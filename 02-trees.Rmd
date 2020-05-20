@@ -1,0 +1,23 @@
+# Trees
+
+## Anatomy
+Trees are a special find of graph. Bifurcating acyclic.
+
+Nodes, edges (branches).
+
+I'll stick with the methematical convention of calling branches edges, since this makes for stronger conceptual ties to other fields that also consider graphs.
+
+## Types
+
+Cladogram, phylogram, time tree
+
+
+## Interpretation
+
+Tree thinking
+
+## Representation
+
+ape
+
+ggtree

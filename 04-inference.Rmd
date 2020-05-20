@@ -1,0 +1,17 @@
+# Inference
+
+A specific task - given a set of character data corresponding to the tips of a tree, what is the topology of the tree? Model is also estimated, but may or may not be of interest.
+
+Calculating the likelihood of a tree
+
+
+What a likelihood is
+
+maximum likelihood
+
+hueristics
+
+Bayesian
+
+"Model free" methods
+

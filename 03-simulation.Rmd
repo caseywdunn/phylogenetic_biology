@@ -1,0 +1,10 @@
+# Simulation
+
+Build the machinery to simulate the evolution of traits on trees. Focus for now on DNA evolution.
+
+Generative models
+
+rates, equilibrium frequencies
+
+exponentiation
+

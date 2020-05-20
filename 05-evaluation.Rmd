@@ -1,0 +1,29 @@
+# Evaluation
+
+## Model evaluation
+
+Why not add as many parameters as you can imagine?
+
+Likelihood ratio test
+
+AIC
+
+BIC
+
+## Topology evaluation
+
+## Sensitiviy
+
+changing methods and parameters
+
+adding noise
+
+
+## Confidence
+
+Propogation, point estimates
+
+
+## Epistemology
+
+gene trees, species trees
