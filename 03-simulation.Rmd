@@ -2,9 +2,60 @@
 
 Build the machinery to simulate the evolution of traits on trees. Focus for now on DNA evolution.
 
+
+## Models
+
 Generative models
+
+The intent is a simplified representation of the process under consideration.
+
+"All models are wrong, some are useful"
+
+
+## A simple model
+
+Let's start with a very simple model of DNA evolution, where each of the four nucleotides (C, G, T, and A) have the same frequency ($1/4$) and the rate of change between any of them is the same.
+
+At some average rate $\mu$, the existing nucleotide is replaced with one of the four possible nucleotides. It is like you excise the existing nucleotide, you reach in a bag that cointains all the nucleotides a t equal frequency, you grab one of the nucleotides at random, and you put the newly sampled nucleotide in the spot where the previous nucleotide was.
+
+Each time this event occurs, there are four possible outcomes of this process-- the new nucleotide is a C, G, T, A. The average rate at which any one of these changes occurs is $\mu/4$, which we will call $\beta$.
+
+Not all events will result in an apparent change. Sometimes the previous nucleotide is replaced with the exact same nucleotide. If, for example, the previous nucleotide was an A, under this model $1/4$ of the time an event occurs the previous A is replaced with a new A and there is no apparent change. In such a case, there is not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of an event result in a substitution, the substitution rate is $3\beta$, which, because $\beta=\mu/4$, is equivalent to noting that the substitution is $(3/4) \mu$. Becuase some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the event rate.
+
+
+
+
+
+
+
+
+
 
 rates, equilibrium frequencies
 
+```{r}
+
+e = matrix(c(0.25,0.25,0.25,0.25),nrow=4)
+
+R =matrix(c(
+  -3,1,1,1,
+  1,-3,1,1,
+  1,1,-3,1,
+  1,1,1,-3
+),
+nrow=4
+)
+
+Q = R %*% e
+
+Q
+
+```
+
+
 exponentiation
+
+## Aditional resources
+
+- My own thinking about this material was heavilly influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent [Phylo Seminar](https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg), starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s
 

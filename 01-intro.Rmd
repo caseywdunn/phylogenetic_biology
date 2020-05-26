@@ -15,6 +15,7 @@ When we want to infer the history of character evolution, we often fix the tree,
 
 But we can also marginalize over models, for example.
 
+
 ## Why phylogenies matter
 
 History of life on earth
@@ -26,3 +27,15 @@ Comparative methods
 Processes of evolution
 
 Current and future evolution (eg epidemiology)
+
+
+## Required background
+
+Comfort at the command line, manipulation of text files. *Practical Computing for Biologists*.
+
+Basic literacy with the programming language R. *R for Data Science*.
+
+Basic statistics, in particular probability theory. Some math, in particular an understanding of matrices and manipulations of matrices.
+
+## Additional resources
+
