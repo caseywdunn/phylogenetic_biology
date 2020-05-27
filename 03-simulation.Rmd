@@ -24,8 +24,35 @@ Not all events will result in an apparent change. Sometimes the previous nucleot
 
 
 
+```{r}
+
+  mu = 0.002
+  
+  t = 100  # total time to consider
+  n = 1000 # number of steps
+  
 
 
+
+  segments = sim_jc( mu, t )
+  
+  ggplot( segments ) +
+    scale_x_continuous(name="time") +
+    geom_rect( mapping=aes(xmin=start, xmax=end, fill=nucleotide ), ymin=0, ymax=t/20 ) +
+    geom_segment( mapping=aes(x=start, xend=start ), y=0, yend=t/20 ) +
+    xlim( 0, t) +
+    ylim( 0, t)
+    
+  
+  
+```
+
+
+
+
+
+
+## Generalizing the simple model
 
 
 
@@ -54,6 +81,17 @@ Q
 
 
 exponentiation
+
+
+## More complex models
+
+
+
+## Model structure
+
+
+
+
 
 ## Aditional resources
 

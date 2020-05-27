@@ -10,6 +10,22 @@ link-citations: yes
 description: "An introduction to Phylogenetic Biology."
 ---
 
+```{r preliminaries, include=FALSE}
+	# The following should be installed from github with the specified 
+	# devtools command. You will need to install devtools first.
+	library( treeio ) # devtools::install_github("GuangchuangYu/treeio")
+	library( ggtree ) # devtools::install_github("GuangchuangYu/ggtree")
+	library( ape )
+	library( gridExtra )
+	library( magrittr )
+	library( phytools )
+	library( stringr )
+	library( tidyverse )
+	source( "functions.R" )
+	set.seed( 23456 )
+```
+
+
 # Preface {-}
 
 I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses.
