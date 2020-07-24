@@ -14,45 +14,47 @@ The intent is a simplified representation of the process under consideration.
 
 ## A simple model
 
-Let's start with a simple model of DNA evolution. Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, though, a random nucleotide is incorporated. The probability of selecting any of the nucleotides during one of these random events is uniform (picking a C is just as probably as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing equal frequencies of C, G, T, and A nucleotides, and as you replicated the DNA every so often you would reach into the bag with your eyes closed and pick a nucleotide at random rather than the complement of the nucleotide in the strand being replicated.
+Let's start with a simple model of DNA evolution. Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, though, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. The probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probably as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing equal frequencies of C, G, T, and A nucleotides. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead selected by reaching into the bag with your eyes closed and picking one at random.
 
-This model of evolution has a few properties of note. First, given enough evolutionary time, each nucleotide would be just as probable at any site no matter what the starting sequence was. That's because when you reach into the bag, you have the same chance of grabbing any nucleotide. Even if you started with a sequence that had 100 A's, after enough evolutionary time had passed to reach equilibrium you would expect 25 C's, 25 G's, 25 T's, and 25 A's.
+Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model $1/4$ of the time a replacement event occurs an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of an event result in a substitution, the substitution rate is $3\beta$, which, because $\beta=\mu/4$, is equivalent to noting that the substitution is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the replacement event rate.
 
-Second, not all events will result in an apparent change. Sometimes the previous nucleotide is replaced with the exact same nucleotide. If, for example, the previous nucleotide was an A, under this model $1/4$ of the time an event occurs the previous A is replaced with a new A and there is no apparent change. In such a case, there is not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of an event result in a substitution, the substitution rate is $3\beta$, which, because $\beta=\mu/4$, is equivalent to noting that the substitution is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the event rate.
+It might seem a bit odd to consider replacement events that don't result in substitutions, but this follows naturally from a central feature we specified for the the model - the new nucleotide doesn't depend in any way on what nucleotide was there before. If we had a process where replacements always resulted in substitutions, then excluding the a replacement in kind would require knowing which nucleotide should be placed so that we *don't* select it.
 
-There are two things to consider if we want to know the amount of evolutionary change. The first is the substitution rate $\mu$ (or ), and the time that has elapsed. In Figure XX the amount of evolutionary time is held constant, and the rate is changed.
-
+One of the primary values of a model is that it allows us to think explicitly about how much evolutionary change we expect to see under the specified process. For the simple process described here, there are two things to consider if we want to know the amount of evolutionary change. The first is the substitution rate $\mu$ (which we also know if we know  $\beta$, since $\mu=4\beta$), and the time over which the evolutionary process acts. In Figure \@ref(fig:jc-mu-sweep) the amount of evolutionary time is held constant, and the rate is changed.
 
 ```{r}
+t = 100  # total time to consider
+```
+
+
+```{r jc-mu-sweep, fig.cap="Each horizontal bar is a simulation of evolution through time, $t$, for a specified value of $\\mu$. "}
 
   mu_step = 0.001
-  mu = seq( 0, 0.01, mu_step )
-  
-  t = 100  # total time to consider
-  n = 1000 # number of steps
+  mu_values = seq( 0, 0.01, mu_step )
   
   
-  segments = lapply( mu, function(x){
+  
+  segments = lapply( mu_values, function(x){
     sim_jc( mu=x, t, first = "A" ) %>% mutate ( mu=x  )
   }  ) %>%
     bind_rows()
   
-  
-  segments = sim_jc( mu, t )
+  delta = ( mu_values[2] - mu_values[1] ) * 0.5
   
   ggplot( segments ) +
     scale_x_continuous(name="time") +
-    geom_rect( mapping=aes(xmin=start, xmax=end, fill=nucleotide ), ymin=0, ymax=t/20 ) +
-    geom_segment( mapping=aes(x=start, xend=start ), y=0, yend=t/20 ) +
+    geom_rect( mapping=aes(xmin=start, xmax=end, fill=nucleotide, ymin=mu, ymax=mu+delta ) ) +
+    geom_segment( mapping=aes(x=start, xend=start, y=mu, yend=mu+delta ) ) +
     xlim( 0, t) +
-    ylim( 0, t)
+    xlab( "time" )
     
-  
   
 ```
 
 
 
+
+Given enough evolutionary time, each nucleotide would be just as probable at any site no matter what the starting sequence was. That's because when you reach into the bag, you have the same chance of grabbing any nucleotide. Even if you started with a sequence that had 100 A's, after enough evolutionary time had passed to reach equilibrium you would expect 25 C's, 25 G's, 25 T's, and 25 A's.
 
 
 

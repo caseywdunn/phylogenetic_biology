@@ -1,6 +1,8 @@
 --- 
 title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
+github-repo: caseywdunn/phylogenetic_biology
+twitter-handle: caseywdunn
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -8,6 +10,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 description: "An introduction to Phylogenetic Biology."
+fig_caption: yes
 ---
 
 ```{r preliminaries, include=FALSE}
@@ -23,6 +26,17 @@ description: "An introduction to Phylogenetic Biology."
 	library( tidyverse )
 	source( "functions.R" )
 	set.seed( 23456 )
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  echo = FALSE,
+  dpi = 300,
+  cache = FALSE
+  )
 ```
 
 

@@ -1,5 +1,10 @@
 # simple simulation under the jc model
-sim_jc = function( mu = 0.001, t = 100, n = 10000, first =  sample( c('C', 'G', 'T', 'A') ) ){
+sim_jc = function( mu = 0.001, t = 100, n = 10000, first =  NULL ){
+  
+  if( is.null(first)){
+    first = sample( c('C', 'G', 'T', 'A') )
+  }
+  
   beta = mu / 4
   i = t/n  # time interval per step
   y = sample( c('C', 'G', 'T', 'A', NA), size=n, replace = TRUE, prob=c( beta, beta, beta, beta, 1-4 * beta  ) )
