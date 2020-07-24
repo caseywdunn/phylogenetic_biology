@@ -14,26 +14,30 @@ The intent is a simplified representation of the process under consideration.
 
 ## A simple model
 
-Let's start with a very simple model of DNA evolution, where each of the four nucleotides (C, G, T, and A) have the same frequency ($1/4$) and the rate of change between any of them is the same.
+Let's start with a simple model of DNA evolution. Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, though, a random nucleotide is incorporated. The probability of selecting any of the nucleotides during one of these random events is uniform (picking a C is just as probably as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing equal frequencies of C, G, T, and A nucleotides, and as you replicated the DNA every so often you would reach into the bag with your eyes closed and pick a nucleotide at random rather than the complement of the nucleotide in the strand being replicated.
 
-At some average rate $\mu$, the existing nucleotide is replaced with one of the four possible nucleotides. It is like you excise the existing nucleotide, you reach in a bag that cointains all the nucleotides a t equal frequency, you grab one of the nucleotides at random, and you put the newly sampled nucleotide in the spot where the previous nucleotide was.
+This model of evolution has a few properties of note. First, given enough evolutionary time, each nucleotide would be just as probable at any site no matter what the starting sequence was. That's because when you reach into the bag, you have the same chance of grabbing any nucleotide. Even if you started with a sequence that had 100 A's, after enough evolutionary time had passed to reach equilibrium you would expect 25 C's, 25 G's, 25 T's, and 25 A's.
 
-Each time this event occurs, there are four possible outcomes of this process-- the new nucleotide is a C, G, T, A. The average rate at which any one of these changes occurs is $\mu/4$, which we will call $\beta$.
+Second, not all events will result in an apparent change. Sometimes the previous nucleotide is replaced with the exact same nucleotide. If, for example, the previous nucleotide was an A, under this model $1/4$ of the time an event occurs the previous A is replaced with a new A and there is no apparent change. In such a case, there is not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of an event result in a substitution, the substitution rate is $3\beta$, which, because $\beta=\mu/4$, is equivalent to noting that the substitution is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the event rate.
 
-Not all events will result in an apparent change. Sometimes the previous nucleotide is replaced with the exact same nucleotide. If, for example, the previous nucleotide was an A, under this model $1/4$ of the time an event occurs the previous A is replaced with a new A and there is no apparent change. In such a case, there is not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of an event result in a substitution, the substitution rate is $3\beta$, which, because $\beta=\mu/4$, is equivalent to noting that the substitution is $(3/4) \mu$. Becuase some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the event rate.
-
+There are two things to consider if we want to know the amount of evolutionary change. The first is the substitution rate $\mu$ (or ), and the time that has elapsed. In Figure XX the amount of evolutionary time is held constant, and the rate is changed.
 
 
 ```{r}
 
-  mu = 0.002
+  mu_step = 0.001
+  mu = seq( 0, 0.01, mu_step )
   
   t = 100  # total time to consider
   n = 1000 # number of steps
   
-
-
-
+  
+  segments = lapply( mu, function(x){
+    sim_jc( mu=x, t, first = "A" ) %>% mutate ( mu=x  )
+  }  ) %>%
+    bind_rows()
+  
+  
   segments = sim_jc( mu, t )
   
   ggplot( segments ) +

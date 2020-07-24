@@ -7,7 +7,7 @@ There are three components to a phylogenetic analysis: characters, evolutionary 
 
 When we don't care, we marginalize. When we have data we fix. When we want to infer we estimate.
 
-This gives a broad range of hypotheetic phylogenetic investigations. Only a subset of these are common in the literature, due to the questions that drive the field right now, the available data, and the methods that have been implemented in software tools.
+This gives a broad range of hypothetical phylogenetic investigations. Only a subset of these are common in the literature, due to the questions that drive the field right now, the available data, and the methods that have been implemented in software tools.
 
 When we want to infer phylogenetic trees, we usually fix the characters at the tips using our data, marginalize over historical character states, estimate models, and estimate the tree.
 

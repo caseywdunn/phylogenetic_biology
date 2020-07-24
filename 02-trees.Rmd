@@ -5,7 +5,7 @@ Trees are a special find of graph. Bifurcating acyclic.
 
 Nodes, edges (branches).
 
-I'll stick with the methematical convention of calling branches edges, since this makes for stronger conceptual ties to other fields that also consider graphs.
+I'll stick with the mathematical convention of calling branches edges, since this makes for stronger conceptual ties to other fields that also consider graphs.
 
 ## Types
 
