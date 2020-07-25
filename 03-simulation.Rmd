@@ -26,17 +26,11 @@ One of the primary values of a model is that it allows us to think explicitly ab
 
 In Figure \@ref(fig:jc-mu-sweep) the amount of evolutionary time is held constant, and the rate $\mu$ is changed. When $\mu=0$, the bottom bar, there are no replacements (black bars) and therefore no substitutions (the whole bar is the same color). 
 
-```{r}
-t = 100  # total time to consider
-```
+```{r jc-mu-sweep, fig.cap="Each horizontal bar is a simulation of evolution of a single nucleotide position through time, $t$, for a specified value of $\\mu$. Each sumulation starts out as an A. Black vertical bars correspond to replacement events, which don't all lead to substitutions (a new color). "}
 
-
-```{r jc-mu-sweep, fig.cap="Each horizontal bar is a simulation of evolution through time, $t$, for a specified value of $\\mu$. Each sumulation starts out as an A. Black vertical bars correspond to replacement events, which don't all lead to substitutions (a new color). "}
-
+  t = 100  # total time to consider
   mu_step = 0.001
   mu_values = seq( 0, 0.01, mu_step )
-  
-  
   
   segments = lapply( mu_values, function(x){
     sim_jc( mu=x, t, first = "A" ) %>% mutate ( mu=x  )
@@ -70,7 +64,7 @@ segments %>%
 
 ```
 
-Because of the linear relationship between the number of replacements and the product $\mu t$, rate and time are conflated. in many scenarios you can estimate the number of expected changes, but you can't estimate them independently. If there are a small number of replacements, for example, you can't be sure if there is a low rate over a long time interval or a high rate over a short interval. Both would give the same result. Because they are so often confounded, the unit of time for branch lengths in phylogenies is often given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies.
+Because of the linear relationship between the number of replacements and the product $\mu t$, rate and time are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't be sure if there is a low rate over a long time interval or a high rate over a short interval. Both would give the same result. Because they are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for edge lengths is given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:tree-cnid)). The exception is when you have external information, such as dated fossils, that allow you to independently estimate edge lengths and rates.
 
 
 
@@ -82,10 +76,33 @@ knitr::include_graphics("figures/Fig_cnidaria.png")
 
 ### Expected end state
 
-The machinery above shows how to 
+The machinery above shows how a model can clarify the way we think about the expected amount of change. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a  question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
+
+The situation is most clear after a small amount of change - we expect the end result to be the same as the starting condition. If we start with an A, for example, we expect to end with an A. In this situation, if we know the starting state that information tells us a lot about the end state. Not much else matters.
+
+What should we expect, though, if there has been a large amount of change? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, than the initial starting state really doesn't matter at all because whatever was there will probably have been replaced multiple times. If the starting state doesn't contain information about the end state, what does? It is the bag that you are picking the nucleotides at random from. Given enough evolutionary time, our simple model will lead the expected frequency of each nucleotide in the evolving sequence to be the same as the frequency in the bag that we randomly draw them from. Since we specified that you have the same chance of grabbing any nucleotide from the bacg, eventually the probability of having each of the our nucleotides is the same, 25%. If you started with a sequence that had an A and let it evolve 100 times, after enough evolutionary time had passed to reach equilibrium you would expect to get 25 C's, 25 G's, 25 T's, and 25 A's.
+
+```{r}
+
+  mu = 0.0000
+  t_values = seq( 0, 100, 10 )
+  t_values = rep(t_values,100)
+  
+  simulations = 
+    lapply( t_values, function(x){
+      sim_jc( mu=mu, t=x, first = "A" ) %>% mutate ( time=x  ) %>% slice_tail( n=1 )
+    }  ) %>% 
+    bind_rows()
+  
+  simulations %>% 
+    ggplot() +
+      aes(x = time, fill = factor(nucleotide)) +
+      geom_bar(position = "fill")
+  
 
 
-Given enough evolutionary time, each nucleotide would be just as probable at any site no matter what the starting sequence was. That's because when you reach into the bag, you have the same chance of grabbing any nucleotide. Even if you started with a sequence that had 100 A's, after enough evolutionary time had passed to reach equilibrium you would expect 25 C's, 25 G's, 25 T's, and 25 A's.
+```
+
 
 
 
