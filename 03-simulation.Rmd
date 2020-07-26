@@ -29,8 +29,8 @@ In Figure \@ref(fig:jc-mu-sweep) the amount of evolutionary time is held constan
 ```{r jc-mu-sweep, fig.cap="Each horizontal bar is a simulation of evolution of a single nucleotide position through time, $t$, for a specified value of $\\mu$. Each sumulation starts out as an A. Black vertical bars correspond to replacement events, which don't all lead to substitutions (a new color). "}
 
   t = 100  # total time to consider
-  mu_step = 0.001
-  mu_values = seq( 0, 0.01, mu_step )
+  mu_step = 0.01
+  mu_values = seq( 0, 0.1, mu_step )
   
   segments = lapply( mu_values, function(x){
     sim_jc( mu=x, t, first = "A" ) %>% mutate ( mu=x  )
@@ -60,7 +60,8 @@ segments %>%
   summarise( replacements = n()-1) %>% 
   ggplot( aes(x=mu, y=replacements) ) + 
     geom_point (  ) + 
-    geom_smooth( method = "lm", se = FALSE )
+    geom_smooth( method = "lm", se = FALSE ) +
+    geom_abline( slope = mu)
 
 ```
 
@@ -84,13 +85,13 @@ What should we expect, though, if there has been a large amount of change? Can w
 
 ```{r}
 
-  mu = 0.0000
+  mu = 0.050
   t_values = seq( 0, 100, 10 )
-  t_values = rep(t_values,100)
+  t_values = rep(t_values,1000)
   
   simulations = 
     lapply( t_values, function(x){
-      sim_jc( mu=mu, t=x, first = "A" ) %>% mutate ( time=x  ) %>% slice_tail( n=1 )
+      sim_jc( mu=mu, t=x, first = "A", n=100 ) %>% mutate ( time=x  ) %>% slice_tail( n=1 )
     }  ) %>% 
     bind_rows()
   
