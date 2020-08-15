@@ -1,4 +1,7 @@
 phylogenetic_biology.Rmd
+phylogenetic_biology.pdf
+*.tex
+*.log
 
 .Rproj.user
 .Rhistory

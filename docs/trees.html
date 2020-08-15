@@ -82,6 +82,7 @@
 <li class="chapter" data-level="2.3" data-path="trees.html"><a href="trees.html#types"><i class="fa fa-check"></i><b>2.3</b> Types</a></li>
 <li class="chapter" data-level="2.4" data-path="trees.html"><a href="trees.html#interpretation"><i class="fa fa-check"></i><b>2.4</b> Interpretation</a></li>
 <li class="chapter" data-level="2.5" data-path="trees.html"><a href="trees.html#representation"><i class="fa fa-check"></i><b>2.5</b> Representation</a></li>
+<li class="chapter" data-level="2.6" data-path="trees.html"><a href="trees.html#additional-reading"><i class="fa fa-check"></i><b>2.6</b> Additional reading</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a><ul>
 <li class="chapter" data-level="3.1" data-path="simulation.html"><a href="simulation.html#models"><i class="fa fa-check"></i><b>3.1</b> Models</a></li>
@@ -183,14 +184,22 @@ etc…</p>
 <li><p>They are acyclic. This means that there is only one path from one node to another,
 and that it isn’t possible to go in circles. Exceptions can arise in cases of horizontal
 gene transfer or hybridization.</p></li>
+<li><p>They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three edges connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. Some phylogenies are not strictly bifurcating, in which they are said to have a polytomy. This can be either due to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages.</p></li>
 <li><p>They can be directed. This means that edges are not symmetric, and instead have
 directionality. Specifically, they denote time. The node on one end of the edge
 is older than the node on the other side of the edge.</p></li>
-<li><p>They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three edges connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. Some phylogenies are not strictly bifurcating, in which they are said to have a polytomy. This can be either due to uncertainty about branching order (a soft polytomy) or multiple branchings in very quick succession, giving rise at effectively the same time to more than two lineages.</p></li>
 </ul>
+<p>A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what it actually is. The nodes are entities that can evolve, like organisms or genes. The edges indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each edge would connect each individual to its immediate ancestors. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth.</p>
 </div>
 <div id="layout" class="section level2">
 <h2><span class="header-section-number">2.2</span> Layout</h2>
+<p>You will rarely see a phylogeny depecited as in Figure <a href="trees.html#fig:trees-graph-tree">2.4</a>, with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the edges, with the nodes implied at the ends of edges (including at their intersections, which are internal nodes). The nodes are implied.</p>
+<div class="figure"><span id="fig:trees-mammal"></span>
+<img src="phylogenetic_biology_files/figure-html/trees-mammal-1.png" alt="A phylogeny of some mammals, downloaded from http://vertlife.org . Note that node circles are not drawn, instead nodes are implied at ends of edges." width="2100" />
+<p class="caption">
+Figure 2.5: A phylogeny of some mammals, downloaded from <a href="http://vertlife.org" class="uri">http://vertlife.org</a> . Note that node circles are not drawn, instead nodes are implied at ends of edges.
+</p>
+</div>
 </div>
 <div id="types" class="section level2">
 <h2><span class="header-section-number">2.3</span> Types</h2>
@@ -206,6 +215,10 @@ is older than the node on the other side of the edge.</p></li>
 <p>paranthetical</p>
 <p>ape</p>
 <p>ggtree</p>
+</div>
+<div id="additional-reading" class="section level2">
+<h2><span class="header-section-number">2.6</span> Additional reading</h2>
+<p>ggtree vignettes - <a href="https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html" class="uri">https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html</a></p>
 
 </div>
 </div>
@@ -274,6 +287,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

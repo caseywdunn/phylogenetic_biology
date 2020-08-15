@@ -78,21 +78,23 @@ A phylogenetic graph is an abstraction, and for it to be useful it is important 
 
 You will rarely see a phylogeny depecited as in Figure \@ref(fig:trees-graph-tree), with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the edges, with the nodes implied at the ends of edges (including at their intersections, which are internal nodes). The nodes are implied. 
 
-```{r trees-mammal, echo=FALSE, fig.cap="A mammal phylogeny of some mammals downloaded from http://vertlife.org ."}
+```{r trees-mammal, echo=FALSE, fig.cap="A phylogeny of some mammals, downloaded from http://vertlife.org . Note that node circles are not drawn, instead nodes are implied at ends of edges."}
 
 tree_mammal_text="((((((Lepus_europaeus:70.20096322090001,Mus_musculus:70.2009638712):3.154317,Homo_sapiens:73.3552735285):6.856746,(((Equus_ferus:58.229796309799994,Balaenoptera_musculus:58.22982398432999):8.913111,Panthera_leo:67.14292611620002):0.811577,Corynorhinus_townsendii:67.95450331960001):12.257514):5.856834,(Loxodonta_africana:83.676113197,Dasypus_novemcinctus:83.67612211229999):2.392725):76.041131,Macropus_giganteus:162.10993597769):17.193944,Ornithorhynchus_anatinus:179.30390079);"
 
 tree = read.tree( text=tree_mammal_text )
 
-# d = ggimage::phylopic_uid(tree$tip.label)
+# The native phylopic tool in ggtree has some issues - api times out, some images can be missing because originals are small, and hard to control scaling when they have variable width. So load them from local copies of the images
 
+# d = ggimage::phylopic_uid(tree$tip.label) # The original retrieval of some phylopic uid's
 d = read.table("data/phylopic_mammals.tsv", header=TRUE, sep="\t")
 
 row.names(d) = d$name
 
+
 p = ggtree(tree) %<+% d + 
-  geom_tiplab( aes(image=uid ), geom="phylopic", offset=5, size=0.1 ) +
-  geom_tiplab( aes(label=label ), offset = 40) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+  geom_tiplab( aes(label=str_replace(label, "_", " " )), fontface = "italic", offset = 40) +
   xlim(0, 400)
 
 p
