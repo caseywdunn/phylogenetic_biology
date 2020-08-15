@@ -37,5 +37,13 @@ Basic literacy with the programming language R. *R for Data Science*.
 
 Basic statistics, in particular probability theory. Some math, in particular an understanding of matrices and manipulations of matrices.
 
+
+
+
+
+
+
+
+
 ## Additional resources
 

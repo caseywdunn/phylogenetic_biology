@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-07-26" />
+<meta name="date" content="2020-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -78,9 +78,10 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="trees.html"><a href="trees.html"><i class="fa fa-check"></i><b>2</b> Trees</a><ul>
 <li class="chapter" data-level="2.1" data-path="trees.html"><a href="trees.html#anatomy"><i class="fa fa-check"></i><b>2.1</b> Anatomy</a></li>
-<li class="chapter" data-level="2.2" data-path="trees.html"><a href="trees.html#types"><i class="fa fa-check"></i><b>2.2</b> Types</a></li>
-<li class="chapter" data-level="2.3" data-path="trees.html"><a href="trees.html#interpretation"><i class="fa fa-check"></i><b>2.3</b> Interpretation</a></li>
-<li class="chapter" data-level="2.4" data-path="trees.html"><a href="trees.html#representation"><i class="fa fa-check"></i><b>2.4</b> Representation</a></li>
+<li class="chapter" data-level="2.2" data-path="trees.html"><a href="trees.html#layout"><i class="fa fa-check"></i><b>2.2</b> Layout</a></li>
+<li class="chapter" data-level="2.3" data-path="trees.html"><a href="trees.html#types"><i class="fa fa-check"></i><b>2.3</b> Types</a></li>
+<li class="chapter" data-level="2.4" data-path="trees.html"><a href="trees.html#interpretation"><i class="fa fa-check"></i><b>2.4</b> Interpretation</a></li>
+<li class="chapter" data-level="2.5" data-path="trees.html"><a href="trees.html#representation"><i class="fa fa-check"></i><b>2.5</b> Representation</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a><ul>
 <li class="chapter" data-level="3.1" data-path="simulation.html"><a href="simulation.html#models"><i class="fa fa-check"></i><b>3.1</b> Models</a></li>
@@ -131,26 +132,90 @@
             <section class="normal" id="section-">
 <div id="trees" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Trees</h1>
+<div class="figure"><span id="fig:trees-darwin"></span>
+<img src="figures/darwin.png" alt="Darwin's depiction of the evolutioanry relationships between organisms [@darwin1859]."  />
+<p class="caption">
+Figure 2.1: Darwin’s depiction of the evolutioanry relationships between organisms <span class="citation">(Darwin <a href="#ref-darwin1859" role="doc-biblioref">1859</a>)</span>.
+</p>
+</div>
+<p>Phylogenies are representations of evolutionary relationships. The only figure in Darwin’s Origin of Species was a phylogeny (Figure <a href="trees.html#fig:trees-darwin">2.1</a>), though he didn’t call it that.</p>
+<p>Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the reference of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees (Figure <a href="trees.html#fig:trees-haeckel">2.2</a>).</p>
+<div class="figure"><span id="fig:trees-haeckel"></span>
+<img src="figures/haeckel.jpg" alt="Haeckel's hypothesis of the animal phylogeny [@haeckel1897], drawn as an actual tree. He also coined the term phylogeny."  />
+<p class="caption">
+Figure 2.2: Haeckel’s hypothesis of the animal phylogeny <span class="citation">(Haeckel <a href="#ref-haeckel1897" role="doc-biblioref">1897</a>)</span>, drawn as an actual tree. He also coined the term phylogeny.
+</p>
+</div>
+<p>Not all trees in science, or even biology, are phylogenies, though. For example,
+hierarchical clustering results in trees that represent similarity, rather than
+shared evolutionary history. In some cases phylogeny and clustering of organisms
+will be largely congruent, but in many cases they will not be. Hierarchical tree-like clustering is also
+used for things that have no evolutionary component, like similarity of responses
+to a drug.</p>
+<p>It is helpful, then, to be more precise about the components of a phylogeny, and
+what each of those parts represent.</p>
 <div id="anatomy" class="section level2">
 <h2><span class="header-section-number">2.1</span> Anatomy</h2>
-<p>Trees are a special find of graph. Bifurcating acyclic.</p>
-<p>Nodes, edges (branches).</p>
-<p>I’ll stick with the mathematical convention of calling branches edges, since this makes for stronger conceptual ties to other fields that also consider graphs.</p>
+<p>As we refine the precision of what a phylogeny is, it is helpful to think of it
+in a rigorous mathematical framework rather than a botanical analogy.</p>
+<div class="figure"><span id="fig:trees-graph"></span>
+<img src="figures/graph.svg" alt="A simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating, as nodes have from one to four edges connected to them."  />
+<p class="caption">
+Figure 2.3: A simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating, as nodes have from one to four edges connected to them.
+</p>
+</div>
+<p>A phylogeny is a specific instance of a mathematical object known as a (graph)[<a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)" class="uri">https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)</a>].
+A graph consists of nodes, often represented as circles, connected by edges, often
+represented by lines or curves (Figure <a href="trees.html#fig:trees-graph">2.3</a>). Graphs are useful representations of a variety of systems.
+For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions.</p>
+<div class="figure"><span id="fig:trees-graph-tree"></span>
+<img src="figures/graph_tree.svg" alt="A graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede branching events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents)."  />
+<p class="caption">
+Figure 2.4: A graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede branching events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating– the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents).
+</p>
+</div>
+<p>Because there is so much to learn from adjacent fields when using mathematical conventions,
+I will tend to use mathematical notation for phylogenies rather than the classical botanical
+nomenclatures. I will refer to edges rather than branches, terminal nodes rather than leaves,
+etc…</p>
+<p>Phylogeny graphs (Figure <a href="trees.html#fig:trees-graph-tree">2.4</a>) usually have a few specific topological properties:</p>
+<ul>
+<li><p>They are acyclic. This means that there is only one path from one node to another,
+and that it isn’t possible to go in circles. Exceptions can arise in cases of horizontal
+gene transfer or hybridization.</p></li>
+<li><p>They can be directed. This means that edges are not symmetric, and instead have
+directionality. Specifically, they denote time. The node on one end of the edge
+is older than the node on the other side of the edge.</p></li>
+<li><p>They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three edges connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. Some phylogenies are not strictly bifurcating, in which they are said to have a polytomy. This can be either due to uncertainty about branching order (a soft polytomy) or multiple branchings in very quick succession, giving rise at effectively the same time to more than two lineages.</p></li>
+</ul>
+</div>
+<div id="layout" class="section level2">
+<h2><span class="header-section-number">2.2</span> Layout</h2>
 </div>
 <div id="types" class="section level2">
-<h2><span class="header-section-number">2.2</span> Types</h2>
+<h2><span class="header-section-number">2.3</span> Types</h2>
 <p>Cladogram, phylogram, time tree</p>
 </div>
 <div id="interpretation" class="section level2">
-<h2><span class="header-section-number">2.3</span> Interpretation</h2>
+<h2><span class="header-section-number">2.4</span> Interpretation</h2>
 <p>Tree thinking</p>
+<p>Layout doesn’t matter - it’s the connections that tell us about the relationships.</p>
 </div>
 <div id="representation" class="section level2">
-<h2><span class="header-section-number">2.4</span> Representation</h2>
+<h2><span class="header-section-number">2.5</span> Representation</h2>
 <p>paranthetical</p>
 <p>ape</p>
 <p>ggtree</p>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-darwin1859">
+<p>Darwin, Charles. 1859. <em>The Origin of Species by Means of Natural Selection: Or, the Preservation of Favored Races in the Struggle for Life</em>.</p>
+</div>
+<div id="ref-haeckel1897">
+<p>Haeckel, Ernst. 1897. <em>The Evolution of Man</em>. Vol. 1. D. Appleton.</p>
 </div>
 </div>
             </section>
@@ -209,20 +274,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

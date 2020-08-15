@@ -3,6 +3,8 @@
 This book is a collection of lecture notes by Casey Dunn for his coures 
 Phylogenetic Biology (EEB354, Yale).
 
+The formatted book can be viewed at http://dunnlab.org/phylogenetic_biology/index.html .
+
 ## Development
 
 ### Running tests

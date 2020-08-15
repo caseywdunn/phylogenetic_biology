@@ -73,7 +73,7 @@
 
 \title{Phylogenetic Biology}
 \author{Casey W. Dunn}
-\date{2020-07-26}
+\date{2020-07-29}
 
 \begin{document}
 \maketitle
@@ -133,14 +133,62 @@ Basic statistics, in particular probability theory. Some math, in particular an 
 \hypertarget{trees}{%
 \chapter{Trees}\label{trees}}
 
+\begin{figure}
+\centering
+\includegraphics{figures/darwin.png}
+\caption{\label{fig:trees-darwin}Darwin's depiction of the evolutioanry relationships between organisms \citep{darwin1859}.}
+\end{figure}
+
+Phylogenies are representations of evolutionary relationships. The only figure in Darwin's Origin of Species was a phylogeny (Figure \ref{fig:trees-darwin}), though he didn't call it that.
+
+Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the reference of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees (Figure \ref{fig:trees-haeckel}).
+
+\begin{figure}
+\centering
+\includegraphics{figures/haeckel.jpg}
+\caption{\label{fig:trees-haeckel}Haeckel's hypothesis of the animal phylogeny \citep{haeckel1897}, drawn as an actual tree. He also coined the term phylogeny.}
+\end{figure}
+
+Not all trees in science, or even biology, are phylogenies, though. For example,
+hierarchical clustering results in trees that represent similarity, rather than
+shared evolutionary history. In some cases phylogeny and clustering of organisms
+will be largely congruent, but in many cases they will not be. Tree clustering is also
+used for things that have no evolutionary component, like similarity of responses
+to a drug.
+
+It is helpful, then, to be more precise about the components of a phylogeny, and
+what each of those parts represent.
+
 \hypertarget{anatomy}{%
 \section{Anatomy}\label{anatomy}}
 
-Trees are a special find of graph. Bifurcating acyclic.
+As we refine the precision of what a phylogeny is, it is helpful to think of it
+in a rigorous mathematical framework rather than a botanical analogy.
 
-Nodes, edges (branches).
+A phylogeny is a specific instance of a mathematical object known as a (graph){[}\url{https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)}{]}.
+A graph consists of nodes, often represented as circles, connected by edges, often
+represented by curves or lines. Graphs are useful representations of a variety of systems.
+For example, nodes could be people, and edges family relationships, communication events, or financial transactions.
 
-I'll stick with the mathematical convention of calling branches edges, since this makes for stronger conceptual ties to other fields that also consider graphs.
+Because there is so much to learn from adjacent fields when using mathematical conventions,
+I will tend to use mathematical notation for phylogenies rather than the classical botanical
+nomenclatures. I will refer to edges rather than branches, terminal nodes rather than leaves,
+etc\ldots{}
+
+Phylogeny graphs usually have a few specific properties:
+
+\begin{itemize}
+\item
+  They are acyclic. This means that there is only one path from one node to another,
+  and that it isn't possible to go in circles. Exceptions can arise in cases of horizontal
+  gene transfer or hybridization.
+\item
+  They can be directed. This means that edges are not symmetric, and instead have
+  directionality. Specifically, they denote time. The node on one end of the edge
+  is older than the node on the other side of the edge.
+\item
+  They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three edges connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. Some phylogenies are not strictly bifurcating, in which they are said to have a polytomy. This can be either due to uncertainty about branching order (a soft polytomy) or multiple branchings in very quick succession, giving rise at effectively the same time to more than two lineages.
+\end{itemize}
 
 \hypertarget{types}{%
 \section{Types}\label{types}}
@@ -178,7 +226,9 @@ The intent is a simplified representation of the process under consideration.
 \hypertarget{a-simple-model}{%
 \section{A simple model}\label{a-simple-model}}
 
-Let's start with a simple model of DNA evolution. Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate \(\mu\), an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. The probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probably as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing equal frequencies of C, G, T, and A nucleotides. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead selected by reaching into the bag with your eyes closed and picking one at random.
+Let's start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position.
+
+Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate \(\mu\), an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. The probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probably as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing equal frequencies of C, G, T, and A nucleotides. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead selected by reaching into the bag with your eyes closed and picking one at random.
 
 Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model \(1/4\) of the time a replacement event occurs an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of an event result in a substitution, the substitution rate is \(3\beta\), which, because \(\beta=\mu/4\), is equivalent to noting that the substitution is \((3/4) \mu\). Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is \emph{lower} than the replacement event rate.
 
@@ -218,9 +268,9 @@ Because of the linear relationship between the number of replacements and the pr
 
 The machinery above shows how a model can clarify the way we think about the expected amount of change. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
 
-The situation is most clear after a small amount of change - we expect the end result to be the same as the starting condition. If we start with an A, for example, we expect to end with an A. In this situation, if we know the starting state that information tells us a lot about the end state. Not much else matters.
+The situation is most clear after a small amount of change - we expect the end result to be the same as the starting condition. If we start with an A, for example, we expect to end with an A (Figure \ref{fig:sim-saturation}, left side). In this situation, if we know the starting state that information tells us a lot about the end state. Not much else matters.
 
-What should we expect, though, if there has been a large amount of change? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, than the initial starting state really doesn't matter at all because whatever was there will probably have been replaced multiple times. If the starting state doesn't contain information about the end state, what does? It is the bag that you are picking the nucleotides at random from. Given enough evolutionary time, our simple model will lead the expected frequency of each nucleotide in the evolving sequence to be the same as the frequency in the bag that we randomly draw them from. Since we specified that you have the same chance of grabbing any nucleotide from the bag, eventually the probability of having each of the our nucleotides is the same, 25\%. If you started with a sequence that had an A and let it evolve 100 times, after enough evolutionary time had passed to reach equilibrium you would expect to get 25 C's, 25 G's, 25 T's, and 25 A's.
+What should we expect, though, if there has been a large amount of change? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, than the initial starting state really doesn't matter at all because whatever was there will probably have been replaced multiple times. If the starting state doesn't contain information about the end state, what does? It is the bag that you are picking the nucleotides at random from. Given enough evolutionary time, our simple model will lead the expected frequency of each nucleotide in the evolving sequence to be the same as the frequency in the bag that we randomly draw them from. Since we specified that you have the same chance of grabbing any nucleotide from the bag, eventually the probability of having each of the our nucleotides is the same, 25\% (Figure \ref{fig:sim-saturation}, right side). If you started with a sequence that had an A and let it evolve 100 times, after enough evolutionary time had passed to reach equilibrium you would expect to get 25 C's, 25 G's, 25 T's, and 25 A's.
 
 \begin{figure}
 \centering
@@ -253,9 +303,10 @@ exponentiation
 \section{Aditional resources}\label{aditional-resources}}
 
 \begin{itemize}
-\tightlist
 \item
   My own thinking about this material was heavilly influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent \href{https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg}{Phylo Seminar}, starting with \url{https://www.youtube.com/watch?v=1r4z0YJq580\&t=2111s}
+\item
+  A great introduction to continuous time models by John Huelsenbeck \url{https://revbayes.github.io/tutorials/dice/}
 \end{itemize}
 
 \hypertarget{inference}{%
