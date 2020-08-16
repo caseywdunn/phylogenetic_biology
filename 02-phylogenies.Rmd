@@ -1,4 +1,4 @@
-# Trees
+# Phylogenies
 
 
 ```{r trees-darwin, echo=FALSE, fig.cap="Darwin's depiction of the evolutioanry relationships between organisms [@darwin1859]."}
@@ -45,7 +45,7 @@ A graph consists of nodes (also called vertices in a mathematical context), ofte
 represented by lines or curves (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
 For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions.
 
-```{r trees-graph-tree, echo=FALSE, fig.cap="A graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede branching events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents)."}
+```{r trees-graph-tree, echo=FALSE, fig.cap="A graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents)."}
 
 knitr::include_graphics("figures/graph_tree.svg")
 
@@ -70,7 +70,7 @@ is older than the node on the other side of the edge.
 
 A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what it actually is. The nodes are entities that can evolve, like organisms or genes. The edges indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each edge would connect each individual to its immediate ancestors. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth.
 
-In a fully bifurcating tree with $n$ tip nodes, there are $n-1$ internal nodes. For example, Figure \@ref(fig:trees-graph-tree) shows a tree with 4 tip nodes (labeled 1-4) and 3 internal nodes (labeled 4-7).
+In a fully bifurcating phylogeny with $n$ tip nodes, there are $n-1$ internal nodes. For example, Figure \@ref(fig:trees-graph-tree) shows a phylogeny with 4 tip nodes (labeled 1-4) and 3 internal nodes (labeled 4-7).
 
 ## Drawing phylogenies
 
@@ -99,7 +99,7 @@ p
 
 ```
 
-There is considerable variation in how the exact same phylogeny can be drawn (Figure \@ref(fig:trees-layouts)). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. Rectangular layouts are the most common, because the entire branch length is along one axis of the plot. Slanted layouts avoid the elbows of rectangular layouts, but because the edges aren't parallel and can be at a variety of angles, it isn't always easy to read branch lengths on them. Circular layouts place the root at the center, and the tips around the edges. This is a very compact representation that works well for very large trees. 
+There is considerable variation in how the exact same phylogeny can be drawn (Figure \@ref(fig:trees-layouts)). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. Rectangular layouts are the most common, because the entire edge length is along one axis of the plot. Slanted layouts avoid the elbows of rectangular layouts, but because the edges aren't parallel and can be at a variety of angles, it isn't always easy to read edge lengths on them. Circular layouts place the root at the center, and the tips around the edges. This is a very compact representation that works well for very large phylogenies. 
 
 
 ```{r trees-layouts, echo=FALSE, fig.cap="The same tree as above, layed out in several different ways."}
@@ -168,9 +168,9 @@ grid.arrange(
 
 Another source of variation to keep in mind is the meaning of edge length (Figure \@ref(fig:trees-types)). A phylogeny where edge lengths are scaled to time is known as a chronogram. In many cases we don't have the information needed to scale edges to time, which requires fossil calibrations. Chronograms of organisms all sampled at the same time will be ultrametric, ie the tip nodes will be flush. If they are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
 
-Most published trees therefore scale the edges according to the expected amount of evolutionary change in the characters under consideration. The rate of evolution usually varies a bit across edges, so phylograms are not usually ultrametric. 
+Most published phylogenies therefore scale the edges according to the expected amount of evolutionary change in the characters under consideration. The rate of evolution usually varies a bit across edges, so phylograms are not usually ultrametric. 
 
-Sometimes we are only interested in, or only have information about, the topology of the phylogeny. In this case we can draw the edges with uniform length, and we call the phylogeny a cladogram. Cladograms can also be useful for showing annotations on edges in phylogenies with a wide variation in edge lengths, since there might not be enough room to write labels on very short edges. It is always good practice whenever you show a phylogeny to indicated whether it is a chronogram, phylogram, or cladogram. This is inconsistent int he literature, though, and if you aren't sure it is best to just ignore edge lengths at treat the tree as if it were a cladogram.
+Sometimes we are only interested in, or only have information about, the topology of the phylogeny. In this case we can draw the edges with uniform length, and we call the phylogeny a cladogram. Cladograms can also be useful for showing annotations on edges in phylogenies with a wide variation in edge lengths, since there might not be enough room to write labels on very short edges. It is always good practice whenever you show a phylogeny to indicated whether it is a chronogram, phylogram, or cladogram. This is inconsistent int he literature, though, and if you aren't sure it is best to just ignore edge lengths at treat the phylogeny as if it were a cladogram.
 
 
 ```{r trees-types, echo=FALSE, fig.cap="Several types of trees. In a chronogram, edge lengths are scaled according to time. In a phylogram, edge lengths are scaled according to expected amount of evolutionary change, which can differ across characters and edges. In a cladogram, the edge lengths have no meaning. "}
@@ -178,7 +178,7 @@ Sometimes we are only interested in, or only have information about, the topolog
 
 tree_noised = tree
 
-# Noise up the branch lengths so that the phylograms don't have uniform branch lengths
+# Noise up the edge lengths so that the phylograms don't have uniform edge lengths
 tree_noised$edge.length = tree_noised$edge.length * rpois(length(tree_noised$edge.length), lambda = 100)/100
 
 p_chronogram = g_tree + 
@@ -204,9 +204,13 @@ grid.arrange(
 
 ## Rooting
 
-The root of a phylogeny is the node that has no parent. This seems simple enough, 
+So far we have dealt with rooted phylogenies. Each of them has had a root node that is the oldest node in the phylogeny. It has no edge connecting it to a parent node, and all other nodes in the phylogeny are its descendants. This seems simple enough.
+
+
+
+The root of a phylogeny (or sub-phylogeny) is the node that has no parent. This seems simple enough, 
 but the concept is actually quite complicated once you get into the details. There are a 
-few different contexts to consider rooting in-- the actual phylogeny, the phylogeny as it is 
+few different contexts to consider rooting in-- the whole phylogeny, the phylogeny as it is 
 stored in computer memory, and the phylogeny as it is drawn. In a chronogram, where edges lengths 
 indicate time and time proceeds in a particular direction along the edges, all three rooting concepts
 are consistent. The root is just the oldest node, and therefore the node furthest from the tips (Figure \@ref(fig:trees-rooting)).
@@ -214,7 +218,7 @@ are consistent. The root is just the oldest node, and therefore the node furthes
 Where things get confusing is when we don't know where the root is. This is often something we are 
 trying to figure out, and takes external information (such as knowing that some of the nodes form an outgroup). It may be that we know the topology of the phylogeny (ie, how the nodes are connected with edges), but we just don't know where the root is. It could be any of the internal nodes, or it could actually be along any of the edges connecting the nodes. 
 
-Where things get really, really confusing is that trees are often drawn in a rooted format even 
+Where things get really, really confusing is that phylogenies are often drawn in a rooted format even 
 when we don't know where the root is. So just because a phylogeny is drawn like that in (Figure \@ref(fig:trees-rooting)), don't assume that the author knows where the root actually is unless they say so.
 
 
@@ -277,7 +281,7 @@ star / comb phylogeny
 
 Thinking about phylogenies as graphs gives us very explicit ways to think about what information can be contained in a phylogeny. In the fundamental graphical sense, a phylogeny is a pair of sets -- a set of nodes and a set of edges -- and annotations on those entities.
 
-The topology of the phylogeny is the way in which nodes are connected by edges. If there are different connections in two trees, then they have different topologies. If the annotations differ but the connections are the same, then the topolpgies are the same. Sometimes we know more and sometimes less about the topology. A fully resolved bifurcating phylogeny, where every internal node has two children, contains maximal information about the topology. A completely unresolved star phylogeny contains no information about topology.
+The topology of the phylogeny is the way in which nodes are connected by edges. If there are different connections in two phylogenies, then they have different topologies. If the annotations differ but the connections are the same, then the topolpgies are the same. Sometimes we know more and sometimes less about the topology. A fully resolved bifurcating phylogeny, where every internal node has two children, contains maximal information about the topology. A completely unresolved star phylogeny contains no information about topology.
 
 Node annotations can include:
 
@@ -292,17 +296,17 @@ Edge annotations can include:
 
 - Length. The value and unit of length can differ, for example it can time (as in a chronogram) or expected amount of change in a particular set of characters (as in a phylogram).
 
-- Directionality. An indication of which direction time goes in along each branch. This only applies in the context of a rooted tree.
+- Directionality. An indication of which direction time goes in along each edge. This only applies in the context of a rooted phylogenies.
 
 - Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes need not be different in the relevant trait to have change events. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the edge that are compatible with this pattern, for example a change from A to C and then a change from C back to A.
 
 - Edge frequencies.This is how topology support values such as bootstraps and posterior probabilities, which we'll discuss later, are stored.
 
-Not all trees have all this information. The minimum possible information a tree could contain is just the number of tips. With this, you could could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that tree. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and edges that indicate the topology of the tree (Figure \@ref(fig:trees-information)C). Once you have topology, you could display edge attributes. For example, you could scale the edge lengths by time (Figure \@ref(fig:trees-information)D).
+Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and edges that indicate the topology of the phylogeny (Figure \@ref(fig:trees-information)C). Once you have topology, you could display edge attributes. For example, you could scale the edge lengths by time (Figure \@ref(fig:trees-information)D).
 
-At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure \@ref(fig:trees-information)A is compatible with any phylogeny with any branch lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure \@ref(fig:trees-information)B, it is compatible with any phylogeny with any branch lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure \@ref(fig:trees-information)D, for example by labeling internal nodes or showing character states.
+At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure \@ref(fig:trees-information)A is compatible with any phylogeny with any edge lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure \@ref(fig:trees-information)B, it is compatible with any phylogeny with any edge lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure \@ref(fig:trees-information)D, for example by labeling internal nodes or showing character states.
 
-The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate branch lengths, for example, while another couldn't care less about branch lengths and is only interested in topology.
+The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate edge lengths, for example, while another couldn't care less about edge lengths and is only interested in topology.
 
 ```{r trees-information, echo=FALSE, fig.cap="Adding information to a phylogeny makes it more specific."}
 
