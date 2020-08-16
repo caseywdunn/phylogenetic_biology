@@ -19,6 +19,7 @@ fig_caption: yes
 	library( treeio ) # devtools::install_github("GuangchuangYu/treeio")
 	library( ggtree ) # devtools::install_github("GuangchuangYu/ggtree")
 	library( ape )
+  library( geiger )
 	library( gridExtra )
 	library( magrittr )
 	library( phytools )

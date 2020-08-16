@@ -25,8 +25,6 @@ will be largely congruent, but in many cases they will not be. Hierarchical tree
 used for things that have no evolutionary component, like similarity of responses 
 to a drug.
 
-
-
 It is helpful, then, to be more precise about the components of a phylogeny, and 
 what each of those parts represent.
 
@@ -43,7 +41,7 @@ knitr::include_graphics("figures/graph.svg")
 ```
 
 A phylogeny is a specific instance of a mathematical object known as a (graph)[https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)]. 
-A graph consists of nodes, often represented as circles, connected by edges, often 
+A graph consists of nodes (also called vertices in a mathematical context), often represented as circles, connected by edges, often 
 represented by lines or curves (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
 For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions.
 
@@ -72,26 +70,27 @@ is older than the node on the other side of the edge.
 
 A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what it actually is. The nodes are entities that can evolve, like organisms or genes. The edges indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each edge would connect each individual to its immediate ancestors. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth.
 
+In a fully bifurcating tree with $n$ tip nodes, there are $n-1$ internal nodes. For example, Figure \@ref(fig:trees-graph-tree) shows a tree with 4 tip nodes (labeled 1-4) and 3 internal nodes (labeled 4-7).
 
 ## Drawing phylogenies
 
-You will rarely see a phylogeny depicted as in Figure \@ref(fig:trees-graph-tree), with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the edges (Figure \@ref(fig:trees-mammal)), with the nodes implied at the ends of edges (including at their intersections, which are internal nodes). The nodes are implied. 
+You will rarely see a phylogeny depicted as in Figure \@ref(fig:trees-graph-tree), with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the edges (Figure \@ref(fig:trees-mammal)), with the nodes implied at the ends of edges (including at their intersections, which are internal nodes). The nodes are implied.
 
 ```{r trees-mammal, echo=FALSE, fig.cap="A phylogeny of some mammals, downloaded from http://vertlife.org . Note that node circles are not drawn, instead nodes are implied at ends of edges."}
-
-tree_mammal_text="((((((Lepus_europaeus:70.20096322090001,Mus_musculus:70.2009638712):3.154317,Homo_sapiens:73.3552735285):6.856746,(((Equus_ferus:58.229796309799994,Balaenoptera_musculus:58.22982398432999):8.913111,Panthera_leo:67.14292611620002):0.811577,Corynorhinus_townsendii:67.95450331960001):12.257514):5.856834,(Loxodonta_africana:83.676113197,Dasypus_novemcinctus:83.67612211229999):2.392725):76.041131,Macropus_giganteus:162.10993597769):17.193944,Ornithorhynchus_anatinus:179.30390079);"
-
-tree = read.tree( text=tree_mammal_text )
 
 # The native phylopic tool in ggtree has some issues - api times out, some images can be missing because originals are small, and hard to control scaling when they have variable width. So load them from local copies of the images
 
 # d = ggimage::phylopic_uid(tree$tip.label) # The original retrieval of some phylopic uid's
 d = read.table("data/phylopic_mammals.tsv", header=TRUE, sep="\t")
-
 row.names(d) = d$name
 
+tree_mammal_text="((((((Lepus_europaeus:70.20096322090001,Mus_musculus:70.2009638712):3.154317,Homo_sapiens:73.3552735285):6.856746,(((Equus_ferus:58.229796309799994,Balaenoptera_musculus:58.22982398432999):8.913111,Panthera_leo:67.14292611620002):0.811577,Corynorhinus_townsendii:67.95450331960001):12.257514):5.856834,(Loxodonta_africana:83.676113197,Dasypus_novemcinctus:83.67612211229999):2.392725):76.041131,Macropus_giganteus:162.10993597769):17.193944,Ornithorhynchus_anatinus:179.30390079);"
 
-p = ggtree(tree) %<+% d + 
+tree = read.tree( text=tree_mammal_text )
+d_ingroup = d %>% filter( group=="ingroup" )
+g_tree = ggtree(tree) %<+% d_ingroup
+
+p = g_tree + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
   geom_tiplab( aes(label=str_replace(label, "_", " " )), fontface = "italic", offset = 40) +
   xlim(0, 400)
@@ -100,7 +99,7 @@ p
 
 ```
 
-There is considerable variation in how the exact same phylogeny can be drawn (Figure \@ref(fig:trees-layouts)). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. Rectangular layouts are the most common, because the entire branch length is along one axis of the plot. But there are other options, like slanted and circular layout. 
+There is considerable variation in how the exact same phylogeny can be drawn (Figure \@ref(fig:trees-layouts)). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. Rectangular layouts are the most common, because the entire branch length is along one axis of the plot. Slanted layouts avoid the elbows of rectangular layouts, but because the edges aren't parallel and can be at a variety of angles, it isn't always easy to read branch lengths on them. Circular layouts place the root at the center, and the tips around the edges. This is a very compact representation that works well for very large trees. 
 
 
 ```{r trees-layouts, echo=FALSE, fig.cap="The same tree as above, layed out in several different ways."}
@@ -108,29 +107,28 @@ There is considerable variation in how the exact same phylogeny can be drawn (Fi
 # Derived from https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html
 
 
-p_rect = ggtree(tree) %<+% d + 
+p_rect = g_tree + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
   xlim(0, 400) + ggtitle("rectangular layout")
 
-p_slanted = ggtree(tree, layout="slanted") %<+% d + 
+p_slanted = ggtree(tree, layout="slanted") %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
   xlim(0, 400) + ggtitle("slanted layout")
 
-p_circ = ggtree(tree, layout="circular") %<+% d + 
+p_circ = ggtree(tree, layout="circular") %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
   xlim(0, 400)  + ggtitle("circular layout")
 
-p_unrooted = ggtree(tree, layout="unrooted") %<+% d + 
+p_vert = g_tree + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  ggtitle("unrooted layout")
-
+  xlim(0, 400) + ggtitle("vertical layout") + coord_flip()
 
 library("gridExtra")
 grid.arrange(
   p_rect,
   p_slanted,
   p_circ,
-  p_unrooted,
+  p_vert,
   ncol=2
   )
 
@@ -138,6 +136,33 @@ grid.arrange(
 
 ```
 
+## Rotating nodes
+
+One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn't have any information content. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure \@ref(fig:trees-rotations)). The topology remains unchanged. It's the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this -- https://vimeo.com/148794860 . 
+
+```{r trees-rotations, echo=FALSE, fig.cap="The exact same phylogeny, drawn a few times with different node rotations."}
+
+n_tips = length(tree$tip.label)
+nodes_internal = seq( n_tips+1, 2*n_tips-1 ) %>% sample()
+
+p_r1 = g_tree + 
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+  xlim(0, 400)
+
+p_r2 = ggtree::rotate( p_r1, nodes_internal[1] )
+p_r3 = ggtree::rotate( p_r2, nodes_internal[2] )
+p_r4 = ggtree::rotate( p_r3, nodes_internal[3] )
+
+
+grid.arrange(
+  p_r1,
+  p_r2,
+  p_r3,
+  p_r4,
+  ncol=2
+  )
+
+```
 
 ## The meaning of edge lengths
 
@@ -156,15 +181,15 @@ tree_noised = tree
 # Noise up the branch lengths so that the phylograms don't have uniform branch lengths
 tree_noised$edge.length = tree_noised$edge.length * rpois(length(tree_noised$edge.length), lambda = 100)/100
 
-p_chronogram = ggtree(tree) %<+% d + 
+p_chronogram = g_tree + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
   xlim(0, 400) + ggtitle("chronogram")
 
-p_phylogram = ggtree(tree_noised) %<+% d + 
+p_phylogram = ggtree(tree_noised) %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
   xlim(0, 400) + ggtitle("phylogram")
 
-p_cladogram = ggtree(tree_noised, branch.length="none") %<+% d + 
+p_cladogram = ggtree(tree_noised, branch.length="none") %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
   xlim(0, 15) + ggtitle("cladogram")
 
@@ -193,64 +218,146 @@ Where things get really, really confusing is that trees are often drawn in a roo
 when we don't know where the root is. So just because a phylogeny is drawn like that in (Figure \@ref(fig:trees-rooting)), don't assume that the author knows where the root actually is unless they say so.
 
 
-```{r trees-rooting, echo=FALSE, fig.cap="The actual root is shown in red."}
+```{r trees-rooting, echo=FALSE, fig.cap="The root of the mammal tree is shown in red."}
+
+
+# Manually graft on the outgroup
+# Figure that the MRCA ages of:
+# tetrapoda 370
+# amniota   340
+# diapsid   300
+
+tree_tetrapod_text="((((((((Lepus_europaeus:70.20096322090001,Mus_musculus:70.2009638712):3.154317,Homo_sapiens:73.3552735285):6.856746,(((Equus_ferus:58.229796309799994,Balaenoptera_musculus:58.22982398432999):8.913111,Panthera_leo:67.14292611620002):0.811577,Corynorhinus_townsendii:67.95450331960001):12.257514):5.856834,(Loxodonta_africana:83.676113197,Dasypus_novemcinctus:83.67612211229999):2.392725):76.041131,Macropus_giganteus:162.10993597769):17.193944,Ornithorhynchus_anatinus:179.30390079):160.6961,(Buteo_jamaicensis:300,Podarcis_lilfordi:300):40):30,Hyla_versicolor:370);"
+
+tree_tetrapod = read.tree( text=tree_tetrapod_text )
+
+ingroup_taxa = d %>% filter(group=="ingroup") %>% pull(name)
+
+mammal_mrca = getMRCA(tree_tetrapod, ingroup_taxa)
+
+g_tree_tetrapod = ggtree(tree_tetrapod) %<+% d
 
 # get the root node
 root_node = tree$edge[ ! tree$edge[ ,1] %in% tree$edge[ ,2]  ,1] %>% unique()
 
-p_rooted = tree %>% 
-  ggtree() %<+% d + 
+p_unrooted = ggtree(tree, layout="unrooted") %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  xlim(0, 400) + 
+  ggtitle("(A) unrooted layout") + 
   geom_nodepoint(aes(subset=(node == root_node )), col="red")
 
-
-grid.arrange(
-  p_rooted,
-  ncol=2
-  )
-
-```
-
-
-
-## Rotating nodes
-
-One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn't have any information content. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure \@ref(fig:trees-rotations)). It's the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this -- https://vimeo.com/148794860 . 
-
-```{r trees-rotations, echo=FALSE, fig.cap="The exact same phylogeny, drawn a few times with different node rotations."}
-
-n_tips = length(tree$tip.label)
-nodes_internal = seq( n_tips+1, 2*n_tips-1 ) %>% sample()
-
-p_r1 = tree %>% 
-  ggtree() %<+% d + 
+p_rooted = tree %>% 
+  ggtree() %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  xlim(0, 400)
+  xlim(0, 400) +
+  ggtitle("(B) rooted layout") + 
+  geom_nodepoint(aes(subset=(node == root_node )), col="red")
 
-p_r2 = ggtree::rotate( p_r1, nodes_internal[1] )
-p_r3 = ggtree::rotate( p_r2, nodes_internal[2] )
-p_r4 = ggtree::rotate( p_r3, nodes_internal[3] )
-
+p_tetra = g_tree_tetrapod + 
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+  ggtitle("(C) with outgroup taxa") + 
+  geom_nodepoint(aes(subset=(node == mammal_mrca )), col="red") +
+  xlim(0, 500)
 
 grid.arrange(
-  p_r1,
-  p_r2,
-  p_r3,
-  p_r4,
+  p_unrooted,
+  p_rooted,
+  p_tetra,
   ncol=2
   )
 
 ```
+
+## Polytomies
+
+Polytomies are internal nodes with more than two child nodes (or, in the case of unrooted trees, internal nodes that have more than three edges).
+
+star / comb phylogeny
+
+## The information contained in phylogenies
+
+Thinking about phylogenies as graphs gives us very explicit ways to think about what information can be contained in a phylogeny. In the fundamental graphical sense, a phylogeny is a pair of sets -- a set of nodes and a set of edges -- and annotations on those entities.
+
+The topology of the phylogeny is the way in which nodes are connected by edges. If there are different connections in two trees, then they have different topologies. If the annotations differ but the connections are the same, then the topolpgies are the same. Sometimes we know more and sometimes less about the topology. A fully resolved bifurcating phylogeny, where every internal node has two children, contains maximal information about the topology. A completely unresolved star phylogeny contains no information about topology.
+
+Node annotations can include:
+
+- Labels. These could be species names, gene names, museum accession numbers for particular specimens, or broader clade names (eg Mammalia).
+
+- Character states. The presence or absence of particular attributes (like hair), or the particular nucleotide at a particular spot in a particular gene (CGTA).
+
+- Geographical locations.
+
+
+Edge annotations can include:
+
+- Length. The value and unit of length can differ, for example it can time (as in a chronogram) or expected amount of change in a particular set of characters (as in a phylogram).
+
+- Directionality. An indication of which direction time goes in along each branch. This only applies in the context of a rooted tree.
+
+- Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes need not be different in the relevant trait to have change events. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the edge that are compatible with this pattern, for example a change from A to C and then a change from C back to A.
+
+- Edge frequencies.This is how topology support values such as bootstraps and posterior probabilities, which we'll discuss later, are stored.
+
+Not all trees have all this information. The minimum possible information a tree could contain is just the number of tips. With this, you could could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that tree. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and edges that indicate the topology of the tree (Figure \@ref(fig:trees-information)C). Once you have topology, you could display edge attributes. For example, you could scale the edge lengths by time (Figure \@ref(fig:trees-information)D).
+
+At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure \@ref(fig:trees-information)A is compatible with any phylogeny with any branch lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure \@ref(fig:trees-information)B, it is compatible with any phylogeny with any branch lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure \@ref(fig:trees-information)D, for example by labeling internal nodes or showing character states.
+
+The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate branch lengths, for example, while another couldn't care less about branch lengths and is only interested in topology.
+
+```{r trees-information, echo=FALSE, fig.cap="Adding information to a phylogeny makes it more specific."}
+
+tree_star = di2multi(tree, 1e6)
+
+p_min = tree_star %>% 
+  ggtree( branch.length="none" ) %<+% d_ingroup + 
+  #geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+  xlim(0, 2) +
+  ggtitle("(A) Unlabeled 11 tips comb cladogram")
+
+p_images = tree_star %>% 
+  ggtree( branch.length="none" ) %<+% d_ingroup + 
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.2 ) +
+  xlim(0, 2) +
+  ggtitle("(B) Add tip images")
+
+p_topo = tree %>% 
+  ggtree( branch.length="none" ) %<+% d_ingroup + 
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.2 ) +
+  xlim(0, 15) +
+  ggtitle("(C) Add topology")
+
+p_bl = tree %>% 
+  ggtree( ) %<+% d_ingroup + 
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.2 ) +
+  xlim(0, 400) +
+  ggtitle("(D) Add branch lengths")
+
+grid.arrange(
+  p_min,
+  p_images,
+  p_topo,
+  p_bl,
+  ncol=2
+  )
+
+```
+
 
 ## Representation
 
+So far we have focused on phylogenies in the abstract sense as mathematical graphs and their associated annotations, and in the concrete sense as 
 
 paranthetical
 
 ape
 
 ggtree
+
+
+## Final thoughts
+
+
+
 
 ## Additional reading
 
