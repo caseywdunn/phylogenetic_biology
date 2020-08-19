@@ -7,7 +7,7 @@ knitr::include_graphics("figures/darwin.png")
 
 ```
 
-Phylogenies are representations of evolutionary relationships. The only figure in Darwin's Origin of Species was a phylogeny (Figure \@ref(fig:trees-darwin)), though he didn't call it that.
+Phylogenies are representations of evolutionary relationships. The only figure in Darwin's Origin of Species [@darwin1859] was a phylogeny (Figure \@ref(fig:trees-darwin)), though he didn't call it that.
 
 Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the reference of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees (Figure \@ref(fig:trees-haeckel)).
 
@@ -62,7 +62,7 @@ Phylogeny graphs (Figure \@ref(fig:trees-graph-tree)) usually have a few specifi
 and that it isn't possible to go in circles. Exceptions can arise in cases of horizontal 
 gene transfer or hybridization.
 
-- They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three edges connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. Some phylogenies are not strictly bifurcating, in which they are said to have a polytomy. This can be either due to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages.
+- They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three edges connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. 
 
 - They can be directed. This means that edges are not symmetric, and instead have 
 directionality. Specifically, they denote time. The node on one end of the edge 
@@ -99,7 +99,13 @@ p
 
 ```
 
-There is considerable variation in how the exact same phylogeny can be drawn (Figure \@ref(fig:trees-layouts)). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. Rectangular layouts are the most common, because the entire edge length is along one axis of the plot. Slanted layouts avoid the elbows of rectangular layouts, but because the edges aren't parallel and can be at a variety of angles, it isn't always easy to read edge lengths on them. Circular layouts place the root at the center, and the tips around the edges. This is a very compact representation that works well for very large phylogenies. 
+There is considerable variation in how the exact same phylogeny can be drawn (Figure \@ref(fig:trees-layouts)). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. 
+
+Rectangular layouts are the most common, because the entire edge length is along one axis of the plot. In a rectangular tree, each node is depicted as a line that is orthogonal to the edges. The confusing thing is that, because this line has the same width and color as the edges, it looks as if it is part of the edge. It isn't though-- its length is arbitrary, and it just shows which edges attach to that node. It also adds right-degree elbows where the ends of the node lines connect to the edges, forming a corner.
+
+Slanted layouts avoid the node lines and elbows of rectangular layouts, but because the edges aren't parallel and can be at a variety of angles, it isn't always easy to read edge lengths on them. 
+
+Circular layouts place the root at the center, and the tips around the edges. This is a very compact representation that works well for very large phylogenies. 
 
 
 ```{r trees-layouts, echo=FALSE, fig.cap="The same tree as above, layed out in several different ways."}
@@ -202,11 +208,112 @@ grid.arrange(
 
 ```
 
+## Polytomies
+
+Some phylogenies are not strictly bifurcating, in which they are said to have a polytomy. This can be either due to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages.
+
+Polytomies are internal nodes with more than two child nodes (or, in the case of unrooted trees, internal nodes that have more than three edges).
+
+A phylogeny that has only a single polytomy is said to be entirely unresolved -- it has no topological information. When laid out in a rectangular format, it looks like a comb. When laid out in a slanted format it looks like a star. So you will hear fully unresolved trees referred to as comb or star phylogenies.
+
+
+
+
 ## Rooting
 
-So far we have dealt with rooted phylogenies. Each of them has had a root node that is the oldest node in the phylogeny. It has no edge connecting it to a parent node, and all other nodes in the phylogeny are its descendants. This seems simple enough.
+So far we have dealt only with rooted phylogenies. We know what the oldest point is in the tree, and call it the root node. This special internal node has no edge connecting it to a parent node (because it has no parent in the phylogeny), and all other nodes in the phylogeny are its descendants. Of course this root node didn't arise by spontaneous generation, this phylogeny is a subtree of the rest of the tree of life and this root is 
+where this subtree would connect to other organisms outside this group if they were included (unless the root in question is the root of the entire tree of life).
+
+One consequence of having a rooted tree is that we know the direction of time along each edge - time proceeds from the root to the tips. This provides a clear parent-child relationship between nodes at the ends of each edge.
 
 
+```{r trees-rooted-abstract, echo=FALSE, fig.cap="These four cladograms have the same tips and same topology, only the their layout differs. The first layout is unrooted. The other three are rooted on the red node, blue node, and orange edge. These colored elements are in the exact same topological positions in all trees. When the tree is rooted on the red or blue nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the orange edge, a new nroted node is added along the edge. This new node is bifurcating."}
+
+# Generated a random tree, but then specify it to use the same one for each render
+# rtree(10, rooted=FALSE) %>% write.tree()
+
+random_tree_text = "((((t2:0.6426371725,(t7:0.795404278,t5:0.490902385):0.08911590092):0.6092204258,(t1:0.4927926983,t6:0.6394529371):0.003689205274):0.5385288459,t3:0.1666099441):0.6687747235,(t4:0.8152954176,t9:0.829404637):0.5864574732,(t8:0.724212883,t10:0.417881
+4138):0.9724797395);"
+
+tree_r = read.tree( text = random_tree_text )
+
+# Work from tip labels rather than node numbers since node numbers are not guranteed to be consistent
+mrca_t10_t3_n11 = getMRCA(tree_r, which(tree_r$tip.label %in% c('t10','t3'))) # 11
+mrca_t9_t4_n11 = getMRCA(tree_r, which(tree_r$tip.label %in% c('t9','t4'))) # 17
+mrca_t5_t2_n11 = getMRCA(tree_r, which(tree_r$tip.label %in% c('t5','t2'))) # 14
+n_nodes = max(tree_r$edge)
+d_n11 = data.frame( node=1:n_nodes, color="black" )
+d_n11$color[ mrca_t5_t2_n11 ] = "orange"
+
+p_r_unrooted = 
+  tree_r %>% 
+  ggtree( layout="unrooted", branch.length="none", aes(color=I(color)) ) %<+% d_n11 + 
+  geom_tiplab(offset=0.2) +
+  #geom_text(aes(label=node)) +
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="red", size=4 ) + 
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="blue", size=4 )
+
+p_r_rooted_n11 = 
+  tree_r %>% 
+  ggtree( branch.length="none", aes(color=I(color)) ) %<+% d_n11 + 
+  geom_tiplab(offset=0.2) +
+  #geom_text(aes(label=node)) +
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="red", size=4 ) + 
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="blue", size=4 )
+
+
+tree_r_n17 = tree_r %>%  phytools::reroot( node=mrca_t9_t4_n11 ) %>% di2multi()
+mrca_t10_t3_n17 = getMRCA(tree_r_n17, which(tree_r_n17$tip.label %in% c('t10','t3')))
+mrca_t9_t4_n17 = getMRCA(tree_r_n17, which(tree_r_n17$tip.label %in% c('t9','t4')))
+mrca_t5_t2_n17 = getMRCA(tree_r_n17, which(tree_r_n17$tip.label %in% c('t5','t2')))
+n_nodes = max(tree_r_n17$edge)
+d_n17 = data.frame( node=1:n_nodes, color="black" )
+d_n17$color[ mrca_t5_t2_n17 ] = "orange"
+
+
+p_r_rooted_n17 = 
+  tree_r_n17 %>% 
+  ggtree( branch.length="none", aes(color=I(color)) ) %<+% d_n17 + 
+  geom_tiplab(offset=0.2) +
+  #geom_text(aes(label=node)) +
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n17 )), col="red", size=4 ) + 
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n17 )), col="blue", size=4 )
+
+tree_r_e14 = tree_r %>%  phytools::reroot( node=mrca_t5_t2_n11 )
+mrca_t10_t3_e14 = getMRCA(tree_r_e14, which(tree_r_e14$tip.label %in% c('t10','t3')))
+mrca_t9_t4_e14 = getMRCA(tree_r_e14, which(tree_r_e14$tip.label %in% c('t9','t4')))
+mrca_t5_t2_e14 = getMRCA(tree_r_e14, which(tree_r_e14$tip.label %in% c('t5','t2')))
+mrca_t1_t10_e14 = getMRCA(tree_r_e14, which(tree_r_e14$tip.label %in% c('t10','t1')))
+
+n_nodes = max(tree_r_e14$edge)
+d_e14 = data.frame( node=1:n_nodes, color="black" )
+d_e14$color[ c(mrca_t1_t10_e14, mrca_t5_t2_e14) ] = "orange"
+
+p_rooted_e14 = 
+  tree_r_e14 %>% 
+  ggtree( branch.length="none", aes(color=I(color)) )  %<+% d_e14 + 
+  geom_tiplab(offset=0.2) +
+  #geom_text(aes(label=node)) +
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_e14 )), col="red", size=4 ) + 
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_e14 )), col="blue", size=4 )
+
+grid.arrange(
+  p_r_unrooted,
+  p_r_rooted_n11,
+  p_r_rooted_n17,
+  p_rooted_e14,
+  ncol=2
+  )
+
+
+```
+
+
+Knowing where the root is in a phylogeny is one more piece of information about it, in addition to knowing other node attributes, the topology, and edge attributes. Sometimes we have that added information about root placement, and sometimes we don't. There are many phylogenetic studies focused on identifying the location of the root in various groups of organisms, this is often an interesting and important question. Even when we don't know where the root of a phylogeny is, we often want to talk about other aspects of the tree. For this reason we need to be able to talk about unrooted phylogenies.
+
+Because a root could fall at any point in an unrooted phylogeny, there are some basic things we can't take for granted. We don't, for example, know which way time goes along the branches. We don't know which internal nodes are child nodes and which are parent nodes. 
+
+Things get even stranger when one considers how rooted and unrooted phylogenies are depicted
 
 The root of a phylogeny (or sub-phylogeny) is the node that has no parent. This seems simple enough, 
 but the concept is actually quite complicated once you get into the details. There are a 
@@ -271,11 +378,7 @@ grid.arrange(
 
 ```
 
-## Polytomies
 
-Polytomies are internal nodes with more than two child nodes (or, in the case of unrooted trees, internal nodes that have more than three edges).
-
-star / comb phylogeny
 
 ## The information contained in phylogenies
 

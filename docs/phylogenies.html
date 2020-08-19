@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-08-16" />
+<meta name="date" content="2020-08-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -82,8 +82,8 @@
 <li class="chapter" data-level="2.2" data-path="phylogenies.html"><a href="phylogenies.html#drawing-phylogenies"><i class="fa fa-check"></i><b>2.2</b> Drawing phylogenies</a></li>
 <li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#rotating-nodes"><i class="fa fa-check"></i><b>2.3</b> Rotating nodes</a></li>
 <li class="chapter" data-level="2.4" data-path="phylogenies.html"><a href="phylogenies.html#the-meaning-of-edge-lengths"><i class="fa fa-check"></i><b>2.4</b> The meaning of edge lengths</a></li>
-<li class="chapter" data-level="2.5" data-path="phylogenies.html"><a href="phylogenies.html#rooting"><i class="fa fa-check"></i><b>2.5</b> Rooting</a></li>
-<li class="chapter" data-level="2.6" data-path="phylogenies.html"><a href="phylogenies.html#polytomies"><i class="fa fa-check"></i><b>2.6</b> Polytomies</a></li>
+<li class="chapter" data-level="2.5" data-path="phylogenies.html"><a href="phylogenies.html#polytomies"><i class="fa fa-check"></i><b>2.5</b> Polytomies</a></li>
+<li class="chapter" data-level="2.6" data-path="phylogenies.html"><a href="phylogenies.html#rooting"><i class="fa fa-check"></i><b>2.6</b> Rooting</a></li>
 <li class="chapter" data-level="2.7" data-path="phylogenies.html"><a href="phylogenies.html#the-information-contained-in-phylogenies"><i class="fa fa-check"></i><b>2.7</b> The information contained in phylogenies</a></li>
 <li class="chapter" data-level="2.8" data-path="phylogenies.html"><a href="phylogenies.html#representation"><i class="fa fa-check"></i><b>2.8</b> Representation</a></li>
 <li class="chapter" data-level="2.9" data-path="phylogenies.html"><a href="phylogenies.html#final-thoughts"><i class="fa fa-check"></i><b>2.9</b> Final thoughts</a></li>
@@ -144,7 +144,7 @@
 Figure 2.1: Darwin’s depiction of the evolutioanry relationships between organisms <span class="citation">(Darwin <a href="#ref-darwin1859" role="doc-biblioref">1859</a>)</span>.
 </p>
 </div>
-<p>Phylogenies are representations of evolutionary relationships. The only figure in Darwin’s Origin of Species was a phylogeny (Figure <a href="phylogenies.html#fig:trees-darwin">2.1</a>), though he didn’t call it that.</p>
+<p>Phylogenies are representations of evolutionary relationships. The only figure in Darwin’s Origin of Species <span class="citation">(Darwin <a href="#ref-darwin1859" role="doc-biblioref">1859</a>)</span> was a phylogeny (Figure <a href="phylogenies.html#fig:trees-darwin">2.1</a>), though he didn’t call it that.</p>
 <p>Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the reference of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees (Figure <a href="phylogenies.html#fig:trees-haeckel">2.2</a>).</p>
 <div class="figure"><span id="fig:trees-haeckel"></span>
 <img src="figures/haeckel.jpg" alt="Haeckel's hypothesis of the animal phylogeny [@haeckel1897], drawn as an actual tree. He also coined the term phylogeny."  />
@@ -189,7 +189,7 @@ etc…</p>
 <li><p>They are acyclic. This means that there is only one path from one node to another,
 and that it isn’t possible to go in circles. Exceptions can arise in cases of horizontal
 gene transfer or hybridization.</p></li>
-<li><p>They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three edges connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. Some phylogenies are not strictly bifurcating, in which they are said to have a polytomy. This can be either due to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages.</p></li>
+<li><p>They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three edges connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages.</p></li>
 <li><p>They can be directed. This means that edges are not symmetric, and instead have
 directionality. Specifically, they denote time. The node on one end of the edge
 is older than the node on the other side of the edge.</p></li>
@@ -206,7 +206,10 @@ is older than the node on the other side of the edge.</p></li>
 Figure 2.5: A phylogeny of some mammals, downloaded from <a href="http://vertlife.org" class="uri">http://vertlife.org</a> . Note that node circles are not drawn, instead nodes are implied at ends of edges.
 </p>
 </div>
-<p>There is considerable variation in how the exact same phylogeny can be drawn (Figure <a href="phylogenies.html#fig:trees-layouts">2.6</a>). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. Rectangular layouts are the most common, because the entire edge length is along one axis of the plot. Slanted layouts avoid the elbows of rectangular layouts, but because the edges aren’t parallel and can be at a variety of angles, it isn’t always easy to read edge lengths on them. Circular layouts place the root at the center, and the tips around the edges. This is a very compact representation that works well for very large phylogenies.</p>
+<p>There is considerable variation in how the exact same phylogeny can be drawn (Figure <a href="phylogenies.html#fig:trees-layouts">2.6</a>). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny.</p>
+<p>Rectangular layouts are the most common, because the entire edge length is along one axis of the plot. In a rectangular tree, each node is depicted as a line that is orthogonal to the edges. The confusing thing is that, because this line has the same width and color as the edges, it looks as if it is part of the edge. It isn’t though– its length is arbitrary, and it just shows which edges attach to that node. It also adds right-degree elbows where the ends of the node lines connect to the edges, forming a corner.</p>
+<p>Slanted layouts avoid the node lines and elbows of rectangular layouts, but because the edges aren’t parallel and can be at a variety of angles, it isn’t always easy to read edge lengths on them.</p>
+<p>Circular layouts place the root at the center, and the tips around the edges. This is a very compact representation that works well for very large phylogenies.</p>
 <div class="figure"><span id="fig:trees-layouts"></span>
 <img src="phylogenetic_biology_files/figure-html/trees-layouts-1.png" alt="The same tree as above, layed out in several different ways." width="2100" />
 <p class="caption">
@@ -236,30 +239,42 @@ Figure 2.8: Several types of trees. In a chronogram, edge lengths are scaled acc
 </p>
 </div>
 </div>
+<div id="polytomies" class="section level2">
+<h2><span class="header-section-number">2.5</span> Polytomies</h2>
+<p>Some phylogenies are not strictly bifurcating, in which they are said to have a polytomy. This can be either due to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages.</p>
+<p>Polytomies are internal nodes with more than two child nodes (or, in the case of unrooted trees, internal nodes that have more than three edges).</p>
+<p>A phylogeny that has only a single polytomy is said to be entirely unresolved – it has no topological information. When laid out in a rectangular format, it looks like a comb. When laid out in a slanted format it looks like a star. So you will hear fully unresolved trees referred to as comb or star phylogenies.</p>
+</div>
 <div id="rooting" class="section level2">
-<h2><span class="header-section-number">2.5</span> Rooting</h2>
-<p>So far we have dealt with rooted phylogenies. Each of them has had a root node that is the oldest node in the phylogeny. It has no edge connecting it to a parent node, and all other nodes in the phylogeny are its descendants. This seems simple enough.</p>
+<h2><span class="header-section-number">2.6</span> Rooting</h2>
+<p>So far we have dealt only with rooted phylogenies. We know what the oldest point is in the tree, and call it the root node. This special internal node has no edge connecting it to a parent node (because it has no parent in the phylogeny), and all other nodes in the phylogeny are its descendants. Of course this root node didn’t arise by spontaneous generation, this phylogeny is a subtree of the rest of the tree of life and this root is
+where this subtree would connect to other organisms outside this group if they were included (unless the root in question is the root of the entire tree of life).</p>
+<p>One consequence of having a rooted tree is that we know the direction of time along each edge - time proceeds from the root to the tips. This provides a clear parent-child relationship between nodes at the ends of each edge.</p>
+<div class="figure"><span id="fig:trees-rooted-abstract"></span>
+<img src="phylogenetic_biology_files/figure-html/trees-rooted-abstract-1.png" alt="These four cladograms have the same tips and same topology, only the their layout differs. The first layout is unrooted. The other three are rooted on the red node, blue node, and orange edge. These colored elements are in the exact same topological positions in all trees. When the tree is rooted on the red or blue nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the orange edge, a new nroted node is added along the edge. This new node is bifurcating." width="2100" />
+<p class="caption">
+Figure 2.9: These four cladograms have the same tips and same topology, only the their layout differs. The first layout is unrooted. The other three are rooted on the red node, blue node, and orange edge. These colored elements are in the exact same topological positions in all trees. When the tree is rooted on the red or blue nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the orange edge, a new nroted node is added along the edge. This new node is bifurcating.
+</p>
+</div>
+<p>Knowing where the root is in a phylogeny is one more piece of information about it, in addition to knowing other node attributes, the topology, and edge attributes. Sometimes we have that added information about root placement, and sometimes we don’t. There are many phylogenetic studies focused on identifying the location of the root in various groups of organisms, this is often an interesting and important question. Even when we don’t know where the root of a phylogeny is, we often want to talk about other aspects of the tree. For this reason we need to be able to talk about unrooted phylogenies.</p>
+<p>Because a root could fall at any point in an unrooted phylogeny, there are some basic things we can’t take for granted. We don’t, for example, know which way time goes along the branches. We don’t know which internal nodes are child nodes and which are parent nodes.</p>
+<p>Things get even stranger when one considers how rooted and unrooted phylogenies are depicted</p>
 <p>The root of a phylogeny (or sub-phylogeny) is the node that has no parent. This seems simple enough,
 but the concept is actually quite complicated once you get into the details. There are a
 few different contexts to consider rooting in– the whole phylogeny, the phylogeny as it is
 stored in computer memory, and the phylogeny as it is drawn. In a chronogram, where edges lengths
 indicate time and time proceeds in a particular direction along the edges, all three rooting concepts
-are consistent. The root is just the oldest node, and therefore the node furthest from the tips (Figure <a href="phylogenies.html#fig:trees-rooting">2.9</a>).</p>
+are consistent. The root is just the oldest node, and therefore the node furthest from the tips (Figure <a href="phylogenies.html#fig:trees-rooting">2.10</a>).</p>
 <p>Where things get confusing is when we don’t know where the root is. This is often something we are
 trying to figure out, and takes external information (such as knowing that some of the nodes form an outgroup). It may be that we know the topology of the phylogeny (ie, how the nodes are connected with edges), but we just don’t know where the root is. It could be any of the internal nodes, or it could actually be along any of the edges connecting the nodes.</p>
 <p>Where things get really, really confusing is that phylogenies are often drawn in a rooted format even
-when we don’t know where the root is. So just because a phylogeny is drawn like that in (Figure <a href="phylogenies.html#fig:trees-rooting">2.9</a>), don’t assume that the author knows where the root actually is unless they say so.</p>
+when we don’t know where the root is. So just because a phylogeny is drawn like that in (Figure <a href="phylogenies.html#fig:trees-rooting">2.10</a>), don’t assume that the author knows where the root actually is unless they say so.</p>
 <div class="figure"><span id="fig:trees-rooting"></span>
 <img src="phylogenetic_biology_files/figure-html/trees-rooting-1.png" alt="The root of the mammal tree is shown in red." width="2100" />
 <p class="caption">
-Figure 2.9: The root of the mammal tree is shown in red.
+Figure 2.10: The root of the mammal tree is shown in red.
 </p>
 </div>
-</div>
-<div id="polytomies" class="section level2">
-<h2><span class="header-section-number">2.6</span> Polytomies</h2>
-<p>Polytomies are internal nodes with more than two child nodes (or, in the case of unrooted trees, internal nodes that have more than three edges).</p>
-<p>star / comb phylogeny</p>
 </div>
 <div id="the-information-contained-in-phylogenies" class="section level2">
 <h2><span class="header-section-number">2.7</span> The information contained in phylogenies</h2>
@@ -278,13 +293,13 @@ Figure 2.9: The root of the mammal tree is shown in red.
 <li><p>Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes need not be different in the relevant trait to have change events. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the edge that are compatible with this pattern, for example a change from A to C and then a change from C back to A.</p></li>
 <li><p>Edge frequencies.This is how topology support values such as bootstraps and posterior probabilities, which we’ll discuss later, are stored.</p></li>
 </ul>
-<p>Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could could draw an unresolved, unlabeled cladogram (Figure <a href="phylogenies.html#fig:trees-information">2.10</a>A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure <a href="phylogenies.html#fig:trees-information">2.10</a>B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and edges that indicate the topology of the phylogeny (Figure <a href="phylogenies.html#fig:trees-information">2.10</a>C). Once you have topology, you could display edge attributes. For example, you could scale the edge lengths by time (Figure <a href="phylogenies.html#fig:trees-information">2.10</a>D).</p>
-<p>At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure <a href="phylogenies.html#fig:trees-information">2.10</a>A is compatible with any phylogeny with any edge lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure <a href="phylogenies.html#fig:trees-information">2.10</a>B, it is compatible with any phylogeny with any edge lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure <a href="phylogenies.html#fig:trees-information">2.10</a>D, for example by labeling internal nodes or showing character states.</p>
+<p>Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could could draw an unresolved, unlabeled cladogram (Figure <a href="phylogenies.html#fig:trees-information">2.11</a>A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure <a href="phylogenies.html#fig:trees-information">2.11</a>B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and edges that indicate the topology of the phylogeny (Figure <a href="phylogenies.html#fig:trees-information">2.11</a>C). Once you have topology, you could display edge attributes. For example, you could scale the edge lengths by time (Figure <a href="phylogenies.html#fig:trees-information">2.11</a>D).</p>
+<p>At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure <a href="phylogenies.html#fig:trees-information">2.11</a>A is compatible with any phylogeny with any edge lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure <a href="phylogenies.html#fig:trees-information">2.11</a>B, it is compatible with any phylogeny with any edge lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure <a href="phylogenies.html#fig:trees-information">2.11</a>D, for example by labeling internal nodes or showing character states.</p>
 <p>The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate edge lengths, for example, while another couldn’t care less about edge lengths and is only interested in topology.</p>
 <div class="figure"><span id="fig:trees-information"></span>
 <img src="phylogenetic_biology_files/figure-html/trees-information-1.png" alt="Adding information to a phylogeny makes it more specific." width="2100" />
 <p class="caption">
-Figure 2.10: Adding information to a phylogeny makes it more specific.
+Figure 2.11: Adding information to a phylogeny makes it more specific.
 </p>
 </div>
 </div>

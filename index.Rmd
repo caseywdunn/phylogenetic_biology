@@ -48,7 +48,7 @@ I developed this book as a collection of the concepts, methods, and applications
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'ape', 'geiger', 'ggtree', 'treeio'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'ape', 'geiger', 'ggtree', 'treeio', 'phytools'
 ), 'packages.bib')
 ```
 
