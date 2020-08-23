@@ -161,7 +161,7 @@ The function for the number of possible rooted phylogenies for $n$ tips is:
   (\#eq:ntrees)
 \end{equation} 
 
-This gets big really, really fast as $n$ increases. For a phylogeny of 5 tips there are 105 possible topologies. For a phylogeny of just 10 tips there are already 34,459,425 possible topologies. For a phylogeny of 50 tips there are $2.75\times10^{76}$ possible topologies. This very large number of possible trees is a major challenge when it comes to inferring phylogenies from data -- it is impossible to consider all possibilities.
+This gets big really, really fast as $n$ increases. For a phylogeny of 5 tips there are 105 possible topologies. For a phylogeny of just 10 tips there are already 34,459,425 possible topologies. For a phylogeny of 50 tips there are $2.75\times10^{76}$ possible topologies. This very large number of possible trees is a major challenge when it comes to inferring phylogenies from data -- it is impossible to consider all possible topologies.
 
 ## Rotating nodes
 
@@ -235,11 +235,47 @@ grid.arrange(
 
 One of the most useful applications of phylogenies is to concisely refer to groups of organisms in light of their evolutionary history.
 
-A convenient way to designate groups of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade - a group of tips that includes their MRCA and all of its descendants. A group is said to be monophyletic if it satisfies these criteria (you don't need to use the double descriptor "monophyletic clade", since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping the edge just below the MRCA.
+A convenient way to designate groups of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade - a group of tips that includes their MRCA and all of its descendants. A group is said to be monophyletic (Figure \@ref(fig:trees-groups)A) if it satisfies these criteria (you don't need to use the double descriptor "monophyletic clade", since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping the edge just below the MRCA.
+
+```{r trees-groups, echo=FALSE, fig.cap="(A) A monophyletic group, *i.e.* a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit."}
+
+
+p_mono = ggtree(tree) %<+% d_ingroup + 
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+  geom_hilight(node=16, fill='darkgreen', alpha=.6) +
+  # geom_text2(aes(label=node)) +
+  ggtitle("A Monophyletic group")
+
+p_poly = ggtree(tree) %<+% d_ingroup + 
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+  geom_hilight(node=2, fill='darkgreen', alpha=.6) +
+  geom_hilight(node=3, fill='darkgreen', alpha=.6) +
+  # geom_text2(aes(label=node)) +
+  ggtitle("B Polyphyletic group")
+
+p_para = ggtree(tree) %<+% d_ingroup + 
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+  geom_hilight(node=16, fill='darkgreen') +
+  geom_hilight(node=1, fill='white') +
+  # geom_text2(aes(label=node)) +
+  ggtitle("C Paraphyletic group")
+
+
+grid.arrange(
+  p_mono,
+  p_poly,
+  p_para,
+  ncol=2
+  )
+
+```
 
 Any internal node in a rooted phylogeny can be described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@deQueiroz2020].
 
-Not all groups are monophyletic. For example, the group consisting of kangaroos, people, and rabbits to the exclusion of all other mammals is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and edges. If we think of this set of non-monophyletic tips as isolated tips, to the eclusion of the MRCA, then we say the group is polyphyletic. If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic. In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
+Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and edges. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
+
+
+
 
 
 ## Polytomies
@@ -559,7 +595,7 @@ str( phylo_tree )
 
 ```
 
-We can see that there are three slots (each designated with a `$`) within this `phylo` object. `Nnode` is just the number of internal nodes. The real magic is `edge`, which encodes the topology of the tree. It is just an array with one row per edge, and two columns. The value in column 1 is the number of the node that is the parent of the edge, and the value in column 2 is the number of the node that is the child of the edge. Here are the complete contents:
+We can see that there are three slots (each designated with a `$`) within this `phylo` object. `Nnode` is just the number of internal nodes. The real magic is `edge`, which encodes the topology of the tree. It is just an array with one row per edge, and two columns. The value in column 1 is the number of the node that is the parent of the edge, and the value in column 2 is the number of the node that is the child of the edge. Here are the complete contents of the `edge` slot:
 
 
 ```{r trees-phylo-edge, echo=TRUE}
@@ -568,7 +604,7 @@ phylo_tree$edge
 
 So, in this case edge number 1 (the first row) connects node `r phylo_tree$edge[1,1]` to node `r phylo_tree$edge[1,2]`. Indeed, we can see just such an edge in Figure \@ref(fig:trees-newick). Try to identify each of the other edges in the array in the tree figure.
 
-You can discern all sorts of things about the tree from this simple array. The tips are nodes that are in column 2 but not in column 1 (since they aren't parents of any other nodes). The root is the node that is in column 1, but not in column 2 (because it doesn't have a parent). If a node occurs in column one more than twice, then it is a polytomy (because it has more than two edges connecting to child nodes). Note that this data structure is intrinsically rooted - there is a parent-child relationship set up between the nodes at each end of each edge. But you can still use it to store unrooted trees by picking an arbitrary internal node as the root, and just keeping track of the fact that you don't know where the root is.
+You can discern all sorts of things about the tree from this simple array. The tips are nodes that are in column 2 but not in column 1 (since they aren't parents of any other nodes). The root is the node that is in column 1, but not in column 2 (because it doesn't have a parent). If a node occurs in column 1 more than twice, then it is a polytomy (because it has more than two edges connecting to child nodes). Note that this data structure is intrinsically rooted - there is a parent-child relationship set up between the nodes at each end of each edge. But you can still use it to store unrooted trees by picking an arbitrary internal node as the root, and just keeping track of the fact that you don't know where the root is.
 
 There is one other important piece of information that we specified in the newick files - the tip labels. Those are located in another slot within the `phylo` object:
 
