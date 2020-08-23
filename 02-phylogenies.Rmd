@@ -9,7 +9,7 @@ knitr::include_graphics("figures/darwin.png")
 
 Phylogenies represent evolutionary relationships. The only figure in Darwin's Origin of Species [@darwin1859] was a phylogeny (Figure \@ref(fig:trees-darwin)), though he didn't call it that.
 
-Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haekel's tree in the manuscript where he coined the term phylogeny (Figure \@ref(fig:trees-haeckel)).
+Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haeckel's tree in the manuscript where he coined the term phylogeny (Figure \@ref(fig:trees-haeckel)).
 
 
 ```{r trees-haeckel, echo=FALSE, fig.cap="Haeckel's hypothesis of the animal phylogeny [@haeckel1897], drawn as an actual tree."}
@@ -19,7 +19,7 @@ knitr::include_graphics("figures/haeckel.jpg")
 ```
 
 Not all trees in biology are phylogenies, though. For example, 
-hierarchical clustering of traits across species results in trees that represent similarity similarity of species, but does not necessarilly show evolutionary relationships. In some cases phylogeny and species clustering 
+hierarchical clustering of traits across species results in trees that represent similarity similarity of species, but does not necessarily show evolutionary relationships. In some cases phylogeny and species clustering 
 will be largely congruent, but in many cases they will not be. Hierarchical tree-like clustering is also 
 used for things that have no evolutionary component, like similarity of responses 
 to a drug.
@@ -70,7 +70,7 @@ A phylogenetic graph is an abstraction, and for it to be useful it is important 
 
 ## Drawing phylogenies
 
-Here we will work with some mammal phylogenies, mostly because their silloutte icons are so recognizable and because there are extensive phylogenies available for this group [@upham2019].
+Here we will work with some mammal phylogenies, mostly because their silhouette icons are so recognizable and because there are extensive phylogenies available for this group [@upham2019].
 
 You will rarely see a phylogeny depicted as in Figure \@ref(fig:trees-graph-tree), with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the edges (Figure \@ref(fig:trees-mammal)), with the nodes implied at the ends of edges. The nodes are implied.
 
@@ -154,11 +154,18 @@ In a fully bifurcating phylogeny with $n$ tip nodes, the following will be the c
 
 - Since every edge in the tree has a single child node, and each node in the tree except for the root as a parent edge, the total number of edges in the tree is $2n-2$.
 
-The number of possible topologies gets big really, really fast as $n$ increases. The number of possible rooted phylogenies for $n$ tips is $(2n-3)!!$. That is two factorials, not two exclamation points. Wow!! So, for a phylogeny of 5 tips there are `r factorial(factorial(2*5-3))` possible topologies. For a phylogeny of 15 tips there are `r factorial(factorial(2*15-3))` possible topologies. For a phylogeny of 50 tips there are `r factorial(factorial(2*50-3))` possible topologies. This very large number of possible trees is a major challenge when it comes to inferring phylogenies from data - it is impossible to consider all possibilities.
+The function for the number of possible rooted phylogenies for $n$ tips is:
+
+\begin{equation} 
+  f\left(n\right) = \frac{(2n-3)!}{2^{(n-2)}(n-2)!}
+  (\#eq:ntrees)
+\end{equation} 
+
+This gets big really, really fast as $n$ increases. For a phylogeny of 5 tips there are 105 possible topologies. For a phylogeny of just 10 tips there are already 34,459,425 possible topologies. For a phylogeny of 50 tips there are $2.75\times10^{76}$ possible topologies. This very large number of possible trees is a major challenge when it comes to inferring phylogenies from data -- it is impossible to consider all possibilities.
 
 ## Rotating nodes
 
-One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn't specify any information. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure \@ref(fig:trees-rotations)). The topology remains unchanged. It's the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this -- https://vimeo.com/148794860 . The major implication of this is that you should never read a tree across the tips to see, for example, which species are more closely related. You always need to look at the structure of the tree itself.
+One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn't convey any information. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure \@ref(fig:trees-rotations)). The topology remains unchanged. It's the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this -- https://vimeo.com/148794860 . The major implication of this is that you should never read a phylogeny across the tips to see, for example, which species are more closely related. You always need to look at the structure of the phylogeny itself.
 
 ```{r trees-rotations, echo=FALSE, fig.cap="The exact same phylogeny, drawn a few times with different node rotations."}
 
@@ -186,12 +193,13 @@ grid.arrange(
 
 ## The meaning of edge lengths
 
-Another source of variation to keep in mind is the meaning of edge length (Figure \@ref(fig:trees-types)). A phylogeny where edge lengths are scaled to time is known as a chronogram. Chronograms of organisms all sampled at the same time will be ultrametric, ie the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
+Another type of variation in phylogeny depiction is the meaning of edge length (Figure \@ref(fig:trees-types)). A phylogeny where edge lengths are scaled to time is known as a chronogram. Chronograms of organisms all sampled at the same time will be ultrametric, ie the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
 
-In many cases we don't have the information needed to scale edges to time, which requires fossil calibrations. Most published phylogenies therefore scale the edges according to the expected amount of evolutionary change in the characters under consideration. The rate of evolution usually varies a bit across edges, so phylograms are not usually ultrametric. 
+In many cases we don't have the information needed to scale edges to time, which requires fossil calibrations. Most published phylogenies therefore scale the edges according to the expected amount of evolutionary change in the characters under consideration. The longer the edge, the greater the expected change. The rate of evolution usually varies a bit across edges, so phylograms are not usually ultrametric. 
 
-Sometimes we are only interested in, or only have information about, the topology of the phylogeny. In this case we can draw the edges whatever length we want, and we call the phylogeny a cladogram. Cladograms can also be useful for showing annotations on edges in phylogenies with a wide variation in edge lengths, since there might not be enough room to write labels on very short edges. It is always good practice whenever you show a phylogeny to indicated whether it is a chronogram, phylogram, or cladogram. This is inconsistent int he literature, though, and if you aren't sure it is best to just ignore edge lengths at treat the phylogeny as if it were a cladogram.
+Sometimes we are only interested in, or only have information about, the topology of the phylogeny. In this case we can draw the edges whatever length we want, and we call the phylogeny a cladogram. Cladograms can also be useful for showing annotations on edges in phylogenies with a wide variation in edge lengths, since there might not be enough room to write labels on very short edges. 
 
+It is always good practice whenever you show a phylogeny to indicate whether it is a chronogram, phylogram, or cladogram. Unfortunately, this is inconsistent in the literature, and not always clear from the figure legend or text. If you aren't sure what edge length means it is best to just ignore edge lengths at treat the phylogeny as if it were a cladogram.
 
 ```{r trees-types, echo=FALSE, fig.cap="Several types of trees. In a chronogram, edge lengths are scaled according to time. In a phylogram, edge lengths are scaled according to expected amount of evolutionary change, which can differ across characters and edges. In a cladogram, the edge lengths have no meaning. "}
 
@@ -225,18 +233,18 @@ grid.arrange(
 
 ## Naming nodes and groups
 
-One of the most useful applications of phylogenies is to concisely refer to sets of organisms in light of their evolutionary history.
+One of the most useful applications of phylogenies is to concisely refer to groups of organisms in light of their evolutionary history.
 
-A convenient way of designating sets of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade - a group of tips that includes all the descendants from their MRCA. A group is said to be monophyletic if it satisfies these creteria (you don't need to use the double descriptor "monophyletic clade", since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping just below the MRCA.
+A convenient way to designate groups of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade - a group of tips that includes their MRCA and all of its descendants. A group is said to be monophyletic if it satisfies these criteria (you don't need to use the double descriptor "monophyletic clade", since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping the edge just below the MRCA.
 
 Any internal node in a rooted phylogeny can be described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@deQueiroz2020].
 
-Not all groups are monophyletic. For example, the group consisting of kangaroos, people, and rabbits to the exclusion of all other mammals is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and edges. If we think of this set of non-monophyletic tips as isolated tips, to the eclusion of the MRCA, then we say the group is polyphyletic. If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic.
+Not all groups are monophyletic. For example, the group consisting of kangaroos, people, and rabbits to the exclusion of all other mammals is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and edges. If we think of this set of non-monophyletic tips as isolated tips, to the eclusion of the MRCA, then we say the group is polyphyletic. If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic. In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
 
 
 ## Polytomies
 
-Some phylogenies are not strictly bifurcating. An internal node with more than two edges connecting it to descendants is called a polytomy. This can be either due to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages (a hard polytomy). Any internal node with more than two descendants can be converted to a polytomy by collapsing some edges and deleting some nodes (Figure \@ref(fig:trees-types)B-D). 
+Some phylogenies are not strictly bifurcating. An internal node with more than two edges connecting it to descendants is called a polytomy (Figure \@ref(fig:trees-types)B-D). This can be to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages (a hard polytomy).
 
 A phylogeny that consists entirely of a single polytomy is said to be entirely unresolved -- it has no topological information. When laid out in a rectangular format, it looks like a comb (Figure \@ref(fig:trees-types)D). When laid out in a slanted format it looks like a star. So you will hear fully unresolved trees referred to as comb or star phylogenies.
 
@@ -289,15 +297,15 @@ grid.arrange(
 
 ## Rooting
 
-All the phylogenies we we have see so far are rooted - we know what the oldest point is in the tree, and call it the root node. This special internal node has no edge connecting it to a parent node (because it has no parent in the phylogeny), and all other nodes in the phylogeny are its descendants. One consequence of having a rooted tree is that we know the direction of time along each edge - time proceeds from the root to the tips. This provides a clear parent-child relationship between nodes at the ends of each edge.
+All the phylogenies we we have see so far are rooted -- we know what the oldest point is in the tree, and call it the root node. This special internal node has no edge connecting it to a parent node, and all other nodes in the phylogeny are its descendants. One consequence of having a rooted tree is that we know the direction of time along each edge -- time proceeds from the root to the tips. This provides a clear parent-child relationship between nodes at the ends of each edge.
 
-Not all phylogenis are rooted. Sometimes we just don't care-- some questions and methods don't depend on where the root is, so we don't have to bother placing it. Sometimes we just don't know-- placing the root is in a phylogeny takes information that sometimes we don't have. There are many phylogenetic studies focused on identifying the location of the root in various groups of organisms, this is often an interesting and important question. 
+Not all phylogenis are rooted. Sometimes we just don't care -- some questions and methods don't depend on where the root is, so we don't have to bother placing it. Sometimes we just don't know -- placing the root is in a phylogeny takes information that sometimes we don't have. There are many phylogenetic studies focused on identifying the location of the root in various groups of organisms, this is often an interesting and important question. 
 
-Even when we don't know where the root of a phylogeny is, we often want to talk about other aspects of the tree, such as the topology and edge lengths, and where the root may be. This means we need to think about how to think about unrooted phylogenies. 
+Even when we don't know where the root of a phylogeny is, we often want to talk about other aspects of the tree, such as the topology and edge lengths. This means we need to think about how to think about unrooted phylogenies. 
 
-there are some basic things we can't take for granted in an unrooted phylogeny. We don't, for example, know which way time goes along the branches. We don't know which internal nodes are child nodes and which are parent nodes. We don't know which of the edges attached to an internal node connect to older nodes and which to younger nodes.
+There are some basic things we can't take for granted in an unrooted phylogeny. We don't, for example, know which way time goes along the branches. We don't know which internal nodes are child nodes and which are parent nodes. We don't know which of the edges attached to an internal node connect to older nodes and which to younger nodes.
 
-```{r trees-rooted-abstract, echo=FALSE, fig.cap="These four cladograms have the same tips and same topology, only the their layout differs. The first layout is unrooted. The other three are rooted on the red node, blue node, and orange edge. These colored elements are in the exact same topological positions in all trees. When the tree is rooted on the red or blue nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the orange edge, a new nroted node is added along the edge. This new node is bifurcating."}
+```{r trees-rooted-abstract, echo=FALSE, fig.cap="These four cladograms have the same tips and same topology, only their layout differs. The first layout is unrooted. The other three are rooted on the red node, blue node, and orange edge. These colored elements are in the exact same topological positions in all trees. When the tree is rooted on the red or blue nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the orange edge, a new unroted node is added along the edge. This new node is bifurcating."}
 
 # Generated a random tree, but then specify it to use the same one for each render
 # rtree(10, rooted=FALSE) %>% write.tree()
@@ -377,13 +385,13 @@ grid.arrange(
 
 ```
 
-The root could fall at any point in an unrooted phylogeny, either along an edge or right at an internal node. You can think of rooting a phylogeny as grabing the point that you think is the root and draggint it until all the edges point away from it (Figure \@ref(trees-rooted-abstract)). If you grab at some point along an edge, this creates a new node that is the root. This new root node has two edges connecting it to descendants. Since it has no edge connecting it to a parent, it differs from other internal nodes in having only two edges connected to it (instead of three, or more in the case of polytomies). The end results of rooting along a edge is that you add a node to the phylogeny and the root is resolved (not a polytomy).
+The root could fall at any point in an unrooted phylogeny, either along an edge or right at an internal node. You can think of rooting a phylogeny as grabing the point that you think is the root and draggint it until all the edges point away from it (Figure \@ref(fig:trees-rooted-abstract)). If you grab at some point along an edge, this creates a new node that is the root. This new root node has two edges connecting it to descendants (these two edges arise by splitting the single edge along which the root was placed). Since it has no edge connecting it to a parent, it differs from other internal nodes in having only two edges connected to it (instead of three, or more in the case of polytomies). The end results of rooting along a edge is that you add a node to the phylogeny and the root is resolved (not a polytomy).
 
-Things are a bit different if you root at an existing internal node. Because the existing node becomes the root, the number of nodes in the tree remains unchanged. So far so good. But since internal nodes in a bifurcating tree all have three edges connected to them, when an internal node becomes the root the root is an unresolved polytomy. This seems like a pain, so why not always root along an edge? There are a few reasons. One is that rooting along an edge requires that we pick a specific point where the root goes, for example in the middle or somewhere else. That decision can take information that we don't have. The other is that the creation and destruction of nodes associated with rooting along edges gets cumbersome and problematic, especially when there are specific data associated with internal nodes.
+Things are a bit different if you root at an existing internal node. Because the existing node becomes the root, the number of nodes in the tree remains unchanged. So far so good. But since internal nodes in a bifurcating tree all have three edges connected to them, when an internal node becomes the root the root is a polytomy. This seems like a pain, so why not always root along an edge? There are a few reasons. One is that rooting along an edge requires that we pick a specific point along the edge where the root goes, for example in the middle or somewhere else. That decision can take information that we don't have. Another reason is that the creation and destruction of nodes associated with rooting along edges gets cumbersome and problematic, especially when there are specific data associated with internal nodes.
 
-What information can we use to root a phylogeny? There are a couple approaches. Once is to pick the midpoint - the point forthest from any tips - as the root. If evolution proceeded at a perfectly uniform rate this could work well, but in practice rates of evolution are too variable across lineages for this to give a reliable result.
+What information can we use to root a phylogeny? There are a couple approaches. Once is to pick the midpoint -- the point forthest from any tips -- as the root. If evolution proceeded at a perfectly uniform rate this could work well, but in practice rates of evolution are too variable across lineages for this to give a reliable result.
 
-The more common approach to rooting a phylogeny is to use an outgroup (Figure \@ref(fig:trees-rooting)). If the ingroup is the group of organisms you are interested in (e.g., mammals), the outgroup is a set of animals that you strongly believe do not fall within the ingroup. If you place the root anywhere in the outgroup, then the most recent common ancestor of the ingroup will be the root of the ingroup.
+The more common approach to rooting a phylogeny is to use an outgroup (Figure \@ref(fig:trees-rooting)). If the ingroup is the group of organisms you are interested in (e.g., mammals), the outgroup is a set of animals that you strongly believe do not fall within the ingroup. If you place the root anywhere in the outgroup, then the most recent common ancestor of the ingroup will be the root of the ingroup. Rooting this way works better when a larger number of outgroup species are considered, and the outgroup species include the organisms most closely related to the ingroup. Including too few outgroups is one of the most common mistakes in published phylogenies.
 
 
 ```{r trees-rooting, echo=FALSE, fig.cap="The root of the mammal tree is shown in red."}
@@ -435,24 +443,24 @@ grid.arrange(
 
 ```
 
-Always be careful interpreting root position when looking at a published phylogeny. Unrooted phylogenies are often drawn is if they are rooted, just by picking a random rooting point are a good guess of where the root is. If the figure legend or text doesn't state how the tree was rooted, best to assume that it wasn't rigorously rooted if this is critical to the analyses at hand.
+Always be careful interpreting root position when looking at a published phylogeny. Unrooted phylogenies are often drawn is if they are rooted, often by picking a random rooting point or making a good guess of where the root is. This is in part because rooted phylogeny figures tend to be easier to read than unrooted figures. If the figure legend or text doesn't state how the tree was rooted, best to assume that it wasn't rigorously rooted if this is critical to the analyses at hand.
 
 
 ## The information contained in phylogenies
 
-Thinking about phylogenies as graphs gives us very explicit ways to think about what information can be contained in a phylogeny. In the fundamental graphical sense, a phylogeny is a pair of sets -- a set of nodes and a set of edges -- and annotations on those entities.
+Thinking about phylogenies as graphs gives us very explicit ways to think about what information can be contained in a phylogeny. In the fundamental graphical sense, a phylogeny is a pair of sets -- a set of nodes and a set of edges -- and annotations of those entities.
 
 The topology of the phylogeny is the way in which nodes are connected by edges. If there are different connections in two phylogenies, then they have different topologies. If the annotations differ but the connections are the same, then the topolpgies are the same. Sometimes we know more and sometimes less about the topology. A fully resolved bifurcating phylogeny, where every internal node has two children, contains maximal information about the topology. A completely unresolved star phylogeny contains no information about topology.
 
 Node annotations can include:
 
-- Labels. These could be species names, gene names, museum accession numbers for particular specimens, or broader clade names (eg Mammalia).
+- Labels. On tip nodes these could be species names, gene names, or museum accession numbers for particular specimens. For internal nodes, they could be clade names (eg Mammalia).
 
-- Character states. The presence or absence of particular attributes (like hair), or the particular nucleotide at a particular spot in a particular gene (CGTA).
+- Character states. The presence or absence of particular attributes (like hair), or the particular nucleotide at a particular spot in a particular gene (CGTA). Often the character states for tip nodes are observed from data and the states of internal nodes are estimated. There are exceptions, though. One can, for example, estimate the states of tips for which no observations are available.
 
 - Geographical locations.
 
-- Whether the node is the tree root.
+- Whether the node is the root.
 
 
 Edge annotations can include:
@@ -461,9 +469,9 @@ Edge annotations can include:
 
 - Directionality. An indication of which direction time goes in along each edge. This only applies in the context of a rooted phylogenies.
 
-- Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes need not be different in the relevant trait to have change events. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the edge that are compatible with this pattern, for example a change from A to C and then a change from C back to A.
+- Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes at eache end of an edge need not be different in the relevant trait to have change events along the edge. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the edge that are compatible with this pattern, for example a change from A to C and then a change from C back to A.
 
-- Edge frequencies.This is how topology support values such as bootstraps and posterior probabilities, which we'll discuss later, are stored.
+- Edge frequencies.This is how topology support values, such as bootstraps and posterior probabilities (which we'll discuss later), are stored.
 
 Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and edges that indicate the topology of the phylogeny (Figure \@ref(fig:trees-information)C). Once you have topology, you could display edge attributes. For example, you could scale the edge lengths by time (Figure \@ref(fig:trees-information)D).
 
@@ -512,9 +520,9 @@ grid.arrange(
 
 ## Representation
 
-So far we have focused on phylogenies in the abstract sense as mathematical graphs and their associated annotations, and in the concrete sense as tree-like drawings that represent these relationships. To work with trees of any significant size, to infer their features from data, and to use them to analyze data, we need to be able to represent them computationally. Variables are routinely used to store numbers and text, but how can you store a whole tree and all its associated annotations?
+So far we have focused on phylogenies in the abstract sense as mathematical graphs and their associated annotations, and in the concrete sense as tree-like drawings that represent these relationships. To work with trees of any significant size, we need to also represent them computationally. How can you store and manipulate a whole tree and all its associated annotations?
 
-One way is to store a text representation of the tree. Newick, a phylogenetic data format ironed out over dinner at [Newick's Lobster House](https://www.yelp.com/biz/newicks-lobster-house-dover), does exactly this. The newick format is widely used for storing phylogenies in files. The basic idea is to designate each clade within a pair of parentheses.
+One way is to store a text representation of the tree. This is conveneint because text files are easy to work with,a nd can be viewed and edited with a variety of existing text editors. Newick, a phylogenetic data format ironed out over dinner at [Newick's Lobster House](https://www.yelp.com/biz/newicks-lobster-house-dover), does exactly this. The newick format is widely used for storing phylogenies in text files, and is supported as a way to read and write trees by almost every phylogenetic software tool. The basic idea is to designate each clade within a pair of parentheses.
 
 ```{r trees-newick, echo=TRUE, fig.cap="Defining and drawing a Newick tree. Tip labels are blue, nodes and node numbers are red, and edges are black."}
 
@@ -537,13 +545,13 @@ In Figure \@ref(fig:trees-newick), you can see how to define a newick tree, conv
 a different type of representation, and then draw that. Most of the figures in this text were 
 made using similar code.
 
-Considering just the newick specificaiton of the tree, `"(((A,B),(C,D)),E);"`, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, `(A,B)` and `(C,D)`. The next set of parentheses out indicates that these two clades together form a larger clade, `((A,B),(C,D))`. Finally, the outermost parentheses indicate that the clade `((A,B),(C,D))` is sister to `E`. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths.
+Considering just the newick specificaiton of the tree, `"(((A,B),(C,D)),E);"`, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, `(A,B)` and `(C,D)`. The next set of parentheses out indicates that these two clades together form a larger clade, `((A,B),(C,D))`. Finally, the outermost parentheses indicate that the clade `((A,B),(C,D))` is sister to `E`. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting [description and history](https://evolution.genetics.washington.edu/phylip/newicktree.html) of the newick format, which includes details on how to store other types of information in the file format.
 
-As versatile and simple as newick is for storing trees in files, it isn't great for storing trees in computer memory where you want to do things with them. For that, we want an object that has a more explicit representation of nodes, edges, and their annotations. This allows us to directly encode the information noted in \@ref(The-information-contained-in-phylogenies), and to readilly extend the data objects as needed.
+As versatile and simple as newick is for storing trees in files, it isn't great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, edges, and their annotations. This allows us to directly encode the information noted in the section [The information contained in phylogenies], and to readily extend the data objects as needed.
 
-The most widely used format for storing phylogenies in the R programming language is as a `phylo` object from the excellent `ape` library. The `read.tree()` function in the code block above creates one of these objects that we call `newick_tree`. In a `phylo` object, each node has a unique number. The first node numbers are allocated to the tip nodes, and then the internal nodes are numbered consecutively from there. Beyond this, the assignment of the node numbers is arbitrary. The numbers of the nodes that were given when we created the `phylo` object from the newick text are shown in red in Figure \@ref(trees-newick).
+The most widely used format for storing phylogenies in the R programming language is as a `phylo` object from the excellent `ape` library [@R-ape]. The `read.tree()` function in the code block above creates a `phylo` object called `phylo_tree` based on the phylogeny we specified as text and named `newick_tree`. In a `phylo` object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to $n$ where $n$ is the number of tip nodes,  are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes $n+1$ to $2n-1$. The assignment of the node numbers within these ranges is arbitrary, there is no guarantee for example that the same internal node will ahve the same number each time the tree is read. The numbers of the nodes that were given when we created the `phylo` object from the newick text are shown in red in Figure \@ref(fig:trees-newick).
 
-Below we take a quick peek inside the `phylo` object we created above. The intent isn't to learn how to manipulated trees in R quite yet, but to just show you how trees can be stored in computer memory. First, let's take a look at the structure of the phylo object to see what variables it contains within it:
+Below we take a quick peek inside the `phylo` object we created above. The intent isn't to learn how to manipulated trees in R quite yet, but to just show you how trees can be stored in computer memory. First, let's take a look at the structure of the `phylo` object to see what variables it contains within it:
 
 ```{r trees-phylo1, echo=TRUE}
 
@@ -551,7 +559,7 @@ str( phylo_tree )
 
 ```
 
-We can see that there are three slots (each designated with a `$`) within this phylo object. `Nnode` is just the number of internal nodes. The real magic is `edge`, which encodes the topology of the tree. It is just an array with one row per edge, and two columns. The value in column 1 is the number of the node that is the parent of the edge, and the value in column 2 is the number of the node that is the child of the edge. Here are the complete contents:
+We can see that there are three slots (each designated with a `$`) within this `phylo` object. `Nnode` is just the number of internal nodes. The real magic is `edge`, which encodes the topology of the tree. It is just an array with one row per edge, and two columns. The value in column 1 is the number of the node that is the parent of the edge, and the value in column 2 is the number of the node that is the child of the edge. Here are the complete contents:
 
 
 ```{r trees-phylo-edge, echo=TRUE}
@@ -560,7 +568,9 @@ phylo_tree$edge
 
 So, in this case edge number 1 (the first row) connects node `r phylo_tree$edge[1,1]` to node `r phylo_tree$edge[1,2]`. Indeed, we can see just such an edge in Figure \@ref(fig:trees-newick). Try to identify each of the other edges in the array in the tree figure.
 
-There is one other important piece of information that we specified in the newick files - the tip labels. Those are located in another slot:
+You can discern all sorts of things about the tree from this simple array. The tips are nodes that are in column 2 but not in column 1 (since they aren't parents of any other nodes). The root is the node that is in column 1, but not in column 2 (because it doesn't have a parent). If a node occurs in column one more than twice, then it is a polytomy (because it has more than two edges connecting to child nodes). Note that this data structure is intrinsically rooted - there is a parent-child relationship set up between the nodes at each end of each edge. But you can still use it to store unrooted trees by picking an arbitrary internal node as the root, and just keeping track of the fact that you don't know where the root is.
+
+There is one other important piece of information that we specified in the newick files - the tip labels. Those are located in another slot within the `phylo` object:
 
 
 ```{r trees-phylo-label, echo=TRUE}
@@ -569,10 +579,12 @@ phylo_tree$tip.label
 
 We can see that this is just a vector of labels. They correspond to the labels of nodes one through five, all the tip labels, in consecutive order.
 
-That's it. That's all the information we specified in the newick file, all the information in the `phylo` object, and all the information that is specified in Figure \@ref(fig:trees-newick) drawn from the `phylo` object. The newick tree is easy to store in files and features are easilly readable to humans, the `phylo` object is a powerful and flexible way to represent the tree in computer memory, and the figure we can automatically draw from the tree is easy to read at a glance.
+That's it. That's all the information we specified in the newick file, all the information in the `phylo` object, and all the information that is needed to draw Figure \@ref(fig:trees-newick). The newick tree is easy to store and manipulate with simple text tools, the `phylo` object is a powerful and flexible way to represent the tree in computer memory, and the figure is easy to read at a glance.
 
 
 ## Additional reading
+
+I used `ggtree` [@R-ggtree] to draw the trees in this chapter. If you are interested in learning more about these tools, see:
 
 The ggtree book - https://yulab-smu.github.io/treedata-book/index.html
 

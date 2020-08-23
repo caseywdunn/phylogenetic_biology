@@ -61,5 +61,20 @@ Basic literacy with the programming language R. *R for Data Science*.
 Basic statistics, in particular probability theory. Some math, in particular an understanding of matrices and manipulations of matrices.
 
 
+## Source code
+
+The source code for this manuscript is available at https://github.com/caseywdunn/phylogenetic_biology. The book was rendered from the source with `bookdown` [@bookdown2016].
 
 
+## Software versions
+
+This book was rendered from the source code on `r format( Sys.time(), "%a %b %d %X %Y" )` with the following R package versions.
+
+```{r session_summary, echo=FALSE, comment=NA}
+	sessionInfo()
+```
+
+
+## License
+
+This manuscript is distrubuted under a [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License]( https://creativecommons.org/licenses/by-nc-nd/3.0/us/).
