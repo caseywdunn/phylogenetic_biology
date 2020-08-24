@@ -9,7 +9,7 @@ knitr::include_graphics("figures/darwin.png")
 
 Phylogenies represent evolutionary relationships. The only figure in Darwin's Origin of Species [@darwin1859] was a phylogeny (Figure \@ref(fig:trees-darwin)), though he didn't call it that.
 
-Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haeckel's tree in the manuscript where he coined the term phylogeny (Figure \@ref(fig:trees-haeckel)).
+Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haeckel's tree in the manuscript [@haeckel1897] where he coined the term phylogeny (Figure \@ref(fig:trees-haeckel)).
 
 
 ```{r trees-haeckel, echo=FALSE, fig.cap="Haeckel's hypothesis of the animal phylogeny [@haeckel1897], drawn as an actual tree."}

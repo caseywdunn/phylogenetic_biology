@@ -40,11 +40,6 @@ knitr::opts_chunk$set(
   )
 ```
 
-
-# Preface {-}
-
-I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses.
-
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
@@ -52,14 +47,10 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 
-## Associated skills
 
-Comfort at the command line, manipulation of text files. *Practical Computing for Biologists*.
+# Preface {-}
 
-Basic literacy with the programming language R. *R for Data Science*.
-
-Basic statistics, in particular probability theory. Some math, in particular an understanding of matrices and manipulations of matrices.
-
+I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses. It is really my lecture notes dessed up in the form of the rough draft of a book.
 
 ## Source code
 

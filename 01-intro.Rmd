@@ -1,22 +1,29 @@
 # Introduction {#intro}
 
-Phylogenetic biology is the study of evolutionary relationships.
+Phylogenetic biology is the study of evolutionary relationships, and the use of those relationships to study other aspects of biology.
+
+## History of the field
+
+At the dawn of the field, in the 1860s [@darwin1859,@haeckel1897], phylogenetic biology was largely a speculative endeavor. People looked at similarities and differences between organisms, and made hypotheses about the evolutionary relationships that would give rise to those patterns. The challenge, though, was that there wasn't an explicit method for testing those hypotheses. So while there was extensive interest in evolutionary relationships, for many decades the general sense was that most relationships were unknowable. Some evolutionary biologists focused on questions that they believed could be pursued without knowing the specifics of relationships, and others did important work collecting data that would help inform our understandings of those relationships. Few fields outside of Macroevolution paid much attention to the field of Phylogenetic Biology.
+
+It wasn't until 100 years later that explicit methods were developed for inferring and testing phylogenetic relationships based on data from organisms [@hennig1966]. This ushered in decades of accelerating phylogenetic methods development that continues to this day. The development of explicit model based approaches to phylogenetic inference was particularly influential [@Felsenstein:1981vk]. These new methods were highly computationally intensive, but fortunately their rise paralleled the rapid development and widespread availability of computers. 
+
+Begining in the late 1980s, Molecular data became widely used for building phylogenies of extant organisms, in large part because the development of PCR and the declining cost of sequencing made it tractable to collect sequence fragments from a few genes across a broad diversity of organisms. Starting in about 2010, new generations of high-throughput sequencing made it possible to collect sequences for thousands of genes from a broad diversity of organisms in a single study, and we are right now in the earliest days of building phylogenies from high-quality chromosome-level genome assemblies. 
+
+Phylogenetic Biology has always been concerned with building phylogenies -- using character data collected from a diversity of organisms to study their relationships. This domain is referred to as phylogenetic inference. Coming from its roots in comparative morphology, there was always great interest in learning about evolutionary relationships, using these to improve the classification of species, and examining the major changes in morphology through time.
+
+It has also become clear that the value of studying evolutionary relationships goes well beyond learning about evolutionary relationships. Once so many advances were made in building trees, many investigators have of course asked themselves, "Now what do I do with this tree?" There has also been a growing recognition that many questions require knowing evolutionary relationships, even if those evolutionary relationships are themselves not of central interest to the investigator. This has led to the rise of another domain often referred to as phylogenetic comparative biology. Instead of ending with trees, as many phylogenetic inference projects do, phylogenetic comparative biology projects usually start with trees and use them to study the evolution of traits. Questions include things like whether there is evolutionary covariance between traits, or shifts in rates of evolution. As comparative methods have become more powerful, more phylogenies have been published, and more investigators have recognized that there is a phylogenetic component to their questions, phylogenetic comparative methods have become an increasingly large part of the field.
+
+Though phylogeny initially sprung from the field of comparative morphology, and much of the initial focus was on building and analyzing trees with morphological data and using them to study the evolution of morphology, the field has rapidly expanded to encompass many other categories of data. Even so, morphology continues to be vital to building phylogenies in many contexts, including when fossils for for which no sequence data are available. While most phylogenetic inference is now based on molecular data, and sometimes molecular data, phylogenetic comparative methods are applied to all sorts of data and questions. It now plays an important role in the study of physiology, ecology, genomics, medicine, and most other parts of biology. 
+
+Phylogenetics is no longer a strictly macroevolutionary field. Some of the most exciting work in recent years has been at the interface of population genetics and phylogenetic biology, helping to unify our perspectives on micro and macroevolution. Phylogenies are now also routinely used to study the evolution of genes and other molecular characters, and also to dive into extremely recent and fast evolutionary processes within species, such as virus outbreaks.
 
 
-There are three components to a phylogenetic analysis: characters, evolutionary models, and phylogenetic trees. In any given study we could have data, not care, or want to infer any three of these. 
 
-When we don't care, we marginalize. When we have data we fix. When we want to infer we estimate.
+## Applications
 
-This gives a broad range of hypothetical phylogenetic investigations. Only a subset of these are common in the literature, due to the questions that drive the field right now, the available data, and the methods that have been implemented in software tools.
+Here are a few specific studies that illustrate the diversity of the field.
 
-When we want to infer phylogenetic trees, we usually fix the characters at the tips using our data, marginalize over historical character states, estimate models, and estimate the tree.
-
-When we want to infer the history of character evolution, we often fix the tree, fix the characters at the tips using our data, estimate the model, and estimate the character history.
-
-But we can also marginalize over models, for example.
-
-
-## Why phylogenies matter
 
 History of life on earth
 
@@ -29,7 +36,21 @@ Processes of evolution
 Current and future evolution (eg epidemiology)
 
 
+## A unified perspective on phylogenetic studies
 
+With so many ways to contribute to advances in phylogenetic biology, how can we unify different types of projects in the field? Fortunately, the strong conceptual foundation of the field that strongly integrate many different types of studies.
+
+There are three components to a phylogenetic analysis: characters, evolutionary models, and phylogenetic trees. In any given study we could have data, not care, or want to infer any three of these. 
+
+When we don't care, we marginalize. When we have data we fix. When we want to infer we estimate.
+
+This gives a broad range of hypothetical phylogenetic investigations. Only a subset of these are common in the literature, due to the questions that drive the field right now, the available data, and the methods that have been implemented in software tools.
+
+When we want to infer phylogenetic trees, we usually fix the characters at the tips using our data, marginalize over historical character states, estimate models, and estimate the tree.
+
+When we want to infer the history of character evolution, we often fix the tree, fix the characters at the tips using our data, estimate the model, and estimate the character history.
+
+But we can also marginalize over models, for example.
 
 
 
