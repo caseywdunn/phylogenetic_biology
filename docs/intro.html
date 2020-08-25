@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-08-24" />
+<meta name="date" content="2020-08-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -141,9 +141,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#history-of-the-field"><i class="fa fa-check"></i><b>1.1</b> History of the field</a></li>
-<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#applications"><i class="fa fa-check"></i><b>1.2</b> Applications</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#core-concepts"><i class="fa fa-check"></i><b>1.2</b> Core concepts</a></li>
 <li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#a-unified-perspective-on-phylogenetic-studies"><i class="fa fa-check"></i><b>1.3</b> A unified perspective on phylogenetic studies</a></li>
-<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#additional-resources"><i class="fa fa-check"></i><b>1.4</b> Additional resources</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#applications"><i class="fa fa-check"></i><b>1.4</b> Applications</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#additional-resources"><i class="fa fa-check"></i><b>1.5</b> Additional resources</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a><ul>
 <li class="chapter" data-level="2.1" data-path="phylogenies.html"><a href="phylogenies.html#phylogenies-are-graphs"><i class="fa fa-check"></i><b>2.1</b> Phylogenies are graphs</a></li>
@@ -210,35 +211,66 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Phylogenetic biology is the study of evolutionary relationships, and the use of those relationships to study other aspects of biology.</p>
 <div id="history-of-the-field" class="section level2">
 <h2><span class="header-section-number">1.1</span> History of the field</h2>
-<p>At the dawn of the field, in the 1860s <span class="citation">(Darwin <a href="#ref-darwin1859" role="doc-biblioref">1859</a>, @haeckel1897)</span>, phylogenetic biology was largely a speculative endeavor. People looked at similarities and differences between organisms, and made hypotheses about the evolutionary relationships that would give rise to those patterns. The challenge, though, was that there wasn’t an explicit method for testing those hypotheses. So while there was extensive interest in evolutionary relationships, for many decades the general sense was that most relationships were unknowable. Some evolutionary biologists focused on questions that they believed could be pursued without knowing the specifics of relationships, and others did important work collecting data that would help inform our understandings of those relationships. Few fields outside of Macroevolution paid much attention to the field of Phylogenetic Biology.</p>
-<p>It wasn’t until 100 years later that explicit methods were developed for inferring and testing phylogenetic relationships based on data from organisms <span class="citation">(Hennig <a href="#ref-hennig1966" role="doc-biblioref">1966</a>)</span>. This ushered in decades of accelerating phylogenetic methods development that continues to this day. The development of explicit model based approaches to phylogenetic inference was particularly influential <span class="citation">(Felsenstein <a href="#ref-Felsenstein:1981vk" role="doc-biblioref">1981</a>)</span>. These new methods were highly computationally intensive, but fortunately their rise paralleled the rapid development and widespread availability of computers.</p>
-<p>Begining in the late 1980s, Molecular data became widely used for building phylogenies of extant organisms, in large part because the development of PCR and the declining cost of sequencing made it tractable to collect sequence fragments from a few genes across a broad diversity of organisms. Starting in about 2010, new generations of high-throughput sequencing made it possible to collect sequences for thousands of genes from a broad diversity of organisms in a single study, and we are right now in the earliest days of building phylogenies from high-quality chromosome-level genome assemblies.</p>
+<p>At the dawn of the field, in the second half of the 19th century <span class="citation">(Darwin <a href="#ref-darwin1859" role="doc-biblioref">1859</a>; Haeckel <a href="#ref-haeckel1897" role="doc-biblioref">1897</a>)</span>, phylogenetic biology was largely a speculative endeavor. People looked at similarities and differences between organisms, and made hypotheses about the evolutionary relationships that would give rise to those patterns. The challenge, though, was that there wasn’t an explicit method for testing those hypotheses. So while there was extensive interest in evolutionary relationships, for many decades the general sense was that most relationships were unknowable. Some evolutionary biologists focused on questions that they believed could be pursued without knowing the specifics of relationships, and others did important work collecting data that would help inform our understandings of those relationships.</p>
+<p>It wasn’t until the second half of the 20th century that explicit methods were developed for inferring and testing phylogenetic relationships based on data from organisms <span class="citation">(Hennig <a href="#ref-hennig1966" role="doc-biblioref">1966</a>)</span>. This ushered in decades of accelerating phylogenetic methods development that continues to this day. The development of explicit model based approaches to phylogenetic inference was particularly influential <span class="citation">(Felsenstein <a href="#ref-Felsenstein:1981vk" role="doc-biblioref">1981</a>)</span>. These new methods were highly computationally intensive, but fortunately their rise paralleled the rapid development and widespread availability of computers.</p>
+<p>Beginning in the late 1980s, Molecular data became widely used for building phylogenies of extant organisms, in large part because the development of PCR and the declining cost of sequencing made it tractable to collect sequence fragments from a few genes across a broad diversity of organisms. Starting in about 2010, new generations of high-throughput sequencing made it possible to collect sequences for thousands of genes from a broad diversity of organisms in a single study, and we are right now in the earliest days of building phylogenies from high-quality chromosome-level genome assemblies.</p>
 <p>Phylogenetic Biology has always been concerned with building phylogenies – using character data collected from a diversity of organisms to study their relationships. This domain is referred to as phylogenetic inference. Coming from its roots in comparative morphology, there was always great interest in learning about evolutionary relationships, using these to improve the classification of species, and examining the major changes in morphology through time.</p>
 <p>It has also become clear that the value of studying evolutionary relationships goes well beyond learning about evolutionary relationships. Once so many advances were made in building trees, many investigators have of course asked themselves, “Now what do I do with this tree?” There has also been a growing recognition that many questions require knowing evolutionary relationships, even if those evolutionary relationships are themselves not of central interest to the investigator. This has led to the rise of another domain often referred to as phylogenetic comparative biology. Instead of ending with trees, as many phylogenetic inference projects do, phylogenetic comparative biology projects usually start with trees and use them to study the evolution of traits. Questions include things like whether there is evolutionary covariance between traits, or shifts in rates of evolution. As comparative methods have become more powerful, more phylogenies have been published, and more investigators have recognized that there is a phylogenetic component to their questions, phylogenetic comparative methods have become an increasingly large part of the field.</p>
 <p>Though phylogeny initially sprung from the field of comparative morphology, and much of the initial focus was on building and analyzing trees with morphological data and using them to study the evolution of morphology, the field has rapidly expanded to encompass many other categories of data. Even so, morphology continues to be vital to building phylogenies in many contexts, including when fossils for for which no sequence data are available. While most phylogenetic inference is now based on molecular data, and sometimes molecular data, phylogenetic comparative methods are applied to all sorts of data and questions. It now plays an important role in the study of physiology, ecology, genomics, medicine, and most other parts of biology.</p>
 <p>Phylogenetics is no longer a strictly macroevolutionary field. Some of the most exciting work in recent years has been at the interface of population genetics and phylogenetic biology, helping to unify our perspectives on micro and macroevolution. Phylogenies are now also routinely used to study the evolution of genes and other molecular characters, and also to dive into extremely recent and fast evolutionary processes within species, such as virus outbreaks.</p>
 </div>
-<div id="applications" class="section level2">
-<h2><span class="header-section-number">1.2</span> Applications</h2>
-<p>Here are a few specific studies that illustrate the diversity of the field.</p>
-<p>History of life on earth</p>
-<p>Phylogenetic systematics</p>
-<p>Comparative methods</p>
-<p>Processes of evolution</p>
-<p>Current and future evolution (eg epidemiology)</p>
+<div id="core-concepts" class="section level2">
+<h2><span class="header-section-number">1.2</span> Core concepts</h2>
+<p>There are a few concepts that are fundamental to understanding phylogenetic analyses. Consider the
+variables at play, and their mathematical relationships. These typically include:</p>
+<ul>
+<li><p>The topology of the phylogeny. This is the structure of the evolutionary relationships.</p></li>
+<li><p>The lengths of the branches in the phylogeny. These can mean different things, such as time elapsed or amount of expected change in a character.</p></li>
+<li><p>Characters. The organism attributes under consideration. These include things like leg length, geographic location, a particular site in a particular gene, a physiological attribute, or a feature of genome organization.</p></li>
+<li><p>Character states. The particular values that can be (or are) taken by different individuals for specific characters. A leg length state could be 4.3mm. For a DNA sequence a character state could be <code>C</code>, <code>G</code>, <code>T</code>, or <code>A</code>.</p></li>
+<li><p>Models. Models are hypotheses about how characters evolve. They take a mathematical and statistical form. For example, a model could describe the covariance between evolutionary changes in different characters, or be a set of functions that describe the probabilities of specific state changes. Models are abstract representations of processes, deliberate simplifications that allows us to explicitly describe what we think the most important features of change are. We can make models as simple or complex as we like, but the more complex they are the more information we need to use them effectively.</p></li>
+<li><p>Model parameter values. These are the specific values for terms in the model. In a model that indicates covariance between characters, the specific values in such a covariance matrix are model parameter values. If you have a set of functions that describe the probability of changing between particular states for a character, the model parameters are the rates and other terms in those equations.</p></li>
+</ul>
+<p>Models and model parameters together allow us, for example, to assess the probability of a particular character state to a different character state along a branch of a given length.</p>
+<p>In order to make informative comparisons across species, both for inferring phylogenies and for phylogenetic comparative analyses, we need a unified ontological framework to refer to the same characters and character states in different organisms. This correspondence is provided by the concept of homology. Homology is a hypothesis that the same attribute is present in different entities because that attribute was present in their shared ancestor. A deceptively simple concept, it can sometimes be devilishly difficult to define, test, and apply [wagner2014].</p>
 </div>
 <div id="a-unified-perspective-on-phylogenetic-studies" class="section level2">
 <h2><span class="header-section-number">1.3</span> A unified perspective on phylogenetic studies</h2>
-<p>With so many ways to contribute to advances in phylogenetic biology, how can we unify different types of projects in the field? Fortunately, the strong conceptual foundation of the field that strongly integrate many different types of studies.</p>
-<p>There are three components to a phylogenetic analysis: characters, evolutionary models, and phylogenetic trees. In any given study we could have data, not care, or want to infer any three of these.</p>
-<p>When we don’t care, we marginalize. When we have data we fix. When we want to infer we estimate.</p>
-<p>This gives a broad range of hypothetical phylogenetic investigations. Only a subset of these are common in the literature, due to the questions that drive the field right now, the available data, and the methods that have been implemented in software tools.</p>
-<p>When we want to infer phylogenetic trees, we usually fix the characters at the tips using our data, marginalize over historical character states, estimate models, and estimate the tree.</p>
-<p>When we want to infer the history of character evolution, we often fix the tree, fix the characters at the tips using our data, estimate the model, and estimate the character history.</p>
-<p>But we can also marginalize over models, for example.</p>
+<p>Phylogenetics is such a diverse and quickly growing field that sometimes different studies can seem to be more different than they are. This is too bad, as it is a lost opportunity to share ideas across domains and to apply what is learned in one context, say phylogenetic inference, to another context, such as phylogenetic comparative analyses.</p>
+<p>Fortunately, phylogenetics has a strong conceptual foundation that provides a unified perspective on phylogenetic studies <span class="citation">(Hohna et al. <a href="#ref-Hohna2014" role="doc-biblioref">2014</a>)</span>. Once you have this in mind, you can quickly see the relationships between different methods, questions, and analyses.</p>
+<p>Let’s revisit the list above, and rearrange it a bit:</p>
+<ul>
+<li>Topology</li>
+<li>Branch lengths</li>
+<li>Characters</li>
+<li>Character states of tips</li>
+<li>Character states of ancestors</li>
+<li>Model</li>
+<li>Model parameters</li>
+</ul>
+<p>The investigator can generally take one of three approaches to each of these things. They either:</p>
+<ul>
+<li>Fix the value according to information in hand, such as their own data or the results of a previous study.</li>
+<li>Estimate the value.</li>
+<li>Don’t care.</li>
+</ul>
+<p>Many phylogenetic inference studies use expert knowledge to define and fix the characters, run some preliminary analyses to evaluate and then fix the model, and fix the character states at the tips according to their observed data. They then estimate the topology, branch lengths, character states of ancestors, and model parameters. They then basically throw away the estimates of ancestral character states and model parameters, and present the topology and branch lengths as the result. You get a tree that provides an educated inference of the evolutionary relationships between your organisms of interest.</p>
+<p>Many phylogenetic comparative analyses take the same approach to characters and observed character states at the tip (both fixed), and ancestral character states (estimated, but discarded). They then take a different approach to the remaining items. They fix the tree and branch lengths according to the results of an earlier phylogenetic inference, evaluate different models, and estimate model parameters. The models and model parameters are then the presented results. They would report, for example, that a model that allows for shifts in rates of evolution along different branches is a better fit than a model that doesn’t, or provide estimates for the evolutionary covariance between particular traits of interest.</p>
+<p>Other studies apply the three approaches (fix, estimate, don’t care) in different ways across the phylogenetic study. Some combinations are very common, others very rare.</p>
+<p>Once you dig in, the “don’t care” case is surprisingly interesting. Sometimes if you don’t care about something, you don’t need to estimate it. But usually you do need to estimate it to get what you do care about, and then you just throw away the result. In many cases, different analyses differ only in which estimates are kept and which are thrown away. One may keep ancestral character states and discard model parameters, and another may do the exact same thing but discard ancestral character states but keep model parameters</p>
+</div>
+<div id="applications" class="section level2">
+<h2><span class="header-section-number">1.4</span> Applications</h2>
+<p>With this framework in mind, let’s take a look at a sampling of recent phylogenetic work.</p>
+<ul>
+<li><p><a href="https://nextstrain.org/sars-cov-2/" class="uri">https://nextstrain.org/sars-cov-2/</a> provides a frequently updated phylogeny of sars-cov-2, with associated data on geography, sampling time, and other factors. This has been critical to understanding and monitoring the sars-cov-2 pandemic, and intervening to disrupt transmission. They are using observed character data at the tips (genome sequences) to estimate topology, branch lengths, and model parameters.</p></li>
+<li><p>Myxozoa are enigmatic parasites that live in fish. They have very few morphological traits that show clear homology with other animals. So Sally Chang, Paulyn Cartwright, and colleagues used phylogenetic inference to examine their relationships to other animals, and found strong support for their placement within Cnidaria. <a href="https://doi.org/10.1073/pnas.1511468112" class="uri">https://doi.org/10.1073/pnas.1511468112</a></p></li>
+<li><p>My own lab wanted to see if the evolution of gene expression is more rapid after gene duplication than after speciation. We found no evidence for a different rate of evolution after gene duplication. We used existing gene phylogenies, existing expression data as character states at the tips, and estimated ancestral expression states to examine sifts in expression along particular branches. <a href="https://doi.org/10.1073/pnas.1707515115" class="uri">https://doi.org/10.1073/pnas.1707515115</a></p></li>
+<li><p><em>Viburnum</em> is a group of plants with wide distribution across the globe, in many different habitat types. Michael Landis spearheaded a collaborative project between the Edwards and Donoghue labs here at Yale EEB to understand how <em>Viburnum</em> first diversified in Asia during the Eocene and then spread across the globe. They developed innovative methods to simultaneously estimate the phylogeny based on genetic data available at the tips, estimate time along branch lengths with fossils calibrations, and reconstruct geographic range. This is the vanguard of new approaches that simultaneously address multiple categories of data rather than daisy chain together multiple methods. <a href="https://doi.org/10.1093/sysbio/syaa027" class="uri">https://doi.org/10.1093/sysbio/syaa027</a></p></li>
+</ul>
 </div>
 <div id="additional-resources" class="section level2">
-<h2><span class="header-section-number">1.4</span> Additional resources</h2>
+<h2><span class="header-section-number">1.5</span> Additional resources</h2>
 
 </div>
 </div>
@@ -250,8 +282,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ref-Felsenstein:1981vk">
 <p>Felsenstein, J. 1981. “Evolutionary trees from DNA sequences: a maximum likelihood approach.” <em>Journal of Molecular Evolution</em> 17 (6): 368–76. <a href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=7288891&amp;retmode=ref&amp;cmd=prlinks">http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=7288891&amp;retmode=ref&amp;cmd=prlinks</a>.</p>
 </div>
+<div id="ref-haeckel1897">
+<p>Haeckel, Ernst. 1897. <em>The Evolution of Man</em>. Vol. 1. D. Appleton.</p>
+</div>
 <div id="ref-hennig1966">
 <p>Hennig, Willi. 1966. <em>Phylogenetic Systematics</em>. University of Illionois Press.</p>
+</div>
+<div id="ref-Hohna2014">
+<p>Hohna, S., T. A. Heath, B. Boussau, M. J. Landis, F. Ronquist, and J. P. Huelsenbeck. 2014. “Probabilistic Graphical Model Representation in Phylogenetics.” Journal Article. <em>Syst Biol</em> 63 (5): 753–71. <a href="https://doi.org/10.1093/sysbio/syu039">https://doi.org/10.1093/sysbio/syu039</a>.</p>
 </div>
 </div>
             </section>
