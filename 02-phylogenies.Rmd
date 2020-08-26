@@ -33,7 +33,7 @@ what each of those parts represent.
 in order to establish a strong foundation for thinking about phylogenies, it is 
 helpful to turn to math.
 
-```{r trees-graph, echo=FALSE, fig.cap="Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating, as nodes have from one to four edges connected to them."}
+```{r trees-graph, echo=FALSE, fig.cap="Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating."}
 
 knitr::include_graphics("figures/graph.svg")
 
@@ -74,7 +74,7 @@ Here we will work with some mammal phylogenies, mostly because their silhouette 
 
 You will rarely see a phylogeny depicted as in Figure \@ref(fig:trees-graph-tree), with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the edges (Figure \@ref(fig:trees-mammal)), with the nodes implied at the ends of edges. The nodes are implied.
 
-```{r trees-mammal, echo=FALSE, fig.cap="Phylogeny of some mammals. Topology and edge lengths  from http://vertlife.org.  The organism sillouettes are from http://phylopic.org/. Note that node circles are not drawn, instead nodes are implied at ends of edges."}
+```{r trees-mammal, echo=FALSE, fig.cap="Phylogeny of some mammals. Topology and edge lengths  from http://vertlife.org.  The organism silhouettes are from http://phylopic.org/. Note that node circles are not drawn, instead nodes are implied at ends of edges."}
 
 # The native phylopic tool in ggtree has some issues - api times out, some images can be missing because originals are small, and hard to control scaling when they have variable width. So load them from local copies of the images
 

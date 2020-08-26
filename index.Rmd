@@ -54,7 +54,7 @@ I developed this book as a collection of the concepts, methods, and applications
 
 ## Source code
 
-The source code for this manuscript is available on [guthub]( https://github.com/caseywdunn/phylogenetic_biology). The book was rendered from the source with `bookdown` [@bookdown2016].
+The source code for this manuscript is available on [github]( https://github.com/caseywdunn/phylogenetic_biology). The book was rendered from the source with `bookdown` [@bookdown2016].
 
 Please submit any errors you find, typos, or suggestions that you have for improving the manusctipt to the [issue tracker](https://github.com/caseywdunn/phylogenetic_biology/issues).
 

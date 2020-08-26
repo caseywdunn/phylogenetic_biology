@@ -35,7 +35,7 @@ There are a few concepts that are fundamental to understanding phylogenetic anal
 
 In order to make informative comparisons across species, both for inferring phylogenies and for phylogenetic comparative analyses, we need a unified ontological framework to refer to the same characters and character states in different organisms. This correspondence is provided by the concept of homology. Homology is a hypothesis that the same attribute is present in different entities because that attribute was present in their shared ancestor. Homology is a deceptively simple concept that can sometimes be devilishly difficult to define, test, and apply [wagner2014]. 
 
-```{r intro-concepts, echo=FALSE, fig.cap="(A) The primary components of a phylogenetic analysis. This mammal phylogeny and edge lengths are from http://vertlife.org. The organism sillouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components."}
+```{r intro-concepts, echo=FALSE, fig.cap="(A) The primary components of a phylogenetic analysis. This mammal phylogeny and edge lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components."}
 
 knitr::include_graphics("figures/phylogenetic_analyses.svg")
 
@@ -59,9 +59,9 @@ Let's revisit the list above, and rearrange it a bit. We have:
 
 The investigator can generally take one of three approaches to each of these things (Figure \@ref(fig:intro-concepts)B). They either:
 
-- Clamp the value according to information in hand, such as their own data or the results of a previous study.
-- Estimate.
-- Don't care.
+- Clamp the value according to information in hand, such as their own data or the results of a previous study
+- Estimate the value
+- Don't care about the value
 
 Many phylogenetic inference studies use expert knowledge to define and clamp the characters, run some preliminary analyses to evaluate and then clamp the model, and clamp the character states at the tips according to the observed data such as gene sequences. They then estimate the topology, edge lengths, character states of ancestors, and model parameters. They then throw away the estimates of ancestral character states and model parameters, and present the topology and edge lengths as the result. The end result is that you get a tree of the inferred evolutionary relationships between your organisms of interest.
 
