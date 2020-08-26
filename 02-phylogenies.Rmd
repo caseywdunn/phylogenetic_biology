@@ -33,7 +33,7 @@ what each of those parts represent.
 in order to establish a strong foundation for thinking about phylogenies, it is 
 helpful to turn to math.
 
-```{r trees-graph, echo=FALSE, fig.cap="A simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating, as nodes have from one to four edges connected to them."}
+```{r trees-graph, echo=FALSE, fig.cap="Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating, as nodes have from one to four edges connected to them."}
 
 knitr::include_graphics("figures/graph.svg")
 
@@ -49,7 +49,7 @@ I will tend to use mathematical notation for phylogenies rather than the classic
 nomenclatures. I will refer to edges rather than branches, tip nodes rather than leaves, 
 etc...
 
-```{r trees-graph-tree, echo=FALSE, fig.cap="A graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents)."}
+```{r trees-graph-tree, echo=FALSE, fig.cap="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents)."}
 
 knitr::include_graphics("figures/graph_tree.svg")
 
@@ -74,7 +74,7 @@ Here we will work with some mammal phylogenies, mostly because their silhouette 
 
 You will rarely see a phylogeny depicted as in Figure \@ref(fig:trees-graph-tree), with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the edges (Figure \@ref(fig:trees-mammal)), with the nodes implied at the ends of edges. The nodes are implied.
 
-```{r trees-mammal, echo=FALSE, fig.cap="A phylogeny of some mammals, downloaded from http://vertlife.org . Note that node circles are not drawn, instead nodes are implied at ends of edges."}
+```{r trees-mammal, echo=FALSE, fig.cap="Phylogeny of some mammals. Topology and edge lengths  from http://vertlife.org.  The organism sillouettes are from http://phylopic.org/. Note that node circles are not drawn, instead nodes are implied at ends of edges."}
 
 # The native phylopic tool in ggtree has some issues - api times out, some images can be missing because originals are small, and hard to control scaling when they have variable width. So load them from local copies of the images
 
@@ -113,19 +113,19 @@ Circular layouts place the root at the center, and the tips around the circumfer
 
 p_rect = g_tree + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  xlim(0, 400) + ggtitle("rectangular layout")
+  xlim(0, 400) + ggtitle("(A) rectangular layout")
 
 p_slanted = ggtree(tree, layout="slanted") %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  xlim(0, 400) + ggtitle("slanted layout")
+  xlim(0, 400) + ggtitle("(B) slanted layout")
 
 p_circ = ggtree(tree, layout="circular") %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  xlim(0, 400)  + ggtitle("circular layout")
+  xlim(0, 400)  + ggtitle("(C) circular layout")
 
 p_vert = g_tree + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  xlim(0, 400) + ggtitle("vertical layout") + coord_flip()
+  xlim(0, 400) + ggtitle("(D) vertical layout") + coord_flip()
 
 library("gridExtra")
 grid.arrange(
@@ -174,11 +174,11 @@ nodes_internal = seq( n_tips+1, 2*n_tips-1 ) %>% sample()
 
 p_r1 = g_tree + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  xlim(0, 400)
+  xlim(0, 400) + ggtitle("(A)")
 
-p_r2 = ggtree::rotate( p_r1, nodes_internal[1] )
-p_r3 = ggtree::rotate( p_r2, nodes_internal[2] )
-p_r4 = ggtree::rotate( p_r3, nodes_internal[3] )
+p_r2 = ggtree::rotate( p_r1, nodes_internal[1] ) + ggtitle("(B)")
+p_r3 = ggtree::rotate( p_r2, nodes_internal[2] ) + ggtitle("(C)")
+p_r4 = ggtree::rotate( p_r3, nodes_internal[3] ) + ggtitle("(D)")
 
 
 grid.arrange(
@@ -211,15 +211,15 @@ tree_noised$edge.length = tree_noised$edge.length * rpois(length(tree_noised$edg
 
 p_chronogram = g_tree + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  xlim(0, 400) + ggtitle("chronogram")
+  xlim(0, 400) + ggtitle("(A) chronogram")
 
 p_phylogram = ggtree(tree_noised) %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  xlim(0, 400) + ggtitle("phylogram")
+  xlim(0, 400) + ggtitle("(B) phylogram")
 
 p_cladogram = ggtree(tree_noised, branch.length="none") %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
-  xlim(0, 15) + ggtitle("cladogram")
+  xlim(0, 15) + ggtitle("(C) cladogram")
 
 grid.arrange(
   p_chronogram,
@@ -244,21 +244,21 @@ p_mono = ggtree(tree) %<+% d_ingroup +
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
   geom_hilight(node=16, fill='darkgreen', alpha=.6) +
   # geom_text2(aes(label=node)) +
-  ggtitle("A Monophyletic group")
+  ggtitle("(A) Monophyletic group")
 
 p_poly = ggtree(tree) %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
   geom_hilight(node=2, fill='darkgreen', alpha=.6) +
   geom_hilight(node=3, fill='darkgreen', alpha=.6) +
   # geom_text2(aes(label=node)) +
-  ggtitle("B Polyphyletic group")
+  ggtitle("(B) Polyphyletic group")
 
 p_para = ggtree(tree) %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
   geom_hilight(node=16, fill='darkgreen') +
   geom_hilight(node=1, fill='white') +
   # geom_text2(aes(label=node)) +
-  ggtitle("C Paraphyletic group")
+  ggtitle("(C) Paraphyletic group")
 
 
 grid.arrange(
@@ -275,9 +275,6 @@ Any internal node in a rooted phylogeny can be described as the MRCA of two or m
 Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and edges. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
 
 
-
-
-
 ## Polytomies
 
 Some phylogenies are not strictly bifurcating. An internal node with more than two edges connecting it to descendants is called a polytomy (Figure \@ref(fig:trees-types)B-D). This can be to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages (a hard polytomy).
@@ -292,7 +289,7 @@ p_resolved = ggtree(tree, branch.length="none") %<+% d_ingroup +
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
   xlim(0, 15) + 
   #geom_text2(aes(label=node)) +
-  ggtitle("A fully resolved")
+  ggtitle("(A) fully resolved")
 
 
 tree_poly16 = tree
@@ -302,7 +299,7 @@ p_poly16 = ggtree(tree_poly16, branch.length="none") %<+% d_ingroup +
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
   xlim(0, 15) + 
   #geom_text2(aes(label=node)) +
-  ggtitle("B with polytomy")
+  ggtitle("(B) with polytomy")
 
 
 tree_poly18 = tree
@@ -312,13 +309,13 @@ p_poly18 = ggtree(tree_poly16, branch.length="none") %<+% d_ingroup +
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
   xlim(0, 15) + 
   #geom_text2(aes(label=node)) +
-  ggtitle("C with polytomy")
+  ggtitle("(C) with polytomy")
 
 
 p_comb = ggtree(tree_comb, branch.length="none") %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
   xlim(0, 15) + 
-  ggtitle("D comb")
+  ggtitle("(D) comb")
 
 grid.arrange(
   p_resolved,
@@ -341,7 +338,7 @@ Even when we don't know where the root of a phylogeny is, we often want to talk 
 
 There are some basic things we can't take for granted in an unrooted phylogeny. We don't, for example, know which way time goes along the branches. We don't know which internal nodes are child nodes and which are parent nodes. We don't know which of the edges attached to an internal node connect to older nodes and which to younger nodes.
 
-```{r trees-rooted-abstract, echo=FALSE, fig.cap="These four cladograms have the same tips and same topology, only their layout differs. The first layout is unrooted. The other three are rooted on the red node, blue node, and orange edge. These colored elements are in the exact same topological positions in all trees. When the tree is rooted on the red or blue nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the orange edge, a new unroted node is added along the edge. This new node is bifurcating."}
+```{r trees-rooted-abstract, echo=FALSE, fig.cap="These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other three are rooted on the red node (B), blue node (C), and orange edge (D). These colored elements are in the exact same topological positions in all trees. When the tree is rooted on the red or blue nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the orange edge, a new unroted node is added along the edge. This new node is bifurcating."}
 
 # Generated a random tree, but then specify it to use the same one for each render
 # rtree(10, rooted=FALSE) %>% write.tree()
@@ -365,7 +362,8 @@ p_r_unrooted =
   geom_tiplab(offset=0.2) +
   #geom_text(aes(label=node)) +
   geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="red", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="blue", size=4 )
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="blue", size=4 ) + 
+  ggtitle("(A) Unrooted")
 
 p_r_rooted_n11 = 
   tree_r %>% 
@@ -373,7 +371,8 @@ p_r_rooted_n11 =
   geom_tiplab(offset=0.2) +
   #geom_text(aes(label=node)) +
   geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="red", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="blue", size=4 )
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="blue", size=4 ) + 
+  ggtitle("(B) Rooted on red node")
 
 
 tree_r_n17 = tree_r %>%  phytools::reroot( node=mrca_t9_t4_n11 ) %>% di2multi()
@@ -382,7 +381,7 @@ mrca_t9_t4_n17 = getMRCA(tree_r_n17, which(tree_r_n17$tip.label %in% c('t9','t4'
 mrca_t5_t2_n17 = getMRCA(tree_r_n17, which(tree_r_n17$tip.label %in% c('t5','t2')))
 n_nodes = max(tree_r_n17$edge)
 d_n17 = data.frame( node=1:n_nodes, color="black" )
-d_n17$color[ mrca_t5_t2_n17 ] = "orange"
+d_n17$color[ mrca_t5_t2_n17 ] = "orange" 
 
 
 p_r_rooted_n17 = 
@@ -391,7 +390,8 @@ p_r_rooted_n17 =
   geom_tiplab(offset=0.2) +
   #geom_text(aes(label=node)) +
   geom_nodepoint(aes(subset=(node == mrca_t10_t3_n17 )), col="red", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n17 )), col="blue", size=4 )
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n17 )), col="blue", size=4 ) + 
+  ggtitle("(C) Rooted on blue node")
 
 tree_r_e14 = tree_r %>%  phytools::reroot( node=mrca_t5_t2_n11 )
 mrca_t10_t3_e14 = getMRCA(tree_r_e14, which(tree_r_e14$tip.label %in% c('t10','t3')))
@@ -409,7 +409,8 @@ p_rooted_e14 =
   geom_tiplab(offset=0.2) +
   #geom_text(aes(label=node)) +
   geom_nodepoint(aes(subset=(node == mrca_t10_t3_e14 )), col="red", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_e14 )), col="blue", size=4 )
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_e14 )), col="blue", size=4 ) + 
+  ggtitle("(D) Rooted on orange edge")
 
 grid.arrange(
   p_r_unrooted,

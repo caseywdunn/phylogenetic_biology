@@ -1,46 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 216 162.17" style="enable-background:new 0 0 216 162.17;" xml:space="preserve">
+	 viewBox="0 0 216 162.2" style="enable-background:new 0 0 216 162.2;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:none;stroke:#231F20;stroke-miterlimit:10;}
-	.st1{fill:#7873FF;}
-	.st2{fill:#FFFFFF;}
-	.st3{font-family:'HelveticaNeue';}
-	.st4{font-size:24px;}
-	.st5{fill:#231F20;}
-	.st6{fill:#787878;}
-	.st7{enable-background:new    ;}
-	.st8{font-size:12px;}
+	.st1{fill:#FFFFFF;}
+	.st2{font-family:'HelveticaNeue';}
+	.st3{font-size:24px;}
+	.st4{fill:#787878;}
+	.st5{font-size:12px;}
+	.st6{enable-background:new    ;}
+	.st7{fill:none;stroke:#7A7A7A;stroke-miterlimit:10;}
 </style>
-<line class="st0" x1="161.35" y1="32.39" x2="140.76" y2="77.85"/>
-<line class="st0" x1="114.09" y1="28.51" x2="140.76" y2="77.85"/>
-<line class="st0" x1="66.84" y1="29" x2="46.19" y2="74.71"/>
-<line class="st0" x1="21.68" y1="28.51" x2="46.19" y2="74.71"/>
-<line class="st0" x1="140.76" y1="77.85" x2="107.21" y2="140.56"/>
-<line class="st0" x1="46.19" y1="74.71" x2="107.21" y2="140.56"/>
-<circle class="st1" cx="21.68" cy="28.51" r="12.65"/>
-<text transform="matrix(1 0 0 1 14.0914 36.5551)" class="st2 st3 st4">1</text>
-<circle class="st1" cx="66.84" cy="29" r="12.65"/>
-<text transform="matrix(1 0 0 1 60.0704 36.424)" class="st2 st3 st4">2</text>
+<line class="st0" x1="161.4" y1="32.4" x2="140.8" y2="77.8"/>
+<line class="st0" x1="114.1" y1="28.5" x2="140.8" y2="77.8"/>
+<line class="st0" x1="68.2" y1="28.3" x2="46.2" y2="74.7"/>
+<line class="st0" x1="21.7" y1="28.5" x2="46.2" y2="74.7"/>
+<line class="st0" x1="140.8" y1="77.8" x2="107.2" y2="140.6"/>
+<line class="st0" x1="46.2" y1="74.7" x2="107.2" y2="140.6"/>
+<circle cx="21.7" cy="28.5" r="12.7"/>
+<text transform="matrix(1 0 0 1 14.0914 36.5551)" class="st1 st2 st3">1</text>
+<circle cx="68.2" cy="28.5" r="12.7"/>
+<text transform="matrix(1 0 0 1 62.2655 36.424)" class="st1 st2 st3">2</text>
+<circle cx="161.4" cy="28.5" r="12.6"/>
+<text transform="matrix(1 0 0 1 153.4102 36.5553)" class="st1 st2 st3">4</text>
+<circle class="st4" cx="47" cy="74.7" r="12.6"/>
+<text transform="matrix(1 0 0 1 40.4285 83.3955)" class="st1 st2 st3">5</text>
+<circle cx="114.8" cy="28.5" r="12.7"/>
+<text transform="matrix(1 0 0 1 108.1633 36.4241)" class="st1 st2 st3">3</text>
+<circle class="st4" cx="140.8" cy="77.8" r="12.6"/>
+<text transform="matrix(1 0 0 1 134.2082 86.5441)" class="st1 st2 st3">6</text>
+<circle class="st4" cx="108" cy="137.4" r="12.6"/>
+<text transform="matrix(1 0 0 1 101.444 146.083)" class="st1 st2 st3">7</text>
+<text transform="matrix(1 0 0 1 182.2769 28.3487)" class="st2 st5">tip </text>
+<text transform="matrix(1 0 0 1 182.2769 42.7487)" class="st2 st5">nodes</text>
 <g>
-	<circle class="st1" cx="161.35" cy="30.6" r="12.65"/>
-	<text transform="matrix(1 0 0 1 153.7502 38.6477)" class="st2 st3 st4">4</text>
+	<text transform="matrix(1 0 0 1 173.7447 83.3956)" class="st6"><tspan x="0" y="0" class="st4 st2 st5">inte</tspan><tspan x="19.6" y="0" class="st4 st2 st5">r</tspan><tspan x="23.8" y="0" class="st4 st2 st5">nal </tspan></text>
+	<text transform="matrix(1 0 0 1 173.7447 97.7956)" class="st4 st2 st5">nodes</text>
 </g>
-<g>
-	<circle class="st5" cx="46.98" cy="74.71" r="12.65"/>
-	<text transform="matrix(1 0 0 1 40.4285 83.3955)" class="st2 st3 st4">5</text>
-</g>
-<circle class="st1" cx="114.09" cy="28.58" r="12.65"/>
-<text transform="matrix(1 0 0 1 108.1633 36.4241)" class="st2 st3 st4">3</text>
-<g>
-	<circle class="st5" cx="140.76" cy="77.85" r="12.65"/>
-	<text transform="matrix(1 0 0 1 134.2082 86.5441)" class="st2 st3 st4">6</text>
-</g>
-<circle class="st6" cx="108" cy="137.39" r="12.65"/>
-<text transform="matrix(1 0 0 1 101.444 146.083)" class="st2 st3 st4">7</text>
-<text transform="matrix(1 0 0 1 182.2769 28.3487)" class="st7"><tspan x="0" y="0" class="st1 st3 st8">tip </tspan><tspan x="0" y="14.4" class="st1 st3 st8">nodes</tspan></text>
-<text transform="matrix(1 0 0 1 173.7447 83.3956)" class="st7"><tspan x="0" y="0" class="st3 st8">internal </tspan><tspan x="0" y="14.4" class="st3 st8">nodes</tspan></text>
-<polyline class="st0" points="160.09,65.2 167.55,65.2 167.55,150.04 160.09,150.04 "/>
-<text transform="matrix(1 0 0 1 126.2209 134.473)"><tspan x="0" y="0" class="st6 st3 st8">root </tspan><tspan x="0" y="14.4" class="st6 st3 st8">node</tspan></text>
+<polyline class="st7" points="160.1,65.2 167.6,65.2 167.6,150 160.1,150 "/>
+<text transform="matrix(1 0 0 1 126.2209 134.473)" class="st4 st2 st5">root </text>
+<text transform="matrix(1 0 0 1 126.2209 148.873)" class="st4 st2 st5">node</text>
 </svg>
