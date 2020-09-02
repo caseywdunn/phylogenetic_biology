@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-08-26" />
+<meta name="date" content="2020-09-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -161,9 +161,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a><ul>
 <li class="chapter" data-level="3.1" data-path="simulation.html"><a href="simulation.html#models"><i class="fa fa-check"></i><b>3.1</b> Models</a></li>
-<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model"><i class="fa fa-check"></i><b>3.2</b> A simple model</a><ul>
+<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="simulation.html"><a href="simulation.html#expected-amount-of-change"><i class="fa fa-check"></i><b>3.2.1</b> Expected amount of change</a></li>
 <li class="chapter" data-level="3.2.2" data-path="simulation.html"><a href="simulation.html#expected-end-state"><i class="fa fa-check"></i><b>3.2.2</b> Expected end state</a></li>
+<li class="chapter" data-level="3.2.3" data-path="simulation.html"><a href="simulation.html#analytical-approach"><i class="fa fa-check"></i><b>3.2.3</b> Analytical approach</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="simulation.html"><a href="simulation.html#generalizing-the-simple-model"><i class="fa fa-check"></i><b>3.3</b> Generalizing the simple model</a></li>
 <li class="chapter" data-level="3.4" data-path="simulation.html"><a href="simulation.html#more-complex-models"><i class="fa fa-check"></i><b>3.4</b> More complex models</a></li>
@@ -262,7 +263,7 @@ gene transfer or hybridization.</p></li>
 directionality. Specifically, they denote time. The node on one end of the edge
 is older than the node on the other side of the edge. We therefore can refer to the nodes connected to a particular edge as the parent node and child node.</p></li>
 </ul>
-<p>A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The edges indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each edge would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth.</p>
+<p>A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The edges indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each edge would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single edge, parent-child node relationships in the tree don’t mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.</p>
 </div>
 <div id="drawing-phylogenies" class="section level2">
 <h2><span class="header-section-number">2.2</span> Drawing phylogenies</h2>
