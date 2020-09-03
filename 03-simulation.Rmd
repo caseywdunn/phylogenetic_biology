@@ -132,7 +132,7 @@ In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over th
 
 As $\mu$ increases (going up on the vertical axis), the number of replacement events over the same time interval increases (Figure \@ref(fig:sim-jc-mu-n)). This reflects the simple linear relationship $n=\mu t$, where $n$ is the number of expected replacement events.
 
-```{r sim-jc-mu-n, fig.cap="The number of replacement events increases linearly with the replacement rate $\\mu$. This plot is from the same simulation as that shown in Figure \\@ref(fig:sim-jc-mu-sweep). The line is a linear model fit to the data. Since $n=\mu t$, and in this case $t=100$, the slope of $n$ on $t$ is estimated to be near 100."}
+```{r sim-jc-mu-n, fig.cap="The number of replacement events increases linearly with the replacement rate $\\mu$. This plot is from the same simulation as that shown in Figure \\@ref(fig:sim-jc-mu-sweep). The line is a linear model fit to the data. Since $n=\\mu t$, and in this case $t=100$, the slope of $n$ on $t$ is estimated to be near 100."}
 
 segments %>% 
   group_by(mu ) %>% 
@@ -170,7 +170,7 @@ Since replacements are coming from the bag that you are picking the nucleotides 
 ```
 
 
-```{r sim-saturation, fig.cap=paste( "Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=" , mu, "$. There are ", n_replicates, " replicate simulations for each value of time. At time=0 (no evolution), the end result is always the same as the initial value, which is fixed at A in these simulations. As the length of time increases, the four nucleotides converge on equal frequencies of 25% each." ) }
+```{r sim-saturation, cache=TRUE, fig.cap=paste( "Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=" , mu, "$. There are ", n_replicates, " replicate simulations for each value of time. At time=0 (no evolution), the end result is always the same as the initial value, which is fixed at A in these simulations. As the length of time increases, the four nucleotides converge on equal proportions of 0.25 each." ) }
 
 
   t_values = seq( 0, 100, 10 )
@@ -185,19 +185,46 @@ Since replacements are coming from the bag that you are picking the nucleotides 
   simulations %>% 
     ggplot() +
       aes(x = time, fill = factor(nucleotide)) +
-      geom_bar(position = "fill")
+      geom_bar(position = "fill") +
+      xlab( "t" ) + 
+      ylab( "P" ) +
+      labs(fill = "nucleotide state")
   
-
 
 ```
 
 ### Analytical approach
 
+The process of change that our simple model describes is similar to compound interest. 
+We have something in hand, apply a process to it, then take the output and apply that same process again. Over and over. 
+In the case of compound interest, that something is money and the process is growth. In the case of our model, the 
+something is a DNA site and the process is mutation. In both cases, we take is inputs a starting state, a rate of change, and an amount of time, and provide as an output get the expected end state. To get the expected end state as a function of time elapsed, given a rate of change, we can use exponential functions.
+
+For our model, we need two exponential functions:
 
 
+\begin{equation} 
+  P\left(t\right) = \frac{1}{4} + \frac{3}{4} e^{-\mu t} 
+  (\#eq:sim-stay)
+\end{equation} 
 
-```{r}
-mu=1
+\begin{equation} 
+  P\left(t\right) = \frac{1}{4} - \frac{1}{4} e^{-\mu t} 
+  (\#eq:sim-change)
+\end{equation}
+
+
+Equation \@ref(eq:sim-stay) shows the probability of the final state being the same as 
+the beginning state. So if you start with an A, this would give you the probability 
+of remaining an A after time $t$ given a specific value of $mu$. Equation \@ref(eq:sim-change) is the probability of each of the different end states. If you start as an A, this is the probability of changing to a G. It is also the probability of changing to a C or a T.
+
+Consider what happens to these equations in the extremes we noted above. If $\mu$ or $t$ are zero, we expect no change (Figure \@ref(fig:sim-analytical), left side). In that case we get $e^0$, which is 1. Equation \@ref(eq:sim-stay) becomes $1/4 + 3/4$, which is 1. So there is a probability of 1 that, after no change, the end state is the same as the beginning state. Likewise, equation \@ref(eq:sim-change) becomes $1/4 - 1/4$, which is 0. So after no change the end states that differ from the beginning state each have probability 0.
+
+Now consider the case after infinite change (or just a large amount of change, as in the right side of Figure \@ref(fig:sim-analytical)). If $\mu$ or $t$ are infinity, then `e^{-\mu t}` becomes `e^{-\infty}`, which is 0. In that case, Equation \@ref(eq:sim-stay) becomes $1/4 + 0$, which is simply $1/4$. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 0$, which is also $1/4$. So all the nucleotides (the one that you started with, and the three other states that substitution can lead to) all have the same equal frequency of $1/4$. This reflects the fact that the frequency of drawing each of these from the bag was $1/4$.
+
+```{r sim-analytical, fig.cap=paste( "The probability of observing a particular end state, given the start state and $\\mu=0.05$, at time $t$. The red line is the probability of observing the original start state (as described by \\@ref(eq:sim-stay)), the blue line is the probability of observing each of the three other states (as described by \\@ref(eq:sim-change))." ) }
+
+mu=0.05
 p = ggplot(data = data.frame(x = 0), mapping = aes(x = x))
 fun.1 = function(x) {1/4 + 3/4*(exp(- mu * x))}
 fun.2 = function(x) {1/4 - 1/4*(exp(- mu * x))}
@@ -205,11 +232,53 @@ fun.2 = function(x) {1/4 - 1/4*(exp(- mu * x))}
 p + 
   stat_function(fun = fun.1, color="red") + 
   stat_function(fun = fun.2, color="blue") + 
-  xlim(0,10) + 
-  ylim(0,1)
+  xlim(0,100) + 
+  ylim(0,1) +
+  xlab( "t" ) + 
+  ylab( "P" )
 
 ```
 
+We can reorganize things a bit to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equation \@ref(eq:sim-change) and \@ref(eq:sim-change) instead. 
+
+
+```{r sim-sat-analytical, cache=TRUE, fig.cap=paste( "Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=" , mu, "$. The starting state is set at A, so the probability of observing an A is described by Equation \\@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \\@ref(eq:sim-change). At time=0 (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." ) }
+
+
+  t_values = seq( 0, 100, 10 )
+  
+  analytical = data.frame(t=t_values)
+  
+  analytical %<>%
+    mutate ( A = fun.1(t) ) %>%
+    mutate ( G = fun.2(t) ) %>%
+    mutate ( C = fun.2(t) ) %>%
+    mutate ( T = fun.2(t) ) %>%
+    pivot_longer(c(`A`, `G`,`C`,`T`), names_to = "nucleotide", values_to = "P")
+  
+  analytical %>% 
+    ggplot(aes(x = t, y=P, fill = factor(nucleotide))) +
+      geom_bar(position = "stack", stat="identity") +
+      xlab( "t" ) + 
+      ylab( "P" ) +
+      labs(fill = "nucleotide state")
+  
+
+
+```
+
+Let's put this back into a biological context. Our simple model allows us to 
+calculate the probability $P(t)$ of a given nucleotide state at the end (child node) of an edge given:
+
+- The nucleotide state at the beginning (parent node) of the edge
+- Replacement rate $\mu$
+- Length of the edge
+
+This is powerful stuff. We could do a variety of things with this model machinery, for example:
+
+- Simulate evolution along the edge by sampling nucleotides for the child node from this probability distribution
+- Ask the probability of starting state given the end state
+- Evaluate how reasonable our $\mu$ model parameter value is. If, for example, we had a very short branch that had a different state at the beginning and end, we might be skeptical of a low $\mu$ value.
 
 
 
