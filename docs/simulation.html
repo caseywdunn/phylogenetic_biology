@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-09-03" />
+<meta name="date" content="2020-09-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -356,7 +356,7 @@ of remaining an A after time <span class="math inline">\(t\)</span> given a spec
 Figure 3.8: The probability of observing a particular end state at time <span class="math inline">\(t\)</span>, given the start state A and <span class="math inline">\(\mu=0.05\)</span>. The red line is the probability of observing the original start state (as described by Equation <span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(eq:sim-stay)), the blue line is the probability of observing each of the three other states (as described by Equation <span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(eq:sim-change)).
 </p>
 </div>
-<p>We can reorganize things a bit to get a plot like that of Figure <a href="simulation.html#fig:sim-saturation">3.7</a>, but derived from Equation <a href="simulation.html#eq:sim-change">(3.3)</a> and <a href="simulation.html#eq:sim-change">(3.3)</a> instead.</p>
+<p>We can reorganize things a bit to get a plot like that of Figure <a href="simulation.html#fig:sim-saturation">3.7</a>, but derived from Equations <a href="simulation.html#eq:sim-change">(3.3)</a> and <a href="simulation.html#eq:sim-change">(3.3)</a> instead.</p>
 <div class="figure"><span id="fig:sim-sat-analytical"></span>
 <img src="phylogenetic_biology_files/figure-html/sim-sat-analytical-1.png" alt="Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \@ref(eq:sim-change). At time=0 (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." width="2100" />
 <p class="caption">
@@ -380,14 +380,57 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 </div>
 <div id="generalizing-the-simple-model" class="section level2">
 <h2><span class="header-section-number">3.3</span> Generalizing the simple model</h2>
-<p>The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the scientists who described it in 1969 <span class="citation">(Jukes and Cantor <a href="#ref-jc1969" role="doc-biblioref">1969</a>)</span>. It is only one parameter – the rate of evolution <span class="math inline">\(\mu\)</span>. We can even just set <span class="math inline">\(\mu=1\)</span> and just let differences in edge length explain the expected amount of change. It is highly idealized – there are many important facts about DNA and DNA evolution that it deliberately omits.</p>
+<p>Our model only has one parameter that can vary, <span class="math inline">\(\mu\)</span>, so we can describe the model parameters very simply. This is convenient, but leaves some of the things that are happening under the hood a bit opaque. Let’s rewrite this simple model in a way that makes it a bit clearer how we are using this parameter, and also reveals some other parameters that are there but that we ignored until now because they were clamped. First, we need to represent the model as a <span class="math inline">\(4\times4\)</span> rate matrix, which we will call <span class="math inline">\(\mathbf{Q}\)</span>, as defined in Equation <a href="simulation.html#eq:jc69">(3.4)</a>. Each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the instantaneous rate of change from the nucleotide of the corresponding row, to the nucleotide of the corresponding column.</p>
+<p><span class="math display" id="eq:jc69">\[\begin{equation} 
+
+\mathbf{Q} = 
+\left(\begin{array}{cc} 
+-3\mu\pi &amp; \mu \pi &amp; \mu \pi &amp; \mu \pi\\
+\mu\pi &amp; -3\mu \pi &amp; \mu \pi &amp; \mu \pi\\
+\mu\pi &amp; \mu \pi &amp; -3\mu \pi &amp; \mu \pi\\
+\mu\pi &amp; \mu \pi &amp; \mu \pi &amp; -3\mu \pi\\
+\end{array}\right)
+
+\tag{3.4}
+\end{equation}\]</span></p>
+<p>Recall that <span class="math inline">\(\mu\)</span> is the rate of <em>any</em> replacement event happening. That replacement event could be an A, C, G, or T. Only three of these replacements lead to a substitution, since replacing with the original nucleotides does not lead to a change. To find the rate of <em>specific</em> replacements happening, as we need to do for the elements of this matrix, we essentially need to apportion the total replacement rate <span class="math inline">\(\mu\)</span> to specific nucleotides. We can do that with a new term <span class="math inline">\(\pi\)</span>, which is the name we will give to the equilibrium frequency of each state. This corresponds to the frequency of each nucleotide in the bag we randomly sampled from. In our simple model, <span class="math inline">\(\pi=0.25\)</span> for all nucleotides. Because <span class="math inline">\(\pi\)</span> was clamped and wasn’t free to vary, it was essentially invisible in the way we previously parameterized the model.</p>
+<p>The off-diagonal elements of <span class="math inline">\(\mathbf{Q}\)</span> give the rates of substitutions, and are all <span class="math inline">\(\mu \pi\)</span> as explained by the reasoning above. But what’s up with the diagonal elements? Those correspond to replacements that do not lead to a substitution, for example an A being replaced be an A. We pick these diagonal elements to be whatever value leads the rows to sum to 0. Since there are three substitutions in each row, and each substitution has rate <span class="math inline">\(\mu \pi\)</span>, these diagonal elements are set to <span class="math inline">\(-3 \mu \pi\)</span>. The basic intuition of this is that we aren’t creating or destroying nucleotides, just replacing them. So the net change needs to be 0.</p>
+<p>There is a lot going in in <span class="math inline">\(\mathbf{Q}\)</span>. To make sense of it all, it helps to factor it out into two parts. The first is a <span class="math inline">\(4\times4\)</span> matrix <span class="math inline">\(\mathbf{R}\)</span>, which has all the rates, and the second is a vector <span class="math inline">\(\Pi\)</span> that has the equilibrium frequencies (Equation <a href="simulation.html#eq:jc69-expanded">(3.5)</a>).</p>
+<p><span class="math display" id="eq:jc69-expanded">\[\begin{equation} 
+
+\mathbf{Q} = \mathbf{R}\mathbf{\Pi} =
+\left(\begin{array}{cc} 
+-3\mu &amp; \mu &amp; \mu &amp; \mu\\
+\mu &amp; -3\mu &amp; \mu &amp; \mu\\
+\mu &amp; \mu &amp; -3\mu &amp; \mu\\
+\mu &amp; \mu &amp; \mu &amp; -3\mu\\
+\end{array}\right)
+\left(\begin{array}{cc} 
+\pi\\ 
+\pi\\
+\pi\\
+\pi\\
+\end{array}\right)
+
+\tag{3.5}
+\end{equation}\]</span></p>
+<p><span class="math inline">\(\mathbf{Q}\)</span> is the instantaneous rate matrix – specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along an edge of a given length. Before, when we were keeping things as simple as possible, we used the exponential Equations <a href="simulation.html#eq:sim-stay">(3.2)</a> and <a href="simulation.html#eq:sim-change">(3.3)</a> for this. They took as input the overall replacement rate <span class="math inline">\(\mu\)</span> and the length of the edge <span class="math inline">\(t\)</span>. Now we want a similar equation, but we want to provide the rate matrix <span class="math inline">\(Q\)</span> rather than the single parameter <span class="math inline">\(\mu\)</span>. Well, again we can just use an exponential function, and it actually has a much simpler form.</p>
+<p><span class="math display" id="eq:sim-stay" id="eq:jc69-prob">\[\begin{equation} 
+  \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
+  \tag{3.6}
+\end{equation}\]</span></p>
+<p>Raising <span class="math inline">\(e\)</span> to the power of a matrix this is an example of matrix exponentiation, and it returns a matrix with the same dimensions as the one in the exponent. This new matrix <span class="math inline">\(\mathbf{P}\)</span> is also a <span class="math inline">\(4\times4\)</span> matrix. Each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an edge of length <span class="math inline">\(t\)</span>. The diagonal elements are each Equation \tag{3.2}, and the off diagonal elements are each Equation \tag{3.3}.</p>
+<p>Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of expanding things out this way.</p>
+</div>
+<div id="more-complex-models" class="section level2">
+<h2><span class="header-section-number">3.4</span> More complex models</h2>
+<p>The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 <span class="citation">(Jukes and Cantor <a href="#ref-jc1969" role="doc-biblioref">1969</a>)</span>. It is only one free parameter – the rate of evolution <span class="math inline">\(\mu\)</span>. It is highly idealized – there are many important facts about DNA and DNA evolution that it deliberately omits.</p>
 <p>The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, but the most critical at this point are:</p>
 <ul>
 <li><p>The nucleotides C, G, T, and A are often not found at an equal frequency of 0.25 each. Since the nucleotides form base pairs in organisms with double stranded genomes, C and G are found at the same frequency and T and A at the same frequency. Furthermore, the frequency of the four nucleotides must add to 100%. Therefore, the frequency of all four nucleotides can be summarized with a single number, usually given as the GC content – the percent of sites that are G or C. For examply, the human genome has a GC content of 41%, which indicates frequencies of 0.205 G, 0.205 C, 0.295 T and 0.295 A. This is quite different than the equal frequencies of 0.25 for all nucleotides expected by the JC69 model.</p></li>
 <li><p>The rates of mutation between different nucleotides is not the same. This is in part because some nucleotides are shaped more like others, and are more likely to be substituted for each other by mistake. In particular, A and G tend to be substituted for each other because they have two rings, and C and T tend to be substituted for each other because they have one ring. These changes between A/G and C/T are refered to as transitions. All other substitutions are called transversions, and are each less likely.</p></li>
 </ul>
 <p>To accommodate each of these deviations from JC69, we need to add parameters to the model to explain the added complexity. Those parameters then need to be clamped or estimated when we use the model. There are all kinds of parameters we could add one by one, and in fact that is how the field proceeded in the decades after JC69 was described. Rather than build the models up in that way, though, it is actually easier to propose a General model that all these other models, including JC69, are special cases of.</p>
-<p>To build toward that that General model, let’s first expand the JC69 model.</p>
 <p>rates, equilibrium frequencies</p>
 <pre><code>##      [,1]
 ## [1,]    0
@@ -395,9 +438,6 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 ## [3,]    0
 ## [4,]    0</code></pre>
 <p>exponentiation</p>
-</div>
-<div id="more-complex-models" class="section level2">
-<h2><span class="header-section-number">3.4</span> More complex models</h2>
 </div>
 <div id="model-structure" class="section level2">
 <h2><span class="header-section-number">3.5</span> Model structure</h2>
