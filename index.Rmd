@@ -56,7 +56,47 @@ I developed this book as a collection of the concepts, methods, and applications
 
 The source code for this manuscript is available on [github]( https://github.com/caseywdunn/phylogenetic_biology). The book was rendered from the source with `bookdown` [@bookdown2016].
 
-Please submit any errors you find, typos, or suggestions that you have for improving the manusctipt to the [issue tracker](https://github.com/caseywdunn/phylogenetic_biology/issues).
+Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the [issue tracker](https://github.com/caseywdunn/phylogenetic_biology/issues).
+
+## Other resources
+
+The following sites have a wide variety of material that is relevant to the 
+theory and and practice of phylogenetic biology.
+
+- An extensive list of tools, tutorials, and examples of phylogenetic tools in 
+the programming language R maintained by Briam O'Meara:
+[CRAN Task View: Phylogenetics](https://cran.r-project.org/web/views/Phylogenetics.html)
+
+- The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer 
+course on phylogenetics, with an emphasis on building phylogenetic trees. Check 
+out the faculty pages for lecture pdfs:
+[Workshop on Molecular Evolution](https://molevolworkshop.github.io)
+
+- The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course 
+on phylogenetics, but with a bit more emphasis on using phylogenies to test 
+evolutionary questions:
+[Applied Phylogenetics Workshop](http://treethinkers.org/tutorials/)
+
+The following books are great resources for learning more about phylogenetic biology:
+
+- Baum, D. and Smith, S. (2012). Tree Thinking. An Introduction to Phylogenetic 
+Biology. [Roberts Publishers](http://www.roberts-publishers.com/tree-thinking-an-introduction-to-phylogenetic-biology.html).
+
+- Paradis, E. (2011) Analysis of Phylogenetics and Evolution with R. 
+[Springer](http://www.springer.com/life+sciences/evolutionary+%26+developmental+biology/book/978-0-387-32914-7)
+
+- Felsenstein, J. (2004) Inferring phylogenies. 
+[Sinauer Associates](http://www.sinauer.com/detail.php?id=1775).
+
+- Swofford, D. L., Olsen, G. J., Waddell, P. J., & Hillis, D. M. (1996). 
+Phylogenetic inference. In: Molecular Systematics, Second Edition. eds: D. M. 
+Hillis, C Moritz, & B. K. Mable. [Sinauer Associates](http://www.sinauer.com/detail.php?id=1775)
+
+The following books provide general computational background for the topics covered here:
+
+- Wickham, H., Grolemund, G (2017) R for Data Science. https://r4ds.had.co.nz
+
+- Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. http://practicalcomputing.org
 
 
 ## Software versions

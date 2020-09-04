@@ -1,7 +1,7 @@
 # Simulation
 
-Here we will build the machinery to use a model if DNA evolution. Our first 
-application of the model will be to simulate data.
+Here we will build the machinery to implement models if DNA evolution. Our first 
+application of these models will be to simulate data.
 
 
 ## Models
@@ -11,7 +11,6 @@ deliberately simplified, and they are abstractions in the sense that they leave
 things that aren't thought to be important. As Peter Godfrey-Smith notes [@godfrey2016philosophy,, 21], 
 "Abstraction, to some degree, is inevitable; you can’t include everything. 
 Idealization, in contrast, is a choice."
-
 
 For some application, it doesn't 
 matter if the model structure reflects the underlying 
@@ -95,17 +94,23 @@ Let's start with a simple model of DNA evolution. At first we will also consider
 - State at the end of the edge (the nucleotide at the child node)
 
 
-Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probably as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing equal frequencies of C, G, T, and A nucleotides. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead selected by reaching into the bag and picking one at random. We will call the rate at which any one of these nucleotides is placed in a sequence at random $\beta$, where $\beta=\mu/4$.
+```{r sim-application, echo=FALSE, fig.cap="Our current goal is to model the evolution of a single site in a DNA sequence along a single edge in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the edge under examination (at the top) is thicker than the rest. (B) A cloweup of the focal edge, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states."}
 
-Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model $1/4$ of the time a replacement event occurs an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of an event result in a substitution, the substitution rate is $3\beta$, which, because $\beta=\mu/4$, is equivalent to noting that the substitution is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the replacement event rate.
+knitr::include_graphics("figures/applications.png")
+
+```
+
+Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probably as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing equal frequencies of C, G, T, and A nucleotides. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead selected by reaching into the bag and pick at random.
+
+Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model $1/4$ of the time a replacement event occurs an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of a replacement event result in a substitution, the substitution rate is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the replacement event rate.
 
 It might seem a bit odd to consider replacement events that don't result in substitutions, but this follows naturally from a central feature we specified for the the model - the new nucleotide doesn't depend in any way on what nucleotide was there before. If we had a process where replacements always resulted in substitutions, then excluding the a replacement in kind would require knowing which nucleotide should be placed so that we *don't* select it.
 
 ### Expected amount of change
 
-For the simple process described here, there are two things to consider if we want to know the amount of evolutionary change. The first is the substitution rate $\mu$ (which we also know if we know  $\beta$, since $\mu=4\beta$), and the time over which the evolutionary process acts. In our example here, that time is the length of the edge under consideration in the phylogeny.
+For the simple process described here, there are two things to consider if we want to know the amount of evolutionary change. The first is the substitution rate $\mu$, and the time over which the evolutionary process acts. In our example here, that time is the length of the edge under consideration in the phylogeny.
 
-In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over the same time interval (0-100 time units). Each black line on the bar is a replacement even. We use a different value of $\mu$ for each simulation (as indicated on the vertical axis). When $\mu=0$, the bottom bar, there are no replacements (black bars) and therefore no substitutions (the whole bar is the same color). 
+In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over the same time interval (0-100 time units). Each black line on the bar is a replacement even randomly introduced by the computer according to our model. We use a different value of $\mu$ for each simulation (as indicated on the vertical axis). In the bottom bar, where $\mu=0$, there are no replacements (black bars) and therefore no substitutions (the whole bar is the same color). There are more replacement events as $\mu$ increases along the vertical axis.
 
 ```{r sim-jc-mu-sweep, fig.cap="Each horizontal bar is a simulation of evolution of a single nucleotide position through time, $t$, for a specified value of $\\mu$. Each sumulation starts out as an A. Black vertical lines correspond to replacement events, which don't all lead to substitutions (a new color). "}
 
@@ -158,7 +163,7 @@ knitr::include_graphics("figures/Fig_cnidaria.png")
 
 The machinery above shows how a model can clarify the way we think about the expected amount of change along an edge. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a  question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
 
-The situation is most clear after a small amount of change - we expect the end result to be the same as the starting condition. If we start with an A, for example, if ther eis very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, if we know the starting state that information tells us a lot about the end state. Not much else matters.
+The situation is most clear after a small amount of change - we expect the end result to be the same as the starting condition. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, if we know the starting state that information tells us a lot about the end state. Not much else matters.
 
 What should we expect, though, if there has been a large amount of change? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, than the initial starting state doesn't matter because whatever was there initially will probably have been replaced multiple times. If the starting state doesn't contain information about the end state, what does? 
 
@@ -170,7 +175,7 @@ Since replacements are coming from the bag that you are picking the nucleotides 
 ```
 
 
-```{r sim-saturation, cache=TRUE, fig.cap=paste( "Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=" , mu, "$. There are ", n_replicates, " replicate simulations for each value of time. At time=0 (no evolution), the end result is always the same as the initial value, which is fixed at A in these simulations. As the length of time increases, the four nucleotides converge on equal proportions of 0.25 each." ) }
+```{r sim-saturation, cache=TRUE, fig.cap="Stacked bar plots indicating the frequency of each nucleotide after simulated evolution for a specified amount of time. The rate of evolution is $\\mu=0.050$. There are 1000 replicate simulations for each value of time. At time $t=0$ (no evolution), the end result is always the same as the initial value, which is fixed at A in these simulations. As the length of time increases, the four nucleotides converge on equal proportions of 0.25 each." }
 
 
   t_values = seq( 0, 100, 10 )
@@ -195,12 +200,14 @@ Since replacements are coming from the bag that you are picking the nucleotides 
 
 ### Analytical approach
 
+In all the examples below I simulated replacement events by randomly generating them at the specified rate. To get the end state, I then just retained the last state. You could take this approach to assessing the probability of different outcomes, but computationally it gets very expensive. It would be better to have an equation to solve for the probability directly. That isn't always possible for a model, but it is in this case.
+
 The process of change that our simple model describes is similar to compound interest. 
 We have something in hand, apply a process to it, then take the output and apply that same process again. Over and over. 
 In the case of compound interest, that something is money and the process is growth. In the case of our model, the 
 something is a DNA site and the process is mutation. In both cases, we take is inputs a starting state, a rate of change, and an amount of time, and provide as an output get the expected end state. To get the expected end state as a function of time elapsed, given a rate of change, we can use exponential functions.
 
-For our model, we need two exponential functions:
+For our model, we need two exponential functions [@swofford1996molecular]:
 
 
 \begin{equation} 
@@ -218,11 +225,11 @@ Equation \@ref(eq:sim-stay) shows the probability of the final state being the s
 the beginning state. So if you start with an A, this would give you the probability 
 of remaining an A after time $t$ given a specific value of $mu$. Equation \@ref(eq:sim-change) is the probability of each of the different end states. If you start as an A, this is the probability of changing to a G. It is also the probability of changing to a C or a T.
 
-Consider what happens to these equations in the extremes we noted above. If $\mu$ or $t$ are zero, we expect no change (Figure \@ref(fig:sim-analytical), left side). In that case we get $e^0$, which is 1. Equation \@ref(eq:sim-stay) becomes $1/4 + 3/4$, which is 1. So there is a probability of 1 that, after no change, the end state is the same as the beginning state. Likewise, equation \@ref(eq:sim-change) becomes $1/4 - 1/4$, which is 0. So after no change the end states that differ from the beginning state each have probability 0.
+Consider what happens to these equations in the extremes we noted above. If $\mu$ or $t$ are zero, we expect no change (Figure \@ref(fig:sim-analytical), left side). In that case we get $e^0$, which is 1. Equation \@ref(eq:sim-stay) becomes $1/4 + 3/4$, which is 1. So there is a probability of 1 that, after no change, the end state is the same as the beginning state. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 1/4$, which is 0. So after no change the end states that differ from the beginning state each have probability 0.
 
-Now consider the case after infinite change (or just a large amount of change, as in the right side of Figure \@ref(fig:sim-analytical)). If $\mu$ or $t$ are infinity, then `e^{-\mu t}` becomes `e^{-\infty}`, which is 0. In that case, Equation \@ref(eq:sim-stay) becomes $1/4 + 0$, which is simply $1/4$. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 0$, which is also $1/4$. So all the nucleotides (the one that you started with, and the three other states that substitution can lead to) all have the same equal frequency of $1/4$. This reflects the fact that the frequency of drawing each of these from the bag was $1/4$.
+Now consider the case after infinite change (or just a large amount of change, as in the right side of Figure \@ref(fig:sim-analytical)). If $\mu$ or $t$ are infinity, then $e^{-\mu t}$ becomes $e^{-\infty}$, which is 0. In that case, Equation \@ref(eq:sim-stay) becomes $1/4 + 0$, which is simply $1/4$. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 0$, which is also $1/4$. So all the nucleotides (the one that you started with, and the three other states that substitution can lead to) all have the same equal frequency of $1/4$. This reflects the fact that the frequency of drawing each of these from the bag was $1/4$.
 
-```{r sim-analytical, fig.cap=paste( "The probability of observing a particular end state, given the start state and $\\mu=0.05$, at time $t$. The red line is the probability of observing the original start state (as described by \\@ref(eq:sim-stay)), the blue line is the probability of observing each of the three other states (as described by \\@ref(eq:sim-change))." ) }
+```{r sim-analytical, fig.cap="The probability of observing a particular end state at time $t$, given the start state A and $\\mu=0.05$. The red line is the probability of observing the original start state (as described by Equation @ref(eq:sim-stay)), the blue line is the probability of observing each of the three other states (as described by Equation @ref(eq:sim-change))." }
 
 mu=0.05
 p = ggplot(data = data.frame(x = 0), mapping = aes(x = x))
@@ -241,9 +248,7 @@ p +
 
 We can reorganize things a bit to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equation \@ref(eq:sim-change) and \@ref(eq:sim-change) instead. 
 
-
-```{r sim-sat-analytical, cache=TRUE, fig.cap=paste( "Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=" , mu, "$. The starting state is set at A, so the probability of observing an A is described by Equation \\@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \\@ref(eq:sim-change). At time=0 (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." ) }
-
+```{r sim-sat-analytical, cache=TRUE, fig.cap="Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \\@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \\@ref(eq:sim-change). At time=0 (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." }
 
   t_values = seq( 0, 100, 10 )
   
@@ -281,10 +286,19 @@ This is powerful stuff. We could do a variety of things with this model machiner
 - Evaluate how reasonable our $\mu$ model parameter value is. If, for example, we had a very short branch that had a different state at the beginning and end, we might be skeptical of a low $\mu$ value.
 
 
-
 ## Generalizing the simple model
 
+The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the scientists who described it in 1969 [@jc1969]. It is only one parameter -- the rate of evolution $\mu$. We can even just set $\mu=1$ and just let differences in edge length explain the expected amount of change. It is highly idealized -- there are many important facts about DNA and DNA evolution that it deliberately omits. 
 
+The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, but the most critical at this point are:
+
+- The nucleotides C, G, T, and A are often not found at an equal frequency of 0.25 each. Since the nucleotides form base pairs in organisms with double stranded genomes, C and G are found at the same frequency and T and A at the same frequency. Furthermore, the frequency of the four nucleotides must add to 100%. Therefore, the frequency of all four nucleotides can be summarized with a single number, usually given as the GC content -- the percent of sites that are G or C. For examply, the human genome has a GC content of 41%, which indicates frequencies of 0.205 G, 0.205 C, 0.295 T and 0.295 A. This is quite different than the equal frequencies of 0.25 for all nucleotides expected by the JC69 model.
+
+- The rates of mutation between different nucleotides is not the same. This is in part because some nucleotides are shaped more like others, and are more likely to be substituted for each other by mistake. In particular, A and G tend to be substituted for each other because they have two rings, and C and T tend to be substituted for each other because they have one ring. These changes between A/G and C/T are refered to as transitions. All other substitutions are called transversions, and are each less likely.
+
+To accommodate each of these deviations from JC69, we need to add parameters to the model to explain the added complexity. Those parameters then need to be clamped or estimated when we use the model. There are all kinds of parameters we could add one by one, and in fact that is how the field proceeded in the decades after JC69 was described. Rather than build the models up in that way, though, it is actually easier to propose a General model that all these other models, including JC69, are special cases of.
+
+To build toward that that General model, let's first expand the JC69 model.
 
 
 

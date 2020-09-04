@@ -1,5 +1,7 @@
 phylogenetic_biology.Rmd
 phylogenetic_biology.pdf
+phylogenetic_biology_cache/
+
 *.tex
 *.log
 
