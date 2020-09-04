@@ -347,44 +347,42 @@ The simplicity of JC69 makes it a useful starting place to understand how models
 
 - The nucleotides C, G, T, and A are often not found at an equal frequency of 0.25 each. Since the nucleotides form base pairs in organisms with double stranded genomes, C and G are found at the same frequency and T and A at the same frequency. Furthermore, the frequency of the four nucleotides must add to 100%. Therefore, the frequency of all four nucleotides can be summarized with a single number, usually given as the GC content -- the percent of sites that are G or C. For examply, the human genome has a GC content of 41%, which indicates frequencies of 0.205 G, 0.205 C, 0.295 T and 0.295 A. This is quite different than the equal frequencies of 0.25 for all nucleotides expected by the JC69 model.
 
-- The rates of mutation between different nucleotides is not the same. This is in part because some nucleotides are shaped more like others, and are more likely to be substituted for each other by mistake. In particular, A and G tend to be substituted for each other because they have two rings, and C and T tend to be substituted for each other because they have one ring. These changes between A/G and C/T are refered to as transitions. All other substitutions are called transversions, and are each less likely.
+- The rates of mutation between different nucleotides is not the same. This is in part because some nucleotides are shaped more like others, and are more likely to be substituted for each other by mistake. In particular, A and G tend to be substituted for each other because they have two rings, and C and T tend to be substituted for each other because they have one ring. These changes between A/G and C/T are referred to as transitions. All other substitutions are called transversions, and are each less likely.
 
-To accommodate each of these deviations from JC69, we need to add parameters to the model to explain the added complexity. Those parameters then need to be clamped or estimated when we use the model. There are all kinds of parameters we could add one by one, and in fact that is how the field proceeded in the decades after JC69 was described. Rather than build the models up in that way, though, it is actually easier to propose a General model that all these other models, including JC69, are special cases of.
+To accommodate each of these deviations from JC69, we need to add parameters to the model to explain the added complexity. Those parameters then need to be clamped or estimated when we use the model. There are all kinds of parameters we could add one by one, and in fact that is how the field proceeded in the decades after JC69 was described. Rather than build the models up in that way, though, it is actually easier to propose a General model that these other models, including JC69, are special cases of.
+
+\begin{equation} 
+
+\mathbf{Q} = \mathbf{R}\mathbf{\Pi} =
+\left(\begin{array}{cc} 
+- & \mu a & \mu b & \mu c\\
+\mu a & - & \mu d & \mu e \\
+\mu b & \mu d & - & \mu f \\
+\mu d & \mu e & \mu f & -\\
+\end{array}\right)
+\left(\begin{array}{cc} 
+\pi_A\\ 
+\pi_C\\
+\pi_G\\
+\pi_T\\
+\end{array}\right)
+
+(\#eq:gtr)
+\end{equation}
+
+To keep things compact, I have followed the contenction of placing $-$ in the diagonal elements, which is short for "whatever it takes to make the row sum to 0". 
+
+This model (Equation (\#eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means that the rate of chnge from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It reflects what is observed biologically. And it means that we don't need to know the direction of time along an edge to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software to be able to reroot phylogenies without changing these probabilities.
+
+If we let all the parameters in the GTR model (Equation (\#eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is clamp some of them. In fact, be comparison of Equations (\#eq:jc69-expanded) and (\#eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free.
+
+There are a variety of other commonly used models that clamp these parameters in different ways, some leaving more freedom than others. Some that are widely used and have very specific biological motivation have their own names, like JC69 (the motivation for this model is that it is so simple). Examples include:
+
+- HKY85 differs from GTR in setting some rate modifiers equal to each other so that there are two rates, $b=e$ for transitions (A to G, and C to T) and $a=c=d=f$ for transfersions (all other changes). It still lets all the $\pi$ parameters vary independently.
+
+- F81 differs from HKY85 in that it sets all the rate modifiers to 1, so that $a=b=c=d=e=f=1$. It is almost as simple as JC69, except that the $\pi$ parameters vary independently.
 
 
-
-
-
-rates, equilibrium frequencies
-
-```{r}
-
-e = matrix(c(0.25,0.25,0.25,0.25),nrow=4)
-
-R =matrix(c(
-  -3,1,1,1,
-  1,-3,1,1,
-  1,1,-3,1,
-  1,1,1,-3
-),
-nrow=4
-)
-
-Q = R %*% e
-
-Q
-
-```
-
-
-exponentiation
-
-
-
-
-
-
-## Model structure
 
 
 

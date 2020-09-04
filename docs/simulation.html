@@ -169,8 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="simulation.html"><a href="simulation.html#generalizing-the-simple-model"><i class="fa fa-check"></i><b>3.3</b> Generalizing the simple model</a></li>
 <li class="chapter" data-level="3.4" data-path="simulation.html"><a href="simulation.html#more-complex-models"><i class="fa fa-check"></i><b>3.4</b> More complex models</a></li>
-<li class="chapter" data-level="3.5" data-path="simulation.html"><a href="simulation.html#model-structure"><i class="fa fa-check"></i><b>3.5</b> Model structure</a></li>
-<li class="chapter" data-level="3.6" data-path="simulation.html"><a href="simulation.html#aditional-resources"><i class="fa fa-check"></i><b>3.6</b> Aditional resources</a></li>
+<li class="chapter" data-level="3.5" data-path="simulation.html"><a href="simulation.html#aditional-resources"><i class="fa fa-check"></i><b>3.5</b> Aditional resources</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="inference.html"><a href="inference.html"><i class="fa fa-check"></i><b>4</b> Inference</a></li>
 <li class="chapter" data-level="5" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>5</b> Evaluation</a><ul>
@@ -420,7 +419,7 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
   \tag{3.6}
 \end{equation}\]</span></p>
 <p>Raising <span class="math inline">\(e\)</span> to the power of a matrix this is an example of matrix exponentiation, and it returns a matrix with the same dimensions as the one in the exponent. This new matrix <span class="math inline">\(\mathbf{P}\)</span> is also a <span class="math inline">\(4\times4\)</span> matrix. Each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an edge of length <span class="math inline">\(t\)</span>. The diagonal elements are each Equation \tag{3.2}, and the off diagonal elements are each Equation \tag{3.3}.</p>
-<p>Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of expanding things out this way.</p>
+<p>Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of expanding the model into this more complex form.</p>
 </div>
 <div id="more-complex-models" class="section level2">
 <h2><span class="header-section-number">3.4</span> More complex models</h2>
@@ -428,22 +427,38 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 <p>The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, but the most critical at this point are:</p>
 <ul>
 <li><p>The nucleotides C, G, T, and A are often not found at an equal frequency of 0.25 each. Since the nucleotides form base pairs in organisms with double stranded genomes, C and G are found at the same frequency and T and A at the same frequency. Furthermore, the frequency of the four nucleotides must add to 100%. Therefore, the frequency of all four nucleotides can be summarized with a single number, usually given as the GC content – the percent of sites that are G or C. For examply, the human genome has a GC content of 41%, which indicates frequencies of 0.205 G, 0.205 C, 0.295 T and 0.295 A. This is quite different than the equal frequencies of 0.25 for all nucleotides expected by the JC69 model.</p></li>
-<li><p>The rates of mutation between different nucleotides is not the same. This is in part because some nucleotides are shaped more like others, and are more likely to be substituted for each other by mistake. In particular, A and G tend to be substituted for each other because they have two rings, and C and T tend to be substituted for each other because they have one ring. These changes between A/G and C/T are refered to as transitions. All other substitutions are called transversions, and are each less likely.</p></li>
+<li><p>The rates of mutation between different nucleotides is not the same. This is in part because some nucleotides are shaped more like others, and are more likely to be substituted for each other by mistake. In particular, A and G tend to be substituted for each other because they have two rings, and C and T tend to be substituted for each other because they have one ring. These changes between A/G and C/T are referred to as transitions. All other substitutions are called transversions, and are each less likely.</p></li>
 </ul>
-<p>To accommodate each of these deviations from JC69, we need to add parameters to the model to explain the added complexity. Those parameters then need to be clamped or estimated when we use the model. There are all kinds of parameters we could add one by one, and in fact that is how the field proceeded in the decades after JC69 was described. Rather than build the models up in that way, though, it is actually easier to propose a General model that all these other models, including JC69, are special cases of.</p>
-<p>rates, equilibrium frequencies</p>
-<pre><code>##      [,1]
-## [1,]    0
-## [2,]    0
-## [3,]    0
-## [4,]    0</code></pre>
-<p>exponentiation</p>
-</div>
-<div id="model-structure" class="section level2">
-<h2><span class="header-section-number">3.5</span> Model structure</h2>
+<p>To accommodate each of these deviations from JC69, we need to add parameters to the model to explain the added complexity. Those parameters then need to be clamped or estimated when we use the model. There are all kinds of parameters we could add one by one, and in fact that is how the field proceeded in the decades after JC69 was described. Rather than build the models up in that way, though, it is actually easier to propose a General model that these other models, including JC69, are special cases of.</p>
+<p><span class="math display" id="eq:sim-gtr" id="eq:sim-gtr" id="eq:gtr">\[\begin{equation} 
+
+\mathbf{Q} = \mathbf{R}\mathbf{\Pi} =
+\left(\begin{array}{cc} 
+- &amp; \mu a &amp; \mu b &amp; \mu c\\
+\mu a &amp; - &amp; \mu d &amp; \mu e \\
+\mu b &amp; \mu d &amp; - &amp; \mu f \\
+\mu d &amp; \mu e &amp; \mu f &amp; -\\
+\end{array}\right)
+\left(\begin{array}{cc} 
+\pi_A\\ 
+\pi_C\\
+\pi_G\\
+\pi_T\\
+\end{array}\right)
+
+\tag{3.7}
+\end{equation}\]</span></p>
+<p>To keep things compact, I have followed the contenction of placing <span class="math inline">\(-\)</span> in the diagonal elements, which is short for “whatever it takes to make the row sum to 0”.</p>
+<p>This model (Equation \tag{3.8}) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The <span class="math inline">\(\pi_A ... \pi_T\)</span> parameters allow the equilibrium frequencies to differ for each nucleotide. The <span class="math inline">\(a ... f\)</span> parameters adjust <span class="math inline">\(\mu\)</span> so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> to different values. It is Time Reversible because we don’t have different rate parameters for every single off-diagonal element, but instead mirror them. This means that the rate of chnge from A to C and from C to A are both the same, <span class="math inline">\(\mu a\)</span>. There are a few motivations for this. It keeps the total number of parameters down. It reflects what is observed biologically. And it means that we don’t need to know the direction of time along an edge to calculate <span class="math inline">\(\mathbf{P}(t)\)</span>. This last point is very important since we often don’t know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software to be able to reroot phylogenies without changing these probabilities.</p>
+<p>If we let all the parameters in the GTR model (Equation \tag{3.8}) be free, it is quite complex. We would have to estimate them all from data. The alternative is clamp some of them. In fact, be comparison of Equations \tag{3.5} and \tag{3.8}, we can see that JC69 is a clamped version of GTR where <span class="math inline">\(\pi_A=\pi_C=\pi_G=\pi_T=0.25\)</span> and <span class="math inline">\(a=b=c=d=e=f=1\)</span>. Only <span class="math inline">\(\mu\)</span> is left free.</p>
+<p>There are a variety of other commonly used models that clamp these parameters in different ways, some leaving more freedom than others. Some that are widely used and have very specific biological motivation have their own names, like JC69 (the motivation for this model is that it is so simple). Examples include:</p>
+<ul>
+<li><p>HKY85 differs from GTR in setting some rate modifiers equal to each other so that there are two rates, <span class="math inline">\(b=e\)</span> for transitions (A to G, and C to T) and <span class="math inline">\(a=c=d=f\)</span> for transfersions (all other changes). It still lets all the <span class="math inline">\(\pi\)</span> parameters vary independently.</p></li>
+<li><p>F81 differs from HKY85 in that it sets all the rate modifiers to 1, so that <span class="math inline">\(a=b=c=d=e=f=1\)</span>. It is almost as simple as JC69, except that the <span class="math inline">\(\pi\)</span> parameters vary independently.</p></li>
+</ul>
 </div>
 <div id="aditional-resources" class="section level2">
-<h2><span class="header-section-number">3.6</span> Aditional resources</h2>
+<h2><span class="header-section-number">3.5</span> Aditional resources</h2>
 <ul>
 <li><p>My own thinking about this material was heavilly influenced by Paul Lewis’s wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent <a href="https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg">Phylo Seminar</a>, starting with <a href="https://www.youtube.com/watch?v=1r4z0YJq580&amp;t=2111s" class="uri">https://www.youtube.com/watch?v=1r4z0YJq580&amp;t=2111s</a></p></li>
 <li><p>A great introduction to continuous time models by John Huelsenbeck <a href="https://revbayes.github.io/tutorials/dice/" class="uri">https://revbayes.github.io/tutorials/dice/</a></p></li>
