@@ -25,6 +25,7 @@ fig_caption: yes
 	library( phytools )
 	library( stringr )
 	library( tidyverse )
+  library(Matrix)
 	source( "functions.R" )
 	set.seed( 23456 )
 ```

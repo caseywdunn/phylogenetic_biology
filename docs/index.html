@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-09-04" />
+<meta name="date" content="2020-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -168,8 +168,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.3" data-path="simulation.html"><a href="simulation.html#analytical-approach"><i class="fa fa-check"></i><b>3.2.3</b> Analytical approach</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="simulation.html"><a href="simulation.html#generalizing-the-simple-model"><i class="fa fa-check"></i><b>3.3</b> Generalizing the simple model</a></li>
-<li class="chapter" data-level="3.4" data-path="simulation.html"><a href="simulation.html#more-complex-models"><i class="fa fa-check"></i><b>3.4</b> More complex models</a></li>
-<li class="chapter" data-level="3.5" data-path="simulation.html"><a href="simulation.html#aditional-resources"><i class="fa fa-check"></i><b>3.5</b> Aditional resources</a></li>
+<li class="chapter" data-level="3.4" data-path="simulation.html"><a href="simulation.html#expanding-the-models"><i class="fa fa-check"></i><b>3.4</b> Expanding the models</a></li>
+<li class="chapter" data-level="3.5" data-path="simulation.html"><a href="simulation.html#plugging-some-numbers-into-the-expanded-model"><i class="fa fa-check"></i><b>3.5</b> Plugging some numbers into the expanded model</a></li>
+<li class="chapter" data-level="3.6" data-path="simulation.html"><a href="simulation.html#scaling-from-a-single-edge-to-a-whole-tree"><i class="fa fa-check"></i><b>3.6</b> Scaling from a single edge to a whole tree</a></li>
+<li class="chapter" data-level="3.7" data-path="simulation.html"><a href="simulation.html#aditional-resources"><i class="fa fa-check"></i><b>3.7</b> Aditional resources</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="inference.html"><a href="inference.html"><i class="fa fa-check"></i><b>4</b> Inference</a></li>
 <li class="chapter" data-level="5" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>5</b> Evaluation</a><ul>
@@ -210,7 +212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Phylogenetic Biology</h1>
 <p class="author"><em>Casey W. Dunn</em></p>
-<p class="date"><em>2020-09-04</em></p>
+<p class="date"><em>2020-09-05</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
@@ -257,7 +259,7 @@ Hillis, C Moritz, &amp; B. K. Mable. <a href="http://www.sinauer.com/detail.php?
 </div>
 <div id="software-versions" class="section level2">
 <h2><span class="header-section-number">0.3</span> Software versions</h2>
-<p>This book was rendered from the source code on Fri Sep 04 18:31:25 2020 with the following R package versions.</p>
+<p>This book was rendered from the source code on Sat Sep 05 19:25:47 2020 with the following R package versions.</p>
 <pre><code>R version 4.0.2 (2020-06-22)
 Platform: x86_64-apple-darwin17.0 (64-bit)
 Running under: macOS Catalina 10.15.6
@@ -273,11 +275,11 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] forcats_0.5.0   dplyr_1.0.0     purrr_0.3.4     readr_1.3.1    
- [5] tidyr_1.1.0     tibble_3.0.3    ggplot2_3.3.2   tidyverse_1.3.0
- [9] stringr_1.4.0   phytools_0.7-47 maps_3.3.0      magrittr_1.5   
-[13] gridExtra_2.3   geiger_2.0.7    ape_5.4         ggtree_2.2.3   
-[17] treeio_1.12.0  
+ [1] Matrix_1.2-18   forcats_0.5.0   dplyr_1.0.0     purrr_0.3.4    
+ [5] readr_1.3.1     tidyr_1.1.0     tibble_3.0.3    ggplot2_3.3.2  
+ [9] tidyverse_1.3.0 stringr_1.4.0   phytools_0.7-47 maps_3.3.0     
+[13] magrittr_1.5    gridExtra_2.3   geiger_2.0.7    ape_5.4        
+[17] ggtree_2.2.3    treeio_1.12.0  
 
 loaded via a namespace (and not attached):
  [1] subplex_1.6             nlme_3.1-148            fs_1.4.2               
@@ -293,20 +295,19 @@ loaded via a namespace (and not attached):
 [31] plotrix_3.7-8           dbplyr_1.4.4            rlang_0.4.7            
 [34] readxl_1.3.1            rstudioapi_0.11         generics_0.0.2         
 [37] combinat_0.0-8          jsonlite_1.7.0          gtools_3.8.2           
-[40] patchwork_1.0.1         Matrix_1.2-18           fansi_0.4.1            
-[43] Rcpp_1.0.5              munsell_0.5.0           lifecycle_0.2.0        
-[46] scatterplot3d_0.3-41    stringi_1.4.6           yaml_2.2.1             
-[49] clusterGeneration_1.3.4 MASS_7.3-51.6           grid_4.0.2             
-[52] blob_1.2.1              parallel_4.0.2          crayon_1.3.4           
-[55] lattice_0.20-41         haven_2.3.1             hms_0.5.3              
-[58] tmvnsim_1.0-2           knitr_1.29              pillar_1.4.6           
-[61] igraph_1.2.5            fastmatch_1.1-0         reprex_0.3.0           
-[64] glue_1.4.1              evaluate_0.14           BiocManager_1.30.10    
-[67] modelr_0.1.8            deSolve_1.28            vctrs_0.3.2            
-[70] cellranger_1.1.0        gtable_0.3.0            assertthat_0.2.1       
-[73] xfun_0.16               broom_0.7.0             tidytree_0.3.3         
-[76] coda_0.19-3             aplot_0.0.5             rvcheck_0.1.8          
-[79] ellipsis_0.3.1         </code></pre>
+[40] patchwork_1.0.1         fansi_0.4.1             Rcpp_1.0.5             
+[43] munsell_0.5.0           lifecycle_0.2.0         scatterplot3d_0.3-41   
+[46] stringi_1.4.6           yaml_2.2.1              clusterGeneration_1.3.4
+[49] MASS_7.3-51.6           grid_4.0.2              blob_1.2.1             
+[52] parallel_4.0.2          crayon_1.3.4            lattice_0.20-41        
+[55] haven_2.3.1             hms_0.5.3               tmvnsim_1.0-2          
+[58] knitr_1.29              pillar_1.4.6            igraph_1.2.5           
+[61] fastmatch_1.1-0         reprex_0.3.0            glue_1.4.1             
+[64] evaluate_0.14           BiocManager_1.30.10     modelr_0.1.8           
+[67] deSolve_1.28            vctrs_0.3.2             cellranger_1.1.0       
+[70] gtable_0.3.0            assertthat_0.2.1        xfun_0.16              
+[73] broom_0.7.0             tidytree_0.3.3          coda_0.19-3            
+[76] aplot_0.0.5             rvcheck_0.1.8           ellipsis_0.3.1         </code></pre>
 </div>
 <div id="license" class="section level2">
 <h2><span class="header-section-number">0.4</span> License</h2>

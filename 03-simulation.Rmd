@@ -85,7 +85,7 @@ The models that we will use in phylogenetic biology tend to be more complex than
 
 ## A simple model of evolution
 
-Let's start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single edge in a phylogeny. The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:
+Let's start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single edge in a phylogeny (Figure \@ref(fig:sim-application)). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:
 
 - Model structure
 - Model parameters
@@ -307,7 +307,7 @@ Recall that $\mu$ is the rate of *any* replacement event happening. That replace
 
 The off-diagonal elements of $\mathbf{Q}$ give the rates of substitutions, and are all $\mu \pi$ as explained by the reasoning above. But what's up with the diagonal elements? Those correspond to replacements that do not lead to a substitution, for example an A being replaced be an A. We pick these diagonal elements to be whatever value leads the rows to sum to 0. Since there are three substitutions in each row, and each substitution has rate $\mu \pi$, these diagonal elements are set to $-3 \mu \pi$. The basic intuition of this is that we aren't creating or destroying nucleotides, just replacing them. So the net change needs to be 0.
 
-There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to factor it out into two parts. The first is a $4\times4$ matrix $\mathbf{R}$, which has all the rates, and the second is a vector $\Pi$ that has the equilibrium frequencies (Equation \@ref(eq:jc69-expanded)).
+There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to factor it out into two parts [@swofford1996molecular]. The first is a $4\times4$ matrix $\mathbf{R}$, which has all the rates, and the second is a $4\times4$ matrix $\Pi$ that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation \@ref(eq:jc69-expanded)).
 
 \begin{equation} 
 
@@ -319,14 +319,16 @@ There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to fa
 \mu & \mu & \mu & -3\mu\\
 \end{array}\right)
 \left(\begin{array}{cc} 
-\pi\\ 
-\pi\\
-\pi\\
-\pi\\
+\pi & 0 & 0 & 0\\ 
+0 & \pi & 0 & 0\\
+0 & 0 &\pi & 0 \\
+0 & 0 & 0 &\pi\\
 \end{array}\right)
 
 (\#eq:jc69-expanded)
 \end{equation}
+
+(This factoring is possible because of the way matrix multiplication works. For a refresher on matrix multiplication, [this video](https://www.youtube.com/watch?v=OMA2Mwo0aZg) explains how to do it operationally, and [this series of videos](https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) explains what it is actually doing.)
 
 $\mathbf{Q}$ is the instantaneous rate matrix -- specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along an edge of a given length. Before, when we were keeping things as simple as possible, we used the exponential Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the edge $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Well, again we can just use an exponential function, and it actually has a much simpler form.
 
@@ -339,9 +341,9 @@ Raising $e$ to the power of a matrix this is an example of matrix exponentiation
 
 Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of expanding the model into this more complex form.
 
-## More complex models
+## Expanding the models
 
-The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 [@jc1969]. It is only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that it deliberately omits. 
+The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 [@jc1969]. It is only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that it deliberately omits. 
 
 The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, but the most critical at this point are:
 
@@ -358,13 +360,13 @@ To accommodate each of these deviations from JC69, we need to add parameters to 
 - & \mu a & \mu b & \mu c\\
 \mu a & - & \mu d & \mu e \\
 \mu b & \mu d & - & \mu f \\
-\mu d & \mu e & \mu f & -\\
+\mu c & \mu e & \mu f & -\\
 \end{array}\right)
 \left(\begin{array}{cc} 
-\pi_A\\ 
-\pi_C\\
-\pi_G\\
-\pi_T\\
+\pi_A & 0 & 0 & 0 \\ 
+0 & \pi_C & 0 & 0 \\
+0 & 0 &\pi_G & 0 \\
+0 & 0 & 0 & \pi_T \\
 \end{array}\right)
 
 (\#eq:gtr)
@@ -382,8 +384,131 @@ There are a variety of other commonly used models that clamp these parameters in
 
 - F81 differs from HKY85 in that it sets all the rate modifiers to 1, so that $a=b=c=d=e=f=1$. It is almost as simple as JC69, except that the $\pi$ parameters vary independently.
 
+We now have a more complex model of DNA evolution that we can simplify by setting the parameters to equal each other and/or clamping them to specific values. It can accommodate much of variation observed in actual DNA sequence data. We could use it to simulate data just as we did in Figure \@ref(fig:sim-saturation), but taking into consideration things like unequal nucleotide frequencies and differences in rates of change between nucleotides. This is getting us much closer to something that provides real biological insight in phylogenetic biology.
+
+## Plugging some numbers into the expanded model
+
+Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\mathbf{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along an edge. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)C.
+
+We are using a mammal tree, so let's pick some parameter values that roughly approximate what we might see in mammals. First, we can clamp $\mu=1$. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters $b$ and $e$) are on the order of 4 times more frequent than transversions (captured by parameters $a$, $c$, $d$, and $f$) in mammals [@rosenberg2003]. So we will clamp $b=e=2$ and $a=c=d=f=0.5$. I picked these particular values because the keep the average off-diagonal entries in $\mathbf{R}$ to 1. This gives us the following values for $\mathbf{R}$:
+
+$$
+\mathbf{R} =
+\left(\begin{array}{cc} 
+- & 0.5 & 2 & 0.5 \\
+0.5 & - & 0.5 & 2 \\
+2 & 0.5 & - & 0.5 \\
+0.5 & 2 & 0.5 & - \\
+\end{array}\right)
+$$
+We won't specify the diagonal elements of $\mathbf{R}$ quite yet.
+
+Now we need $\mathbf{\Pi}$. We noted earlier that humans have a GC content of 41%, so we'll use that. This gave the following entries for $\mathbf{\Pi}$:
+
+$$
+\mathbf{\Pi} =
+\left(\begin{array}{cc} 
+0.295 & 0 & 0 & 0 \\ 
+0 & 0.205 & 0 & 0 \\
+0 & 0 & 0.205 & 0 \\
+0 & 0 & 0 & 0.295 \\
+\end{array}\right)
+$$
+
+```{r}
+
+R = rbind(
+ c(0, 0.5 , 2 , 0.5),
+ c(0.5 , 0, 0.5 , 2 ),
+ c(2 , 0.5 , 0, 0.5 ),
+ c(0.5 , 2 , 0.5 , 0 ))
+
+rownames(R) = c("A", "C", "G", "T")
+colnames(R) = c("A", "C", "G", "T")
+
+Pi = c(0.295, 0.205, 0.205, 0.295)
+names(Pi) = c("A", "C", "G", "T")
+
+Q = R %*% diag(Pi)
+colnames(Q) = c("A", "C", "G", "T")
+
+diag(Q) = - rowSums(Q)
+
+```
+
+Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\mathbf{\Pi}$ and adjusting the diagonal so that the rows each sum to 0:
 
 
+$$
+\mathbf{Q} = \mathbf{R\Pi} =
+\left(\begin{array}{cc} 
+-0.6600 & 0.1025 & 0.4100 & 0.1475 \\
+0.1475 & -0.8400 & 0.1025 & 0.5900 \\
+0.5900 & 0.1025 & -0.8400 & 0.1475 \\
+0.1475 & 0.4100 & 0.1025 & -0.6600 \\
+\end{array}\right)
+$$
+
+This is our instantaneous rate matrix. From here on out a I am going to switch from mathematical 
+notation to computational representations, since we are doing more calculations. Here is what the contents of $\mathbf{Q}$ look like when outputted from R:
+
+```{r}
+Q
+```
+
+
+
+Now we need to exponentiate $\mathbf{Q}$ it to get $\mathbf{P}(t)$, according to Equation \@ref(eq:jc69-prob). If we do that numerically, we need to specify $t$ before we do the exponentiation. So, for example, $\mathbf{P}(1)$:
+
+```{r echo=FALSE}
+
+exponentiate_matrix = function(X){
+  Y = expm(X) %>% as.matrix()
+  rownames(Y) = rownames(X)
+  colnames(Y) = colnames(X)
+  Y
+  
+}
+
+```
+
+
+
+```{r}
+t = 1
+P = exponentiate_matrix(Q*t)
+print(P)
+```
+
+Note that the sum of each row of $\mathbf{P}$ is 1. If you start with any one of the four nucleotides, you have to end with one of the four nucleotides. So the sum of the probability of each potential nucleotide has to be 1. This works out becuase of the way we selected the diagonal values of $\mathbf{Q}$ so that each row of the *rate* matrix is 0. The sum of each row of $\mathbf{P}(t)$ is 1 for any value of $t$, since our model doesn't create or destroy nucleotides no matter how long the edge.
+
+Let's think about what happens when $t=0$. In this case, there is no time for evolution to occur and the resulting nucleotide should be the same as the starting nucleotide. Indeed, we see this is the case:
+
+```{r}
+t = 0
+P = exponentiate_matrix(Q*t)
+print(P)
+```
+
+The probability of goint from A to A is 1 while the probability of going from any other nucleotide is 0. The same goes for all of the other nucleotides, giving ones on the diagonal and zeros everywhere else.
+
+What if the edge is very long?
+
+```{r}
+t = 100
+P = exponentiate_matrix(Q*t)
+print(P)
+```
+
+We can see now that each row has the exact same values. If you look closely, they should be familiar -- they are the equilibrium frequencies from $\mathbf{Pi}$. 
+
+
+
+## Scaling from a single edge to a whole tree
+
+So far we have considered the evolution of one DNA site along one edge in a phylogeny (Figure \@ref(fig:sim-application)) according to a variety of models. We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of the single site along all edges, generating a specific nucleotide state at each node. We will pick some specific model parameters, let's say XXX. 
+
+Let's start with the root of the tree. How do we decide on the state at the root? We could clamp it to a specific initial state, just as we did when looking at a single edge (Figure \@ref(fig:sim-jc-mu-sweep)). But let's pick it at random. We could pick the starting state from that bag with equal nucleotide frequencies, but some models don't have equal nucleotide frequencies. So let's pick the starting nucleotide from a bag with the frequencies in the $\Pi$ vector. 
 
 
 

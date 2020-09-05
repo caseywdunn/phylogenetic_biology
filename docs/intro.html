@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-09-04" />
+<meta name="date" content="2020-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -168,8 +168,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.3" data-path="simulation.html"><a href="simulation.html#analytical-approach"><i class="fa fa-check"></i><b>3.2.3</b> Analytical approach</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="simulation.html"><a href="simulation.html#generalizing-the-simple-model"><i class="fa fa-check"></i><b>3.3</b> Generalizing the simple model</a></li>
-<li class="chapter" data-level="3.4" data-path="simulation.html"><a href="simulation.html#more-complex-models"><i class="fa fa-check"></i><b>3.4</b> More complex models</a></li>
-<li class="chapter" data-level="3.5" data-path="simulation.html"><a href="simulation.html#aditional-resources"><i class="fa fa-check"></i><b>3.5</b> Aditional resources</a></li>
+<li class="chapter" data-level="3.4" data-path="simulation.html"><a href="simulation.html#expanding-the-models"><i class="fa fa-check"></i><b>3.4</b> Expanding the models</a></li>
+<li class="chapter" data-level="3.5" data-path="simulation.html"><a href="simulation.html#plugging-some-numbers-into-the-expanded-model"><i class="fa fa-check"></i><b>3.5</b> Plugging some numbers into the expanded model</a></li>
+<li class="chapter" data-level="3.6" data-path="simulation.html"><a href="simulation.html#scaling-from-a-single-edge-to-a-whole-tree"><i class="fa fa-check"></i><b>3.6</b> Scaling from a single edge to a whole tree</a></li>
+<li class="chapter" data-level="3.7" data-path="simulation.html"><a href="simulation.html#aditional-resources"><i class="fa fa-check"></i><b>3.7</b> Aditional resources</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="inference.html"><a href="inference.html"><i class="fa fa-check"></i><b>4</b> Inference</a></li>
 <li class="chapter" data-level="5" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>5</b> Evaluation</a><ul>
@@ -260,7 +262,7 @@ Figure 1.1: (A) The primary components of a phylogenetic analysis. This mammal p
 </ul>
 <p>Many phylogenetic inference studies use expert knowledge to define and clamp the characters, run some preliminary analyses to evaluate and then clamp the model, and clamp the character states at the tips according to the observed data such as gene sequences. They then estimate the topology, edge lengths, character states of ancestors, and model parameters. They then throw away the estimates of ancestral character states and model parameters, and present the topology and edge lengths as the result. The end result is that you get a tree of the inferred evolutionary relationships between your organisms of interest.</p>
 <p>Many phylogenetic comparative analyses take the same approach to characters and observed character states at the tip (both clamped), and ancestral character states (estimated, but discarded). They then take a different approach to the remaining items. They clamp the tree and edge lengths according to the results of an earlier phylogenetic inference, evaluate different models, and estimate model parameters. The models and model parameters are then the presented results. They would report, for example, that a model that allows for shifts in rates of evolution along different edges is a better fit than a model that doesn’t, or provide estimates of the evolutionary covariance between traits.</p>
-<p>Other studies apply the three approaches (clamp, estimate, don’t care) in different ways across the phylogenetic study. Some combinations are very common, others very rare. Some have yet to be explored at all.</p>
+<p>Other studies apply the three approaches (clamp, estimate, don’t care) in different ways across the phylogenetic study. Some combinations are very common, others very rare. Some have yet to be explored at all. There are a few reasons for this variation. One is historical. Some combinations became widespread early on and stayed that way as later studies were created in the image of earlier studies. Another reason is methodological. Some combinations are rare or nonexistent in practice because they require methods development that hasn’t been done yet. Data limitations are another big issue. It takes more data to estimate more things. As you get more data, you can unclamp more things. And the biggest limitation is often computational. Phylogenetic analyses are often computationally expensive, and this can quickly become limiting. This is often the ceiling in practice, but more efficient software tools, improved methods, and new data are all helping to make analyses more tractable at the same time that more computer power is becoming available to more investigators.</p>
 <p>Once you dig in, the “don’t care” case is surprisingly interesting. Sometimes if you don’t care about something, you don’t need to estimate it. But usually you do need to estimate it to get what you do care about, and then you just throw away the result. Things that you aren’t specifically interested in but that you need to estimate to figure out what you do want to learn are referred to as nuisance parameters. Some nuisance parameters aren’t even retained by software, but others are. I I mean “don’t care” in the specific sense that these entities aren’t part of your primary question. You should very much care whether your nuisance parameter estimates are sensible since other results depend on them, and you should examine them whenever you can.</p>
 <p>Some studies differ only in which estimates are kept and which are thrown away. One person’s nuisance is another’s bread and butter. One study may keep ancestral character states and discard model parameters, and another study may run essentially the same analysis but discard ancestral character states and keep model parameters.</p>
 </div>

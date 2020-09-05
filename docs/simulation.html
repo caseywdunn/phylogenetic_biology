@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-09-04" />
+<meta name="date" content="2020-09-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -168,8 +168,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.3" data-path="simulation.html"><a href="simulation.html#analytical-approach"><i class="fa fa-check"></i><b>3.2.3</b> Analytical approach</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="simulation.html"><a href="simulation.html#generalizing-the-simple-model"><i class="fa fa-check"></i><b>3.3</b> Generalizing the simple model</a></li>
-<li class="chapter" data-level="3.4" data-path="simulation.html"><a href="simulation.html#more-complex-models"><i class="fa fa-check"></i><b>3.4</b> More complex models</a></li>
-<li class="chapter" data-level="3.5" data-path="simulation.html"><a href="simulation.html#aditional-resources"><i class="fa fa-check"></i><b>3.5</b> Aditional resources</a></li>
+<li class="chapter" data-level="3.4" data-path="simulation.html"><a href="simulation.html#expanding-the-models"><i class="fa fa-check"></i><b>3.4</b> Expanding the models</a></li>
+<li class="chapter" data-level="3.5" data-path="simulation.html"><a href="simulation.html#plugging-some-numbers-into-the-expanded-model"><i class="fa fa-check"></i><b>3.5</b> Plugging some numbers into the expanded model</a></li>
+<li class="chapter" data-level="3.6" data-path="simulation.html"><a href="simulation.html#scaling-from-a-single-edge-to-a-whole-tree"><i class="fa fa-check"></i><b>3.6</b> Scaling from a single edge to a whole tree</a></li>
+<li class="chapter" data-level="3.7" data-path="simulation.html"><a href="simulation.html#aditional-resources"><i class="fa fa-check"></i><b>3.7</b> Aditional resources</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="inference.html"><a href="inference.html"><i class="fa fa-check"></i><b>4</b> Inference</a></li>
 <li class="chapter" data-level="5" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>5</b> Evaluation</a><ul>
@@ -273,7 +275,7 @@ Figure 3.2: A linear model with <span class="math inline">\(m\)</span>=0.5 and <
 </div>
 <div id="a-simple-model-of-evolution" class="section level2">
 <h2><span class="header-section-number">3.2</span> A simple model of evolution</h2>
-<p>Let’s start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single edge in a phylogeny. The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:</p>
+<p>Let’s start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single edge in a phylogeny (Figure <a href="simulation.html#fig:sim-application">3.3</a>). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:</p>
 <ul>
 <li>Model structure</li>
 <li>Model parameters</li>
@@ -394,7 +396,7 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 \end{equation}\]</span></p>
 <p>Recall that <span class="math inline">\(\mu\)</span> is the rate of <em>any</em> replacement event happening. That replacement event could be an A, C, G, or T. Only three of these replacements lead to a substitution, since replacing with the original nucleotides does not lead to a change. To find the rate of <em>specific</em> replacements happening, as we need to do for the elements of this matrix, we essentially need to apportion the total replacement rate <span class="math inline">\(\mu\)</span> to specific nucleotides. We can do that with a new term <span class="math inline">\(\pi\)</span>, which is the name we will give to the equilibrium frequency of each state. This corresponds to the frequency of each nucleotide in the bag we randomly sampled from. In our simple model, <span class="math inline">\(\pi=0.25\)</span> for all nucleotides. Because <span class="math inline">\(\pi\)</span> was clamped and wasn’t free to vary, it was essentially invisible in the way we previously parameterized the model.</p>
 <p>The off-diagonal elements of <span class="math inline">\(\mathbf{Q}\)</span> give the rates of substitutions, and are all <span class="math inline">\(\mu \pi\)</span> as explained by the reasoning above. But what’s up with the diagonal elements? Those correspond to replacements that do not lead to a substitution, for example an A being replaced be an A. We pick these diagonal elements to be whatever value leads the rows to sum to 0. Since there are three substitutions in each row, and each substitution has rate <span class="math inline">\(\mu \pi\)</span>, these diagonal elements are set to <span class="math inline">\(-3 \mu \pi\)</span>. The basic intuition of this is that we aren’t creating or destroying nucleotides, just replacing them. So the net change needs to be 0.</p>
-<p>There is a lot going in in <span class="math inline">\(\mathbf{Q}\)</span>. To make sense of it all, it helps to factor it out into two parts. The first is a <span class="math inline">\(4\times4\)</span> matrix <span class="math inline">\(\mathbf{R}\)</span>, which has all the rates, and the second is a vector <span class="math inline">\(\Pi\)</span> that has the equilibrium frequencies (Equation <a href="simulation.html#eq:jc69-expanded">(3.5)</a>).</p>
+<p>There is a lot going in in <span class="math inline">\(\mathbf{Q}\)</span>. To make sense of it all, it helps to factor it out into two parts <span class="citation">(Swofford et al. <a href="#ref-swofford1996molecular" role="doc-biblioref">1996</a>)</span>. The first is a <span class="math inline">\(4\times4\)</span> matrix <span class="math inline">\(\mathbf{R}\)</span>, which has all the rates, and the second is a <span class="math inline">\(4\times4\)</span> matrix <span class="math inline">\(\Pi\)</span> that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation <a href="simulation.html#eq:jc69-expanded">(3.5)</a>).</p>
 <p><span class="math display" id="eq:jc69-expanded">\[\begin{equation} 
 
 \mathbf{Q} = \mathbf{R}\mathbf{\Pi} =
@@ -405,14 +407,15 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 \mu &amp; \mu &amp; \mu &amp; -3\mu\\
 \end{array}\right)
 \left(\begin{array}{cc} 
-\pi\\ 
-\pi\\
-\pi\\
-\pi\\
+\pi &amp; 0 &amp; 0 &amp; 0\\ 
+0 &amp; \pi &amp; 0 &amp; 0\\
+0 &amp; 0 &amp;\pi &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp;\pi\\
 \end{array}\right)
 
 \tag{3.5}
 \end{equation}\]</span></p>
+<p>(This factoring is possible because of the way matrix multiplication works. For a refresher on matrix multiplication, <a href="https://www.youtube.com/watch?v=OMA2Mwo0aZg">this video</a> explains how to do it operationally, and <a href="https://www.youtube.com/watch?v=fNk_zzaMoSs&amp;list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">this series of videos</a> explains what it is actually doing.)</p>
 <p><span class="math inline">\(\mathbf{Q}\)</span> is the instantaneous rate matrix – specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along an edge of a given length. Before, when we were keeping things as simple as possible, we used the exponential Equations <a href="simulation.html#eq:sim-stay">(3.2)</a> and <a href="simulation.html#eq:sim-change">(3.3)</a> for this. They took as input the overall replacement rate <span class="math inline">\(\mu\)</span> and the length of the edge <span class="math inline">\(t\)</span>. Now we want a similar equation, but we want to provide the rate matrix <span class="math inline">\(Q\)</span> rather than the single parameter <span class="math inline">\(\mu\)</span>. Well, again we can just use an exponential function, and it actually has a much simpler form.</p>
 <p><span class="math display" id="eq:sim-stay" id="eq:jc69-prob">\[\begin{equation} 
   \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
@@ -421,9 +424,9 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 <p>Raising <span class="math inline">\(e\)</span> to the power of a matrix this is an example of matrix exponentiation, and it returns a matrix with the same dimensions as the one in the exponent. This new matrix <span class="math inline">\(\mathbf{P}\)</span> is also a <span class="math inline">\(4\times4\)</span> matrix. Each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an edge of length <span class="math inline">\(t\)</span>. The diagonal elements are each Equation \tag{3.2}, and the off diagonal elements are each Equation \tag{3.3}.</p>
 <p>Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of expanding the model into this more complex form.</p>
 </div>
-<div id="more-complex-models" class="section level2">
-<h2><span class="header-section-number">3.4</span> More complex models</h2>
-<p>The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 <span class="citation">(Jukes and Cantor <a href="#ref-jc1969" role="doc-biblioref">1969</a>)</span>. It is only one free parameter – the rate of evolution <span class="math inline">\(\mu\)</span>. It is highly idealized – there are many important facts about DNA and DNA evolution that it deliberately omits.</p>
+<div id="expanding-the-models" class="section level2">
+<h2><span class="header-section-number">3.4</span> Expanding the models</h2>
+<p>The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny (Figure <a href="simulation.html#fig:sim-application">3.3</a>) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 <span class="citation">(Jukes and Cantor <a href="#ref-jc1969" role="doc-biblioref">1969</a>)</span>. It is only one free parameter – the rate of evolution <span class="math inline">\(\mu\)</span>. It is highly idealized – there are many important facts about DNA and DNA evolution that it deliberately omits.</p>
 <p>The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, but the most critical at this point are:</p>
 <ul>
 <li><p>The nucleotides C, G, T, and A are often not found at an equal frequency of 0.25 each. Since the nucleotides form base pairs in organisms with double stranded genomes, C and G are found at the same frequency and T and A at the same frequency. Furthermore, the frequency of the four nucleotides must add to 100%. Therefore, the frequency of all four nucleotides can be summarized with a single number, usually given as the GC content – the percent of sites that are G or C. For examply, the human genome has a GC content of 41%, which indicates frequencies of 0.205 G, 0.205 C, 0.295 T and 0.295 A. This is quite different than the equal frequencies of 0.25 for all nucleotides expected by the JC69 model.</p></li>
@@ -437,13 +440,13 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 - &amp; \mu a &amp; \mu b &amp; \mu c\\
 \mu a &amp; - &amp; \mu d &amp; \mu e \\
 \mu b &amp; \mu d &amp; - &amp; \mu f \\
-\mu d &amp; \mu e &amp; \mu f &amp; -\\
+\mu c &amp; \mu e &amp; \mu f &amp; -\\
 \end{array}\right)
 \left(\begin{array}{cc} 
-\pi_A\\ 
-\pi_C\\
-\pi_G\\
-\pi_T\\
+\pi_A &amp; 0 &amp; 0 &amp; 0 \\ 
+0 &amp; \pi_C &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp;\pi_G &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; \pi_T \\
 \end{array}\right)
 
 \tag{3.7}
@@ -456,9 +459,78 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 <li><p>HKY85 differs from GTR in setting some rate modifiers equal to each other so that there are two rates, <span class="math inline">\(b=e\)</span> for transitions (A to G, and C to T) and <span class="math inline">\(a=c=d=f\)</span> for transfersions (all other changes). It still lets all the <span class="math inline">\(\pi\)</span> parameters vary independently.</p></li>
 <li><p>F81 differs from HKY85 in that it sets all the rate modifiers to 1, so that <span class="math inline">\(a=b=c=d=e=f=1\)</span>. It is almost as simple as JC69, except that the <span class="math inline">\(\pi\)</span> parameters vary independently.</p></li>
 </ul>
+<p>We now have a more complex model of DNA evolution that we can simplify by setting the parameters to equal each other and/or clamping them to specific values. It can accommodate much of variation observed in actual DNA sequence data. We could use it to simulate data just as we did in Figure <a href="simulation.html#fig:sim-saturation">3.7</a>, but taking into consideration things like unequal nucleotide frequencies and differences in rates of change between nucleotides. This is getting us much closer to something that provides real biological insight in phylogenetic biology.</p>
+</div>
+<div id="plugging-some-numbers-into-the-expanded-model" class="section level2">
+<h2><span class="header-section-number">3.5</span> Plugging some numbers into the expanded model</h2>
+<p>Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let’s build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into <span class="math inline">\(\mathbf{R}\)</span> and <span class="math inline">\(\mathbf{\Pi}\)</span> to get <span class="math inline">\(\mathbf{Q}\)</span>, and then exponentiate that to get <span class="math inline">\(\mathbf{P}(t)\)</span>. We can then use that to simulate changes in a single nucleotide along an edge. This will be a mathematically grounded version of the schematic in Figure <a href="simulation.html#fig:sim-application">3.3</a>C.</p>
+<p>We are using a mammal tree, so let’s pick some parameter values that roughly approximate what we might see in mammals. First, we can clamp <span class="math inline">\(\mu=1\)</span>. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters <span class="math inline">\(b\)</span> and <span class="math inline">\(e\)</span>) are on the order of 4 times more frequent than transversions (captured by parameters <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(f\)</span>) in mammals <span class="citation">(Rosenberg, Subramanian, and Kumar <a href="#ref-rosenberg2003" role="doc-biblioref">2003</a>)</span>. So we will clamp <span class="math inline">\(b=e=2\)</span> and <span class="math inline">\(a=c=d=f=0.5\)</span>. I picked these particular values because the keep the average off-diagonal entries in <span class="math inline">\(\mathbf{R}\)</span> to 1. This gives us the following values for <span class="math inline">\(\mathbf{R}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{R} =
+\left(\begin{array}{cc} 
+- &amp; 0.5 &amp; 2 &amp; 0.5 \\
+0.5 &amp; - &amp; 0.5 &amp; 2 \\
+2 &amp; 0.5 &amp; - &amp; 0.5 \\
+0.5 &amp; 2 &amp; 0.5 &amp; - \\
+\end{array}\right)
+\]</span>
+We won’t specify the diagonal elements of <span class="math inline">\(\mathbf{R}\)</span> quite yet.</p>
+<p>Now we need <span class="math inline">\(\mathbf{\Pi}\)</span>. We noted earlier that humans have a GC content of 41%, so we’ll use that. This gave the following entries for <span class="math inline">\(\mathbf{\Pi}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{\Pi} =
+\left(\begin{array}{cc} 
+0.295 &amp; 0 &amp; 0 &amp; 0 \\ 
+0 &amp; 0.205 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp;0.205 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp;0.295 \\
+\end{array}\right)
+\]</span></p>
+<p>Now we can calculate <span class="math inline">\(\mathbf{Q}\)</span> by multiplying <span class="math inline">\(\mathbf{R}\)</span> and <span class="math inline">\(\mathbf{\Pi}\)</span> and adjusting the diagonal so that the rows each sum to 0:</p>
+<p><span class="math display">\[
+\mathbf{Q} = \mathbf{R\Pi} =
+\left(\begin{array}{cc} 
+-0.6600 &amp; 0.1025 &amp; 0.4100 &amp; 0.1475 \\
+0.1475 &amp; -0.8400 &amp; 0.1025 &amp; 0.5900 \\
+0.5900 &amp; 0.1025 &amp; -0.8400 &amp; 0.1475 \\
+0.1475 &amp; 0.4100 &amp; 0.1025 &amp; -0.6600 \\
+\end{array}\right)
+\]</span></p>
+<p>This is our instantaneous rate matrix. From here on out a I am going to switch from mathematical
+notation to computational representations, since we are doing more calculations. Here is what the contents of <span class="math inline">\(\mathbf{Q}\)</span> look like when outputted from R:</p>
+<pre><code>##         A       C       G       T
+## A -0.6600  0.1025  0.4100  0.1475
+## C  0.1475 -0.8400  0.1025  0.5900
+## G  0.5900  0.1025 -0.8400  0.1475
+## T  0.1475  0.4100  0.1025 -0.6600</code></pre>
+<p>Now we need to exponentiate <span class="math inline">\(\mathbf{Q}\)</span> it to get <span class="math inline">\(\mathbf{P}(t)\)</span>, according to Equation <a href="simulation.html#eq:jc69-prob">(3.6)</a>. If we do that numerically, we need to specify <span class="math inline">\(t\)</span> before we do the exponentiation. So, for example, <span class="math inline">\(\mathbf{P}(1)\)</span>:</p>
+<pre><code>##           A          C          G         T
+## A 0.5913935 0.08066121 0.21187182 0.1160735
+## C 0.1160735 0.49837662 0.08066121 0.3048887
+## G 0.3048887 0.08066121 0.49837662 0.1160735
+## T 0.1160735 0.21187182 0.08066121 0.5913935</code></pre>
+<p>Note that the sum of each row of <span class="math inline">\(\mathbf{P}\)</span> is 1. If you start with any one of the four nucleotides, you have to end with one of the four nucleotides. So the sum of the probability of each potential nucleotide has to be 1. This works out becuase of the way we selected the diagonal values of <span class="math inline">\(\mathbf{Q}\)</span> so that each row of the <em>rate</em> matrix is 0. The sum of each row of <span class="math inline">\(\mathbf{P}(t)\)</span> is 1 for any value of <span class="math inline">\(t\)</span>, since our model doesn’t create or destroy nucleotides no matter how long the edge.</p>
+<p>Let’s think about what happens when <span class="math inline">\(t=0\)</span>. In this case, there is no time for evolution to occur and the resulting nucleotide should be the same as the starting nucleotide. Indeed, we see this is the case:</p>
+<pre><code>##   A C G T
+## A 1 0 0 0
+## C 0 1 0 0
+## G 0 0 1 0
+## T 0 0 0 1</code></pre>
+<p>The probability of goint from A to A is 1 while the probability of going from any other nucleotide is 0. The same goes for all of the other nucleotides, giving ones on the diagonal and zeros everywhere else.</p>
+<p>What if the edge is very long?</p>
+<pre><code>##       A     C     G     T
+## A 0.295 0.205 0.205 0.295
+## C 0.295 0.205 0.205 0.295
+## G 0.295 0.205 0.205 0.295
+## T 0.295 0.205 0.205 0.295</code></pre>
+<p>We can see now that each row has the exact same values. If you look closely, they should be familiar – they are the equilibrium frequencies from <span class="math inline">\(\mathbf{Pi}\)</span>.</p>
+</div>
+<div id="scaling-from-a-single-edge-to-a-whole-tree" class="section level2">
+<h2><span class="header-section-number">3.6</span> Scaling from a single edge to a whole tree</h2>
+<p>So far we have considered the evolution of one DNA site along one edge in a phylogeny (Figure <a href="simulation.html#fig:sim-application">3.3</a>) according to a variety of models. We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of the single site along all edges, generating a specific nucleotide state at each node. We will pick some specific model parameters, let’s say XXX.</p>
+<p>Let’s start with the root of the tree. How do we decide on the state at the root? We could clamp it to a specific initial state, just as we did when looking at a single edge (Figure <a href="simulation.html#fig:sim-jc-mu-sweep">3.4</a>). But let’s pick it at random. We could pick the starting state from that bag with equal nucleotide frequencies, but some models don’t have equal nucleotide frequencies. So let’s pick the starting nucleotide from a bag with the frequencies in the <span class="math inline">\(\Pi\)</span> vector.</p>
 </div>
 <div id="aditional-resources" class="section level2">
-<h2><span class="header-section-number">3.5</span> Aditional resources</h2>
+<h2><span class="header-section-number">3.7</span> Aditional resources</h2>
 <ul>
 <li><p>My own thinking about this material was heavilly influenced by Paul Lewis’s wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent <a href="https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg">Phylo Seminar</a>, starting with <a href="https://www.youtube.com/watch?v=1r4z0YJq580&amp;t=2111s" class="uri">https://www.youtube.com/watch?v=1r4z0YJq580&amp;t=2111s</a></p></li>
 <li><p>A great introduction to continuous time models by John Huelsenbeck <a href="https://revbayes.github.io/tutorials/dice/" class="uri">https://revbayes.github.io/tutorials/dice/</a></p></li>
@@ -479,6 +551,9 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 </div>
 <div id="ref-jc1969">
 <p>Jukes, TH, and CR Cantor. 1969. <em>Evolution of Protein Molecules</em>. Academic Press New York, NY. <a href="https://doi.org/10.1016/B978-1-4832-3211-9.50009-7">https://doi.org/10.1016/B978-1-4832-3211-9.50009-7</a>.</p>
+</div>
+<div id="ref-rosenberg2003">
+<p>Rosenberg, Michael S., Sankar Subramanian, and Sudhir Kumar. 2003. “Patterns of Transitional Mutation Biases Within and Among Mammalian Genomes.” <em>Molecular Biology and Evolution</em> 20 (6): 988–93. <a href="https://doi.org/10.1093/molbev/msg113">https://doi.org/10.1093/molbev/msg113</a>.</p>
 </div>
 <div id="ref-swofford1996molecular">
 <p>Swofford, DL, GJ Olsen, Waddell PJ, and DM Hillis. 1996. <em>Phylogenetic Inference</em>. Edited by David M Hillis, Craig Moritz, Barbara K Mable, and Richard G Olmstead. Sinauer Associates Sunderland, MA.</p>
