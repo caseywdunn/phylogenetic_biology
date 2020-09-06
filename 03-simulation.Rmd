@@ -390,7 +390,7 @@ We now have a more complex model of DNA evolution that we can simplify by settin
 
 Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\mathbf{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along an edge. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)C.
 
-We are using a mammal tree, so let's pick some parameter values that roughly approximate what we might see in mammals. First, we can clamp $\mu=1$. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters $b$ and $e$) are on the order of 4 times more frequent than transversions (captured by parameters $a$, $c$, $d$, and $f$) in mammals [@rosenberg2003]. So we will clamp $b=e=2$ and $a=c=d=f=0.5$. I picked these particular values because the keep the average off-diagonal entries in $\mathbf{R}$ to 1. This gives us the following values for $\mathbf{R}$:
+We are using a mammal tree, so let's pick some parameter values that roughly approximate what we might see in mammals. Rather than set all the parameters independently, let's set up an HKY85 model, which accommodates non-uniform base grequences and different transition/ tansversion ratios. First, we can clamp $\mu=1$. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters $b$ and $e$) are on the order of 4 times more frequent than transversions (captured by parameters $a$, $c$, $d$, and $f$) in mammals [@rosenberg2003]. So we will clamp $b=e=2$ and $a=c=d=f=0.5$. I picked these particular values because the keep the average off-diagonal entries in $\mathbf{R}$ to 1. This gives us the following values for $\mathbf{R}$:
 
 $$
 \mathbf{R} =
@@ -500,7 +500,53 @@ P = exponentiate_matrix(Q*t)
 print(P)
 ```
 
-We can see now that each row has the exact same values. If you look closely, they should be familiar -- they are the equilibrium frequencies from $\mathbf{Pi}$. 
+We can see now that each row has the exact same values. If you look closely, they should be familiar -- they are the equilibrium frequencies from $\mathbf{\Pi}$. This matches what happened in Figures \@ref(fig:sim-saturation) and \@ref(fig:sim-analytical). As edge length increases, the expected frequencies of each base pair deviate further and further from the original state and approach the equilibrium frequencies specified by $\mathbf{\Pi}$.
+
+## Simulation along a single edge
+
+We can now calculate the probability of a given end state given a start state. Now what? Let's use these tools to simulate evolution along a single edge at a time as in Figure \@ref(fig:sim-application)B. 
+
+We will first decide how we are going to set the state at the parent node and how long the edge is. There are a couple approaches we could use to set the parent state. We could clamp it to a specific initial state, just as we did in our JC69 simulations when we set the starting state to A (Figure \@ref(fig:sim-jc-mu-sweep)). Alternatively, we could pick the starting state at random. 
+
+How do we select a starting state at random? We could draw the starting state from a big with equal frequencies of each nucleotide, but our model allows us to make a more informed selection than that. We implemented $\mathbf{\Pi}$ because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let's draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this distribution. 
+
+
+```{r sim-single-edges }
+
+sim_site = function( start, t, Q){
+  P = exponentiate_matrix(Q*t)
+  prob = P[rownames(P)==start,]
+  sample(names(prob), size=1, prob=prob, replace = TRUE)
+}
+
+
+n = 10
+Length_max = 2
+Parent = sample(names(Pi), size=n, prob=Pi, replace = TRUE)
+Length = runif( n, min = 0, max = Length_max)
+
+single_edges = data.frame(
+  Parent=Parent,
+  Length=Length
+)
+
+single_edges$Child = 
+map2( 
+  single_edges$Parent, 
+  single_edges$Length, 
+  function(Parent,Length) sim_site(Parent,Length,Q)
+  ) %>% unlist()
+
+knitr::kable( 
+  single_edges, 
+  booktabs = TRUE,
+  caption = 'Each row is simulated evolution along a single edge.' 
+)
+
+```
+
+In Table \@ref(fig:sim-single-edges) I selected the Parent nucleotide by sampling from $\mathbf{\Pi}$ as described above. I then created a random edge length $t$ by sampling from a uniform distribution that ranges from 0 to `r Length_max`, just to get a variety of edge lengths. I then simulated the Child state by samling from $\mathbf{P}(t)$ given $t$ and the Parent state.
+
 
 
 
@@ -508,14 +554,20 @@ We can see now that each row has the exact same values. If you look closely, the
 
 So far we have considered the evolution of one DNA site along one edge in a phylogeny (Figure \@ref(fig:sim-application)) according to a variety of models. We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of the single site along all edges, generating a specific nucleotide state at each node. We will pick some specific model parameters, let's say XXX. 
 
-Let's start with the root of the tree. How do we decide on the state at the root? We could clamp it to a specific initial state, just as we did when looking at a single edge (Figure \@ref(fig:sim-jc-mu-sweep)). But let's pick it at random. We could pick the starting state from that bag with equal nucleotide frequencies, but some models don't have equal nucleotide frequencies. So let's pick the starting nucleotide from a bag with the frequencies in the $\Pi$ vector. 
+Let's start with the root of the tree. How do we decide on the state at the root? 
 
+## Scaling from a single site to multiple sites
 
+So far we have considered the evolution of one DNA site across a whole tree using a flexible model framework. Genomes have from thousands to billions of sites, though. Here we expand our simulations from a single nucleotide at a time to arbitrarily long DNA sequences.
+
+How? With one simplifying assumption, that the evolution of each site is independent of the evolution at other sites, this is trivial. We just simulate one site at a time, and then stick all the results together into a sequence. 
 
 
 ## Aditional resources
 
-- My own thinking about this material was heavilly influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent [Phylo Seminar](https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg), starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s
+- As a grad student, I learned much of what I present here from [swofford1996molecular]. It was while reading this incredibly lucid chapter that molecular evolution on a phylogenetic tree.
+
+- My own thinking about presenting this material was heavilly influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent [Phylo Seminar](https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg), starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s
 
 - A great introduction to continuous time models by John Huelsenbeck https://revbayes.github.io/tutorials/dice/
 

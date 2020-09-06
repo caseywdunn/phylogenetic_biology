@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-09-05" />
+<meta name="date" content="2020-09-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -170,8 +170,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3" data-path="simulation.html"><a href="simulation.html#generalizing-the-simple-model"><i class="fa fa-check"></i><b>3.3</b> Generalizing the simple model</a></li>
 <li class="chapter" data-level="3.4" data-path="simulation.html"><a href="simulation.html#expanding-the-models"><i class="fa fa-check"></i><b>3.4</b> Expanding the models</a></li>
 <li class="chapter" data-level="3.5" data-path="simulation.html"><a href="simulation.html#plugging-some-numbers-into-the-expanded-model"><i class="fa fa-check"></i><b>3.5</b> Plugging some numbers into the expanded model</a></li>
-<li class="chapter" data-level="3.6" data-path="simulation.html"><a href="simulation.html#scaling-from-a-single-edge-to-a-whole-tree"><i class="fa fa-check"></i><b>3.6</b> Scaling from a single edge to a whole tree</a></li>
-<li class="chapter" data-level="3.7" data-path="simulation.html"><a href="simulation.html#aditional-resources"><i class="fa fa-check"></i><b>3.7</b> Aditional resources</a></li>
+<li class="chapter" data-level="3.6" data-path="simulation.html"><a href="simulation.html#simulation-along-a-single-edge"><i class="fa fa-check"></i><b>3.6</b> Simulation along a single edge</a></li>
+<li class="chapter" data-level="3.7" data-path="simulation.html"><a href="simulation.html#scaling-from-a-single-edge-to-a-whole-tree"><i class="fa fa-check"></i><b>3.7</b> Scaling from a single edge to a whole tree</a></li>
+<li class="chapter" data-level="3.8" data-path="simulation.html"><a href="simulation.html#aditional-resources"><i class="fa fa-check"></i><b>3.8</b> Aditional resources</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="inference.html"><a href="inference.html"><i class="fa fa-check"></i><b>4</b> Inference</a></li>
 <li class="chapter" data-level="5" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>5</b> Evaluation</a><ul>
@@ -464,7 +465,7 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 <div id="plugging-some-numbers-into-the-expanded-model" class="section level2">
 <h2><span class="header-section-number">3.5</span> Plugging some numbers into the expanded model</h2>
 <p>Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let’s build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into <span class="math inline">\(\mathbf{R}\)</span> and <span class="math inline">\(\mathbf{\Pi}\)</span> to get <span class="math inline">\(\mathbf{Q}\)</span>, and then exponentiate that to get <span class="math inline">\(\mathbf{P}(t)\)</span>. We can then use that to simulate changes in a single nucleotide along an edge. This will be a mathematically grounded version of the schematic in Figure <a href="simulation.html#fig:sim-application">3.3</a>C.</p>
-<p>We are using a mammal tree, so let’s pick some parameter values that roughly approximate what we might see in mammals. First, we can clamp <span class="math inline">\(\mu=1\)</span>. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters <span class="math inline">\(b\)</span> and <span class="math inline">\(e\)</span>) are on the order of 4 times more frequent than transversions (captured by parameters <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(f\)</span>) in mammals <span class="citation">(Rosenberg, Subramanian, and Kumar <a href="#ref-rosenberg2003" role="doc-biblioref">2003</a>)</span>. So we will clamp <span class="math inline">\(b=e=2\)</span> and <span class="math inline">\(a=c=d=f=0.5\)</span>. I picked these particular values because the keep the average off-diagonal entries in <span class="math inline">\(\mathbf{R}\)</span> to 1. This gives us the following values for <span class="math inline">\(\mathbf{R}\)</span>:</p>
+<p>We are using a mammal tree, so let’s pick some parameter values that roughly approximate what we might see in mammals. Rather than set all the parameters independently, let’s set up an HKY85 model, which accommodates non-uniform base grequences and different transition/ tansversion ratios. First, we can clamp <span class="math inline">\(\mu=1\)</span>. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters <span class="math inline">\(b\)</span> and <span class="math inline">\(e\)</span>) are on the order of 4 times more frequent than transversions (captured by parameters <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(f\)</span>) in mammals <span class="citation">(Rosenberg, Subramanian, and Kumar <a href="#ref-rosenberg2003" role="doc-biblioref">2003</a>)</span>. So we will clamp <span class="math inline">\(b=e=2\)</span> and <span class="math inline">\(a=c=d=f=0.5\)</span>. I picked these particular values because the keep the average off-diagonal entries in <span class="math inline">\(\mathbf{R}\)</span> to 1. This gives us the following values for <span class="math inline">\(\mathbf{R}\)</span>:</p>
 <p><span class="math display">\[
 \mathbf{R} =
 \left(\begin{array}{cc} 
@@ -481,8 +482,8 @@ We won’t specify the diagonal elements of <span class="math inline">\(\mathbf{
 \left(\begin{array}{cc} 
 0.295 &amp; 0 &amp; 0 &amp; 0 \\ 
 0 &amp; 0.205 &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp;0.205 &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp;0.295 \\
+0 &amp; 0 &amp; 0.205 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0.295 \\
 \end{array}\right)
 \]</span></p>
 <p>Now we can calculate <span class="math inline">\(\mathbf{Q}\)</span> by multiplying <span class="math inline">\(\mathbf{R}\)</span> and <span class="math inline">\(\mathbf{\Pi}\)</span> and adjusting the diagonal so that the rows each sum to 0:</p>
@@ -522,15 +523,84 @@ notation to computational representations, since we are doing more calculations.
 ## C 0.295 0.205 0.205 0.295
 ## G 0.295 0.205 0.205 0.295
 ## T 0.295 0.205 0.205 0.295</code></pre>
-<p>We can see now that each row has the exact same values. If you look closely, they should be familiar – they are the equilibrium frequencies from <span class="math inline">\(\mathbf{Pi}\)</span>.</p>
+<p>We can see now that each row has the exact same values. If you look closely, they should be familiar – they are the equilibrium frequencies from <span class="math inline">\(\mathbf{\Pi}\)</span>. This matches what happened in Figures <a href="simulation.html#fig:sim-saturation">3.7</a> and <a href="simulation.html#fig:sim-analytical">3.8</a>. As edge length increases, the expected frequencies of each base pair deviate further and further from the original state and approach the equilibrium frequencies specified by <span class="math inline">\(\mathbf{\Pi}\)</span>.</p>
+</div>
+<div id="simulation-along-a-single-edge" class="section level2">
+<h2><span class="header-section-number">3.6</span> Simulation along a single edge</h2>
+<p>We can now calculate the probability of a given end state given a start state. Now what? Let’s use these tools to simulate evolution along a single edge at a time as in Figure <a href="simulation.html#fig:sim-application">3.3</a>B.</p>
+<p>We will first decide how we are going to set the state at the parent node and how long the edge is. There are a couple approaches we could use to set the parent state. We could clamp it to a specific initial state, just as we did in our JC69 simulations when we set the starting state to A (Figure <a href="simulation.html#fig:sim-jc-mu-sweep">3.4</a>). Alternatively, we could pick the starting state at random.</p>
+<p>How do we select a starting state at random? We could draw the starting state from a big with equal frequencies of each nucleotide, but our model allows us to make a more informed selection than that. We implemented <span class="math inline">\(\mathbf{\Pi}\)</span> because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let’s draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this distribution.</p>
+<table>
+<caption><span id="tab:sim-single-edges">Table 3.1: </span>Each row is simulated evolution along a single edge.</caption>
+<thead>
+<tr class="header">
+<th align="left">Parent</th>
+<th align="right">Length</th>
+<th align="left">Child</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">A</td>
+<td align="right">0.0387691</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td align="left">A</td>
+<td align="right">0.3444866</td>
+<td align="left">A</td>
+</tr>
+<tr class="odd">
+<td align="left">C</td>
+<td align="right">0.6561006</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td align="left">C</td>
+<td align="right">0.6723020</td>
+<td align="left">C</td>
+</tr>
+<tr class="odd">
+<td align="left">A</td>
+<td align="right">0.5311025</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td align="left">A</td>
+<td align="right">0.7477842</td>
+<td align="left">G</td>
+</tr>
+<tr class="odd">
+<td align="left">T</td>
+<td align="right">1.7042348</td>
+<td align="left">T</td>
+</tr>
+<tr class="even">
+<td align="left">A</td>
+<td align="right">0.6896113</td>
+<td align="left">G</td>
+</tr>
+<tr class="odd">
+<td align="left">G</td>
+<td align="right">0.7347406</td>
+<td align="left">G</td>
+</tr>
+<tr class="even">
+<td align="left">G</td>
+<td align="right">1.3263353</td>
+<td align="left">G</td>
+</tr>
+</tbody>
+</table>
+<p>In Table <a href="#fig:sim-single-edges"><strong>??</strong></a> I selected the Parent nucleotide by sampling from <span class="math inline">\(\mathbf{\Pi}\)</span> as described above. I then created a random edge length <span class="math inline">\(t\)</span> by sampling from a uniform distribution that ranges from 0 to 2, just to get a variety of edge lengths. I then simulated the Child state by samling from <span class="math inline">\(\mathbf{P}(t)\)</span> given <span class="math inline">\(t\)</span> and the Parent state.</p>
 </div>
 <div id="scaling-from-a-single-edge-to-a-whole-tree" class="section level2">
-<h2><span class="header-section-number">3.6</span> Scaling from a single edge to a whole tree</h2>
+<h2><span class="header-section-number">3.7</span> Scaling from a single edge to a whole tree</h2>
 <p>So far we have considered the evolution of one DNA site along one edge in a phylogeny (Figure <a href="simulation.html#fig:sim-application">3.3</a>) according to a variety of models. We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of the single site along all edges, generating a specific nucleotide state at each node. We will pick some specific model parameters, let’s say XXX.</p>
-<p>Let’s start with the root of the tree. How do we decide on the state at the root? We could clamp it to a specific initial state, just as we did when looking at a single edge (Figure <a href="simulation.html#fig:sim-jc-mu-sweep">3.4</a>). But let’s pick it at random. We could pick the starting state from that bag with equal nucleotide frequencies, but some models don’t have equal nucleotide frequencies. So let’s pick the starting nucleotide from a bag with the frequencies in the <span class="math inline">\(\Pi\)</span> vector.</p>
+<p>Let’s start with the root of the tree. How do we decide on the state at the root?</p>
 </div>
 <div id="aditional-resources" class="section level2">
-<h2><span class="header-section-number">3.7</span> Aditional resources</h2>
+<h2><span class="header-section-number">3.8</span> Aditional resources</h2>
 <ul>
 <li><p>My own thinking about this material was heavilly influenced by Paul Lewis’s wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent <a href="https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg">Phylo Seminar</a>, starting with <a href="https://www.youtube.com/watch?v=1r4z0YJq580&amp;t=2111s" class="uri">https://www.youtube.com/watch?v=1r4z0YJq580&amp;t=2111s</a></p></li>
 <li><p>A great introduction to continuous time models by John Huelsenbeck <a href="https://revbayes.github.io/tutorials/dice/" class="uri">https://revbayes.github.io/tutorials/dice/</a></p></li>
