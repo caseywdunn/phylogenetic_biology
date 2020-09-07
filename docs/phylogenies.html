@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-09-06" />
+<meta name="date" content="2020-09-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -410,7 +410,7 @@ Figure 2.13: Adding information to a phylogeny makes it more specific.
 <div id="representation" class="section level2">
 <h2><span class="header-section-number">2.10</span> Representation</h2>
 <p>So far we have focused on phylogenies in the abstract sense as mathematical graphs and their associated annotations, and in the concrete sense as tree-like drawings that represent these relationships. To work with trees of any significant size, we need to also represent them computationally. How can you store and manipulate a whole tree and all its associated annotations?</p>
-<p>One way is to store a text representation of the tree. This is conveneint because text files are easy to work with,a nd can be viewed and edited with a variety of existing text editors. Newick, a phylogenetic data format ironed out over dinner at <a href="https://www.yelp.com/biz/newicks-lobster-house-dover">Newick’s Lobster House</a>, does exactly this. The newick format is widely used for storing phylogenies in text files, and is supported as a way to read and write trees by almost every phylogenetic software tool. The basic idea is to designate each clade within a pair of parentheses.</p>
+<p>One way is to store a text representation of the tree. This is conveneint because text files are easy to work with, and can be viewed and edited with a variety of existing text editors. Newick, a phylogenetic data format ironed out over dinner at <a href="https://www.yelp.com/biz/newicks-lobster-house-dover">Newick’s Lobster House</a>, does exactly this. The newick format is widely used for storing phylogenies in text files, and is supported as a way to read and write trees by almost every phylogenetic software tool. The basic idea is to designate each clade within a pair of parentheses.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="phylogenies.html#cb2-1"></a><span class="co"># Define the newick text that includes the tip labels and tree topology</span></span>
 <span id="cb2-2"><a href="phylogenies.html#cb2-2"></a>newick_text =<span class="st"> &quot;(((A,B),(C,D)),E);&quot;</span></span>
 <span id="cb2-3"><a href="phylogenies.html#cb2-3"></a></span>
