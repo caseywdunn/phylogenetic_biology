@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-09-17" />
+<meta name="date" content="2020-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -178,6 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a><ul>
 <li class="chapter" data-level="4.1" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-a-single-history"><i class="fa fa-check"></i><b>4.1</b> Probability of a single history</a></li>
+<li class="chapter" data-level="4.2" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#scrap"><i class="fa fa-check"></i><b>4.2</b> Scrap</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>5</b> Evaluation</a><ul>
 <li class="chapter" data-level="5.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>5.1</b> Model evaluation</a></li>
@@ -536,64 +539,132 @@ notation to computational representations, since we are doing more calculations.
 <p>We first need to set the state at the parent node. There are a couple approaches we could use to set the parent state. We could clamp it to a specific initial state, just as we did in our JC69 simulations when we set the starting state to A (Figure <a href="simulation.html#fig:sim-jc-mu-sweep">3.4</a>). Alternatively, we could pick the starting state at random.</p>
 <p>How do we select a starting state at random? We could draw the starting state from a bag with equal frequencies of each nucleotide (as we did at the beginning of this chapter), but our model allows us to make a more informed selection than that. We implemented <span class="math inline">\(\mathbf{\Pi}\)</span> because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let’s draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this probability distribution.</p>
 <table>
-<caption><span id="tab:sim-single-edges">Table 3.1: </span>Each row is simulated evolution along a single edge.</caption>
+<caption>
+<span id="tab:sim-single-edges">Table 3.1: </span>Each row is simulated evolution along a single edge.
+</caption>
 <thead>
-<tr class="header">
-<th align="left">Parent</th>
-<th align="right">Length</th>
-<th align="left">Child</th>
+<tr>
+<th style="text-align:left;">
+Parent
+</th>
+<th style="text-align:right;">
+Length
+</th>
+<th style="text-align:left;">
+Child
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">A</td>
-<td align="right">0.0387691</td>
-<td align="left">A</td>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0387691
+</td>
+<td style="text-align:left;">
+A
+</td>
 </tr>
-<tr class="even">
-<td align="left">A</td>
-<td align="right">0.3444866</td>
-<td align="left">A</td>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.3444866
+</td>
+<td style="text-align:left;">
+A
+</td>
 </tr>
-<tr class="odd">
-<td align="left">C</td>
-<td align="right">0.6561006</td>
-<td align="left">A</td>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.6561006
+</td>
+<td style="text-align:left;">
+A
+</td>
 </tr>
-<tr class="even">
-<td align="left">C</td>
-<td align="right">0.6723020</td>
-<td align="left">C</td>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.6723020
+</td>
+<td style="text-align:left;">
+C
+</td>
 </tr>
-<tr class="odd">
-<td align="left">A</td>
-<td align="right">0.5311025</td>
-<td align="left">A</td>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.5311025
+</td>
+<td style="text-align:left;">
+A
+</td>
 </tr>
-<tr class="even">
-<td align="left">A</td>
-<td align="right">0.7477842</td>
-<td align="left">G</td>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.7477842
+</td>
+<td style="text-align:left;">
+G
+</td>
 </tr>
-<tr class="odd">
-<td align="left">T</td>
-<td align="right">1.7042348</td>
-<td align="left">T</td>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+1.7042348
+</td>
+<td style="text-align:left;">
+T
+</td>
 </tr>
-<tr class="even">
-<td align="left">A</td>
-<td align="right">0.6896113</td>
-<td align="left">G</td>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.6896113
+</td>
+<td style="text-align:left;">
+G
+</td>
 </tr>
-<tr class="odd">
-<td align="left">G</td>
-<td align="right">0.7347406</td>
-<td align="left">G</td>
+<tr>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.7347406
+</td>
+<td style="text-align:left;">
+G
+</td>
 </tr>
-<tr class="even">
-<td align="left">G</td>
-<td align="right">1.3263353</td>
-<td align="left">G</td>
+<tr>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+1.3263353
+</td>
+<td style="text-align:left;">
+G
+</td>
 </tr>
 </tbody>
 </table>

@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-09-17" />
+<meta name="date" content="2020-09-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -178,6 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a><ul>
 <li class="chapter" data-level="4.1" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-a-single-history"><i class="fa fa-check"></i><b>4.1</b> Probability of a single history</a></li>
+<li class="chapter" data-level="4.2" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#scrap"><i class="fa fa-check"></i><b>4.2</b> Scrap</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>5</b> Evaluation</a><ul>
 <li class="chapter" data-level="5.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>5.1</b> Model evaluation</a></li>
@@ -230,9 +233,9 @@ Figure 4.1: The toy phylogeny we will use to examine inference. Node numbers are
 </div>
 <p>We will start be calculating the probability of a single history of evolution for a single site on a single tree. By history a mean the full set of states at all nodes in a particular phylogeny for a particular nucleotide site. These are added to the toy phylogeny in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-internal-states">4.2</a>. I want to emphasize that this isn’t a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.</p>
 <div class="figure"><span id="fig:inference-internal-states"></span>
-<img src="phylogenetic_biology_files/figure-html/inference-internal-states-1.png" alt="The same toy tree as above, but with internal node states (in boxes)." width="2100" />
+<img src="phylogenetic_biology_files/figure-html/inference-internal-states-1.png" alt="The same toy tree as above, but with arbitrary internal node states (in boxes)." width="2100" />
 <p class="caption">
-Figure 4.2: The same toy tree as above, but with internal node states (in boxes).
+Figure 4.2: The same toy tree as above, but with arbitrary internal node states (in boxes).
 </p>
 </div>
 <p>Our goal now is to calculate the probability of each observed change. Recall that the matrix that contains these probabilities, given a starting state (rows), ending state (columns), and edge length <span class="math inline">\(t\)</span>, is given by:</p>
@@ -258,14 +261,261 @@ Figure 4.2: The same toy tree as above, but with internal node states (in boxes)
 ## C  0.1475 -0.8400  0.1025  0.5900
 ## G  0.5900  0.1025 -0.8400  0.1475
 ## T  0.1475  0.4100  0.1025 -0.6600</code></pre>
-<p>For each in the edge, we can now use <span class="math inline">\(\mathbf{P}(t)\)</span> to calculate the probability of a cahnge from the start state at the parent node to the end state at the child node, given the edge length <span class="math inline">\(t\)</span>. The results are shown in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-history">4.3</a>.</p>
+<p>For each in the edge, we can now use <span class="math inline">\(\mathbf{P}(t)\)</span> to calculate the probability of a change from the start state at the parent node to the end state at the child node, given the edge length <span class="math inline">\(t\)</span>. The results are shown in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-history">4.3</a>.</p>
 <div class="figure"><span id="fig:inference-history"></span>
 <img src="phylogenetic_biology_files/figure-html/inference-history-1.png" alt="The same toy tree as above, but with probabilities of the specific change along each edge (in blue)." width="2100" />
 <p class="caption">
 Figure 4.3: The same toy tree as above, but with probabilities of the specific change along each edge (in blue).
 </p>
 </div>
-<p>Consider the probabilities of simulating a particular dataset, given a set of trees, model and model parameters.</p>
+<p>Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is <span class="math inline">\(1/6\)</span>. The probability of rolling two 4s in a row is <span class="math inline">\(1/6\times1/6=1/36\)</span>. So we can just multiply all the blue probabilities times each other.</p>
+<p>In Figure <a href="inferring-phylogenies-from-data.html#fig:inference-history">4.3</a> we illustrated these probabilities as the probability of changes along each edge, but we can also think of these as the probabilities of the state at each node (including tips and internal nodes).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+node
+</th>
+<th style="text-align:right;">
+probability
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.7442034
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.7442034
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.3048887
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.2260230
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.0195083
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.0652538
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note, though that the probability for node 5 is missing (it has a value of <code>NA</code>, which means it is not available). By reference to Figure <a href="inferring-phylogenies-from-data.html#fig:inference-history">4.3</a> we can see that this is the root node. We calculated probabilities of each node state according to the probability of the state at the child node of each edge, and the root is not the child of any edge. So its probability is missing. We will therefore assess the probability of the root node state according to <span class="math inline">\(\mathbf{\Pi}\)</span>, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+node
+</th>
+<th style="text-align:right;">
+probability
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.7442034
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.7442034
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.3048887
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.2260230
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.2950000
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.0195083
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.0652538
+</td>
+</tr>
+</tbody>
+</table>
+<p>The joint probability of all these events happening (the root state being what it is, and then each of the changes along each of the edges) can now be calculated as their product. This comes out to <span class="math inline">\(1.4332602\times 10^{-5}\)</span>. Three are multiple ways to think about this probability. One is from a frequentest perspective. If we were to simulate character states on this tree, in the way we did in the previous chapter using this same model, we would expect this full set of character states 14.3 times out of a million simulations.</p>
+<p>This is a really small number, and this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The probabilities, in fact, get so small that computers have trouble storing them efficiently. Rather than store and manipulate the probabilities directly, then, most tools take the natural logs of the probabilities, <span class="math inline">\(ln(p)\)</span>. The log probability of this particular history is -11.1529738. This transforms them to a numerical representation that is easier to work with. It also has the added value of making calculations simpler too. Given the relationship between the log of products of variables and the sum of logs of each value:</p>
+<p><span class="math display" id="eq:logs">\[\begin{equation} 
+  ln(a)+ln(b) = ln(ab)
+  \tag{4.2}
+\end{equation}\]</span></p>
+<p>We can take the log of each probability:</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+node
+</th>
+<th style="text-align:right;">
+probability
+</th>
+<th style="text-align:right;">
+ln.p
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.7442034
+</td>
+<td style="text-align:right;">
+-0.2954409
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.7442034
+</td>
+<td style="text-align:right;">
+-0.2954409
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.3048887
+</td>
+<td style="text-align:right;">
+-1.1878084
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.2260230
+</td>
+<td style="text-align:right;">
+-1.4871184
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.2950000
+</td>
+<td style="text-align:right;">
+-1.2207799
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.0195083
+</td>
+<td style="text-align:right;">
+-3.9369138
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.0652538
+</td>
+<td style="text-align:right;">
+-2.7294715
+</td>
+</tr>
+</tbody>
+</table>
+<p>The sum of these log probabilities is -11.1529738, the same is the log of products expected above.</p>
+</div>
+<div id="scrap" class="section level2">
+<h2><span class="header-section-number">4.2</span> Scrap</h2>
 <p>A specific task - given a set of character data corresponding to the tips of a tree, what is the topology of the tree? Model is also estimated, but may or may not be of interest.</p>
 <p>Calculating the likelihood of a tree</p>
 <p>What a likelihood is</p>

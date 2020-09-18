@@ -27,6 +27,8 @@ fig_caption: yes
 	library( tidyverse )
   library( Matrix )
   library( phangorn )
+  library(kableExtra)
+
 	source( "functions.R" )
 	set.seed( 23456 )
 ```
