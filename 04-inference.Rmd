@@ -2,7 +2,7 @@
 
 In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given $\mathbf{Q}$, the starting state, and the edge length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the edges of a tree.
 
-We will now turn to using that exact same statistical framework for what may initially seem to be a very different task -- inferring the topology and and edge lengths of a phylogeny from DNA sequence data. But they are very similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data given the model and model parameters.
+We will now turn to using that exact same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case) at the tip nodes. But these tasks are very similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data given the model and model parameters.
 
 This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis as referred to as Maximum Likelihood (ML).
 
@@ -242,3 +242,16 @@ We can calculate joint log probabilities as sums of log probabilities for each e
 The machinery above allows gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides for a single site. Many investigators now infer phylogenies based on whole genomes, so clearly we need to expand this model from a single site to multiple sites.
 
 This turns out to be quite simple -- we do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site. And, since we are adding negative numbers for log likelihoods, this will result in a very large negative number.
+
+
+## Maximum likelihood
+
+At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, how do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, log likelihood).
+
+The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. Given Equation \@ref(eq:ntrees), there are 15 possible topologies. For each, we would optimize the edge lengths to find the maximum likelihood for the topology. This is an iterative process, where each edge length is progressively optimized. This execellent [interactive visualization](http://phylo.bio.ku.edu/mephytis/brlen-opt.html) allows you to manually optimize edge lengths on a small phylogeny. Then we would pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
+
+Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use hueristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.
+
+This might sound simple, but it isn't. One challenge is that you can get trapped on a local maximum and think it is the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima.
+
+
