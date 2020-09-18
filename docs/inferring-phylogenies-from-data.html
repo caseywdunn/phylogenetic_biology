@@ -180,7 +180,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a><ul>
 <li class="chapter" data-level="4.1" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-a-single-history"><i class="fa fa-check"></i><b>4.1</b> Probability of a single history</a></li>
-<li class="chapter" data-level="4.2" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#scrap"><i class="fa fa-check"></i><b>4.2</b> Scrap</a></li>
+<li class="chapter" data-level="4.2" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-multiple-histories"><i class="fa fa-check"></i><b>4.2</b> Probability of multiple histories</a></li>
+<li class="chapter" data-level="4.3" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#log-likelihood"><i class="fa fa-check"></i><b>4.3</b> Log likelihood</a></li>
+<li class="chapter" data-level="4.4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#likelihood-for-multiple-sites"><i class="fa fa-check"></i><b>4.4</b> Likelihood for multiple sites</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>5</b> Evaluation</a><ul>
 <li class="chapter" data-level="5.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>5.1</b> Model evaluation</a></li>
@@ -412,117 +414,1725 @@ probability
 </tbody>
 </table>
 <p>The joint probability of all these events happening (the root state being what it is, and then each of the changes along each of the edges) can now be calculated as their product. This comes out to <span class="math inline">\(1.4332602\times 10^{-5}\)</span>. Three are multiple ways to think about this probability. One is from a frequentest perspective. If we were to simulate character states on this tree, in the way we did in the previous chapter using this same model, we would expect this full set of character states 14.3 times out of a million simulations.</p>
-<p>This is a really small number, and this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The probabilities, in fact, get so small that computers have trouble storing them efficiently. Rather than store and manipulate the probabilities directly, then, most tools take the natural logs of the probabilities, <span class="math inline">\(ln(p)\)</span>. The log probability of this particular history is -11.1529738. This transforms them to a numerical representation that is easier to work with. It also has the added value of making calculations simpler too. Given the relationship between the log of products of variables and the sum of logs of each value:</p>
-<p><span class="math display" id="eq:logs">\[\begin{equation} 
-  ln(a)+ln(b) = ln(ab)
-  \tag{4.2}
-\end{equation}\]</span></p>
-<p>We can take the log of each probability:</p>
+<p>Here we have used much of the same machinery as we did in the previous chapter, but toward a slightly different end. Rather than use the probability distributions provided by our model to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.</p>
+</div>
+<div id="probability-of-multiple-histories" class="section level2">
+<h2><span class="header-section-number">4.2</span> Probability of multiple histories</h2>
+<p>Above we considered the joint probability of a specific set of node states at all nodes, including both tip nodes and internal nodes. We specified all these node states arbitrarily and calculated the log probability of the entire configuration of states. Usually, though, we don’t know the internal node states. We don’t even know what internal nodes exist, which is why we are trying to infer the phylogeny! Instead we have observed states at the tips that we got by sequencing living organisms. We want to clamp these tip states and assess thei probability on a particular tree (with edge lengths) under the model. This probability is independent of a specific history of node states.</p>
+<p>If we aren’t clamping the internal node states as well, how can we calculate the probability of just the tip node states? The key is to consider all possible internal states in turn. Each configuration of internal node states represents one possible history that gave rise to the observed tip states. We can sum the probabilities of each of these different ways to get the tip states to find the probability of the tip states over all possible histories. We are summing the probabilities because these are mutually exclusive histories that could give rise to the observed data. For example, if we want to find the probability of getting a total of seven when rolling two dice, we need to add up the probability of each way to get seven (1+6 <em>or</em> 2+4 <em>or</em> 3+3 <em>or</em> … 6+1). This is different from when we multiplied probabilities to find the joint probabilities of multiple events occurring together (<em>e.g.</em>, the probability of rolling a 4 <em>and</em> then another 4).</p>
+<p>This is a small tree, with only 3 internal nodes that can each have 4 states. This gives <span class="math inline">\(4^3=64\)</span> possible histories. That is small enough to just list them out. That is what I do below. I also include the probability of each specific history, calculated exactly as I did above (the example above is the history in row 60).</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="text-align:right;">
-node
+<th style="text-align:left;">
+n1
+</th>
+<th style="text-align:left;">
+n2
+</th>
+<th style="text-align:left;">
+n3
+</th>
+<th style="text-align:left;">
+n4
+</th>
+<th style="text-align:left;">
+n5
+</th>
+<th style="text-align:left;">
+n6
+</th>
+<th style="text-align:left;">
+n7
 </th>
 <th style="text-align:right;">
 probability
-</th>
-<th style="text-align:right;">
-ln.p
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:right;">
-1
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
 </td>
 <td style="text-align:right;">
-0.7442034
-</td>
-<td style="text-align:right;">
--0.2954409
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0.7442034
-</td>
-<td style="text-align:right;">
--0.2954409
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0.3048887
-</td>
-<td style="text-align:right;">
--1.1878084
+0.0000451
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-4
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
 </td>
 <td style="text-align:right;">
-0.2260230
-</td>
-<td style="text-align:right;">
--1.4871184
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-0.2950000
-</td>
-<td style="text-align:right;">
--1.2207799
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-0.0195083
-</td>
-<td style="text-align:right;">
--3.9369138
+0.0000048
 </td>
 </tr>
 <tr>
-<td style="text-align:right;">
-7
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
 </td>
 <td style="text-align:right;">
-0.0652538
+0.0000036
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
 </td>
 <td style="text-align:right;">
--2.7294715
+0.0000035
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000025
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000005
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000005
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000044
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000004
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000003
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+0.0000019
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000282
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000030
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000023
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000022
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000018
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0002699
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000013
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000164
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000012
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000011
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000097
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000008
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000006
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000069
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000004
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000432
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000088
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000009
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000007
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000007
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000018
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000017
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000142
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000011
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000002
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:right;">
+0.0000013
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0005139
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000552
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000415
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000400
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000071
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0010512
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000050
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000638
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000214
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000198
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0001776
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000143
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000366
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0004512
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+G
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0000255
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:left;">
+T
+</td>
+<td style="text-align:right;">
+0.0028111
 </td>
 </tr>
 </tbody>
 </table>
-<p>The sum of these log probabilities is -11.1529738, the same is the log of products expected above.</p>
+<p>Note that I listed the states for all the nodes, including nodes 1-4, which are clamped. It is the last three states for the three internal nodes (n5-n7) that are variable. The probabilities for each specific history range quite widely, from <span class="math inline">\(8.2902428\times 10^{-9}\)</span> to <span class="math inline">\(0.0028111\)</span>.</p>
+<p>The sum of the probabilities for each of these different histories for n5-n7 that give rise to the observed clamped states for tip nodes n1-n4 is <span class="math inline">\(0.0058252\)</span>. This probability of the data given a particular hypothesis (the topology, edge lengths, model, and model parameters) is the likelihood.</p>
 </div>
-<div id="scrap" class="section level2">
-<h2><span class="header-section-number">4.2</span> Scrap</h2>
-<p>A specific task - given a set of character data corresponding to the tips of a tree, what is the topology of the tree? Model is also estimated, but may or may not be of interest.</p>
-<p>Calculating the likelihood of a tree</p>
-<p>What a likelihood is</p>
-<p>maximum likelihood</p>
-<p>hueristics</p>
-<p>Bayesian</p>
-<p>“Model free” methods</p>
+<div id="log-likelihood" class="section level2">
+<h2><span class="header-section-number">4.3</span> Log likelihood</h2>
+<p>The likelihood of these data on this phylogeny, <span class="math inline">\(0.0058252\)</span>, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The probabilities, in fact, get so small that computers have trouble storing them efficiently. Rather than store and manipulate the small probabilities, like likelihoods, directly, most tools take the natural logs of the probabilities, <span class="math inline">\(ln(p)\)</span>. The log likelihood for this of this particular history is <span class="math inline">\(-5.1455597\)</span>. This transforms them to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:</p>
+<p><span class="math display" id="eq:logs">\[\begin{equation} 
+  ln(a)+ln(b) = ln(ab)
+  \tag{4.2}
+\end{equation}\]</span></p>
+<p>We can calculate joint log probabilities as sums of log probabilities for each event, rather than as the log of products of the probabilities. Addition is much faster than multiplication for computers (since multiplication is a series of addition operations), so this speeds things up. For these reasons you will almost always see log likelihoods, rather than just likelihoods, published in there literature. Note that becuase likelihoods are probabilities and therefore range from 0–1, the log likelihoods will range from <span class="math inline">\(-\infty\)</span> (for probabilities very close to 0) to <span class="math inline">\(0\)</span> (for probabilities close to 0). Since likelihoods tend to be small, they end up as log likelihoods that are negative number with large absolute values.</p>
+</div>
+<div id="likelihood-for-multiple-sites" class="section level2">
+<h2><span class="header-section-number">4.4</span> Likelihood for multiple sites</h2>
+<p>The machinery above allows gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides for a single site. Many investigators now infer phylogenies based on whole genomes, so clearly we need to expand this model from a single site to multiple sites.</p>
+<p>This turns out to be quite simple – we do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site. And, since we are adding negative numbers for log likelihoods, this will result in a very large negative number.</p>
 
 
 
