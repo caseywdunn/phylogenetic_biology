@@ -26,6 +26,7 @@ fig_caption: yes
 	library( stringr )
 	library( tidyverse )
   library( Matrix )
+  library( phangorn )
 	source( "functions.R" )
 	set.seed( 23456 )
 ```

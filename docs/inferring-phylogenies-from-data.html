@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Future | Phylogenetic Biology</title>
+  <title>Chapter 4 Inferring phylogenies from data | Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 6 Future | Phylogenetic Biology" />
+  <meta property="og:title" content="Chapter 4 Inferring phylogenies from data | Phylogenetic Biology" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="caseywdunn/phylogenetic_biology" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Future | Phylogenetic Biology" />
+  <meta name="twitter:title" content="Chapter 4 Inferring phylogenies from data | Phylogenetic Biology" />
   <meta name="twitter:site" content="@caseywdunn" />
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="evaluation.html"/>
-<link rel="next" href="shape.html"/>
+<link rel="prev" href="simulation.html"/>
+<link rel="next" href="evaluation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -214,19 +214,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="future" class="section level1">
-<h1><span class="header-section-number">Chapter 6</span> Future</h1>
-<p>Integrated models of genome evolution</p>
+<div id="inferring-phylogenies-from-data" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Inferring phylogenies from data</h1>
+<p>In the previous chapter we built modeling machinery that allowed us to specify a rate matrix <span class="math inline">\(\mathbf{Q}\)</span> (Equation <a href="simulation.html#eq:sim-gtr">(3.8)</a>), and from that derive the matrix <span class="math inline">\(\mathbf{P}(t)\)</span> (Equation <a href="simulation.html#eq:jc69-prob">(3.7)</a>) that gives the probability of a particular end state given <span class="math inline">\(\mathbf{Q}\)</span>, the starting state, and the edge length <span class="math inline">\(t\)</span>. We used <span class="math inline">\(\mathbf{P}(t)\)</span> in a generative context, to simulate the evolution of a DNA sequence along the edges of a tree.</p>
+<p>We will now turn to using that exact same statistical framework for what may initially seem to be a very different task – inferring the topology and and edge lengths of a phylogeny from DNA sequence data. But they are very similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data given the model and model parameters.</p>
+<p>This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis as referred to as Maximum Likelihood (ML).</p>
+<div id="probability-of-a-single-history" class="section level2">
+<h2><span class="header-section-number">4.1</span> Probability of a single history</h2>
+<p>We will consider the toy phylogeny, along with its tip states, shown in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-toy">4.1</a>.</p>
+<div class="figure"><span id="fig:inference-toy"></span>
+<img src="phylogenetic_biology_files/figure-html/inference-toy-1.png" alt="The toy phylogeny we will use to examine inference. Node numbers are in red. Edge lengths are in orange. Tip node states are within boxes." width="2100" />
+<p class="caption">
+Figure 4.1: The toy phylogeny we will use to examine inference. Node numbers are in red. Edge lengths are in orange. Tip node states are within boxes.
+</p>
+</div>
+<p>We will start be calculating the probability of a single history of evolution for a single site on a single tree. By history a mean the full set of states at all nodes in a particular phylogeny for a particular nucleotide site. These are added to the toy phylogeny in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-internal-states">4.2</a>. I want to emphasize that this isn’t a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.</p>
+<div class="figure"><span id="fig:inference-internal-states"></span>
+<img src="phylogenetic_biology_files/figure-html/inference-internal-states-1.png" alt="The same toy tree as above, but with internal node states (in boxes)." width="2100" />
+<p class="caption">
+Figure 4.2: The same toy tree as above, but with internal node states (in boxes).
+</p>
+</div>
+<p>Our goal now is to calculate the probability of each observed change. Recall that the matrix that contains these probabilities, given a starting state (rows), ending state (columns), and edge length <span class="math inline">\(t\)</span>, is given by:</p>
+<p><span class="math display" id="eq:prob">\[\begin{equation} 
+  \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
+  \tag{4.1}
+\end{equation}\]</span></p>
+<p>Where <span class="math inline">\(\mathbf{Q}\)</span> is the rate matrix. Let’s plug some numbers in using the model we specified in the previous chapter. We don’t have any specific reason to use this particular model on this tree, we are just sticking with it since we already built it.</p>
+<p>Specifically:</p>
+<pre><code>##     A   C   G   T
+## A 0.0 0.5 2.0 0.5
+## C 0.5 0.0 0.5 2.0
+## G 2.0 0.5 0.0 0.5
+## T 0.5 2.0 0.5 0.0</code></pre>
+<pre><code>##       A     C     G     T
+## A 0.295 0.000 0.000 0.000
+## C 0.000 0.205 0.000 0.000
+## G 0.000 0.000 0.205 0.000
+## T 0.000 0.000 0.000 0.295</code></pre>
+<p>And their product <span class="math inline">\(\mathbf{Q}\)</span>, with the diagonal adjusted so that rows sum to 0:</p>
+<pre><code>##         A       C       G       T
+## A -0.6600  0.1025  0.4100  0.1475
+## C  0.1475 -0.8400  0.1025  0.5900
+## G  0.5900  0.1025 -0.8400  0.1475
+## T  0.1475  0.4100  0.1025 -0.6600</code></pre>
+<p>For each in the edge, we can now use <span class="math inline">\(\mathbf{P}(t)\)</span> to calculate the probability of a cahnge from the start state at the parent node to the end state at the child node, given the edge length <span class="math inline">\(t\)</span>. The results are shown in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-history">4.3</a>.</p>
+<div class="figure"><span id="fig:inference-history"></span>
+<img src="phylogenetic_biology_files/figure-html/inference-history-1.png" alt="The same toy tree as above, but with probabilities of the specific change along each edge (in blue)." width="2100" />
+<p class="caption">
+Figure 4.3: The same toy tree as above, but with probabilities of the specific change along each edge (in blue).
+</p>
+</div>
+<p>Consider the probabilities of simulating a particular dataset, given a set of trees, model and model parameters.</p>
+<p>A specific task - given a set of character data corresponding to the tips of a tree, what is the topology of the tree? Model is also estimated, but may or may not be of interest.</p>
+<p>Calculating the likelihood of a tree</p>
+<p>What a likelihood is</p>
+<p>maximum likelihood</p>
+<p>hueristics</p>
+<p>Bayesian</p>
+<p>“Model free” methods</p>
 
 
+
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="evaluation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="shape.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="simulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="evaluation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -34,3 +34,22 @@ sim_jc = function( mu = 1, t = 100, n = 1000, first =  NULL ){
   
   segments
 }
+
+
+## Chapter 3 - simulations
+
+exponentiate_matrix = function(X){
+  Y = expm(X) %>% as.matrix()
+  rownames(Y) = rownames(X)
+  colnames(Y) = colnames(X)
+  Y
+}
+
+sim_site = function( start, t, Q){
+  P = exponentiate_matrix(Q*t)
+  prob = P[rownames(P)==start,]
+  sample(names(prob), size=1, prob=prob, replace = TRUE)
+}
+
+## Chapter 4 - inference
+

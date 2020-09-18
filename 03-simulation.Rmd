@@ -427,10 +427,11 @@ R = rbind(
 rownames(R) = c("A", "C", "G", "T")
 colnames(R) = c("A", "C", "G", "T")
 
-Pi = c(0.295, 0.205, 0.205, 0.295)
-names(Pi) = c("A", "C", "G", "T")
+Pi = diag(c(0.295, 0.205, 0.205, 0.295))
+rownames(Pi) = c("A", "C", "G", "T")
+colnames(Pi) = c("A", "C", "G", "T")
 
-Q = R %*% diag(Pi)
+Q = R %*% Pi
 colnames(Q) = c("A", "C", "G", "T")
 
 diag(Q) = - rowSums(Q)
@@ -460,19 +461,6 @@ Q
 
 
 Now we need to exponentiate $\mathbf{Q}$ it to get $\mathbf{P}(t)$, according to Equation \@ref(eq:jc69-prob). If we do that numerically, we need to specify $t$ before we do the exponentiation. So, for example, $\mathbf{P}(1)$ is:
-
-```{r echo=FALSE}
-
-exponentiate_matrix = function(X){
-  Y = expm(X) %>% as.matrix()
-  rownames(Y) = rownames(X)
-  colnames(Y) = colnames(X)
-  Y
-  
-}
-
-```
-
 
 
 ```{r}
@@ -514,16 +502,9 @@ How do we select a starting state at random? We could draw the starting state fr
 
 ```{r sim-single-edges }
 
-sim_site = function( start, t, Q){
-  P = exponentiate_matrix(Q*t)
-  prob = P[rownames(P)==start,]
-  sample(names(prob), size=1, prob=prob, replace = TRUE)
-}
-
-
 n = 10
 Length_max = 2
-Parent = sample(names(Pi), size=n, prob=Pi, replace = TRUE)
+Parent = sample(rownames(Pi), size=n, prob=diag(Pi), replace = TRUE)
 Length = runif( n, min = 0, max = Length_max)
 
 single_edges = data.frame(
@@ -568,7 +549,7 @@ phy = read.tree( text = tree_text )
 
 state = rep( NA, max(phy$edge)  )
 
-state[5] = sample(names(Pi), size=1, prob=Pi, replace = TRUE)
+state[5] = sample(rownames(Pi), size=1, prob=diag(Pi), replace = TRUE)
 state[6] = sim_site( state[5], phy$edge.length[ which(phy$edge[,2]==6) ], Q )
 state[7] = sim_site( state[5], phy$edge.length[ which(phy$edge[,2]==7) ], Q )
 state[1] = sim_site( state[6], phy$edge.length[ which(phy$edge[,2]==1) ], Q )

@@ -1,4 +1,143 @@
-# Inference
+# Inferring phylogenies from data
+
+In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given $\mathbf{Q}$, the starting state, and the edge length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the edges of a tree.
+
+We will now turn to using that exact same statistical framework for what may initially seem to be a very different task -- inferring the topology and and edge lengths of a phylogeny from DNA sequence data. But they are very similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data given the model and model parameters.
+
+This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis as referred to as Maximum Likelihood (ML).
+
+## Probability of a single history
+
+We will consider the toy phylogeny, along with its tip states, shown in Figure \@ref(fig:inference-toy).
+
+```{r inference-toy, fig.cap="The toy phylogeny we will use to examine inference. Node numbers are in red. Edge lengths are in orange. Tip node states are within boxes."}
+
+phy_text = "(((Species_A:0.5,Species_B:0.5):0.5,Species_C:1.0):0.2,Species_D:1.2);"
+phy = read.tree( text=phy_text )
+
+internal_states = expand.grid(
+  node_5=c("A", "C", "G", "T"), 
+  node_6=c("A", "C", "G", "T"), 
+  node_7=c("A", "C", "G", "T")) %>% 
+as.matrix() %>% 
+t()
+
+tip_states = c("T", "T", "A", "C")
+
+node_states = rbind( replicate(ncol(internal_states), tip_states), internal_states )
+
+get_edge_states = function( phy, states){
+  D = tibble(
+    parent = phy$edge[,1],
+    child  = phy$edge[,2],
+    start  = states[ phy$edge[,1] ],
+    end    = states[ phy$edge[,2] ],
+    edge_length = phy$edge.length
+  )
+  D
+}
+
+get_edge_prob  = function( start, end, edge_length, Q ){
+  P = exponentiate_matrix(Q*edge_length)
+  P[ start, end ]
+}
+
+get_edge_probs = function( phy, states, Q ){
+  edges = get_edge_states( phy, states)
+  prob = 
+    edges %>%
+    select( start, end, edge_length ) %>%
+    pmap( get_edge_prob, Q )
+  prob %<>% unlist()
+  names(prob) = NULL
+  edges$prob = prob
+  edges
+}
+
+example_states = node_states[,60]
+
+edge_probs = 
+  get_edge_probs( phy, example_states, Q ) %>%
+  arrange(child)
+
+
+edge_lengths = rep( NA, max(edge_probs$child))
+edge_lengths[ edge_probs$child ] = edge_probs$edge_length
+
+p = rep( NA, max(edge_probs$child))
+p[ edge_probs$child ] = edge_probs$prob
+
+tip_state_labels = rep( NA, max(edge_probs$child))
+tip_state_labels[1:length(tip_states)] = tip_states
+
+ggtree(phy) +
+  geom_tiplab(offset=0.2) +
+  geom_label(aes(label=tip_state_labels)) +
+  geom_text2(aes(label=node), col="red", nudge_x=0.12 ) +
+  geom_text2(aes(label=edge_lengths), col="orange", nudge_x=-0.12, nudge_y=-0.1 ) +
+  xlim(0,2)
+
+
+```
+
+We will start be calculating the probability of a single history of evolution for a single site on a single tree. By history a mean the full set of states at all nodes in a particular phylogeny for a particular nucleotide site. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). I want to emphasize that this isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
+
+```{r inference-internal-states, fig.cap="The same toy tree as above, but with arbitrary internal node states (in boxes)."}
+
+ggtree(phy) +
+  geom_tiplab(offset=0.2) +
+  geom_label(aes(label=example_states)) +
+  geom_text2(aes(label=node), col="red", nudge_x=0.15 ) +
+  geom_text2(aes(label=edge_lengths), col="orange", nudge_x=-0.12, nudge_y=-0.1 ) +
+  xlim(0,2)
+
+```
+
+Our goal now is to calculate the probability of each observed change. Recall that the matrix that contains these probabilities, given a starting state (rows), ending state (columns), and edge length $t$, is given by:
+
+\begin{equation} 
+  \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
+  (\#eq:prob)
+\end{equation}
+
+Where $\mathbf{Q}$ is the rate matrix. Let's plug some numbers in using the model we specified in the previous chapter. We don't have any specific reason to use this particular model on this tree, we are just sticking with it since we already built it.
+
+Specifically:
+
+```{r}
+R
+```
+
+```{r}
+Pi
+```
+
+And their product $\mathbf{Q}$, with the diagonal adjusted so that rows sum to 0:
+
+```{r}
+Q
+```
+
+For each in the edge, we can now use $\mathbf{P}(t)$ to calculate the probability of a change from the start state at the parent node to the end state at the child node, given the edge length $t$. The results are shown in Figure \@ref(fig:inference-history). 
+
+
+```{r inference-history, fig.cap="The same toy tree as above, but with probabilities of the specific change along each edge (in blue)."}
+
+
+ggtree(phy) +
+  geom_tiplab(offset=0.2) +
+  geom_label(aes(label=example_states)) +
+  geom_text2(aes(label=node), col="red", nudge_x=0.15 ) +
+  geom_text2(aes(label=edge_lengths), col="orange", nudge_x=-0.12, nudge_y=-0.1 ) +
+  geom_text2(aes(label=round(p,3)), col="blue", nudge_x=-0.15, nudge_y=0.1 ) +
+  xlim(0,2)
+
+```
+
+
+
+
+
 
 A specific task - given a set of character data corresponding to the tips of a tree, what is the topology of the tree? Model is also estimated, but may or may not be of interest.
 
