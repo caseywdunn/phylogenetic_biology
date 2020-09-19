@@ -1,8 +1,8 @@
 # Inferring phylogenies from data
 
-In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given $\mathbf{Q}$, the starting state, and the edge length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the edges of a tree.
+In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given the starting state and the edge length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the edges of a phylogeny.
 
-We will now turn to using that exact same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case) at the tip nodes. But these tasks are very similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data given the model and model parameters.
+We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data.
 
 This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis as referred to as Maximum Likelihood (ML).
 
@@ -78,13 +78,11 @@ get_tree_prob = function( states, phy, R, Pi ){
   
 }
 
-
 example_states = node_states[,60]
 
 edge_probs = 
   get_edge_probs( phy, example_states, Q ) %>%
   arrange(child)
-
 
 edge_lengths = rep( NA, max(edge_probs$child))
 edge_lengths[ edge_probs$child ] = edge_probs$edge_length
@@ -105,7 +103,7 @@ ggtree(phy) +
 
 ```
 
-We will start be calculating the probability of a single history of evolution for a single site on a single tree. By history a mean the full set of states at all nodes in a particular phylogeny for a particular nucleotide site. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). I want to emphasize that this isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
+We will start be calculating the probability of a single history of evolution for a single site on a single tree. This history is the full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). I want to emphasize that this isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
 
 ```{r inference-internal-states, fig.cap="The same toy tree as above, but with arbitrary internal node states (in boxes)."}
 
@@ -125,13 +123,15 @@ Our goal now is to calculate the probability of each observed change. Recall tha
   (\#eq:prob)
 \end{equation}
 
-Where $\mathbf{Q}$ is the rate matrix. Let's plug some numbers in using the model we specified in the previous chapter. We don't have any specific reason to use this particular model on this tree, we are just sticking with it since we already built it.
+Where $\mathbf{Q}$ is the rate matrix. Let's plug some numbers in using the model we specified in the previous chapter. We don't have any specific reason to use this model on this tree, we are just sticking with it since we already built it.
 
-Specifically:
+Here is the relative rate matrix $\mathbf{R}$:
 
 ```{r}
 R
 ```
+
+The equilibrium frequencies $\mathbf{\Pi}$:
 
 ```{r}
 Pi
@@ -143,7 +143,7 @@ And their product $\mathbf{Q}$, with the diagonal adjusted so that rows sum to 0
 Q
 ```
 
-For each in the edge, we can now use $\mathbf{P}(t)$ to calculate the probability of a change from the start state at the parent node to the end state at the child node, given the edge length $t$. The results are shown in Figure \@ref(fig:inference-history). 
+For each edge, we can now use $\mathbf{P}(t)$ to calculate the probability of a change from the start state at the parent node to the end state at the child node, given the edge length $t$. The results are shown in Figure \@ref(fig:inference-history). 
 
 
 ```{r inference-history, fig.cap="The same toy tree as above, but with probabilities of the specific change along each edge (in blue)."}
@@ -159,9 +159,8 @@ ggtree(phy) +
 
 ```
 
-Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s in a row is $1/6\times1/6=1/36$. So we can just multiply all the blue probabilities times each other. 
-
-In Figure \@ref(fig:inference-history) we illustrated these probabilities as the probability of changes along each edge, but we can also think of these as the probabilities of the state at each node (including tips and internal nodes). 
+Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the blue probabilities to calculate the joint probability of all of these events happening. 
+We can think of these as the probabilities of specific changes along each edge as the probabilities of the state at each child node. 
 
 ```{r}
 knitr::kable(data.frame( node=1:length(p), probability=p ))
@@ -174,7 +173,7 @@ root_prob = pi_v[ example_states[root_node] ]
 
 ```
 
-Note, though that the probability for node 5 is missing (it has a value of `NA`, which means it is not available). By reference to Figure \@ref(fig:inference-history) we can see that this is the root node. We calculated probabilities of each node state according to the probability of the state at the child node of each edge, and the root is not the child of any edge. So its probability is missing. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
+Note, though, that the probability for node 5 is missing (it has a value of `NA`, which means it is Not Available). By reference to Figure \@ref(fig:inference-history) we can see that this is the root node. This makes sense since the root is not the child of any edge, and we calculated the probabilities based on changes along edges. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
 
 ```{r}
 
@@ -187,17 +186,17 @@ example_prob = prod(p)
 
 ```
 
-The joint probability of all these events happening (the root state being what it is, and then each of the changes along each of the edges) can now be calculated as their product. This comes out to $`r example_prob`$. Three are multiple ways to think about this probability. One is from a frequentest perspective. If we were to simulate character states on this tree, in the way we did in the previous chapter using this same model, we would expect this full set of character states `r round(example_prob*1e6,1)` times out of a million simulations.
+The joint probability of all these states can now be calculated as the product of each state. This comes out to $`r example_prob`$. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of `r round(example_prob*1e6,1)` times out of a million simulations.
 
-Here we have used much of the same machinery as we did in the previous chapter, but toward a slightly different end. Rather than use the probability distributions provided by our model to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.
+Here we have used much of the same machinery as we did in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.
 
 ## Probability of multiple histories
 
-Above we considered the joint probability of a specific set of node states at all nodes, including both tip nodes and internal nodes. We specified all these node states arbitrarily and calculated the log probability of the entire configuration of states. Usually, though, we don't know the internal node states. We don't even know what internal nodes exist, which is why we are trying to infer the phylogeny! Instead we have observed states at the tips that we got by sequencing living organisms. We want to clamp these tip states and assess thei probability on a particular tree (with edge lengths) under the model. This probability is independent of a specific history of node states. 
+Above we considered the joint probability of a specific set of nucleotide states at all nodes, including both tip nodes and internal nodes. Usually, though, we don't know the internal node states. We don't even know what internal nodes exist, which is why we are trying to infer the phylogeny! Instead we have observed states that we got by sequencing organisms at the tips. We want to clamp these tip states and assess their probability on a particular tree (with edge lengths) under the model. This probability is independent of a specific history of internal node states. 
 
-If we aren't clamping the internal node states as well, how can we calculate the probability of just the tip node states? The key is to consider all possible internal states in turn. Each configuration of internal node states represents one possible history that gave rise to the observed tip states. We can sum the probabilities of each of these different ways to get the tip states to find the probability of the tip states over all possible histories. We are summing the probabilities because these are mutually exclusive histories that could give rise to the observed data. For example, if we want to find the probability of getting a total of seven when rolling two dice, we need to add up the probability of each way to get seven (1+6 *or* 2+4 *or* 3+3 *or* ... 6+1). This is different from when we multiplied probabilities to find the joint probabilities of multiple events occurring together (*e.g.*, the probability of rolling a 4 *and* then another 4).
+If we aren't clamping the internal node states as well, how can we calculate the probability of just the tip node states? The key is to consider all possible internal states. Each configuration of internal node states represents one possible history that gave rise to the observed tip states. We can sum the probabilities of each of these different ways to get the tip states to find the probability of the tip states over all possible histories. We are summing the probabilities because these are mutually exclusive histories that could give rise to the observed data. For example, if we want to find the probability of getting a total of seven when rolling two dice, we need to add up the probability of each way to get seven (1+6 *or* 2+4 *or* 3+3 *or* ... 6+1). This is different from when we multiplied probabilities to find the joint probabilities of multiple events occurring together (*e.g.*, the probability of rolling a 4 *and* another 4).
 
-This is a small tree, with only 3 internal nodes that can each have 4 states. This gives $4^3=64$ possible histories. That is small enough to just list them out. That is what I do below. I also include the probability of each specific history, calculated exactly as I did above (the example above is the history in row 60).
+This is a small tree, with only 3 internal nodes that can each have 4 states. This gives $4^3=64$ possible histories. That is small enough to list them out below. I also include the probability of each specific history, calculated exactly as I did above (the example above corresponds to row 60 here).
 
 ```{r}
 
@@ -222,13 +221,13 @@ knitr::kable( history_D ) %>%
 
 ```
 
-Note that I listed the states for all the nodes, including nodes 1-4, which are clamped. It is the last three states for the three internal nodes (n5-n7) that are variable. The probabilities for each specific history range quite widely, from $`r min(history_probs)`$ to $`r max(history_probs)`$. 
+Note that I listed the states for all the nodes, including nodes 1-4, which are clamped. It is the last three internal nodes (n5-n7) that have variable states. The probabilities for each specific history range quite widely, from $`r min(history_probs)`$ to $`r max(history_probs)`$.
 
 The sum of the probabilities for each of these different histories for n5-n7 that give rise to the observed clamped states for tip nodes n1-n4 is $`r sum(history_probs)`$. This probability of the data given a particular hypothesis (the topology, edge lengths, model, and model parameters) is the likelihood.
 
 ## Log likelihood
 
-The likelihood of these data on this phylogeny, $`r sum(history_probs)`$, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The probabilities, in fact, get so small that computers have trouble storing them efficiently. Rather than store and manipulate the small probabilities, like likelihoods, directly, most tools take the natural logs of the probabilities, $ln(p)$. The log likelihood for this  of this particular history is $`r sum(history_probs) %>% log()`$. This transforms them to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:
+The likelihood of these data on this phylogeny, $`r sum(history_probs)`$, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers have trouble storing them efficiently. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, $ln(p)$. The log likelihood for this phylogeny is $`r sum(history_probs) %>% log()`$. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:
 
 \begin{equation} 
   ln(a)+ln(b) = ln(ab)
@@ -239,19 +238,19 @@ We can calculate joint log probabilities as sums of log probabilities for each e
 
 ## Likelihood for multiple sites
 
-The machinery above allows gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides for a single site. Many investigators now infer phylogenies based on whole genomes, so clearly we need to expand this model from a single site to multiple sites.
+The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We new need to expand this model from a single site to multiple sites within a gene or even across whole genomes.
 
-This turns out to be quite simple -- we do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site. And, since we are adding negative numbers for log likelihoods, this will result in a very large negative number.
+This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.
 
 
 ## Maximum likelihood
 
-At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, how do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, log likelihood).
+At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. Wow do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).
 
-The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. Given Equation \@ref(eq:ntrees), there are 15 possible topologies. For each, we would optimize the edge lengths to find the maximum likelihood for the topology. This is an iterative process, where each edge length is progressively optimized. This execellent [interactive visualization](http://phylo.bio.ku.edu/mephytis/brlen-opt.html) allows you to manually optimize edge lengths on a small phylogeny. Then we would pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
+The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. Be reference to Equation \@ref(eq:ntrees), we can see that there are 15 possible topologies. For each, we can optimize the edge lengths to find the maximum likelihood for the topology. This is an iterative process, where each edge length is progressively refined until no change increases the likelihood. This excelent [interactive visualization](http://phylo.bio.ku.edu/mephytis/brlen-opt.html) allows you to manually optimize edge lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
 
-Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use hueristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.
+Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.
 
-This might sound simple, but it isn't. One challenge is that you can get trapped on a local maximum and think it is the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima.
+This might sound simple, but it isn't. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima.
 
 
