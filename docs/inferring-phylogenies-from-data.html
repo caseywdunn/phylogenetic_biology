@@ -184,6 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#log-likelihood"><i class="fa fa-check"></i><b>4.3</b> Log likelihood</a></li>
 <li class="chapter" data-level="4.4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#likelihood-for-multiple-sites"><i class="fa fa-check"></i><b>4.4</b> Likelihood for multiple sites</a></li>
 <li class="chapter" data-level="4.5" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#maximum-likelihood"><i class="fa fa-check"></i><b>4.5</b> Maximum likelihood</a></li>
+<li class="chapter" data-level="4.6" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#optimality-criteria"><i class="fa fa-check"></i><b>4.6</b> Optimality criteria</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>5</b> Evaluation</a><ul>
 <li class="chapter" data-level="5.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>5.1</b> Model evaluation</a></li>
@@ -223,7 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="inferring-phylogenies-from-data" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Inferring phylogenies from data</h1>
 <p>In the previous chapter we built modeling machinery that allowed us to specify a rate matrix <span class="math inline">\(\mathbf{Q}\)</span> (Equation <a href="simulation.html#eq:sim-gtr">(3.8)</a>), and from that derive the matrix <span class="math inline">\(\mathbf{P}(t)\)</span> (Equation <a href="simulation.html#eq:jc69-prob">(3.7)</a>) that gives the probability of a particular end state given the starting state and the edge length <span class="math inline">\(t\)</span>. We used <span class="math inline">\(\mathbf{P}(t)\)</span> in a generative context, to simulate the evolution of a DNA sequence along the edges of a phylogeny.</p>
-<p>We will now turn to using the same statistical framework for what may initially seem to be a very different task – phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data.</p>
+<p>We will now turn to using the same statistical framework for what may initially seem to be a very different task – phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data <span class="citation">(Felsenstein <a href="#ref-Felsenstein:1981vk" role="doc-biblioref">1981</a>)</span>.</p>
 <p>This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis as referred to as Maximum Likelihood (ML).</p>
 <div id="probability-of-a-single-history" class="section level2">
 <h2><span class="header-section-number">4.1</span> Probability of a single history</h2>
@@ -2142,10 +2143,25 @@ T
 <p>The small toy phylogeny considered here (Figure <a href="inferring-phylogenies-from-data.html#fig:inference-toy">4.1</a>) has four tip nodes. Be reference to Equation <a href="phylogenies.html#eq:ntrees">(2.1)</a>, we can see that there are 15 possible topologies. For each, we can optimize the edge lengths to find the maximum likelihood for the topology. This is an iterative process, where each edge length is progressively refined until no change increases the likelihood. This excellent <a href="http://phylo.bio.ku.edu/mephytis/brlen-opt.html">interactive visualization</a> allows you to manually optimize edge lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.</p>
 <p>Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.</p>
 <p>This might sound simple, but it isn’t. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima.</p>
+<p>Optimization of calculations becomes very important. For example, it isn’t necessary to recalculate all values on each new topology, since some of the calculations from previous topologies remain relevant <span class="citation">(Felsenstein <a href="#ref-Felsenstein:1981vk" role="doc-biblioref">1981</a>)</span>.</p>
+</div>
+<div id="optimality-criteria" class="section level2">
+<h2><span class="header-section-number">4.6</span> Optimality criteria</h2>
+<p>Here we used likelihood as an optimality criterion to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony. In parsimony, the minimum number of changes along edges needed to explain the data at the tips is used as the criterion to evaluate each topology. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.</p>
+<p>Under some conditions parsimony and likelihood will recover similar topologies, but often they do not. This is because they are doing different things that under many conditions lead to different results <span class="citation">(Steel and Penny <a href="#ref-steel2000parsimony" role="doc-biblioref">2000</a>)</span>. For example, we do not always expect the simplest possible explanation for a given pattern to be the best explanation. If a character has a high rate of evolutionary change, then we expect many changes on a tree rather than the fewest possible. This is accommodated in a likelihood framework.</p>
 
 
 
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Felsenstein:1981vk">
+<p>Felsenstein, J. 1981. “Evolutionary trees from DNA sequences: a maximum likelihood approach.” <em>Journal of Molecular Evolution</em> 17 (6): 368–76. <a href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=7288891&amp;retmode=ref&amp;cmd=prlinks">http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=7288891&amp;retmode=ref&amp;cmd=prlinks</a>.</p>
+</div>
+<div id="ref-steel2000parsimony">
+<p>Steel, Mike, and David Penny. 2000. “Parsimony, Likelihood, and the Role of Models in Molecular Phylogenetics.” <em>Molecular Biology and Evolution</em> 17 (6): 839–50. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026364">https://doi.org/10.1093/oxfordjournals.molbev.a026364</a>.</p>
 </div>
 </div>
             </section>

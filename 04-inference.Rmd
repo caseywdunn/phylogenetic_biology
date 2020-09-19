@@ -2,7 +2,7 @@
 
 In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given the starting state and the edge length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the edges of a phylogeny.
 
-We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data.
+We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data [@Felsenstein:1981vk].
 
 This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis as referred to as Maximum Likelihood (ML).
 
@@ -253,4 +253,10 @@ Things change very quickly, though, as trees grow in size. Beyond about 15 tips 
 
 This might sound simple, but it isn't. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima.
 
+Optimization of calculations becomes very important. For example, it isn't necessary to recalculate all values on each new topology, since some of the calculations from previous topologies remain relevant [@Felsenstein:1981vk].
 
+## Optimality criteria
+
+Here we used likelihood as an optimality criterion to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony. In parsimony, the minimum number of changes along edges needed to explain the data at the tips is used as the criterion to evaluate each topology. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
+
+Under some conditions parsimony and likelihood will recover similar topologies, but often they do not. This is because they are doing different things that under many conditions lead to different results [@steel2000parsimony]. For example, we do not always expect the simplest possible explanation for a given pattern to be the best explanation. If a character has a high rate of evolutionary change, then we expect many changes on a tree rather than the fewest possible. This is accommodated in a likelihood framework.
