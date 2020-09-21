@@ -234,7 +234,7 @@ The likelihood of these data on this phylogeny, $`r sum(history_probs)`$, is not
   (\#eq:logs)
 \end{equation}
 
-We can calculate joint log probabilities as sums of log probabilities for each event, rather than as the log of products of the probabilities. Addition is much faster than multiplication for computers (since multiplication is a series of addition operations), so this speeds things up. For these reasons you will almost always see log likelihoods, rather than just likelihoods, published in the literature. Note that becuase likelihoods are probabilities and therefore range from 0--1, the log likelihoods will range from $-\infty$ (for probabilities very close to 0) to $0$ (for probabilities close to 0). Since likelihoods tend to be small, they end up as log likelihoods that are negative numbers with large absolute values.
+We can calculate joint log probabilities as sums of log probabilities for each event, rather than as the log of products of the probabilities. Addition is much faster than multiplication for computers (since multiplication is a series of addition operations), so this speeds things up. For these reasons you will almost always see log likelihoods, rather than just likelihoods, published in the literature. Note that because likelihoods are probabilities and therefore range from 0--1, the log likelihoods will range from $-\infty$ (for probabilities very close to 0) to $0$ (for probabilities close to 1). Since likelihoods tend to be small, they end up as log likelihoods that are negative numbers with large absolute values.
 
 ## Likelihood for multiple sites
 

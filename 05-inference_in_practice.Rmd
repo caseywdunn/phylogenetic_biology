@@ -1,0 +1,22 @@
+# Inference in practice
+
+In the last chapter we examined the mathematical and statistical underpinning of phylogenetic inference with maximum likelihood. In this chapter we examine the practice of phylogenetic inference -- what are the actual steps you need to take to infer topology and edge lengths? We are sticking with DNA sequence data for now, but we will extend these approaches to other types of data later.
+
+## Homologous genome regions
+
+## Homologous sites
+
+Sequence orientation
+
+multiple sequence alignment
+
+
+## Model selection
+
+
+## Running the inference
+
+## Viewing results
+
+## Interpretting results
+
