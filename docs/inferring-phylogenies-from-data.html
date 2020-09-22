@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-09-21" />
+<meta name="date" content="2020-09-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -233,7 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 4</span> Inferring phylogenies from data</h1>
 <p>In the previous chapter we built modeling machinery that allowed us to specify a rate matrix <span class="math inline">\(\mathbf{Q}\)</span> (Equation <a href="simulation.html#eq:sim-gtr">(3.8)</a>), and from that derive the matrix <span class="math inline">\(\mathbf{P}(t)\)</span> (Equation <a href="simulation.html#eq:jc69-prob">(3.7)</a>) that gives the probability of a particular end state given the starting state and the edge length <span class="math inline">\(t\)</span>. We used <span class="math inline">\(\mathbf{P}(t)\)</span> in a generative context, to simulate the evolution of a DNA sequence along the edges of a phylogeny.</p>
 <p>We will now turn to using the same statistical framework for what may initially seem to be a very different task – phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data <span class="citation">(Felsenstein <a href="#ref-Felsenstein:1981vk" role="doc-biblioref">1981</a>)</span>.</p>
-<p>This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis as referred to as Maximum Likelihood (ML).</p>
+<p>This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis is referred to as Maximum Likelihood (ML).</p>
 <div id="probability-of-a-single-history" class="section level2">
 <h2><span class="header-section-number">4.1</span> Probability of a single history</h2>
 <p>We will consider the toy phylogeny, along with its tip states, shown in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-toy">4.1</a>.</p>
@@ -243,7 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 4.1: The toy phylogeny we will use to examine inference. Node numbers are in red. Edge lengths are in orange. Tip node states are within boxes.
 </p>
 </div>
-<p>We will start be calculating the probability of a single history of evolution for a single site on a single tree. This history is the full set of states at all nodes. These are added to the toy phylogeny in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-internal-states">4.2</a>. I want to emphasize that this isn’t a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.</p>
+<p>We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and edge lengths. This history is the full set of states at all nodes. These are added to the toy phylogeny in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-internal-states">4.2</a>. I want to emphasize that this isn’t a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.</p>
 <div class="figure"><span id="fig:inference-internal-states"></span>
 <img src="phylogenetic_biology_files/figure-html/inference-internal-states-1.png" alt="The same toy tree as above, but with arbitrary internal node states (in boxes)." width="2100" />
 <p class="caption">
