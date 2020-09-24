@@ -2,6 +2,13 @@
 
 In the last chapter we examined the mathematical and statistical underpinning of phylogenetic inference with maximum likelihood. In this chapter we examine the practice of phylogenetic inference -- what are the actual steps you need to take to infer topology and edge lengths? We are sticking with DNA sequence data for now, but we will extend these approaches to other types of data later.
 
+## The question
+
+The first step to an analysis is to clearly define your question. There will be many decisions to make along the way, and having a clear decision makes many of these decisions 
+
+
+## Taxon sampling
+
 ## Homologous genome regions
 
 ## Homologous sites
@@ -10,9 +17,9 @@ Sequence orientation
 
 multiple sequence alignment
 
+## Model complexity
 
 ## Model selection
-
 
 ## Running the inference
 
@@ -20,3 +27,4 @@ multiple sequence alignment
 
 ## Interpretting results
 
+## Multiple genes

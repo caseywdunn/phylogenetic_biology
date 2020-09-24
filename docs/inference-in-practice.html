@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Phylogenetic Biology</title>
+  <title>Chapter 5 Inference in practice | Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Phylogenetic Biology" />
+  <meta property="og:title" content="Chapter 5 Inference in practice | Phylogenetic Biology" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="caseywdunn/phylogenetic_biology" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Phylogenetic Biology" />
+  <meta name="twitter:title" content="Chapter 5 Inference in practice | Phylogenetic Biology" />
   <meta name="twitter:site" content="@caseywdunn" />
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="inferring-phylogenies-from-data.html"/>
+<link rel="next" href="evaluation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -231,117 +231,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Phylogenetic Biology</h1>
-<p class="author"><em>Casey W. Dunn</em></p>
-<p class="date"><em>2020-09-24</em></p>
+<div id="inference-in-practice" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Inference in practice</h1>
+<p>In the last chapter we examined the mathematical and statistical underpinning of phylogenetic inference with maximum likelihood. In this chapter we examine the practice of phylogenetic inference – what are the actual steps you need to take to infer topology and edge lengths? We are sticking with DNA sequence data for now, but we will extend these approaches to other types of data later.</p>
+<div id="homologous-genome-regions" class="section level2">
+<h2><span class="header-section-number">5.1</span> Homologous genome regions</h2>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses. It is really my lecture notes dessed up in the form of the rough draft of a book.</p>
-<div id="source-code" class="section level2">
-<h2><span class="header-section-number">0.1</span> Source code</h2>
-<p>The source code for this manuscript is available on <a href="https://github.com/caseywdunn/phylogenetic_biology">github</a>. The book was rendered from the source with <code>bookdown</code> <span class="citation">(Xie <a href="#ref-bookdown2016" role="doc-biblioref">2016</a>)</span>.</p>
-<p>Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the <a href="https://github.com/caseywdunn/phylogenetic_biology/issues">issue tracker</a>.</p>
+<div id="homologous-sites" class="section level2">
+<h2><span class="header-section-number">5.2</span> Homologous sites</h2>
+<p>Sequence orientation</p>
+<p>multiple sequence alignment</p>
 </div>
-<div id="other-resources" class="section level2">
-<h2><span class="header-section-number">0.2</span> Other resources</h2>
-<p>The following sites have a wide variety of material that is relevant to the
-theory and and practice of phylogenetic biology.</p>
-<ul>
-<li><p>An extensive list of tools, tutorials, and examples of phylogenetic tools in
-the programming language R maintained by Briam O’Meara:
-<a href="https://cran.r-project.org/web/views/Phylogenetics.html">CRAN Task View: Phylogenetics</a></p></li>
-<li><p>The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer
-course on phylogenetics, with an emphasis on building phylogenetic trees. Check
-out the faculty pages for lecture pdfs:
-<a href="https://molevolworkshop.github.io">Workshop on Molecular Evolution</a></p></li>
-<li><p>The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course
-on phylogenetics, but with a bit more emphasis on using phylogenies to test
-evolutionary questions:
-<a href="http://treethinkers.org/tutorials/">Applied Phylogenetics Workshop</a></p></li>
-</ul>
-<p>The following books are great resources for learning more about phylogenetic biology:</p>
-<ul>
-<li><p>Baum, D. and Smith, S. (2012). Tree Thinking. An Introduction to Phylogenetic
-Biology. <a href="http://www.roberts-publishers.com/tree-thinking-an-introduction-to-phylogenetic-biology.html">Roberts Publishers</a>.</p></li>
-<li><p>Paradis, E. (2011) Analysis of Phylogenetics and Evolution with R.
-<a href="http://www.springer.com/life+sciences/evolutionary+%26+developmental+biology/book/978-0-387-32914-7">Springer</a></p></li>
-<li><p>Felsenstein, J. (2004) Inferring phylogenies.
-<a href="http://www.sinauer.com/detail.php?id=1775">Sinauer Associates</a>.</p></li>
-<li><p>Swofford, D. L., Olsen, G. J., Waddell, P. J., &amp; Hillis, D. M. (1996).
-Phylogenetic inference. In: Molecular Systematics, Second Edition. eds: D. M.
-Hillis, C Moritz, &amp; B. K. Mable. <a href="http://www.sinauer.com/detail.php?id=1775">Sinauer Associates</a></p></li>
-</ul>
-<p>The following books provide general computational background for the topics covered here:</p>
-<ul>
-<li><p>Wickham, H., Grolemund, G (2017) R for Data Science. <a href="https://r4ds.had.co.nz" class="uri">https://r4ds.had.co.nz</a></p></li>
-<li><p>Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. <a href="http://practicalcomputing.org" class="uri">http://practicalcomputing.org</a></p></li>
-</ul>
+<div id="model-complexity" class="section level2">
+<h2><span class="header-section-number">5.3</span> Model complexity</h2>
 </div>
-<div id="software-versions" class="section level2">
-<h2><span class="header-section-number">0.3</span> Software versions</h2>
-<p>This book was rendered from the source code on Thu Sep 24 14:00:25 2020 with the following R package versions.</p>
-<pre><code>R version 4.0.2 (2020-06-22)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Catalina 10.15.6
-
-Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
-
-locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-other attached packages:
- [1] kableExtra_1.2.1 phangorn_2.5.5   Matrix_1.2-18    forcats_0.5.0   
- [5] dplyr_1.0.2      purrr_0.3.4      readr_1.3.1      tidyr_1.1.2     
- [9] tibble_3.0.3     ggplot2_3.3.2    tidyverse_1.3.0  stringr_1.4.0   
-[13] phytools_0.7-47  maps_3.3.0       magrittr_1.5     gridExtra_2.3   
-[17] geiger_2.0.7     ape_5.4-1        ggtree_2.2.4     treeio_1.12.0   
-
-loaded via a namespace (and not attached):
- [1] subplex_1.6             nlme_3.1-149            fs_1.5.0               
- [4] lubridate_1.7.9         webshot_0.5.2           httr_1.4.2             
- [7] numDeriv_2016.8-1.1     tools_4.0.2             backports_1.1.10       
-[10] R6_2.4.1                DBI_1.1.0               lazyeval_0.2.2         
-[13] colorspace_1.4-1        withr_2.2.0             tidyselect_1.1.0       
-[16] mnormt_2.0.2            compiler_4.0.2          cli_2.0.2              
-[19] rvest_0.3.6             animation_2.6           expm_0.999-5           
-[22] xml2_1.3.2              bookdown_0.20           scales_1.1.1           
-[25] mvtnorm_1.1-1           quadprog_1.5-8          digest_0.6.25          
-[28] rmarkdown_2.3           pkgconfig_2.0.3         htmltools_0.5.0        
-[31] plotrix_3.7-8           dbplyr_1.4.4            rlang_0.4.7            
-[34] readxl_1.3.1            rstudioapi_0.11         generics_0.0.2         
-[37] combinat_0.0-8          jsonlite_1.7.1          gtools_3.8.2           
-[40] patchwork_1.0.1         fansi_0.4.1             Rcpp_1.0.5             
-[43] munsell_0.5.0           lifecycle_0.2.0         scatterplot3d_0.3-41   
-[46] stringi_1.5.3           yaml_2.2.1              clusterGeneration_1.3.4
-[49] MASS_7.3-53             grid_4.0.2              blob_1.2.1             
-[52] parallel_4.0.2          crayon_1.3.4            lattice_0.20-41        
-[55] haven_2.3.1             hms_0.5.3               tmvnsim_1.0-2          
-[58] knitr_1.29              pillar_1.4.6            igraph_1.2.5           
-[61] fastmatch_1.1-0         reprex_0.3.0            glue_1.4.2             
-[64] evaluate_0.14           BiocManager_1.30.10     modelr_0.1.8           
-[67] deSolve_1.28            vctrs_0.3.4             cellranger_1.1.0       
-[70] gtable_0.3.0            assertthat_0.2.1        xfun_0.17              
-[73] broom_0.7.0             tidytree_0.3.3          coda_0.19-3            
-[76] viridisLite_0.3.0       aplot_0.0.6             rvcheck_0.1.8          
-[79] ellipsis_0.3.1         </code></pre>
+<div id="model-selection" class="section level2">
+<h2><span class="header-section-number">5.4</span> Model selection</h2>
 </div>
-<div id="license" class="section level2">
-<h2><span class="header-section-number">0.4</span> License</h2>
-<p>This manuscript is distrubuted under a <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/us/">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License</a>.</p>
+<div id="running-the-inference" class="section level2">
+<h2><span class="header-section-number">5.5</span> Running the inference</h2>
+</div>
+<div id="viewing-results" class="section level2">
+<h2><span class="header-section-number">5.6</span> Viewing results</h2>
+</div>
+<div id="interpretting-results" class="section level2">
+<h2><span class="header-section-number">5.7</span> Interpretting results</h2>
+</div>
+<div id="multiple-genes" class="section level2">
+<h2><span class="header-section-number">5.8</span> Multiple genes</h2>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-bookdown2016">
-<p>Xie, Yihui. 2016. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</p>
+
+
 </div>
 </div>
             </section>
@@ -349,8 +269,8 @@ loaded via a namespace (and not attached):
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="inferring-phylogenies-from-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="evaluation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
