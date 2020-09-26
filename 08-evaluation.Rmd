@@ -1,6 +1,15 @@
 # Evaluation
 
-## Model evaluation
+## Model selection
+
+Once you have your data matrix (or matrices), and before you do your phylogenetic inference, it is critical to consider which model to use. We examined the mathematic structure of several models in earlier chapters, but we didn't examine how to decide which model to use.
+
+
+
+## Running the inference
+
+## Computational considerations
+
 
 Why not add as many parameters as you can imagine?
 
@@ -23,7 +32,3 @@ adding noise
 
 Propogation, point estimates
 
-
-## Epistemology
-
-gene trees, species trees
