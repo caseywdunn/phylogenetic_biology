@@ -8,23 +8,23 @@ The first step to an analysis is to clearly define your question. There will be 
 
 ## Taxon sampling
 
-Phylogenetic questions are almost always taxon specific, so the first thing you will want to consider is taxon sampling.
+The tips in a phylogeny, be they genes, species, individuals, or some other evolving entity, are commonly referred to as taxa. One of the first things you will want to consider is the breadth and depth of taxon sampling.
 
-One of the most common mistakes in phylogenetic analyses is to include too few taxa (ie, tips). There are many ways that adding taxa helps:
+One of the most common mistakes in phylogenetic analyses is to include too few taxa. There are many ways that adding taxa helps:
 
-- Adding taxa breaks up edges in the phylogeny. This often improves the performance of maximum likelihood. So if you are only interested in taxa 1...20, it still helps to add in taxa 21...50, even if you end up not paying much attention to where they go. They will often improve your ability to infer relationships among the taxa you are interested in.
+- Adding taxa breaks up edges in the phylogeny. This often improves the performance of maximum likelihood. If you are only interested in taxa 1...20, it still helps to add in taxa 21...50, even if you end up not paying much attention to where they go. They will often improve your ability to infer relationships among the taxa you are most interested in.
 
-- Adding taxa can help improve model evaluation and model parameter estimation. Like breaking up edges, this is a mechanism by which adding taxa that you don't care so much about can improve the analysis of the taxa you do care about.
+- Adding taxa can help improve model evaluation and model parameter estimation.
 
-- Adding taxa reduces the number of assumptions going into a study. You are almost always inferring a phylogeny because you are uncertain at the outset about evolutionary relationships. If, for example, you only include a couple of species from Clade B because you assume it is monophyletic, this sampling may be insufficient to reveal that Clade C is in fact nested within Clade B. With insufficient sampling of Clade B, it may instead appear that the two groups are sister clades.
+- Adding taxa reduces the number of assumptions going into a study. You are almost always inferring a phylogeny because you are uncertain at the outset about evolutionary relationships. If, for example, you only include a couple of species from Clade B because you assume it is monophyletic, this poor sampling may be insufficient to reveal that Clade C is in fact nested within Clade B. With insufficient sampling of Clade B, it may instead appear that the two groups are sister clades.
 
-- Adding taxa provides a more rigorous test of phylogenetic hypotheses. Say you are conducting a study to investigate the phylogenetic placement of a specific enigmatic species that is so morphologically distinct from other organisms that it is hard to know where it goes. You think it may fall in Clade A, Clade B, or Clade C, so you densely sample those groups. But in fact it falls within Clade D, and our taxon sampling is such that you can't even evaluate this hypothesis because you have no or too few taxa from Clade D in your study.
+- Adding taxa provides a more rigorous test of phylogenetic hypotheses. Say you are conducting a study to investigate the phylogenetic placement of a specific enigmatic species that is so morphologically distinct from other organisms that it is hard to know where it goes. You think it may fall in Clade A, Clade B, or Clade C, so you densely sample those groups. But in fact it falls within Clade D, and your taxon sampling is such that you can't even evaluate this hypothesis because you have no taxa from Clade D in your study.
 
-- Adding more outgroup taxa often improves rooting. Skimping on outgroup sampling is one of the most common mistakes in project design. This can lead to rooting problems. The best practice in general is to include the most closely related outgroup taxa possible, and some that are progressively more distantly related. The root and the edges that connect to it are the deepest in the tree, and can be the hardest to infer. So it is good to densely sample taxa relevant to the root.
+- Adding more outgroup taxa often improves rooting. Skimping on outgroup sampling is one of the most common mistakes in project design. The best practice in general is to include the most closely related outgroup taxa possible, and some that are progressively more distantly related. The root and the edges that connect to it are the deepest in the tree, and can be the hardest to infer. So it is good to densely sample taxa relevant to the root.
 
 There are costs to adding taxa that must be balanced against the benefits above:
 
-- If you are collecting the data, it costs money to add taxa. It can be very expensive to collect the specimens and then to sequence them, depending on the approach you are taking. That money may be best allocated in other ways.
+- If you are collecting the data, it costs money to add taxa. That money may be best allocated in other ways.
 
 - Adding taxa can considerably increase the computational demand of analyses. This can increase the time and cost of analysis, and maybe even make an analysis unfeasible on the computers available to the investigator.
 
@@ -38,21 +38,21 @@ There are some conditions under which you may want to exclude specific taxa, at 
 
 ## Collecting sequence data
 
-Once you have a good idea about taxon sampling, you will need to consider which genome regions to include in your analyses. To build a phylogeny, you need homologous characters across the organism under investigation. In the context of DNA analyses, this means that you need overlapping genome regions across the taxa in your tree.  
+Once you have a general idea about taxon sampling, you will need to consider which genome regions to include in your analyses. To build a phylogeny, you need homologous characters across the taxa under investigation. In the context of DNA analyses, this means that you need overlapping genome regions across the taxa that will be in your phylogeny.  
 
-Decisions about which taxa include interact quite a bit with decisions about which genome regions you will consider. So there is often quite a bit of back and forth as you refine these decisions. At the coarsest level, if you are collecting data yourself you will often need to decide if you are going to capture a larger amount of data from fewer taxa or s smaller amount of data from many taxa. If you are using publicly available data, then your taxon and genome region sampling will be strongly constrained by what data are already available.
+Decisions about which specific taxa to include interact quite a bit with decisions about which genome regions you will consider, so there is often quite a bit of back and forth as you refine these decisions. At the coarsest level, if you are collecting data yourself you will often need to decide if you are going to capture a larger amount of data from fewer taxa or a smaller amount of data from many taxa. If you are using publicly available data, then your taxon and genome region sampling will be strongly constrained by what data are already available.
 
-Decisions about what genome regions to include can be thought of as decisions about genome sequence enrichment strategies that can restrict data acquisition to particular regions. Here I describe common enrichment methods along a spectrum of increasing enrichment. 
+Decisions about what genome regions to include can be thought of as decisions about which genome enrichment strategy to use. These strategies restrict data acquisition (sequencing) to particular regions. Here I describe common enrichment strategies along a spectrum of increasing enrichment, from no enrichment (whole genome sequencing) to enrichment of just a single gene. 
 
-### Full genomes
+### Whole genomes
 
-Phylogenies are now routinely inferred without enrichment of any genome regions - the full genome is sequenced and analyzed. This is possible in large part to increasing read length, higher quality, and declining cost of new DNA sequencing technologies. Full genome phylogenetic analyses are still largely restricted to organisms with small genomes, in particular viruses. This has been a very powerful tool, for example, to investigate virus transmission through human populations. It is still expensive and difficult to build phylogenies with large genome sequences, though this is rapidly changing. 
+Phylogenies are now routinely inferred without enrichment of any genome regions -- the full genome is sequenced and analyzed. This is possible due to increasing read length, higher quality, and declining cost of new DNA sequencing technologies, as well as improved methods for processing raw genome data into useful annotated genome sequences. Full genome phylogenetic analyses are still largely restricted to organisms with small genomes, in particular viruses. This has been a very powerful tool, for example, to investigate virus transmission through human populations. It is still expensive and difficult to build phylogenies with large genome sequences, though this is rapidly changing.
 
 ### Transcriptomes
 
-A transcriptome is the collection of RNA in a cell or collection of cells. Because RNA is transcribed from the genome, sequencing the RNA gives a snapshot of an enriched subset of the genome. Whereas the other enrichment approaches we will see below are done bby the investigator at the bench, transcriptome sequencing largely relies on a natrural process in the living cell (transcription) to enrich for particular genome regions.
+A transcriptome is the collection of RNA in a cell or collection of cells. Because RNA is transcribed from the genome, sequencing the RNA gives a snapshot of an enriched subset of the genome. Whereas the other enrichment approaches we will see below are implemented by the investigator at the bench, transcriptome sequencing largely relies on a natural process in the living cell (transcription) to enrich for particular genome regions.
 
-In a typical phylogenetic study based on transcriptome data, messenger RNA (mRNA), which encode the protein coding genes, is isolated. mRNA is then copied to complimentary DNA (cDNA) and sequenced. These DNA sequences are then assembled into predictions of protein coding genes. Because many of the same genes are highly expressed across species and tissues, there is considerable overlap between the genes in transcriptome datasets. Many studies are interested in protein coding genes for other purposes as well, so transcriptomes are a very cost-effective way to collect data from a broad diversity of species that can be used for multiple purposes.
+In a typical phylogenetic study based on transcriptome data, messenger RNA (mRNA), which encodes the protein coding genes, is isolated. mRNA is then copied to complimentary DNA (cDNA) and sequenced. Because many of the same genes are highly expressed across species and tissues, there is considerable overlap between the genes in transcriptome datasets from different samples. Many investigators are interested in protein coding genes for other purposes as well, so transcriptomes are a very cost-effective way to collect data from a broad diversity of species that can be used for multiple purposes.
 
 There are a couple challenges to working with transcriptomes, though. For one, RNA is much less stable than DNA. It is therefore critical to take considerable care when collecting, storing, and processing tissue for transcriptome studies. 
 
