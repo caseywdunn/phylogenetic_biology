@@ -51,7 +51,7 @@ Let's examine one of the most common models, the linear model:
 Here, $y$ and $x$ are variables. The model posits a linear relationship between $x$ and $y$, that is that if you plot their correspondence in a plane 
 you will get a line. $m$ and $b$ are model parameters. $m$ is the slope of the line -- it captures how much change there is in $y$ for each unit of change in $x$. $b$ is the intercept -- it is the value of $y$ when $x=0$.
 
-```{r sim-linear, fig.cap="A linear model with $m$=0.5 and $b$=1."}
+```{r sim-linear, fig.cap="A linear model with $m=0.5$ and $b=1$."}
 m = 0.5
 b = 1
 p = ggplot(data = data.frame(x = 0), mapping = aes(x = x))

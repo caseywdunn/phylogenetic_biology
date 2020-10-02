@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-10-01" />
+<meta name="date" content="2020-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -205,8 +205,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a><ul>
-<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a></li>
-<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a></li>
+<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="evaluation.html"><a href="evaluation.html#model-structure"><i class="fa fa-check"></i><b>6.1.1</b> Model structure</a></li>
+<li class="chapter" data-level="6.1.2" data-path="evaluation.html"><a href="evaluation.html#model-likelihood"><i class="fa fa-check"></i><b>6.1.2</b> Model likelihood</a></li>
+<li class="chapter" data-level="6.1.3" data-path="evaluation.html"><a href="evaluation.html#evaluating-models"><i class="fa fa-check"></i><b>6.1.3</b> Evaluating models</a></li>
+<li class="chapter" data-level="6.1.4" data-path="evaluation.html"><a href="evaluation.html#adding-complexity-to-dna-evolution-models"><i class="fa fa-check"></i><b>6.1.4</b> Adding complexity to DNA evolution models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="evaluation.html"><a href="evaluation.html#bootstrapping-alignments"><i class="fa fa-check"></i><b>6.2.1</b> Bootstrapping alignments</a></li>
+<li class="chapter" data-level="6.2.2" data-path="evaluation.html"><a href="evaluation.html#summarizing-tree-sets"><i class="fa fa-check"></i><b>6.2.2</b> Summarizing tree sets</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -274,9 +282,9 @@ Figure 3.1: Four maps of the Yale campus, varying in complexity and focus. (A) A
 <p>Here, <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are variables. The model posits a linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, that is that if you plot their correspondence in a plane
 you will get a line. <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> are model parameters. <span class="math inline">\(m\)</span> is the slope of the line – it captures how much change there is in <span class="math inline">\(y\)</span> for each unit of change in <span class="math inline">\(x\)</span>. <span class="math inline">\(b\)</span> is the intercept – it is the value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>.</p>
 <div class="figure"><span id="fig:sim-linear"></span>
-<img src="phylogenetic_biology_files/figure-html/sim-linear-1.png" alt="A linear model with $m$=0.5 and $b$=1." width="2100" />
+<img src="phylogenetic_biology_files/figure-html/sim-linear-1.png" alt="A linear model with $m=0.5$ and $b=1$." width="2100" />
 <p class="caption">
-Figure 3.2: A linear model with <span class="math inline">\(m\)</span>=0.5 and <span class="math inline">\(b\)</span>=1.
+Figure 3.2: A linear model with <span class="math inline">\(m=0.5\)</span> and <span class="math inline">\(b=1\)</span>.
 </p>
 </div>
 <p>There are a variety of useful things we could do based on these relationships between the model, model parameters, and values. Let’s consider <span class="math inline">\(x\)</span> to be a variable that tell us something about the past and <span class="math inline">\(y\)</span> to be a variable that tell us something about the present or future. Use cases then include:</p>

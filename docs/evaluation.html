@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-10-01" />
+<meta name="date" content="2020-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -205,8 +205,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a><ul>
-<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a></li>
-<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a></li>
+<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="evaluation.html"><a href="evaluation.html#model-structure"><i class="fa fa-check"></i><b>6.1.1</b> Model structure</a></li>
+<li class="chapter" data-level="6.1.2" data-path="evaluation.html"><a href="evaluation.html#model-likelihood"><i class="fa fa-check"></i><b>6.1.2</b> Model likelihood</a></li>
+<li class="chapter" data-level="6.1.3" data-path="evaluation.html"><a href="evaluation.html#evaluating-models"><i class="fa fa-check"></i><b>6.1.3</b> Evaluating models</a></li>
+<li class="chapter" data-level="6.1.4" data-path="evaluation.html"><a href="evaluation.html#adding-complexity-to-dna-evolution-models"><i class="fa fa-check"></i><b>6.1.4</b> Adding complexity to DNA evolution models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="evaluation.html"><a href="evaluation.html#bootstrapping-alignments"><i class="fa fa-check"></i><b>6.2.1</b> Bootstrapping alignments</a></li>
+<li class="chapter" data-level="6.2.2" data-path="evaluation.html"><a href="evaluation.html#summarizing-tree-sets"><i class="fa fa-check"></i><b>6.2.2</b> Summarizing tree sets</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -233,16 +241,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 6</span> Evaluation</h1>
 <div id="model-evaluation" class="section level2">
 <h2><span class="header-section-number">6.1</span> Model evaluation</h2>
+<p>I have introduced the use of models of DNA evolution for simulation and inference, but I haven’t explained how to select a model. Given a dataset, consisting of aligned DNA sequences for a set of taxa that correspond to tips on a phylogeny, how do you decide which model to use?</p>
+<div id="model-structure" class="section level3">
+<h3><span class="header-section-number">6.1.1</span> Model structure</h3>
+<p>Each model parameters can be treated in one of at least three ways <span class="citation">(Hohna et al. <a href="#ref-Hohna2014" role="doc-biblioref">2014</a>)</span>:</p>
+<ul>
+<li><p>Constant. The parameter is set to a specific value before the analysis and is not free to vary.</p></li>
+<li><p>Stochastic. The parameter is free to vary in the analysis. This allows the value to be estimated from the data as part of the inference process.</p></li>
+<li><p>Deterministic. The parameter value depends on the values of other parameters according to specified relationships to other parameter values. Their value can vary, but it is determined by the value of other parameters and cannot be set independently from them.</p></li>
+</ul>
+<p>The most widely used DNA sequence evolution models include the General Time Reversible model and its derivatives (Section <a href="simulation.html#expanding-the-models">3.4</a>). The GTR model 11 parameters (Figure <a href="evaluation.html#fig:evaluation-models-nested">6.1</a>). These include the global rate <span class="math inline">\(\mu\)</span> used to tune the overall rate of evolution. Next come the relative rate parameters <span class="math inline">\(a,b,c,d,e,f\)</span> that modify the rates of change between particular nucleotide states, so that they can differ from each other. Finally we have the equilibrium frequencies <span class="math inline">\(\pi_A,\pi_C,\pi_G,\pi_T\)</span>.</p>
+<p>These parameters are treated as follows in the GTR model (Figure <a href="evaluation.html#fig:evaluation-models-nested">6.1</a>):</p>
+<ul>
+<li><p><span class="math inline">\(\mu\)</span> is constant. With <span class="math inline">\(\mu=1\)</span>, the edge lengths are in units of expected evolutionary change.</p></li>
+<li><p>The six rate parameters are constrained such that <span class="math inline">\(a+b+c+d+e+f=6\)</span>. If they were all free to vary, than values other than 6 would lead to changes in the global rate rather than the relative rates. Imagine setting them all to <span class="math inline">\(10\)</span>, for example. This would be equivalent to setting them all to 1 and setting <span class="math inline">\(\mu=10\)</span>. This mathematical relationship between the relative rate parameters means that only five of them can vary independently, because the sixth will depend on the other five and the fact that they all sum to 6. This means that five of the rate parameters are stochastic, and one is deterministic. For our purposes it doesn’t matter which one is deterministic, only that one of them is, so I’ll treat <span class="math inline">\(f\)</span> as the deterministic rate parameter.</p></li>
+<li><p>The four equilibrium frequencies are constrained such that <span class="math inline">\(\pi_A+\pi_C+\pi_G+\pi_T=1\)</span>. This is because they are exclusive frequencies, and there are no other possible states. Given that every site must be an A, C, G, or T, their frequencies must sum to <span class="math inline">\(1\)</span>. This mathematical relationship between the equilibrium frequency parameters means that only three of them can vary independently – three are stochastic and one is deterministic. Again, it doesn’t matter which one is deterministic, only how many are stochastic, so I’ll treat <span class="math inline">\(\pi_A\)</span> as the deterministic parameter.</p></li>
+</ul>
 <div class="figure"><span id="fig:evaluation-models-nested"></span>
-<img src="figures/models_dna.png" alt="A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis) ir deterministic (their value depends on the value of other parameters according to specified relationships). The models are listed from top to bottom by increasing nestedness. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014). See the [iqtree DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models."  />
+<img src="figures/models_dna.png" alt="A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis) ir deterministic (their value depends on the value of other parameters according to specified relationships). Here $\mu=1$, such that the edge lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014). See the [iqtree DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models."  />
 <p class="caption">
-Figure 6.1: A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis) ir deterministic (their value depends on the value of other parameters according to specified relationships). The models are listed from top to bottom by increasing nestedness. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014). See the <a href="http://www.iqtree.org/doc/Substitution-Models#dna-models">iqtree DNA model documentation</a> for a longer list of models.
+Figure 6.1: A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis) ir deterministic (their value depends on the value of other parameters according to specified relationships). Here <span class="math inline">\(\mu=1\)</span>, such that the edge lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014). See the <a href="http://www.iqtree.org/doc/Substitution-Models#dna-models">iqtree DNA model documentation</a> for a longer list of models.
 </p>
+</div>
+<p>The number of stochastic parameters in a model is referred to as the degrees of freedom, <span class="math inline">\(df\)</span>. You can think of it is the number of knobs that can be turned freely. Models that have higher degrees of freedom are often referred to as more complex than models with fewer degrees of freedom.</p>
+<p>The GTR model has <span class="math inline">\(df=8\)</span>. There are <span class="math inline">\(5\)</span> stochastic relative rate parameters and <span class="math inline">\(3\)</span> stochastic equilibrium frequencies (Figure <a href="evaluation.html#fig:evaluation-models-nested">6.1</a>). The other models we have seen are nested within this. By nested I mean that they can take on a smaller subset of the values that the more complex model can. Models that are nested within other models have a smaller degree of freedom.</p>
+<p>The HKY85 model has <span class="math inline">\(df=4\)</span> (Figure <a href="evaluation.html#fig:evaluation-models-nested">6.1</a>). There is <span class="math inline">\(1\)</span> stochastic relative rate parameter, which determines the transition to transversion ratio. There are the same <span class="math inline">\(3\)</span> stochastic equilibrium frequency parameters as in the GTR model. There are many values that a GTR model can take that an HKY85 model cannot, for example <span class="math inline">\(b\)</span> can differ from <span class="math inline">\(e\)</span> in GTR but not in HKY85. Every value that HKY85 can take can also be taken by GTR. For example, in HKY85 <span class="math inline">\(b=e\)</span>, and in GTR <span class="math inline">\(b\)</span> and <span class="math inline">\(e\)</span> are independent stochastic variables that can be different or that can take on the same value. Because every possible value of HKY85 is also possible in GTR, and GTR has more degrees of freedom than GTR, HKY85 is nested within GTR.</p>
+<p>Likewise, F81 is nested within HKY85 (and therefore GTR as well). It has <span class="math inline">\(df=3\)</span>, the same <span class="math inline">\(3\)</span> stochastic equilibrium frequency parameters as in the GTR and HKY85 models. All the relative rates are constant and set to <span class="math inline">\(1\)</span>. Any value that F81 can take can also be taken by HKY85 or GTR.</p>
+<p>The first model we introduced, JC, has <span class="math inline">\(df=0\)</span>. All the relative rates are constant at <span class="math inline">\(1\)</span>, and all the equilibrium frequencies are constant at <span class="math inline">\(1\)</span>. In typical use, <span class="math inline">\(mu=1\)</span>. All the other models mentioned above have stochastic parameters that can take on these values, so JC is nested within them all.</p>
+<p>Though nested models always have different degrees of freedom, there is no guarantee that models with different degrees of freedom have a nested relationship. It could be that the simpler model has some stochastic parameters that are not stochastic in the more complex model, even though the more complex model has a greater number of free parameters overall. That would allow the simpler model to take on values that the more complex model cannot, violating the nested relationship. When evaluating nestedness it is therefore critical to consider model structure, not just the degrees of freedom.</p>
+</div>
+<div id="model-likelihood" class="section level3">
+<h3><span class="header-section-number">6.1.2</span> Model likelihood</h3>
+<p>In our previous examinations of inference, we used likelihood as an optimality criterion when looking for the phylogeny that best explains our data. Similarly, we can search for the model that best explains the data. We can pick a reasonable phylogeny and evaluate the likelihood of the data under each of the models we would like to consider. In each case we also optimize the model parameter values for each model to make sure we are comparing the models in the best possible light.</p>
+<p>We can then make a series of pairwise comparisons between models, where we consider the ratio of their likelihoods. This is the gist of what is called a likelihood ratio test (LRT). Instead of considering the ratio of likelihoods, we can consider the difference of their log likelihoods since:</p>
+<p><span class="math display" id="eq:logs-diff">\[\begin{equation} 
+  ln(\frac{a}{b}) = ln(a) - ln(b)
+  \tag{6.1}
+\end{equation}\]</span></p>
+<p>If this difference, which we can call <span class="math inline">\(\Delta\)</span>, in log likelihoods is positive, then the model corresponding to <span class="math inline">\(a\)</span> is more likely. If it is negative, then the model corresponding to <span class="math inline">\(b\)</span> is more likely.</p>
+<p>Let’s say we are comparing GTR to HKY85, and we denote the likelihood under GTR as <span class="math inline">\(L_{GTR}\)</span> and the likelihood under HKY85 as <span class="math inline">\(L_{HKY85}\)</span>. We’ll put the model with more parameters, GTR in this case, in the numerator, <em>i.e.</em> set <span class="math inline">\(a\)</span> above to <span class="math inline">\(L_{GTR}\)</span> and <span class="math inline">\(b\)</span> to <span class="math inline">\(L_{HKY85}\)</span>.</p>
+<p><span class="math display" id="eq:logs-gtr-hyk">\[\begin{equation} 
+  \Delta = ln(\frac{L_{GTR}}{L_{HKY85}}) = ln(L_{GTR}) - ln(L_{HKY85})
+  \tag{6.2}
+\end{equation}\]</span></p>
+<p>One way to proceed would then be to select GTR if <span class="math inline">\(\Delta&gt;0\)</span>, and HKY85 if <span class="math inline">\(\Delta&lt;0\)</span>. It wouldn’t be a good way to go, though, since it would pick GTR every single time. The reason is that HKY85 is nested within GTR. That means that the best possible likelihood under HKY85 is also available under GTR. Because it has more degrees of freedom, GTR has many other possible values, and chances are very good that one of those will be more likely than the parameter values that were most likely under HKY85. If comparing two nested models, the model with more degrees of freedom will never have a likelihood lower than the simpler model.</p>
+<p>This would seem to imply that more complex models are always better, but they most certainly are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn’t estimate an infinite number of parameters from a finite dataset – there wouldn’t be enough information to independently assess each parameter. But there are challenges far short of this extreme example. If we add too many model parameters, we can over-fit. Essentially, if there are a very large number of model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and edge length based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.</p>
+<p>When comparing nested models, the question therefore isn’t whether one model has higher likelihood than the other, but whether the increase in likelihood one gets from adding parameters is worth the cost of adding the parameters. There are a few different ways to make this cost/benefit analysis.</p>
+<p>The simplest is to slightly modify the way we compare the log likelihoods, so that their difference is distributed according to a <span class="math inline">\(\chi^2\)</span> distribution with degrees of freedom equal to the difference in degrees of freedom of the models:</p>
+<p><span class="math display" id="eq:lrt">\[\begin{equation} 
+  \delta = 2(ln(L_{1}) - ln(L_{0}))
+  \tag{6.3}
+\end{equation}\]</span></p>
+<p>We can compare this test statistic <span class="math inline">\(\delta\)</span> to the appropriate <span class="math inline">\(\chi^2\)</span> distribution to assess if the more complex model has a significantly greater likelihood. If not, we stick with the simpler model. It is important to note that it is only appropriate for comparing <em>nested</em> models.</p>
+<p>There are a few challenges to applying the LRT to model selection in phylogenetics <span class="citation">(Posada and Buckley <a href="#ref-posada2004model" role="doc-biblioref">2004</a>)</span>. One issue is that the test presumes that one of the models is correct <span class="citation">(Zhang <a href="#ref-zhang1999performance" role="doc-biblioref">1999</a>)</span>, but in phylogenetics models are always simplifications of the evolutionary process at hand. The impact of violating this assumption varies across data sets and analyses, but can lead do undesirable behavior in real-world applications.</p>
+<p>There are two other approaches commonly used in phylogenetic model selection. Where <span class="math inline">\(L_i\)</span> is the likelihood under model <span class="math inline">\(i\)</span>, <span class="math inline">\(k_i\)</span> is the degrees of freedom for the model, and <span class="math inline">\(n\)</span> is sample size (<em>e.g.</em> number of sites in the alignment), these are the Akaike Information Criterion (AIC):</p>
+<p><span class="math display" id="eq:aic">\[\begin{equation} 
+  AIC_i = -2(ln(L_i) + 2k_i
+  \tag{6.4}
+\end{equation}\]</span></p>
+<p>And the Bayesian Information Criterion (BIC):</p>
+<p><span class="math display" id="eq:aic">\[\begin{equation} 
+  BIC_i = -2(ln(L_i) + k_iln(n)
+  \tag{6.4}
+\end{equation}\]</span></p>
+<p>To apply either of these criteria, they are calculated for each model and the model with the <em>lowest</em> value is selected. Adding parameters increases the value, penalizing any increase in likelihood they provide.</p>
+<p>To decide whether to use LRT, AIC, or BIC model selection criteria, you need to run a model selection criterion selection analysis. Just kidding. To decide which to use, you should apply your knowledge of phylogenetic methods critically. In many cases, these different approaches will lead to very similar decisions about model selection. As an example of a fairly typical approach, the program iqtree runs AIC and BIC analyses, but proceeds under the model selected by BIC unless you explicitly step in to apply a different model. If, on inspection of the analysis results, you find that AIC selects a very different model, it would be prudent to run your analyses under that model as well to see if it leads to differences that are relevant to the questions that motivate your project.</p>
+</div>
+<div id="evaluating-models" class="section level3">
+<h3><span class="header-section-number">6.1.3</span> Evaluating models</h3>
+</div>
+<div id="adding-complexity-to-dna-evolution-models" class="section level3">
+<h3><span class="header-section-number">6.1.4</span> Adding complexity to DNA evolution models</h3>
 </div>
 </div>
 <div id="topological-evaluation" class="section level2">
 <h2><span class="header-section-number">6.2</span> Topological evaluation</h2>
+<div id="bootstrapping-alignments" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Bootstrapping alignments</h3>
+</div>
+<div id="summarizing-tree-sets" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Summarizing tree sets</h3>
 
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Hohna2014">
+<p>Hohna, S., T. A. Heath, B. Boussau, M. J. Landis, F. Ronquist, and J. P. Huelsenbeck. 2014. “Probabilistic Graphical Model Representation in Phylogenetics.” Journal Article. <em>Syst Biol</em> 63 (5): 753–71. <a href="https://doi.org/10.1093/sysbio/syu039">https://doi.org/10.1093/sysbio/syu039</a>.</p>
+</div>
+<div id="ref-posada2004model">
+<p>Posada, David, and Thomas R Buckley. 2004. “Model Selection and Model Averaging in Phylogenetics: Advantages of Akaike Information Criterion and Bayesian Approaches over Likelihood Ratio Tests.” <em>Systematic Biology</em> 53 (5): 793–808. <a href="https://doi.org/10.1080/10635150490522304">https://doi.org/10.1080/10635150490522304</a>.</p>
+</div>
+<div id="ref-zhang1999performance">
+<p>Zhang, Jianzhi. 1999. “Performance of Likelihood Ratio Tests of Evolutionary Hypotheses Under Inadequate Substitution Models.” <em>Molecular Biology and Evolution</em> 16 (6): 868–75. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026171">https://doi.org/10.1093/oxfordjournals.molbev.a026171</a>.</p>
 </div>
 </div>
             </section>

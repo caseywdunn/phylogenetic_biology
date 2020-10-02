@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-10-01" />
+<meta name="date" content="2020-10-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -205,8 +205,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a><ul>
-<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a></li>
-<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a></li>
+<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="evaluation.html"><a href="evaluation.html#model-structure"><i class="fa fa-check"></i><b>6.1.1</b> Model structure</a></li>
+<li class="chapter" data-level="6.1.2" data-path="evaluation.html"><a href="evaluation.html#model-likelihood"><i class="fa fa-check"></i><b>6.1.2</b> Model likelihood</a></li>
+<li class="chapter" data-level="6.1.3" data-path="evaluation.html"><a href="evaluation.html#evaluating-models"><i class="fa fa-check"></i><b>6.1.3</b> Evaluating models</a></li>
+<li class="chapter" data-level="6.1.4" data-path="evaluation.html"><a href="evaluation.html#adding-complexity-to-dna-evolution-models"><i class="fa fa-check"></i><b>6.1.4</b> Adding complexity to DNA evolution models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="evaluation.html"><a href="evaluation.html#bootstrapping-alignments"><i class="fa fa-check"></i><b>6.2.1</b> Bootstrapping alignments</a></li>
+<li class="chapter" data-level="6.2.2" data-path="evaluation.html"><a href="evaluation.html#summarizing-tree-sets"><i class="fa fa-check"></i><b>6.2.2</b> Summarizing tree sets</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -232,7 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Phylogenetic Biology</h1>
 <p class="author"><em>Casey W. Dunn</em></p>
-<p class="date"><em>2020-10-01</em></p>
+<p class="date"><em>2020-10-02</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
@@ -279,7 +287,7 @@ Hillis, C Moritz, &amp; B. K. Mable. <a href="http://www.sinauer.com/detail.php?
 </div>
 <div id="software-versions" class="section level2">
 <h2><span class="header-section-number">0.3</span> Software versions</h2>
-<p>This book was rendered from the source code on Thu Oct 01 23:00:02 2020 with the following R package versions.</p>
+<p>This book was rendered from the source code on Fri Oct 02 15:06:33 2020 with the following R package versions.</p>
 <pre><code>R version 4.0.2 (2020-06-22)
 Platform: x86_64-apple-darwin17.0 (64-bit)
 Running under: macOS Catalina 10.15.7
