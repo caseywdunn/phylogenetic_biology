@@ -1,9 +1,0 @@
-# Character evolution
-
-Comparative biology
-
-Reconstructing a single trait on trees
-
-Trait correlation
-
-Models of character change, including rate
