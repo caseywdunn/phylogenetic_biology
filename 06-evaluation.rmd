@@ -1,0 +1,13 @@
+# Evaluation
+
+## Model evaluation
+
+```{r evaluation-models-nested, echo=FALSE, fig.cap="A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis) ir deterministic (their value depends on the value of other parameters according to specified relationships). The models are listed from top to bottom by increasing nestedness. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014). See the [iqtree DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models."}
+
+knitr::include_graphics("figures/models_dna.png")
+
+```
+
+
+
+## Topological evaluation

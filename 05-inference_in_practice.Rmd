@@ -121,6 +121,7 @@ knitr::include_graphics("figures/cnidaria_taxonomy_browser.png")
 
 Based on this overview, you can assess which types of data (*i.e.*, which data produced by which enrichment strategy) are best for advancing your question with publicly available data. All the PCR data and most of the raw sequence data will usually be available here, but many assemblies and processed data for whole genomes, transcriptomes, and other high-throughput datasets may not be. The best practice when working with these data is to take a deep dive into the recent literature and see if these intermediate products were deposited in another public archive, or contact authors for more details.
 
+
 ## Homologous sites
 
 Once you have collected homologous sequences for one or more genome regions across your taxa of interest, you next need to identify homologous nucleotide sites within these regions. This process is referred to as multiple sequence alignment (MSA). Rather than rely on explicit models of molecular evolution, multiple sequence alignment usually relies on similarities between sequences. The general idea is to slide the sequences along each other and insert gaps as needed so that similarity at each site is optimized while reducing the number of gaps introduced. 
