@@ -118,6 +118,34 @@ Most methods that evaluate topologies generate a large set of phylogenies, which
 
 Edge frequencies are far more useful. It is helpful to think of an edge as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the edge, and those on the other. We will consider two edges to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of edges deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.
 
+```{r eval=FALSE}
+text_a = '((A,B),((C,D),E),(F,G));'
+text_b = '((A,B),((C,D),E),(F,G));'
+text_c = '((A,B),(C,D),(E,(F,G)));'
+text_d = '((A,B),(C,(D,E)),(F,G));'
+
+text_focal = '(A,((C,D),E),(B,(F,G)));'
+
+
+phy_a = read.tree( text=text_a )
+phy_b = read.tree( text=text_b )
+phy_c = read.tree( text=text_c )
+phy_d = read.tree( text=text_d )
+phy_focal = read.tree( text=text_focal )
+
+grid.arrange(
+  ggtree(phy_a) + geom_tiplab( aes(label=label)), 
+  ggtree(phy_b) + geom_tiplab( aes(label=label)), 
+  ggtree(phy_c) + geom_tiplab( aes(label=label)),
+  ggtree(phy_d) + geom_tiplab( aes(label=label)),
+  ggtree(phy_focal) + geom_tiplab( aes(label=label)),
+  ncol=2)
+
+
+```
+
+
+
 We can consider each edge in the focal phylogeny independently. For a given focal edge, we count the fraction of phylogenies in the sample that have the same edge, as determined by producing an identical split in taxa. We consider this frequency as the support for the focal edge. If the frequency is 1, the edge was in all the phylogenies in the sample. If it is zero, it wasn't present in any of the phylogenies in the sample. The interpretation of these frequencies, which are often reported as percents, depends on the method that was used to generate the sample.
 
 It should be noted that these support values are often referred to as "nodal support values", and are often drawn onto nodes. This is unfortunate, as they are edge support values. They are just commonly associated with child node of the edge rather than the edge itself. This obscures their meaning, and leads to serious problems when trees are re-rooted [@10.1093/molbev/msx055].
@@ -128,6 +156,11 @@ It should be noted that these support values are often referred to as "nodal sup
 The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap [@felsenstein1985confidence]. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with $n$ columns, bootstrapping generates a new matrix, also with $n$ columns, by resampling from the the original matrix with replacement. Some columns from the original matrix won't be sampled at all, some will be sampled once, and some will be sampled multiple times.
 
 Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each edge of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. An edge frequency of 100% indicates that an edge is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
+
+
+
+
+
 
 Note that I am not using the term "significance" when referring to bootstrap support. This is because bootstraps don't have a clear statistical interpretation. It is a scale that varies from $0$ to $1$, but is not itself a significance. It just indicates how frequently an edge is recovered when the data columns are resampled. This gives a sense of how broad support is for the edge across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.
 
