@@ -116,7 +116,7 @@ Before we get into how to assess support for a phylogenetic hypothesis, it use h
 
 Most methods that evaluate topologies generate a large set of phylogenies, which I'll call the *sample*. Assessing support for a feature of the focal topology is a matter of assessing the frequency of phylogenies in the sample that also have that feature. We could assess the support for the focal tree as a whole by asking how frequent identical topologies are in the sample. But support can often be strong in one part of a phylogeny and weak in another. Reporting equivalence of the entire topology provides no window into that variation. This approach would also break down as taxa are added, which quickly increases them number of possible topologies and reduces the chances of any two analyses returning the exact same topologies, given the variation that is inherent in heuristic searches.
 
-Edge frequencies are far more useful. It is helpful to think of an edge as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the edge, and those on the other. We will consider two edges to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of edges deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.
+Edge frequencies are far more useful. It is helpful to think of an edge as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the edge, and those on the other (Figure \@ref(fig:eval-splits)). We will consider two edges to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of edges deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.
 
 ```{r eval=FALSE}
 text_a = '((A,B),((C,D),E),(F,G));'
@@ -143,6 +143,13 @@ grid.arrange(
 
 
 ```
+
+```{r eval-splits, echo=FALSE, fig.cap="Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is an edge, with the identification of the edge based on which taxa are split from each other by the edge. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the edges in the focal topology."}
+
+knitr::include_graphics("figures/splits.png")
+
+```
+
 
 
 
