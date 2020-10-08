@@ -1,0 +1,12 @@
+# Statistical fundamentals
+
+## Probability theory
+
+### Joint probability
+
+### Exclusive probability
+
+### Conditional probability
+
+Conditional probability
+

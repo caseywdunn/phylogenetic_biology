@@ -4,6 +4,7 @@ output_dir: "docs"
 language:
   ui:
     chapter_name: "Chapter "
+    appendix_name: "Appendix "
 
 rmd_files: [
   "index.rmd", 
@@ -13,6 +14,10 @@ rmd_files: [
   "inference.rmd", 
   "inference_in_practice.rmd",
   "evaluation.rmd",
+  "bayes.rmd",
+  
+  "appendix.rmd",
+  "stats.rmd",
   
   "references.rmd"
   ]
