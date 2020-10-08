@@ -35,7 +35,7 @@ helpful to turn to math.
 
 ```{r trees-graph, echo=FALSE, fig.cap="Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating."}
 
-knitr::include_graphics("figures/graph.svg")
+knitr::include_graphics("figures/graph.png")
 
 ```
 
@@ -51,7 +51,7 @@ etc...
 
 ```{r trees-graph-tree, echo=FALSE, fig.cap="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents)."}
 
-knitr::include_graphics("figures/graph_tree.svg")
+knitr::include_graphics("figures/graph_tree.png")
 
 ```
 

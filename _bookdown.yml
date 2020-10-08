@@ -1,5 +1,5 @@
 book_filename: "phylogenetic_biology"
-delete_merged_file: true
+delete_merged_file: false
 output_dir: "docs"
 language:
   ui:

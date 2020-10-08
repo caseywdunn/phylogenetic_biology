@@ -1,6 +1,9 @@
 phylogenetic_biology.Rmd
 phylogenetic_biology.pdf
 phylogenetic_biology_cache/
+phylogenetic_biology.knit.md
+phylogenetic_biology.utf8.md
+
 
 *.tex
 *.log

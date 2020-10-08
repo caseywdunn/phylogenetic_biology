@@ -186,7 +186,7 @@ example_prob = prod(p)
 
 ```
 
-The joint probability of all these states can now be calculated as the product of each state. This comes out to $`r example_prob`$. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of `r round(example_prob*1e6,1)` times out of a million simulations.
+The joint probability of all these states can now be calculated as the product of each state. This comes out to $`r example_prob`$. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of $`r round(example_prob*1e6,1)`$ times out of a million simulations.
 
 Here we have used much of the same machinery as we did in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.
 
