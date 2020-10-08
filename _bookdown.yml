@@ -4,3 +4,15 @@ output_dir: "docs"
 language:
   ui:
     chapter_name: "Chapter "
+
+rmd_files: [
+  "index.rmd", 
+  "intro.rmd", 
+  "phylogenies.rmd",
+  "simulation.rmd",
+  "inference.rmd", 
+  "inference_in_practice.rmd",
+  "evaluation.rmd",
+  
+  "references.rmd"
+  ]
