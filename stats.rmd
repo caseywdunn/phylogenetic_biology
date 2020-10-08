@@ -6,7 +6,7 @@
 
 ### Exclusive probability
 
-### Conditional probability
+### Conditional probability {#stats-conditional}
 
 Conditional probability
 

@@ -37,7 +37,7 @@ In order to make informative comparisons across species, both for inferring phyl
 
 ```{r intro-concepts, echo=FALSE, fig.cap="(A) The primary components of a phylogenetic analysis. This mammal phylogeny and edge lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components."}
 
-knitr::include_graphics("figures/phylogenetic_analyses.svg")
+knitr::include_graphics("figures/phylogenetic_analyses.png")
 
 ```
 
