@@ -88,4 +88,3 @@ With this framework in mind, let's take a look at a sampling of recent phylogene
 
 This is a very exciting time in phylogenetic biology. For many years most studies followed a few basic templates. With the development of new phylogenetic methods, new tools to collect high throughput character data, and a growing interest in phylogenetic questions, the field is now in its most interesting stage of development and application yet.
 
-## Additional resources

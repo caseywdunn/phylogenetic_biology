@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Simulation
 
 Here we will build the machinery to implement models of DNA evolution. Our first 
@@ -247,7 +252,7 @@ p +
 
 We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-change) and \@ref(eq:sim-change) instead of from actual simulations of changes along branches. 
 
-```{r sim-sat-analytical, cache=TRUE, fig.cap="Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \\@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \\@ref(eq:sim-change). At time=0 (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." }
+```{r sim-sat-analytical, cache=TRUE, fig.cap="Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \\@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \\@ref(eq:sim-change). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." }
 
   t_values = seq( 0, 100, 10 )
   

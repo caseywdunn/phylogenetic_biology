@@ -1,12 +1,23 @@
-# Statistical fundamentals
+# Statistical and mathematical fundamentals
 
-## Probability theory
+Phylogenetic biology draws on a variety of themes in statistics and mathematics. Given the diverse backgrounds of people coming to phylogenetic biology, one of the challenges of introducing people to this field is ensuring a foundation in these fundamentals. Many people have a solid working grasp of many of these topics, others need a refresher, and some have never seen them.
 
-### Joint probability
+Throughout the text I have covered some of these fundamentals, but here I provide a deeper grounding and links to additional resources.
 
-### Exclusive probability
 
-### Conditional probability {#stats-conditional}
+## General statistics {#stats-general}
 
-Conditional probability
+I put together this [short summary](https://bitbucket.org/caseywdunn/statistics/raw/master/statistics_in_biology.pdf) of statistical concepts commonly encountered in biology. It is short and technical, with a focus on the relationship between concepts, such as the exponential family of distributions.
+
+## Probability theory {#stats-prob}
+
+
+
+## Bayes theorem {#stats-bayes}
+
+Grant Sanderson provides an excellent introduction to Bayes Theorem and conditional probability in [this video](https://youtu.be/HZGCoVF3YvM). Note that he uses $E$ for Evidence rather than $D$ for Data as is common practice in phylogenetic applications.
+
+[This video](https://youtu.be/R13BD8qKeTg) provides additional perspective, including its application to medical testing.
+
+The [MCMC robot](https://phylogeny.uconn.edu/mcmc-robot/) by Paul Lewis is an excellent interactive introduction to MCMC sampling.
 

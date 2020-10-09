@@ -54,7 +54,20 @@ knitr::write_bib(c(
 
 # Preface {-}
 
-I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses. It is really my lecture notes dessed up in the form of the rough draft of a book.
+I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses. It is really my lecture notes dressed up in the form of the rough draft of a book.
+
+## Additional resources
+
+Please see the appendices for a variety of additional resources.
+
+## Acknowledgements
+
+Thanks in particular to the students of Yale EEB354 in the fall of 2020. This book started as a collection of lecture notes for this course, the first that I taught fully online. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course, for her incredible contributions to this course and, as a result, this book. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata provided close reads of host chapters, often within hours of completing first drafts.
+
+## Dedication
+
+This book is dedicated to my sister Jenny Dunn, who has been there every step of the way. I am so grateful for her adventurous spirit, quick mind, and shared love of life. Thank you Jenny.
+
 
 ## Source code
 
@@ -105,7 +118,7 @@ The following books provide general computational background for the topics cove
 
 ## Software versions
 
-This book was rendered from the source code on `r format( Sys.time(), "%a %b %d %X %Y" )` with the following R package versions.
+This book was rendered from the source code on $`r format( Sys.time(), "%a %b %d %X %Y" )`$ with the following R package versions.
 
 ```{r session_summary, echo=FALSE, comment=NA}
 	sessionInfo()
