@@ -7,6 +7,11 @@ phylogenetic_biology.utf8.md
 
 *.tex
 *.log
+*.aux
+*.out
+*.toc
+
+explorations/
 
 .Rproj.user
 .Rhistory
