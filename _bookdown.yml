@@ -15,6 +15,7 @@ rmd_files: [
   "inference_in_practice.rmd",
   "evaluation.rmd",
   "bayes.rmd",
+  "character_types.rmd",
   
   "appendix.rmd",
   "stats.rmd",

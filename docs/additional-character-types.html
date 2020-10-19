@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 7 Bayesian phylognetics | Phylogenetic Biology</title>
+  <title>Chapter 8 Additional character types | Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 7 Bayesian phylognetics | Phylogenetic Biology" />
+  <meta property="og:title" content="Chapter 8 Additional character types | Phylogenetic Biology" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="caseywdunn/phylogenetic_biology" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 7 Bayesian phylognetics | Phylogenetic Biology" />
+  <meta name="twitter:title" content="Chapter 8 Additional character types | Phylogenetic Biology" />
   <meta name="twitter:site" content="@caseywdunn" />
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="evaluation.html"/>
-<link rel="next" href="additional-character-types.html"/>
+<link rel="prev" href="bayesian-phylognetics.html"/>
+<link rel="next" href="statistical-and-mathematical-fundamentals.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -261,66 +261,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bayesian-phylognetics" class="section level1">
-<h1><span class="header-section-number">Chapter 7</span> Bayesian phylognetics</h1>
-<p>Let’s take stock of what we have covered so far. We introduced models, and how to simulate data with them. We then explored how to use models to calculate the likelihood – the probability of the observed data given the topology, edge lengths, model parameters, and model. We used likelihood as an optimality criterion in heuristic searches to find the Maximum Likelihood (ML) phylogeny. We introduced the methods to calculate the frequency of edges on a focal topology, like the ML topology, in a sample of phylogenies. We showed how to generate a sample of phylogenies by running ML searches on bootstrapped matrices, and used this to calculate bootstrap support for each edge in the ML phylogeny.</p>
-<p>ML and bootstraps are widely used and are a critical foundation for many phylogenetic analyses. There are, however, a few things about analysis frameworks based on optimality criteria, ML, and bootstraps that are not ideal:</p>
-<ul>
-<li><p>Whenever we apply an optimality criterion, such as ML or parsimony, to identify the “best” phylogeny, that doesn’t tell us anything about how much better this optimal phylogeny is than other hypotheses. If it is the best phylogeny by far, then this single phylogeny tells us a lot about the the phylogenetic information in our topology. If however, there are multiple phylogenies that are almost as good as the best one, as is often the case, then we would need to know about these others as well to have a good understanding of what hypotheses are consistent with our data.</p></li>
-<li><p>Likelihood is the probability of the data given the phylogenetic hypothesis. The probability of the data under the ML hypothesis will be exceptionally low, often far less than one in a million, since the ML hypothesis could generate many other data as well. This is because we are evaluating the probability of the data given the hypothesis, but often what we really want to know is the probability of the hypothesis given the data. The two are quite different, but are related. It would be nice to be more explicit about that relationship.</p></li>
-<li><p>Bootstraps are a convenient way to generate a sample of phylogenies, but their statistical interpretation is not clear. The frequencies of bootstrap supports don’t correspond in a clear way to probabilities of our hypothesis, but instead tell us something about how frequently features of the phylogeny are supported when we resample the data. In practice it turns out this is a good proxy for phylogenetic support, but it would be nice to have support values that have a more explicit statistical interpretation.</p></li>
-</ul>
-<p>All analyses include a variety of tradeoffs, and the downsides of the issues listed above are often mitigated by the multiple upsides of a ML bootstrap analysis framework. It also greatly helps that there are decades of experience with such analyses that help contextualize and interpret ML bootstrap results. This work has also produced ML methods and software packages that are highly optimized for computational efficiency, enabling the routine application of these approaches to very large datasets.</p>
-<p>Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above. Rather than focus on a single “best” topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters.</p>
-<div id="bayesian-statistics" class="section level2">
-<h2><span class="header-section-number">7.1</span> Bayesian statistics</h2>
-<p>Bayesian statistics is much older than many other domains of statistics, but have recently seen a surge in use as computational and methodological advances allow them to be applied more effectively to a wider number of problems. The basic intuition is that our understanding of the world are not drawn from the data alone. Instead, the data are used to update our prior understanding of the world. This updated understanding is referred to as the posterior. There are many excellent introductions to Bayesian statistics, so I will not provide a full derivation here. If you would like more of a background, please consult Appendix <a href="statistical-and-mathematical-fundamentals.html#stats-bayes">A.3</a>.</p>
-<p>Bayes’ theorem establishes the the following relationships:</p>
-<p><span class="math display" id="eq:bayes-theorem">\[\begin{equation} 
-  P(H|D) = \frac{P(D|H)P(H)}{P(D)} 
-  \tag{7.1}
-\end{equation}\]</span></p>
-<p><span class="math inline">\(P(H|D)\)</span>, read as “the probability of the hypothesis given the data”, is the posterior probability of a given hypothesis. It takes into account prior expectations and new insight from the data. This posterior probability is what we are trying to estimate. We have already seen <span class="math inline">\(P(D|H)\)</span>, read as “the probability of the data given the hypothesis”. This is the likelihood, and from previous chapters we know how to calculate it. <span class="math inline">\(P(H)\)</span> and <span class="math inline">\(P(D)\)</span> are our prior probabilities, our world view before we collected data. <span class="math inline">\(P(H)\)</span> is the prior probability of the hypothesis, without considering the data. <span class="math inline">\(P(D)\)</span> is the prior probability of the data, without considering the hypothesis.</p>
-<p>Let’s plug in a few numbers to get some intuition for the behavior of Bayes’ theorem. First, consider the case where <span class="math inline">\(P(H)=0\)</span>, <em>i.e.</em> you assign a prior probability of <span class="math inline">\(0\)</span> to the hypothesis. The posterior probability, <span class="math inline">\(P(H|D)\)</span>, will then also be <span class="math inline">\(0\)</span>. This shows that if you believe ahead of collecting data that the hypothesis is absolutely impossible, no amount of data can change your mind and your updated hypothesis, the posterior, will also be <span class="math inline">\(0\)</span>.</p>
-<p>Second, let’s consider the case where the data are just as likely under the hypothesis is they are in general. This would be like having a medical test for a specific condition where the test was so bad that the data (test result) didn’t depend in any way on the hypothesis (the presence of the condition). For example, the test returns a positive 10% of the time regardless of whether you have the condition or not. In that situation, <span class="math inline">\(P(D|H)=P(D)\)</span>. Since <span class="math inline">\(P(D|H)\)</span> is in the numerator and <span class="math inline">\(P(D)\)</span> is in the denominator, they cancel out. That leaves <span class="math inline">\(P(H|D)=P(H)\)</span> – the posterior probability of the hypothesis is the same as the prior on the hypothesis. The data didn’t change our understanding of the hypothesis at all. This is the behavior we want when the data have no information relevant to the hypothesis.</p>
-<p>Third, consider a case where the data are perfect indicators of the hypothesis. You get a specific pattern in the data whenever, and only when, the hypothesis is true. Because the hypothesis and data are perfectly linked, <span class="math inline">\(P(D)=P(H)\)</span> the priors cancel out. In this case, <span class="math inline">\(P(H|D)=P(D|H)\)</span>, <em>i.e.</em> the posterior becomes equal to the likelihood. This never happens in phylogenetic inference, since any given phylogeny could always generate multiple sequences at the tips. But it is the case that as the data become more informative the priors have less impact on the posterior.</p>
+<div id="additional-character-types" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Additional character types</h1>
+<p>Character types are fundamental to phylogenetics. Specifying the character types is a critical aspect of how we articulate our ontological perspective (<em>i.e.</em>, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory <span class="citation">(Houle et al. <a href="#ref-houle2011measurement" role="doc-biblioref">2011</a>)</span> – a field that sits at the intersection of math, statistics, and philosophy that concerns the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like “measurement theory”, you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually an exciting and grounding framework for understanding many of the central aspects of what we do in science.</p>
+<div class="figure"><span id="fig:characters-scaletype"></span>
+<img src="figures/scale-type.png" alt="Scale types from measurement theory that are relevant to biology. Permissible transformations indicate the mathematical operations that can be performed on measurements of each scale type without distorting their meaning. The Domain indicates the state space, *i.e.* range of possible values. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Reproduced from Table 1 of [@houle2011measurement]."  />
+<p class="caption">
+Figure 8.1: Scale types from measurement theory that are relevant to biology. Permissible transformations indicate the mathematical operations that can be performed on measurements of each scale type without distorting their meaning. The Domain indicates the state space, <em>i.e.</em> range of possible values. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Reproduced from Table 1 of <span class="citation">(Houle et al. <a href="#ref-houle2011measurement" role="doc-biblioref">2011</a>)</span>.
+</p>
 </div>
-<div id="bayesian-phylogenetic-inference" class="section level2">
-<h2><span class="header-section-number">7.2</span> Bayesian phylogenetic inference</h2>
-<p>To calculate the posterior probability of a phylogenetic hypothesis, we need to address all the terms on the right side of Equation <a href="bayesian-phylognetics.html#eq:bayes-theorem">(7.1)</a>. We already know how to calculate <span class="math inline">\(P(D|H)\)</span>, the likelihood. What about <span class="math inline">\(P(H)\)</span> and <span class="math inline">\(P(D)\)</span>? There are a variety of practical approaches to <span class="math inline">\(P(H)\)</span> that have been shown to work well in the context of phylogenetics. These include uniform priors, where all topologies are considered to be equally likely. The priors on edge length can be approximated from an exponential distribution. One of the major take-aways from the past two decades of work on Bayesian phylogenetics is that inference is quite robust to <span class="math inline">\(P(H)\)</span> when the data are informative about the phylogeny, as expected.</p>
-<p>What then, about <span class="math inline">\(P(D)\)</span>? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (<em>e.g.</em>, nucleotide sequences observed at the tips) across all possible topologies and edge lengths. That would be prohibitively computationally expensive to actually do. So we won’t.</p>
-<p>Instead, we will forego dealing with <span class="math inline">\(P(D)\)</span> at all by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling<span class="citation">(Metropolis et al. <a href="#ref-metropolis1953" role="doc-biblioref">1953</a>)</span>. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic <span class="math inline">\(R\)</span> and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.</p>
-<p>Consider the current hypothesis to be <span class="math inline">\(H\)</span>, and the newly proposed hypothesis <span class="math inline">\(H^*\)</span>. We calculate our test statistic as the ratio of the posterior probability of <span class="math inline">\(H^*\)</span> to the prior probability of <span class="math inline">\(H\)</span>:</p>
-<p><span class="math display" id="eq:bayes-mcmc">\[\begin{equation} 
-  R = \frac{P(D|H^*)P(H^*)}{P(D)} \frac{P(D)}{P(D|H)P(H)} = \frac{P(D|H^*)P(H^*)}{P(D|H)P(H)}
-  \tag{7.2}
-\end{equation}\]</span></p>
-<p>Because <span class="math inline">\(P(D)\)</span> doesn’t depend on the hypothesis under consideration, it is the same in both posteriors. Because we are considering a ratio of posteriors, it cancels out. We don’t need to calculate it to derive <span class="math inline">\(R\)</span>.</p>
-<p>The “Markov Chain” in MCMC alludes to the fact that MCMC is a series of repeated events that depends only on the previous step. Each repeated cycle of events, also known as a generation, proceeds as follows:</p>
-<ol style="list-style-type: decimal">
-<li>We have hypothesis <span class="math inline">\(H\)</span></li>
-<li>We propose a new hypothesis <span class="math inline">\(H^*\)</span> by modifying <span class="math inline">\(H\)</span>.</li>
-<li>We calculate <span class="math inline">\(R\)</span> according to Equation <a href="bayesian-phylognetics.html#eq:bayes-mcmc">(7.2)</a></li>
-<li>If <span class="math inline">\(R&gt;1\)</span>, we accept <span class="math inline">\(H^*\)</span>. If If <span class="math inline">\(R&lt;1\)</span>, we accept <span class="math inline">\(H^*\)</span> with probability <span class="math inline">\(R\)</span>. Otherwise, we retain <span class="math inline">\(H\)</span>.</li>
-<li>The result of the step above is added to the posterior sample, and becomes <span class="math inline">\(H\)</span> for the next iteration of the cycle.</li>
-</ol>
-<p>MCMC produces a sample of model parameters and topologies with edge lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as edge frequencies. Unlike bootstraps, though, the frequency of an edge in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that edge, <em>i.e.</em> the probability of the edge given the data. The edge lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.</p>
-<p>There are a variety of practical considerations to implementing a Bayesian phylogenetic analysis with MCMC. These include:</p>
+<p>Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory at large, there are some differences in the nomenclature. What phylogenetic biologists call “character type” is referred to in measurement theory, and many other fields of science, as “scale type”.</p>
+<p>To date we have considered only one specific biological measurement - DNA nucleotide sequence data. Measurements of DNA sequences have the following attributes:</p>
 <ul>
-<li>Selecting the appropriate model. Many of the same considerations we reviewed in the context of likelihood apply here.</li>
-<li>Selecting appropriate priors on topology, edge length, and model parameters.</li>
-<li>Devising an appropriate hypothesis proposal mechanism. If the new hypothesis <span class="math inline">\(H^*\)</span> is too different from <span class="math inline">\(H\)</span>, it will tend to be rejected as <span class="math inline">\(H\)</span> becomes optimized. This will lead to an approximated posterior distribution that is too narrow, leading to overconfidence in a small set of hypotheses. If the steps are too small, then MCMC will tend to get trapped in local optima because they cannot find more distant better optima. There are several approaches to these challenges, including searches with multiple MCMC chains that take different step sizes.</li>
-<li>The very early samples in the chain are not a good estimate of the posterior distribution, because the initial <span class="math inline">\(H\)</span> is
-not necessarily close to a peak in the posterior. The initial samples becore MCMC settles into a stable distribution are therefore discarded as part of a “burn-in” phase.</li>
-<li>Knowing when enough generations have been sampled to adequately approximate the posterior distribution. This is often evaluated by running multiple independent MCMC analyses and stopping them if and when they have converged on similar distributions.</li>
+<li>A DNA character is discrete and unordered. It is discrete because it has a finite number of specific states that it can take on. It is unordered because changes don’t have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types corresponds to a nominal scale type.</li>
+<li>There are 4 possible states, corresponding to each of the 4 nucleotides – <code>A</code>, <code>C</code>, <code>G</code>, and <code>T</code>. This defines the state space of the character, it can take on these particular values and no others.</li>
 </ul>
+<p>There are many other types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types. Changing the state space for discrete characters changes the dimensions of the model matrices we have used. Changing scale types requires entirely new model types, since different mathematical operations are permissible and sensical for different scale types.</p>
+<div id="nominal-scale-types" class="section level2">
+<h2><span class="header-section-number">8.1</span> Nominal scale types</h2>
+<p>There are several other frequent applications of nominal scale types beyond DNA sequences in phylogenetic analyses. The most common include others include other molecular sequence data, but they are also used for discrete unordered morphological character states</p>
+<div id="amino-acids" class="section level3">
+<h3><span class="header-section-number">8.1.1</span> Amino acids</h3>
+<p>Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more model parameters than for DNA data.</p>
+<p>There are a few reasons why protein sequences are often considered rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another reason is that synonymous changes in protein coding DNA sequences quickly saturate for more distant evolutionary comparisons. This makes it difficult to align sequences, and means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.</p>
+</div>
+<div id="codons" class="section level3">
+<h3><span class="header-section-number">8.1.2</span> Codons</h3>
+<p>Since there are 4 possible DNA nucleotides and codons are 3 nucleotides long, there are <span class="math inline">\(4^3=64\)</span> possible codons. Each one of these codons corresponds to a specific amino acid or stop codon. In some cases, it is most interesting to consider each of the 64 codons as a discrete character state. The models then have matrices that have dimensions of 64 (as opposed to 4 for nucleotides and 20 for amino acids).</p>
+</div>
+<div id="morphology" class="section level3">
+<h3><span class="header-section-number">8.1.3</span> Morphology</h3>
+<p>Direct analogs of the DNA sequence evolution models we have explored in previous chapters are often applied to discrete unordered morphological traits, such as the presence or absence of limbs <span class="citation">(Harmon <a href="#ref-harmon2018phylogenetic" role="doc-biblioref">2018</a>, chap. 7)</span>.</p>
+</div>
+</div>
+<div id="ordinal-scale-types" class="section level2">
+<h2><span class="header-section-number">8.2</span> Ordinal scale types</h2>
+<p>Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is a ranking, <em>i.e.</em> some values are larger than others <span class="citation">(Houle et al. <a href="#ref-houle2011measurement" role="doc-biblioref">2011</a>, Table 1)</span>. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. Models for the evolution of ordinal data typically disallow instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of 4 digits.</p>
+</div>
+<div id="continuous-data" class="section level2">
+<h2><span class="header-section-number">8.3</span> Continuous data</h2>
+<p>Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate can take on a value within some range of real numbers. These character states are often lumped together by phylogenetic biologists under the single umbrella of continuous character data, since they can take on any one of an infinite number of values in a continuous range. Measurement theory, on the other hand, identifies multiple scale types that all have continuous values, but that have very different state spaces (<em>i.e.</em>, ranges of values), interpretations, and sensible mathematical interpretations. Many of the critical methodological challenges in phylogenetic biology right now will require distinguishing between the different continuous scale types and developing appropriate models for each.</p>
+<p>The evolution of continuous measurements, regardless of specific scale type, are often modeled with the Brownian Motion (BM) family of models. At any point in time, the value can take an incremental step up or down. There are two parameters - the starting value, and the step size per unit time.</p>
+<p>The use of BM models for phylogenetic analysis of continuous data is a pragmatic choice, as it greatly simplifies many calculations but there are many ways in which BM doesn’t actually describe the evolution of continuous traits. For example, BM can result in a value that is any real number, positive or negative, whereas many biological measurements that are considered in a phylogenetic perspective can only take on positive values. Sometimes these discrepancies have little impact, and sometimes they can lead to entirely wrong conclusions.</p>
+<div id="ratio-scale-type" class="section level3">
+<h3><span class="header-section-number">8.3.1</span> Ratio scale type</h3>
+<p>The most commonly encountered continuous scale type in phylogenetic analyses is the ratio scale type <span class="citation">(Houle et al. <a href="#ref-houle2011measurement" role="doc-biblioref">2011</a>, Table 1)</span>. These measurements can take on values that are positive real numbers. They include many common continuous measurements, such as mass, length, and time interval. The name “ratio scale type” refers to the fact that ratios of these measurements are invariant with respect to units. If the ratio of body lengths of frog A to frog B is 2.38 when measured in centimeters, it will also be 2.38 when measured in inches, miles, or any other unit of length.</p>
+</div>
+<div id="difference-scale-type" class="section level3">
+<h3><span class="header-section-number">8.3.2</span> Difference scale type</h3>
+<p>Ratio scale type data are often log transformed before phylogenetic analysis. This places them on a different scale type - the difference scale type. It is so named because differences are invariant with respect to units.</p>
 
 </div>
 </div>
+</div>
+
+
+
+</div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-metropolis1953">
-<p>Metropolis, Nicholas, Arianna W Rosenbluth, Marshall N Rosenbluth, Augusta H Teller, and Edward Teller. 1953. “Equation of State Calculations by Fast Computing Machines.” <em>The Journal of Chemical Physics</em> 21 (6): 1087–92. <a href="https://doi.org/10.1063/1.1699114">https://doi.org/10.1063/1.1699114</a>.</p>
+<div id="ref-harmon2018phylogenetic">
+<p>Harmon, Luke. 2018. “Phylogenetic Comparative Methods: Learning from Trees.” <a href="https://lukejharmon.github.io/pcm/">https://lukejharmon.github.io/pcm/</a>.</p>
+</div>
+<div id="ref-houle2011measurement">
+<p>Houle, David, Christophe Pélabon, Günter P Wagner, and Thomas F Hansen. 2011. “Measurement and Meaning in Biology.” <em>The Quarterly Review of Biology</em> 86 (1): 3–34. <a href="https://doi.org/10.1086/658408">https://doi.org/10.1086/658408</a>.</p>
 </div>
 </div>
             </section>
@@ -328,8 +332,8 @@ not necessarily close to a peak in the posterior. The initial samples becore MCM
           </div>
         </div>
       </div>
-<a href="evaluation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="additional-character-types.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bayesian-phylognetics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistical-and-mathematical-fundamentals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
