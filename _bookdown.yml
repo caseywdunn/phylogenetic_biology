@@ -16,6 +16,7 @@ rmd_files: [
   "evaluation.rmd",
   "bayes.rmd",
   "character_types.rmd",
+  "time.rmd",
   
   "appendix.rmd",
   "stats.rmd",

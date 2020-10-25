@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-10-19" />
+<meta name="date" content="2020-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,9 +154,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a><ul>
 <li class="chapter" data-level="2.1" data-path="phylogenies.html"><a href="phylogenies.html#phylogenies-are-graphs"><i class="fa fa-check"></i><b>2.1</b> Phylogenies are graphs</a></li>
 <li class="chapter" data-level="2.2" data-path="phylogenies.html"><a href="phylogenies.html#drawing-phylogenies"><i class="fa fa-check"></i><b>2.2</b> Drawing phylogenies</a></li>
-<li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#some-properties-of-trees"><i class="fa fa-check"></i><b>2.3</b> Some properties of trees</a></li>
+<li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of trees</a></li>
 <li class="chapter" data-level="2.4" data-path="phylogenies.html"><a href="phylogenies.html#rotating-nodes"><i class="fa fa-check"></i><b>2.4</b> Rotating nodes</a></li>
-<li class="chapter" data-level="2.5" data-path="phylogenies.html"><a href="phylogenies.html#the-meaning-of-edge-lengths"><i class="fa fa-check"></i><b>2.5</b> The meaning of edge lengths</a></li>
+<li class="chapter" data-level="2.5" data-path="phylogenies.html"><a href="phylogenies.html#trees-edge-lengths"><i class="fa fa-check"></i><b>2.5</b> The meaning of edge lengths</a></li>
 <li class="chapter" data-level="2.6" data-path="phylogenies.html"><a href="phylogenies.html#naming-nodes-and-groups"><i class="fa fa-check"></i><b>2.6</b> Naming nodes and groups</a></li>
 <li class="chapter" data-level="2.7" data-path="phylogenies.html"><a href="phylogenies.html#polytomies"><i class="fa fa-check"></i><b>2.7</b> Polytomies</a></li>
 <li class="chapter" data-level="2.8" data-path="phylogenies.html"><a href="phylogenies.html#rooting"><i class="fa fa-check"></i><b>2.8</b> Rooting</a></li>
@@ -232,6 +232,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="additional-character-types.html"><a href="additional-character-types.html#ratio-scale-type"><i class="fa fa-check"></i><b>8.3.1</b> Ratio scale type</a></li>
 <li class="chapter" data-level="8.3.2" data-path="additional-character-types.html"><a href="additional-character-types.html#difference-scale-type"><i class="fa fa-check"></i><b>8.3.2</b> Difference scale type</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a><ul>
+<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>9.1.1</b> Cladograms</a></li>
+<li class="chapter" data-level="9.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>9.1.2</b> Phylograms</a></li>
+<li class="chapter" data-level="9.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>9.1.3</b> Chronograms</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#clock-like-evolution"><i class="fa fa-check"></i><b>9.2</b> Clock-like evolution</a></li>
+<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#mathematical-implications-of-age-constraints"><i class="fa fa-check"></i><b>9.3.1</b> Mathematical implications of age constraints</a></li>
+<li class="chapter" data-level="9.3.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#constraining-node-ages"><i class="fa fa-check"></i><b>9.3.2</b> Constraining node ages</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -340,7 +352,7 @@ Figure 2.6: The same tree as above, layed out in several different ways.
 </p>
 </div>
 </div>
-<div id="some-properties-of-trees" class="section level2">
+<div id="tree-properties" class="section level2">
 <h2><span class="header-section-number">2.3</span> Some properties of trees</h2>
 <p>In a fully bifurcating phylogeny with <span class="math inline">\(n\)</span> tip nodes, the following will be the case:</p>
 <ul>
@@ -367,7 +379,7 @@ Figure 2.7: The exact same phylogeny, drawn a few times with different node rota
 </p>
 </div>
 </div>
-<div id="the-meaning-of-edge-lengths" class="section level2">
+<div id="trees-edge-lengths" class="section level2">
 <h2><span class="header-section-number">2.5</span> The meaning of edge lengths</h2>
 <p>Another type of variation in phylogeny depiction is the meaning of edge length (Figure <a href="phylogenies.html#fig:trees-types">2.8</a>). A phylogeny where edge lengths are scaled to time is known as a chronogram. Chronograms of organisms all sampled at the same time will be ultrametric, ie the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.</p>
 <p>In many cases we don’t have the information needed to scale edges to time, which requires fossil calibrations. Most published phylogenies therefore scale the edges according to the expected amount of evolutionary change in the characters under consideration. The longer the edge, the greater the expected change. The rate of evolution usually varies a bit across edges, so phylograms are not usually ultrametric.</p>

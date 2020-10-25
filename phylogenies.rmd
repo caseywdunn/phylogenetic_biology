@@ -140,7 +140,7 @@ grid.arrange(
 
 ```
 
-## Some properties of trees
+## Some properties of trees {#tree-properties}
 
 In a fully bifurcating phylogeny with $n$ tip nodes, the following will be the case:
 
@@ -191,7 +191,7 @@ grid.arrange(
 
 ```
 
-## The meaning of edge lengths
+## The meaning of edge lengths {#trees-edge-lengths}
 
 Another type of variation in phylogeny depiction is the meaning of edge length (Figure \@ref(fig:trees-types)). A phylogeny where edge lengths are scaled to time is known as a chronogram. Chronograms of organisms all sampled at the same time will be ultrametric, ie the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
 
@@ -611,7 +611,6 @@ So, in this case edge number 1 (the first row) connects node $`r phylo_tree$edge
 You can discern all sorts of things about the tree from this simple array. The tips are nodes that are in column 2 but not in column 1 (since they aren't parents of any other nodes). The root is the node that is in column 1, but not in column 2 (because it doesn't have a parent). If a node occurs in column 1 more than twice, then it is a polytomy (because it has more than two edges connecting to child nodes). Note that this data structure is intrinsically rooted - there is a parent-child relationship set up between the nodes at each end of each edge. But you can still use it to store unrooted trees by picking an arbitrary internal node as the root, and just keeping track of the fact that you don't know where the root is.
 
 There is one other important piece of information that we specified in the newick files - the tip labels. Those are located in another slot within the `phylo` object:
-
 
 ```{r trees-phylo-label, echo=TRUE}
 phylo_tree$tip.label

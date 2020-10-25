@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Additional character types | Phylogenetic Biology</title>
+  <title>Chapter 9 Phylogenies and time | Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Additional character types | Phylogenetic Biology" />
+  <meta property="og:title" content="Chapter 9 Phylogenies and time | Phylogenetic Biology" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="caseywdunn/phylogenetic_biology" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Additional character types | Phylogenetic Biology" />
+  <meta name="twitter:title" content="Chapter 9 Phylogenies and time | Phylogenetic Biology" />
   <meta name="twitter:site" content="@caseywdunn" />
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="bayesian-phylognetics.html"/>
-<link rel="next" href="phylogenies-and-time.html"/>
+<link rel="prev" href="additional-character-types.html"/>
+<link rel="next" href="statistical-and-mathematical-fundamentals.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -273,75 +273,84 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="additional-character-types" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Additional character types</h1>
-<p>Character types are fundamental to phylogenetics. Specifying the character types is a critical aspect of how we articulate our ontological perspective (<em>i.e.</em>, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory <span class="citation">(Houle et al. <a href="#ref-houle2011measurement" role="doc-biblioref">2011</a>)</span> – a field that sits at the intersection of math, statistics, and philosophy that concerns the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like “measurement theory”, you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually an exciting and grounding framework for understanding many of the central aspects of what we do in science.</p>
-<div class="figure"><span id="fig:characters-scaletype"></span>
-<img src="figures/scale-type.png" alt="Scale types from measurement theory that are relevant to biology. Permissible transformations indicate the mathematical operations that can be performed on measurements of each scale type without distorting their meaning. The Domain indicates the state space, *i.e.* range of possible values. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Reproduced from Table 1 of [@houle2011measurement]."  />
+<div id="phylogenies-and-time" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> Phylogenies and time</h1>
+<p>Phylogenies consider the history, pattern, and process of evolution through time, so time is a critical feature of phylogenetic analyses. The specific considerations of time vary across analyses and studies, depending on the data available and the questions asked.</p>
+<p>It is helpful to first think about how the elements of a phylogeny correspond to time. We will consider rooted trees, where the direction of time is specified and runs from the root to the tips. Each node occurs at a specific point in time, even if the specific timing is unknown. We will call this point in time the node age. There is often confusion about the description of relative time on phylogenies. I will describe the magnitude of age here as time before the present. A node minimum age is closer to the present (further forward in time) and a node with maximum age as further from the present (further back in time). A node is treated as a singular divergence event, and has no duration. This of course is an approximation of the actual biology of divergence, which can take place over a period of time as populations become increasingly isolated but gene flow may persist between them.</p>
+<p>Each edge connects two nodes. In a rooted tree, we refer to the node closer to the root (or that is the root) as the parent node, and the node closer to the tips (or that is a tip) as the child node. The starting and ending times of the edge are set by the ages of the parent and child nodes. The duration of the edge is the difference in the ages of these nodes.</p>
+<div id="measurements-of-time-on-trees" class="section level2">
+<h2><span class="header-section-number">9.1</span> Measurements of time on trees</h2>
+<p>As discussed in Section <a href="phylogenies.html#trees-edge-lengths">2.5</a>, edge length can mean different things. It is up to the investigator to specify an edge length, and clearly communicate what it means. The three usual approaches are a cladogram (edge lengths are not specified and have no meaning), phylogram (edge lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where edge lengths are in units of time.</p>
+<div id="cladograms" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> Cladograms</h3>
+<p>Because edge lengths in a cladogram have no meaning, we cannot make absolute statements about time in a cladogram. This doesn’t mean, though, that we can’t say anything about time – we can still make some ordinal statements about the relative ages of nodes.</p>
+<div class="figure"><span id="fig:time-cladogram"></span>
+<img src="phylogenetic_biology_files/figure-html/time-cladogram-1.png" alt="A cladogram. Tip labels are blue, nodes and node numbers are red, and edges are black." width="2100" />
 <p class="caption">
-Figure 8.1: Scale types from measurement theory that are relevant to biology. Permissible transformations indicate the mathematical operations that can be performed on measurements of each scale type without distorting their meaning. The Domain indicates the state space, <em>i.e.</em> range of possible values. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Reproduced from Table 1 of <span class="citation">(Houle et al. <a href="#ref-houle2011measurement" role="doc-biblioref">2011</a>)</span>.
+Figure 9.1: A cladogram. Tip labels are blue, nodes and node numbers are red, and edges are black.
 </p>
 </div>
-<p>Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory at large, there are some differences in the nomenclature. What phylogenetic biologists call “character type” is referred to in measurement theory, and many other fields of science, as “scale type”.</p>
-<p>To date we have considered only one specific biological measurement - DNA nucleotide sequence data. Measurements of DNA sequences have the following attributes:</p>
+<p>Take a look at the cladogram in Figure <a href="phylogenies-and-time.html#fig:time-cladogram">9.1</a>. Consider the red node numbers. The terminal nodes are numbered 1-5, and 6-9 are internal nodes. Of those, the root is node 6. Because the tree is rooted, we know that time proceeds from the root to the tips. If you consider two nodes, where one is descended from the other, then the node closer to the root is older. There are a variety of statements we could make based on this simple relationship, including:</p>
 <ul>
-<li>A DNA character is discrete and unordered. It is discrete because it has a finite number of specific states that it can take on. It is unordered because changes don’t have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types corresponds to a nominal scale type.</li>
-<li>There are 4 possible states, corresponding to each of the 4 nucleotides – <code>A</code>, <code>C</code>, <code>G</code>, and <code>T</code>. This defines the state space of the character, it can take on these particular values and no others.</li>
+<li>Node 6 is older than all other nodes in the phylogeny. This is tautological, since the root is by definition the oldest node.</li>
+<li>Node 7 is older than node 9. This is because 9 is descended form 7, and 7 is closer to the root.</li>
 </ul>
-<p>There are many other types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types. Changing the state space for discrete characters changes the dimensions of the model matrices we have used. Changing scale types requires entirely new model types, since different mathematical operations are permissible and sensical for different scale types.</p>
-<div id="nominal-scale-types" class="section level2">
-<h2><span class="header-section-number">8.1</span> Nominal scale types</h2>
-<p>There are several other frequent applications of nominal scale types beyond DNA sequences in phylogenetic analyses. The most common include others include other molecular sequence data, but they are also used for discrete unordered morphological character states</p>
-<div id="amino-acids" class="section level3">
-<h3><span class="header-section-number">8.1.1</span> Amino acids</h3>
-<p>Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more model parameters than for DNA data.</p>
-<p>There are a few reasons why protein sequences are often considered rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another reason is that synonymous changes in protein coding DNA sequences quickly saturate for more distant evolutionary comparisons. This makes it difficult to align sequences, and means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.</p>
+<p>We can’t make any relative assertions about the ages of nodes that aren’t descended from each other. For example, we have no idea of node 8 or node node 9 is older.</p>
+<p>In practice, these relative statements of age are often quite useful. For example, if Clade A is nested within Clade B, then we know that Clade A is younger than Clade B even if we don’t know the ages of any nodes. This may seem trivial, but it is implicit in many discussions of phylogenies.</p>
+<p>Note that all of these assertions hold whether or not the tips have the same age. Tips can have different ages in a variety of scenarios, such as a real-time virus phylogeny sampled through the course of a phylogeny or if some tips are fossils.</p>
 </div>
-<div id="codons" class="section level3">
-<h3><span class="header-section-number">8.1.2</span> Codons</h3>
-<p>Since there are 4 possible DNA nucleotides and codons are 3 nucleotides long, there are <span class="math inline">\(4^3=64\)</span> possible codons. Each one of these codons corresponds to a specific amino acid or stop codon. In some cases, it is most interesting to consider each of the 64 codons as a discrete character state. The models then have matrices that have dimensions of 64 (as opposed to 4 for nucleotides and 20 for amino acids).</p>
+<div id="phylograms" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> Phylograms</h3>
+<p>Strictly speaking, the only assertions we can make about time on phylograms are those that we can also make on cladograms. This is because we can’t be certain of the relationships between time and edge length in the phylogram. If the rate of evolution changes in different regions of the tree, then edges of the same length would not represent time intervals of the same length. It is safest, then, to think of phylograms as cladograms when it comes to discussing time.</p>
 </div>
-<div id="morphology" class="section level3">
-<h3><span class="header-section-number">8.1.3</span> Morphology</h3>
-<p>Direct analogs of the DNA sequence evolution models we have explored in previous chapters are often applied to discrete unordered morphological traits, such as the presence or absence of limbs <span class="citation">(Harmon <a href="#ref-harmon2018phylogenetic" role="doc-biblioref">2018</a>, chap. 7)</span>.</p>
+<div id="chronograms" class="section level3">
+<h3><span class="header-section-number">9.1.3</span> Chronograms</h3>
+<p>By definition, in a chronogram edge lengths are in units of time. The age of each node is fully specified. This has a couple implications for what we can say about time. We can make ordinal statements, as we did for cladograms and phylograms, but we can also make absolute statements about the interval of time that has elapsed between two nodes. We can also make statements about the relative ages of nodes that are not descended from each other.</p>
 </div>
 </div>
-<div id="ordinal-scale-types" class="section level2">
-<h2><span class="header-section-number">8.2</span> Ordinal scale types</h2>
-<p>Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is a ranking, <em>i.e.</em> some values are larger than others <span class="citation">(Houle et al. <a href="#ref-houle2011measurement" role="doc-biblioref">2011</a>, Table 1)</span>. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. Models for the evolution of ordinal data typically disallow instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of 4 digits.</p>
+<div id="clock-like-evolution" class="section level2">
+<h2><span class="header-section-number">9.2</span> Clock-like evolution</h2>
+<p>If the rate of evolution were uniform and did not vary in different lineages, then the edge lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing edge lengths by the rate of change. For example, if the edge lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions were million years, then dividing each edge length by 2 would give a chronogram where the units of edge length are millions of years. This is called clock-like evolution – changes in characters are like regular tics on a clock.</p>
+<p>Real data are never this tidy, but when evolutionary rates are locally fairly uniform, then phylogram edge lengths will tend to be roughly proportional to the amount of time elapsed according to a locally adjusted clock. This is called a relaxed clock model.</p>
 </div>
-<div id="continuous-data" class="section level2">
-<h2><span class="header-section-number">8.3</span> Continuous data</h2>
-<p>Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate can take on a value within some range of real numbers. These character states are often lumped together by phylogenetic biologists under the single umbrella of continuous character data, since they can take on any one of an infinite number of values in a continuous range. Measurement theory, on the other hand, identifies multiple scale types that all have continuous values, but that have very different state spaces (<em>i.e.</em>, ranges of values), interpretations, and sensible mathematical interpretations. Many of the critical methodological challenges in phylogenetic biology right now will require distinguishing between the different continuous scale types and developing appropriate models for each.</p>
-<p>The evolution of continuous measurements, regardless of specific scale type, are often modeled with the Brownian Motion (BM) family of models. At any point in time, the value can take an incremental step up or down. There are two parameters - the starting value, and the step size per unit time.</p>
-<p>The use of BM models for phylogenetic analysis of continuous data is a pragmatic choice, as it greatly simplifies many calculations but there are many ways in which BM doesn’t actually describe the evolution of continuous traits. For example, BM can result in a value that is any real number, positive or negative, whereas many biological measurements that are considered in a phylogenetic perspective can only take on positive values. Sometimes these discrepancies have little impact, and sometimes they can lead to entirely wrong conclusions.</p>
-<div id="ratio-scale-type" class="section level3">
-<h3><span class="header-section-number">8.3.1</span> Ratio scale type</h3>
-<p>The most commonly encountered continuous scale type in phylogenetic analyses is the ratio scale type <span class="citation">(Houle et al. <a href="#ref-houle2011measurement" role="doc-biblioref">2011</a>, Table 1)</span>. These measurements can take on values that are positive real numbers. They include many common continuous measurements, such as mass, length, and time interval. The name “ratio scale type” refers to the fact that ratios of these measurements are invariant with respect to units. If the ratio of body lengths of frog A to frog B is 2.38 when measured in centimeters, it will also be 2.38 when measured in inches, miles, or any other unit of length.</p>
+<div id="time-calibration" class="section level2">
+<h2><span class="header-section-number">9.3</span> Time calibration</h2>
+<p>The process of creating a chronogram is referred to as time calibration. There are a few parts to the process:</p>
+<ul>
+<li>Get a phylogram.</li>
+<li>Constrain the ages of some nodes using external evidence. This can be done by clamping them to a specific age or specifying a distribution of possible ages.</li>
+<li>Adjust edge lengths so that they are consistent with the ages of the clamped nodes, also adjusting the ages of the unclamped nodes as necessary. This is done by fitting clock-like models character change, and adjusting for local variations in rate.</li>
+<li>Assess robustness and confidence in the calibrated node ages and edge lengths.</li>
+</ul>
+<p>There are multiply approaches to applying these steps. In the early days of the field, each step was done largely independently. A phylogram would be inferred, dates specified for some nodes, the edges would be stretched or shrunk to get them to fit the calibrations as closely as possible, and then the process would be repeated with slightly different input edge lengths or different calibrations to asses robustness.</p>
+<p>The field has been moving toward more integrated approaches, including the simultaneous estimation of all of these features in a <a href="https://revbayes.github.io/tutorials/dating/">Bayesian framework</a>. A Bayesian framework is a very natural way to incorporate diverse information about topology, edge lengths, and evolutionary rates. This has intuitive appeal – if the calibrations for two nodes indicate that they have a short edge between them, for example, then topologies that place these nodes together should be favored over other that do not. Constraints on node ages can be incorporated as priors, for example. Unconstrained nodes would have flat priors on age, and constrained nodes would have a sharp peak around a specific age.</p>
+<div id="mathematical-implications-of-age-constraints" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Mathematical implications of age constraints</h3>
+<p>If all the tips are clamped to the same age, then the phylogeny is referred to as being ultrametric – each tip is the same distance from the root. An ultrametric tree is not necessarily a chronogram, though – some of the internal nodes may have ages that violate edge lengths proportional to time.</p>
+<p>Clamping the ages of tips reduces the number of free parameters in our tree. The way to think about this is that the more information we have, the more constrained and specific our view of the world is. Before we clamp the tip ages, any tip can be any age and all the edges are free to have any length. The ultrametric tree is nested within this set of unconstrained possibilities. The tip ages, and therefore edge lengths, in this unconstrained tree can be selected so that they are ultrametric, but the vast majority of values will lead to trees that are not ultrametric. By clamping some values with added information that some nodes (tips, in this case) are the same age, we now are allowing only a constrained subset of trees and these require fewer parameters to describe.</p>
+<p>It is easiest to think of this in terms of edge lengths, rather than node ages. From Section <a href="phylogenies.html#tree-properties">2.3</a>, we know that the number of edges in a tree is <span class="math inline">\(2n-2\)</span>, where <span class="math inline">\(n\)</span> is the number of tips. This is because each of the <span class="math inline">\(n\)</span> tip nodes has an edge leading to it, and each of the <span class="math inline">\(n-1\)</span> internal nodes, with the exception of the root node, has an edge leading to it. So there are <span class="math inline">\(n-2\)</span> edges that give rise to internal nodes. This is how we arrive at our <span class="math inline">\(n+n-2=2n-2\)</span> edges in the phylogeny, each with their own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the edges leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than <span class="math inline">\(n\)</span> edge lengths for the tips, we only have <span class="math inline">\(1\)</span> edge length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with <span class="math inline">\(1+n-2=n-1\)</span> edge lengths that we need to estimate independently in our ultrametric tree.</p>
 </div>
-<div id="difference-scale-type" class="section level3">
-<h3><span class="header-section-number">8.3.2</span> Difference scale type</h3>
-<p>Ratio scale type data are often log transformed before phylogenetic analysis. This places them on a different scale type - the difference scale type. It is so named because differences are invariant with respect to units.</p>
+<div id="constraining-node-ages" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> Constraining node ages</h3>
+<p>All the tips sampled in the present day have the same age, and we can constrain them accordingly as described above. But to time calibrate our tree we need to constrain nodes at multiple time points. This is what allows us to establish rates that we can use to infer the ages of unconstrained nodes. There are two broad approaches to applying multiple constraints through time. The investigator can either constrain the ages of internal nodes (internal-node-calibrated phylogenies), in which all tips still have the same age, or some tips can be allowed to have ages that precede the present day (tip-calibrated phylogenies). We will illustrate both approaches with an example a study where we have 50 living organisms all sampled in the present day, and 10 fossils sampled across a range of times. We have a morphological character matrix for all, and can infer phylograms that we find to be consistent with a relaxed clock model.</p>
+<p>In an internal-node-calibrated phylogeny, we would infer a phylogeny with all 60 taxa (fossil and extant), note the placement of the fossil taxa, and then infer the phylogeny with only the 50 extant taxa. We would constrain internal nodes so that they are no younger than the oldest fossil that is descended from them. We are considering a phylogeny of only extant taxa, but using the fossils to constrain the minimum age of the clades they belong to. In practice, it is also necessary to place maximum ages on some of the nodes to keep the time calibration from pushing everything way back in time. Given the incompleteness of the fossil record, this is not as straight forward as constraining the minimum age of a node. If we have a fossil we can assert that the clade that contains it can be no younger than that specimen, though it may be much older. But it is harder to assert a maximum age, given that we just might not have fossils for older organisms that existed in the clade. Applying maximum ages often relies on expertise and additional information, such as knowledge that a given land mass where the organisms are exclusively found did not exist before a particular time.</p>
+<p>The internal-node-calibrated approach is simplest to implement in some respects, but has a variety of drawbacks. It doesn’t make good use of all the available information. By just setting minima on clade ages, it is discarding information about the edge lengths for the fossil taxa. If the edge giving rise to a fossil is long, then we might want to mush the minimum age for a clade much further back than the age of the fossil itself, for example. This approach also doesn’t work well has the fraction of fossil taxa increases in the analysis. For example, it wouldn’t work at all for a phylogeny comprised exclusively of fossil taxa.</p>
+<p>In a tip-calibrated phylogeny, all taxa, fossil and extant, are included as tips in the phylogeny. The age of each tip is then constrained. Any tips from the present day are constrained to have the same present age, and fossil tips are constrained according to external information such as stratigraphy. A relaxed clock is then applied to infer the ages of unconstrained nodes, which also provides inferences of edge lengths.</p>
 
 </div>
 </div>
 </div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-harmon2018phylogenetic">
-<p>Harmon, Luke. 2018. “Phylogenetic Comparative Methods: Learning from Trees.” <a href="https://lukejharmon.github.io/pcm/">https://lukejharmon.github.io/pcm/</a>.</p>
-</div>
-<div id="ref-houle2011measurement">
-<p>Houle, David, Christophe Pélabon, Günter P Wagner, and Thomas F Hansen. 2011. “Measurement and Meaning in Biology.” <em>The Quarterly Review of Biology</em> 86 (1): 3–34. <a href="https://doi.org/10.1086/658408">https://doi.org/10.1086/658408</a>.</p>
-</div>
+
+
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="bayesian-phylognetics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="phylogenies-and-time.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="additional-character-types.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistical-and-mathematical-fundamentals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
