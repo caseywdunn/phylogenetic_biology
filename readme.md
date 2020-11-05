@@ -10,6 +10,11 @@ The order of files in the book is specified in `_bookdown.yml`.
 
 ## Development
 
+### Building the book
+
+In `phylogenetic_biology`, execute:
+    bookdown::render_book("index.Rmd", "bookdown::gitbook")
+
 ### Running tests
 
 To run tests of the code, launch an R console from the `manuscript/` directory of this
@@ -20,8 +25,6 @@ repository and run:
 
 ### Docker
 
-## Docker
-
 Make sure you have [docker installed](https://docs.docker.com/install/#supported-platforms).
 
 In `docker/`, build the container image with:
@@ -30,9 +33,7 @@ In `docker/`, build the container image with:
 docker build -t phylogenetic_biology .
 ```
 
-### Running analyses
-
-The model for executing the manuscript follows that at
+The model for executing the manuscript in docker follows that at
 https://github.com/caseywdunn/comparative_expression_2017/tree/master/docker .
 
 To run an RStudio session:

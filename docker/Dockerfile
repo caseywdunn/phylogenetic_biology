@@ -6,6 +6,7 @@ RUN install2.r --error \
     --deps TRUE \
     ape \
     geiger \
+    ggimage \
     gridExtra \
     kableExtra \
     phytools

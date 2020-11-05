@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Phylogenetic Biology" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-10-25" />
+<meta name="date" content="2020-11-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,8 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -178,7 +180,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.7" data-path="simulation.html"><a href="simulation.html#scaling-from-a-single-edge-to-a-whole-tree"><i class="fa fa-check"></i><b>3.7</b> Scaling from a single edge to a whole tree</a></li>
 <li class="chapter" data-level="3.8" data-path="simulation.html"><a href="simulation.html#scaling-from-a-single-site-to-multiple-sites"><i class="fa fa-check"></i><b>3.8</b> Scaling from a single site to multiple sites</a></li>
 <li class="chapter" data-level="3.9" data-path="simulation.html"><a href="simulation.html#concluding-thoughts"><i class="fa fa-check"></i><b>3.9</b> Concluding thoughts</a></li>
-<li class="chapter" data-level="3.10" data-path="index.html"><a href="index.html#additional-resources"><i class="fa fa-check"></i><b>3.10</b> Additional resources</a></li>
+<li class="chapter" data-level="3.10" data-path="simulation.html"><a href="simulation.html#additional-resources-1"><i class="fa fa-check"></i><b>3.10</b> Additional resources</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a><ul>
 <li class="chapter" data-level="4.1" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-a-single-history"><i class="fa fa-check"></i><b>4.1</b> Probability of a single history</a></li>
@@ -276,7 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Phylogenetic Biology</h1>
 <p class="author"><em>Casey W. Dunn</em></p>
-<p class="date"><em>2020-10-25</em></p>
+<p class="date"><em>2020-11-05</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
@@ -335,56 +337,44 @@ Hillis, C Moritz, &amp; B. K. Mable. <a href="http://www.sinauer.com/detail.php?
 </div>
 <div id="software-versions" class="section level2">
 <h2><span class="header-section-number">0.6</span> Software versions</h2>
-<p>This book was rendered from the source code on <span class="math inline">\(Sun Oct 25 09:47:18 2020\)</span> with the following R package versions.</p>
-<pre><code>R version 4.0.2 (2020-06-22)
-Platform: x86_64-apple-darwin17.0 (64-bit)
-Running under: macOS Catalina 10.15.7
+<p>This book was rendered from the source code on <span class="math inline">\(Thu Nov 05 10:57:12 PM 2020\)</span> with the following R package versions.</p>
+<pre><code>R version 4.0.3 (2020-10-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 20.04.1 LTS
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
+BLAS/LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.8.so
 
 locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=C              LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] kableExtra_1.2.1 phangorn_2.5.5   Matrix_1.2-18    forcats_0.5.0   
- [5] dplyr_1.0.2      purrr_0.3.4      readr_1.3.1      tidyr_1.1.2     
- [9] tibble_3.0.3     ggplot2_3.3.2    tidyverse_1.3.0  stringr_1.4.0   
-[13] phytools_0.7-47  maps_3.3.0       magrittr_1.5     gridExtra_2.3   
-[17] geiger_2.0.7     ape_5.4-1        ggtree_2.2.4     treeio_1.12.0   
+ [1] kableExtra_1.3.1 phangorn_2.5.5   Matrix_1.2-18    forcats_0.5.0    dplyr_1.0.2      purrr_0.3.4      readr_1.4.0     
+ [8] tidyr_1.1.2      tibble_3.0.4     ggplot2_3.3.2    tidyverse_1.3.0  stringr_1.4.0    phytools_0.7-70  maps_3.3.0      
+[15] magrittr_1.5     gridExtra_2.3    geiger_2.0.7     ape_5.4-1        ggtree_2.4.0     treeio_1.14.0   
 
 loaded via a namespace (and not attached):
- [1] subplex_1.6             nlme_3.1-149            fs_1.5.0               
- [4] lubridate_1.7.9         webshot_0.5.2           httr_1.4.2             
- [7] numDeriv_2016.8-1.1     tools_4.0.2             backports_1.1.10       
-[10] R6_2.4.1                DBI_1.1.0               lazyeval_0.2.2         
-[13] colorspace_1.4-1        withr_2.2.0             tidyselect_1.1.0       
-[16] mnormt_2.0.2            compiler_4.0.2          cli_2.0.2              
-[19] rvest_0.3.6             animation_2.6           expm_0.999-5           
-[22] xml2_1.3.2              bookdown_0.20           scales_1.1.1           
-[25] mvtnorm_1.1-1           quadprog_1.5-8          digest_0.6.25          
-[28] rmarkdown_2.3           pkgconfig_2.0.3         htmltools_0.5.0        
-[31] plotrix_3.7-8           dbplyr_1.4.4            rlang_0.4.7            
-[34] readxl_1.3.1            rstudioapi_0.11         generics_0.0.2         
-[37] combinat_0.0-8          jsonlite_1.7.1          gtools_3.8.2           
-[40] patchwork_1.0.1         fansi_0.4.1             Rcpp_1.0.5             
-[43] munsell_0.5.0           lifecycle_0.2.0         scatterplot3d_0.3-41   
-[46] stringi_1.5.3           yaml_2.2.1              clusterGeneration_1.3.4
-[49] MASS_7.3-53             grid_4.0.2              blob_1.2.1             
-[52] parallel_4.0.2          crayon_1.3.4            lattice_0.20-41        
-[55] haven_2.3.1             hms_0.5.3               tmvnsim_1.0-2          
-[58] knitr_1.29              pillar_1.4.6            igraph_1.2.5           
-[61] fastmatch_1.1-0         reprex_0.3.0            glue_1.4.2             
-[64] evaluate_0.14           BiocManager_1.30.10     modelr_0.1.8           
-[67] deSolve_1.28            vctrs_0.3.4             cellranger_1.1.0       
-[70] gtable_0.3.0            assertthat_0.2.1        xfun_0.17              
-[73] broom_0.7.0             tidytree_0.3.3          coda_0.19-3            
-[76] viridisLite_0.3.0       aplot_0.0.6             rvcheck_0.1.8          
-[79] ellipsis_0.3.1         </code></pre>
+ [1] subplex_1.6             nlme_3.1-149            fs_1.5.0                lubridate_1.7.9         webshot_0.5.2          
+ [6] httr_1.4.2              numDeriv_2016.8-1.1     tools_4.0.3             backports_1.2.0         R6_2.5.0               
+[11] DBI_1.1.0               lazyeval_0.2.2          colorspace_1.4-1        withr_2.3.0             tidyselect_1.1.0       
+[16] mnormt_2.0.2            compiler_4.0.3          cli_2.1.0               rvest_0.3.6             expm_0.999-5           
+[21] xml2_1.3.2              bookdown_0.21           scales_1.1.1            mvtnorm_1.1-1           quadprog_1.5-8         
+[26] digest_0.6.27           rmarkdown_2.5           pkgconfig_2.0.3         htmltools_0.5.0         plotrix_3.7-8          
+[31] highr_0.8               dbplyr_1.4.4            rlang_0.4.8             readxl_1.3.1            rstudioapi_0.11        
+[36] generics_0.1.0          combinat_0.0-8          jsonlite_1.7.1          gtools_3.8.2            patchwork_1.0.1        
+[41] fansi_0.4.1             Rcpp_1.0.5              munsell_0.5.0           lifecycle_0.2.0         scatterplot3d_0.3-41   
+[46] stringi_1.5.3           yaml_2.2.1              clusterGeneration_1.3.5 MASS_7.3-53             grid_4.0.3             
+[51] blob_1.2.1              parallel_4.0.3          crayon_1.3.4            lattice_0.20-41         haven_2.3.1            
+[56] hms_0.5.3               tmvnsim_1.0-2           knitr_1.30              pillar_1.4.6            igraph_1.2.6           
+[61] fastmatch_1.1-0         reprex_0.3.0            glue_1.4.2              evaluate_0.14           BiocManager_1.30.10    
+[66] modelr_0.1.8            deSolve_1.28            vctrs_0.3.4             cellranger_1.1.0        gtable_0.3.0           
+[71] assertthat_0.2.1        xfun_0.19               broom_0.7.2             tidytree_0.3.3          coda_0.19-4            
+[76] viridisLite_0.3.0       aplot_0.0.6             rvcheck_0.1.8           ellipsis_0.3.1         </code></pre>
 </div>
 <div id="license" class="section level2">
 <h2><span class="header-section-number">0.7</span> License</h2>
