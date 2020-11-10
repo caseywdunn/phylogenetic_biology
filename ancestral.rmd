@@ -4,9 +4,17 @@ Reconstruction [@joy2016ancestral].
 
 ```{r}
 
-tree_text = "(((A:1,B:1):1,C:2):1,((D:1,E:1):1,F:2):1);"
-phy = read.tree(text=tree_text)
-plot(phy)
+
+
+
+# Scale edge lengths so that root has specified age
+scale_phy = function(phy, age=1){
+  node_root = phy$edge[(!phy$edge[,1] %in% phy$edge[,2]),1] %>% unique()
+  age_root = max( dist.nodes(phy)[,node_root] )
+  phy$edge.length = phy$edge.length / age_root
+  phy
+}
+
 
 # Transform edge lengths to squish length into root edges or other edges.
 # Also rescaled age of root to 1
@@ -44,11 +52,63 @@ squish_phy = function( phy, x ){
   
   
   # Scale root age to one
-  age_root = max( dist.nodes(phy)[,node_root] )
-  phy$edge.length / age_root
+  phy = scale_phy(phy)
   
   return(phy)
 }
+
+tree_text = "(((A:1,B:1):1,C:2):1,((D:1,E:1):1,F:2):1);"
+phy = read.tree(text=tree_text)
+phy = scale_phy( phy )
+plot( phy )
+
+phy_star = squish_phy(phy, 1)
+phy_deep = squish_phy(phy, -0.9 )
+
+```
+
+
+
+```{r}
+set.seed(123456)
+
+cov_matrix <- function(diag_term=1, cov_term=0) {
+  G=2
+  trueCovariance = matrix(cov_term,G,G)
+  diag(trueCovariance) = diag_term
+
+  trueCovariance
+}
+
+plot_matrix <- function(m, ... ) {
+	# Basic plotting
+	nr <- nrow(m)
+	nc <- ncol(m)
+	image(1:nc, 1:nr, t(m[nr:1, ]), axes=F,xlab="", ylab="", ... )
+}
+
+
+cov_0 = cov_matrix(1,0)
+cov_a = cov_matrix(1,0.2)
+cov_b = cov_matrix(1,0.5)
+
+
+```
+## Inferring covariance in the absence of phylogenetic structure
+
+
+```{r}
+Z_0 = sim.char(phy_star, cov_0, nsim = 1, model = "BM", root = 0)
+Z_a = sim.char(phy_star, cov_a, nsim = 1, model = "BM", root = 0)
+
+```
+
+
+
+
+## Phylogenetic structure is the expected covariance structure
+
+```{r}
 
 ```
 
