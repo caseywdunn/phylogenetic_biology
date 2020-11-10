@@ -7,17 +7,13 @@ PGLS [@symonds2014primer].
 
 ```{r}
 
-
-
-
 # Scale edge lengths so that root has specified age
 scale_phy = function(phy, age=1){
   node_root = phy$edge[(!phy$edge[,1] %in% phy$edge[,2]),1] %>% unique()
   age_root = max( dist.nodes(phy)[,node_root] )
-  phy$edge.length = phy$edge.length / age_root
+  phy$edge.length = phy$edge.length / age_root * age
   phy
 }
-
 
 # Transform edge lengths to squish length into root edges or other edges.
 # Also rescaled age of root to 1
@@ -60,13 +56,23 @@ squish_phy = function( phy, x ){
   return(phy)
 }
 
-tree_text = "(((A:1,B:1):1,C:2):1,((D:1,E:1):1,F:2):1);"
+tree_text = "((((A:1,B:1):1,(C:1,D:1):1):1,((E:1,F:1):1,(G:1,H:1):1):1):1,(((I:1,J:1):1,(K:1,L:1):1):1,((M:1,N:1):1,(O:1,P:1):1):1):1);"
 phy = read.tree(text=tree_text)
 phy = scale_phy( phy )
-plot( phy )
+# plot( phy )
 
 phy_star = squish_phy(phy, 1)
-phy_deep = squish_phy(phy, -0.9 )
+phy_deep = squish_phy(phy, -0.98 )
+
+label_offset = 0.05
+tree_width = 1.5
+ggtree_deep = ggtree( phy_deep ) + 
+  geom_tiplab( fontface = "italic", offset=label_offset ) +
+  xlim(0, tree_width) +
+  geom_text2(aes(label=node), col="red", nudge_x=label_offset/2 )
+
+plot(phy_star)
+plot(phy_deep)
 
 ```
 
@@ -90,12 +96,16 @@ plot_matrix <- function(m, ... ) {
 	image(1:nc, 1:nr, t(m[nr:1, ]), axes=F,xlab="", ylab="", ... )
 }
 
+a_off_diag = 0
+b_off_diag = 0.5
+c_off_diag = 1
+cov_a = cov_matrix(1, a_off_diag)
+cov_b = cov_matrix(1, b_off_diag)
+cov_c = cov_matrix(1, c_off_diag)
 
-cov_a = cov_matrix(1,0)
-cov_b = cov_matrix(1,0.2)
-cov_c = cov_matrix(1,0.5)
-
-
+cov_a
+cov_b
+cov_c
 ```
 ## Inferring covariance in the absence of phylogenetic structure
 
@@ -112,9 +122,35 @@ sim_char = function( phy, cov_sim ){
   x
 }
 
-Z_a = sim_char(phy_star, cov_a)
-Z_b = sim_char(phy_star, cov_b)
-Z_c = sim_char(phy_star, cov_c)
+Z_star_a = sim_char(phy_star, cov_a)
+Z_star_b = sim_char(phy_star, cov_b)
+Z_star_c = sim_char(phy_star, cov_c)
+
+Z_deep_a = sim_char(phy_deep, cov_a)
+Z_deep_b = sim_char(phy_deep, cov_b)
+Z_deep_c = sim_char(phy_deep, cov_c)
+
+
+D = rbind(
+  data.frame(Z_star_a) %>% mutate(tree="star", cov = a_off_diag, node=1:nrow(Z_star_a), name = phy$tip.label ),
+  data.frame(Z_star_b) %>% mutate(tree="star", cov = b_off_diag, node=1:nrow(Z_star_b), name = phy$tip.label ),
+  data.frame(Z_star_c) %>% mutate(tree="star", cov = c_off_diag, node=1:nrow(Z_star_c), name = phy$tip.label ),
+  data.frame(Z_deep_a) %>% mutate(tree="deep", cov = a_off_diag, node=1:nrow(Z_deep_a), name = phy$tip.label ),
+  data.frame(Z_deep_b) %>% mutate(tree="deep", cov = b_off_diag, node=1:nrow(Z_deep_b), name = phy$tip.label ),
+  data.frame(Z_deep_c) %>% mutate(tree="deep", cov = c_off_diag, node=1:nrow(Z_deep_c), name = phy$tip.label )
+)
+
+
+
+
+D %>% 
+  filter(cov==0) %>%
+  ggplot(aes(x=X1, y=X2, color=cov )) +
+  #geom_text( aes(label=name), color="red", vjust = 0, nudge_y = 0.01 ) +
+  geom_text_repel(aes(label=name), color="black") +
+  geom_point() +
+  facet_wrap(~tree)
+
 
 ```
 
