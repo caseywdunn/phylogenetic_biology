@@ -1,3 +1,54 @@
 # Ancestral character state reconstruction
 
 Reconstruction [@joy2016ancestral].
+
+```{r}
+
+tree_text = "(((A:1,B:1):1,C:2):1,((D:1,E:1):1,F:2):1);"
+phy = read.tree(text=tree_text)
+plot(phy)
+
+# Transform edge lengths to squish length into root edges or other edges.
+# Also rescaled age of root to 1
+# x = 1 all length in tip edges
+# x = 0 no transform
+# x = -1 all length in root edges
+squish_phy = function( phy, x ){
+  node_root = phy$edge[(!phy$edge[,1] %in% phy$edge[,2]),1] %>% unique()
+  n_tips = length(phy$tip.label)
+  
+  mult_deep = 1 - x
+  mult_shallow = 1 + x   
+
+  edges_root = which(phy$edge[,1]==node_root)
+  phy$edge.length[edges_root] = phy$edge.length[edges_root] * mult_deep
+  
+  edges_tip = which( phy$edge[,2] <= n_tips )
+  phy$edge.length[edges_tip] = phy$edge.length[edges_tip] * mult_shallow
+  
+  edges = 1:nrow(phy$edge)
+  edges_mid = which( ! edges %in% c(edges_root, edges_tip)  )
+  
+  if(x>0){
+    phy$edge.length[edges_mid] = phy$edge.length[edges_mid] * mult_deep
+  } else if (x<0){
+    phy$edge.length[edges_mid] = phy$edge.length[edges_mid] * mult_shallow
+  }
+
+  
+  tip_ages = dist.nodes(phy)[1:n_tips,node_root]
+  trim = max(tip_ages) - min(tip_ages)
+  tips_long = which(tip_ages > min(tip_ages))
+  tips_edges_long = phy$edge[,2] %in% tips_long
+  phy$edge.length[tips_edges_long] = phy$edge.length[tips_edges_long] - trim
+  
+  
+  # Scale root age to one
+  age_root = max( dist.nodes(phy)[,node_root] )
+  phy$edge.length / age_root
+  
+  return(phy)
+}
+
+```
+
