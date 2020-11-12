@@ -27,7 +27,8 @@ fig_caption: yes
 	library( tidyverse )
   library( Matrix )
   library( phangorn )
-  library(kableExtra)
+  library( kableExtra )
+  library( ggrepel )
 
 	source( "functions.R" )
 	set.seed( 23456 )
