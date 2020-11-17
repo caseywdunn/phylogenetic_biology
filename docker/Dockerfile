@@ -13,7 +13,9 @@ RUN install2.r --error \
     kableExtra \
     phytools
 
-RUN tlmgr install \
+RUN tlmgr init-usertree \
+ && tlmgr update --all \
+ && tlmgr install \
     ae \
     amsfonts \
     amsmath \
@@ -120,4 +122,6 @@ RUN tlmgr install \
     xetexconfig \
     xkeyval \
     xunicode \
+    collection-fontsrecommended \
+    geometry \
     zapfding 
