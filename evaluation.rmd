@@ -91,7 +91,7 @@ And the Bayesian Information Criterion (BIC):
 
 \begin{equation} 
   BIC_i = -2(ln(L_i) + k_iln(n)
-  (\#eq:aic)
+  (\#eq:bic)
 \end{equation}
 
 To apply either of these criteria, they are calculated for each model and the model with the *lowest* value is selected. Adding parameters increases the value, penalizing any increase in likelihood they provide. These criteria have multiple advantages over LRT, including that they can be used to compare non-nested models [@Burnham2002].
