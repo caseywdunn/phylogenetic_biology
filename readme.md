@@ -42,4 +42,11 @@ To run an RStudio session:
 docker run --rm  -dP -e PASSWORD=secret123 -e USERID=$UID -v /path/to/phylogenetic_biology:/phylogenetic_biology -p 8787:8787 phylogenetic_biology
 ```
 
-Then go to [http://localhost:8787/](http://localhost:8787/) in your browser. Log in with user/password rstudio/secret123 (Password can be anything except "rstudio"). You can jump to the repo's R directory with the R command:
+Then go to [http://localhost:8787/](http://localhost:8787/) in your browser. Log in with user/password rstudio/secret123 (Password can be anything except "rstudio"). From the console, you can jump to the repo's R directory with the R command:
+
+    setwd("/phylogenetic_biology")
+
+And then build the book with:
+
+    library(bookdown)
+    bookdown::render_book("index.rmd", "bookdown::gitbook")
