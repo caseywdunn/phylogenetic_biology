@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-11-05" />
+<meta name="date" content="2022-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="statistical-and-mathematical-fundamentals.html"/>
 
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,26 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -138,7 +136,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Phylogenetic Biology</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#additional-resources"><i class="fa fa-check"></i><b>0.1</b> Additional resources</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.2</b> Acknowledgements</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i><b>0.3</b> Dedication</a></li>
@@ -147,13 +146,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#software-versions"><i class="fa fa-check"></i><b>0.6</b> Software versions</a></li>
 <li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.7</b> License</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#history-of-the-field"><i class="fa fa-check"></i><b>1.1</b> History of the field</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#core-concepts"><i class="fa fa-check"></i><b>1.2</b> Core concepts</a></li>
 <li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#a-unified-perspective-on-phylogenetic-studies"><i class="fa fa-check"></i><b>1.3</b> A unified perspective on phylogenetic studies</a></li>
 <li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#applications"><i class="fa fa-check"></i><b>1.4</b> Applications</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a><ul>
+<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="phylogenies.html"><a href="phylogenies.html#phylogenies-are-graphs"><i class="fa fa-check"></i><b>2.1</b> Phylogenies are graphs</a></li>
 <li class="chapter" data-level="2.2" data-path="phylogenies.html"><a href="phylogenies.html#drawing-phylogenies"><i class="fa fa-check"></i><b>2.2</b> Drawing phylogenies</a></li>
 <li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of trees</a></li>
@@ -166,9 +167,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="phylogenies.html"><a href="phylogenies.html#representation"><i class="fa fa-check"></i><b>2.10</b> Representation</a></li>
 <li class="chapter" data-level="2.11" data-path="phylogenies.html"><a href="phylogenies.html#additional-reading"><i class="fa fa-check"></i><b>2.11</b> Additional reading</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a><ul>
+<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="simulation.html"><a href="simulation.html#models"><i class="fa fa-check"></i><b>3.1</b> Models</a></li>
-<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a><ul>
+<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="simulation.html"><a href="simulation.html#expected-amount-of-change"><i class="fa fa-check"></i><b>3.2.1</b> Expected amount of change</a></li>
 <li class="chapter" data-level="3.2.2" data-path="simulation.html"><a href="simulation.html#expected-end-state"><i class="fa fa-check"></i><b>3.2.2</b> Expected end state</a></li>
 <li class="chapter" data-level="3.2.3" data-path="simulation.html"><a href="simulation.html#analytical-approach"><i class="fa fa-check"></i><b>3.2.3</b> Analytical approach</a></li>
@@ -182,7 +185,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.9" data-path="simulation.html"><a href="simulation.html#concluding-thoughts"><i class="fa fa-check"></i><b>3.9</b> Concluding thoughts</a></li>
 <li class="chapter" data-level="3.10" data-path="simulation.html"><a href="simulation.html#additional-resources-1"><i class="fa fa-check"></i><b>3.10</b> Additional resources</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a><ul>
+<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-a-single-history"><i class="fa fa-check"></i><b>4.1</b> Probability of a single history</a></li>
 <li class="chapter" data-level="4.2" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-multiple-histories"><i class="fa fa-check"></i><b>4.2</b> Probability of multiple histories</a></li>
 <li class="chapter" data-level="4.3" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#log-likelihood"><i class="fa fa-check"></i><b>4.3</b> Log likelihood</a></li>
@@ -190,17 +194,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#maximum-likelihood"><i class="fa fa-check"></i><b>4.5</b> Maximum likelihood</a></li>
 <li class="chapter" data-level="4.6" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#optimality-criteria"><i class="fa fa-check"></i><b>4.6</b> Optimality criteria</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a><ul>
+<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#your-question"><i class="fa fa-check"></i><b>5.1</b> Your question</a></li>
 <li class="chapter" data-level="5.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#taxon-sampling"><i class="fa fa-check"></i><b>5.2</b> Taxon sampling</a></li>
-<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a><ul>
+<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#whole-genomes"><i class="fa fa-check"></i><b>5.3.1</b> Whole genomes</a></li>
 <li class="chapter" data-level="5.3.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#transcriptomes"><i class="fa fa-check"></i><b>5.3.2</b> Transcriptomes</a></li>
 <li class="chapter" data-level="5.3.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#targeted-enrichment"><i class="fa fa-check"></i><b>5.3.3</b> Targeted enrichment</a></li>
 <li class="chapter" data-level="5.3.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#rad-seq"><i class="fa fa-check"></i><b>5.3.4</b> RAD-seq</a></li>
 <li class="chapter" data-level="5.3.5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#pcr"><i class="fa fa-check"></i><b>5.3.5</b> PCR</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a><ul>
+<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#estimation-of-original-sequences"><i class="fa fa-check"></i><b>5.4.1</b> Estimation of original sequences</a></li>
 <li class="chapter" data-level="5.4.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#identification-of-homologous-genome-regions"><i class="fa fa-check"></i><b>5.4.2</b> Identification of homologous genome regions</a></li>
 </ul></li>
@@ -208,48 +215,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#homologous-sites"><i class="fa fa-check"></i><b>5.6</b> Homologous sites</a></li>
 <li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a><ul>
-<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a><ul>
+<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="evaluation.html"><a href="evaluation.html#model-structure"><i class="fa fa-check"></i><b>6.1.1</b> Model structure</a></li>
 <li class="chapter" data-level="6.1.2" data-path="evaluation.html"><a href="evaluation.html#evaluating-models"><i class="fa fa-check"></i><b>6.1.2</b> Evaluating models</a></li>
 <li class="chapter" data-level="6.1.3" data-path="evaluation.html"><a href="evaluation.html#adding-complexity-to-dna-evolution-models"><i class="fa fa-check"></i><b>6.1.3</b> Adding complexity to DNA evolution models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a><ul>
+<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="evaluation.html"><a href="evaluation.html#summarizing-topological-support"><i class="fa fa-check"></i><b>6.2.1</b> Summarizing topological support</a></li>
 <li class="chapter" data-level="6.2.2" data-path="evaluation.html"><a href="evaluation.html#bootstrapping"><i class="fa fa-check"></i><b>6.2.2</b> Bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="evaluation.html"><a href="evaluation.html#topology-tests"><i class="fa fa-check"></i><b>6.3</b> Topology tests</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylognetics</a><ul>
+<li class="chapter" data-level="7" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylognetics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>7.1</b> Bayesian statistics</a></li>
 <li class="chapter" data-level="7.2" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>7.2</b> Bayesian phylogenetic inference</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a><ul>
-<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1</b> Nominal scale types</a><ul>
+<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1</b> Nominal scale types</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#amino-acids"><i class="fa fa-check"></i><b>8.1.1</b> Amino acids</a></li>
 <li class="chapter" data-level="8.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#codons"><i class="fa fa-check"></i><b>8.1.2</b> Codons</a></li>
 <li class="chapter" data-level="8.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#morphology"><i class="fa fa-check"></i><b>8.1.3</b> Morphology</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>8.2</b> Ordinal scale types</a></li>
-<li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a><ul>
+<li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a>
+<ul>
 <li class="chapter" data-level="8.3.1" data-path="additional-character-types.html"><a href="additional-character-types.html#ratio-scale-type"><i class="fa fa-check"></i><b>8.3.1</b> Ratio scale type</a></li>
 <li class="chapter" data-level="8.3.2" data-path="additional-character-types.html"><a href="additional-character-types.html#difference-scale-type"><i class="fa fa-check"></i><b>8.3.2</b> Difference scale type</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a><ul>
-<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a><ul>
+<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>9.1.1</b> Cladograms</a></li>
 <li class="chapter" data-level="9.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>9.1.2</b> Phylograms</a></li>
 <li class="chapter" data-level="9.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>9.1.3</b> Chronograms</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#clock-like-evolution"><i class="fa fa-check"></i><b>9.2</b> Clock-like evolution</a></li>
-<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a><ul>
+<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#mathematical-implications-of-age-constraints"><i class="fa fa-check"></i><b>9.3.1</b> Mathematical implications of age constraints</a></li>
 <li class="chapter" data-level="9.3.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#constraining-node-ages"><i class="fa fa-check"></i><b>9.3.2</b> Constraining node ages</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>10</b> Ancestral character state reconstruction</a></li>
+<li class="chapter" data-level="11" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>11</b> Comparative methods</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="comparative-methods.html"><a href="comparative-methods.html#correlated-evolutionary-changes"><i class="fa fa-check"></i><b>11.1</b> Correlated evolutionary changes</a></li>
+<li class="chapter" data-level="11.2" data-path="comparative-methods.html"><a href="comparative-methods.html#inferring-covariance-in-the-absence-of-phylogenetic-structure"><i class="fa fa-check"></i><b>11.2</b> Inferring covariance in the absence of phylogenetic structure</a></li>
+<li class="chapter" data-level="11.3" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>11.3</b> Phylogenetic Independent Contrasts</a></li>
+<li class="chapter" data-level="11.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-structure-is-the-expected-covariance-structure"><i class="fa fa-check"></i><b>11.4</b> Phylogenetic structure is the expected covariance structure</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a><ul>
+<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
+<ul>
 <li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> General statistics</a></li>
 <li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-prob"><i class="fa fa-check"></i><b>A.2</b> Probability theory</a></li>
 <li class="chapter" data-level="A.3" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.3</b> Bayes theorem</a></li>
@@ -278,102 +304,108 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="references" class="section level1 unnumbered">
 <h1>References</h1>
 
-<div id="refs" class="references">
-<div>
-<p>Box, George EP. 1976. “Science and Statistics.” <em>Journal of the American Statistical Association</em> 71 (356): 791–99. <a href="https://doi.org/10.1080/01621459.1976.10480949">https://doi.org/10.1080/01621459.1976.10480949</a>.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-box1976science" class="csl-entry">
+Box, George EP. 1976. <span>“Science and Statistics.”</span> <em>Journal of the American Statistical Association</em> 71 (356): 791–99. <a href="https://doi.org/10.1080/01621459.1976.10480949">https://doi.org/10.1080/01621459.1976.10480949</a>.
 </div>
-<div>
-<p>Breiman, Leo, and others. 2001. “Statistical Modeling: The Two Cultures (with Comments and a Rejoinder by the Author).” <em>Statistical Science</em> 16 (3): 199–231. <a href="https://projecteuclid.org/euclid.ss/1009213726">https://projecteuclid.org/euclid.ss/1009213726</a>.</p>
+<div id="ref-breiman2001statistical" class="csl-entry">
+Breiman, Leo, and others. 2001. <span>“Statistical Modeling: The Two Cultures (with Comments and a Rejoinder by the Author).”</span> <em>Statistical Science</em> 16 (3): 199–231. <a href="https://projecteuclid.org/euclid.ss/1009213726">https://projecteuclid.org/euclid.ss/1009213726</a>.
 </div>
-<div>
-<p>Burnham, KP, and DR Anderson. 2002. <em>Model Selection and Multimodel Inference: A Practical Information-Theoretic Approach</em>. 2nd ed. Springer. <a href="https://doi.org/10.1007/b97636">https://doi.org/10.1007/b97636</a>.</p>
+<div id="ref-Burnham2002" class="csl-entry">
+Burnham, KP, and DR Anderson. 2002. <em>Model Selection and Multimodel Inference: A Practical Information-Theoretic Approach</em>. 2nd ed. Springer. <a href="https://doi.org/10.1007/b97636">https://doi.org/10.1007/b97636</a>.
 </div>
-<div>
-<p>Chang, E Sally, Moran Neuhof, Nimrod D Rubinstein, Arik Diamant, Hervé Philippe, Dorothée Huchon, and Paulyn Cartwright. 2015. “Genomic Insights into the Evolutionary Origin of Myxozoa Within Cnidaria.” <em>Proceedings of the National Academy of Sciences</em> 112 (48): 14912–7. <a href="https://doi.org/10.1073/pnas.1511468112">https://doi.org/10.1073/pnas.1511468112</a>.</p>
+<div id="ref-chang2015genomic" class="csl-entry">
+Chang, E Sally, Moran Neuhof, Nimrod D Rubinstein, Arik Diamant, Hervé Philippe, Dorothée Huchon, and Paulyn Cartwright. 2015. <span>“Genomic Insights into the Evolutionary Origin of Myxozoa Within Cnidaria.”</span> <em>Proceedings of the National Academy of Sciences</em> 112 (48): 14912–17. <a href="https://doi.org/10.1073/pnas.1511468112">https://doi.org/10.1073/pnas.1511468112</a>.
 </div>
-<div>
-<p>Czech, Lucas, Jaime Huerta-Cepas, and Alexandros Stamatakis. 2017. “A Critical Review on the Use of Support Values in Tree Viewers and Bioinformatics Toolkits.” <em>Molecular Biology and Evolution</em> 34 (6): 1535–42. <a href="https://doi.org/10.1093/molbev/msx055">https://doi.org/10.1093/molbev/msx055</a>.</p>
+<div id="ref-10.1093/molbev/msx055" class="csl-entry">
+Czech, Lucas, Jaime Huerta-Cepas, and Alexandros Stamatakis. 2017. <span>“<span class="nocase">A Critical Review on the Use of Support Values in Tree Viewers and Bioinformatics Toolkits</span>.”</span> <em>Molecular Biology and Evolution</em> 34 (6): 1535–42. <a href="https://doi.org/10.1093/molbev/msx055">https://doi.org/10.1093/molbev/msx055</a>.
 </div>
-<div>
-<p>Darwin, Charles. 1859. <em>The Origin of Species by Means of Natural Selection: Or, the Preservation of Favored Races in the Struggle for Life</em>.</p>
+<div id="ref-darwin1859" class="csl-entry">
+Darwin, Charles. 1859. <em>The Origin of Species by Means of Natural Selection: Or, the Preservation of Favored Races in the Struggle for Life</em>.
 </div>
-<div>
-<p>deQueiroz, Kevin, and Philip D Cantino. 2020. <em>International Code of Phylogenetic Nomenclature (Phylocode): A Phylogenetic Code of Biological Nomenclature</em>. CRC Press.</p>
+<div id="ref-deQueiroz2020" class="csl-entry">
+deQueiroz, Kevin, and Philip D Cantino. 2020. <em>International Code of Phylogenetic Nomenclature (PhyloCode): A Phylogenetic Code of Biological Nomenclature</em>. CRC Press.
 </div>
-<div>
-<p>Dunn, Casey W, Felipe Zapata, Catriona Munro, Stefan Siebert, and Andreas Hejnol. 2018. “Pairwise Comparisons Across Species Are Problematic When Analyzing Functional Genomic Data.” <em>Proceedings of the National Academy of Sciences</em> 115 (3): E409–E417. <a href="https://doi.org/10.1073/pnas.1707515115">https://doi.org/10.1073/pnas.1707515115</a>.</p>
+<div id="ref-dunn2018pairwise" class="csl-entry">
+Dunn, Casey W, Felipe Zapata, Catriona Munro, Stefan Siebert, and Andreas Hejnol. 2018. <span>“Pairwise Comparisons Across Species Are Problematic When Analyzing Functional Genomic Data.”</span> <em>Proceedings of the National Academy of Sciences</em> 115 (3): E409–17. <a href="https://doi.org/10.1073/pnas.1707515115">https://doi.org/10.1073/pnas.1707515115</a>.
 </div>
-<div>
-<p>Felsenstein, J. 1981. “Evolutionary trees from DNA sequences: a maximum likelihood approach.” <em>Journal of Molecular Evolution</em> 17 (6): 368–76. <a href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=7288891&amp;retmode=ref&amp;cmd=prlinks">http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=7288891&amp;retmode=ref&amp;cmd=prlinks</a>.</p>
+<div id="ref-Felsenstein:1981vk" class="csl-entry">
+Felsenstein, J. 1981. <span>“<span class="nocase">Evolutionary trees from DNA sequences: a maximum likelihood approach.</span>”</span> <em>Journal of Molecular Evolution</em> 17 (6): 368–76. <a href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=7288891&amp;retmode=ref&amp;cmd=prlinks">http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=7288891&amp;retmode=ref&amp;cmd=prlinks</a>.
 </div>
-<div>
-<p>Felsenstein, Joseph. 1985. “Confidence Limits on Phylogenies: An Approach Using the Bootstrap.” <em>Evolution</em> 39 (4): 783–91. <a href="https://doi.org/10.1111/j.1558-5646.1985.tb00420.x">https://doi.org/10.1111/j.1558-5646.1985.tb00420.x</a>.</p>
+<div id="ref-felsenstein1985confidence" class="csl-entry">
+Felsenstein, Joseph. 1985. <span>“Confidence Limits on Phylogenies: An Approach Using the Bootstrap.”</span> <em>Evolution</em> 39 (4): 783–91. <a href="https://doi.org/10.1111/j.1558-5646.1985.tb00420.x">https://doi.org/10.1111/j.1558-5646.1985.tb00420.x</a>.
 </div>
-<div>
-<p>Godfrey-Smith, Peter. 2013. <em>Philosophy of Biology</em>. Princeton University Press.</p>
+<div id="ref-godfrey2016philosophy" class="csl-entry">
+Godfrey-Smith, Peter. 2013. <em>Philosophy of Biology</em>. Princeton University Press.
 </div>
-<div>
-<p>Hadfield, James, Colin Megill, Sidney M Bell, John Huddleston, Barney Potter, Charlton Callender, Pavel Sagulenko, Trevor Bedford, and Richard A Neher. 2018. “Nextstrain: Real-Time Tracking of Pathogen Evolution.” <em>Bioinformatics</em> 34 (23): 4121–3. <a href="https://doi.org/10.1093/bioinformatics/bty407">https://doi.org/10.1093/bioinformatics/bty407</a>.</p>
+<div id="ref-hadfield2018nextstrain" class="csl-entry">
+Hadfield, James, Colin Megill, Sidney M Bell, John Huddleston, Barney Potter, Charlton Callender, Pavel Sagulenko, Trevor Bedford, and Richard A Neher. 2018. <span>“Nextstrain: Real-Time Tracking of Pathogen Evolution.”</span> <em>Bioinformatics</em> 34 (23): 4121–23. <a href="https://doi.org/10.1093/bioinformatics/bty407">https://doi.org/10.1093/bioinformatics/bty407</a>.
 </div>
-<div>
-<p>Haeckel, Ernst. 1897. <em>The Evolution of Man</em>. Vol. 1. D. Appleton.</p>
+<div id="ref-haeckel1897" class="csl-entry">
+Haeckel, Ernst. 1897. <em>The Evolution of Man</em>. Vol. 1. D. Appleton.
 </div>
-<div>
-<p>Harmon, Luke. 2018. “Phylogenetic Comparative Methods: Learning from Trees.” <a href="https://lukejharmon.github.io/pcm/">https://lukejharmon.github.io/pcm/</a>.</p>
+<div id="ref-harmon2018phylogenetic" class="csl-entry">
+Harmon, Luke. 2018. <span>“Phylogenetic Comparative Methods: Learning from Trees.”</span> <a href="https://lukejharmon.github.io/pcm/">https://lukejharmon.github.io/pcm/</a>.
 </div>
-<div>
-<p>Hennig, Willi. 1966. <em>Phylogenetic Systematics</em>. University of Illionois Press.</p>
+<div id="ref-hennig1966" class="csl-entry">
+Hennig, Willi. 1966. <em>Phylogenetic Systematics</em>. University of Illionois Press.
 </div>
-<div>
-<p>Hohna, S., T. A. Heath, B. Boussau, M. J. Landis, F. Ronquist, and J. P. Huelsenbeck. 2014. “Probabilistic Graphical Model Representation in Phylogenetics.” Journal Article. <em>Syst Biol</em> 63 (5): 753–71. <a href="https://doi.org/10.1093/sysbio/syu039">https://doi.org/10.1093/sysbio/syu039</a>.</p>
+<div id="ref-Hohna2014" class="csl-entry">
+Hohna, S., T. A. Heath, B. Boussau, M. J. Landis, F. Ronquist, and J. P. Huelsenbeck. 2014. <span>“Probabilistic Graphical Model Representation in Phylogenetics.”</span> Journal Article. <em>Syst Biol</em> 63 (5): 753–71. <a href="https://doi.org/10.1093/sysbio/syu039">https://doi.org/10.1093/sysbio/syu039</a>.
 </div>
-<div>
-<p>Houle, David, Christophe Pélabon, Günter P Wagner, and Thomas F Hansen. 2011. “Measurement and Meaning in Biology.” <em>The Quarterly Review of Biology</em> 86 (1): 3–34. <a href="https://doi.org/10.1086/658408">https://doi.org/10.1086/658408</a>.</p>
+<div id="ref-houle2011measurement" class="csl-entry">
+Houle, David, Christophe Pélabon, Günter P Wagner, and Thomas F Hansen. 2011. <span>“Measurement and Meaning in Biology.”</span> <em>The Quarterly Review of Biology</em> 86 (1): 3–34. <a href="https://doi.org/10.1086/658408">https://doi.org/10.1086/658408</a>.
 </div>
-<div>
-<p>Jukes, TH, and CR Cantor. 1969. <em>Evolution of Protein Molecules</em>. Academic Press New York, NY. <a href="https://doi.org/10.1016/B978-1-4832-3211-9.50009-7">https://doi.org/10.1016/B978-1-4832-3211-9.50009-7</a>.</p>
+<div id="ref-joy2016ancestral" class="csl-entry">
+Joy, Jeffrey B, Richard H Liang, Rosemary M McCloskey, T Nguyen, and Art FY Poon. 2016. <span>“Ancestral Reconstruction.”</span> <em>PLoS Computational Biology</em> 12 (7): e1004763. <a href="https://doi.org/10.1371/journal.pcbi.1004763">https://doi.org/10.1371/journal.pcbi.1004763</a>.
 </div>
-<div>
-<p>Landis, Michael J, Deren AR Eaton, Wendy L Clement, Brian Park, Elizabeth L Spriggs, Patrick W Sweeney, Erika J Edwards, and Michael J Donoghue. 2020. “Joint Phylogenetic Estimation of Geographic Movements and Biome Shifts During the Global Diversification of Viburnum.” <em>Systematic Biology</em>. <a href="https://doi.org/10.1093/sysbio/syaa027">https://doi.org/10.1093/sysbio/syaa027</a>.</p>
+<div id="ref-jc1969" class="csl-entry">
+Jukes, TH, and CR Cantor. 1969. <em>Evolution of Protein Molecules</em>. Academic Press New York, NY. <a href="https://doi.org/10.1016/B978-1-4832-3211-9.50009-7">https://doi.org/10.1016/B978-1-4832-3211-9.50009-7</a>.
 </div>
-<div>
-<p>Maddison, Wayne P. 1997. “Gene Trees in Species Trees.” <em>Systematic Biology</em> 46 (3): 523–36. <a href="https://doi.org/10.1093/sysbio/46.3.523">https://doi.org/10.1093/sysbio/46.3.523</a>.</p>
+<div id="ref-landis2020joint" class="csl-entry">
+Landis, Michael J, Deren AR Eaton, Wendy L Clement, Brian Park, Elizabeth L Spriggs, Patrick W Sweeney, Erika J Edwards, and Michael J Donoghue. 2020. <span>“Joint Phylogenetic Estimation of Geographic Movements and Biome Shifts During the Global Diversification of Viburnum.”</span> <em>Systematic Biology</em>. <a href="https://doi.org/10.1093/sysbio/syaa027">https://doi.org/10.1093/sysbio/syaa027</a>.
 </div>
-<div>
-<p>Metropolis, Nicholas, Arianna W Rosenbluth, Marshall N Rosenbluth, Augusta H Teller, and Edward Teller. 1953. “Equation of State Calculations by Fast Computing Machines.” <em>The Journal of Chemical Physics</em> 21 (6): 1087–92. <a href="https://doi.org/10.1063/1.1699114">https://doi.org/10.1063/1.1699114</a>.</p>
+<div id="ref-maddison1997gene" class="csl-entry">
+Maddison, Wayne P. 1997. <span>“Gene Trees in Species Trees.”</span> <em>Systematic Biology</em> 46 (3): 523–36. <a href="https://doi.org/10.1093/sysbio/46.3.523">https://doi.org/10.1093/sysbio/46.3.523</a>.
 </div>
-<div>
-<p>Paradis, Emmanuel, Simon Blomberg, Ben Bolker, Joseph Brown, Santiago Claramunt, Julien Claude, Hoa Sien Cuong, et al. 2020. <em>Ape: Analyses of Phylogenetics and Evolution</em>. <a href="http://ape-package.ird.fr/">http://ape-package.ird.fr/</a>.</p>
+<div id="ref-metropolis1953" class="csl-entry">
+Metropolis, Nicholas, Arianna W Rosenbluth, Marshall N Rosenbluth, Augusta H Teller, and Edward Teller. 1953. <span>“Equation of State Calculations by Fast Computing Machines.”</span> <em>The Journal of Chemical Physics</em> 21 (6): 1087–92. <a href="https://doi.org/10.1063/1.1699114">https://doi.org/10.1063/1.1699114</a>.
 </div>
-<div>
-<p>Posada, David, and Thomas R Buckley. 2004. “Model Selection and Model Averaging in Phylogenetics: Advantages of Akaike Information Criterion and Bayesian Approaches over Likelihood Ratio Tests.” <em>Systematic Biology</em> 53 (5): 793–808. <a href="https://doi.org/10.1080/10635150490522304">https://doi.org/10.1080/10635150490522304</a>.</p>
+<div id="ref-R-ape" class="csl-entry">
+Paradis, Emmanuel, Simon Blomberg, Ben Bolker, Joseph Brown, Santiago Claramunt, Julien Claude, Hoa Sien Cuong, et al. 2020. <em>Ape: Analyses of Phylogenetics and Evolution</em>. <a href="http://ape-package.ird.fr/">http://ape-package.ird.fr/</a>.
 </div>
-<div>
-<p>Rosenberg, Michael S., Sankar Subramanian, and Sudhir Kumar. 2003. “Patterns of Transitional Mutation Biases Within and Among Mammalian Genomes.” <em>Molecular Biology and Evolution</em> 20 (6): 988–93. <a href="https://doi.org/10.1093/molbev/msg113">https://doi.org/10.1093/molbev/msg113</a>.</p>
+<div id="ref-posada2004model" class="csl-entry">
+Posada, David, and Thomas R Buckley. 2004. <span>“Model Selection and Model Averaging in Phylogenetics: Advantages of Akaike Information Criterion and Bayesian Approaches over Likelihood Ratio Tests.”</span> <em>Systematic Biology</em> 53 (5): 793–808. <a href="https://doi.org/10.1080/10635150490522304">https://doi.org/10.1080/10635150490522304</a>.
 </div>
-<div>
-<p>Steel, Mike, and David Penny. 2000. “Parsimony, Likelihood, and the Role of Models in Molecular Phylogenetics.” <em>Molecular Biology and Evolution</em> 17 (6): 839–50. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026364">https://doi.org/10.1093/oxfordjournals.molbev.a026364</a>.</p>
+<div id="ref-rosenberg2003" class="csl-entry">
+Rosenberg, Michael S., Sankar Subramanian, and Sudhir Kumar. 2003. <span>“<span class="nocase">Patterns of Transitional Mutation Biases Within and Among Mammalian Genomes</span>.”</span> <em>Molecular Biology and Evolution</em> 20 (6): 988–93. <a href="https://doi.org/10.1093/molbev/msg113">https://doi.org/10.1093/molbev/msg113</a>.
 </div>
-<div>
-<p>Swofford, DL, GJ Olsen, Waddell PJ, and DM Hillis. 1996. <em>Phylogenetic Inference</em>. Edited by David M Hillis, Craig Moritz, Barbara K Mable, and Richard G Olmstead. Sinauer Associates Sunderland, MA.</p>
+<div id="ref-steel2000parsimony" class="csl-entry">
+Steel, Mike, and David Penny. 2000. <span>“Parsimony, Likelihood, and the Role of Models in Molecular Phylogenetics.”</span> <em>Molecular Biology and Evolution</em> 17 (6): 839–50. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026364">https://doi.org/10.1093/oxfordjournals.molbev.a026364</a>.
 </div>
-<div>
-<p>Upham, Nathan S, Jacob A Esselstyn, and Walter Jetz. 2019. “Inferring the Mammal Tree: Species-Level Sets of Phylogenies for Questions in Ecology, Evolution, and Conservation.” <em>PLoS Biology</em> 17 (12): e3000494. <a href="https://doi.org/10.1371/journal.pbio.3000494">https://doi.org/10.1371/journal.pbio.3000494</a>.</p>
+<div id="ref-swofford1996molecular" class="csl-entry">
+Swofford, DL, GJ Olsen, PJ Waddell, and DM Hillis. 1996. <em>Phylogenetic Inference</em>. Edited by David M Hillis, Craig Moritz, Barbara K Mable, and Richard G Olmstead. Sinauer Associates Sunderland, MA.
 </div>
-<div>
-<p>Xie, Yihui. 2016. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.</p>
+<div id="ref-symonds2014primer" class="csl-entry">
+Symonds, Matthew RE, and Simon P Blomberg. 2014. <span>“A Primer on Phylogenetic Generalised Least Squares.”</span> In <em>Modern Phylogenetic Comparative Methods and Their Application in Evolutionary Biology</em>, 105–30. Springer.
 </div>
-<div>
-<p>Yang, Ziheng. 1994. “Maximum Likelihood Phylogenetic Estimation from Dna Sequences with Variable Rates over Sites: Approximate Methods.” <em>Journal of Molecular Evolution</em> 39 (3): 306–14. <a href="https://doi.org/10.1007/BF00160154">https://doi.org/10.1007/BF00160154</a>.</p>
+<div id="ref-upham2019" class="csl-entry">
+Upham, Nathan S, Jacob A Esselstyn, and Walter Jetz. 2019. <span>“Inferring the Mammal Tree: Species-Level Sets of Phylogenies for Questions in Ecology, Evolution, and Conservation.”</span> <em>PLoS Biology</em> 17 (12): e3000494. <a href="https://doi.org/10.1371/journal.pbio.3000494">https://doi.org/10.1371/journal.pbio.3000494</a>.
 </div>
-<div>
-<p>Yu, Guangchuang, Tommy Tsan-Yuk Lam, and Shuangbin Xu. 2020. <em>Ggtree: An R Package for Visualization of Tree and Annotation Data</em>. <a href="https://yulab-smu.top/treedata-book/">https://yulab-smu.top/treedata-book/</a>.</p>
+<div id="ref-bookdown2016" class="csl-entry">
+Xie, Yihui. 2016. <em>Bookdown: Authoring Books and Technical Documents with <span>R</span> Markdown</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://github.com/rstudio/bookdown">https://github.com/rstudio/bookdown</a>.
 </div>
-<div>
-<p>Zapata, Felipe, Freya E Goetz, Stephen A Smith, Mark Howison, Stefan Siebert, Samuel H Church, Steven M Sanders, et al. 2015. “Phylogenomic Analyses Support Traditional Relationships Within Cnidaria.” <em>PloS One</em> 10 (10): e0139068.</p>
+<div id="ref-yang1994maximum" class="csl-entry">
+Yang, Ziheng. 1994. <span>“Maximum Likelihood Phylogenetic Estimation from DNA Sequences with Variable Rates over Sites: Approximate Methods.”</span> <em>Journal of Molecular Evolution</em> 39 (3): 306–14. <a href="https://doi.org/10.1007/BF00160154">https://doi.org/10.1007/BF00160154</a>.
 </div>
-<div>
-<p>Zhang, Jianzhi. 1999. “Performance of Likelihood Ratio Tests of Evolutionary Hypotheses Under Inadequate Substitution Models.” <em>Molecular Biology and Evolution</em> 16 (6): 868–75. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026171">https://doi.org/10.1093/oxfordjournals.molbev.a026171</a>.</p>
+<div id="ref-R-ggtree" class="csl-entry">
+Yu, Guangchuang, Tommy Tsan-Yuk Lam, and Shuangbin Xu. 2021. <em>Ggtree: An r Package for Visualization of Tree and Annotation Data</em>. <a href="https://yulab-smu.top/treedata-book/">https://yulab-smu.top/treedata-book/</a>.
+</div>
+<div id="ref-zapata2015" class="csl-entry">
+Zapata, Felipe, Freya E Goetz, Stephen A Smith, Mark Howison, Stefan Siebert, Samuel H Church, Steven M Sanders, et al. 2015. <span>“Phylogenomic Analyses Support Traditional Relationships Within Cnidaria.”</span> <em>PloS One</em> 10 (10): e0139068.
+</div>
+<div id="ref-zhang1999performance" class="csl-entry">
+Zhang, Jianzhi. 1999. <span>“Performance of Likelihood Ratio Tests of Evolutionary Hypotheses Under Inadequate Substitution Models.”</span> <em>Molecular Biology and Evolution</em> 16 (6): 868–75. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026171">https://doi.org/10.1093/oxfordjournals.molbev.a026171</a>.
 </div>
 </div>
 </div>

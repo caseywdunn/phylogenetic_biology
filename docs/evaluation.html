@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-11-05" />
+<meta name="date" content="2022-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="molecular-inference-in-practice.html"/>
 <link rel="next" href="bayesian-phylognetics.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,26 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -138,7 +136,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Phylogenetic Biology</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#additional-resources"><i class="fa fa-check"></i><b>0.1</b> Additional resources</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.2</b> Acknowledgements</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i><b>0.3</b> Dedication</a></li>
@@ -147,13 +146,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#software-versions"><i class="fa fa-check"></i><b>0.6</b> Software versions</a></li>
 <li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.7</b> License</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#history-of-the-field"><i class="fa fa-check"></i><b>1.1</b> History of the field</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#core-concepts"><i class="fa fa-check"></i><b>1.2</b> Core concepts</a></li>
 <li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#a-unified-perspective-on-phylogenetic-studies"><i class="fa fa-check"></i><b>1.3</b> A unified perspective on phylogenetic studies</a></li>
 <li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#applications"><i class="fa fa-check"></i><b>1.4</b> Applications</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a><ul>
+<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="phylogenies.html"><a href="phylogenies.html#phylogenies-are-graphs"><i class="fa fa-check"></i><b>2.1</b> Phylogenies are graphs</a></li>
 <li class="chapter" data-level="2.2" data-path="phylogenies.html"><a href="phylogenies.html#drawing-phylogenies"><i class="fa fa-check"></i><b>2.2</b> Drawing phylogenies</a></li>
 <li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of trees</a></li>
@@ -166,9 +167,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="phylogenies.html"><a href="phylogenies.html#representation"><i class="fa fa-check"></i><b>2.10</b> Representation</a></li>
 <li class="chapter" data-level="2.11" data-path="phylogenies.html"><a href="phylogenies.html#additional-reading"><i class="fa fa-check"></i><b>2.11</b> Additional reading</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a><ul>
+<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="simulation.html"><a href="simulation.html#models"><i class="fa fa-check"></i><b>3.1</b> Models</a></li>
-<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a><ul>
+<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="simulation.html"><a href="simulation.html#expected-amount-of-change"><i class="fa fa-check"></i><b>3.2.1</b> Expected amount of change</a></li>
 <li class="chapter" data-level="3.2.2" data-path="simulation.html"><a href="simulation.html#expected-end-state"><i class="fa fa-check"></i><b>3.2.2</b> Expected end state</a></li>
 <li class="chapter" data-level="3.2.3" data-path="simulation.html"><a href="simulation.html#analytical-approach"><i class="fa fa-check"></i><b>3.2.3</b> Analytical approach</a></li>
@@ -182,7 +185,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.9" data-path="simulation.html"><a href="simulation.html#concluding-thoughts"><i class="fa fa-check"></i><b>3.9</b> Concluding thoughts</a></li>
 <li class="chapter" data-level="3.10" data-path="simulation.html"><a href="simulation.html#additional-resources-1"><i class="fa fa-check"></i><b>3.10</b> Additional resources</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a><ul>
+<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-a-single-history"><i class="fa fa-check"></i><b>4.1</b> Probability of a single history</a></li>
 <li class="chapter" data-level="4.2" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-multiple-histories"><i class="fa fa-check"></i><b>4.2</b> Probability of multiple histories</a></li>
 <li class="chapter" data-level="4.3" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#log-likelihood"><i class="fa fa-check"></i><b>4.3</b> Log likelihood</a></li>
@@ -190,17 +194,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#maximum-likelihood"><i class="fa fa-check"></i><b>4.5</b> Maximum likelihood</a></li>
 <li class="chapter" data-level="4.6" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#optimality-criteria"><i class="fa fa-check"></i><b>4.6</b> Optimality criteria</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a><ul>
+<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#your-question"><i class="fa fa-check"></i><b>5.1</b> Your question</a></li>
 <li class="chapter" data-level="5.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#taxon-sampling"><i class="fa fa-check"></i><b>5.2</b> Taxon sampling</a></li>
-<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a><ul>
+<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#whole-genomes"><i class="fa fa-check"></i><b>5.3.1</b> Whole genomes</a></li>
 <li class="chapter" data-level="5.3.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#transcriptomes"><i class="fa fa-check"></i><b>5.3.2</b> Transcriptomes</a></li>
 <li class="chapter" data-level="5.3.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#targeted-enrichment"><i class="fa fa-check"></i><b>5.3.3</b> Targeted enrichment</a></li>
 <li class="chapter" data-level="5.3.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#rad-seq"><i class="fa fa-check"></i><b>5.3.4</b> RAD-seq</a></li>
 <li class="chapter" data-level="5.3.5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#pcr"><i class="fa fa-check"></i><b>5.3.5</b> PCR</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a><ul>
+<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#estimation-of-original-sequences"><i class="fa fa-check"></i><b>5.4.1</b> Estimation of original sequences</a></li>
 <li class="chapter" data-level="5.4.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#identification-of-homologous-genome-regions"><i class="fa fa-check"></i><b>5.4.2</b> Identification of homologous genome regions</a></li>
 </ul></li>
@@ -208,48 +215,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#homologous-sites"><i class="fa fa-check"></i><b>5.6</b> Homologous sites</a></li>
 <li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a><ul>
-<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a><ul>
+<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="evaluation.html"><a href="evaluation.html#model-structure"><i class="fa fa-check"></i><b>6.1.1</b> Model structure</a></li>
 <li class="chapter" data-level="6.1.2" data-path="evaluation.html"><a href="evaluation.html#evaluating-models"><i class="fa fa-check"></i><b>6.1.2</b> Evaluating models</a></li>
 <li class="chapter" data-level="6.1.3" data-path="evaluation.html"><a href="evaluation.html#adding-complexity-to-dna-evolution-models"><i class="fa fa-check"></i><b>6.1.3</b> Adding complexity to DNA evolution models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a><ul>
+<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="evaluation.html"><a href="evaluation.html#summarizing-topological-support"><i class="fa fa-check"></i><b>6.2.1</b> Summarizing topological support</a></li>
 <li class="chapter" data-level="6.2.2" data-path="evaluation.html"><a href="evaluation.html#bootstrapping"><i class="fa fa-check"></i><b>6.2.2</b> Bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="evaluation.html"><a href="evaluation.html#topology-tests"><i class="fa fa-check"></i><b>6.3</b> Topology tests</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylognetics</a><ul>
+<li class="chapter" data-level="7" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylognetics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>7.1</b> Bayesian statistics</a></li>
 <li class="chapter" data-level="7.2" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>7.2</b> Bayesian phylogenetic inference</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a><ul>
-<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1</b> Nominal scale types</a><ul>
+<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1</b> Nominal scale types</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#amino-acids"><i class="fa fa-check"></i><b>8.1.1</b> Amino acids</a></li>
 <li class="chapter" data-level="8.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#codons"><i class="fa fa-check"></i><b>8.1.2</b> Codons</a></li>
 <li class="chapter" data-level="8.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#morphology"><i class="fa fa-check"></i><b>8.1.3</b> Morphology</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>8.2</b> Ordinal scale types</a></li>
-<li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a><ul>
+<li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a>
+<ul>
 <li class="chapter" data-level="8.3.1" data-path="additional-character-types.html"><a href="additional-character-types.html#ratio-scale-type"><i class="fa fa-check"></i><b>8.3.1</b> Ratio scale type</a></li>
 <li class="chapter" data-level="8.3.2" data-path="additional-character-types.html"><a href="additional-character-types.html#difference-scale-type"><i class="fa fa-check"></i><b>8.3.2</b> Difference scale type</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a><ul>
-<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a><ul>
+<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>9.1.1</b> Cladograms</a></li>
 <li class="chapter" data-level="9.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>9.1.2</b> Phylograms</a></li>
 <li class="chapter" data-level="9.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>9.1.3</b> Chronograms</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#clock-like-evolution"><i class="fa fa-check"></i><b>9.2</b> Clock-like evolution</a></li>
-<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a><ul>
+<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#mathematical-implications-of-age-constraints"><i class="fa fa-check"></i><b>9.3.1</b> Mathematical implications of age constraints</a></li>
 <li class="chapter" data-level="9.3.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#constraining-node-ages"><i class="fa fa-check"></i><b>9.3.2</b> Constraining node ages</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>10</b> Ancestral character state reconstruction</a></li>
+<li class="chapter" data-level="11" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>11</b> Comparative methods</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="comparative-methods.html"><a href="comparative-methods.html#correlated-evolutionary-changes"><i class="fa fa-check"></i><b>11.1</b> Correlated evolutionary changes</a></li>
+<li class="chapter" data-level="11.2" data-path="comparative-methods.html"><a href="comparative-methods.html#inferring-covariance-in-the-absence-of-phylogenetic-structure"><i class="fa fa-check"></i><b>11.2</b> Inferring covariance in the absence of phylogenetic structure</a></li>
+<li class="chapter" data-level="11.3" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>11.3</b> Phylogenetic Independent Contrasts</a></li>
+<li class="chapter" data-level="11.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-structure-is-the-expected-covariance-structure"><i class="fa fa-check"></i><b>11.4</b> Phylogenetic structure is the expected covariance structure</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a><ul>
+<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
+<ul>
 <li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> General statistics</a></li>
 <li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-prob"><i class="fa fa-check"></i><b>A.2</b> Probability theory</a></li>
 <li class="chapter" data-level="A.3" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.3</b> Bayes theorem</a></li>
@@ -275,14 +301,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="evaluation" class="section level1">
+<div id="evaluation" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Evaluation</h1>
-<div id="model-evaluation" class="section level2">
+<div id="model-evaluation" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Model evaluation</h2>
 <p>I have introduced the use of models of DNA evolution for simulation and inference, but I haven’t explained how to select a model. Given a dataset, consisting of aligned DNA sequences for a set of taxa that correspond to tips on a phylogeny, how do you decide which model to use?</p>
-<div id="model-structure" class="section level3">
+<div id="model-structure" class="section level3" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> Model structure</h3>
-<p>Each model parameters can be treated in one of at least three ways <span class="citation">(Hohna et al. <a href="#ref-Hohna2014" role="doc-biblioref">2014</a>)</span>:</p>
+<p>Each model parameters can be treated in one of at least three ways <span class="citation">(<a href="references.html#ref-Hohna2014" role="doc-biblioref">Hohna et al. 2014</a>)</span>:</p>
 <ul>
 <li><p>Constant. The parameter is set to a specific value before the analysis and is not free to vary.</p></li>
 <li><p>Stochastic. The parameter is free to vary in the analysis. This allows the value to be estimated from the data as part of the inference process.</p></li>
@@ -296,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The four equilibrium frequencies are constrained such that <span class="math inline">\(\pi_A+\pi_C+\pi_G+\pi_T=1\)</span>. This is because they are exclusive frequencies, and there are no other possible states. Given that every site must be an A, C, G, or T, their frequencies must sum to <span class="math inline">\(1\)</span>. This mathematical relationship between the equilibrium frequency parameters means that only three of them can vary independently – three are stochastic and one is deterministic. Again, it doesn’t matter which one is deterministic, only how many are stochastic, so I’ll treat <span class="math inline">\(\pi_A\)</span> as the deterministic parameter.</p></li>
 </ul>
 <div class="figure"><span id="fig:evaluation-models-nested"></span>
-<img src="figures/models_dna.png" alt="A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the edge lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014). See the [iqtree DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models."  />
+<img src="figures/models_dna.png" alt="A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the edge lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014). See the [iqtree DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models." width="270" />
 <p class="caption">
 Figure 6.1: A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here <span class="math inline">\(\mu=1\)</span>, such that the edge lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014). See the <a href="http://www.iqtree.org/doc/Substitution-Models#dna-models">iqtree DNA model documentation</a> for a longer list of models.
 </p>
@@ -308,7 +334,7 @@ Figure 6.1: A hierarchical view of DNA substitution models. The number of degree
 <p>The first model we introduced, JC, has <span class="math inline">\(df=0\)</span>. All the relative rates are constant at <span class="math inline">\(1\)</span>, and all the equilibrium frequencies are constant at <span class="math inline">\(1\)</span>. In typical use, <span class="math inline">\(\mu=1\)</span>. All the other models mentioned above have stochastic parameters that can take on these values, so JC is nested within them all.</p>
 <p>Though nested models always have different degrees of freedom, there is no guarantee that models with different degrees of freedom have a nested relationship. It could be that the simpler model has some stochastic parameters that are not stochastic in the more complex model, even though the more complex model has a greater number of free parameters overall. That would allow the simpler model to take on values that the more complex model cannot, violating the nested relationship. When evaluating nestedness it is therefore critical to consider model structure, not just the degrees of freedom.</p>
 </div>
-<div id="evaluating-models" class="section level3">
+<div id="evaluating-models" class="section level3" number="6.1.2">
 <h3><span class="header-section-number">6.1.2</span> Evaluating models</h3>
 <p>In our previous examinations of inference, we used likelihood as an optimality criterion when looking for the phylogeny that best explains our data. Similarly, we can search for the model that best explains the data. We can pick a reasonable phylogeny and evaluate the likelihood of the data under each of the models we would like to consider. In each case we also optimize the model parameter values for each model to make sure we are comparing the models in the best possible light.</p>
 <p>We can then make a series of pairwise comparisons between models, where we consider the ratio of their likelihoods. This is the gist of what is called a likelihood ratio test (LRT). Instead of considering the ratio of likelihoods, we can consider the difference of their log likelihoods since:</p>
@@ -331,83 +357,56 @@ Figure 6.1: A hierarchical view of DNA substitution models. The number of degree
   \tag{6.3}
 \end{equation}\]</span></p>
 <p>We can compare this test statistic <span class="math inline">\(\delta\)</span> to the appropriate <span class="math inline">\(\chi^2\)</span> distribution to assess if the more complex model has a significantly greater likelihood. If not, we stick with the simpler model. It is important to note that it is only appropriate for comparing <em>nested</em> models.</p>
-<p>There are a few challenges to applying the LRT to model selection in phylogenetics <span class="citation">(Posada and Buckley <a href="#ref-posada2004model" role="doc-biblioref">2004</a>)</span>. One issue is that the test presumes that one of the models is correct <span class="citation">(Zhang <a href="#ref-zhang1999performance" role="doc-biblioref">1999</a>)</span>, but in phylogenetics models are always simplifications of the evolutionary process at hand. The impact of violating this assumption varies across data sets and analyses, but can lead do undesirable behavior in real-world applications.</p>
+<p>There are a few challenges to applying the LRT to model selection in phylogenetics <span class="citation">(<a href="references.html#ref-posada2004model" role="doc-biblioref">Posada and Buckley 2004</a>)</span>. One issue is that the test presumes that one of the models is correct <span class="citation">(<a href="references.html#ref-zhang1999performance" role="doc-biblioref">Zhang 1999</a>)</span>, but in phylogenetics models are always simplifications of the evolutionary process at hand. The impact of violating this assumption varies across data sets and analyses, but can lead do undesirable behavior in real-world applications.</p>
 <p>There are two other approaches commonly used in phylogenetic model selection. Where <span class="math inline">\(L_i\)</span> is the likelihood under model <span class="math inline">\(i\)</span>, <span class="math inline">\(k_i\)</span> is the degrees of freedom for the model, and <span class="math inline">\(n\)</span> is sample size (<em>e.g.</em> number of sites in the alignment), these are the Akaike Information Criterion (AIC):</p>
 <p><span class="math display" id="eq:aic">\[\begin{equation} 
   AIC_i = -2(ln(L_i) + 2k_i
   \tag{6.4}
 \end{equation}\]</span></p>
 <p>And the Bayesian Information Criterion (BIC):</p>
-<p><span class="math display" id="eq:aic">\[\begin{equation} 
+<p><span class="math display" id="eq:bic">\[\begin{equation} 
   BIC_i = -2(ln(L_i) + k_iln(n)
-  \tag{6.4}
+  \tag{6.5}
 \end{equation}\]</span></p>
-<p>To apply either of these criteria, they are calculated for each model and the model with the <em>lowest</em> value is selected. Adding parameters increases the value, penalizing any increase in likelihood they provide. These criteria have multiple advantages over LRT, including that they can be used to compare non-nested models <span class="citation">(Burnham and Anderson <a href="#ref-Burnham2002" role="doc-biblioref">2002</a>)</span>.</p>
+<p>To apply either of these criteria, they are calculated for each model and the model with the <em>lowest</em> value is selected. Adding parameters increases the value, penalizing any increase in likelihood they provide. These criteria have multiple advantages over LRT, including that they can be used to compare non-nested models <span class="citation">(<a href="references.html#ref-Burnham2002" role="doc-biblioref">Burnham and Anderson 2002</a>)</span>.</p>
 <p>To decide whether to use LRT, AIC, or BIC model selection criteria, you need to run a model selection criterion selection analysis. Just kidding. To decide which to use, you should apply your knowledge of phylogenetic methods critically. In many cases, these different approaches will lead to very similar decisions about model selection. As an example of a fairly typical approach, the program iqtree runs AIC and BIC analyses, but proceeds under the model selected by BIC unless you explicitly step in to apply a different model. If, on inspection of the analysis results, you find that AIC selects a very different model, it would be prudent to run your analyses under that model as well to see if it leads to differences that are relevant to the questions that motivate your project.</p>
 </div>
-<div id="adding-complexity-to-dna-evolution-models" class="section level3">
+<div id="adding-complexity-to-dna-evolution-models" class="section level3" number="6.1.3">
 <h3><span class="header-section-number">6.1.3</span> Adding complexity to DNA evolution models</h3>
 <p>The GTR model, and its nested derivatives, capture only a small subset of evolutionary processes and therefore can’t describe many of patterns in observed data. One of the most obvious patterns you will notice when inspecting multiple sequence alignments is that the amount of variation is very different across sites. Some columns will be highly variable, while others are nearly constant. This pattern is due to extensive heterogeneity across sites in rate of evolution.</p>
-<p>Two additional model features are often added to address this rate heterogeneity - <code>I</code> and <code>G</code>. The I parameter is the fraction of sites that are invariant and effectively have a rate of zero. <code>G</code> accommodates rate heterogeneity across sites that do vary <span class="citation">(Yang <a href="#ref-yang1994maximum" role="doc-biblioref">1994</a>)</span>. This is modeled with a continuous <span class="math inline">\(\Gamma\)</span> distribution that is divided into discrete rate categories, usually 4, to speed up computations. Sites are assigned to these different rate categories. To specify the shape of the <span class="math inline">\(\Gamma\)</span> distribution, and therefore the rates of the categories, a parameter referred to as <span class="math inline">\(\alpha\)</span> is used.</p>
+<p>Two additional model features are often added to address this rate heterogeneity - <code>I</code> and <code>G</code>. The I parameter is the fraction of sites that are invariant and effectively have a rate of zero. <code>G</code> accommodates rate heterogeneity across sites that do vary <span class="citation">(<a href="references.html#ref-yang1994maximum" role="doc-biblioref">Yang 1994</a>)</span>. This is modeled with a continuous <span class="math inline">\(\Gamma\)</span> distribution that is divided into discrete rate categories, usually 4, to speed up computations. Sites are assigned to these different rate categories. To specify the shape of the <span class="math inline">\(\Gamma\)</span> distribution, and therefore the rates of the categories, a parameter referred to as <span class="math inline">\(\alpha\)</span> is used.</p>
 <p><code>I</code> and <code>G</code> can be added to GTR and its derivative models. Model selection routines usually examine a panel of models without these rate heterogeneity features, then with <code>I</code>, <code>G</code>, and <code>I+G</code>. The models with <code>I+G</code> are often selected, reflecting the importance of accommodating rate heterogeneity in real data.</p>
 </div>
 </div>
-<div id="topological-evaluation" class="section level2">
+<div id="topological-evaluation" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Topological evaluation</h2>
 <p>Maximum likelihood inference gives a point estimate of the phylogeny – a single phylogeny (topology and edge lengths) that maximizes the probability of the observed data under the model. A maximum likelihood analysis will always return a single phylogeny, regardless of how strong the support for that phylogeny is or how much higher its likelihood is than that of other phylogenies. This is akin to presenting an estimate of mass, made from multiple observations, without showing error bars.</p>
-<div id="summarizing-topological-support" class="section level3">
+<div id="summarizing-topological-support" class="section level3" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Summarizing topological support</h3>
 <p>Before we get into how to assess support for a phylogenetic hypothesis, it use helpful to think about what that support means and how it is viewed on a phylogeny. Given a specific topology, such as a maximum likelihood phylogeny, how can we summarize and present support for that topology? I’ll refer to the topology we are evaluating as the <em>focal topology</em>.</p>
 <p>Most methods that evaluate topologies generate a large set of phylogenies, which I’ll call the <em>sample</em>. Assessing support for a feature of the focal topology is a matter of assessing the frequency of phylogenies in the sample that also have that feature. We could assess the support for the focal tree as a whole by asking how frequent identical topologies are in the sample. But support can often be strong in one part of a phylogeny and weak in another. Reporting equivalence of the entire topology provides no window into that variation. This approach would also break down as taxa are added, which quickly increases them number of possible topologies and reduces the chances of any two analyses returning the exact same topologies, given the variation that is inherent in heuristic searches.</p>
 <p>Edge frequencies are far more useful. It is helpful to think of an edge as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the edge, and those on the other (Figure <a href="evaluation.html#fig:eval-splits">6.2</a>). We will consider two edges to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of edges deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.</p>
 <div class="figure"><span id="fig:eval-splits"></span>
-<img src="figures/splits.png" alt="Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is an edge, with the identification of the edge based on which taxa are split from each other by the edge. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the edges in the focal topology."  />
+<img src="figures/splits.png" alt="Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is an edge, with the identification of the edge based on which taxa are split from each other by the edge. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the edges in the focal topology." width="288" />
 <p class="caption">
 Figure 6.2: Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is an edge, with the identification of the edge based on which taxa are split from each other by the edge. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the edges in the focal topology.
 </p>
 </div>
 <p>We can consider each edge in the focal phylogeny independently. For a given focal edge, we count the fraction of phylogenies in the sample that have the same edge, as determined by producing an identical split in taxa. We consider this frequency as the support for the focal edge. If the frequency is 1, the edge was in all the phylogenies in the sample. If it is zero, it wasn’t present in any of the phylogenies in the sample. The interpretation of these frequencies, which are often reported as percents, depends on the method that was used to generate the sample.</p>
-<p>It should be noted that these support values are often referred to as “nodal support values”, and are often drawn onto nodes. This is unfortunate, as they are edge support values. They are just commonly associated with child node of the edge rather than the edge itself. This obscures their meaning, and leads to serious problems when trees are re-rooted <span class="citation">(Czech, Huerta-Cepas, and Stamatakis <a href="#ref-10.1093/molbev/msx055" role="doc-biblioref">2017</a>)</span>.</p>
+<p>It should be noted that these support values are often referred to as “nodal support values,” and are often drawn onto nodes. This is unfortunate, as they are edge support values. They are just commonly associated with child node of the edge rather than the edge itself. This obscures their meaning, and leads to serious problems when trees are re-rooted <span class="citation">(<a href="references.html#ref-10.1093/molbev/msx055" role="doc-biblioref">Czech, Huerta-Cepas, and Stamatakis 2017</a>)</span>.</p>
 </div>
-<div id="bootstrapping" class="section level3">
+<div id="bootstrapping" class="section level3" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Bootstrapping</h3>
-<p>The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap <span class="citation">(Felsenstein <a href="#ref-felsenstein1985confidence" role="doc-biblioref">1985</a>)</span>. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with <span class="math inline">\(n\)</span> columns, bootstrapping generates a new matrix, also with <span class="math inline">\(n\)</span> columns, by resampling from the the original matrix with replacement. Some columns from the original matrix won’t be sampled at all, some will be sampled once, and some will be sampled multiple times.</p>
+<p>The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap <span class="citation">(<a href="references.html#ref-felsenstein1985confidence" role="doc-biblioref">Joseph Felsenstein 1985</a>)</span>. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with <span class="math inline">\(n\)</span> columns, bootstrapping generates a new matrix, also with <span class="math inline">\(n\)</span> columns, by resampling from the the original matrix with replacement. Some columns from the original matrix won’t be sampled at all, some will be sampled once, and some will be sampled multiple times.</p>
 <p>Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each edge of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. An edge frequency of 100% indicates that an edge is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.</p>
 <p>Note that I am not using the term “significance” when referring to bootstrap support. This is because bootstraps don’t have a clear statistical interpretation. It is a scale that varies from <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span>, but is not itself a significance. It just indicates how frequently an edge is recovered when the data columns are resampled. This gives a sense of how broad support is for the edge across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.</p>
 <p>Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process.</p>
 </div>
 </div>
-<div id="topology-tests" class="section level2">
+<div id="topology-tests" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Topology tests</h2>
-<p>Rather than assess the support of a particular focal topology, sometimes you want to assess how significant the difference in support is for specific phylogenies. There are several different topology tests that address these questions. They include the SOWH test <span class="citation">(Swofford et al. <a href="#ref-swofford1996molecular" role="doc-biblioref">1996</a>)</span>, among others.</p>
+<p>Rather than assess the support of a particular focal topology, sometimes you want to assess how significant the difference in support is for specific phylogenies. There are several different topology tests that address these questions. They include the SOWH test <span class="citation">(<a href="references.html#ref-swofford1996molecular" role="doc-biblioref">Swofford et al. 1996</a>)</span>, among others.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-Burnham2002">
-<p>Burnham, KP, and DR Anderson. 2002. <em>Model Selection and Multimodel Inference: A Practical Information-Theoretic Approach</em>. 2nd ed. Springer. <a href="https://doi.org/10.1007/b97636">https://doi.org/10.1007/b97636</a>.</p>
-</div>
-<div id="ref-10.1093/molbev/msx055">
-<p>Czech, Lucas, Jaime Huerta-Cepas, and Alexandros Stamatakis. 2017. “A Critical Review on the Use of Support Values in Tree Viewers and Bioinformatics Toolkits.” <em>Molecular Biology and Evolution</em> 34 (6): 1535–42. <a href="https://doi.org/10.1093/molbev/msx055">https://doi.org/10.1093/molbev/msx055</a>.</p>
-</div>
-<div id="ref-felsenstein1985confidence">
-<p>Felsenstein, Joseph. 1985. “Confidence Limits on Phylogenies: An Approach Using the Bootstrap.” <em>Evolution</em> 39 (4): 783–91. <a href="https://doi.org/10.1111/j.1558-5646.1985.tb00420.x">https://doi.org/10.1111/j.1558-5646.1985.tb00420.x</a>.</p>
-</div>
-<div id="ref-Hohna2014">
-<p>Hohna, S., T. A. Heath, B. Boussau, M. J. Landis, F. Ronquist, and J. P. Huelsenbeck. 2014. “Probabilistic Graphical Model Representation in Phylogenetics.” Journal Article. <em>Syst Biol</em> 63 (5): 753–71. <a href="https://doi.org/10.1093/sysbio/syu039">https://doi.org/10.1093/sysbio/syu039</a>.</p>
-</div>
-<div id="ref-posada2004model">
-<p>Posada, David, and Thomas R Buckley. 2004. “Model Selection and Model Averaging in Phylogenetics: Advantages of Akaike Information Criterion and Bayesian Approaches over Likelihood Ratio Tests.” <em>Systematic Biology</em> 53 (5): 793–808. <a href="https://doi.org/10.1080/10635150490522304">https://doi.org/10.1080/10635150490522304</a>.</p>
-</div>
-<div id="ref-swofford1996molecular">
-<p>Swofford, DL, GJ Olsen, Waddell PJ, and DM Hillis. 1996. <em>Phylogenetic Inference</em>. Edited by David M Hillis, Craig Moritz, Barbara K Mable, and Richard G Olmstead. Sinauer Associates Sunderland, MA.</p>
-</div>
-<div id="ref-yang1994maximum">
-<p>Yang, Ziheng. 1994. “Maximum Likelihood Phylogenetic Estimation from Dna Sequences with Variable Rates over Sites: Approximate Methods.” <em>Journal of Molecular Evolution</em> 39 (3): 306–14. <a href="https://doi.org/10.1007/BF00160154">https://doi.org/10.1007/BF00160154</a>.</p>
-</div>
-<div id="ref-zhang1999performance">
-<p>Zhang, Jianzhi. 1999. “Performance of Likelihood Ratio Tests of Evolutionary Hypotheses Under Inadequate Substitution Models.” <em>Molecular Biology and Evolution</em> 16 (6): 868–75. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026171">https://doi.org/10.1093/oxfordjournals.molbev.a026171</a>.</p>
 </div>
 </div>
             </section>

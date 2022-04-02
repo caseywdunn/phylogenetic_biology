@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-11-05" />
+<meta name="date" content="2022-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="simulation.html"/>
 <link rel="next" href="molecular-inference-in-practice.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,26 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -138,7 +136,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Phylogenetic Biology</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#additional-resources"><i class="fa fa-check"></i><b>0.1</b> Additional resources</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.2</b> Acknowledgements</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i><b>0.3</b> Dedication</a></li>
@@ -147,13 +146,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#software-versions"><i class="fa fa-check"></i><b>0.6</b> Software versions</a></li>
 <li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.7</b> License</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#history-of-the-field"><i class="fa fa-check"></i><b>1.1</b> History of the field</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#core-concepts"><i class="fa fa-check"></i><b>1.2</b> Core concepts</a></li>
 <li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#a-unified-perspective-on-phylogenetic-studies"><i class="fa fa-check"></i><b>1.3</b> A unified perspective on phylogenetic studies</a></li>
 <li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#applications"><i class="fa fa-check"></i><b>1.4</b> Applications</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a><ul>
+<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="phylogenies.html"><a href="phylogenies.html#phylogenies-are-graphs"><i class="fa fa-check"></i><b>2.1</b> Phylogenies are graphs</a></li>
 <li class="chapter" data-level="2.2" data-path="phylogenies.html"><a href="phylogenies.html#drawing-phylogenies"><i class="fa fa-check"></i><b>2.2</b> Drawing phylogenies</a></li>
 <li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of trees</a></li>
@@ -166,9 +167,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="phylogenies.html"><a href="phylogenies.html#representation"><i class="fa fa-check"></i><b>2.10</b> Representation</a></li>
 <li class="chapter" data-level="2.11" data-path="phylogenies.html"><a href="phylogenies.html#additional-reading"><i class="fa fa-check"></i><b>2.11</b> Additional reading</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a><ul>
+<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="simulation.html"><a href="simulation.html#models"><i class="fa fa-check"></i><b>3.1</b> Models</a></li>
-<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a><ul>
+<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="simulation.html"><a href="simulation.html#expected-amount-of-change"><i class="fa fa-check"></i><b>3.2.1</b> Expected amount of change</a></li>
 <li class="chapter" data-level="3.2.2" data-path="simulation.html"><a href="simulation.html#expected-end-state"><i class="fa fa-check"></i><b>3.2.2</b> Expected end state</a></li>
 <li class="chapter" data-level="3.2.3" data-path="simulation.html"><a href="simulation.html#analytical-approach"><i class="fa fa-check"></i><b>3.2.3</b> Analytical approach</a></li>
@@ -182,7 +185,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.9" data-path="simulation.html"><a href="simulation.html#concluding-thoughts"><i class="fa fa-check"></i><b>3.9</b> Concluding thoughts</a></li>
 <li class="chapter" data-level="3.10" data-path="simulation.html"><a href="simulation.html#additional-resources-1"><i class="fa fa-check"></i><b>3.10</b> Additional resources</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a><ul>
+<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-a-single-history"><i class="fa fa-check"></i><b>4.1</b> Probability of a single history</a></li>
 <li class="chapter" data-level="4.2" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-multiple-histories"><i class="fa fa-check"></i><b>4.2</b> Probability of multiple histories</a></li>
 <li class="chapter" data-level="4.3" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#log-likelihood"><i class="fa fa-check"></i><b>4.3</b> Log likelihood</a></li>
@@ -190,17 +194,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#maximum-likelihood"><i class="fa fa-check"></i><b>4.5</b> Maximum likelihood</a></li>
 <li class="chapter" data-level="4.6" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#optimality-criteria"><i class="fa fa-check"></i><b>4.6</b> Optimality criteria</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a><ul>
+<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#your-question"><i class="fa fa-check"></i><b>5.1</b> Your question</a></li>
 <li class="chapter" data-level="5.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#taxon-sampling"><i class="fa fa-check"></i><b>5.2</b> Taxon sampling</a></li>
-<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a><ul>
+<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#whole-genomes"><i class="fa fa-check"></i><b>5.3.1</b> Whole genomes</a></li>
 <li class="chapter" data-level="5.3.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#transcriptomes"><i class="fa fa-check"></i><b>5.3.2</b> Transcriptomes</a></li>
 <li class="chapter" data-level="5.3.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#targeted-enrichment"><i class="fa fa-check"></i><b>5.3.3</b> Targeted enrichment</a></li>
 <li class="chapter" data-level="5.3.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#rad-seq"><i class="fa fa-check"></i><b>5.3.4</b> RAD-seq</a></li>
 <li class="chapter" data-level="5.3.5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#pcr"><i class="fa fa-check"></i><b>5.3.5</b> PCR</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a><ul>
+<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#estimation-of-original-sequences"><i class="fa fa-check"></i><b>5.4.1</b> Estimation of original sequences</a></li>
 <li class="chapter" data-level="5.4.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#identification-of-homologous-genome-regions"><i class="fa fa-check"></i><b>5.4.2</b> Identification of homologous genome regions</a></li>
 </ul></li>
@@ -208,48 +215,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#homologous-sites"><i class="fa fa-check"></i><b>5.6</b> Homologous sites</a></li>
 <li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a><ul>
-<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a><ul>
+<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="evaluation.html"><a href="evaluation.html#model-structure"><i class="fa fa-check"></i><b>6.1.1</b> Model structure</a></li>
 <li class="chapter" data-level="6.1.2" data-path="evaluation.html"><a href="evaluation.html#evaluating-models"><i class="fa fa-check"></i><b>6.1.2</b> Evaluating models</a></li>
 <li class="chapter" data-level="6.1.3" data-path="evaluation.html"><a href="evaluation.html#adding-complexity-to-dna-evolution-models"><i class="fa fa-check"></i><b>6.1.3</b> Adding complexity to DNA evolution models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a><ul>
+<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="evaluation.html"><a href="evaluation.html#summarizing-topological-support"><i class="fa fa-check"></i><b>6.2.1</b> Summarizing topological support</a></li>
 <li class="chapter" data-level="6.2.2" data-path="evaluation.html"><a href="evaluation.html#bootstrapping"><i class="fa fa-check"></i><b>6.2.2</b> Bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="evaluation.html"><a href="evaluation.html#topology-tests"><i class="fa fa-check"></i><b>6.3</b> Topology tests</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylognetics</a><ul>
+<li class="chapter" data-level="7" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylognetics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>7.1</b> Bayesian statistics</a></li>
 <li class="chapter" data-level="7.2" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>7.2</b> Bayesian phylogenetic inference</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a><ul>
-<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1</b> Nominal scale types</a><ul>
+<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1</b> Nominal scale types</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#amino-acids"><i class="fa fa-check"></i><b>8.1.1</b> Amino acids</a></li>
 <li class="chapter" data-level="8.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#codons"><i class="fa fa-check"></i><b>8.1.2</b> Codons</a></li>
 <li class="chapter" data-level="8.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#morphology"><i class="fa fa-check"></i><b>8.1.3</b> Morphology</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>8.2</b> Ordinal scale types</a></li>
-<li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a><ul>
+<li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a>
+<ul>
 <li class="chapter" data-level="8.3.1" data-path="additional-character-types.html"><a href="additional-character-types.html#ratio-scale-type"><i class="fa fa-check"></i><b>8.3.1</b> Ratio scale type</a></li>
 <li class="chapter" data-level="8.3.2" data-path="additional-character-types.html"><a href="additional-character-types.html#difference-scale-type"><i class="fa fa-check"></i><b>8.3.2</b> Difference scale type</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a><ul>
-<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a><ul>
+<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>9.1.1</b> Cladograms</a></li>
 <li class="chapter" data-level="9.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>9.1.2</b> Phylograms</a></li>
 <li class="chapter" data-level="9.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>9.1.3</b> Chronograms</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#clock-like-evolution"><i class="fa fa-check"></i><b>9.2</b> Clock-like evolution</a></li>
-<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a><ul>
+<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#mathematical-implications-of-age-constraints"><i class="fa fa-check"></i><b>9.3.1</b> Mathematical implications of age constraints</a></li>
 <li class="chapter" data-level="9.3.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#constraining-node-ages"><i class="fa fa-check"></i><b>9.3.2</b> Constraining node ages</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>10</b> Ancestral character state reconstruction</a></li>
+<li class="chapter" data-level="11" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>11</b> Comparative methods</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="comparative-methods.html"><a href="comparative-methods.html#correlated-evolutionary-changes"><i class="fa fa-check"></i><b>11.1</b> Correlated evolutionary changes</a></li>
+<li class="chapter" data-level="11.2" data-path="comparative-methods.html"><a href="comparative-methods.html#inferring-covariance-in-the-absence-of-phylogenetic-structure"><i class="fa fa-check"></i><b>11.2</b> Inferring covariance in the absence of phylogenetic structure</a></li>
+<li class="chapter" data-level="11.3" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>11.3</b> Phylogenetic Independent Contrasts</a></li>
+<li class="chapter" data-level="11.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-structure-is-the-expected-covariance-structure"><i class="fa fa-check"></i><b>11.4</b> Phylogenetic structure is the expected covariance structure</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a><ul>
+<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
+<ul>
 <li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> General statistics</a></li>
 <li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-prob"><i class="fa fa-check"></i><b>A.2</b> Probability theory</a></li>
 <li class="chapter" data-level="A.3" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.3</b> Bayes theorem</a></li>
@@ -275,12 +301,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="inferring-phylogenies-from-data" class="section level1">
+<div id="inferring-phylogenies-from-data" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Inferring phylogenies from data</h1>
 <p>In the previous chapter we built modeling machinery that allowed us to specify a rate matrix <span class="math inline">\(\mathbf{Q}\)</span> (Equation <a href="simulation.html#eq:sim-gtr">(3.8)</a>), and from that derive the matrix <span class="math inline">\(\mathbf{P}(t)\)</span> (Equation <a href="simulation.html#eq:jc69-prob">(3.7)</a>) that gives the probability of a particular end state given the starting state and the edge length <span class="math inline">\(t\)</span>. We used <span class="math inline">\(\mathbf{P}(t)\)</span> in a generative context, to simulate the evolution of a DNA sequence along the edges of a phylogeny.</p>
-<p>We will now turn to using the same statistical framework for what may initially seem to be a very different task – phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data <span class="citation">(Felsenstein <a href="#ref-Felsenstein:1981vk" role="doc-biblioref">1981</a>)</span>.</p>
+<p>We will now turn to using the same statistical framework for what may initially seem to be a very different task – phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data <span class="citation">(<a href="references.html#ref-Felsenstein:1981vk" role="doc-biblioref">J. Felsenstein 1981</a>)</span>.</p>
 <p>This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis is referred to as Maximum Likelihood (ML).</p>
-<div id="probability-of-a-single-history" class="section level2">
+<div id="probability-of-a-single-history" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Probability of a single history</h2>
 <p>We will consider the toy phylogeny, along with its tip states, shown in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-toy">4.1</a>.</p>
 <div class="figure"><span id="fig:inference-toy"></span>
@@ -289,7 +315,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 4.1: The toy phylogeny we will use to examine inference. Node numbers are in red. Edge lengths are in orange. Tip node states are within boxes.
 </p>
 </div>
-<p>We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and edge lengths. This history is the full set of states at all nodes. These are added to the toy phylogeny in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-internal-states">4.2</a>. I want to emphasize that this isn’t a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.</p>
+<p>We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and edge lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-internal-states">4.2</a>. I want to emphasize that this isn’t a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.</p>
 <div class="figure"><span id="fig:inference-internal-states"></span>
 <img src="phylogenetic_biology_files/figure-html/inference-internal-states-1.png" alt="The same toy tree as above, but with arbitrary internal node states (in boxes)." width="2100" />
 <p class="caption">
@@ -473,7 +499,7 @@ probability
 <p>The joint probability of all these states can now be calculated as the product of each state. This comes out to <span class="math inline">\(1.4332602\times 10^{-5}\)</span>. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of <span class="math inline">\(14.3\)</span> times out of a million simulations.</p>
 <p>Here we have used much of the same machinery as we did in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.</p>
 </div>
-<div id="probability-of-multiple-histories" class="section level2">
+<div id="probability-of-multiple-histories" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Probability of multiple histories</h2>
 <p>Above we considered the joint probability of a specific set of nucleotide states at all nodes, including both tip nodes and internal nodes. Usually, though, we don’t know the internal node states. We don’t even know what internal nodes exist, which is why we are trying to infer the phylogeny! Instead we have observed states that we got by sequencing organisms at the tips. We want to clamp these tip states and assess their probability on a particular tree (with edge lengths) under the model. This probability is independent of a specific history of internal node states.</p>
 <p>If we aren’t clamping the internal node states as well, how can we calculate the probability of just the tip node states? The key is to consider all possible internal states. Each configuration of internal node states represents one possible history that gave rise to the observed tip states. We can sum the probabilities of each of these different ways to get the tip states to find the probability of the tip states over all possible histories. We are summing the probabilities because these are mutually exclusive histories that could give rise to the observed data. For example, if we want to find the probability of getting a total of seven when rolling two dice, we need to add up the probability of each way to get seven (1+6 <em>or</em> 2+5 <em>or</em> 3+4 <em>or</em> … 6+1). This is different from when we multiplied probabilities to find the joint probabilities of multiple events occurring together (<em>e.g.</em>, the probability of rolling a 4 <em>and</em> another 4).</p>
@@ -2177,7 +2203,7 @@ T
 <p>Note that I listed the states for all the nodes, including nodes 1-4, which are clamped. It is the last three internal nodes (n5-n7) that have variable states. The probabilities for each specific history range quite widely, from <span class="math inline">\(8.2902428\times 10^{-9}\)</span> to <span class="math inline">\(0.0028111\)</span>.</p>
 <p>The sum of the probabilities for each of these different histories for n5-n7 that give rise to the observed clamped states for tip nodes n1-n4 is <span class="math inline">\(0.0058252\)</span>. This probability of the data given a particular hypothesis (the topology, edge lengths, model, and model parameters) is the likelihood.</p>
 </div>
-<div id="log-likelihood" class="section level2">
+<div id="log-likelihood" class="section level2" number="4.3">
 <h2><span class="header-section-number">4.3</span> Log likelihood</h2>
 <p>The likelihood of these data on this phylogeny, <span class="math inline">\(0.0058252\)</span>, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers have trouble storing them efficiently. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, <span class="math inline">\(ln(p)\)</span>. The log likelihood for this phylogeny is <span class="math inline">\(-5.1455597\)</span>. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:</p>
 <p><span class="math display" id="eq:logs">\[\begin{equation} 
@@ -2186,33 +2212,24 @@ T
 \end{equation}\]</span></p>
 <p>We can calculate joint log probabilities as sums of log probabilities for each event, rather than as the log of products of the probabilities. Addition is much faster than multiplication for computers (since multiplication is a series of addition operations), so this speeds things up. For these reasons you will almost always see log likelihoods, rather than just likelihoods, published in the literature. Note that because likelihoods are probabilities and therefore range from 0–1, the log likelihoods will range from <span class="math inline">\(-\infty\)</span> (for probabilities very close to 0) to <span class="math inline">\(0\)</span> (for probabilities close to 1). Since likelihoods tend to be small, they end up as log likelihoods that are negative numbers with large absolute values.</p>
 </div>
-<div id="likelihood-for-multiple-sites" class="section level2">
+<div id="likelihood-for-multiple-sites" class="section level2" number="4.4">
 <h2><span class="header-section-number">4.4</span> Likelihood for multiple sites</h2>
 <p>The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We new need to expand this model from a single site to multiple sites within a gene or even across whole genomes.</p>
 <p>This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.</p>
 </div>
-<div id="maximum-likelihood" class="section level2">
+<div id="maximum-likelihood" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> Maximum likelihood</h2>
 <p>At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. How do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).</p>
 <p>The small toy phylogeny considered here (Figure <a href="inferring-phylogenies-from-data.html#fig:inference-toy">4.1</a>) has four tip nodes. Be reference to Equation <a href="phylogenies.html#eq:ntrees">(2.1)</a>, we can see that there are 15 possible topologies. For each, we can optimize the edge lengths to find the maximum likelihood for the topology. This is an iterative process, where each edge length is progressively refined until no change increases the likelihood. This excellent <a href="http://phylo.bio.ku.edu/mephytis/brlen-opt.html">interactive visualization</a> allows you to manually optimize edge lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.</p>
 <p>Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.</p>
 <p>This might sound simple, but it isn’t. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima.</p>
-<p>Optimization of calculations becomes very important. For example, it isn’t necessary to recalculate all values on each new topology, since some of the calculations from previous topologies remain relevant <span class="citation">(Felsenstein <a href="#ref-Felsenstein:1981vk" role="doc-biblioref">1981</a>)</span>.</p>
+<p>Optimization of calculations becomes very important. For example, it isn’t necessary to recalculate all values on each new topology, since some of the calculations from previous topologies remain relevant <span class="citation">(<a href="references.html#ref-Felsenstein:1981vk" role="doc-biblioref">J. Felsenstein 1981</a>)</span>.</p>
 </div>
-<div id="optimality-criteria" class="section level2">
+<div id="optimality-criteria" class="section level2" number="4.6">
 <h2><span class="header-section-number">4.6</span> Optimality criteria</h2>
 <p>Here we used likelihood as an optimality criterion to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony. In parsimony, the minimum number of changes along edges needed to explain the data at the tips is used as the criterion to evaluate each topology. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.</p>
-<p>Under some conditions parsimony and likelihood will recover similar topologies, but often they do not. This is because they are doing different things that under many conditions lead to different results <span class="citation">(Steel and Penny <a href="#ref-steel2000parsimony" role="doc-biblioref">2000</a>)</span>. For example, we do not always expect the simplest possible explanation for a given pattern to be the best explanation. If a character has a high rate of evolutionary change, then we expect many changes on a tree rather than the fewest possible. This is accommodated in a likelihood framework.</p>
+<p>Under some conditions parsimony and likelihood will recover similar topologies, but often they do not. This is because they are doing different things that under many conditions lead to different results <span class="citation">(<a href="references.html#ref-steel2000parsimony" role="doc-biblioref">Steel and Penny 2000</a>)</span>. For example, we do not always expect the simplest possible explanation for a given pattern to be the best explanation. If a character has a high rate of evolutionary change, then we expect many changes on a tree rather than the fewest possible. This is accommodated in a likelihood framework.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-Felsenstein:1981vk">
-<p>Felsenstein, J. 1981. “Evolutionary trees from DNA sequences: a maximum likelihood approach.” <em>Journal of Molecular Evolution</em> 17 (6): 368–76. <a href="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=7288891&amp;retmode=ref&amp;cmd=prlinks">http://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&amp;id=7288891&amp;retmode=ref&amp;cmd=prlinks</a>.</p>
-</div>
-<div id="ref-steel2000parsimony">
-<p>Steel, Mike, and David Penny. 2000. “Parsimony, Likelihood, and the Role of Models in Molecular Phylogenetics.” <em>Molecular Biology and Evolution</em> 17 (6): 839–50. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026364">https://doi.org/10.1093/oxfordjournals.molbev.a026364</a>.</p>
 </div>
 </div>
             </section>

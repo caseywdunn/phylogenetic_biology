@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-11-05" />
+<meta name="date" content="2022-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="intro.html"/>
 <link rel="next" href="simulation.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,26 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -138,7 +136,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Phylogenetic Biology</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#additional-resources"><i class="fa fa-check"></i><b>0.1</b> Additional resources</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.2</b> Acknowledgements</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i><b>0.3</b> Dedication</a></li>
@@ -147,13 +146,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#software-versions"><i class="fa fa-check"></i><b>0.6</b> Software versions</a></li>
 <li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.7</b> License</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#history-of-the-field"><i class="fa fa-check"></i><b>1.1</b> History of the field</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#core-concepts"><i class="fa fa-check"></i><b>1.2</b> Core concepts</a></li>
 <li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#a-unified-perspective-on-phylogenetic-studies"><i class="fa fa-check"></i><b>1.3</b> A unified perspective on phylogenetic studies</a></li>
 <li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#applications"><i class="fa fa-check"></i><b>1.4</b> Applications</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a><ul>
+<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="phylogenies.html"><a href="phylogenies.html#phylogenies-are-graphs"><i class="fa fa-check"></i><b>2.1</b> Phylogenies are graphs</a></li>
 <li class="chapter" data-level="2.2" data-path="phylogenies.html"><a href="phylogenies.html#drawing-phylogenies"><i class="fa fa-check"></i><b>2.2</b> Drawing phylogenies</a></li>
 <li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of trees</a></li>
@@ -166,9 +167,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="phylogenies.html"><a href="phylogenies.html#representation"><i class="fa fa-check"></i><b>2.10</b> Representation</a></li>
 <li class="chapter" data-level="2.11" data-path="phylogenies.html"><a href="phylogenies.html#additional-reading"><i class="fa fa-check"></i><b>2.11</b> Additional reading</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a><ul>
+<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="simulation.html"><a href="simulation.html#models"><i class="fa fa-check"></i><b>3.1</b> Models</a></li>
-<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a><ul>
+<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="simulation.html"><a href="simulation.html#expected-amount-of-change"><i class="fa fa-check"></i><b>3.2.1</b> Expected amount of change</a></li>
 <li class="chapter" data-level="3.2.2" data-path="simulation.html"><a href="simulation.html#expected-end-state"><i class="fa fa-check"></i><b>3.2.2</b> Expected end state</a></li>
 <li class="chapter" data-level="3.2.3" data-path="simulation.html"><a href="simulation.html#analytical-approach"><i class="fa fa-check"></i><b>3.2.3</b> Analytical approach</a></li>
@@ -182,7 +185,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.9" data-path="simulation.html"><a href="simulation.html#concluding-thoughts"><i class="fa fa-check"></i><b>3.9</b> Concluding thoughts</a></li>
 <li class="chapter" data-level="3.10" data-path="simulation.html"><a href="simulation.html#additional-resources-1"><i class="fa fa-check"></i><b>3.10</b> Additional resources</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a><ul>
+<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-a-single-history"><i class="fa fa-check"></i><b>4.1</b> Probability of a single history</a></li>
 <li class="chapter" data-level="4.2" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-multiple-histories"><i class="fa fa-check"></i><b>4.2</b> Probability of multiple histories</a></li>
 <li class="chapter" data-level="4.3" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#log-likelihood"><i class="fa fa-check"></i><b>4.3</b> Log likelihood</a></li>
@@ -190,17 +194,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#maximum-likelihood"><i class="fa fa-check"></i><b>4.5</b> Maximum likelihood</a></li>
 <li class="chapter" data-level="4.6" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#optimality-criteria"><i class="fa fa-check"></i><b>4.6</b> Optimality criteria</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a><ul>
+<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#your-question"><i class="fa fa-check"></i><b>5.1</b> Your question</a></li>
 <li class="chapter" data-level="5.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#taxon-sampling"><i class="fa fa-check"></i><b>5.2</b> Taxon sampling</a></li>
-<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a><ul>
+<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#whole-genomes"><i class="fa fa-check"></i><b>5.3.1</b> Whole genomes</a></li>
 <li class="chapter" data-level="5.3.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#transcriptomes"><i class="fa fa-check"></i><b>5.3.2</b> Transcriptomes</a></li>
 <li class="chapter" data-level="5.3.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#targeted-enrichment"><i class="fa fa-check"></i><b>5.3.3</b> Targeted enrichment</a></li>
 <li class="chapter" data-level="5.3.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#rad-seq"><i class="fa fa-check"></i><b>5.3.4</b> RAD-seq</a></li>
 <li class="chapter" data-level="5.3.5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#pcr"><i class="fa fa-check"></i><b>5.3.5</b> PCR</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a><ul>
+<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#estimation-of-original-sequences"><i class="fa fa-check"></i><b>5.4.1</b> Estimation of original sequences</a></li>
 <li class="chapter" data-level="5.4.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#identification-of-homologous-genome-regions"><i class="fa fa-check"></i><b>5.4.2</b> Identification of homologous genome regions</a></li>
 </ul></li>
@@ -208,48 +215,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#homologous-sites"><i class="fa fa-check"></i><b>5.6</b> Homologous sites</a></li>
 <li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a><ul>
-<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a><ul>
+<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="evaluation.html"><a href="evaluation.html#model-structure"><i class="fa fa-check"></i><b>6.1.1</b> Model structure</a></li>
 <li class="chapter" data-level="6.1.2" data-path="evaluation.html"><a href="evaluation.html#evaluating-models"><i class="fa fa-check"></i><b>6.1.2</b> Evaluating models</a></li>
 <li class="chapter" data-level="6.1.3" data-path="evaluation.html"><a href="evaluation.html#adding-complexity-to-dna-evolution-models"><i class="fa fa-check"></i><b>6.1.3</b> Adding complexity to DNA evolution models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a><ul>
+<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="evaluation.html"><a href="evaluation.html#summarizing-topological-support"><i class="fa fa-check"></i><b>6.2.1</b> Summarizing topological support</a></li>
 <li class="chapter" data-level="6.2.2" data-path="evaluation.html"><a href="evaluation.html#bootstrapping"><i class="fa fa-check"></i><b>6.2.2</b> Bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="evaluation.html"><a href="evaluation.html#topology-tests"><i class="fa fa-check"></i><b>6.3</b> Topology tests</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylognetics</a><ul>
+<li class="chapter" data-level="7" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylognetics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>7.1</b> Bayesian statistics</a></li>
 <li class="chapter" data-level="7.2" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>7.2</b> Bayesian phylogenetic inference</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a><ul>
-<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1</b> Nominal scale types</a><ul>
+<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1</b> Nominal scale types</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#amino-acids"><i class="fa fa-check"></i><b>8.1.1</b> Amino acids</a></li>
 <li class="chapter" data-level="8.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#codons"><i class="fa fa-check"></i><b>8.1.2</b> Codons</a></li>
 <li class="chapter" data-level="8.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#morphology"><i class="fa fa-check"></i><b>8.1.3</b> Morphology</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>8.2</b> Ordinal scale types</a></li>
-<li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a><ul>
+<li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a>
+<ul>
 <li class="chapter" data-level="8.3.1" data-path="additional-character-types.html"><a href="additional-character-types.html#ratio-scale-type"><i class="fa fa-check"></i><b>8.3.1</b> Ratio scale type</a></li>
 <li class="chapter" data-level="8.3.2" data-path="additional-character-types.html"><a href="additional-character-types.html#difference-scale-type"><i class="fa fa-check"></i><b>8.3.2</b> Difference scale type</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a><ul>
-<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a><ul>
+<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>9.1.1</b> Cladograms</a></li>
 <li class="chapter" data-level="9.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>9.1.2</b> Phylograms</a></li>
 <li class="chapter" data-level="9.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>9.1.3</b> Chronograms</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#clock-like-evolution"><i class="fa fa-check"></i><b>9.2</b> Clock-like evolution</a></li>
-<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a><ul>
+<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#mathematical-implications-of-age-constraints"><i class="fa fa-check"></i><b>9.3.1</b> Mathematical implications of age constraints</a></li>
 <li class="chapter" data-level="9.3.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#constraining-node-ages"><i class="fa fa-check"></i><b>9.3.2</b> Constraining node ages</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>10</b> Ancestral character state reconstruction</a></li>
+<li class="chapter" data-level="11" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>11</b> Comparative methods</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="comparative-methods.html"><a href="comparative-methods.html#correlated-evolutionary-changes"><i class="fa fa-check"></i><b>11.1</b> Correlated evolutionary changes</a></li>
+<li class="chapter" data-level="11.2" data-path="comparative-methods.html"><a href="comparative-methods.html#inferring-covariance-in-the-absence-of-phylogenetic-structure"><i class="fa fa-check"></i><b>11.2</b> Inferring covariance in the absence of phylogenetic structure</a></li>
+<li class="chapter" data-level="11.3" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>11.3</b> Phylogenetic Independent Contrasts</a></li>
+<li class="chapter" data-level="11.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-structure-is-the-expected-covariance-structure"><i class="fa fa-check"></i><b>11.4</b> Phylogenetic structure is the expected covariance structure</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a><ul>
+<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
+<ul>
 <li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> General statistics</a></li>
 <li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-prob"><i class="fa fa-check"></i><b>A.2</b> Probability theory</a></li>
 <li class="chapter" data-level="A.3" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.3</b> Bayes theorem</a></li>
@@ -275,20 +301,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="phylogenies" class="section level1">
+<div id="phylogenies" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Phylogenies</h1>
 <div class="figure"><span id="fig:trees-darwin"></span>
-<img src="figures/darwin.png" alt="Darwin's depiction of the evolutionary relationships between organisms [@darwin1859]."  />
+<img src="figures/darwin.png" alt="Darwin's depiction of the evolutionary relationships between organisms [@darwin1859]." width="222" />
 <p class="caption">
-Figure 2.1: Darwin’s depiction of the evolutionary relationships between organisms <span class="citation">(Darwin <a href="#ref-darwin1859" role="doc-biblioref">1859</a>)</span>.
+Figure 2.1: Darwin’s depiction of the evolutionary relationships between organisms <span class="citation">(<a href="references.html#ref-darwin1859" role="doc-biblioref">Darwin 1859</a>)</span>.
 </p>
 </div>
-<p>Phylogenies represent evolutionary relationships. The only figure in Darwin’s Origin of Species <span class="citation">(Darwin <a href="#ref-darwin1859" role="doc-biblioref">1859</a>)</span> was a phylogeny (Figure <a href="phylogenies.html#fig:trees-darwin">2.1</a>), though he didn’t call it that.</p>
-<p>Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haeckel’s tree in the manuscript <span class="citation">(Haeckel <a href="#ref-haeckel1897" role="doc-biblioref">1897</a>)</span> where he coined the term phylogeny (Figure <a href="phylogenies.html#fig:trees-haeckel">2.2</a>).</p>
+<p>Phylogenies represent evolutionary relationships. The only figure in Darwin’s Origin of Species <span class="citation">(<a href="references.html#ref-darwin1859" role="doc-biblioref">Darwin 1859</a>)</span> was a phylogeny (Figure <a href="phylogenies.html#fig:trees-darwin">2.1</a>), though he didn’t call it that.</p>
+<p>Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haeckel’s tree in the manuscript <span class="citation">(<a href="references.html#ref-haeckel1897" role="doc-biblioref">Haeckel 1897</a>)</span> where he coined the term phylogeny (Figure <a href="phylogenies.html#fig:trees-haeckel">2.2</a>).</p>
 <div class="figure"><span id="fig:trees-haeckel"></span>
 <img src="figures/haeckel.jpg" alt="Haeckel's hypothesis of the animal phylogeny [@haeckel1897], drawn as an actual tree."  />
 <p class="caption">
-Figure 2.2: Haeckel’s hypothesis of the animal phylogeny <span class="citation">(Haeckel <a href="#ref-haeckel1897" role="doc-biblioref">1897</a>)</span>, drawn as an actual tree.
+Figure 2.2: Haeckel’s hypothesis of the animal phylogeny <span class="citation">(<a href="references.html#ref-haeckel1897" role="doc-biblioref">Haeckel 1897</a>)</span>, drawn as an actual tree.
 </p>
 </div>
 <p>Not all trees in biology are phylogenies, though. For example,
@@ -298,12 +324,12 @@ used for things that have no evolutionary component, like similarity of response
 to a drug.</p>
 <p>It is helpful, then, to be more precise about the components of a phylogeny, and
 what each of those parts represent.</p>
-<div id="phylogenies-are-graphs" class="section level2">
+<div id="phylogenies-are-graphs" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Phylogenies are graphs</h2>
 <p>in order to establish a strong foundation for thinking about phylogenies, it is
 helpful to turn to math.</p>
 <div class="figure"><span id="fig:trees-graph"></span>
-<img src="figures/graph.png" alt="Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating."  />
+<img src="figures/graph.png" alt="Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating." width="120" />
 <p class="caption">
 Figure 2.3: Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating.
 </p>
@@ -317,7 +343,7 @@ I will tend to use mathematical notation for phylogenies rather than the classic
 nomenclatures. I will refer to edges rather than branches, tip nodes rather than leaves,
 etc…</p>
 <div class="figure"><span id="fig:trees-graph-tree"></span>
-<img src="figures/graph_tree.png" alt="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents)."  />
+<img src="figures/graph_tree.png" alt="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents)." width="139" />
 <p class="caption">
 Figure 2.4: Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating– the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents).
 </p>
@@ -333,9 +359,9 @@ is older than the node on the other side of the edge. We therefore can refer to 
 </ul>
 <p>A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The edges indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each edge would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single edge, parent-child node relationships in the tree don’t mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.</p>
 </div>
-<div id="drawing-phylogenies" class="section level2">
+<div id="drawing-phylogenies" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Drawing phylogenies</h2>
-<p>Here we will work with some mammal phylogenies, mostly because their silhouette icons are so recognizable and because there are extensive phylogenies available for this group <span class="citation">(Upham, Esselstyn, and Jetz <a href="#ref-upham2019" role="doc-biblioref">2019</a>)</span>.</p>
+<p>Here we will work with some mammal phylogenies, mostly because their silhouette icons are so recognizable and because there are extensive phylogenies available for this group <span class="citation">(<a href="references.html#ref-upham2019" role="doc-biblioref">Upham, Esselstyn, and Jetz 2019</a>)</span>.</p>
 <p>You will rarely see a phylogeny depicted as in Figure <a href="phylogenies.html#fig:trees-graph-tree">2.4</a>, with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the edges (Figure <a href="phylogenies.html#fig:trees-mammal">2.5</a>), with the nodes implied at the ends of edges. The nodes are implied.</p>
 <div class="figure"><span id="fig:trees-mammal"></span>
 <img src="phylogenetic_biology_files/figure-html/trees-mammal-1.png" alt="Phylogeny of some mammals. Topology and edge lengths  from http://vertlife.org.  The organism silhouettes are from http://phylopic.org/. Note that node circles are not drawn, instead nodes are implied at ends of edges." width="2100" />
@@ -354,7 +380,7 @@ Figure 2.6: The same tree as above, layed out in several different ways.
 </p>
 </div>
 </div>
-<div id="tree-properties" class="section level2">
+<div id="tree-properties" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> Some properties of trees</h2>
 <p>In a fully bifurcating phylogeny with <span class="math inline">\(n\)</span> tip nodes, the following will be the case:</p>
 <ul>
@@ -371,7 +397,7 @@ Figure 2.6: The same tree as above, layed out in several different ways.
 \end{equation}\]</span></p>
 <p>This gets big really, really fast as <span class="math inline">\(n\)</span> increases. For a phylogeny of 5 tips there are 105 possible topologies. For a phylogeny of just 10 tips there are already 34,459,425 possible topologies. For a phylogeny of 50 tips there are <span class="math inline">\(2.75\times10^{76}\)</span> possible topologies. This very large number of possible trees is a major challenge when it comes to inferring phylogenies from data – it is impossible to consider all possible topologies.</p>
 </div>
-<div id="rotating-nodes" class="section level2">
+<div id="rotating-nodes" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Rotating nodes</h2>
 <p>One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn’t convey any information. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure <a href="phylogenies.html#fig:trees-rotations">2.7</a>). The topology remains unchanged. It’s the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this – <a href="https://vimeo.com/148794860" class="uri">https://vimeo.com/148794860</a> . The major implication of this is that you should never read a phylogeny across the tips to see, for example, which species are more closely related. You always need to look at the structure of the phylogeny itself.</p>
 <div class="figure"><span id="fig:trees-rotations"></span>
@@ -381,7 +407,7 @@ Figure 2.7: The exact same phylogeny, drawn a few times with different node rota
 </p>
 </div>
 </div>
-<div id="trees-edge-lengths" class="section level2">
+<div id="trees-edge-lengths" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> The meaning of edge lengths</h2>
 <p>Another type of variation in phylogeny depiction is the meaning of edge length (Figure <a href="phylogenies.html#fig:trees-types">2.8</a>). A phylogeny where edge lengths are scaled to time is known as a chronogram. Chronograms of organisms all sampled at the same time will be ultrametric, ie the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.</p>
 <p>In many cases we don’t have the information needed to scale edges to time, which requires fossil calibrations. Most published phylogenies therefore scale the edges according to the expected amount of evolutionary change in the characters under consideration. The longer the edge, the greater the expected change. The rate of evolution usually varies a bit across edges, so phylograms are not usually ultrametric.</p>
@@ -394,20 +420,20 @@ Figure 2.8: Several types of trees. In a chronogram, edge lengths are scaled acc
 </p>
 </div>
 </div>
-<div id="naming-nodes-and-groups" class="section level2">
+<div id="naming-nodes-and-groups" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Naming nodes and groups</h2>
 <p>One of the most useful applications of phylogenies is to concisely refer to groups of organisms in light of their evolutionary history.</p>
-<p>A convenient way to designate groups of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade - a group of tips that includes their MRCA and all of its descendants. A group is said to be monophyletic (Figure <a href="phylogenies.html#fig:trees-groups">2.9</a>A) if it satisfies these criteria (you don’t need to use the double descriptor “monophyletic clade”, since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping the edge just below the MRCA.</p>
+<p>A convenient way to designate groups of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade - a group of tips that includes their MRCA and all of its descendants. A group is said to be monophyletic (Figure <a href="phylogenies.html#fig:trees-groups">2.9</a>A) if it satisfies these criteria (you don’t need to use the double descriptor “monophyletic clade,” since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping the edge just below the MRCA.</p>
 <div class="figure"><span id="fig:trees-groups"></span>
 <img src="phylogenetic_biology_files/figure-html/trees-groups-1.png" alt="(A) A monophyletic group, *i.e.* a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit." width="2100" />
 <p class="caption">
 Figure 2.9: (A) A monophyletic group, <em>i.e.</em> a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit.
 </p>
 </div>
-<p>Any internal node in a rooted phylogeny can be described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these <span class="citation">(deQueiroz and Cantino <a href="#ref-deQueiroz2020" role="doc-biblioref">2020</a>)</span>.</p>
+<p>Any internal node in a rooted phylogeny can be described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these <span class="citation">(<a href="references.html#ref-deQueiroz2020" role="doc-biblioref">deQueiroz and Cantino 2020</a>)</span>.</p>
 <p>Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and edges. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure <a href="phylogenies.html#fig:trees-groups">2.9</a>B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure <a href="phylogenies.html#fig:trees-groups">2.9</a>C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.</p>
 </div>
-<div id="polytomies" class="section level2">
+<div id="polytomies" class="section level2" number="2.7">
 <h2><span class="header-section-number">2.7</span> Polytomies</h2>
 <p>Some phylogenies are not strictly bifurcating. An internal node with more than two edges connecting it to descendants is called a polytomy (Figure <a href="phylogenies.html#fig:trees-polytomies">2.10</a>B-D). This can be to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages (a hard polytomy).</p>
 <p>A phylogeny that consists entirely of a single polytomy is said to be entirely unresolved – it has no topological information. When laid out in a rectangular format, it looks like a comb (Figure <a href="phylogenies.html#fig:trees-polytomies">2.10</a>D). When laid out in a slanted format it looks like a star. So you will hear fully unresolved trees referred to as comb or star phylogenies.</p>
@@ -418,7 +444,7 @@ Figure 2.10: (A) The fully resolved mammal tree used in other figures. (B-C) Dif
 </p>
 </div>
 </div>
-<div id="rooting" class="section level2">
+<div id="rooting" class="section level2" number="2.8">
 <h2><span class="header-section-number">2.8</span> Rooting</h2>
 <p>All the phylogenies we have seen so far are rooted – we know what the oldest point is in the tree, and call it the root node. This special internal node has no edge connecting it to a parent node, and all other nodes in the phylogeny are its descendants. One consequence of having a rooted tree is that we know the direction of time along each edge – time proceeds from the root to the tips. This provides a clear parent-child relationship between nodes at the ends of each edge.</p>
 <p>Not all phylogenies are rooted. Sometimes we just don’t care – some questions and methods don’t depend on where the root is, so we don’t have to bother placing it. Sometimes we just don’t know – placing the root in a phylogeny takes information that sometimes we don’t have. There are many phylogenetic studies focused on identifying the location of the root in various groups of organisms, this is often an interesting and important question.</p>
@@ -442,7 +468,7 @@ Figure 2.12: The root of the mammal tree is shown in red. (A) Unrooted layout. (
 </div>
 <p>Always be careful interpreting root position when looking at a published phylogeny. Unrooted phylogenies are often drawn is if they are rooted, often by picking a random rooting point or making a good guess of where the root is. This is in part because rooted phylogeny figures tend to be easier to read than unrooted figures. If the figure legend or text doesn’t state how the tree was rooted, best to assume that it wasn’t rigorously rooted if this is critical to the analyses at hand.</p>
 </div>
-<div id="the-information-contained-in-phylogenies" class="section level2">
+<div id="the-information-contained-in-phylogenies" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> The information contained in phylogenies</h2>
 <p>Thinking about phylogenies as graphs gives us very explicit ways to think about what information can be contained in a phylogeny. In the fundamental graphical sense, a phylogeny is a pair of sets – a set of nodes and a set of edges – and annotations of those entities.</p>
 <p>The topology of the phylogeny is the way in which nodes are connected by edges. If there are different connections in two phylogenies, then they have different topologies. If the annotations differ but the connections are the same, then the topologies are the same. Sometimes we know more and sometimes less about the topology. A fully resolved bifurcating phylogeny, where every internal node has two children, contains maximal information about the topology. A completely unresolved star phylogeny contains no information about topology.</p>
@@ -470,22 +496,22 @@ Figure 2.13: Adding information to a phylogeny makes it more specific.
 </p>
 </div>
 </div>
-<div id="representation" class="section level2">
+<div id="representation" class="section level2" number="2.10">
 <h2><span class="header-section-number">2.10</span> Representation</h2>
 <p>So far we have focused on phylogenies in the abstract sense as mathematical graphs and their associated annotations, and in the concrete sense as tree-like drawings that represent these relationships. To work with trees of any significant size, we need to also represent them computationally. How can you store and manipulate a whole tree and all its associated annotations?</p>
 <p>One way is to store a text representation of the tree. This is conveneint because text files are easy to work with, and can be viewed and edited with a variety of existing text editors. Newick, a phylogenetic data format ironed out over dinner at <a href="https://www.yelp.com/biz/newicks-lobster-house-dover">Newick’s Lobster House</a>, does exactly this. The newick format is widely used for storing phylogenies in text files, and is supported as a way to read and write trees by almost every phylogenetic software tool. The basic idea is to designate each clade within a pair of parentheses.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="phylogenies.html#cb2-1"></a><span class="co"># Define the newick text that includes the tip labels and tree topology</span></span>
-<span id="cb2-2"><a href="phylogenies.html#cb2-2"></a>newick_text =<span class="st"> &quot;(((A,B),(C,D)),E);&quot;</span></span>
-<span id="cb2-3"><a href="phylogenies.html#cb2-3"></a></span>
-<span id="cb2-4"><a href="phylogenies.html#cb2-4"></a><span class="co"># Create an ape phylo object from the tree text</span></span>
-<span id="cb2-5"><a href="phylogenies.html#cb2-5"></a>phylo_tree =<span class="st"> </span><span class="kw">read.tree</span>( <span class="dt">text=</span>newick_text )</span>
-<span id="cb2-6"><a href="phylogenies.html#cb2-6"></a></span>
-<span id="cb2-7"><a href="phylogenies.html#cb2-7"></a><span class="co"># Plot the newick_tree phylo object using the ggtree library</span></span>
-<span id="cb2-8"><a href="phylogenies.html#cb2-8"></a><span class="kw">ggtree</span>(phylo_tree ) <span class="op">+</span><span class="st">                                      </span><span class="co"># Draw the tree</span></span>
-<span id="cb2-9"><a href="phylogenies.html#cb2-9"></a><span class="st">  </span><span class="kw">geom_text2</span>(<span class="kw">aes</span>(<span class="dt">label=</span>node), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>, <span class="dt">nudge_x=</span><span class="fl">0.1</span> ) <span class="op">+</span><span class="st">   </span><span class="co"># Add the node numbers</span></span>
-<span id="cb2-10"><a href="phylogenies.html#cb2-10"></a><span class="st">  </span><span class="kw">geom_tiplab</span>( <span class="kw">aes</span>(<span class="dt">label=</span>label), <span class="dt">offset=</span><span class="fl">0.3</span>, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add the tip labels</span></span>
-<span id="cb2-11"><a href="phylogenies.html#cb2-11"></a><span class="st">  </span><span class="kw">geom_nodepoint</span>(<span class="dt">col=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st">                              </span><span class="co"># Add points on nodes</span></span>
-<span id="cb2-12"><a href="phylogenies.html#cb2-12"></a><span class="st">  </span><span class="kw">geom_tippoint</span>(<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="phylogenies.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the newick text that includes the tip labels and tree topology</span></span>
+<span id="cb2-2"><a href="phylogenies.html#cb2-2" aria-hidden="true" tabindex="-1"></a>newick_text <span class="ot">=</span> <span class="st">&quot;(((A,B),(C,D)),E);&quot;</span></span>
+<span id="cb2-3"><a href="phylogenies.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="phylogenies.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create an ape phylo object from the tree text</span></span>
+<span id="cb2-5"><a href="phylogenies.html#cb2-5" aria-hidden="true" tabindex="-1"></a>phylo_tree <span class="ot">=</span> <span class="fu">read.tree</span>( <span class="at">text=</span>newick_text )</span>
+<span id="cb2-6"><a href="phylogenies.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="phylogenies.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the newick_tree phylo object using the ggtree library</span></span>
+<span id="cb2-8"><a href="phylogenies.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggtree</span>(phylo_tree ) <span class="sc">+</span>                                      <span class="co"># Draw the tree</span></span>
+<span id="cb2-9"><a href="phylogenies.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text2</span>(<span class="fu">aes</span>(<span class="at">label=</span>node), <span class="at">col=</span><span class="st">&quot;red&quot;</span>, <span class="at">nudge_x=</span><span class="fl">0.1</span> ) <span class="sc">+</span>   <span class="co"># Add the node numbers</span></span>
+<span id="cb2-10"><a href="phylogenies.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tiplab</span>( <span class="fu">aes</span>(<span class="at">label=</span>label), <span class="at">offset=</span><span class="fl">0.3</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="co"># Add the tip labels</span></span>
+<span id="cb2-11"><a href="phylogenies.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_nodepoint</span>(<span class="at">col=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span>                              <span class="co"># Add points on nodes</span></span>
+<span id="cb2-12"><a href="phylogenies.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tippoint</span>(<span class="at">col=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
 <div class="figure"><span id="fig:trees-newick"></span>
 <img src="phylogenetic_biology_files/figure-html/trees-newick-1.png" alt="Defining and drawing a Newick tree. Tip labels are blue, nodes and node numbers are red, and edges are black." width="2100" />
 <p class="caption">
@@ -497,9 +523,9 @@ a different type of representation, and then draw that. Most of the figures in t
 made using similar code.</p>
 <p>Considering just the newick specificaiton of the tree, <code>"(((A,B),(C,D)),E);"</code>, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, <code>(A,B)</code> and <code>(C,D)</code>. The next set of parentheses out indicates that these two clades together form a larger clade, <code>((A,B),(C,D))</code>. Finally, the outermost parentheses indicate that the clade <code>((A,B),(C,D))</code> is sister to <code>E</code>. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting <a href="https://evolution.genetics.washington.edu/phylip/newicktree.html">description and history</a> of the newick format, which includes details on how to store other types of information in the file format.</p>
 <p>As versatile and simple as newick is for storing trees in files, it isn’t great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, edges, and their annotations. This allows us to directly encode the information noted in the section <a href="phylogenies.html#the-information-contained-in-phylogenies">The information contained in phylogenies</a>, and to readily extend the data objects as needed.</p>
-<p>The most widely used format for storing phylogenies in the R programming language is as a <code>phylo</code> object from the excellent <code>ape</code> library <span class="citation">(Paradis et al. <a href="#ref-R-ape" role="doc-biblioref">2020</a>)</span>. The <code>read.tree()</code> function in the code block above creates a <code>phylo</code> object called <code>phylo_tree</code> based on the phylogeny we specified as text and named <code>newick_tree</code>. In a <code>phylo</code> object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to <span class="math inline">\(n\)</span> where <span class="math inline">\(n\)</span> is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes <span class="math inline">\(n+1\)</span> to <span class="math inline">\(2n-1\)</span>. The assignment of the node numbers within these ranges is arbitrary, there is no guarantee for example that the same internal node will ahve the same number each time the tree is read. The numbers of the nodes that were given when we created the <code>phylo</code> object from the newick text are shown in red in Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>.</p>
+<p>The most widely used format for storing phylogenies in the R programming language is as a <code>phylo</code> object from the excellent <code>ape</code> library <span class="citation">(<a href="references.html#ref-R-ape" role="doc-biblioref">Paradis et al. 2020</a>)</span>. The <code>read.tree()</code> function in the code block above creates a <code>phylo</code> object called <code>phylo_tree</code> based on the phylogeny we specified as text and named <code>newick_tree</code>. In a <code>phylo</code> object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to <span class="math inline">\(n\)</span> where <span class="math inline">\(n\)</span> is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes <span class="math inline">\(n+1\)</span> to <span class="math inline">\(2n-1\)</span>. The assignment of the node numbers within these ranges is arbitrary, there is no guarantee for example that the same internal node will ahve the same number each time the tree is read. The numbers of the nodes that were given when we created the <code>phylo</code> object from the newick text are shown in red in Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>.</p>
 <p>Below we take a quick peek inside the <code>phylo</code> object we created above. The intent isn’t to learn how to manipulated trees in R quite yet, but to just show you how trees can be stored in computer memory. First, let’s take a look at the structure of the <code>phylo</code> object to see what variables it contains within it:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="phylogenies.html#cb3-1"></a><span class="kw">str</span>( phylo_tree )</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="phylogenies.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>( phylo_tree )</span></code></pre></div>
 <pre><code>## List of 3
 ##  $ edge     : int [1:8, 1:2] 6 7 8 8 7 9 9 6 7 8 ...
 ##  $ Nnode    : int 4
@@ -507,7 +533,7 @@ made using similar code.</p>
 ##  - attr(*, &quot;class&quot;)= chr &quot;phylo&quot;
 ##  - attr(*, &quot;order&quot;)= chr &quot;cladewise&quot;</code></pre>
 <p>We can see that there are three slots (each designated with a <code>$</code>) within this <code>phylo</code> object. <code>Nnode</code> is just the number of internal nodes. The real magic is <code>edge</code>, which encodes the topology of the tree. It is just an array with one row per edge, and two columns. The value in column 1 is the number of the node that is the parent of the edge, and the value in column 2 is the number of the node that is the child of the edge. Here are the complete contents of the <code>edge</code> slot:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="phylogenies.html#cb5-1"></a>phylo_tree<span class="op">$</span>edge</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="phylogenies.html#cb5-1" aria-hidden="true" tabindex="-1"></a>phylo_tree<span class="sc">$</span>edge</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    6    7
 ## [2,]    7    8
@@ -520,38 +546,17 @@ made using similar code.</p>
 <p>So, in this case edge number 1 (the first row) connects node <span class="math inline">\(6\)</span> to node <span class="math inline">\(7\)</span>. Indeed, we can see just such an edge in Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>. Try to identify each of the other edges in the array in the tree figure.</p>
 <p>You can discern all sorts of things about the tree from this simple array. The tips are nodes that are in column 2 but not in column 1 (since they aren’t parents of any other nodes). The root is the node that is in column 1, but not in column 2 (because it doesn’t have a parent). If a node occurs in column 1 more than twice, then it is a polytomy (because it has more than two edges connecting to child nodes). Note that this data structure is intrinsically rooted - there is a parent-child relationship set up between the nodes at each end of each edge. But you can still use it to store unrooted trees by picking an arbitrary internal node as the root, and just keeping track of the fact that you don’t know where the root is.</p>
 <p>There is one other important piece of information that we specified in the newick files - the tip labels. Those are located in another slot within the <code>phylo</code> object:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="phylogenies.html#cb7-1"></a>phylo_tree<span class="op">$</span>tip.label</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="phylogenies.html#cb7-1" aria-hidden="true" tabindex="-1"></a>phylo_tree<span class="sc">$</span>tip.label</span></code></pre></div>
 <pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot;</code></pre>
 <p>We can see that this is just a vector of labels. They correspond to the labels of nodes one through five, all the tip labels, in consecutive order.</p>
 <p>That’s it. That’s all the information we specified in the newick file, all the information in the <code>phylo</code> object, and all the information that is needed to draw Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>. The newick tree is easy to store and manipulate with simple text tools, the <code>phylo</code> object is a powerful and flexible way to represent the tree in computer memory, and the figure is easy to read at a glance.</p>
 </div>
-<div id="additional-reading" class="section level2">
+<div id="additional-reading" class="section level2" number="2.11">
 <h2><span class="header-section-number">2.11</span> Additional reading</h2>
-<p>I used <code>ggtree</code> <span class="citation">(Yu, Lam, and Xu <a href="#ref-R-ggtree" role="doc-biblioref">2020</a>)</span> to draw the trees in this chapter. If you are interested in learning more about these tools, see:</p>
+<p>I used <code>ggtree</code> <span class="citation">(<a href="references.html#ref-R-ggtree" role="doc-biblioref">Yu, Lam, and Xu 2021</a>)</span> to draw the trees in this chapter. If you are interested in learning more about these tools, see:</p>
 <p>The ggtree book - <a href="https://yulab-smu.github.io/treedata-book/index.html" class="uri">https://yulab-smu.github.io/treedata-book/index.html</a></p>
 <p>ggtree vignettes - <a href="https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html" class="uri">https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html</a></p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-darwin1859">
-<p>Darwin, Charles. 1859. <em>The Origin of Species by Means of Natural Selection: Or, the Preservation of Favored Races in the Struggle for Life</em>.</p>
-</div>
-<div id="ref-deQueiroz2020">
-<p>deQueiroz, Kevin, and Philip D Cantino. 2020. <em>International Code of Phylogenetic Nomenclature (Phylocode): A Phylogenetic Code of Biological Nomenclature</em>. CRC Press.</p>
-</div>
-<div id="ref-haeckel1897">
-<p>Haeckel, Ernst. 1897. <em>The Evolution of Man</em>. Vol. 1. D. Appleton.</p>
-</div>
-<div id="ref-R-ape">
-<p>Paradis, Emmanuel, Simon Blomberg, Ben Bolker, Joseph Brown, Santiago Claramunt, Julien Claude, Hoa Sien Cuong, et al. 2020. <em>Ape: Analyses of Phylogenetics and Evolution</em>. <a href="http://ape-package.ird.fr/">http://ape-package.ird.fr/</a>.</p>
-</div>
-<div id="ref-upham2019">
-<p>Upham, Nathan S, Jacob A Esselstyn, and Walter Jetz. 2019. “Inferring the Mammal Tree: Species-Level Sets of Phylogenies for Questions in Ecology, Evolution, and Conservation.” <em>PLoS Biology</em> 17 (12): e3000494. <a href="https://doi.org/10.1371/journal.pbio.3000494">https://doi.org/10.1371/journal.pbio.3000494</a>.</p>
-</div>
-<div id="ref-R-ggtree">
-<p>Yu, Guangchuang, Tommy Tsan-Yuk Lam, and Shuangbin Xu. 2020. <em>Ggtree: An R Package for Visualization of Tree and Annotation Data</em>. <a href="https://yulab-smu.top/treedata-book/">https://yulab-smu.top/treedata-book/</a>.</p>
 </div>
 </div>
             </section>

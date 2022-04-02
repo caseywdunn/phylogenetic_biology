@@ -24,7 +24,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2020-11-05" />
+<meta name="date" content="2022-04-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="phylogenies.html"/>
 <link rel="next" href="inferring-phylogenies-from-data.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,26 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -138,7 +136,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Phylogenetic Biology</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#additional-resources"><i class="fa fa-check"></i><b>0.1</b> Additional resources</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.2</b> Acknowledgements</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#dedication"><i class="fa fa-check"></i><b>0.3</b> Dedication</a></li>
@@ -147,13 +146,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#software-versions"><i class="fa fa-check"></i><b>0.6</b> Software versions</a></li>
 <li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.7</b> License</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#history-of-the-field"><i class="fa fa-check"></i><b>1.1</b> History of the field</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#core-concepts"><i class="fa fa-check"></i><b>1.2</b> Core concepts</a></li>
 <li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#a-unified-perspective-on-phylogenetic-studies"><i class="fa fa-check"></i><b>1.3</b> A unified perspective on phylogenetic studies</a></li>
 <li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#applications"><i class="fa fa-check"></i><b>1.4</b> Applications</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a><ul>
+<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="phylogenies.html"><a href="phylogenies.html#phylogenies-are-graphs"><i class="fa fa-check"></i><b>2.1</b> Phylogenies are graphs</a></li>
 <li class="chapter" data-level="2.2" data-path="phylogenies.html"><a href="phylogenies.html#drawing-phylogenies"><i class="fa fa-check"></i><b>2.2</b> Drawing phylogenies</a></li>
 <li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of trees</a></li>
@@ -166,9 +167,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="phylogenies.html"><a href="phylogenies.html#representation"><i class="fa fa-check"></i><b>2.10</b> Representation</a></li>
 <li class="chapter" data-level="2.11" data-path="phylogenies.html"><a href="phylogenies.html#additional-reading"><i class="fa fa-check"></i><b>2.11</b> Additional reading</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a><ul>
+<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="simulation.html"><a href="simulation.html#models"><i class="fa fa-check"></i><b>3.1</b> Models</a></li>
-<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a><ul>
+<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="simulation.html"><a href="simulation.html#expected-amount-of-change"><i class="fa fa-check"></i><b>3.2.1</b> Expected amount of change</a></li>
 <li class="chapter" data-level="3.2.2" data-path="simulation.html"><a href="simulation.html#expected-end-state"><i class="fa fa-check"></i><b>3.2.2</b> Expected end state</a></li>
 <li class="chapter" data-level="3.2.3" data-path="simulation.html"><a href="simulation.html#analytical-approach"><i class="fa fa-check"></i><b>3.2.3</b> Analytical approach</a></li>
@@ -182,7 +185,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.9" data-path="simulation.html"><a href="simulation.html#concluding-thoughts"><i class="fa fa-check"></i><b>3.9</b> Concluding thoughts</a></li>
 <li class="chapter" data-level="3.10" data-path="simulation.html"><a href="simulation.html#additional-resources-1"><i class="fa fa-check"></i><b>3.10</b> Additional resources</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a><ul>
+<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-a-single-history"><i class="fa fa-check"></i><b>4.1</b> Probability of a single history</a></li>
 <li class="chapter" data-level="4.2" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-multiple-histories"><i class="fa fa-check"></i><b>4.2</b> Probability of multiple histories</a></li>
 <li class="chapter" data-level="4.3" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#log-likelihood"><i class="fa fa-check"></i><b>4.3</b> Log likelihood</a></li>
@@ -190,17 +194,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#maximum-likelihood"><i class="fa fa-check"></i><b>4.5</b> Maximum likelihood</a></li>
 <li class="chapter" data-level="4.6" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#optimality-criteria"><i class="fa fa-check"></i><b>4.6</b> Optimality criteria</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a><ul>
+<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#your-question"><i class="fa fa-check"></i><b>5.1</b> Your question</a></li>
 <li class="chapter" data-level="5.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#taxon-sampling"><i class="fa fa-check"></i><b>5.2</b> Taxon sampling</a></li>
-<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a><ul>
+<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#whole-genomes"><i class="fa fa-check"></i><b>5.3.1</b> Whole genomes</a></li>
 <li class="chapter" data-level="5.3.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#transcriptomes"><i class="fa fa-check"></i><b>5.3.2</b> Transcriptomes</a></li>
 <li class="chapter" data-level="5.3.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#targeted-enrichment"><i class="fa fa-check"></i><b>5.3.3</b> Targeted enrichment</a></li>
 <li class="chapter" data-level="5.3.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#rad-seq"><i class="fa fa-check"></i><b>5.3.4</b> RAD-seq</a></li>
 <li class="chapter" data-level="5.3.5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#pcr"><i class="fa fa-check"></i><b>5.3.5</b> PCR</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a><ul>
+<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#estimation-of-original-sequences"><i class="fa fa-check"></i><b>5.4.1</b> Estimation of original sequences</a></li>
 <li class="chapter" data-level="5.4.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#identification-of-homologous-genome-regions"><i class="fa fa-check"></i><b>5.4.2</b> Identification of homologous genome regions</a></li>
 </ul></li>
@@ -208,48 +215,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.6" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#homologous-sites"><i class="fa fa-check"></i><b>5.6</b> Homologous sites</a></li>
 <li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a><ul>
-<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a><ul>
+<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a>
+<ul>
 <li class="chapter" data-level="6.1.1" data-path="evaluation.html"><a href="evaluation.html#model-structure"><i class="fa fa-check"></i><b>6.1.1</b> Model structure</a></li>
 <li class="chapter" data-level="6.1.2" data-path="evaluation.html"><a href="evaluation.html#evaluating-models"><i class="fa fa-check"></i><b>6.1.2</b> Evaluating models</a></li>
 <li class="chapter" data-level="6.1.3" data-path="evaluation.html"><a href="evaluation.html#adding-complexity-to-dna-evolution-models"><i class="fa fa-check"></i><b>6.1.3</b> Adding complexity to DNA evolution models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a><ul>
+<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="evaluation.html"><a href="evaluation.html#summarizing-topological-support"><i class="fa fa-check"></i><b>6.2.1</b> Summarizing topological support</a></li>
 <li class="chapter" data-level="6.2.2" data-path="evaluation.html"><a href="evaluation.html#bootstrapping"><i class="fa fa-check"></i><b>6.2.2</b> Bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="evaluation.html"><a href="evaluation.html#topology-tests"><i class="fa fa-check"></i><b>6.3</b> Topology tests</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylognetics</a><ul>
+<li class="chapter" data-level="7" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylognetics</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>7.1</b> Bayesian statistics</a></li>
 <li class="chapter" data-level="7.2" data-path="bayesian-phylognetics.html"><a href="bayesian-phylognetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>7.2</b> Bayesian phylogenetic inference</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a><ul>
-<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1</b> Nominal scale types</a><ul>
+<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1</b> Nominal scale types</a>
+<ul>
 <li class="chapter" data-level="8.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#amino-acids"><i class="fa fa-check"></i><b>8.1.1</b> Amino acids</a></li>
 <li class="chapter" data-level="8.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#codons"><i class="fa fa-check"></i><b>8.1.2</b> Codons</a></li>
 <li class="chapter" data-level="8.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#morphology"><i class="fa fa-check"></i><b>8.1.3</b> Morphology</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>8.2</b> Ordinal scale types</a></li>
-<li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a><ul>
+<li class="chapter" data-level="8.3" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.3</b> Continuous data</a>
+<ul>
 <li class="chapter" data-level="8.3.1" data-path="additional-character-types.html"><a href="additional-character-types.html#ratio-scale-type"><i class="fa fa-check"></i><b>8.3.1</b> Ratio scale type</a></li>
 <li class="chapter" data-level="8.3.2" data-path="additional-character-types.html"><a href="additional-character-types.html#difference-scale-type"><i class="fa fa-check"></i><b>8.3.2</b> Difference scale type</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a><ul>
-<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a><ul>
+<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>9.1.1</b> Cladograms</a></li>
 <li class="chapter" data-level="9.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>9.1.2</b> Phylograms</a></li>
 <li class="chapter" data-level="9.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>9.1.3</b> Chronograms</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#clock-like-evolution"><i class="fa fa-check"></i><b>9.2</b> Clock-like evolution</a></li>
-<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a><ul>
+<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.3</b> Time calibration</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#mathematical-implications-of-age-constraints"><i class="fa fa-check"></i><b>9.3.1</b> Mathematical implications of age constraints</a></li>
 <li class="chapter" data-level="9.3.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#constraining-node-ages"><i class="fa fa-check"></i><b>9.3.2</b> Constraining node ages</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>10</b> Ancestral character state reconstruction</a></li>
+<li class="chapter" data-level="11" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>11</b> Comparative methods</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="comparative-methods.html"><a href="comparative-methods.html#correlated-evolutionary-changes"><i class="fa fa-check"></i><b>11.1</b> Correlated evolutionary changes</a></li>
+<li class="chapter" data-level="11.2" data-path="comparative-methods.html"><a href="comparative-methods.html#inferring-covariance-in-the-absence-of-phylogenetic-structure"><i class="fa fa-check"></i><b>11.2</b> Inferring covariance in the absence of phylogenetic structure</a></li>
+<li class="chapter" data-level="11.3" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>11.3</b> Phylogenetic Independent Contrasts</a></li>
+<li class="chapter" data-level="11.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-structure-is-the-expected-covariance-structure"><i class="fa fa-check"></i><b>11.4</b> Phylogenetic structure is the expected covariance structure</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a><ul>
+<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
+<ul>
 <li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> General statistics</a></li>
 <li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-prob"><i class="fa fa-check"></i><b>A.2</b> Probability theory</a></li>
 <li class="chapter" data-level="A.3" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.3</b> Bayes theorem</a></li>
@@ -275,28 +301,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="simulation" class="section level1">
+<div id="simulation" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Simulation</h1>
 <p>Here we will build the machinery to implement models of DNA evolution. Our first
 application of these models will be to simulate data.</p>
-<div id="models" class="section level2">
+<div id="models" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Models</h2>
-<p>Models are representations of processes. They are idealized in the sense that they are deliberately simplified, and they are abstractions in the sense that they leave out things that aren’t thought to be important. As Peter Godfrey-Smith notes <span class="citation">(Godfrey-Smith <a href="#ref-godfrey2016philosophy" role="doc-biblioref">2013</a>, 21)</span>,
+<p>Models are representations of processes. They are abstractions in the sense that they leave out things that aren’t thought to be important, and they are idealized in the sense that they are deliberately simplified. As Peter Godfrey-Smith notes <span class="citation">(<a href="references.html#ref-godfrey2016philosophy" role="doc-biblioref">Godfrey-Smith 2013, 21</a>)</span>,
 “Abstraction, to some degree, is inevitable; you can’t include everything.
 Idealization, in contrast, is a choice.”</p>
 <p>For some applications, it doesn’t
 matter if model structure reflects actual underlying
-processes, as long as it generates useful output <span class="citation">(Breiman and others <a href="#ref-breiman2001statistical" role="doc-biblioref">2001</a>)</span>.
+processes, as long as it generates useful output <span class="citation">(<a href="references.html#ref-breiman2001statistical" role="doc-biblioref">Breiman and others 2001</a>)</span>.
 For example, if data scientists at a large retail chain are trying to predict how much toothpaste they
 need to stock at each store, they likely don’t care if their models properly consider
 purchasing rates and all the other things that impact stock, so long as the
-the model does a reasonable job of making reasonable
+the model does a reasonable job of making useful
 predictions. In science, though, we often care very much about the model because
 many of our questions have to do with the mechanisms that underlay the processes
 we are modeling. We don’t just want models that give us the right answer, we often
 want models that give us the right answer for the right reasons.</p>
 <p>Statisticians often note that “All models are wrong but some
-are useful”, a common aphorism expanded from a quote by <span class="citation">Box (<a href="#ref-box1976science" role="doc-biblioref">1976</a>)</span>.
+are useful,” a common aphorism expanded from a quote by <span class="citation"><a href="references.html#ref-box1976science" role="doc-biblioref">Box</a> (<a href="references.html#ref-box1976science" role="doc-biblioref">1976</a>)</span>.
 The goal of a model isn’t to be “right” in the sense of being a perfect explanation of
 data. Real data are far too complex for any model to do this. Instead, the most useful models strike a trade-off between simplicity and adequacy. They are
 as simple as possible, while adequately describing the phenomenon of interest. Adequacy is often
@@ -307,25 +333,25 @@ for which more complexity is needed for adequate explanation.</p>
 be a copy of the whole world, which wouldn’t be that much more useful than the world itself already is for many
 of the things you would like to do with a map. So all maps are simplifications (Figure <a href="simulation.html#fig:sim-maps">3.1</a>). The simplification is often what makes the map useful.</p>
 <div class="figure"><span id="fig:sim-maps"></span>
-<img src="figures/maps.png" alt="Four maps of the Yale campus, varying in complexity and focus. (A) A satellite image of New Haven, including much of Yale campus, from Google Maps. This image has a very large amount of information. (B) A street map of the same region, also from Google Maps. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points."  />
+<img src="figures/maps.png" alt="Four maps of the Yale campus, varying in complexity and focus. (A) A satellite image of New Haven, including much of Yale campus, from Google Maps. This image has a very large amount of information. (B) A street map of the same region, also from Google Maps. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points." width="285" />
 <p class="caption">
 Figure 3.1: Four maps of the Yale campus, varying in complexity and focus. (A) A satellite image of New Haven, including much of Yale campus, from Google Maps. This image has a very large amount of information. (B) A street map of the same region, also from Google Maps. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.
 </p>
 </div>
 <p>Let’s examine one of the most common models, the linear model:</p>
-<p><span class="math display" id="eq:linear">\[\begin{equation} 
+<p><span class="math display" id="eq:linear">\[\begin{equation}
   y = mx+b
   \tag{3.1}
 \end{equation}\]</span></p>
-<p>Here, <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are variables. The model posits a linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, that is that if you plot their correspondence in a plane
-you will get a line. <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> are model parameters. <span class="math inline">\(m\)</span> is the slope of the line – it captures how much change there is in <span class="math inline">\(y\)</span> for each unit of change in <span class="math inline">\(x\)</span>. <span class="math inline">\(b\)</span> is the intercept – it is the value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>.</p>
+<p>Here, <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are variables. The model posits a linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>. If you plot their correspondence in a plane
+you will get a line. <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span> are model parameters. <span class="math inline">\(m\)</span> is the slope of the line. It captures how much change there is in <span class="math inline">\(y\)</span> for each unit of change in <span class="math inline">\(x\)</span>. <span class="math inline">\(b\)</span> is the intercept. It is the value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>.</p>
 <div class="figure"><span id="fig:sim-linear"></span>
 <img src="phylogenetic_biology_files/figure-html/sim-linear-1.png" alt="A linear model with $m=0.5$ and $b=1$." width="2100" />
 <p class="caption">
 Figure 3.2: A linear model with <span class="math inline">\(m=0.5\)</span> and <span class="math inline">\(b=1\)</span>.
 </p>
 </div>
-<p>There are a variety of useful things we could do based on these relationships between the model, model parameters, and values. Let’s consider <span class="math inline">\(x\)</span> to be a variable that tell us something about the past and <span class="math inline">\(y\)</span> to be a variable that tell us something about the present or future. Use cases then include:</p>
+<p>There are a variety of useful things we could do based on these relationships between the model, model parameters, and values. Let’s consider <span class="math inline">\(x\)</span> to be a variable that tell us something about the past and <span class="math inline">\(y\)</span> to be a variable that tells us something about the present or future. Use cases then include:</p>
 <ul>
 <li><p>If we clamp the model (linear) and model parameters (specific values of <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span>) according to prior knowledge, and clamp <span class="math inline">\(y\)</span> according to observed data, we can estimate <span class="math inline">\(x\)</span>. In this case the model is like a time machine that allows us to look into the past.</p></li>
 <li><p>If we clamp the model (linear) and variables (<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>) according to prior knowledge, we can estimate model parameters <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span>. In this case the model is like an instrument that allows us to peer inside processes based on their inputs and outputs.</p></li>
@@ -335,7 +361,7 @@ Figure 3.2: A linear model with <span class="math inline">\(m=0.5\)</span> and <
 <p>There are some deep connections here. For example, predicting the future is basically just simulating the future based on our model and what we already know about the past and present.</p>
 <p>The models that we will use in phylogenetic biology tend to be more complex than the linear mode, but this general perspective of clamping and estimating different things still holds.</p>
 </div>
-<div id="a-simple-model-of-evolution" class="section level2">
+<div id="a-simple-model-of-evolution" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> A simple model of evolution</h2>
 <p>Let’s start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single edge in a phylogeny (Figure <a href="simulation.html#fig:sim-application">3.3</a>). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:</p>
 <ul>
@@ -346,18 +372,18 @@ Figure 3.2: A linear model with <span class="math inline">\(m=0.5\)</span> and <
 <li>State at the end of the edge (the nucleotide at the child node)</li>
 </ul>
 <div class="figure"><span id="fig:sim-application"></span>
-<img src="figures/applications.png" alt="Our current goal is to model the evolution of a single site in a DNA sequence along a single edge in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the edge under examination (at the top) is thicker than the rest. (B) A closeup of the focal edge, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a cange from A to C."  />
+<img src="figures/applications.png" alt="Our current goal is to model the evolution of a single site in a DNA sequence along a single edge in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the edge under examination (at the top) is thicker than the rest. (B) A closeup of the focal edge, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a cange from A to C." width="240" />
 <p class="caption">
 Figure 3.3: Our current goal is to model the evolution of a single site in a DNA sequence along a single edge in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the edge under examination (at the top) is thicker than the rest. (B) A closeup of the focal edge, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), <em>i.e.</em> a cange from A to C.
 </p>
 </div>
-<p>Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate <span class="math inline">\(\mu\)</span>, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probably as picking a G, for example), and the new nucleotide doesn’t depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and pick at random.</p>
+<p>Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate <span class="math inline">\(\mu\)</span>, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn’t depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.</p>
 <p>Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model <span class="math inline">\(1/4\)</span> of the time a replacement event occurs, an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of a replacement event result in a substitution, the substitution rate is <span class="math inline">\((3/4) \mu\)</span>. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is <em>lower</em> than the replacement rate.</p>
 <p>It might seem a bit odd to consider replacement events that don’t result in substitutions, but this follows naturally from a central feature we specified for the the model - the new nucleotide doesn’t depend in any way on what nucleotide was there before. If we had a process where replacements always resulted in substitutions, then excluding the replacement-in-kind events would require knowing which nucleotide should be placed so that we <em>don’t</em> select it.</p>
-<div id="expected-amount-of-change" class="section level3">
+<div id="expected-amount-of-change" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Expected amount of change</h3>
 <p>For the simple process described here, there are two things to consider if we want to know the amount of evolutionary change. The first is the substitution rate <span class="math inline">\(\mu\)</span>, and the second is the time over which the evolutionary process acts. In our example here, that time is the length of the edge under consideration in the phylogeny.</p>
-<p>In Figure <a href="simulation.html#fig:sim-jc-mu-sweep">3.4</a> each horizontal bar is a simulation over the same time interval (0-100 time units). Each black line on the bar is a replacement even randomly introduced by the computer according to our model. We use a different value of <span class="math inline">\(\mu\)</span> for each simulation (as indicated on the vertical axis). In the bottom bar, where <span class="math inline">\(\mu=0\)</span>, there are no replacements (black bars) and therefore no substitutions (the whole bar is the same color). There are more replacement events as <span class="math inline">\(\mu\)</span> increases along the vertical axis.</p>
+<p>In Figure <a href="simulation.html#fig:sim-jc-mu-sweep">3.4</a> each horizontal bar is a simulation over the same time interval (0-100 time units). Each black line on the bar is a replacement event randomly introduced by the computer according to our model. We use a different value of <span class="math inline">\(\mu\)</span> for each simulation (as indicated on the vertical axis). In the bottom bar, where <span class="math inline">\(\mu=0\)</span>, there are no replacements (black bars) and therefore no substitutions (the whole bar is the same color). There are more replacement events as <span class="math inline">\(\mu\)</span> increases along the vertical axis.</p>
 <div class="figure"><span id="fig:sim-jc-mu-sweep"></span>
 <img src="phylogenetic_biology_files/figure-html/sim-jc-mu-sweep-1.png" alt="Each horizontal bar is a simulation of evolution of a single nucleotide position through time, $t$, for a specified value of $\mu$. Each simulation starts out as an A. Black vertical lines correspond to replacement events, which don't all lead to substitutions (a new color). " width="2100" />
 <p class="caption">
@@ -373,17 +399,17 @@ Figure 3.5: The number of replacement events increases linearly with the replace
 </div>
 <p>Because of the linear relationship between the number of replacements and the product <span class="math inline">\(\mu t\)</span>, rate (<span class="math inline">\(\mu\)</span>) and time (<span class="math inline">\(t\)</span>) are conflated. In many scenarios you can’t estimate them independently. If there are a small number of replacements, for example, you can’t tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes <span class="math inline">\(n\)</span>. Because rate (<span class="math inline">\(\mu\)</span>) and time (<span class="math inline">\(t\)</span>) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for edge lengths is given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure <a href="simulation.html#fig:sim-tree-cnid">3.6</a>). The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and edge lengths in terms of actual time. Sometimes deconfounding <span class="math inline">\(\mu t\)</span> isn’t important to the primary question of the investigator, sometimes it would be nice to know but can’t be done, and other times (such as in papers that date trees) it <em>is</em> the central question.</p>
 <div class="figure"><span id="fig:sim-tree-cnid"></span>
-<img src="figures/Fig_cnidaria.png" alt="A published phylogeny [@zapata2015] with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time."  />
+<img src="figures/Fig_cnidaria.png" alt="A published phylogeny [@zapata2015] with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time." width="403" />
 <p class="caption">
-Figure 3.6: A published phylogeny <span class="citation">(Zapata et al. <a href="#ref-zapata2015" role="doc-biblioref">2015</a>)</span> with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.
+Figure 3.6: A published phylogeny <span class="citation">(<a href="references.html#ref-zapata2015" role="doc-biblioref">Zapata et al. 2015</a>)</span> with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.
 </p>
 </div>
 </div>
-<div id="expected-end-state" class="section level3">
+<div id="expected-end-state" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Expected end state</h3>
 <p>The machinery above shows how a model can clarify the way we think about the expected amount of change along an edge. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?</p>
-<p>The situation is most clear after a small amount of change - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure <a href="simulation.html#fig:sim-saturation">3.7</a>, left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.</p>
-<p>What should we expect, though, if there has been a large amount of change? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, than the initial starting state doesn’t matter because whatever was there initially will probably have been replaced multiple times. It is as if had been erased and written over. If the starting state doesn’t contain information about the end state, what does?</p>
+<p>The situation is most clear after a small amount of change (when <span class="math inline">\(\mu t\)</span> is small) - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure <a href="simulation.html#fig:sim-saturation">3.7</a>, left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.</p>
+<p>What should we expect, though, if there has been a large amount of change (when <span class="math inline">\(\mu t\)</span> is large)? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, than the initial starting state doesn’t matter because whatever was there initially will probably have been replaced multiple times. It is as if had been erased and written over. If the starting state doesn’t contain information about the end state, what does?</p>
 <p>Since replacements are coming from the bag that you are picking the nucleotides at random from, that bag has information about the expected states after a large number of changes. Given enough evolutionary time, our simple model will lead the expected frequency of each nucleotide in the evolving sequence to be the same as their frequencies in the bag. Since we specified that you have the same chance of grabbing any nucleotide from the bag, eventually the probability of having each of the our nucleotides is the same, 25% (Figure <a href="simulation.html#fig:sim-saturation">3.7</a>, right side). If you started with a sequence that had an A and let it evolve 100 times, after enough evolutionary time had passed to reach equilibrium you would expect to get 25 C’s, 25 G’s, 25 T’s, and 25 A’s.</p>
 <div class="figure"><span id="fig:sim-saturation"></span>
 <img src="phylogenetic_biology_files/figure-html/sim-saturation-1.png" alt="Stacked bar plots indicating the frequency of each nucleotide after simulated evolution for a specified amount of time. The rate of evolution is $\mu=0.050$. There are 1000 replicate simulations for each value of time. At time $t=0$ (no evolution), the end result is always the same as the initial value, which is fixed at A in these simulations. As the length of time increases, the four nucleotides converge on equal proportions of 0.25 each." width="2100" />
@@ -392,29 +418,29 @@ Figure 3.7: Stacked bar plots indicating the frequency of each nucleotide after 
 </p>
 </div>
 </div>
-<div id="analytical-approach" class="section level3">
+<div id="analytical-approach" class="section level3" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Analytical approach</h3>
 <p>In all the examples above, I simulated replacement events by randomly generating them at the specified rate. To get the end state, I then just retained the last state. You could take this approach to assessing the probability of different outcomes in actual analyses, but it gets very computationally expensive. It would be better to have an equation to solve for the probabilities directly. That isn’t always possible for a model, but it is in this case.</p>
 <p>The process of change that our simple model describes is similar to compound interest.
 We have something in hand, apply a process to it, then take the output and apply that same process again. Over and over.
 In the case of compound interest, that something is money and the process is growth. In the case of our model, the
-something is a DNA site and the process is mutation. In both cases, we take is inputs a starting state, a rate of change, and an amount of time, and provide as an output get the expected end state. To get the expected end state as a function of time elapsed, given a rate of change, we can use exponential functions. For example, here is the exponential function for calculating a balance at time <span class="math inline">\(B(t)\)</span> given the initial balance <span class="math inline">\(B_0\)</span> and an interest rate <span class="math inline">\(r\)</span>:</p>
-<p><span class="math display" id="eq:sim-interest">\[\begin{equation} 
+something is a DNA site and the process is mutation. In both cases, we take as inputs a starting state, a rate of change, and an amount of time, and as an output get the expected end state. To get the expected end state as a function of time elapsed, given a rate of change, we can use exponential functions. For example, here is the exponential function for calculating a balance at time <span class="math inline">\(B(t)\)</span> given the initial balance <span class="math inline">\(B_0\)</span> and an interest rate <span class="math inline">\(r\)</span>:</p>
+<p><span class="math display" id="eq:sim-interest">\[\begin{equation}
   B\left(t\right) = B_0 e^{r t} 
   \tag{3.2}
 \end{equation}\]</span></p>
-<p>For our sequence evolution model, we need two exponential functions <span class="citation">(Swofford et al. <a href="#ref-swofford1996molecular" role="doc-biblioref">1996</a>)</span>:</p>
-<p><span class="math display" id="eq:sim-stay">\[\begin{equation} 
+<p>For our sequence evolution model, we need two exponential functions <span class="citation">(<a href="references.html#ref-swofford1996molecular" role="doc-biblioref">Swofford et al. 1996</a>)</span>:</p>
+<p><span class="math display" id="eq:sim-stay">\[\begin{equation}
   P\left(t\right) = \frac{1}{4} + \frac{3}{4} e^{-\mu t} 
   \tag{3.3}
 \end{equation}\]</span></p>
-<p><span class="math display" id="eq:sim-change">\[\begin{equation} 
+<p><span class="math display" id="eq:sim-change">\[\begin{equation}
   P\left(t\right) = \frac{1}{4} - \frac{1}{4} e^{-\mu t} 
   \tag{3.4}
 \end{equation}\]</span></p>
 <p>Equation <a href="simulation.html#eq:sim-stay">(3.3)</a> shows the probability of the final state being the same as
 the beginning state. So if you start with an A, this would give you the probability
-of remaining an A after time <span class="math inline">\(t\)</span> given a specific value of <span class="math inline">\(\mu\)</span>. Equation <a href="simulation.html#eq:sim-change">(3.4)</a> is the probability of each of the different end states. If you start as an A, this is the probability of changing to a G, for example. It is also the rate of C to T, G to A, <em>etc</em>…</p>
+of remaining an A after time <span class="math inline">\(t\)</span> given a specific value of <span class="math inline">\(\mu\)</span>. Equation <a href="simulation.html#eq:sim-change">(3.4)</a> is the probability of each of the three end states that are different from the starting state. If you start as an A, this is the probability of changing to a G, for example. It is also the rate of C to T, G to A, <em>etc</em>…</p>
 <p>Consider what happens to these equations in the extremes we considered above when examining Figure <a href="simulation.html#fig:sim-saturation">3.7</a>. If <span class="math inline">\(\mu\)</span> or <span class="math inline">\(t\)</span> are zero, we expect no change (Figure <a href="simulation.html#fig:sim-analytical">3.8</a>, left side). In that case we get <span class="math inline">\(e^0\)</span>, which is 1. Equation <a href="simulation.html#eq:sim-stay">(3.3)</a> becomes <span class="math inline">\(1/4 + 3/4\)</span>, which is 1. So there is a probability of 1 that, after no change, the end state is the same as the beginning state. Likewise, Equation <a href="simulation.html#eq:sim-change">(3.4)</a> becomes <span class="math inline">\(1/4 - 1/4\)</span>, which is 0. So after no change the end states that differ from the beginning state each have probability 0.</p>
 <p>Now consider the case after infinite change (or just a large amount of change, as in the right side of Figure <a href="simulation.html#fig:sim-analytical">3.8</a>). If <span class="math inline">\(\mu\)</span> or <span class="math inline">\(t\)</span> are infinity, then <span class="math inline">\(e^{-\mu t}\)</span> becomes <span class="math inline">\(e^{-\infty}\)</span>, which is 0. In that case, Equation <a href="simulation.html#eq:sim-stay">(3.3)</a> becomes <span class="math inline">\(1/4 + 0\)</span>, which is simply <span class="math inline">\(1/4\)</span>. Likewise, Equation <a href="simulation.html#eq:sim-change">(3.4)</a> becomes <span class="math inline">\(1/4 - 0\)</span>, which is also <span class="math inline">\(1/4\)</span>. So all the nucleotides (the one that you started with, and the three other states that substitution can lead to) all have the same equal frequency of <span class="math inline">\(1/4\)</span>. This reflects the fact that the frequency of drawing each of these from the bag was <span class="math inline">\(1/4\)</span>.</p>
 <div class="figure"><span id="fig:sim-analytical"></span>
@@ -423,7 +449,7 @@ of remaining an A after time <span class="math inline">\(t\)</span> given a spec
 Figure 3.8: The probability of observing a particular end state at time <span class="math inline">\(t\)</span>, given the start state A and <span class="math inline">\(\mu=0.05\)</span>. The red line is the probability of observing the original start state (as described by Equation <a href="simulation.html#eq:sim-stay">(3.3)</a>), the blue line is the probability of observing each of the three other states (as described by Equation <a href="simulation.html#eq:sim-change">(3.4)</a>).
 </p>
 </div>
-<p>We can reorganize things a bit (Figure <a href="simulation.html#fig:sim-analytical">3.8</a>) to get a plot like that of Figure <a href="simulation.html#fig:sim-saturation">3.7</a>, but derived from Equations <a href="simulation.html#eq:sim-change">(3.4)</a> and <a href="simulation.html#eq:sim-change">(3.4)</a> instead of from actual simulations of changes along branches.</p>
+<p>We can reorganize things a bit (Figure <a href="simulation.html#fig:sim-analytical">3.8</a>) to get a plot like that of Figure <a href="simulation.html#fig:sim-saturation">3.7</a>, but derived from Equations <a href="simulation.html#eq:sim-stay">(3.3)</a> and <a href="simulation.html#eq:sim-change">(3.4)</a> instead of from actual simulations of changes along branches.</p>
 <div class="figure"><span id="fig:sim-sat-analytical"></span>
 <img src="phylogenetic_biology_files/figure-html/sim-sat-analytical-1.png" alt="Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \@ref(eq:sim-change). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." width="2100" />
 <p class="caption">
@@ -441,85 +467,79 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 <ul>
 <li>Simulate evolution along an edge by sampling nucleotides for the child node from this probability distribution</li>
 <li>Ask the probability of a given starting state given an end state</li>
-<li>Evaluate how reasonable our <span class="math inline">\(\mu\)</span> model parameter value is. If, for example, we have a tree with very short edges that had different state at their parents and children, we might be skeptical of a low <span class="math inline">\(\mu\)</span> value.</li>
+<li>Evaluate how reasonable our <span class="math inline">\(\mu\)</span> model parameter value is. If, for example, we have a tree with very short edges that had different states at their parents and children, we might be skeptical of a low <span class="math inline">\(\mu\)</span> value.</li>
 </ul>
 </div>
 </div>
-<div id="generalizing-the-simple-model" class="section level2">
+<div id="generalizing-the-simple-model" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Generalizing the simple model</h2>
 <p>The model we built above only has one parameter that can vary, <span class="math inline">\(\mu\)</span>, so we can describe the model parameters very simply. This is convenient, but leaves some of the things that are happening under the hood a bit opaque. Let’s rewrite this simple model in a way that makes it a bit clearer how we are using this parameter, and also reveals some other parameters that are there but that we ignored until now because they were clamped. First, we need to represent the model as a <span class="math inline">\(4\times4\)</span> rate matrix, which we will call <span class="math inline">\(\mathbf{Q}\)</span>, as defined in Equation <a href="simulation.html#eq:jc69">(3.5)</a>. Each row corresponds to one of the four possible nucleotides (A, C, G, T, in that order from top to bottom), and each column corresponds to one of the four possible nucleotides (A, C, G, T, in that order from left to right). Each of the elements in the matrix is the instantaneous rate of change from the nucleotide of the corresponding row, to the nucleotide of the corresponding column.</p>
-<p><span class="math display" id="eq:jc69">\[\begin{equation} 
-
+<p><span class="math display" id="eq:jc69">\[\begin{equation}
 \mathbf{Q} = 
-\left(\begin{array}{cc} 
--3\mu\pi &amp; \mu \pi &amp; \mu \pi &amp; \mu \pi\\
-\mu\pi &amp; -3\mu \pi &amp; \mu \pi &amp; \mu \pi\\
-\mu\pi &amp; \mu \pi &amp; -3\mu \pi &amp; \mu \pi\\
-\mu\pi &amp; \mu \pi &amp; \mu \pi &amp; -3\mu \pi\\
+\left(\begin{array}{cccc} 
+-3\mu\pi &amp; \mu\pi &amp; \mu\pi &amp; \mu\pi\\
+\mu\pi &amp; -3\mu\pi &amp; \mu\pi &amp; \mu\pi\\
+\mu\pi &amp; \mu\pi &amp; -3\mu\pi &amp; \mu\pi\\
+\mu\pi &amp; \mu\pi &amp; \mu\pi &amp; -3\mu\pi\\
 \end{array}\right)
-
 \tag{3.5}
 \end{equation}\]</span></p>
 <p>Recall that <span class="math inline">\(\mu\)</span> is the rate of <em>any</em> replacement event happening. That replacement event could be an A, C, G, or T. Only three of these replacements lead to a substitution, since replacing with the original nucleotides does not lead to a change. To find the rate of <em>specific</em> replacements happening, as we need to do for the elements of this matrix, we need to apportion the total replacement rate <span class="math inline">\(\mu\)</span> to specific nucleotides. We can do that with a new term <span class="math inline">\(\pi\)</span>, which is the name we will give to the equilibrium frequency of each state. This corresponds to the frequency of each nucleotide in the bag we randomly sampled from. In our simple model, <span class="math inline">\(\pi=0.25\)</span> for all nucleotides. Because <span class="math inline">\(\pi\)</span> was clamped and wasn’t free to vary, it was essentially invisible in the way we previously described the model.</p>
-<p>The off-diagonal elements of <span class="math inline">\(\mathbf{Q}\)</span> give the rates of substitutions, and are all <span class="math inline">\(\mu \pi\)</span>. But what’s up with the diagonal elements? Those correspond to replacements that do not lead to a substitution, for example an A being replaced be an A. We pick these diagonal elements to be whatever value leads the rows to sum to 0. Since there are three substitutions in each row, and each substitution has rate <span class="math inline">\(\mu \pi\)</span>, these diagonal elements are set to <span class="math inline">\(-3 \mu \pi\)</span>. The basic intuition of this is that we aren’t creating or destroying nucleotides, just replacing them. So the net change needs to be 0.</p>
-<p>There is a lot going in in <span class="math inline">\(\mathbf{Q}\)</span>. To make sense of it all, it helps to factor it out into two parts <span class="citation">(Swofford et al. <a href="#ref-swofford1996molecular" role="doc-biblioref">1996</a>)</span>. The first is a <span class="math inline">\(4\times4\)</span> matrix <span class="math inline">\(\mathbf{R}\)</span>, which has all the rates, and the second is a <span class="math inline">\(4\times4\)</span> matrix <span class="math inline">\(\Pi\)</span> that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation <a href="simulation.html#eq:jc69-expanded">(3.6)</a>).</p>
-<p><span class="math display" id="eq:jc69-expanded">\[\begin{equation} 
-
+<p>The off-diagonal elements of <span class="math inline">\(\mathbf{Q}\)</span> give the rates of substitutions, and are all <span class="math inline">\(\mu \pi\)</span>. But what’s up with the diagonal elements? Those correspond to replacements that do not lead to a substitution, for example an A being replaced be an A. We pick these diagonal elements to be whatever value leads the rows to sum to 0. The basic intuition of this is that we aren’t creating or destroying nucleotides, just replacing them. So the net change needs to be 0. Since there are three substitutions in each row, and each substitution has rate <span class="math inline">\(\mu \pi\)</span>, these diagonal elements are set to <span class="math inline">\(-3 \mu \pi\)</span>.</p>
+<p>There is a lot going in in <span class="math inline">\(\mathbf{Q}\)</span>. To make sense of it all, it helps to factor it out into two parts <span class="citation">(<a href="references.html#ref-swofford1996molecular" role="doc-biblioref">Swofford et al. 1996</a>)</span>. The first is a <span class="math inline">\(4\times4\)</span> matrix <span class="math inline">\(\mathbf{R}\)</span>, which has all the rates, and the second is a <span class="math inline">\(4\times4\)</span> matrix <span class="math inline">\(\Pi\)</span> that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation <a href="simulation.html#eq:jc69-expanded">(3.6)</a>).</p>
+<p><span class="math display" id="eq:jc69-expanded">\[\begin{equation}
 \mathbf{Q} = \mathbf{R}\mathbf{\Pi} =
-\left(\begin{array}{cc} 
+\left(\begin{array}{cccc} 
 -3\mu &amp; \mu &amp; \mu &amp; \mu\\
 \mu &amp; -3\mu &amp; \mu &amp; \mu\\
 \mu &amp; \mu &amp; -3\mu &amp; \mu\\
 \mu &amp; \mu &amp; \mu &amp; -3\mu\\
 \end{array}\right)
-\left(\begin{array}{cc} 
+\left(\begin{array}{cccc} 
 \pi &amp; 0 &amp; 0 &amp; 0\\ 
 0 &amp; \pi &amp; 0 &amp; 0\\
-0 &amp; 0 &amp;\pi &amp; 0 \\
-0 &amp; 0 &amp; 0 &amp;\pi\\
+0 &amp; 0 &amp; \pi &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; \pi\\
 \end{array}\right)
-
 \tag{3.6}
 \end{equation}\]</span></p>
 <p>(This factoring is possible because of the way matrix multiplication works. For a refresher on matrix multiplication, <a href="https://www.youtube.com/watch?v=OMA2Mwo0aZg">this video</a> explains how to do it operationally, and <a href="https://www.youtube.com/watch?v=fNk_zzaMoSs&amp;list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">this series of videos</a> explains what it is actually doing.)</p>
 <p><span class="math inline">\(\mathbf{Q}\)</span> is the instantaneous rate matrix – it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along an edge of a given length. Before, when we were keeping things as simple as possible, we used the exponential Equations <a href="simulation.html#eq:sim-stay">(3.3)</a> and <a href="simulation.html#eq:sim-change">(3.4)</a> for this. They took as input the overall replacement rate <span class="math inline">\(\mu\)</span> and the length of the edge <span class="math inline">\(t\)</span>. Now we want a similar equation, but we want to provide the rate matrix <span class="math inline">\(Q\)</span> rather than the single parameter <span class="math inline">\(\mu\)</span>. Again we can just use an exponential function, and it actually has a much simpler form.</p>
-<p><span class="math display" id="eq:jc69-prob">\[\begin{equation} 
-  \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
-  \tag{3.7}
+<p><span class="math display" id="eq:jc69-prob">\[\begin{equation}
+\mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
+\tag{3.7}
 \end{equation}\]</span></p>
 <p>Raising <span class="math inline">\(e\)</span> to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix <span class="math inline">\(\mathbf{P}(t)\)</span> is therefore also a <span class="math inline">\(4 \times 4\)</span> matrix. As for <span class="math inline">\(\mathbf{Q}\)</span> and <span class="math inline">\(\mathbf{\Pi}\)</span>, and <span class="math inline">\(\mathbf{R}\)</span>, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an edge of length <span class="math inline">\(t\)</span>. The diagonal elements are each Equation <a href="simulation.html#eq:sim-stay">(3.3)</a>, and the off diagonal elements are each Equation <a href="simulation.html#eq:sim-change">(3.4)</a>.</p>
 <p>Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.</p>
 </div>
-<div id="expanding-the-models" class="section level2">
+<div id="expanding-the-models" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Expanding the models</h2>
-<p>The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny (Figure <a href="simulation.html#fig:sim-application">3.3</a>) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 <span class="citation">(Jukes and Cantor <a href="#ref-jc1969" role="doc-biblioref">1969</a>)</span>. It is only one free parameter – the rate of evolution <span class="math inline">\(\mu\)</span>. It is highly idealized – there are many important facts about DNA and DNA evolution that it deliberately omits.</p>
+<p>The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny (Figure <a href="simulation.html#fig:sim-application">3.3</a>) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 <span class="citation">(<a href="references.html#ref-jc1969" role="doc-biblioref">Jukes and Cantor 1969</a>)</span>. It is only one free parameter – the rate of evolution <span class="math inline">\(\mu\)</span>. It is highly idealized – there are many important facts about DNA and DNA evolution that we deliberately omit.</p>
 <p>The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, including that:</p>
 <ul>
 <li><p>The nucleotides C, G, T, and A are often not found at an equal frequency of 0.25 each. Since the nucleotides form base pairs in organisms with double stranded genomes, C and G are found at the same frequency and T and A at the same frequency. Furthermore, the frequency of the four nucleotides must add to 100%. Therefore, the frequency of all four nucleotides can be summarized with a single number, usually given as the GC content – the percent of sites that are G or C. For example, the human genome has a GC content of 41%, which indicates nucleotide frequencies of 0.205 G, 0.205 C, 0.295 T and 0.295 A. This is quite different than the equal frequencies of 0.25 for all nucleotides expected by the JC69 model.</p></li>
 <li><p>The rates of mutation between different nucleotides is not the same. This is in part because some nucleotides are shaped more like others, and are more likely to be substituted for each other by mistake. In particular, A and G tend to be substituted for each other because they have two rings, and C and T tend to be substituted for each other because they have one ring. These changes between A/G and C/T are referred to as transitions. All other substitutions are called transversions, and are each less likely.</p></li>
 </ul>
 <p>To accommodate each of these deviations from JC69, we need to add parameters to the model to explain the added complexity. There are all kinds of parameters we could add one by one, and in fact that is how the field proceeded in the decades after JC69 was described. Rather than build the models up in that way, though, it is actually easier to describe a general model that these other models, including JC69, are special cases of.</p>
-<p><span class="math display" id="eq:sim-gtr">\[\begin{equation} 
-
+<p><span class="math display" id="eq:sim-gtr">\[\begin{equation}
 \mathbf{Q} = \mathbf{R}\mathbf{\Pi} =
-\left(\begin{array}{cc} 
+\left(\begin{array}{cccc} 
 - &amp; \mu a &amp; \mu b &amp; \mu c\\
-\mu a &amp; - &amp; \mu d &amp; \mu e \\
-\mu b &amp; \mu d &amp; - &amp; \mu f \\
+\mu a &amp; - &amp; \mu d &amp; \mu e\\
+\mu b &amp; \mu d &amp; - &amp; \mu f\\
 \mu c &amp; \mu e &amp; \mu f &amp; -\\
 \end{array}\right)
-\left(\begin{array}{cc} 
-\pi_A &amp; 0 &amp; 0 &amp; 0 \\ 
+\left(\begin{array}{cccc} 
+\pi_A &amp; 0 &amp; 0 &amp; 0 \\
 0 &amp; \pi_C &amp; 0 &amp; 0 \\
-0 &amp; 0 &amp;\pi_G &amp; 0 \\
+0 &amp; 0 &amp; \pi_G &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; \pi_T \\
 \end{array}\right)
-
 \tag{3.8}
 \end{equation}\]</span></p>
-<p>(To keep things compact, I have followed the convention of placing <span class="math inline">\(-\)</span> in the diagonal elements, which is short for “whatever it takes to make the rows of <span class="math inline">\(\mathbf{Q}\)</span> sum to 0”.)</p>
-<p>This model (Equation <a href="simulation.html#eq:sim-gtr">(3.8)</a>) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The <span class="math inline">\(\pi_A ... \pi_T\)</span> parameters allow the equilibrium frequencies to differ for each nucleotide. The <span class="math inline">\(a ... f\)</span> parameters adjust <span class="math inline">\(\mu\)</span> so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> to different values. It is Time Reversible because we don’t have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rate of change from A to C and from C to A are both the same, <span class="math inline">\(\mu a\)</span>. There are a few motivations for this. It keeps the total number of parameters down. It reflects what is observed biologically. And it means that we don’t need to know the direction of time along an edge to calculate <span class="math inline">\(\mathbf{P}(t)\)</span>. This last point is very important since we often don’t know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.</p>
-<p>If we let all the parameters in the GTR model (Equation <a href="simulation.html#eq:sim-gtr">(3.8)</a>) be free, it is quite complex. We would have to estimate them all from data. The alternative is clamp some of them. In fact, by comparison of Equations <a href="simulation.html#eq:jc69-expanded">(3.6)</a>) and <a href="simulation.html#eq:sim-gtr">(3.8)</a>, we can see that JC69 is a clamped version of GTR where <span class="math inline">\(\pi_A=\pi_C=\pi_G=\pi_T=0.25\)</span> and <span class="math inline">\(a=b=c=d=e=f=1\)</span>. Only <span class="math inline">\(\mu\)</span> is left free in JC69.</p>
+<p>(To keep things compact, I have followed the convention of placing <span class="math inline">\(-\)</span> in the diagonal elements, which is short for “whatever it takes to make the rows of <span class="math inline">\(\mathbf{Q}\)</span> sum to 0.”)</p>
+<p>This model (Equation <a href="simulation.html#eq:sim-gtr">(3.8)</a>) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The <span class="math inline">\(\pi_A ... \pi_T\)</span> parameters allow the equilibrium frequencies to differ for each nucleotide. The <span class="math inline">\(a ... f\)</span> parameters adjust <span class="math inline">\(\mu\)</span> so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> to different values. It is Time Reversible because we don’t have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, <span class="math inline">\(\mu a\)</span>. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don’t need to know the direction of time along an edge to calculate <span class="math inline">\(\mathbf{P}(t)\)</span>. This last point is very important since we often don’t know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.</p>
+<p>If we let all the parameters in the GTR model (Equation <a href="simulation.html#eq:sim-gtr">(3.8)</a>) be free, it is quite complex. We would have to estimate them all from data. The alternative is to clamp some of them. In fact, by comparison of Equations <a href="simulation.html#eq:jc69-expanded">(3.6)</a>) and <a href="simulation.html#eq:sim-gtr">(3.8)</a>, we can see that JC69 is a clamped version of GTR where <span class="math inline">\(\pi_A=\pi_C=\pi_G=\pi_T=0.25\)</span> and <span class="math inline">\(a=b=c=d=e=f=1\)</span>. Only <span class="math inline">\(\mu\)</span> is left free in JC69.</p>
 <p>There are a variety of other commonly used models that clamp these parameters in different ways, some leaving more freedom than others. Some that are widely used and have very specific biological motivation have their own names, like JC69 (the motivation for this model is that it is so simple). Examples of other named models include:</p>
 <ul>
 <li><p>HKY85 differs from GTR in setting some rate modifiers equal to each other so that there are two rates, <span class="math inline">\(b=e\)</span> for transitions (A to G, and C to T) and <span class="math inline">\(a=c=d=f\)</span> for transversions (all other changes). It still lets all the <span class="math inline">\(\pi\)</span> parameters vary independently.</p></li>
@@ -527,41 +547,41 @@ calculate the probability <span class="math inline">\(P(t)\)</span> of a given n
 </ul>
 <p>We now have a more complex model of DNA evolution that we can simplify by setting the parameters to equal each other and/or clamping them to specific values. It can accommodate much of variation observed in actual DNA sequence data. We could use it to simulate data just as we did in Figure <a href="simulation.html#fig:sim-saturation">3.7</a>, but taking into consideration things like unequal nucleotide frequencies and differences in rates of change between nucleotides. This is getting us much closer to something that provides real biological insight.</p>
 </div>
-<div id="plugging-some-numbers-into-the-expanded-model" class="section level2">
+<div id="plugging-some-numbers-into-the-expanded-model" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Plugging some numbers into the expanded model</h2>
 <p>Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let’s build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into <span class="math inline">\(\mathbf{R}\)</span> and <span class="math inline">\(\mathbf{\Pi}\)</span> to get <span class="math inline">\(\mathbf{Q}\)</span>, and then exponentiate that to get <span class="math inline">\(\mathbf{P}(t)\)</span>. We can then use that to simulate changes in a single nucleotide along an edge. This will be a mathematically grounded version of the schematic in Figure <a href="simulation.html#fig:sim-application">3.3</a>B.</p>
-<p>We are using a mammal tree, so let’s pick some parameter values that roughly approximate what we see in mammals. Rather than set all the parameters independently, let’s set up an HKY85 model, which accommodates non-uniform base frequencies and different transition/ tansversion ratios. First, we can clamp <span class="math inline">\(\mu=1\)</span>. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters <span class="math inline">\(b\)</span> and <span class="math inline">\(e\)</span>) are on the order of 4 times more frequent than transversions (captured by parameters <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(f\)</span>) in mammals <span class="citation">(Rosenberg, Subramanian, and Kumar <a href="#ref-rosenberg2003" role="doc-biblioref">2003</a>)</span>. So we will clamp <span class="math inline">\(b=e=2\)</span> and <span class="math inline">\(a=c=d=f=0.5\)</span>. I picked these particular values (rather than others, such as 4 and 1) because they keep the mean of the off-diagonal entries in <span class="math inline">\(\mathbf{R}\)</span> to 1.</p>
+<p>We are using a mammal tree, so let’s pick some parameter values that roughly approximate what we see in mammals. Rather than set all the parameters independently, let’s set up an HKY85 model, which accommodates non-uniform base frequencies and different transition/ tansversion ratios. First, we can clamp <span class="math inline">\(\mu=1\)</span>. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters <span class="math inline">\(b\)</span> and <span class="math inline">\(e\)</span>) are on the order of 4 times more frequent than transversions (captured by parameters <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span>, <span class="math inline">\(d\)</span>, and <span class="math inline">\(f\)</span>) in mammals <span class="citation">(<a href="references.html#ref-rosenberg2003" role="doc-biblioref">Rosenberg, Subramanian, and Kumar 2003</a>)</span>. So we will clamp <span class="math inline">\(b=e=2\)</span> and <span class="math inline">\(a=c=d=f=0.5\)</span>. I picked these particular values (rather than others, such as 4 and 1) because they keep the mean of the off-diagonal entries in <span class="math inline">\(\mathbf{R}\)</span> to 1.</p>
 <p>Now we have the following values for <span class="math inline">\(\mathbf{R}\)</span>:</p>
-<p><span class="math display">\[
+<p><span class="math display">\[\begin{equation}
 \mathbf{R} =
-\left(\begin{array}{cc} 
+\left(\begin{array}{cccc} 
 - &amp; 0.5 &amp; 2 &amp; 0.5 \\
 0.5 &amp; - &amp; 0.5 &amp; 2 \\
 2 &amp; 0.5 &amp; - &amp; 0.5 \\
 0.5 &amp; 2 &amp; 0.5 &amp; - \\
 \end{array}\right)
-\]</span>
-We won’t specify the diagonal elements of <span class="math inline">\(\mathbf{R}\)</span> quite yet.</p>
+\end{equation}\]</span></p>
+<p>We won’t specify the diagonal elements of <span class="math inline">\(\mathbf{R}\)</span> quite yet.</p>
 <p>Now we need <span class="math inline">\(\mathbf{\Pi}\)</span>. We noted earlier that humans have a GC content of 41%, so we’ll use that. This gave the following entries for <span class="math inline">\(\mathbf{\Pi}\)</span>:</p>
-<p><span class="math display">\[
+<p><span class="math display">\[\begin{equation}
 \mathbf{\Pi} =
-\left(\begin{array}{cc} 
+\left(\begin{array}{cccc}
 0.295 &amp; 0 &amp; 0 &amp; 0 \\ 
 0 &amp; 0.205 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0.205 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 0.295 \\
 \end{array}\right)
-\]</span></p>
+\end{equation}\]</span></p>
 <p>Now we can calculate <span class="math inline">\(\mathbf{Q}\)</span> by multiplying <span class="math inline">\(\mathbf{R}\)</span> and <span class="math inline">\(\mathbf{\Pi}\)</span> and adjusting the diagonal so that the rows each sum to 0:</p>
-<p><span class="math display">\[
+<p><span class="math display">\[\begin{equation}
 \mathbf{Q} = \mathbf{R\Pi} =
-\left(\begin{array}{cc} 
+\left(\begin{array}{cccc} 
 -0.6600 &amp; 0.1025 &amp; 0.4100 &amp; 0.1475 \\
 0.1475 &amp; -0.8400 &amp; 0.1025 &amp; 0.5900 \\
 0.5900 &amp; 0.1025 &amp; -0.8400 &amp; 0.1475 \\
 0.1475 &amp; 0.4100 &amp; 0.1025 &amp; -0.6600 \\
 \end{array}\right)
-\]</span></p>
+\end{equation}\]</span></p>
 <p>This is our instantaneous rate matrix. From here on out I will switch from mathematical
 notation to computational representations, since we are doing more calculations. Here is what the contents of <span class="math inline">\(\mathbf{Q}\)</span> look like when outputted from R:</p>
 <pre><code>##         A       C       G       T
@@ -575,7 +595,7 @@ notation to computational representations, since we are doing more calculations.
 ## C 0.1160735 0.49837662 0.08066121 0.3048887
 ## G 0.3048887 0.08066121 0.49837662 0.1160735
 ## T 0.1160735 0.21187182 0.08066121 0.5913935</code></pre>
-<p>The sum of each row of <span class="math inline">\(\mathbf{P}(t)\)</span> is 1 for any value of <span class="math inline">\(t\)</span>, since our model doesn’t create or destroy nucleotides no matter how long the edge. No matter which of the four nucleotides you start with, you have to end with one of the four nucleotides. This better demonstrates why we had to select diagonal values of the <em>rate</em> matrix <span class="math inline">\(\mathbf{Q}\)</span> so that each row in that matrix is 0 – if we hadn’t, then the row sums of <span class="math inline">\(\mathbf{P}(t)\)</span> would not be 1.</p>
+<p>The sum of each row of <span class="math inline">\(\mathbf{P}(t)\)</span> is 1 for any value of <span class="math inline">\(t\)</span>, since our model doesn’t create or destroy nucleotides. No matter which of the four nucleotides you start with, you have to end with one of the four nucleotides. This better demonstrates why we had to select diagonal values of the <em>rate</em> matrix <span class="math inline">\(\mathbf{Q}\)</span> so that each row in that matrix is 0 – if we hadn’t, then the row sums of <span class="math inline">\(\mathbf{P}(t)\)</span> would not be 1.</p>
 <p>Now that we can derive <span class="math inline">\(\mathbf{P}(t)\)</span>, let’s explore some of its properties. Let’s first think about what happens when <span class="math inline">\(t=0\)</span>. In this case, there is no time for evolution to occur and the resulting nucleotide should be the same as the starting nucleotide. Indeed, we see this is the case:</p>
 <pre><code>##   A C G T
 ## A 1 0 0 0
@@ -591,7 +611,7 @@ notation to computational representations, since we are doing more calculations.
 ## T 0.295 0.205 0.205 0.295</code></pre>
 <p>In this case, each row has the exact same values. If you look closely, they should be familiar – they are the equilibrium frequencies from <span class="math inline">\(\mathbf{\Pi}\)</span>. This matches what happened in Figures <a href="simulation.html#fig:sim-saturation">3.7</a> and <a href="simulation.html#fig:sim-analytical">3.8</a>. As edge length increases, the expected frequencies of each nucleotide deviate further and further from the original state and approach the equilibrium frequencies specified by <span class="math inline">\(\mathbf{\Pi}\)</span>.</p>
 </div>
-<div id="simulation-along-a-single-edge" class="section level2">
+<div id="simulation-along-a-single-edge" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Simulation along a single edge</h2>
 <p>We can now calculate the probability of a specific end state given a start state. Now let’s use this machinery to simulate evolution along a single edge at a time, as in Figure <a href="simulation.html#fig:sim-application">3.3</a>B.</p>
 <p>We first need to set the state at the parent node. There are a couple approaches we could use to set the parent state. We could clamp it to a specific initial state, just as we did in our JC69 simulations when we set the starting state to A (Figure <a href="simulation.html#fig:sim-jc-mu-sweep">3.4</a>). Alternatively, we could pick the starting state at random.</p>
@@ -728,7 +748,7 @@ G
 </table>
 <p>In Table <a href="simulation.html#tab:sim-single-edges">3.1</a> I selected the Parent nucleotide by sampling from <span class="math inline">\(\mathbf{\Pi}\)</span> as described above. I then created a random edge length <span class="math inline">\(t\)</span> by sampling from a uniform distribution that ranges from 0 to <span class="math inline">\(2\)</span>, just to get a variety of edge lengths. I then simulated the Child state by sampling from <span class="math inline">\(\mathbf{P}(t)\)</span> given <span class="math inline">\(t\)</span> and the Parent state.</p>
 </div>
-<div id="scaling-from-a-single-edge-to-a-whole-tree" class="section level2">
+<div id="scaling-from-a-single-edge-to-a-whole-tree" class="section level2" number="3.7">
 <h2><span class="header-section-number">3.7</span> Scaling from a single edge to a whole tree</h2>
 <p>So far we have considered the evolution of one DNA site along one edge at a time (Figure <a href="simulation.html#fig:sim-application">3.3</a>B, Table <a href="simulation.html#tab:sim-single-edges">3.1</a>). We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of a single site along all edges, generating a specific nucleotide state at each node. We will use the same toy mammal model as above. We will consider a simplified tree (Figure <a href="simulation.html#fig:sim-tree">3.10</a>) rather than the full mammal tree, just to keep things compact.</p>
 <div class="figure"><span id="fig:sim-tree"></span>
@@ -742,16 +762,16 @@ Figure 3.10: Simulation of states for a single DNA site on a simple tree accordi
 <p>There are four more edges in this tree, each connected to a terminal node. One edge has parent node 6 and child node 1 (which is the <code>Species_A</code> terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from <span class="math inline">\(\mathbf{\Pi}\)</span>, we just use the state that was simulated along the edge connecting node 5 to node 6. This state is <span class="math inline">\(A\)</span>. Now we simulate evolution along the edge connecting node 6 to node 1, given the state at node 6, length <span class="math inline">\(t\)</span> of the edge, and <span class="math inline">\(\mathbf{P}(t)\)</span>. We then do the same for each of the other edges.</p>
 <p>Data can be simulated on a tree of arbitrary size in this way. Just sample from <span class="math inline">\(\mathbf{P}(t)\)</span> for the root state. Then traverse the tree from the root to each of the tips, simulating the state at each of the other internal nodes and finally the terminal nodes according to the states of their parents, edge length <span class="math inline">\(t\)</span>, and <span class="math inline">\(\mathbf{P}(t)\)</span>.</p>
 </div>
-<div id="scaling-from-a-single-site-to-multiple-sites" class="section level2">
+<div id="scaling-from-a-single-site-to-multiple-sites" class="section level2" number="3.8">
 <h2><span class="header-section-number">3.8</span> Scaling from a single site to multiple sites</h2>
 <p>So far we have considered evolution at a single DNA site across a whole phylogeny. Genomes have from thousands to billions of sites, though. Here we expand our simulations from a single nucleotide at a time to arbitrarily long DNA sequences.</p>
 <p>How? With one simplifying assumption – that the evolution of each site is independent of the evolution at other sites. We just simulate one site at a time, and then stick all the results together into a sequence.</p>
 </div>
-<div id="concluding-thoughts" class="section level2">
+<div id="concluding-thoughts" class="section level2" number="3.9">
 <h2><span class="header-section-number">3.9</span> Concluding thoughts</h2>
 <p>Here we have built up the conceptual, mathematical, statistical, and computational machinery to simulating DNA evolution on a tree. Sequence simulation is useful for a variety of things, including generating datasets under known conditions to test tools. A major value, though, is to to think in a full explicit way about how you are modeling evolution. This probabilistic model framework is the exact same one we will use as we move to our next task, inferring phylogenies from sequence data.</p>
 </div>
-<div id="additional-resources-1" class="section level2">
+<div id="additional-resources-1" class="section level2" number="3.10">
 <h2><span class="header-section-number">3.10</span> Additional resources</h2>
 <ul>
 <li><p>As a grad student, I learned much of what I present here from [swofford1996molecular]. This is an incredibly lucid chapter, and the foundation for my own understanding of how to think about the likelihood of molecular sequence data on a phylogeny.</p></li>
@@ -759,30 +779,6 @@ Figure 3.10: Simulation of states for a single DNA site on a simple tree accordi
 <li><p>A great introduction to continuous time models by John Huelsenbeck <a href="https://revbayes.github.io/tutorials/dice/" class="uri">https://revbayes.github.io/tutorials/dice/</a></p></li>
 </ul>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-box1976science">
-<p>Box, George EP. 1976. “Science and Statistics.” <em>Journal of the American Statistical Association</em> 71 (356): 791–99. <a href="https://doi.org/10.1080/01621459.1976.10480949">https://doi.org/10.1080/01621459.1976.10480949</a>.</p>
-</div>
-<div id="ref-breiman2001statistical">
-<p>Breiman, Leo, and others. 2001. “Statistical Modeling: The Two Cultures (with Comments and a Rejoinder by the Author).” <em>Statistical Science</em> 16 (3): 199–231. <a href="https://projecteuclid.org/euclid.ss/1009213726">https://projecteuclid.org/euclid.ss/1009213726</a>.</p>
-</div>
-<div id="ref-godfrey2016philosophy">
-<p>Godfrey-Smith, Peter. 2013. <em>Philosophy of Biology</em>. Princeton University Press.</p>
-</div>
-<div id="ref-jc1969">
-<p>Jukes, TH, and CR Cantor. 1969. <em>Evolution of Protein Molecules</em>. Academic Press New York, NY. <a href="https://doi.org/10.1016/B978-1-4832-3211-9.50009-7">https://doi.org/10.1016/B978-1-4832-3211-9.50009-7</a>.</p>
-</div>
-<div id="ref-rosenberg2003">
-<p>Rosenberg, Michael S., Sankar Subramanian, and Sudhir Kumar. 2003. “Patterns of Transitional Mutation Biases Within and Among Mammalian Genomes.” <em>Molecular Biology and Evolution</em> 20 (6): 988–93. <a href="https://doi.org/10.1093/molbev/msg113">https://doi.org/10.1093/molbev/msg113</a>.</p>
-</div>
-<div id="ref-swofford1996molecular">
-<p>Swofford, DL, GJ Olsen, Waddell PJ, and DM Hillis. 1996. <em>Phylogenetic Inference</em>. Edited by David M Hillis, Craig Moritz, Barbara K Mable, and Richard G Olmstead. Sinauer Associates Sunderland, MA.</p>
-</div>
-<div id="ref-zapata2015">
-<p>Zapata, Felipe, Freya E Goetz, Stephen A Smith, Mark Howison, Stefan Siebert, Samuel H Church, Steven M Sanders, et al. 2015. “Phylogenomic Analyses Support Traditional Relationships Within Cnidaria.” <em>PloS One</em> 10 (10): e0139068.</p>
 </div>
 </div>
             </section>
