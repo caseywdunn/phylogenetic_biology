@@ -519,11 +519,11 @@ map2(
   function(Parent,Length) sim_site(Parent,Length,Q)
   ) %>% unlist()
 
-knitr::kable( 
+kable( 
   single_edges, 
   booktabs = TRUE,
   caption = 'Each row is simulated evolution along a single edge.' 
-)
+) %>% kable_styling()
 
 ```
 

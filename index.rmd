@@ -30,6 +30,7 @@ always_allow_html: true
   library( phangorn )
   library( kableExtra )
   library( ggrepel )
+  library( kableExtra )
 
 	source( "functions.R" )
 	set.seed( 23456 )
