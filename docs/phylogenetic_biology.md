@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2021-11-09"
+date: "2022-04-02"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -11,6 +11,7 @@ biblio-style: apalike
 link-citations: yes
 description: "An introduction to Phylogenetic Biology."
 fig_caption: yes
+always_allow_html: true
 ---
 
 
@@ -23,7 +24,7 @@ fig_caption: yes
 
 # Preface {-}
 
-I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses. It is really my lecture notes dressed up in the form of the rough draft of a book.
+I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses.
 
 ## Additional resources
 
@@ -31,7 +32,7 @@ Please see the appendices for a variety of additional resources.
 
 ## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the fall of 2020. This book started as a collection of lecture notes for this course, the first that I taught fully online. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course, for her incredible contributions to this course and, as a result, this book. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata provided close reads of host chapters, often within hours of completing first drafts.
+Thanks in particular to the students of Yale EEB354 in the fall of 2020. This book started as a collection of lecture notes for this course, the first that I taught fully online. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata provided close reads of host chapters, often within hours of completing first drafts.
 
 ## Dedication
 
@@ -87,65 +88,78 @@ The following books provide general computational background for the topics cove
 
 ## Software versions
 
-This book was rendered from the source code on $Tue Nov 09 08:24:42 PM 2021$ with the following R package versions.
+This book was rendered from the source code on $Sat Apr 02 07:19:00 PM 2022$ with the following R package versions.
 
 
 ```
-R version 4.0.3 (2020-10-10)
+R version 4.1.3 (2022-03-10)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.3 LTS
+Running under: Ubuntu 20.04.4 LTS
 
 Matrix products: default
-BLAS/LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.8.so
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
 
 locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
- [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=C             
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
-[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] ggrepel_0.9.1    kableExtra_1.3.2 phangorn_2.5.5   Matrix_1.2-18    forcats_0.5.1   
- [6] dplyr_1.0.4      purrr_0.3.4      readr_1.4.0      tidyr_1.1.2      tibble_3.0.6    
-[11] ggplot2_3.3.3    tidyverse_1.3.0  stringr_1.4.0    phytools_0.7-70  maps_3.3.0      
-[16] magrittr_2.0.1   gridExtra_2.3    geiger_2.0.7     ape_5.4-1        ggtree_2.4.2    
-[21] treeio_1.14.4    bookdown_0.21   
+ [1] ggimage_0.3.0    ggrepel_0.9.1    kableExtra_1.3.4 phangorn_2.8.1  
+ [5] Matrix_1.4-0     forcats_0.5.1    dplyr_1.0.8      purrr_0.3.4     
+ [9] readr_2.1.2      tidyr_1.2.0      tibble_3.1.6     ggplot2_3.3.5   
+[13] tidyverse_1.3.1  stringr_1.4.0    phytools_1.0-1   maps_3.4.0      
+[17] magrittr_2.0.3   gridExtra_2.3    geiger_2.0.7     ape_5.6-2       
+[21] ggtree_3.2.1     treeio_1.18.1    bookdown_0.25   
 
 loaded via a namespace (and not attached):
- [1] subplex_1.6             nlme_3.1-149            fs_1.5.0               
- [4] lubridate_1.7.9.2       webshot_0.5.2           httr_1.4.2             
- [7] numDeriv_2016.8-1.1     tools_4.0.3             backports_1.2.1        
-[10] R6_2.5.0                DBI_1.1.1               lazyeval_0.2.2         
-[13] colorspace_2.0-0        withr_2.4.1             tidyselect_1.1.0       
-[16] mnormt_2.0.2            compiler_4.0.3          cli_2.3.0              
-[19] rvest_0.3.6             expm_0.999-6            xml2_1.3.2             
-[22] scales_1.1.1            mvtnorm_1.1-1           quadprog_1.5-8         
-[25] digest_0.6.27           rmarkdown_2.6           pkgconfig_2.0.3        
-[28] htmltools_0.5.1.1       plotrix_3.8-1           dbplyr_2.1.0           
-[31] rlang_0.4.10            readxl_1.3.1            rstudioapi_0.13        
-[34] generics_0.1.0          combinat_0.0-8          jsonlite_1.7.2         
-[37] gtools_3.8.2            patchwork_1.1.1         Rcpp_1.0.6             
-[40] munsell_0.5.0           lifecycle_1.0.0         scatterplot3d_0.3-41   
-[43] stringi_1.5.3           yaml_2.2.1              clusterGeneration_1.3.7
-[46] MASS_7.3-53             grid_4.0.3              parallel_4.0.3         
-[49] crayon_1.4.1            lattice_0.20-41         haven_2.3.1            
-[52] hms_1.0.0               tmvnsim_1.0-2           knitr_1.31             
-[55] pillar_1.4.7            igraph_1.2.6            fastmatch_1.1-0        
-[58] reprex_1.0.0            glue_1.4.2              evaluate_0.14          
-[61] BiocManager_1.30.10     modelr_0.1.8            deSolve_1.28           
-[64] vctrs_0.3.6             cellranger_1.1.0        gtable_0.3.0           
-[67] assertthat_0.2.1        xfun_0.21               broom_0.7.4            
-[70] tidytree_0.3.3          coda_0.19-4             viridisLite_0.3.0      
-[73] aplot_0.0.6             rvcheck_0.1.8           ellipsis_0.3.1         
+ [1] colorspace_2.0-3        ellipsis_0.3.2          fs_1.5.2               
+ [4] aplot_0.1.2             rstudioapi_0.13         farver_2.1.0           
+ [7] fansi_1.0.3             mvtnorm_1.1-3           lubridate_1.8.0        
+[10] xml2_1.3.3              splines_4.1.3           codetools_0.2-18       
+[13] mnormt_2.0.2            knitr_1.38              jsonlite_1.8.0         
+[16] broom_0.7.12            dbplyr_2.1.1            png_0.1-7              
+[19] compiler_4.1.3          httr_1.4.2              backports_1.4.1        
+[22] assertthat_0.2.1        fastmap_1.1.0           lazyeval_0.2.2         
+[25] cli_3.2.0               htmltools_0.5.2         tools_4.1.3            
+[28] igraph_1.2.11           coda_0.19-4             gtable_0.3.0           
+[31] glue_1.6.2              clusterGeneration_1.3.7 tinytex_0.38           
+[34] fastmatch_1.1-3         Rcpp_1.0.8.3            cellranger_1.1.0       
+[37] jquerylib_0.1.4         vctrs_0.4.0             svglite_2.1.0          
+[40] nlme_3.1-155            xfun_0.30               rvest_1.0.2            
+[43] lifecycle_1.0.1         MASS_7.3-55             scales_1.1.1           
+[46] subplex_1.7             hms_1.1.1               parallel_4.1.3         
+[49] expm_0.999-6            yaml_2.3.5              ggfun_0.0.5            
+[52] yulab.utils_0.0.4       sass_0.4.1              stringi_1.7.6          
+[55] highr_0.9               plotrix_3.8-2           tidytree_0.3.9         
+[58] rlang_1.0.2             pkgconfig_2.0.3         systemfonts_1.0.4      
+[61] evaluate_0.15           lattice_0.20-45         patchwork_1.1.1        
+[64] labeling_0.4.2          tidyselect_1.1.2        deSolve_1.31           
+[67] R6_2.5.1                magick_2.7.3            generics_0.1.2         
+[70] combinat_0.0-8          DBI_1.1.2               mgcv_1.8-39            
+[73] pillar_1.7.0            haven_2.4.3             withr_2.5.0            
+[76] scatterplot3d_0.3-41    modelr_0.1.8            crayon_1.5.1           
+[79] utf8_1.2.2              tmvnsim_1.0-2           tzdb_0.3.0             
+[82] rmarkdown_2.13          grid_4.1.3              readxl_1.4.0           
+[85] reprex_2.0.1            digest_0.6.29           webshot_0.5.2          
+[88] numDeriv_2016.8-1.1     gridGraphics_0.5-1      munsell_0.5.0          
+[91] viridisLite_0.4.0       ggplotify_0.1.0         bslib_0.3.1            
+[94] quadprog_1.5-8         
 ```
 
 
 ## License
 
-This manuscript is distrubuted under a [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License]( https://creativecommons.org/licenses/by-nc-nd/3.0/us/).
+![](figures/cc.png)
+
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/).
 
 <!--chapter:end:index.rmd-->
 
@@ -159,7 +173,7 @@ At the dawn of the field, in the second half of the 19th century [@darwin1859; @
 
 Beginning in the late 1980s, molecular data became widely used for building phylogenies of extant organisms with data from fragments of a few genes. Starting in about 2010, new generations of high-throughput sequencing technology made it possible to collect sequences for thousands of genes from a broad diversity of organisms in a single study, and right now we are in the earliest days of building phylogenies from broadly sampled high-quality chromosome-level genome assemblies. 
 
-Phylogenetic Biology has always been concerned with figuring out evolutionary relationships. This domain of inquiry is referred to as phylogenetic inference. It has been vital to improved classification of species (phylogenetic taxonomy), reconstructing key features in the evolutionary history of many groups of organisms, and is extremely interesting to those who know the organisms well.
+Phylogenetic Biology has always been concerned with figuring out evolutionary relationships. This domain of inquiry is referred to as phylogenetic inference. Phylogenetic inference has been vital to improved classification of species (phylogenetic taxonomy), reconstructing key features in the evolutionary history of many groups of organisms, and is extremely interesting to those who know the organisms well.
 
 Once so many advances were made in building trees, many investigators have of course asked themselves, "Now what do I do with this tree?" There has also been a growing recognition that many questions require knowing evolutionary relationships, even if those evolutionary relationships are themselves not of central interest to the investigator. This has led to the rise of another domain often referred to as phylogenetic comparative biology. Instead of ending with trees, as many phylogenetic inference projects do, phylogenetic comparative projects usually start with trees and use them to study the evolution of traits. Comparative questions include whether there is evolutionary covariance between traits, or shifts in rates of evolution along particular edges (also referred to as branches). Phylogenetic comparative methods have become an increasingly large part of the field.
 
@@ -186,7 +200,9 @@ There are a few concepts that are fundamental to understanding phylogenetic anal
 
 In order to make informative comparisons across species, both for inferring phylogenies and for phylogenetic comparative analyses, we need a unified ontological framework to refer to the same characters and character states in different organisms. This correspondence is provided by the concept of homology. Homology is a hypothesis that the same attribute is present in different entities because that attribute was present in their shared ancestor. Homology is a deceptively simple concept that can sometimes be devilishly difficult to define, test, and apply [wagner2014]. 
 
-![(\#fig:intro-concepts)(A) The primary components of a phylogenetic analysis. This mammal phylogeny and edge lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.](figures/phylogenetic_analyses.png) 
+\begin{figure}
+\includegraphics[width=6.01in]{figures/phylogenetic_analyses} \caption{(A) The primary components of a phylogenetic analysis. This mammal phylogeny and edge lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.}(\#fig:intro-concepts)
+\end{figure}
 
 ## A unified perspective on phylogenetic studies
 
@@ -241,7 +257,9 @@ This is a very exciting time in phylogenetic biology. For many years most studie
 # Phylogenies
 
 
-![(\#fig:trees-darwin)Darwin's depiction of the evolutionary relationships between organisms [@darwin1859].](figures/darwin.png) 
+\begin{figure}
+\includegraphics[width=4.62in]{figures/darwin} \caption{Darwin's depiction of the evolutionary relationships between organisms [@darwin1859].}(\#fig:trees-darwin)
+\end{figure}
 
 Phylogenies represent evolutionary relationships. The only figure in Darwin's Origin of Species [@darwin1859] was a phylogeny (Figure \@ref(fig:trees-darwin)), though he didn't call it that.
 
@@ -265,7 +283,9 @@ what each of those parts represent.
 in order to establish a strong foundation for thinking about phylogenies, it is 
 helpful to turn to math.
 
-![(\#fig:trees-graph)Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating.](figures/graph.png) 
+\begin{figure}
+\includegraphics[width=2.5in]{figures/graph} \caption{Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating.}(\#fig:trees-graph)
+\end{figure}
 
 A phylogeny is a specific instance of a mathematical object known as a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)). 
 A graph consists of nodes, often represented as circles, connected by edges, often 
@@ -277,7 +297,9 @@ I will tend to use mathematical notation for phylogenies rather than the classic
 nomenclatures. I will refer to edges rather than branches, tip nodes rather than leaves, 
 etc...
 
-![(\#fig:trees-graph-tree)Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents).](figures/graph_tree.png) 
+\begin{figure}
+\includegraphics[width=2.89in]{figures/graph_tree} \caption{Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents).}(\#fig:trees-graph-tree)
+\end{figure}
 
 Phylogeny graphs (Figure \@ref(fig:trees-graph-tree)) usually have a few specific topological properties:
 
@@ -552,7 +574,7 @@ application of these models will be to simulate data.
 
 ## Models
 
-Models are representations of processes. They are idealized in the sense that they are deliberately simplified, and they are abstractions in the sense that they leave out things that aren't thought to be important. As Peter Godfrey-Smith notes [@godfrey2016philosophy, 21], 
+Models are representations of processes. They are abstractions in the sense that they leave out things that aren't thought to be important, and they are idealized in the sense that they are deliberately simplified. As Peter Godfrey-Smith notes [@godfrey2016philosophy, 21], 
 "Abstraction, to some degree, is inevitable; you can’t include everything. 
 Idealization, in contrast, is a choice."
 
@@ -562,7 +584,7 @@ processes, as long as it generates useful output [@breiman2001statistical].
 For example, if data scientists at a large retail chain are trying to predict how much toothpaste they 
 need to stock at each store, they likely don't care if their models properly consider 
 purchasing rates and all the other things that impact stock, so long as the 
-the model does a reasonable job of making reasonable 
+the model does a reasonable job of making useful 
 predictions. In science, though, we often care very much about the model because 
 many of our questions have to do with the mechanisms that underlay the processes 
 we are modeling. We don't just want models that give us the right answer, we often 
@@ -581,7 +603,9 @@ Cartography is an interesting analogy for the way we will use statistical models
 be a copy of the whole world, which wouldn't be that much more useful than the world itself already is for many 
 of the things you would like to do with a map. So all maps are simplifications (Figure \@ref(fig:sim-maps)). The simplification is often what makes the map useful. 
 
-![(\#fig:sim-maps)Four maps of the Yale campus, varying in complexity and focus. (A) A satellite image of New Haven, including much of Yale campus, from Google Maps. This image has a very large amount of information. (B) A street map of the same region, also from Google Maps. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.](figures/maps.png) 
+\begin{figure}
+\includegraphics[width=5.94in]{figures/maps} \caption{Four maps of the Yale campus, varying in complexity and focus. (A) A satellite image of New Haven, including much of Yale campus, from Google Maps. This image has a very large amount of information. (B) A street map of the same region, also from Google Maps. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.}(\#fig:sim-maps)
+\end{figure}
 
 Let's examine one of the most common models, the linear model:
 
@@ -590,12 +614,12 @@ Let's examine one of the most common models, the linear model:
   (\#eq:linear)
 \end{equation}
 
-Here, $y$ and $x$ are variables. The model posits a linear relationship between $x$ and $y$, that is that if you plot their correspondence in a plane 
-you will get a line. $m$ and $b$ are model parameters. $m$ is the slope of the line -- it captures how much change there is in $y$ for each unit of change in $x$. $b$ is the intercept -- it is the value of $y$ when $x=0$.
+Here, $y$ and $x$ are variables. The model posits a linear relationship between $x$ and $y$. If you plot their correspondence in a plane 
+you will get a line. $m$ and $b$ are model parameters. $m$ is the slope of the line. It captures how much change there is in $y$ for each unit of change in $x$. $b$ is the intercept. It is the value of $y$ when $x=0$.
 
 ![(\#fig:sim-linear)A linear model with $m=0.5$ and $b=1$.](phylogenetic_biology_files/figure-latex/sim-linear-1.pdf) 
 
-There are a variety of useful things we could do based on these relationships between the model, model parameters, and values. Let's consider $x$ to be a variable that tell us something about the past and $y$ to be a variable that tell us something about the present or future. Use cases then include:
+There are a variety of useful things we could do based on these relationships between the model, model parameters, and values. Let's consider $x$ to be a variable that tell us something about the past and $y$ to be a variable that tells us something about the present or future. Use cases then include:
 
 - If we clamp the model (linear) and model parameters (specific values of $m$ and $b$) according to prior knowledge, and clamp $y$ according to observed data, we can estimate $x$. In this case the model is like a time machine that allows us to look into the past.
 
@@ -621,9 +645,11 @@ Let's start with a simple model of DNA evolution. At first we will also consider
 - State at the end of the edge (the nucleotide at the child node)
 
 
-![(\#fig:sim-application)Our current goal is to model the evolution of a single site in a DNA sequence along a single edge in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the edge under examination (at the top) is thicker than the rest. (B) A closeup of the focal edge, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a cange from A to C.](figures/applications.png) 
+\begin{figure}
+\includegraphics[width=5.01in]{figures/applications} \caption{Our current goal is to model the evolution of a single site in a DNA sequence along a single edge in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the edge under examination (at the top) is thicker than the rest. (B) A closeup of the focal edge, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a cange from A to C.}(\#fig:sim-application)
+\end{figure}
 
-Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probably as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and pick at random.
+Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
 
 Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model $1/4$ of the time a replacement event occurs, an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of a replacement event result in a substitution, the substitution rate is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the replacement rate.
 
@@ -633,7 +659,7 @@ It might seem a bit odd to consider replacement events that don't result in subs
 
 For the simple process described here, there are two things to consider if we want to know the amount of evolutionary change. The first is the substitution rate $\mu$, and the second is the time over which the evolutionary process acts. In our example here, that time is the length of the edge under consideration in the phylogeny.
 
-In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over the same time interval (0-100 time units). Each black line on the bar is a replacement even randomly introduced by the computer according to our model. We use a different value of $\mu$ for each simulation (as indicated on the vertical axis). In the bottom bar, where $\mu=0$, there are no replacements (black bars) and therefore no substitutions (the whole bar is the same color). There are more replacement events as $\mu$ increases along the vertical axis.
+In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over the same time interval (0-100 time units). Each black line on the bar is a replacement event randomly introduced by the computer according to our model. We use a different value of $\mu$ for each simulation (as indicated on the vertical axis). In the bottom bar, where $\mu=0$, there are no replacements (black bars) and therefore no substitutions (the whole bar is the same color). There are more replacement events as $\mu$ increases along the vertical axis.
 
 ![(\#fig:sim-jc-mu-sweep)Each horizontal bar is a simulation of evolution of a single nucleotide position through time, $t$, for a specified value of $\mu$. Each simulation starts out as an A. Black vertical lines correspond to replacement events, which don't all lead to substitutions (a new color). ](phylogenetic_biology_files/figure-latex/sim-jc-mu-sweep-1.pdf) 
 
@@ -643,15 +669,17 @@ As $\mu$ increases (going up on the vertical axis), the number of replacement ev
 
 Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for edge lengths is given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)). The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and edge lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
 
-![(\#fig:sim-tree-cnid)A published phylogeny [@zapata2015] with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.](figures/Fig_cnidaria.png) 
+\begin{figure}
+\includegraphics[width=8.39in]{figures/Fig_cnidaria} \caption{A published phylogeny [@zapata2015] with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.}(\#fig:sim-tree-cnid)
+\end{figure}
 
 ### Expected end state
 
 The machinery above shows how a model can clarify the way we think about the expected amount of change along an edge. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a  question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
 
-The situation is most clear after a small amount of change - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.
+The situation is most clear after a small amount of change (when $\mu t$ is small) - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.
 
-What should we expect, though, if there has been a large amount of change? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, than the initial starting state doesn't matter because whatever was there initially will probably have been replaced multiple times. It is as if had been erased and written over. If the starting state doesn't contain information about the end state, what does? 
+What should we expect, though, if there has been a large amount of change (when $\mu t$ is large)? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, than the initial starting state doesn't matter because whatever was there initially will probably have been replaced multiple times. It is as if had been erased and written over. If the starting state doesn't contain information about the end state, what does? 
 
 Since replacements are coming from the bag that you are picking the nucleotides at random from, that bag has information about the expected states after a large number of changes. Given enough evolutionary time, our simple model will lead the expected frequency of each nucleotide in the evolving sequence to be the same as their frequencies in the bag. Since we specified that you have the same chance of grabbing any nucleotide from the bag, eventually the probability of having each of the our nucleotides is the same, 25% (Figure \@ref(fig:sim-saturation), right side). If you started with a sequence that had an A and let it evolve 100 times, after enough evolutionary time had passed to reach equilibrium you would expect to get 25 C's, 25 G's, 25 T's, and 25 A's.
 
@@ -667,7 +695,7 @@ In all the examples above, I simulated replacement events by randomly generating
 The process of change that our simple model describes is similar to compound interest. 
 We have something in hand, apply a process to it, then take the output and apply that same process again. Over and over. 
 In the case of compound interest, that something is money and the process is growth. In the case of our model, the 
-something is a DNA site and the process is mutation. In both cases, we take is inputs a starting state, a rate of change, and an amount of time, and provide as an output get the expected end state. To get the expected end state as a function of time elapsed, given a rate of change, we can use exponential functions. For example, here is the exponential function for calculating a balance at time $B(t)$ given the initial balance $B_0$ and an interest rate $r$:
+something is a DNA site and the process is mutation. In both cases, we take as inputs a starting state, a rate of change, and an amount of time, and as an output get the expected end state. To get the expected end state as a function of time elapsed, given a rate of change, we can use exponential functions. For example, here is the exponential function for calculating a balance at time $B(t)$ given the initial balance $B_0$ and an interest rate $r$:
 
 \begin{equation}
   B\left(t\right) = B_0 e^{r t} 
@@ -690,7 +718,7 @@ For our sequence evolution model, we need two exponential functions [@swofford19
 
 Equation \@ref(eq:sim-stay) shows the probability of the final state being the same as 
 the beginning state. So if you start with an A, this would give you the probability 
-of remaining an A after time $t$ given a specific value of $\mu$. Equation \@ref(eq:sim-change) is the probability of each of the different end states. If you start as an A, this is the probability of changing to a G, for example. It is also the rate of C to T, G to A, *etc*...
+of remaining an A after time $t$ given a specific value of $\mu$. Equation \@ref(eq:sim-change) is the probability of each of the three end states that are different from the starting state. If you start as an A, this is the probability of changing to a G, for example. It is also the rate of C to T, G to A, *etc*...
 
 Consider what happens to these equations in the extremes we considered above when examining Figure \@ref(fig:sim-saturation). If $\mu$ or $t$ are zero, we expect no change (Figure \@ref(fig:sim-analytical), left side). In that case we get $e^0$, which is 1. Equation \@ref(eq:sim-stay) becomes $1/4 + 3/4$, which is 1. So there is a probability of 1 that, after no change, the end state is the same as the beginning state. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 1/4$, which is 0. So after no change the end states that differ from the beginning state each have probability 0.
 
@@ -698,7 +726,7 @@ Now consider the case after infinite change (or just a large amount of change, a
 
 ![(\#fig:sim-analytical)The probability of observing a particular end state at time $t$, given the start state A and $\mu=0.05$. The red line is the probability of observing the original start state (as described by Equation \@ref(eq:sim-stay)), the blue line is the probability of observing each of the three other states (as described by Equation \@ref(eq:sim-change)).](phylogenetic_biology_files/figure-latex/sim-analytical-1.pdf) 
 
-We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-change) and \@ref(eq:sim-change) instead of from actual simulations of changes along branches. 
+We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) instead of from actual simulations of changes along branches. 
 
 ![(\#fig:sim-sat-analytical)Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \@ref(eq:sim-change). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each.](phylogenetic_biology_files/figure-latex/sim-sat-analytical-1.pdf) 
 
@@ -713,7 +741,7 @@ This is powerful stuff. We could do a variety of things with this model machiner
 
 - Simulate evolution along an edge by sampling nucleotides for the child node from this probability distribution
 - Ask the probability of a given starting state given an end state
-- Evaluate how reasonable our $\mu$ model parameter value is. If, for example, we have a tree with very short edges that had different state at their parents and children, we might be skeptical of a low $\mu$ value.
+- Evaluate how reasonable our $\mu$ model parameter value is. If, for example, we have a tree with very short edges that had different states at their parents and children, we might be skeptical of a low $\mu$ value.
 
 
 ## Generalizing the simple model
@@ -733,7 +761,7 @@ The model we built above only has one parameter that can vary, $\mu$, so we can 
 
 Recall that $\mu$ is the rate of *any* replacement event happening. That replacement event could be an A, C, G, or T. Only three of these replacements lead to a substitution, since replacing with the original nucleotides does not lead to a change. To find the rate of *specific* replacements happening, as we need to do for the elements of this matrix, we need to apportion the total replacement rate $\mu$ to specific nucleotides. We can do that with a new term $\pi$, which is the name we will give to the equilibrium frequency of each state. This corresponds to the frequency of each nucleotide in the bag we randomly sampled from. In our simple model, $\pi=0.25$ for all nucleotides. Because $\pi$ was clamped and wasn't free to vary, it was essentially invisible in the way we previously described the model.
 
-The off-diagonal elements of $\mathbf{Q}$ give the rates of substitutions, and are all $\mu \pi$. But what's up with the diagonal elements? Those correspond to replacements that do not lead to a substitution, for example an A being replaced be an A. We pick these diagonal elements to be whatever value leads the rows to sum to 0. Since there are three substitutions in each row, and each substitution has rate $\mu \pi$, these diagonal elements are set to $-3 \mu \pi$. The basic intuition of this is that we aren't creating or destroying nucleotides, just replacing them. So the net change needs to be 0.
+The off-diagonal elements of $\mathbf{Q}$ give the rates of substitutions, and are all $\mu \pi$. But what's up with the diagonal elements? Those correspond to replacements that do not lead to a substitution, for example an A being replaced be an A. We pick these diagonal elements to be whatever value leads the rows to sum to 0. The basic intuition of this is that we aren't creating or destroying nucleotides, just replacing them. So the net change needs to be 0. Since there are three substitutions in each row, and each substitution has rate $\mu \pi$, these diagonal elements are set to $-3 \mu \pi$.
 
 There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to factor it out into two parts [@swofford1996molecular]. The first is a $4\times4$ matrix $\mathbf{R}$, which has all the rates, and the second is a $4\times4$ matrix $\Pi$ that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation \@ref(eq:jc69-expanded)).
 
@@ -769,7 +797,7 @@ Wow! This was a lot of work to write a really simple model in a much more compli
 
 ## Expanding the models
 
-The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 [@jc1969]. It is only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that it deliberately omits. 
+The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 [@jc1969]. It is only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that we deliberately omit. 
 
 The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, including that:
 
@@ -798,9 +826,9 @@ To accommodate each of these deviations from JC69, we need to add parameters to 
 
 (To keep things compact, I have followed the convention of placing $-$ in the diagonal elements, which is short for "whatever it takes to make the rows of $\mathbf{Q}$ sum to 0".)
 
-This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rate of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It reflects what is observed biologically. And it means that we don't need to know the direction of time along an edge to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
+This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along an edge to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
 
-If we let all the parameters in the GTR model (Equation \@ref(eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is clamp some of them. In fact, by comparison of Equations \@ref(eq:jc69-expanded)) and \@ref(eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free in JC69.
+If we let all the parameters in the GTR model (Equation \@ref(eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is to clamp some of them. In fact, by comparison of Equations \@ref(eq:jc69-expanded)) and \@ref(eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free in JC69.
 
 There are a variety of other commonly used models that clamp these parameters in different ways, some leaving more freedom than others. Some that are widely used and have very specific biological motivation have their own names, like JC69 (the motivation for this model is that it is so simple). Examples of other named models include:
 
@@ -883,7 +911,7 @@ Now we need to exponentiate $\mathbf{Q}$ it to get $\mathbf{P}(t)$, according to
 ## T 0.1160735 0.21187182 0.08066121 0.5913935
 ```
 
-The sum of each row of $\mathbf{P}(t)$ is 1 for any value of $t$, since our model doesn't create or destroy nucleotides no matter how long the edge. No matter which of the four nucleotides you start with, you have to end with one of the four nucleotides. This better demonstrates why we had to select diagonal values of the *rate* matrix $\mathbf{Q}$ so that each row in that matrix is 0 -- if we hadn't, then the row sums of $\mathbf{P}(t)$ would not be 1. 
+The sum of each row of $\mathbf{P}(t)$ is 1 for any value of $t$, since our model doesn't create or destroy nucleotides. No matter which of the four nucleotides you start with, you have to end with one of the four nucleotides. This better demonstrates why we had to select diagonal values of the *rate* matrix $\mathbf{Q}$ so that each row in that matrix is 0 -- if we hadn't, then the row sums of $\mathbf{P}(t)$ would not be 1. 
 
 Now that we can derive $\mathbf{P}(t)$, let's explore some of its properties. Let's first think about what happens when $t=0$. In this case, there is no time for evolution to occur and the resulting nucleotide should be the same as the starting nucleotide. Indeed, we see this is the case:
 
@@ -920,28 +948,68 @@ We first need to set the state at the parent node. There are a couple approaches
 How do we select a starting state at random? We could draw the starting state from a bag with equal frequencies of each nucleotide (as we did at the beginning of this chapter), but our model allows us to make a more informed selection than that. We implemented $\mathbf{\Pi}$ because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let's draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this probability distribution. 
 
 
-\begin{table}
-
-\caption{(\#tab:sim-single-edges)Each row is simulated evolution along a single edge.}
-\centering
-\begin{tabular}[t]{lrl}
-\toprule
-Parent & Length & Child\\
-\midrule
-A & 0.0387691 & A\\
-A & 0.3444866 & A\\
-C & 0.6561006 & A\\
-C & 0.6723020 & C\\
-A & 0.5311025 & A\\
-\addlinespace
-A & 0.7477842 & G\\
-T & 1.7042348 & T\\
-A & 0.6896113 & G\\
-G & 0.7347406 & G\\
-G & 1.3263353 & G\\
-\bottomrule
-\end{tabular}
-\end{table}
+<table>
+<caption>(\#tab:sim-single-edges)Each row is simulated evolution along a single edge.</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Parent </th>
+   <th style="text-align:right;"> Length </th>
+   <th style="text-align:left;"> Child </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0387691 </td>
+   <td style="text-align:left;"> A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.3444866 </td>
+   <td style="text-align:left;"> A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.6561006 </td>
+   <td style="text-align:left;"> A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.6723020 </td>
+   <td style="text-align:left;"> C </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.5311025 </td>
+   <td style="text-align:left;"> A </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.7477842 </td>
+   <td style="text-align:left;"> G </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 1.7042348 </td>
+   <td style="text-align:left;"> T </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.6896113 </td>
+   <td style="text-align:left;"> G </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.7347406 </td>
+   <td style="text-align:left;"> G </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 1.3263353 </td>
+   <td style="text-align:left;"> G </td>
+  </tr>
+</tbody>
+</table>
 
 In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\mathbf{\Pi}$ as described above. I then created a random edge length $t$ by sampling from a uniform distribution that ranges from 0 to $2$, just to get a variety of edge lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
 
@@ -996,7 +1064,7 @@ We will consider the toy phylogeny, along with its tip states, shown in Figure \
 
 ![(\#fig:inference-toy)The toy phylogeny we will use to examine inference. Node numbers are in red. Edge lengths are in orange. Tip node states are within boxes.](phylogenetic_biology_files/figure-latex/inference-toy-1.pdf) 
 
-We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and edge lengths. This history is the full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). I want to emphasize that this isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
+We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and edge lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). I want to emphasize that this isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
 
 ![(\#fig:inference-internal-states)The same toy tree as above, but with arbitrary internal node states (in boxes).](phylogenetic_biology_files/figure-latex/inference-internal-states-1.pdf) 
 
@@ -1050,51 +1118,85 @@ For each edge, we can now use $\mathbf{P}(t)$ to calculate the probability of a 
 Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the blue probabilities to calculate the joint probability of all of these events happening. 
 We can think of these as the probabilities of specific changes along each edge as the probabilities of the state at each child node. 
 
-
-\begin{tabular}{r|r}
-\hline
-node & probability\\
-\hline
-1 & 0.7442034\\
-\hline
-2 & 0.7442034\\
-\hline
-3 & 0.3048887\\
-\hline
-4 & 0.2260230\\
-\hline
-5 & NA\\
-\hline
-6 & 0.0195083\\
-\hline
-7 & 0.0652538\\
-\hline
-\end{tabular}
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> node </th>
+   <th style="text-align:right;"> probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.7442034 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.7442034 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0.3048887 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 0.2260230 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> NA </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0.0195083 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 0.0652538 </td>
+  </tr>
+</tbody>
+</table>
 
 Note, though, that the probability for node 5 is missing (it has a value of `NA`, which means it is Not Available). By reference to Figure \@ref(fig:inference-history) we can see that this is the root node. This makes sense since the root is not the child of any edge, and we calculated the probabilities based on changes along edges. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
 
-\begin{table}
-\centering
-\begin{tabular}{r|r}
-\hline
-node & probability\\
-\hline
-1 & 0.7442034\\
-\hline
-2 & 0.7442034\\
-\hline
-3 & 0.3048887\\
-\hline
-4 & 0.2260230\\
-\hline
-5 & 0.2950000\\
-\hline
-6 & 0.0195083\\
-\hline
-7 & 0.0652538\\
-\hline
-\end{tabular}
-\end{table}
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> node </th>
+   <th style="text-align:right;"> probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.7442034 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.7442034 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0.3048887 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:right;"> 0.2260230 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 0.2950000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 0.0195083 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:right;"> 0.0652538 </td>
+  </tr>
+</tbody>
+</table>
 
 The joint probability of all these states can now be calculated as the product of each state. This comes out to $\ensuremath{1.4332602\times 10^{-5}}$. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of $14.3$ times out of a million simulations.
 
@@ -1108,142 +1210,662 @@ If we aren't clamping the internal node states as well, how can we calculate the
 
 This is a small tree, with only 3 internal nodes that can each have 4 states. This gives $4^3=64$ possible histories. That is small enough to list them out below. I also include the probability of each specific history, calculated exactly as I did above (the example above corresponds to row 60 here).
 
-\begin{table}
-\centering
-\begin{tabular}{l|l|l|l|l|l|l|r}
-\hline
-n1 & n2 & n3 & n4 & n5 & n6 & n7 & probability\\
-\hline
-T & T & A & C & A & A & A & 0.0000451\\
-\hline
-T & T & A & C & C & A & A & 0.0000048\\
-\hline
-T & T & A & C & G & A & A & 0.0000036\\
-\hline
-T & T & A & C & T & A & A & 0.0000035\\
-\hline
-T & T & A & C & A & C & A & 0.0000000\\
-\hline
-T & T & A & C & C & C & A & 0.0000025\\
-\hline
-T & T & A & C & G & C & A & 0.0000000\\
-\hline
-T & T & A & C & T & C & A & 0.0000002\\
-\hline
-T & T & A & C & A & G & A & 0.0000005\\
-\hline
-T & T & A & C & C & G & A & 0.0000005\\
-\hline
-T & T & A & C & G & G & A & 0.0000044\\
-\hline
-T & T & A & C & T & G & A & 0.0000004\\
-\hline
-T & T & A & C & A & T & A & 0.0000000\\
-\hline
-T & T & A & C & C & T & A & 0.0000003\\
-\hline
-T & T & A & C & G & T & A & 0.0000000\\
-\hline
-T & T & A & C & T & T & A & 0.0000019\\
-\hline
-T & T & A & C & A & A & C & 0.0000282\\
-\hline
-T & T & A & C & C & A & C & 0.0000030\\
-\hline
-T & T & A & C & G & A & C & 0.0000023\\
-\hline
-T & T & A & C & T & A & C & 0.0000022\\
-\hline
-T & T & A & C & A & C & C & 0.0000018\\
-\hline
-T & T & A & C & C & C & C & 0.0002699\\
-\hline
-T & T & A & C & G & C & C & 0.0000013\\
-\hline
-T & T & A & C & T & C & C & 0.0000164\\
-\hline
-T & T & A & C & A & G & C & 0.0000012\\
-\hline
-T & T & A & C & C & G & C & 0.0000011\\
-\hline
-T & T & A & C & G & G & C & 0.0000097\\
-\hline
-T & T & A & C & T & G & C & 0.0000008\\
-\hline
-T & T & A & C & A & T & C & 0.0000006\\
-\hline
-T & T & A & C & C & T & C & 0.0000069\\
-\hline
-T & T & A & C & G & T & C & 0.0000004\\
-\hline
-T & T & A & C & T & T & C & 0.0000432\\
-\hline
-T & T & A & C & A & A & G & 0.0000088\\
-\hline
-T & T & A & C & C & A & G & 0.0000009\\
-\hline
-T & T & A & C & G & A & G & 0.0000007\\
-\hline
-T & T & A & C & T & A & G & 0.0000007\\
-\hline
-T & T & A & C & A & C & G & 0.0000000\\
-\hline
-T & T & A & C & C & C & G & 0.0000018\\
-\hline
-T & T & A & C & G & C & G & 0.0000000\\
-\hline
-T & T & A & C & T & C & G & 0.0000001\\
-\hline
-T & T & A & C & A & G & G & 0.0000017\\
-\hline
-T & T & A & C & C & G & G & 0.0000016\\
-\hline
-T & T & A & C & G & G & G & 0.0000142\\
-\hline
-T & T & A & C & T & G & G & 0.0000011\\
-\hline
-T & T & A & C & A & T & G & 0.0000000\\
-\hline
-T & T & A & C & C & T & G & 0.0000002\\
-\hline
-T & T & A & C & G & T & G & 0.0000000\\
-\hline
-T & T & A & C & T & T & G & 0.0000013\\
-\hline
-T & T & A & C & A & A & T & 0.0005139\\
-\hline
-T & T & A & C & C & A & T & 0.0000552\\
-\hline
-T & T & A & C & G & A & T & 0.0000415\\
-\hline
-T & T & A & C & T & A & T & 0.0000400\\
-\hline
-T & T & A & C & A & C & T & 0.0000071\\
-\hline
-T & T & A & C & C & C & T & 0.0010512\\
-\hline
-T & T & A & C & G & C & T & 0.0000050\\
-\hline
-T & T & A & C & T & C & T & 0.0000638\\
-\hline
-T & T & A & C & A & G & T & 0.0000214\\
-\hline
-T & T & A & C & C & G & T & 0.0000198\\
-\hline
-T & T & A & C & G & G & T & 0.0001776\\
-\hline
-T & T & A & C & T & G & T & 0.0000143\\
-\hline
-T & T & A & C & A & T & T & 0.0000366\\
-\hline
-T & T & A & C & C & T & T & 0.0004512\\
-\hline
-T & T & A & C & G & T & T & 0.0000255\\
-\hline
-T & T & A & C & T & T & T & 0.0028111\\
-\hline
-\end{tabular}
-\end{table}
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> n1 </th>
+   <th style="text-align:left;"> n2 </th>
+   <th style="text-align:left;"> n3 </th>
+   <th style="text-align:left;"> n4 </th>
+   <th style="text-align:left;"> n5 </th>
+   <th style="text-align:left;"> n6 </th>
+   <th style="text-align:left;"> n7 </th>
+   <th style="text-align:right;"> probability </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000451 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000048 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000036 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000035 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000025 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000002 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000005 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000005 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000044 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000004 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000003 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:right;"> 0.0000019 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000282 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000030 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000023 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000022 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000018 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0002699 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000013 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000164 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000012 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000011 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000097 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000008 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000006 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000069 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000004 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:right;"> 0.0000432 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000088 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000009 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000007 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000007 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000018 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000001 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000017 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000016 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000142 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000011 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000002 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:right;"> 0.0000013 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0005139 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000552 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000415 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000400 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000071 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0010512 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000050 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000638 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000214 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000198 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0001776 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000143 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000366 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0004512 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> G </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0000255 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> A </td>
+   <td style="text-align:left;"> C </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:left;"> T </td>
+   <td style="text-align:right;"> 0.0028111 </td>
+  </tr>
+</tbody>
+</table>
 
 Note that I listed the states for all the nodes, including nodes 1-4, which are clamped. It is the last three internal nodes (n5-n7) that have variable states. The probabilities for each specific history range quite widely, from $\ensuremath{8.2902428\times 10^{-9}}$ to $0.0028111$.
 
@@ -1402,7 +2024,9 @@ Most phylogenetic studies deposit their raw data in public archives like the [NC
 
 When I am interested in building a phylogeny for a particular group of organisms, one of my first steps is to take a look at the [NCBI taxonomy browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi). There you can enter a taxonomic group name, and select which data you would like to see (Figure \@ref(fig:practice-cnidaria)). You can adjust the number of taxonomic levels to control whether you want to view just summaries for larger groups or get all the way down to the species level.
 
-![(\#fig:practice-cnidaria)A view of the sequence data available for Cnidaria. Here I have selected to view available Nucleotide, Protein, SRA, Genome, and Assembly data.](figures/cnidaria_taxonomy_browser.png) 
+\begin{figure}
+\includegraphics[width=6.83in]{figures/cnidaria_taxonomy_browser} \caption{A view of the sequence data available for Cnidaria. Here I have selected to view available Nucleotide, Protein, SRA, Genome, and Assembly data.}(\#fig:practice-cnidaria)
+\end{figure}
 
 Based on this overview, you can assess which types of data (*i.e.*, which data produced by which enrichment strategy) are best for advancing your question with publicly available data. All the PCR data and most of the raw sequence data will usually be available here, but many assemblies and processed data for whole genomes, transcriptomes, and other high-throughput datasets may not be. The best practice when working with these data is to take a deep dive into the recent literature and see if these intermediate products were deposited in another public archive, or contact authors for more details.
 
@@ -1457,11 +2081,13 @@ These parameters are treated as follows in the GTR model (Figure \@ref(fig:evalu
 
 - The four equilibrium frequencies are constrained such that $\pi_A+\pi_C+\pi_G+\pi_T=1$. This is because they are exclusive frequencies, and there are no other possible states. Given that every site must be an A, C, G, or T, their frequencies must sum to $1$. This mathematical relationship between the equilibrium frequency parameters means that only three of them can vary independently -- three are stochastic and one is deterministic. Again, it doesn't matter which one is deterministic, only how many are stochastic, so I'll treat $\pi_A$ as the deterministic parameter.
 
-![(\#fig:evaluation-models-nested)A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the edge lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014). See the [iqtree DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models.](figures/models_dna.png) 
+\begin{figure}
+\includegraphics[width=8.42in]{figures/models_dna} \caption{A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the edge lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014).}(\#fig:evaluation-models-nested)
+\end{figure}
 
 The number of stochastic parameters in a model is referred to as the degrees of freedom, $df$. You can think of it is the number of knobs that can be turned freely. Models that have higher degrees of freedom are often referred to as more complex than models with fewer degrees of freedom.
 
-The GTR model has $df=8$. There are $5$ stochastic relative rate parameters and $3$ stochastic equilibrium frequencies (Figure \@ref(fig:evaluation-models-nested)). The other models we have seen are nested within this. By nested I mean that they can take on a smaller subset of the parameter values than the more complex model can. Models that are nested within other models have a smaller degree of freedom.
+The GTR model has $df=8$. There are $5$ stochastic relative rate parameters and $3$ stochastic equilibrium frequencies (Figure \@ref(fig:evaluation-models-nested)). The other models we have seen are nested within this. By nested I mean that they can take on a smaller subset of the parameter values than the more complex model can. Models that are nested within other models have a smaller degree of freedom. See the [iqtree DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models.
 
 The HKY85 model has $df=4$ (Figure \@ref(fig:evaluation-models-nested)). There is $1$ stochastic relative rate parameter, which determines the transition to transversion ratio. There are the same $3$ stochastic equilibrium frequency parameters as in the GTR model. There are many values that a GTR model can take that an HKY85 model cannot, for example $b$ can differ from $e$ in GTR but not in HKY85. Every value that HKY85 can take can also be taken by GTR. For example, in HKY85 $b=e$, and in GTR $b$ and $e$ are independent stochastic variables that can be different or that can take on the same value. Because every possible value of HKY85 is also possible in GTR, and GTR has more degrees of freedom than GTR, HKY85 is nested within GTR.
 
@@ -1548,7 +2174,9 @@ Edge frequencies are far more useful. It is helpful to think of an edge as a spl
 
 
 
-![(\#fig:eval-splits)Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is an edge, with the identification of the edge based on which taxa are split from each other by the edge. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the edges in the focal topology.](figures/splits.png) 
+\begin{figure}
+\includegraphics[width=6in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is an edge, with the identification of the edge based on which taxa are split from each other by the edge. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the edges in the focal topology.}(\#fig:eval-splits)
+\end{figure}
 
 
 
@@ -1661,7 +2289,9 @@ not necessarily close to a peak in the posterior. The initial samples becore MCM
 Character types are fundamental to phylogenetics. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory [@houle2011measurement] -- a field that sits at the intersection of math, statistics, and philosophy that concerns the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually an exciting and grounding framework for understanding many of the central aspects of what we do in science.
 
 
-![(\#fig:characters-scaletype)Scale types from measurement theory that are relevant to biology. Permissible transformations indicate the mathematical operations that can be performed on measurements of each scale type without distorting their meaning. The Domain indicates the state space, *i.e.* range of possible values. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Reproduced from Table 1 of [@houle2011measurement].](figures/scale-type.png) 
+\begin{figure}
+\includegraphics[width=4.42in]{figures/scale-type} \caption{Scale types from measurement theory that are relevant to biology. Permissible transformations indicate the mathematical operations that can be performed on measurements of each scale type without distorting their meaning. The Domain indicates the state space, *i.e.* range of possible values. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Reproduced from Table 1 of [@houle2011measurement].}(\#fig:characters-scaletype)
+\end{figure}
 
 Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory at large, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type". 
 
