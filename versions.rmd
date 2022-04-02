@@ -1,0 +1,7 @@
+# Software versions
+
+This book was rendered from the source code on $`r format( Sys.time(), "%a %b %d %X %Y" )`$ with the following R package versions.
+
+```{r session_summary, echo=FALSE, comment=NA}
+	sessionInfo()
+```

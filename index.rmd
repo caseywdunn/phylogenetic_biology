@@ -56,11 +56,15 @@ knitr::write_bib(c(
 
 # Preface {-}
 
-I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses.
+## Approach
 
-## Additional resources
+Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative - they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
 
-Please see the appendices for a variety of additional resources.
+## Using this book
+
+This book is intended both for the self directed learner, and for use in a course. 
+
+I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands on work, read papers from the literature, or share student projects.
 
 ## Acknowledgements
 
@@ -118,17 +122,11 @@ The following books provide general computational background for the topics cove
 - Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. http://practicalcomputing.org
 
 
-## Software versions
 
-This book was rendered from the source code on $`r format( Sys.time(), "%a %b %d %X %Y" )`$ with the following R package versions.
-
-```{r session_summary, echo=FALSE, comment=NA}
-	sessionInfo()
-```
 
 
 ## License
 
-![](figures/cc.png)
+![](figures/by-nc-nd-600.png)
 
 This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/).
