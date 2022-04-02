@@ -11,6 +11,7 @@ biblio-style: apalike
 link-citations: yes
 description: "An introduction to Phylogenetic Biology."
 fig_caption: yes
+always_allow_html: true
 ---
 
 ```{r preliminaries, include=FALSE}
@@ -128,6 +129,6 @@ This book was rendered from the source code on $`r format( Sys.time(), "%a %b %d
 
 ## License
 
-![](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)
+![](figures/cc.png)
 
 This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/).
