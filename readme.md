@@ -1,18 +1,25 @@
 # Phylogenetic Biology
 
-This book is a collection of lecture notes by Casey Dunn for his coures 
-Phylogenetic Biology (EEB354, Yale).
+This repository contains all the text, source code, and supporting material for the book *Phylogenetic Biology*, by [Casey Dunn](http://dunnlab.org/).
 
 The formatted book can be viewed at http://dunnlab.org/phylogenetic_biology/index.html .
 
-The order of files in the book is specified in `_bookdown.yml`.
+
+## License
+
+![](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)
+
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/).
 
 
 ## Development
 
+The order of files in the book is specified in `_bookdown.yml`.
+
 ### Building the book
 
 In `phylogenetic_biology`, execute:
+
     bookdown::render_book("index.Rmd", "bookdown::gitbook")
 
 ### Running tests

@@ -14,4 +14,6 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
   keep_md: yes
+  fontsize: 11pt
+  always_allow_html: true
 bookdown::epub_book: default

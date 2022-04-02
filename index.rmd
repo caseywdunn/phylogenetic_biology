@@ -55,7 +55,7 @@ knitr::write_bib(c(
 
 # Preface {-}
 
-I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses. It is really my lecture notes dressed up in the form of the rough draft of a book.
+I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses.
 
 ## Additional resources
 
@@ -63,7 +63,7 @@ Please see the appendices for a variety of additional resources.
 
 ## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the fall of 2020. This book started as a collection of lecture notes for this course, the first that I taught fully online. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course, for her incredible contributions to this course and, as a result, this book. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata provided close reads of host chapters, often within hours of completing first drafts.
+Thanks in particular to the students of Yale EEB354 in the fall of 2020. This book started as a collection of lecture notes for this course, the first that I taught fully online. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata provided close reads of host chapters, often within hours of completing first drafts.
 
 ## Dedication
 
@@ -128,4 +128,6 @@ This book was rendered from the source code on $`r format( Sys.time(), "%a %b %d
 
 ## License
 
-This manuscript is distrubuted under a [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License]( https://creativecommons.org/licenses/by-nc-nd/3.0/us/).
+![](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)
+
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/).

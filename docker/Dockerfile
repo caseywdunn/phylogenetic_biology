@@ -1,4 +1,4 @@
-FROM rocker/verse:4.0.3
+FROM rocker/verse:4.1.3
 
 RUN Rscript -e "library(BiocManager); BiocManager::install('ggtree'); \
                                       BiocManager::install('treeio');"
