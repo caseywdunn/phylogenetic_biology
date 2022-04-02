@@ -1,7 +1,7 @@
 # Phylogenies
 
 
-```{r trees-darwin, echo=FALSE, fig.cap="Darwin's depiction of the evolutionary relationships between organisms [@darwin1859]."}
+```{r trees-darwin, echo=FALSE, fig.cap="Darwin's depiction of the evolutionary relationships between organisms (Darwin, 1859)."}
 
 knitr::include_graphics("figures/darwin.png")
 
@@ -242,20 +242,20 @@ A convenient way to designate groups of organisms is by their most recent common
 
 p_mono = ggtree(tree) %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
-  geom_hilight(node=16, fill='darkgreen', alpha=.6) +
+  geom_hilight(node=16, fill='gray', alpha=.6) +
   # geom_text2(aes(label=node)) +
   ggtitle("(A) Monophyletic group")
 
 p_poly = ggtree(tree) %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
-  geom_hilight(node=2, fill='darkgreen', alpha=.6) +
-  geom_hilight(node=3, fill='darkgreen', alpha=.6) +
+  geom_hilight(node=2, fill='gray', alpha=.6) +
+  geom_hilight(node=3, fill='gray', alpha=.6) +
   # geom_text2(aes(label=node)) +
   ggtitle("(B) Polyphyletic group")
 
 p_para = ggtree(tree) %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
-  geom_hilight(node=16, fill='darkgreen') +
+  geom_hilight(node=16, fill='gray') +
   geom_hilight(node=1, fill='white') +
   # geom_text2(aes(label=node)) +
   ggtitle("(C) Paraphyletic group")
@@ -338,7 +338,7 @@ Even when we don't know where the root of a phylogeny is, we often want to talk 
 
 There are some basic things we can't take for granted in an unrooted phylogeny. We don't, for example, know which way time goes along the branches. We don't know which internal nodes are child nodes and which are parent nodes. We don't know which of the edges attached to an internal node connect to older nodes and which to younger nodes.
 
-```{r trees-rooted-abstract, echo=FALSE, fig.cap="These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other three are rooted on the red node (B), blue node (C), and orange edge (D). These colored elements are in the exact same topological positions in all trees. When the tree is rooted on the red or blue nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the orange edge, a new unrooted node is added along the edge. This new node is bifurcating."}
+```{r trees-rooted-abstract, echo=FALSE, fig.cap="These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other three are rooted on the black node (B), gray node (C), and gray edge (D). Each of these elements are in the exact same topological positions in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray edge, a new unrooted node is added along the edge. This new node is bifurcating."}
 
 # Generated a random tree, but then specify it to use the same one for each render
 # rtree(10, rooted=FALSE) %>% write.tree()
@@ -354,15 +354,15 @@ mrca_t9_t4_n11 = getMRCA(tree_r, which(tree_r$tip.label %in% c('t9','t4'))) # 17
 mrca_t5_t2_n11 = getMRCA(tree_r, which(tree_r$tip.label %in% c('t5','t2'))) # 14
 n_nodes = max(tree_r$edge)
 d_n11 = data.frame( node=1:n_nodes, color="black" )
-d_n11$color[ mrca_t5_t2_n11 ] = "orange"
+d_n11$color[ mrca_t5_t2_n11 ] = "gray"
 
 p_r_unrooted = 
   tree_r %>% 
   ggtree( layout="unrooted", branch.length="none", aes(color=I(color)) ) %<+% d_n11 + 
   geom_tiplab(offset=0.2) +
   #geom_text(aes(label=node)) +
-  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="red", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="blue", size=4 ) + 
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="black", size=4 ) + 
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="gray", size=4 ) + 
   ggtitle("(A) Unrooted")
 
 p_r_rooted_n11 = 
@@ -370,9 +370,9 @@ p_r_rooted_n11 =
   ggtree( branch.length="none", aes(color=I(color)) ) %<+% d_n11 + 
   geom_tiplab(offset=0.2) +
   #geom_text(aes(label=node)) +
-  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="red", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="blue", size=4 ) + 
-  ggtitle("(B) Rooted on red node")
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="black", size=4 ) + 
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="gray", size=4 ) + 
+  ggtitle("(B) Rooted on black node")
 
 
 tree_r_n17 = tree_r %>%  phytools::reroot( node=mrca_t9_t4_n11 ) %>% di2multi()
@@ -381,7 +381,7 @@ mrca_t9_t4_n17 = getMRCA(tree_r_n17, which(tree_r_n17$tip.label %in% c('t9','t4'
 mrca_t5_t2_n17 = getMRCA(tree_r_n17, which(tree_r_n17$tip.label %in% c('t5','t2')))
 n_nodes = max(tree_r_n17$edge)
 d_n17 = data.frame( node=1:n_nodes, color="black" )
-d_n17$color[ mrca_t5_t2_n17 ] = "orange" 
+d_n17$color[ mrca_t5_t2_n17 ] = "gray" 
 
 
 p_r_rooted_n17 = 
@@ -389,9 +389,9 @@ p_r_rooted_n17 =
   ggtree( branch.length="none", aes(color=I(color)) ) %<+% d_n17 + 
   geom_tiplab(offset=0.2) +
   #geom_text(aes(label=node)) +
-  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n17 )), col="red", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n17 )), col="blue", size=4 ) + 
-  ggtitle("(C) Rooted on blue node")
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n17 )), col="black", size=4 ) + 
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n17 )), col="gray", size=4 ) + 
+  ggtitle("(C) Rooted on gray node")
 
 tree_r_e14 = tree_r %>%  phytools::reroot( node=mrca_t5_t2_n11 )
 mrca_t10_t3_e14 = getMRCA(tree_r_e14, which(tree_r_e14$tip.label %in% c('t10','t3')))
@@ -401,16 +401,16 @@ mrca_t1_t10_e14 = getMRCA(tree_r_e14, which(tree_r_e14$tip.label %in% c('t10','t
 
 n_nodes = max(tree_r_e14$edge)
 d_e14 = data.frame( node=1:n_nodes, color="black" )
-d_e14$color[ c(mrca_t1_t10_e14, mrca_t5_t2_e14) ] = "orange"
+d_e14$color[ c(mrca_t1_t10_e14, mrca_t5_t2_e14) ] = "gray"
 
 p_rooted_e14 = 
   tree_r_e14 %>% 
   ggtree( branch.length="none", aes(color=I(color)) )  %<+% d_e14 + 
   geom_tiplab(offset=0.2) +
   #geom_text(aes(label=node)) +
-  geom_nodepoint(aes(subset=(node == mrca_t10_t3_e14 )), col="red", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_e14 )), col="blue", size=4 ) + 
-  ggtitle("(D) Rooted on orange edge")
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_e14 )), col="black", size=4 ) + 
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_e14 )), col="gray", size=4 ) + 
+  ggtitle("(D) Rooted on gray edge")
 
 grid.arrange(
   p_r_unrooted,
@@ -431,7 +431,7 @@ What information can we use to root a phylogeny? There are a couple approaches. 
 The more common approach to rooting a phylogeny is to use an outgroup (Figure \@ref(fig:trees-rooting)). If the ingroup is the group of organisms you are interested in (e.g., mammals), the outgroup is a set of animals that you strongly believe do not fall within the ingroup. If you place the root anywhere in the outgroup, then the most recent common ancestor of the ingroup will be the root of the ingroup. Rooting this way works better when a larger number of outgroup species are considered, and the outgroup species include the organisms most closely related to the ingroup. Including too few outgroups is one of the most common mistakes in published phylogenies.
 
 
-```{r trees-rooting, echo=FALSE, fig.cap="The root of the mammal tree is shown in red. (A) Unrooted layout. (B) Rooted layout. (C) Rooted layout, including outgroup. The root for the whole tree, shown in blue, is placed in the outgroup. The node where the ingroup is attached to the rest of the tree is the ingroup root. In this case, that is the red mammal root."}
+```{r trees-rooting, echo=FALSE, fig.cap="The root of the mammal tree is shown in black. (A) Unrooted layout. (B) Rooted layout. (C) Rooted layout, including outgroup. The root for the whole tree, shown in gray, is placed in the outgroup. The node where the ingroup is attached to the rest of the tree is the ingroup root. In this case, that is the black mammal root."}
 
 
 # Manually graft on the outgroup
@@ -458,20 +458,20 @@ root_node = tree$edge[ ! tree$edge[ ,1] %in% tree$edge[ ,2]  ,1] %>% unique()
 p_unrooted = ggtree(tree, layout="unrooted") %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
   ggtitle("(A) unrooted layout") + 
-  geom_nodepoint(aes(subset=(node == root_node )), col="red")
+  geom_nodepoint(aes(subset=(node == root_node )), col="black")
 
 p_rooted = tree %>% 
   ggtree() %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
   xlim(0, 400) +
   ggtitle("(B) rooted layout") + 
-  geom_nodepoint(aes(subset=(node == root_node )), col="red")
+  geom_nodepoint(aes(subset=(node == root_node )), col="black")
 
 p_tetra = g_tree_tetrapod + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
   ggtitle("(C) with outgroup taxa") + 
-  geom_nodepoint(aes(subset=(node == mammal_mrca )), col="red") +
-  geom_nodepoint(aes(subset=(node == tetrapod_root_node )), col="blue") +
+  geom_nodepoint(aes(subset=(node == mammal_mrca )), col="black") +
+  geom_nodepoint(aes(subset=(node == tetrapod_root_node )), col="gray") +
   xlim(0, 500)
 
 grid.arrange(
@@ -564,7 +564,7 @@ So far we have focused on phylogenies in the abstract sense as mathematical grap
 
 One way is to store a text representation of the tree. This is conveneint because text files are easy to work with, and can be viewed and edited with a variety of existing text editors. Newick, a phylogenetic data format ironed out over dinner at [Newick's Lobster House](https://www.yelp.com/biz/newicks-lobster-house-dover), does exactly this. The newick format is widely used for storing phylogenies in text files, and is supported as a way to read and write trees by almost every phylogenetic software tool. The basic idea is to designate each clade within a pair of parentheses.
 
-```{r trees-newick, echo=TRUE, fig.cap="Defining and drawing a Newick tree. Tip labels are blue, nodes and node numbers are red, and edges are black."}
+```{r trees-newick, echo=TRUE, fig.cap="Defining and drawing a Newick tree. Tip labels (letters) are black, nodes and node numbers are gray, and edges are black."}
 
 # Define the newick text that includes the tip labels and tree topology
 newick_text = "(((A,B),(C,D)),E);"
@@ -574,10 +574,10 @@ phylo_tree = read.tree( text=newick_text )
 
 # Plot the newick_tree phylo object using the ggtree library
 ggtree(phylo_tree ) +                                      # Draw the tree
-  geom_text2(aes(label=node), col="red", nudge_x=0.1 ) +   # Add the node numbers
-  geom_tiplab( aes(label=label), offset=0.3, col="blue") + # Add the tip labels
-  geom_nodepoint(col="red") +                              # Add points on nodes
-  geom_tippoint(col="red")
+  geom_text2(aes(label=node), col="gray", nudge_x=0.1 ) +   # Add the node numbers
+  geom_tiplab( aes(label=label), offset=0.3, col="black") + # Add the tip labels
+  geom_nodepoint(col="gray") +                              # Add points on nodes
+  geom_tippoint(col="gray")
 
 ```
 

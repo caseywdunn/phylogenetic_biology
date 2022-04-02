@@ -24,11 +24,15 @@ always_allow_html: true
 
 # Preface {-}
 
-I developed this book as a collection of the concepts, methods, and applications that I most wanted to share with students in my Phylogenetic Biology courses.
+## Approach
 
-## Additional resources
+Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative - they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
 
-Please see the appendices for a variety of additional resources.
+## Using this book
+
+This book is intended both for the self directed learner, and for use in a course. 
+
+I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands on work, read papers from the literature, or share student projects.
 
 ## Acknowledgements
 
@@ -86,78 +90,12 @@ The following books provide general computational background for the topics cove
 - Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. http://practicalcomputing.org
 
 
-## Software versions
 
-This book was rendered from the source code on $Sat Apr 02 07:19:00 PM 2022$ with the following R package versions.
-
-
-```
-R version 4.1.3 (2022-03-10)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.4 LTS
-
-Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
-
-locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-other attached packages:
- [1] ggimage_0.3.0    ggrepel_0.9.1    kableExtra_1.3.4 phangorn_2.8.1  
- [5] Matrix_1.4-0     forcats_0.5.1    dplyr_1.0.8      purrr_0.3.4     
- [9] readr_2.1.2      tidyr_1.2.0      tibble_3.1.6     ggplot2_3.3.5   
-[13] tidyverse_1.3.1  stringr_1.4.0    phytools_1.0-1   maps_3.4.0      
-[17] magrittr_2.0.3   gridExtra_2.3    geiger_2.0.7     ape_5.6-2       
-[21] ggtree_3.2.1     treeio_1.18.1    bookdown_0.25   
-
-loaded via a namespace (and not attached):
- [1] colorspace_2.0-3        ellipsis_0.3.2          fs_1.5.2               
- [4] aplot_0.1.2             rstudioapi_0.13         farver_2.1.0           
- [7] fansi_1.0.3             mvtnorm_1.1-3           lubridate_1.8.0        
-[10] xml2_1.3.3              splines_4.1.3           codetools_0.2-18       
-[13] mnormt_2.0.2            knitr_1.38              jsonlite_1.8.0         
-[16] broom_0.7.12            dbplyr_2.1.1            png_0.1-7              
-[19] compiler_4.1.3          httr_1.4.2              backports_1.4.1        
-[22] assertthat_0.2.1        fastmap_1.1.0           lazyeval_0.2.2         
-[25] cli_3.2.0               htmltools_0.5.2         tools_4.1.3            
-[28] igraph_1.2.11           coda_0.19-4             gtable_0.3.0           
-[31] glue_1.6.2              clusterGeneration_1.3.7 tinytex_0.38           
-[34] fastmatch_1.1-3         Rcpp_1.0.8.3            cellranger_1.1.0       
-[37] jquerylib_0.1.4         vctrs_0.4.0             svglite_2.1.0          
-[40] nlme_3.1-155            xfun_0.30               rvest_1.0.2            
-[43] lifecycle_1.0.1         MASS_7.3-55             scales_1.1.1           
-[46] subplex_1.7             hms_1.1.1               parallel_4.1.3         
-[49] expm_0.999-6            yaml_2.3.5              ggfun_0.0.5            
-[52] yulab.utils_0.0.4       sass_0.4.1              stringi_1.7.6          
-[55] highr_0.9               plotrix_3.8-2           tidytree_0.3.9         
-[58] rlang_1.0.2             pkgconfig_2.0.3         systemfonts_1.0.4      
-[61] evaluate_0.15           lattice_0.20-45         patchwork_1.1.1        
-[64] labeling_0.4.2          tidyselect_1.1.2        deSolve_1.31           
-[67] R6_2.5.1                magick_2.7.3            generics_0.1.2         
-[70] combinat_0.0-8          DBI_1.1.2               mgcv_1.8-39            
-[73] pillar_1.7.0            haven_2.4.3             withr_2.5.0            
-[76] scatterplot3d_0.3-41    modelr_0.1.8            crayon_1.5.1           
-[79] utf8_1.2.2              tmvnsim_1.0-2           tzdb_0.3.0             
-[82] rmarkdown_2.13          grid_4.1.3              readxl_1.4.0           
-[85] reprex_2.0.1            digest_0.6.29           webshot_0.5.2          
-[88] numDeriv_2016.8-1.1     gridGraphics_0.5-1      munsell_0.5.0          
-[91] viridisLite_0.4.0       ggplotify_0.1.0         bslib_0.3.1            
-[94] quadprog_1.5-8         
-```
 
 
 ## License
 
-![](figures/cc.png)
+![](figures/by-nc-nd-600.png)
 
 This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/).
 
@@ -201,7 +139,7 @@ There are a few concepts that are fundamental to understanding phylogenetic anal
 In order to make informative comparisons across species, both for inferring phylogenies and for phylogenetic comparative analyses, we need a unified ontological framework to refer to the same characters and character states in different organisms. This correspondence is provided by the concept of homology. Homology is a hypothesis that the same attribute is present in different entities because that attribute was present in their shared ancestor. Homology is a deceptively simple concept that can sometimes be devilishly difficult to define, test, and apply [wagner2014]. 
 
 \begin{figure}
-\includegraphics[width=6.01in]{figures/phylogenetic_analyses} \caption{(A) The primary components of a phylogenetic analysis. This mammal phylogeny and edge lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.}(\#fig:intro-concepts)
+\includegraphics[width=9in]{figures/phylogenetic_analyses} \caption{(A) The primary components of a phylogenetic analysis. This mammal phylogeny and edge lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.}(\#fig:intro-concepts)
 \end{figure}
 
 ## A unified perspective on phylogenetic studies
@@ -258,7 +196,7 @@ This is a very exciting time in phylogenetic biology. For many years most studie
 
 
 \begin{figure}
-\includegraphics[width=4.62in]{figures/darwin} \caption{Darwin's depiction of the evolutionary relationships between organisms [@darwin1859].}(\#fig:trees-darwin)
+\includegraphics[width=4.56in]{figures/darwin} \caption{Darwin's depiction of the evolutionary relationships between organisms (Darwin, 1859).}(\#fig:trees-darwin)
 \end{figure}
 
 Phylogenies represent evolutionary relationships. The only figure in Darwin's Origin of Species [@darwin1859] was a phylogeny (Figure \@ref(fig:trees-darwin)), though he didn't call it that.
@@ -407,7 +345,7 @@ Even when we don't know where the root of a phylogeny is, we often want to talk 
 
 There are some basic things we can't take for granted in an unrooted phylogeny. We don't, for example, know which way time goes along the branches. We don't know which internal nodes are child nodes and which are parent nodes. We don't know which of the edges attached to an internal node connect to older nodes and which to younger nodes.
 
-![(\#fig:trees-rooted-abstract)These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other three are rooted on the red node (B), blue node (C), and orange edge (D). These colored elements are in the exact same topological positions in all trees. When the tree is rooted on the red or blue nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the orange edge, a new unrooted node is added along the edge. This new node is bifurcating.](phylogenetic_biology_files/figure-latex/trees-rooted-abstract-1.pdf) 
+![(\#fig:trees-rooted-abstract)These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other three are rooted on the black node (B), gray node (C), and gray edge (D). These colored elements are in the exact same topological positions in all trees. When the tree is rooted on the black or blue nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray edge, a new unrooted node is added along the edge. This new node is bifurcating.](phylogenetic_biology_files/figure-latex/trees-rooted-abstract-1.pdf) 
 
 The root could fall at any point in an unrooted phylogeny, either along an edge or right at an internal node. You can think of rooting a phylogeny as grabbing the point that you think is the root and dragging it until all the edges point away from it (Figure \@ref(fig:trees-rooted-abstract)B-D). If you grab at some point along an edge (Figure \@ref(fig:trees-rooted-abstract)D), this creates a new node that is the root. This new root node has two edges connecting it to descendants (these two edges arise by splitting the single edge along which the root was placed). Since it has no edge connecting it to a parent, it differs from other internal nodes in having only two edges connected to it (instead of three, or more in the case of polytomies). The end results of rooting along a edge is that you add a node to the phylogeny and the root is resolved (not a polytomy).
 
@@ -418,7 +356,7 @@ What information can we use to root a phylogeny? There are a couple approaches. 
 The more common approach to rooting a phylogeny is to use an outgroup (Figure \@ref(fig:trees-rooting)). If the ingroup is the group of organisms you are interested in (e.g., mammals), the outgroup is a set of animals that you strongly believe do not fall within the ingroup. If you place the root anywhere in the outgroup, then the most recent common ancestor of the ingroup will be the root of the ingroup. Rooting this way works better when a larger number of outgroup species are considered, and the outgroup species include the organisms most closely related to the ingroup. Including too few outgroups is one of the most common mistakes in published phylogenies.
 
 
-![(\#fig:trees-rooting)The root of the mammal tree is shown in red. (A) Unrooted layout. (B) Rooted layout. (C) Rooted layout, including outgroup. The root for the whole tree, shown in blue, is placed in the outgroup. The node where the ingroup is attached to the rest of the tree is the ingroup root. In this case, that is the red mammal root.](phylogenetic_biology_files/figure-latex/trees-rooting-1.pdf) 
+![(\#fig:trees-rooting)The root of the mammal tree is shown in black. (A) Unrooted layout. (B) Rooted layout. (C) Rooted layout, including outgroup. The root for the whole tree, shown in gray, is placed in the outgroup. The node where the ingroup is attached to the rest of the tree is the ingroup root. In this case, that is the black mammal root.](phylogenetic_biology_files/figure-latex/trees-rooting-1.pdf) 
 
 Always be careful interpreting root position when looking at a published phylogeny. Unrooted phylogenies are often drawn is if they are rooted, often by picking a random rooting point or making a good guess of where the root is. This is in part because rooted phylogeny figures tend to be easier to read than unrooted figures. If the figure legend or text doesn't state how the tree was rooted, best to assume that it wasn't rigorously rooted if this is critical to the analyses at hand.
 
@@ -475,13 +413,13 @@ phylo_tree = read.tree( text=newick_text )
 
 # Plot the newick_tree phylo object using the ggtree library
 ggtree(phylo_tree ) +                                      # Draw the tree
-  geom_text2(aes(label=node), col="red", nudge_x=0.1 ) +   # Add the node numbers
-  geom_tiplab( aes(label=label), offset=0.3, col="blue") + # Add the tip labels
-  geom_nodepoint(col="red") +                              # Add points on nodes
-  geom_tippoint(col="red")
+  geom_text2(aes(label=node), col="gray", nudge_x=0.1 ) +   # Add the node numbers
+  geom_tiplab( aes(label=label), offset=0.3, col="black") + # Add the tip labels
+  geom_nodepoint(col="gray") +                              # Add points on nodes
+  geom_tippoint(col="gray")
 ```
 
-![(\#fig:trees-newick)Defining and drawing a Newick tree. Tip labels are blue, nodes and node numbers are red, and edges are black.](phylogenetic_biology_files/figure-latex/trees-newick-1.pdf) 
+![(\#fig:trees-newick)Defining and drawing a Newick tree. Tip labels (letters) are black, nodes and node numbers are gray, and edges are black.](phylogenetic_biology_files/figure-latex/trees-newick-1.pdf) 
 
 In Figure \@ref(fig:trees-newick), you can see how to define a newick tree, convert it to 
 a different type of representation, and then draw that. Most of the figures in this text were 
@@ -2506,6 +2444,65 @@ The [MCMC robot](https://phylogeny.uconn.edu/mcmc-robot/) by Paul Lewis is an ex
 
 
 <!--chapter:end:stats.rmd-->
+
+# Software versions
+
+This book was rendered from the source code on $Sat Apr 02 09:26:53 PM 2022$ with the following R package versions.
+
+
+```
+R version 4.1.3 (2022-03-10)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 20.04.4 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
+ [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
+[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] ggimage_0.3.0    ggrepel_0.9.1    kableExtra_1.3.4 phangorn_2.8.1   Matrix_1.4-0    
+ [6] forcats_0.5.1    dplyr_1.0.8      purrr_0.3.4      readr_2.1.2      tidyr_1.2.0     
+[11] tibble_3.1.6     ggplot2_3.3.5    tidyverse_1.3.1  stringr_1.4.0    phytools_1.0-1  
+[16] maps_3.4.0       magrittr_2.0.3   gridExtra_2.3    geiger_2.0.7     ape_5.6-2       
+[21] ggtree_3.2.1     treeio_1.18.1    bookdown_0.25   
+
+loaded via a namespace (and not attached):
+ [1] colorspace_2.0-3        ellipsis_0.3.2          fs_1.5.2                aplot_0.1.2            
+ [5] rstudioapi_0.13         farver_2.1.0            fansi_1.0.3             mvtnorm_1.1-3          
+ [9] lubridate_1.8.0         xml2_1.3.3              splines_4.1.3           codetools_0.2-18       
+[13] mnormt_2.0.2            knitr_1.38              jsonlite_1.8.0          broom_0.7.12           
+[17] dbplyr_2.1.1            png_0.1-7               compiler_4.1.3          httr_1.4.2             
+[21] backports_1.4.1         assertthat_0.2.1        fastmap_1.1.0           lazyeval_0.2.2         
+[25] cli_3.2.0               htmltools_0.5.2         tools_4.1.3             igraph_1.2.11          
+[29] coda_0.19-4             gtable_0.3.0            glue_1.6.2              clusterGeneration_1.3.7
+[33] tinytex_0.38            fastmatch_1.1-3         Rcpp_1.0.8.3            cellranger_1.1.0       
+[37] jquerylib_0.1.4         vctrs_0.4.0             svglite_2.1.0           nlme_3.1-155           
+[41] xfun_0.30               rvest_1.0.2             lifecycle_1.0.1         MASS_7.3-55            
+[45] scales_1.1.1            subplex_1.7             hms_1.1.1               parallel_4.1.3         
+[49] expm_0.999-6            yaml_2.3.5              ggfun_0.0.5             yulab.utils_0.0.4      
+[53] sass_0.4.1              stringi_1.7.6           highr_0.9               plotrix_3.8-2          
+[57] tidytree_0.3.9          rlang_1.0.2             pkgconfig_2.0.3         systemfonts_1.0.4      
+[61] evaluate_0.15           lattice_0.20-45         patchwork_1.1.1         labeling_0.4.2         
+[65] tidyselect_1.1.2        deSolve_1.31            R6_2.5.1                magick_2.7.3           
+[69] generics_0.1.2          combinat_0.0-8          DBI_1.1.2               mgcv_1.8-39            
+[73] pillar_1.7.0            haven_2.4.3             withr_2.5.0             scatterplot3d_0.3-41   
+[77] modelr_0.1.8            crayon_1.5.1            utf8_1.2.2              tmvnsim_1.0-2          
+[81] tzdb_0.3.0              rmarkdown_2.13          grid_4.1.3              readxl_1.4.0           
+[85] reprex_2.0.1            digest_0.6.29           webshot_0.5.2           numDeriv_2016.8-1.1    
+[89] gridGraphics_0.5-1      munsell_0.5.0           viridisLite_0.4.0       ggplotify_0.1.0        
+[93] bslib_0.3.1             quadprog_1.5-8         
+```
+
+<!--chapter:end:versions.rmd-->
 
 
 

@@ -22,7 +22,7 @@ rmd_files: [
   
   "appendix.rmd",
   "stats.rmd",
-  "versions.rmd"
+  "versions.rmd",
   
   "references.rmd"
   ]
