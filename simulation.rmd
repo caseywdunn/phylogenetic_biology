@@ -63,9 +63,10 @@ p = ggplot(data = data.frame(x = 0), mapping = aes(x = x))
 fun.1 = function(x) { m * x + b }
 
 p + 
-  stat_function(fun = fun.1, color="red") + 
+  stat_function(fun = fun.1, color="gray") + 
   xlim(-5,5) + 
-  ylim(-5,5)
+  ylim(-5,5) +
+  theme_classic()
 
 ```
 
@@ -131,7 +132,8 @@ In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over th
     geom_rect( mapping=aes(xmin=start, xmax=end, fill=nucleotide, ymin=mu, ymax=mu+delta ) ) +
     geom_segment( mapping=aes(x=start, xend=start, y=mu, yend=mu+delta ) ) +
     xlim( 0, t) +
-    xlab( "time" )
+    xlab( "time" ) +
+    scale_color_manual(nucleotide_palette)
     
   
 ```
@@ -521,9 +523,10 @@ map2(
 
 kable( 
   single_edges, 
+  format = "simple",
   booktabs = TRUE,
   caption = 'Each row is simulated evolution along a single edge.' 
-) %>% kable_styling()
+) # %>% kable_styling()
 
 ```
 

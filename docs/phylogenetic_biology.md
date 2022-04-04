@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2022-04-02"
+date: "2022-04-04"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -13,6 +13,10 @@ description: "An introduction to Phylogenetic Biology."
 fig_caption: yes
 always_allow_html: true
 ---
+
+
+
+
 
 
 
@@ -405,17 +409,22 @@ One way is to store a text representation of the tree. This is conveneint becaus
 
 
 ```r
-# Define the newick text that includes the tip labels and tree topology
+# Define the newick text that includes the tip labels and 
+# tree topology
 newick_text = "(((A,B),(C,D)),E);"
 
 # Create an ape phylo object from the tree text
 phylo_tree = read.tree( text=newick_text )
 
 # Plot the newick_tree phylo object using the ggtree library
-ggtree(phylo_tree ) +                                      # Draw the tree
-  geom_text2(aes(label=node), col="gray", nudge_x=0.1 ) +   # Add the node numbers
-  geom_tiplab( aes(label=label), offset=0.3, col="black") + # Add the tip labels
-  geom_nodepoint(col="gray") +                              # Add points on nodes
+# Draw the tree
+ggtree(phylo_tree ) +
+  # Add the node numbers
+  geom_text2(aes(label=node), col="gray", nudge_x=0.1 ) +  
+  # Add the tip labels
+  geom_tiplab( aes(label=label), offset=0.3, col="black") +
+  # Add points on nodes
+  geom_nodepoint(col="gray") +                              
   geom_tippoint(col="gray")
 ```
 
@@ -542,7 +551,7 @@ be a copy of the whole world, which wouldn't be that much more useful than the w
 of the things you would like to do with a map. So all maps are simplifications (Figure \@ref(fig:sim-maps)). The simplification is often what makes the map useful. 
 
 \begin{figure}
-\includegraphics[width=5.94in]{figures/maps} \caption{Four maps of the Yale campus, varying in complexity and focus. (A) A satellite image of New Haven, including much of Yale campus, from Google Maps. This image has a very large amount of information. (B) A street map of the same region, also from Google Maps. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.}(\#fig:sim-maps)
+\includegraphics[width=5in]{figures/maps} \caption{Four maps of the Yale campus, varying in complexity and focus. (A) A satellite image of New Haven, including much of Yale campus, from Google Maps. This image has a very large amount of information. (B) A street map of the same region, also from Google Maps. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.}(\#fig:sim-maps)
 \end{figure}
 
 Let's examine one of the most common models, the linear model:
@@ -886,68 +895,21 @@ We first need to set the state at the parent node. There are a couple approaches
 How do we select a starting state at random? We could draw the starting state from a bag with equal frequencies of each nucleotide (as we did at the beginning of this chapter), but our model allows us to make a more informed selection than that. We implemented $\mathbf{\Pi}$ because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let's draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this probability distribution. 
 
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
-<caption>(\#tab:sim-single-edges)Each row is simulated evolution along a single edge.</caption>
- <thead>
-  <tr>
-   <th style="text-align:left;"> Parent </th>
-   <th style="text-align:right;"> Length </th>
-   <th style="text-align:left;"> Child </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0387691 </td>
-   <td style="text-align:left;"> A </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.3444866 </td>
-   <td style="text-align:left;"> A </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.6561006 </td>
-   <td style="text-align:left;"> A </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.6723020 </td>
-   <td style="text-align:left;"> C </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.5311025 </td>
-   <td style="text-align:left;"> A </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.7477842 </td>
-   <td style="text-align:left;"> G </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 1.7042348 </td>
-   <td style="text-align:left;"> T </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.6896113 </td>
-   <td style="text-align:left;"> G </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.7347406 </td>
-   <td style="text-align:left;"> G </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 1.3263353 </td>
-   <td style="text-align:left;"> G </td>
-  </tr>
-</tbody>
-</table>
+
+Table: (\#tab:sim-single-edges)Each row is simulated evolution along a single edge.
+
+Parent       Length  Child 
+-------  ----------  ------
+A         0.0387691  A     
+A         0.3444866  A     
+C         0.6561006  A     
+C         0.6723020  C     
+A         0.5311025  A     
+A         0.7477842  G     
+T         1.7042348  T     
+A         0.6896113  G     
+G         0.7347406  G     
+G         1.3263353  G     
 
 In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\mathbf{\Pi}$ as described above. I then created a random edge length $t$ by sampling from a uniform distribution that ranges from 0 to $2$, just to get a variety of edge lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
 
@@ -1056,85 +1018,51 @@ For each edge, we can now use $\mathbf{P}(t)$ to calculate the probability of a 
 Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the blue probabilities to calculate the joint probability of all of these events happening. 
 We can think of these as the probabilities of specific changes along each edge as the probabilities of the state at each child node. 
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> node </th>
-   <th style="text-align:right;"> probability </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.7442034 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.7442034 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.3048887 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0.2260230 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0.0195083 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 0.0652538 </td>
-  </tr>
-</tbody>
-</table>
+
+\begin{tabular}{r|r}
+\hline
+node & probability\\
+\hline
+1 & 0.7442034\\
+\hline
+2 & 0.7442034\\
+\hline
+3 & 0.3048887\\
+\hline
+4 & 0.2260230\\
+\hline
+5 & NA\\
+\hline
+6 & 0.0195083\\
+\hline
+7 & 0.0652538\\
+\hline
+\end{tabular}
 
 Note, though, that the probability for node 5 is missing (it has a value of `NA`, which means it is Not Available). By reference to Figure \@ref(fig:inference-history) we can see that this is the root node. This makes sense since the root is not the child of any edge, and we calculated the probabilities based on changes along edges. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> node </th>
-   <th style="text-align:right;"> probability </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.7442034 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.7442034 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.3048887 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0.2260230 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> 0.2950000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0.0195083 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 0.0652538 </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}
+\centering
+\begin{tabular}{r|r}
+\hline
+node & probability\\
+\hline
+1 & 0.7442034\\
+\hline
+2 & 0.7442034\\
+\hline
+3 & 0.3048887\\
+\hline
+4 & 0.2260230\\
+\hline
+5 & 0.2950000\\
+\hline
+6 & 0.0195083\\
+\hline
+7 & 0.0652538\\
+\hline
+\end{tabular}
+\end{table}
 
 The joint probability of all these states can now be calculated as the product of each state. This comes out to $\ensuremath{1.4332602\times 10^{-5}}$. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of $14.3$ times out of a million simulations.
 
@@ -1148,662 +1076,142 @@ If we aren't clamping the internal node states as well, how can we calculate the
 
 This is a small tree, with only 3 internal nodes that can each have 4 states. This gives $4^3=64$ possible histories. That is small enough to list them out below. I also include the probability of each specific history, calculated exactly as I did above (the example above corresponds to row 60 here).
 
-<table class="table" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> n1 </th>
-   <th style="text-align:left;"> n2 </th>
-   <th style="text-align:left;"> n3 </th>
-   <th style="text-align:left;"> n4 </th>
-   <th style="text-align:left;"> n5 </th>
-   <th style="text-align:left;"> n6 </th>
-   <th style="text-align:left;"> n7 </th>
-   <th style="text-align:right;"> probability </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000451 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000048 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000036 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000035 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000025 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000002 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000005 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000005 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000044 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000004 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000003 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:right;"> 0.0000019 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000282 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000030 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000023 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000022 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000018 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0002699 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000013 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000164 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000012 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000011 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000097 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000008 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000006 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000069 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000004 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:right;"> 0.0000432 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000088 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000009 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000007 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000007 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000018 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000001 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000017 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000016 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000142 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000011 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000002 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:right;"> 0.0000013 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0005139 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000552 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000415 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000400 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000071 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0010512 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000050 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000638 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000214 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000198 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0001776 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000143 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000366 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0004512 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> G </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0000255 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> A </td>
-   <td style="text-align:left;"> C </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:left;"> T </td>
-   <td style="text-align:right;"> 0.0028111 </td>
-  </tr>
-</tbody>
-</table>
+\begin{table}
+\centering
+\begin{tabular}{l|l|l|l|l|l|l|r}
+\hline
+n1 & n2 & n3 & n4 & n5 & n6 & n7 & probability\\
+\hline
+T & T & A & C & A & A & A & 0.0000451\\
+\hline
+T & T & A & C & C & A & A & 0.0000048\\
+\hline
+T & T & A & C & G & A & A & 0.0000036\\
+\hline
+T & T & A & C & T & A & A & 0.0000035\\
+\hline
+T & T & A & C & A & C & A & 0.0000000\\
+\hline
+T & T & A & C & C & C & A & 0.0000025\\
+\hline
+T & T & A & C & G & C & A & 0.0000000\\
+\hline
+T & T & A & C & T & C & A & 0.0000002\\
+\hline
+T & T & A & C & A & G & A & 0.0000005\\
+\hline
+T & T & A & C & C & G & A & 0.0000005\\
+\hline
+T & T & A & C & G & G & A & 0.0000044\\
+\hline
+T & T & A & C & T & G & A & 0.0000004\\
+\hline
+T & T & A & C & A & T & A & 0.0000000\\
+\hline
+T & T & A & C & C & T & A & 0.0000003\\
+\hline
+T & T & A & C & G & T & A & 0.0000000\\
+\hline
+T & T & A & C & T & T & A & 0.0000019\\
+\hline
+T & T & A & C & A & A & C & 0.0000282\\
+\hline
+T & T & A & C & C & A & C & 0.0000030\\
+\hline
+T & T & A & C & G & A & C & 0.0000023\\
+\hline
+T & T & A & C & T & A & C & 0.0000022\\
+\hline
+T & T & A & C & A & C & C & 0.0000018\\
+\hline
+T & T & A & C & C & C & C & 0.0002699\\
+\hline
+T & T & A & C & G & C & C & 0.0000013\\
+\hline
+T & T & A & C & T & C & C & 0.0000164\\
+\hline
+T & T & A & C & A & G & C & 0.0000012\\
+\hline
+T & T & A & C & C & G & C & 0.0000011\\
+\hline
+T & T & A & C & G & G & C & 0.0000097\\
+\hline
+T & T & A & C & T & G & C & 0.0000008\\
+\hline
+T & T & A & C & A & T & C & 0.0000006\\
+\hline
+T & T & A & C & C & T & C & 0.0000069\\
+\hline
+T & T & A & C & G & T & C & 0.0000004\\
+\hline
+T & T & A & C & T & T & C & 0.0000432\\
+\hline
+T & T & A & C & A & A & G & 0.0000088\\
+\hline
+T & T & A & C & C & A & G & 0.0000009\\
+\hline
+T & T & A & C & G & A & G & 0.0000007\\
+\hline
+T & T & A & C & T & A & G & 0.0000007\\
+\hline
+T & T & A & C & A & C & G & 0.0000000\\
+\hline
+T & T & A & C & C & C & G & 0.0000018\\
+\hline
+T & T & A & C & G & C & G & 0.0000000\\
+\hline
+T & T & A & C & T & C & G & 0.0000001\\
+\hline
+T & T & A & C & A & G & G & 0.0000017\\
+\hline
+T & T & A & C & C & G & G & 0.0000016\\
+\hline
+T & T & A & C & G & G & G & 0.0000142\\
+\hline
+T & T & A & C & T & G & G & 0.0000011\\
+\hline
+T & T & A & C & A & T & G & 0.0000000\\
+\hline
+T & T & A & C & C & T & G & 0.0000002\\
+\hline
+T & T & A & C & G & T & G & 0.0000000\\
+\hline
+T & T & A & C & T & T & G & 0.0000013\\
+\hline
+T & T & A & C & A & A & T & 0.0005139\\
+\hline
+T & T & A & C & C & A & T & 0.0000552\\
+\hline
+T & T & A & C & G & A & T & 0.0000415\\
+\hline
+T & T & A & C & T & A & T & 0.0000400\\
+\hline
+T & T & A & C & A & C & T & 0.0000071\\
+\hline
+T & T & A & C & C & C & T & 0.0010512\\
+\hline
+T & T & A & C & G & C & T & 0.0000050\\
+\hline
+T & T & A & C & T & C & T & 0.0000638\\
+\hline
+T & T & A & C & A & G & T & 0.0000214\\
+\hline
+T & T & A & C & C & G & T & 0.0000198\\
+\hline
+T & T & A & C & G & G & T & 0.0001776\\
+\hline
+T & T & A & C & T & G & T & 0.0000143\\
+\hline
+T & T & A & C & A & T & T & 0.0000366\\
+\hline
+T & T & A & C & C & T & T & 0.0004512\\
+\hline
+T & T & A & C & G & T & T & 0.0000255\\
+\hline
+T & T & A & C & T & T & T & 0.0028111\\
+\hline
+\end{tabular}
+\end{table}
 
 Note that I listed the states for all the nodes, including nodes 1-4, which are clamped. It is the last three internal nodes (n5-n7) that have variable states. The probabilities for each specific history range quite widely, from $\ensuremath{8.2902428\times 10^{-9}}$ to $0.0028111$.
 
@@ -2376,7 +1784,7 @@ Reconstruction [@joy2016ancestral].
 PGLS [@symonds2014primer].
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-15-2.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-2.pdf)<!-- --> 
 
 
 
@@ -2401,7 +1809,7 @@ PGLS [@symonds2014primer].
 ## Inferring covariance in the absence of phylogenetic structure
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 ## Phylogenetic Independent Contrasts
 
@@ -2447,7 +1855,7 @@ The [MCMC robot](https://phylogeny.uconn.edu/mcmc-robot/) by Paul Lewis is an ex
 
 # Software versions
 
-This book was rendered from the source code on $Sat Apr 02 10:19:22 PM 2022$ with the following R package versions.
+This book was rendered from the source code on $Mon Apr 04 02:26:20 AM 2022$ with the following R package versions.
 
 
 ```
@@ -2469,37 +1877,35 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] ggimage_0.3.0    ggrepel_0.9.1    kableExtra_1.3.4 phangorn_2.8.1   Matrix_1.4-0    
- [6] forcats_0.5.1    dplyr_1.0.8      purrr_0.3.4      readr_2.1.2      tidyr_1.2.0     
-[11] tibble_3.1.6     ggplot2_3.3.5    tidyverse_1.3.1  stringr_1.4.0    phytools_1.0-1  
-[16] maps_3.4.0       magrittr_2.0.3   gridExtra_2.3    geiger_2.0.7     ape_5.6-2       
-[21] ggtree_3.2.1     treeio_1.18.1    bookdown_0.25   
+ [1] scales_1.1.1     ggrepel_0.9.1    kableExtra_1.3.4 phangorn_2.8.1   Matrix_1.4-0     forcats_0.5.1   
+ [7] dplyr_1.0.8      purrr_0.3.4      readr_2.1.2      tidyr_1.2.0      tibble_3.1.6     ggplot2_3.3.5   
+[13] tidyverse_1.3.1  stringr_1.4.0    phytools_1.0-1   maps_3.4.0       magrittr_2.0.3   gridExtra_2.3   
+[19] geiger_2.0.7     ape_5.6-2        ggtree_3.2.1     treeio_1.18.1    bookdown_0.25   
 
 loaded via a namespace (and not attached):
  [1] colorspace_2.0-3        ellipsis_0.3.2          fs_1.5.2                aplot_0.1.2            
  [5] rstudioapi_0.13         farver_2.1.0            fansi_1.0.3             mvtnorm_1.1-3          
- [9] lubridate_1.8.0         xml2_1.3.3              splines_4.1.3           codetools_0.2-18       
+ [9] lubridate_1.8.0         xml2_1.3.3              codetools_0.2-18        splines_4.1.3          
 [13] mnormt_2.0.2            knitr_1.38              jsonlite_1.8.0          broom_0.7.12           
 [17] dbplyr_2.1.1            png_0.1-7               compiler_4.1.3          httr_1.4.2             
 [21] backports_1.4.1         assertthat_0.2.1        fastmap_1.1.0           lazyeval_0.2.2         
 [25] cli_3.2.0               htmltools_0.5.2         tools_4.1.3             igraph_1.2.11          
 [29] coda_0.19-4             gtable_0.3.0            glue_1.6.2              clusterGeneration_1.3.7
 [33] tinytex_0.38            fastmatch_1.1-3         Rcpp_1.0.8.3            cellranger_1.1.0       
-[37] jquerylib_0.1.4         vctrs_0.4.0             svglite_2.1.0           nlme_3.1-155           
-[41] xfun_0.30               rvest_1.0.2             lifecycle_1.0.1         MASS_7.3-55            
-[45] scales_1.1.1            subplex_1.7             hms_1.1.1               parallel_4.1.3         
-[49] expm_0.999-6            yaml_2.3.5              ggfun_0.0.5             yulab.utils_0.0.4      
-[53] sass_0.4.1              stringi_1.7.6           highr_0.9               plotrix_3.8-2          
-[57] tidytree_0.3.9          rlang_1.0.2             pkgconfig_2.0.3         systemfonts_1.0.4      
-[61] evaluate_0.15           lattice_0.20-45         patchwork_1.1.1         labeling_0.4.2         
-[65] tidyselect_1.1.2        deSolve_1.31            R6_2.5.1                magick_2.7.3           
-[69] generics_0.1.2          combinat_0.0-8          DBI_1.1.2               mgcv_1.8-39            
-[73] pillar_1.7.0            haven_2.4.3             withr_2.5.0             scatterplot3d_0.3-41   
-[77] modelr_0.1.8            crayon_1.5.1            utf8_1.2.2              tmvnsim_1.0-2          
-[81] tzdb_0.3.0              rmarkdown_2.13          grid_4.1.3              readxl_1.4.0           
-[85] reprex_2.0.1            digest_0.6.29           webshot_0.5.2           numDeriv_2016.8-1.1    
-[89] gridGraphics_0.5-1      munsell_0.5.0           viridisLite_0.4.0       ggplotify_0.1.0        
-[93] bslib_0.3.1             quadprog_1.5-8         
+[37] vctrs_0.4.0             svglite_2.1.0           nlme_3.1-155            xfun_0.30              
+[41] rvest_1.0.2             ggimage_0.3.0           lifecycle_1.0.1         MASS_7.3-55            
+[45] subplex_1.7             hms_1.1.1               parallel_4.1.3          expm_0.999-6           
+[49] yaml_2.3.5              ggfun_0.0.5             yulab.utils_0.0.4       stringi_1.7.6          
+[53] highr_0.9               plotrix_3.8-2           tidytree_0.3.9          rlang_1.0.2            
+[57] pkgconfig_2.0.3         systemfonts_1.0.4       evaluate_0.15           lattice_0.20-45        
+[61] patchwork_1.1.1         labeling_0.4.2          tidyselect_1.1.2        deSolve_1.31           
+[65] R6_2.5.1                magick_2.7.3            generics_0.1.2          combinat_0.0-8         
+[69] DBI_1.1.2               pillar_1.7.0            haven_2.4.3             withr_2.5.0            
+[73] mgcv_1.8-39             scatterplot3d_0.3-41    modelr_0.1.8            crayon_1.5.1           
+[77] utf8_1.2.2              tmvnsim_1.0-2           tzdb_0.3.0              rmarkdown_2.13         
+[81] grid_4.1.3              readxl_1.4.0            reprex_2.0.1            digest_0.6.29          
+[85] webshot_0.5.2           numDeriv_2016.8-1.1     gridGraphics_0.5-1      munsell_0.5.0          
+[89] viridisLite_0.4.0       ggplotify_0.1.0         quadprog_1.5-8         
 ```
 
 <!--chapter:end:versions.rmd-->

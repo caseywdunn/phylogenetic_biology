@@ -566,17 +566,22 @@ One way is to store a text representation of the tree. This is conveneint becaus
 
 ```{r trees-newick, echo=TRUE, fig.cap="Defining and drawing a Newick tree. Tip labels (letters) are black, nodes and node numbers are gray, and edges are black."}
 
-# Define the newick text that includes the tip labels and tree topology
+# Define the newick text that includes the tip labels and 
+# tree topology
 newick_text = "(((A,B),(C,D)),E);"
 
 # Create an ape phylo object from the tree text
 phylo_tree = read.tree( text=newick_text )
 
 # Plot the newick_tree phylo object using the ggtree library
-ggtree(phylo_tree ) +                                      # Draw the tree
-  geom_text2(aes(label=node), col="gray", nudge_x=0.1 ) +   # Add the node numbers
-  geom_tiplab( aes(label=label), offset=0.3, col="black") + # Add the tip labels
-  geom_nodepoint(col="gray") +                              # Add points on nodes
+# Draw the tree
+ggtree(phylo_tree ) +
+  # Add the node numbers
+  geom_text2(aes(label=node), col="gray", nudge_x=0.1 ) +  
+  # Add the tip labels
+  geom_tiplab( aes(label=label), offset=0.3, col="black") +
+  # Add points on nodes
+  geom_nodepoint(col="gray") +                              
   geom_tippoint(col="gray")
 
 ```
