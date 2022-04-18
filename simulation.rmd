@@ -133,7 +133,7 @@ In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over th
     geom_segment( mapping=aes(x=start, xend=start, y=mu, yend=mu+delta ) ) +
     xlim( 0, t) +
     xlab( "time" ) +
-    scale_color_manual(nucleotide_palette)
+    scale_fill_grey()
     
   
 ```
@@ -147,7 +147,7 @@ segments %>%
   summarise( replacements = n()-1) %>% 
   ggplot( aes(x=mu, y=replacements) ) + 
     geom_point (  ) + 
-    geom_smooth( method = "lm", se = FALSE ) +
+    geom_smooth( method = "lm", se = FALSE, color="grey" ) +
     ylab("n (replacements)")
 
 ```
@@ -194,7 +194,8 @@ Since replacements are coming from the bag that you are picking the nucleotides 
       geom_bar(position = "fill") +
       xlab( "t" ) + 
       ylab( "P" ) +
-      labs(fill = "nucleotide state")
+      labs(fill = "nucleotide state") +
+      scale_fill_grey()
   
 
 ```
@@ -235,7 +236,7 @@ Consider what happens to these equations in the extremes we considered above whe
 
 Now consider the case after infinite change (or just a large amount of change, as in the right side of Figure \@ref(fig:sim-analytical)). If $\mu$ or $t$ are infinity, then $e^{-\mu t}$ becomes $e^{-\infty}$, which is 0. In that case, Equation \@ref(eq:sim-stay) becomes $1/4 + 0$, which is simply $1/4$. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 0$, which is also $1/4$. So all the nucleotides (the one that you started with, and the three other states that substitution can lead to) all have the same equal frequency of $1/4$. This reflects the fact that the frequency of drawing each of these from the bag was $1/4$.
 
-```{r sim-analytical, fig.cap="The probability of observing a particular end state at time $t$, given the start state A and $\\mu=0.05$. The red line is the probability of observing the original start state (as described by Equation \\@ref(eq:sim-stay)), the blue line is the probability of observing each of the three other states (as described by Equation \\@ref(eq:sim-change))." }
+```{r sim-analytical, fig.cap="The probability of observing a particular end state at time $t$, given the start state A and $\\mu=0.05$. The solid line is the probability of observing the original start state (as described by Equation \\@ref(eq:sim-stay)), the dashed line is the probability of observing each of the three other states (as described by Equation \\@ref(eq:sim-change))." }
 
 mu=0.05
 p = ggplot(data = data.frame(x = 0), mapping = aes(x = x))
@@ -243,8 +244,8 @@ fun.1 = function(x) {1/4 + 3/4*(exp(- mu * x))}
 fun.2 = function(x) {1/4 - 1/4*(exp(- mu * x))}
 
 p + 
-  stat_function(fun = fun.1, color="red") + 
-  stat_function(fun = fun.2, color="blue") + 
+  stat_function(fun = fun.1, linetype = "solid") + 
+  stat_function(fun = fun.2, linetype = "dashed") + 
   xlim(0,100) + 
   ylim(0,1) +
   xlab( "t" ) + 
@@ -272,7 +273,8 @@ We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot 
       geom_bar(position = "stack", stat="identity") +
       xlab( "t" ) + 
       ylab( "P" ) +
-      labs(fill = "nucleotide state")
+      labs(fill = "nucleotide state") +
+      scale_fill_grey()
   
 
 
@@ -538,7 +540,7 @@ In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by samplin
 
 So far we have considered the evolution of one DNA site along one edge at a time (Figure \@ref(fig:sim-application)B, Table \@ref(tab:sim-single-edges)). We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of a single site along all edges, generating a specific nucleotide state at each node. We will use the same toy mammal model as above. We will consider a simplified tree (Figure \@ref(fig:sim-tree)) rather than the full mammal tree, just to keep things compact.
 
-```{r sim-tree, fig.cap="Simulation of states for a single DNA site on a simple tree according to our toy mammal model. Node numbers are in red. Character states are in boxes at nodes. Branch lengths for this phylogram are in units of expected change."}
+```{r sim-tree, fig.cap="Simulation of states for a single DNA site on a simple tree according to our toy mammal model. Node numbers are in gray. Character states are in boxes at nodes. Branch lengths for this phylogram are in units of expected change."}
 
 tree_text ="((Species_A:2,Species_B:2):0.5,(Species_C:0.5,Species_D:0.5):2);"
 phy = read.tree( text = tree_text )
@@ -563,7 +565,7 @@ state[4] = sim_site( state[7], phy$edge.length[ which(phy$edge[,2]==4) ], Q )
 ggtree(phy) +
   geom_tiplab(offset=0.5) +
   geom_label(aes(label=state)) +
-  geom_text2(aes(label=node), col="red", nudge_x=0.2 ) +
+  geom_text2(aes(label=node), col="gray", nudge_x=0.2 ) +
   xlim(0,5)
 
 ```

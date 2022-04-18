@@ -50,7 +50,10 @@ knitr::opts_chunk$set(
 
 ```{r include=FALSE}
 
-  nucleotide_palette = scales::hue_pal() 
+  theme_set(theme_classic())
+
+  # nucleotide_palette = scales::hue_pal() 
+  nucleotide_palette = scales::grey_pal()
 
   if ( knitr::is_latex_output() ){
     # PDF specific settings

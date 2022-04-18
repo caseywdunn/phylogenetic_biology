@@ -256,7 +256,7 @@ p_poly = ggtree(tree) %<+% d_ingroup +
 p_para = ggtree(tree) %<+% d_ingroup + 
   geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
   geom_hilight(node=16, fill='gray') +
-  geom_hilight(node=1, fill='white') +
+  geom_hilight(node=1, fill='white', alpha=1.0) +
   # geom_text2(aes(label=node)) +
   ggtitle("(C) Paraphyletic group")
 
