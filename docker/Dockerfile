@@ -13,7 +13,8 @@ RUN install2.r --error \
     kableExtra \
     phytools
 
-RUN tlmgr init-usertree \
+RUN tlmgr update --self \
+ && tlmgr init-usertree \
  && tlmgr update --all \
  && tlmgr install \
     ae \
