@@ -30,7 +30,6 @@ always_allow_html: true
   library( phangorn )
   library( kableExtra )
   library( ggrepel )
-  library( kableExtra )
   library( scales )
 
 	source( "functions.R" )

@@ -10,7 +10,7 @@ This relationship between simulation and inference is widely used in a variety o
 
 We will consider the toy phylogeny, along with its tip states, shown in Figure \@ref(fig:inference-toy).
 
-```{r inference-toy, fig.cap="The toy phylogeny we will use to examine inference. Node numbers are in red. Edge lengths are in orange. Tip node states are within boxes."}
+```{r inference-toy, fig.cap="The toy phylogeny we will use to examine inference. Node numbers are in black. Edge lengths are gray numbers below branches. Tip node states are within boxes."}
 
 phy_text = "(((Species_A:0.5,Species_B:0.5):0.5,Species_C:1.0):0.2,Species_D:1.2);"
 phy = read.tree( text=phy_text )
@@ -96,8 +96,8 @@ tip_state_labels[1:length(tip_states)] = tip_states
 ggtree(phy) +
   geom_tiplab(offset=0.2) +
   geom_label(aes(label=tip_state_labels)) +
-  geom_text2(aes(label=node), col="red", nudge_x=0.12 ) +
-  geom_text2(aes(label=edge_lengths), col="orange", nudge_x=-0.12, nudge_y=-0.1 ) +
+  geom_text2(aes(label=node), col="black", nudge_x=0.12 ) +
+  geom_text2(aes(label=edge_lengths), col="gray", nudge_x=-0.12, nudge_y=-0.1 ) +
   xlim(0,2)
 
 
@@ -110,8 +110,8 @@ We will start be calculating the probability of a single history of evolution fo
 ggtree(phy) +
   geom_tiplab(offset=0.2) +
   geom_label(aes(label=example_states)) +
-  geom_text2(aes(label=node), col="red", nudge_x=0.15 ) +
-  geom_text2(aes(label=edge_lengths), col="orange", nudge_x=-0.12, nudge_y=-0.1 ) +
+  geom_text2(aes(label=node), col="black", nudge_x=0.15 ) +
+  geom_text2(aes(label=edge_lengths), col="gray", nudge_x=-0.12, nudge_y=-0.1 ) +
   xlim(0,2)
 
 ```
@@ -146,15 +146,15 @@ Q
 For each edge, we can now use $\mathbf{P}(t)$ to calculate the probability of a change from the start state at the parent node to the end state at the child node, given the edge length $t$. The results are shown in Figure \@ref(fig:inference-history). 
 
 
-```{r inference-history, fig.cap="The same toy tree as above, but with probabilities of the specific change along each edge (in blue)."}
+```{r inference-history, fig.cap="The same toy tree as above, but with probabilities of the specific change along each branch above each branch (in gray)."}
 
 
 ggtree(phy) +
   geom_tiplab(offset=0.2) +
   geom_label(aes(label=example_states)) +
-  geom_text2(aes(label=node), col="red", nudge_x=0.15 ) +
-  geom_text2(aes(label=edge_lengths), col="orange", nudge_x=-0.12, nudge_y=-0.1 ) +
-  geom_text2(aes(label=round(p,3)), col="blue", nudge_x=-0.15, nudge_y=0.1 ) +
+  geom_text2(aes(label=node), col="black", nudge_x=0.15 ) +
+  geom_text2(aes(label=edge_lengths), col="gray", nudge_x=-0.12, nudge_y=-0.1 ) +
+  geom_text2(aes(label=round(p,3)), col="gray", nudge_x=-0.15, nudge_y=0.1 ) +
   xlim(0,2)
 
 ```
@@ -179,8 +179,11 @@ Note, though, that the probability for node 5 is missing (it has a value of `NA`
 
 p[which(is.na(p))] = root_prob
 
-knitr::kable(data.frame( node=1:length(p), probability=p )) %>% 
-  kable_styling()
+knitr::kable(
+  data.frame( node=1:length(p), probability=p ),
+  format = "simple",
+  booktabs = TRUE
+  ) #%>% kable_styling()
 
 example_prob = prod(p)
 
@@ -215,8 +218,11 @@ history_D = as.data.frame(t(node_states))
 names(history_D) = c("n1", "n2", "n3", "n4", "n5", "n6", "n7")
 history_D$probability = history_probs
 
-knitr::kable( history_D ) %>% 
-  kable_styling()
+knitr::kable( 
+  history_D,
+  format = "simple",
+  booktabs = TRUE
+  ) # %>%  kable_styling()
 
 
 ```
