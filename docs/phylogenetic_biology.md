@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2022-04-20"
+date: "2022-04-23"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -593,7 +593,7 @@ Let's start with a simple model of DNA evolution. At first we will also consider
 
 
 \begin{figure}
-\includegraphics[width=4.91in]{figures/applications} \caption{Our current goal is to model the evolution of a single site in a DNA sequence along a single edge in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the edge under examination (at the top) is thicker than the rest. (B) A closeup of the focal edge, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a cange from A to C.}(\#fig:sim-application)
+\includegraphics[width=4.72in]{figures/applications} \caption{Our current goal is to model the evolution of a single site in a DNA sequence along a single edge in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the edge under examination (at the top) is thicker than the rest. (B) A closeup of the focal edge, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a cange from A to C.}(\#fig:sim-application)
 \end{figure}
 
 Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
@@ -2338,7 +2338,7 @@ Reconstruction [@joy2016ancestral].
 PGLS [@symonds2014primer].
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-25-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-25-2.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-2.pdf)<!-- --> 
 
 
 
@@ -2363,7 +2363,7 @@ PGLS [@symonds2014primer].
 ## Inferring covariance in the absence of phylogenetic structure
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-27-1.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 ## Phylogenetic Independent Contrasts
 
@@ -2409,7 +2409,7 @@ The [MCMC robot](https://phylogeny.uconn.edu/mcmc-robot/) by Paul Lewis is an ex
 
 # Software versions
 
-This book was rendered from the source code on $Wed Apr 20 10:45:02 PM 2022$ with the following R package versions.
+This book was rendered from the source code on $Sat Apr 23 09:43:07 PM 2022$ with the following R package versions.
 
 
 ```

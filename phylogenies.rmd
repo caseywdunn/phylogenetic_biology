@@ -356,6 +356,8 @@ n_nodes = max(tree_r$edge)
 d_n11 = data.frame( node=1:n_nodes, color="black" )
 d_n11$color[ mrca_t5_t2_n11 ] = "gray"
 
+
+s = 40
 p_r_unrooted = 
   tree_r %>% 
   ggtree( layout="unrooted", branch.length="none", aes(color=I(color)) ) %<+% d_n11 + 
