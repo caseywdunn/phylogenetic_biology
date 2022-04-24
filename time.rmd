@@ -15,7 +15,7 @@ As discussed in Section \@ref(trees-edge-lengths), edge length can mean differen
 
 Because edge lengths in a cladogram have no meaning, we cannot make absolute statements about time in a cladogram. This doesn't mean, though, that we can't say anything about time -- we can still make some ordinal statements about the relative ages of nodes.
 
-```{r time-cladogram, echo=FALSE, fig.cap="A cladogram. Tip labels are blue, nodes and node numbers are red, and edges are black."}
+```{r time-cladogram, echo=FALSE, fig.cap="A cladogram. Nodes and node numbers are gray, and branches are black."}
 
 # Define the newick text that includes the tip labels and tree topology
 newick_text = "(((A,B),(C,D)),E);"
@@ -25,10 +25,10 @@ phylo_tree = read.tree( text=newick_text )
 
 # Plot the newick_tree phylo object using the ggtree library
 ggtree(phylo_tree ) +                                      # Draw the tree
-  geom_text2(aes(label=node), col="red", nudge_x=0.1 ) +   # Add the node numbers
+  geom_text2(aes(label=node), col="gray", nudge_x=0.1 ) +   # Add the node numbers
   geom_tiplab( aes(label=label), offset=0.3, col="blue") + # Add the tip labels
-  geom_nodepoint(col="red") +                              # Add points on nodes
-  geom_tippoint(col="red")
+  geom_nodepoint(col="gray") +                              # Add points on nodes
+  geom_tippoint(col="gray")
 
 ```
 Take a look at the cladogram in Figure \@ref(fig:time-cladogram). Consider the red node numbers. The terminal nodes are numbered 1-5, and 6-9 are internal nodes. Of those, the root is node 6. Because the tree is rooted, we know that time proceeds from the root to the tips. If you consider two nodes, where one is descended from the other, then the node closer to the root is older. There are a variety of statements we could make based on this simple relationship, including:

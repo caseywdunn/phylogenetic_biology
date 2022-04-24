@@ -87,11 +87,11 @@ The models that we will use in phylogenetic biology tend to be more complex than
 
 ## A simple model of evolution
 
-Let's start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single edge in a phylogeny (Figure \@ref(fig:sim-application)). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:
+Let's start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single branch in a phylogeny (Figure \@ref(fig:sim-application)). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:
 
 - Model structure
 - Model parameters
-- Edge length
+- Branch length
 - State at the start of the edge (the nucleotide at the parent node)
 - State at the end of the edge (the nucleotide at the child node)
 

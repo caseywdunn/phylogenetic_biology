@@ -159,7 +159,7 @@ ggtree(phy) +
 
 ```
 
-Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the blue probabilities to calculate the joint probability of all of these events happening. 
+Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the probabilities to calculate the joint probability of all of these events happening. 
 We can think of these as the probabilities of specific changes along each edge as the probabilities of the state at each child node. 
 
 ```{r}
