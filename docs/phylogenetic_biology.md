@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2022-04-23"
+date: "2022-04-24"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -222,7 +222,7 @@ what each of those parts represent.
 
 ## Phylogenies are graphs
 
-in order to establish a strong foundation for thinking about phylogenies, it is 
+In order to establish a strong foundation for thinking about phylogenies, it is 
 helpful to turn to math.
 
 \begin{figure}
@@ -234,10 +234,6 @@ A graph consists of nodes, often represented as circles, connected by edges, oft
 represented by lines (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
 For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions.
 
-Because it makes it easier to learn from adjacent fields when using mathematical conventions that are shared across fields, 
-I will tend to use mathematical notation for phylogenies rather than the classical botanical 
-nomenclatures. I will refer to edges rather than branches, tip nodes rather than leaves, 
-etc...
 
 \begin{figure}
 \includegraphics[width=2.89in]{figures/graph_tree} \caption{Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents).}(\#fig:trees-graph-tree)
@@ -254,21 +250,21 @@ gene transfer or hybridization.
 directionality. Specifically, they denote time. The node on one end of the edge 
 is older than the node on the other side of the edge. We therefore can refer to the nodes connected to a particular edge as the parent node and child node.
 
-A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The edges indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each edge would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single edge, parent-child node relationships in the tree don't mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.
+A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The edges, usually referred to as branches in phylogenies, indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each branch would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single branch, parent-child node relationships in the tree don't mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.
 
 ## Drawing phylogenies
 
 Here we will work with some mammal phylogenies, mostly because their silhouette icons are so recognizable and because there are extensive phylogenies available for this group [@upham2019].
 
-You will rarely see a phylogeny depicted as in Figure \@ref(fig:trees-graph-tree), with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the edges (Figure \@ref(fig:trees-mammal)), with the nodes implied at the ends of edges. The nodes are implied.
+You will rarely see a phylogeny depicted as in Figure \@ref(fig:trees-graph-tree), with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the branches (Figure \@ref(fig:trees-mammal)), with the nodes implied at the ends of branches. The nodes are implied.
 
-![(\#fig:trees-mammal)Phylogeny of some mammals. Topology and edge lengths  from http://vertlife.org.  The organism silhouettes are from http://phylopic.org/. Note that node circles are not drawn, instead nodes are implied at ends of edges.](phylogenetic_biology_files/figure-latex/trees-mammal-1.pdf) 
+![(\#fig:trees-mammal)Phylogeny of some mammals. Topology and branch lengths  from http://vertlife.org.  The organism silhouettes are from http://phylopic.org/. Note that node circles are not drawn, instead nodes are implied at ends of branches.](phylogenetic_biology_files/figure-latex/trees-mammal-1.pdf) 
 
 There is considerable variation in how the same phylogeny can be drawn (Figure \@ref(fig:trees-layouts)). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. 
 
-Rectangular layouts are the most common, because the entire edge length is along one axis of the plot. In a rectangular tree, each node is depicted as a line that is orthogonal to the edges. The confusing thing is that, because this line has the same width and color as the edges, it looks as if it is part of the edge. It isn't though-- its length is arbitrary, and it just shows which edges attach to that node. It also adds right-degree elbows where the ends of the node lines connect to the edges, forming a corner.
+Rectangular layouts are the most common, because the entire branch length is along one axis of the plot. In a rectangular tree, each node is depicted as a line that is orthogonal to the branches. The confusing thing is that, because this line has the same width and color as the branches, it looks as if it is part of the branch. It isn't though-- its length is arbitrary, and it just shows which branches attach to that node. It also adds right-degree elbows where the ends of the node lines connect to the branches, forming a corner.
 
-Slanted layouts avoid the node lines and elbows of rectangular layouts, but because the edges aren't parallel and can be at a variety of angles, it isn't always easy to read edge lengths on them. 
+Slanted layouts avoid the node lines and elbows of rectangular layouts, but because the branches aren't parallel and can be at a variety of angles, it isn't always easy to read branch lengths on them. 
 
 Circular layouts place the root at the center, and the tips around the circumference. This is a compact representation that works well for very large phylogenies. 
 
@@ -281,13 +277,13 @@ In a fully bifurcating phylogeny with $n$ tip nodes, the following will be the c
 
 - There are $n-1$ internal nodes. For example, Figure \@ref(fig:trees-graph-tree) shows a phylogeny with 4 tip nodes (labeled 1-4) and 3 internal nodes (labeled 5-7). The total number of nodes (tip nodes and internal nodes) is therefore $2n-1$.
 
-- Each tip node has a single edge, which connects it to its parent node.
+- Each tip node has a single branch, which connects it to its parent node.
 
-- The root node, which is a special internal node that is older than all other nodes, has no parent edge, so it has only two edges. These connect it to its immediate descendant nodes (its children).
+- The root node, which is a special internal node that is older than all other nodes, has no parent branch, so it has only two branches. These connect it to its immediate descendant nodes (its children).
 
-- All internal nodes in the tree other than the root have three edges - one connected to a parent node, and two connected to child nodes.
+- All internal nodes in the tree other than the root have three branches - one connected to a parent node, and two connected to child nodes.
 
-- Since every edge in the tree has a single child node, and each node in the tree except for the root as a parent edge, the total number of edges in the tree is $2n-2$.
+- Since every branch in the tree has a single child node, and each node in the tree except for the root as a parent branch, the total number of branches in the tree is $2n-2$.
 
 The function for the number of possible rooted phylogenies for $n$ tips is:
 
@@ -304,35 +300,35 @@ One of the most important things to keep in mind when interpreting a phylogeny i
 
 ![(\#fig:trees-rotations)The exact same phylogeny, drawn a few times with different node rotations.](phylogenetic_biology_files/figure-latex/trees-rotations-1.pdf) 
 
-## The meaning of edge lengths {#trees-edge-lengths}
+## The meaning of branch lengths {#trees-branch-lengths}
 
-Another type of variation in phylogeny depiction is the meaning of edge length (Figure \@ref(fig:trees-types)). A phylogeny where edge lengths are scaled to time is known as a chronogram. Chronograms of organisms all sampled at the same time will be ultrametric, ie the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
+Another type of variation in phylogeny depiction is the meaning of branch length (Figure \@ref(fig:trees-types)). A phylogeny where branch lengths are scaled to time is known as a chronogram. Chronograms of organisms all sampled at the same time will be ultrametric, ie the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
 
-In many cases we don't have the information needed to scale edges to time, which requires fossil calibrations. Most published phylogenies therefore scale the edges according to the expected amount of evolutionary change in the characters under consideration. The longer the edge, the greater the expected change. The rate of evolution usually varies a bit across edges, so phylograms are not usually ultrametric. 
+In many cases we don't have the information needed to scale branches to time, which requires fossil calibrations. Most published phylogenies therefore scale the branches according to the expected amount of evolutionary change in the characters under consideration. The longer the branch, the greater the expected change. The rate of evolution usually varies a bit across branches, so phylograms are not usually ultrametric. 
 
-Sometimes we are only interested in, or only have information about, the topology of the phylogeny. In this case we can draw the edges whatever length we want, and we call the phylogeny a cladogram. Cladograms can also be useful for showing annotations on edges in phylogenies with a wide variation in edge lengths, since there might not be enough room to write labels on very short edges. 
+Sometimes we are only interested in, or only have information about, the topology of the phylogeny. In this case we can draw the branches whatever length we want, and we call the phylogeny a cladogram. Cladograms can also be useful for showing annotations on branches in phylogenies with a wide variation in branch lengths, since there might not be enough room to write labels on very short branches. 
 
-It is always good practice whenever you show a phylogeny to indicate whether it is a chronogram, phylogram, or cladogram. Unfortunately, this is inconsistent in the literature, and not always clear from the figure legend or text. If you aren't sure what edge length means it is best to just ignore edge lengths and treat the phylogeny as if it were a cladogram.
+It is always good practice whenever you show a phylogeny to indicate whether it is a chronogram, phylogram, or cladogram. Unfortunately, this is inconsistent in the literature, and not always clear from the figure legend or text. If you aren't sure what branch length means it is best to just ignore branch lengths and treat the phylogeny as if it were a cladogram.
 
-![(\#fig:trees-types)Several types of trees. In a chronogram, edge lengths are scaled according to time. In a phylogram, edge lengths are scaled according to expected amount of evolutionary change, which can differ across characters and edges. In a cladogram, the edge lengths have no meaning. ](phylogenetic_biology_files/figure-latex/trees-types-1.pdf) 
+![(\#fig:trees-types)Several types of trees. In a chronogram, branch lengths are scaled according to time. In a phylogram, branch lengths are scaled according to expected amount of evolutionary change, which can differ across characters and branches. In a cladogram, the branch lengths have no meaning. ](phylogenetic_biology_files/figure-latex/trees-types-1.pdf) 
 
 
 ## Naming nodes and groups
 
 One of the most useful applications of phylogenies is to concisely refer to groups of organisms in light of their evolutionary history.
 
-A convenient way to designate groups of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade - a group of tips that includes their MRCA and all of its descendants. A group is said to be monophyletic (Figure \@ref(fig:trees-groups)A) if it satisfies these criteria (you don't need to use the double descriptor "monophyletic clade", since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping the edge just below the MRCA.
+A convenient way to designate groups of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade - a group of tips that includes their MRCA and all of its descendants. A group is said to be monophyletic (Figure \@ref(fig:trees-groups)A) if it satisfies these criteria (you don't need to use the double descriptor "monophyletic clade", since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping the branch just below the MRCA.
 
 ![(\#fig:trees-groups)(A) A monophyletic group, *i.e.* a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit.](phylogenetic_biology_files/figure-latex/trees-groups-1.pdf) 
 
 Any internal node in a rooted phylogeny can be described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@deQueiroz2020].
 
-Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and edges. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
+Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
 
 
 ## Polytomies
 
-Some phylogenies are not strictly bifurcating. An internal node with more than two edges connecting it to descendants is called a polytomy (Figure \@ref(fig:trees-polytomies)B-D). This can be to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages (a hard polytomy).
+Some phylogenies are not strictly bifurcating. An internal node with more than two branches connecting it to descendants is called a polytomy (Figure \@ref(fig:trees-polytomies)B-D). This can be to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages (a hard polytomy).
 
 A phylogeny that consists entirely of a single polytomy is said to be entirely unresolved -- it has no topological information. When laid out in a rectangular format, it looks like a comb (Figure \@ref(fig:trees-polytomies)D). When laid out in a slanted format it looks like a star. So you will hear fully unresolved trees referred to as comb or star phylogenies.
 
@@ -341,19 +337,19 @@ A phylogeny that consists entirely of a single polytomy is said to be entirely u
 
 ## Rooting
 
-All the phylogenies we have seen so far are rooted -- we know what the oldest point is in the tree, and call it the root node. This special internal node has no edge connecting it to a parent node, and all other nodes in the phylogeny are its descendants. One consequence of having a rooted tree is that we know the direction of time along each edge -- time proceeds from the root to the tips. This provides a clear parent-child relationship between nodes at the ends of each edge.
+All the phylogenies we have seen so far are rooted -- we know what the oldest point is in the tree, and call it the root node. This special internal node has no branch connecting it to a parent node, and all other nodes in the phylogeny are its descendants. One consequence of having a rooted tree is that we know the direction of time along each branch -- time proceeds from the root to the tips. This provides a clear parent-child relationship between nodes at the ends of each branch.
 
 Not all phylogenies are rooted. Sometimes we just don't care -- some questions and methods don't depend on where the root is, so we don't have to bother placing it. Sometimes we just don't know -- placing the root in a phylogeny takes information that sometimes we don't have. There are many phylogenetic studies focused on identifying the location of the root in various groups of organisms, this is often an interesting and important question. 
 
-Even when we don't know where the root of a phylogeny is, we often want to talk about other aspects of the tree, such as the topology and edge lengths. This means we need to think about how to think about unrooted phylogenies. 
+Even when we don't know where the root of a phylogeny is, we often want to talk about other aspects of the tree, such as the topology and branch lengths. This means we need to think about how to think about unrooted phylogenies. 
 
-There are some basic things we can't take for granted in an unrooted phylogeny. We don't, for example, know which way time goes along the branches. We don't know which internal nodes are child nodes and which are parent nodes. We don't know which of the edges attached to an internal node connect to older nodes and which to younger nodes.
+There are some basic things we can't take for granted in an unrooted phylogeny. We don't, for example, know which way time goes along the branches. We don't know which internal nodes are child nodes and which are parent nodes. We don't know which of the branches attached to an internal node connect to older nodes and which to younger nodes.
 
-![(\#fig:trees-rooted-abstract)These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray edge (D). Each of these elements are in the exact same topological positions in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three edges attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray edge, a new unrooted node is added along the edge. This new node is bifurcating.](phylogenetic_biology_files/figure-latex/trees-rooted-abstract-1.pdf) 
+![(\#fig:trees-rooted-abstract)These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray branch (D). Each of these elements are in the exact same topological positions in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three branches attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray branch, a new unrooted node is added along the branch. This new node is bifurcating.](phylogenetic_biology_files/figure-latex/trees-rooted-abstract-1.pdf) 
 
-The root could fall at any point in an unrooted phylogeny, either along an edge or right at an internal node. You can think of rooting a phylogeny as grabbing the point that you think is the root and dragging it until all the edges point away from it (Figure \@ref(fig:trees-rooted-abstract)B-D). If you grab at some point along an edge (Figure \@ref(fig:trees-rooted-abstract)D), this creates a new node that is the root. This new root node has two edges connecting it to descendants (these two edges arise by splitting the single edge along which the root was placed). Since it has no edge connecting it to a parent, it differs from other internal nodes in having only two edges connected to it (instead of three, or more in the case of polytomies). The end results of rooting along a edge is that you add a node to the phylogeny and the root is resolved (not a polytomy).
+The root could fall at any point in an unrooted phylogeny, either along an branch or right at an internal node. You can think of rooting a phylogeny as grabbing the point that you think is the root and dragging it until all the branches point away from it (Figure \@ref(fig:trees-rooted-abstract)B-D). If you grab at some point along a branch (Figure \@ref(fig:trees-rooted-abstract)D), this creates a new node that is the root. This new root node has two branches connecting it to descendants (these two branches arise by splitting the single branch along which the root was placed). Since it has no branch connecting it to a parent, it differs from other internal nodes in having only two branches connected to it (instead of three, or more in the case of polytomies). The end results of rooting along a branch is that you add a node to the phylogeny and the root is resolved (not a polytomy).
 
-Things are a bit different if you root at an existing internal node (Figure \@ref(fig:trees-rooted-abstract)B-C). Because the existing node becomes the root, the number of nodes in the tree remains unchanged. So far so good. But since internal nodes in a bifurcating tree all have three edges connected to them, when an internal node becomes the root the root is a polytomy. This seems like a pain, so why not always root along an edge? There are a few reasons. One is that rooting along an edge requires that we pick a specific point along the edge where the root goes, for example in the middle or somewhere else. That decision can take information that we don't have. Another reason is that the creation and destruction of nodes associated with rooting along edges gets cumbersome and problematic, especially when there are specific data associated with internal nodes.
+Things are a bit different if you root at an existing internal node (Figure \@ref(fig:trees-rooted-abstract)B-C). Because the existing node becomes the root, the number of nodes in the tree remains unchanged. So far so good. But since internal nodes in a bifurcating tree all have three branches connected to them, when an internal node becomes the root the root is a polytomy. This seems like a pain, so why not always root along a branch? There are a few reasons. One is that rooting along a branch requires that we pick a specific point along the branch where the root goes, for example in the middle or somewhere else. That decision can take information that we don't have. Another reason is that the creation and destruction of nodes associated with rooting along branches gets cumbersome and problematic, especially when there are specific data associated with internal nodes.
 
 What information can we use to root a phylogeny? There are a couple approaches. One is to pick the midpoint -- the point farthest from any tips -- as the root. If evolution proceeded at a perfectly uniform rate this could work well, but in practice rates of evolution are too variable across lineages for this to give a reliable result.
 
@@ -367,9 +363,9 @@ Always be careful interpreting root position when looking at a published phyloge
 
 ## The information contained in phylogenies
 
-Thinking about phylogenies as graphs gives us very explicit ways to think about what information can be contained in a phylogeny. In the fundamental graphical sense, a phylogeny is a pair of sets -- a set of nodes and a set of edges -- and annotations of those entities.
+Thinking about phylogenies as graphs gives us very explicit ways to think about what information can be contained in a phylogeny. In the fundamental graphical sense, a phylogeny is a pair of sets -- a set of nodes and a set of branches -- and annotations of those entities.
 
-The topology of the phylogeny is the way in which nodes are connected by edges. If there are different connections in two phylogenies, then they have different topologies. If the annotations differ but the connections are the same, then the topologies are the same. Sometimes we know more and sometimes less about the topology. A fully resolved bifurcating phylogeny, where every internal node has two children, contains maximal information about the topology. A completely unresolved star phylogeny contains no information about topology.
+The topology of the phylogeny is the way in which nodes are connected by branches. If there are different connections in two phylogenies, then they have different topologies. If the annotations differ but the connections are the same, then the topologies are the same. Sometimes we know more and sometimes less about the topology. A fully resolved bifurcating phylogeny, where every internal node has two children, contains maximal information about the topology. A completely unresolved star phylogeny contains no information about topology.
 
 Node annotations can include:
 
@@ -382,21 +378,21 @@ Node annotations can include:
 - Whether the node is the root.
 
 
-Edge annotations can include:
+Branch annotations can include:
 
 - Length. The value and unit of length can differ, for example it can time (as in a chronogram) or expected amount of change in a particular set of characters (as in a phylogram).
 
-- Directionality. An indication of which direction time goes in along each edge. This only applies in the context of a rooted phylogenies.
+- Directionality. An indication of which direction time goes in along each branch. This only applies in the context of a rooted phylogenies.
 
-- Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes at eache end of an edge need not be different in the relevant trait to have change events along the edge. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the edge that are compatible with this pattern, for example a change from A to C and then a change from C back to A.
+- Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes at eache end of a branch need not be different in the relevant trait to have change events along the branch. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the branch that are compatible with this pattern, for example a change from A to C and then a change from C back to A.
 
-- Edge frequencies.This is how topology support values, such as bootstraps and posterior probabilities (which we'll discuss later), are stored.
+- Branch frequencies.This is how topology support values, such as bootstraps and posterior probabilities (which we'll discuss later), are stored.
 
-Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and edges that indicate the topology of the phylogeny (Figure \@ref(fig:trees-information)C). Once you have topology, you could display edge attributes. For example, you could scale the edge lengths by time (Figure \@ref(fig:trees-information)D).
+Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and branches that indicate the topology of the phylogeny (Figure \@ref(fig:trees-information)C). Once you have topology, you could display branch attributes. For example, you could scale the branch lengths by time (Figure \@ref(fig:trees-information)D).
 
-At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure \@ref(fig:trees-information)A is compatible with any phylogeny with any edge lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure \@ref(fig:trees-information)B, it is compatible with any phylogeny with any edge lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure \@ref(fig:trees-information)D, for example by labeling internal nodes or showing character states.
+At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure \@ref(fig:trees-information)A is compatible with any phylogeny with any branch lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure \@ref(fig:trees-information)B, it is compatible with any phylogeny with any branch lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure \@ref(fig:trees-information)D, for example by labeling internal nodes or showing character states.
 
-The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate edge lengths, for example, while another couldn't care less about edge lengths and is only interested in topology.
+The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate branch lengths, for example, while another couldn't care less about branch lengths and is only interested in topology.
 
 ![(\#fig:trees-information)Adding information to a phylogeny makes it more specific.](phylogenetic_biology_files/figure-latex/trees-information-1.pdf) 
 
@@ -428,7 +424,7 @@ ggtree(phylo_tree ) +
   geom_tippoint(col="gray")
 ```
 
-![(\#fig:trees-newick)Defining and drawing a Newick tree. Tip labels (letters) are black, nodes and node numbers are gray, and edges are black.](phylogenetic_biology_files/figure-latex/trees-newick-1.pdf) 
+![(\#fig:trees-newick)Defining and drawing a Newick tree. Tip labels (letters) are black, nodes and node numbers are gray, and branches are black.](phylogenetic_biology_files/figure-latex/trees-newick-1.pdf) 
 
 In Figure \@ref(fig:trees-newick), you can see how to define a newick tree, convert it to 
 a different type of representation, and then draw that. Most of the figures in this text were 
@@ -436,7 +432,7 @@ made using similar code.
 
 Considering just the newick specificaiton of the tree, `"(((A,B),(C,D)),E);"`, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, `(A,B)` and `(C,D)`. The next set of parentheses out indicates that these two clades together form a larger clade, `((A,B),(C,D))`. Finally, the outermost parentheses indicate that the clade `((A,B),(C,D))` is sister to `E`. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting [description and history](https://evolution.genetics.washington.edu/phylip/newicktree.html) of the newick format, which includes details on how to store other types of information in the file format.
 
-As versatile and simple as newick is for storing trees in files, it isn't great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, edges, and their annotations. This allows us to directly encode the information noted in the section [The information contained in phylogenies], and to readily extend the data objects as needed.
+As versatile and simple as newick is for storing trees in files, it isn't great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, branches, and their annotations. This allows us to directly encode the information noted in the section [The information contained in phylogenies], and to readily extend the data objects as needed.
 
 The most widely used format for storing phylogenies in the R programming language is as a `phylo` object from the excellent `ape` library [@R-ape]. The ` read.tree() ` function in the code block above creates a `phylo` object called `phylo_tree` based on the phylogeny we specified as text and named `newick_tree`. In a `phylo` object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to $n$ where $n$ is the number of tip nodes,  are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes $n+1$ to $2n-1$. The assignment of the node numbers within these ranges is arbitrary, there is no guarantee for example that the same internal node will ahve the same number each time the tree is read. The numbers of the nodes that were given when we created the `phylo` object from the newick text are shown in red in Figure \@ref(fig:trees-newick).
 
@@ -456,7 +452,7 @@ str( phylo_tree )
 ##  - attr(*, "order")= chr "cladewise"
 ```
 
-We can see that there are three slots (each designated with a `$`) within this `phylo` object. `Nnode` is just the number of internal nodes. The real magic is `edge`, which encodes the topology of the tree. It is just an array with one row per edge, and two columns. The value in column 1 is the number of the node that is the parent of the edge, and the value in column 2 is the number of the node that is the child of the edge. Here are the complete contents of the `edge` slot:
+We can see that there are three slots (each designated with a `$`) within this `phylo` object. `Nnode` is just the number of internal nodes. The real magic is `edge`, which encodes the topology of the tree. It is just an array with one row per edge (*i.e.*, branch), and two columns. The value in column 1 is the number of the node that is the parent of the branch, and the value in column 2 is the number of the node that is the child of the branch. Here are the complete contents of the `edge` slot:
 
 
 
@@ -476,9 +472,9 @@ phylo_tree$edge
 ## [8,]    6    5
 ```
 
-So, in this case edge number 1 (the first row) connects node $6$ to node $7$. Indeed, we can see just such an edge in Figure \@ref(fig:trees-newick). Try to identify each of the other edges in the array in the tree figure.
+So, in this case edge number 1 (the first row) connects node $6$ to node $7$. Indeed, we can see just such an edge in Figure \@ref(fig:trees-newick). Try to identify each of the other branches in the array in the tree figure.
 
-You can discern all sorts of things about the tree from this simple array. The tips are nodes that are in column 2 but not in column 1 (since they aren't parents of any other nodes). The root is the node that is in column 1, but not in column 2 (because it doesn't have a parent). If a node occurs in column 1 more than twice, then it is a polytomy (because it has more than two edges connecting to child nodes). Note that this data structure is intrinsically rooted - there is a parent-child relationship set up between the nodes at each end of each edge. But you can still use it to store unrooted trees by picking an arbitrary internal node as the root, and just keeping track of the fact that you don't know where the root is.
+You can discern all sorts of things about the tree from this simple array. The tips are nodes that are in column 2 but not in column 1 (since they aren't parents of any other nodes). The root is the node that is in column 1, but not in column 2 (because it doesn't have a parent). If a node occurs in column 1 more than twice, then it is a polytomy (because it has more than two branches connecting to child nodes). Note that this data structure is intrinsically rooted - there is a parent-child relationship set up between the nodes at each end of each edge. But you can still use it to store unrooted trees by picking an arbitrary internal node as the root, and just keeping track of the fact that you don't know where the root is.
 
 There is one other important piece of information that we specified in the newick files - the tip labels. Those are located in another slot within the `phylo` object:
 
@@ -521,9 +517,7 @@ application of these models will be to simulate data.
 
 ## Models
 
-Models are representations of processes. They are abstractions in the sense that they leave out things that aren't thought to be important, and they are idealized in the sense that they are deliberately simplified. As Peter Godfrey-Smith notes [@godfrey2016philosophy, 21], 
-"Abstraction, to some degree, is inevitable; you can’t include everything. 
-Idealization, in contrast, is a choice."
+Models are representations of processes. They are abstractions in the sense that they leave out things that aren't thought to be important, and they are idealized in the sense that they are deliberately simplified [@godfrey2016philosophy, 21].
 
 For some applications, it doesn't 
 matter if model structure reflects actual underlying 
@@ -583,17 +577,17 @@ The models that we will use in phylogenetic biology tend to be more complex than
 
 ## A simple model of evolution
 
-Let's start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single edge in a phylogeny (Figure \@ref(fig:sim-application)). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:
+Let's start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single branch in a phylogeny (Figure \@ref(fig:sim-application)). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:
 
 - Model structure
 - Model parameters
-- Edge length
-- State at the start of the edge (the nucleotide at the parent node)
-- State at the end of the edge (the nucleotide at the child node)
+- Branch length
+- State at the start of the branch (the nucleotide at the parent node)
+- State at the end of the branch (the nucleotide at the child node)
 
 
 \begin{figure}
-\includegraphics[width=4.72in]{figures/applications} \caption{Our current goal is to model the evolution of a single site in a DNA sequence along a single edge in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the edge under examination (at the top) is thicker than the rest. (B) A closeup of the focal edge, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a cange from A to C.}(\#fig:sim-application)
+\includegraphics[width=4.72in]{figures/applications} \caption{Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a cange from A to C.}(\#fig:sim-application)
 \end{figure}
 
 Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
@@ -604,7 +598,7 @@ It might seem a bit odd to consider replacement events that don't result in subs
 
 ### Expected amount of change
 
-For the simple process described here, there are two things to consider if we want to know the amount of evolutionary change. The first is the substitution rate $\mu$, and the second is the time over which the evolutionary process acts. In our example here, that time is the length of the edge under consideration in the phylogeny.
+For the simple process described here, there are two things to consider if we want to know the amount of evolutionary change. The first is the substitution rate $\mu$, and the second is the time over which the evolutionary process acts. In our example here, that time is the length of the branch under consideration in the phylogeny.
 
 In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over the same time interval (0-100 time units). Each black line on the bar is a replacement event randomly introduced by the computer according to our model. We use a different value of $\mu$ for each simulation (as indicated on the vertical axis). In the bottom bar, where $\mu=0$, there are no replacements (black bars) and therefore no substitutions (the whole bar is the same color). There are more replacement events as $\mu$ increases along the vertical axis.
 
@@ -614,7 +608,7 @@ As $\mu$ increases (going up on the vertical axis), the number of replacement ev
 
 ![(\#fig:sim-jc-mu-n)The number of replacement events increases linearly with the replacement rate $\mu$. This plot is from the same simulation as that shown in Figure \@ref(fig:sim-jc-mu-sweep). The line is a linear model fit to the data. Since $n=\mu t$, and in this case $t=100$, the slope of $n$ on $t$ is estimated to be near 100.](phylogenetic_biology_files/figure-latex/sim-jc-mu-n-1.pdf) 
 
-Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for edge lengths is given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)). The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and edge lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
+Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for branch lengths is given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)). The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
 
 \begin{figure}
 \includegraphics[width=4.9in]{figures/Fig_cnidaria} \caption{A published phylogeny [@zapata2015] with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.}(\#fig:sim-tree-cnid)
@@ -622,7 +616,7 @@ Because of the linear relationship between the number of replacements and the pr
 
 ### Expected end state
 
-The machinery above shows how a model can clarify the way we think about the expected amount of change along an edge. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a  question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
+The machinery above shows how a model can clarify the way we think about the expected amount of change along an branch. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a  question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
 
 The situation is most clear after a small amount of change (when $\mu t$ is small) - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.
 
@@ -678,17 +672,17 @@ We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot 
 ![(\#fig:sim-sat-analytical)Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \@ref(eq:sim-change). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each.](phylogenetic_biology_files/figure-latex/sim-sat-analytical-1.pdf) 
 
 Let's put this back into a biological context. Our simple model allows us to 
-calculate the probability $P(t)$ of a given nucleotide state at the end (child node) of an edge given:
+calculate the probability $P(t)$ of a given nucleotide state at the end (child node) of an branch given:
 
-- The nucleotide state at the beginning (parent node) of the edge
+- The nucleotide state at the beginning (parent node) of the branch
 - Replacement rate $\mu$
-- Length of the edge $t$
+- Length of the branch $t$
 
 This is powerful stuff. We could do a variety of things with this model machinery, for example:
 
-- Simulate evolution along an edge by sampling nucleotides for the child node from this probability distribution
+- Simulate evolution along an branch by sampling nucleotides for the child node from this probability distribution
 - Ask the probability of a given starting state given an end state
-- Evaluate how reasonable our $\mu$ model parameter value is. If, for example, we have a tree with very short edges that had different states at their parents and children, we might be skeptical of a low $\mu$ value.
+- Evaluate how reasonable our $\mu$ model parameter value is. If, for example, we have a tree with very short branches that had different states at their parents and children, we might be skeptical of a low $\mu$ value.
 
 
 ## Generalizing the simple model
@@ -731,20 +725,20 @@ There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to fa
 
 (This factoring is possible because of the way matrix multiplication works. For a refresher on matrix multiplication, [this video](https://www.youtube.com/watch?v=OMA2Mwo0aZg) explains how to do it operationally, and [this series of videos](https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) explains what it is actually doing.)
 
-$\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along an edge of a given length. Before, when we were keeping things as simple as possible, we used the exponential Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the edge $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
+$\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along an branch of a given length. Before, when we were keeping things as simple as possible, we used the exponential Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
 
 \begin{equation}
 \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
 (\#eq:jc69-prob)
 \end{equation}
 
-Raising $e$ to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$ is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\mathbf{\Pi}$, and $\mathbf{R}$, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an edge of length $t$. The diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
+Raising $e$ to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$ is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\mathbf{\Pi}$, and $\mathbf{R}$, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an branch of length $t$. The diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
 
 Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.
 
 ## Expanding the models
 
-The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one edge in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 [@jc1969]. It is only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that we deliberately omit. 
+The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one branch in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 [@jc1969]. It is only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that we deliberately omit. 
 
 The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, including that:
 
@@ -773,7 +767,7 @@ To accommodate each of these deviations from JC69, we need to add parameters to 
 
 (To keep things compact, I have followed the convention of placing $-$ in the diagonal elements, which is short for "whatever it takes to make the rows of $\mathbf{Q}$ sum to 0".)
 
-This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along an edge to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
+This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along an branch to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
 
 If we let all the parameters in the GTR model (Equation \@ref(eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is to clamp some of them. In fact, by comparison of Equations \@ref(eq:jc69-expanded)) and \@ref(eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free in JC69.
 
@@ -787,7 +781,7 @@ We now have a more complex model of DNA evolution that we can simplify by settin
 
 ## Plugging some numbers into the expanded model
 
-Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\mathbf{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along an edge. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)B.
+Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\mathbf{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along an branch. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)B.
 
 We are using a mammal tree, so let's pick some parameter values that roughly approximate what we see in mammals. Rather than set all the parameters independently, let's set up an HKY85 model, which accommodates non-uniform base frequencies and different transition/ tansversion ratios. First, we can clamp $\mu=1$. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters $b$ and $e$) are on the order of 4 times more frequent than transversions (captured by parameters $a$, $c$, $d$, and $f$) in mammals [@rosenberg2003]. So we will clamp $b=e=2$ and $a=c=d=f=0.5$. I picked these particular values (rather than others, such as 4 and 1) because they keep the mean of the off-diagonal entries in $\mathbf{R}$ to 1. 
 
@@ -873,7 +867,7 @@ Now that we can derive $\mathbf{P}(t)$, let's explore some of its properties. Le
 
 The probability of going from A to A is 1 while the probability of going from any other nucleotide is 0. The same goes for all of the other nucleotides, giving ones on the diagonal and zeros everywhere else.
 
-What if the edge is very long, say $t=100$?
+What if the branch is very long, say $t=100$?
 
 
 ```
@@ -884,11 +878,11 @@ What if the edge is very long, say $t=100$?
 ## T 0.295 0.205 0.205 0.295
 ```
 
-In this case, each row has the exact same values. If you look closely, they should be familiar -- they are the equilibrium frequencies from $\mathbf{\Pi}$. This matches what happened in Figures \@ref(fig:sim-saturation) and \@ref(fig:sim-analytical). As edge length increases, the expected frequencies of each nucleotide deviate further and further from the original state and approach the equilibrium frequencies specified by $\mathbf{\Pi}$.
+In this case, each row has the exact same values. If you look closely, they should be familiar -- they are the equilibrium frequencies from $\mathbf{\Pi}$. This matches what happened in Figures \@ref(fig:sim-saturation) and \@ref(fig:sim-analytical). As branch length increases, the expected frequencies of each nucleotide deviate further and further from the original state and approach the equilibrium frequencies specified by $\mathbf{\Pi}$.
 
-## Simulation along a single edge
+## Simulation along a single branch
 
-We can now calculate the probability of a specific end state given a start state. Now let's use this machinery to simulate evolution along a single edge at a time, as in Figure \@ref(fig:sim-application)B. 
+We can now calculate the probability of a specific end state given a start state. Now let's use this machinery to simulate evolution along a single branch at a time, as in Figure \@ref(fig:sim-application)B. 
 
 We first need to set the state at the parent node. There are a couple approaches we could use to set the parent state. We could clamp it to a specific initial state, just as we did in our JC69 simulations when we set the starting state to A (Figure \@ref(fig:sim-jc-mu-sweep)). Alternatively, we could pick the starting state at random. 
 
@@ -911,22 +905,22 @@ A         0.6896113  G
 G         0.7347406  G     
 G         1.3263353  G     
 
-In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\mathbf{\Pi}$ as described above. I then created a random edge length $t$ by sampling from a uniform distribution that ranges from 0 to $2$, just to get a variety of edge lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
+In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\mathbf{\Pi}$ as described above. I then created a random branch length $t$ by sampling from a uniform distribution that ranges from 0 to $2$, just to get a variety of branch lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
 
 
 
-## Scaling from a single edge to a whole tree
+## Scaling from a single branch to a whole tree
 
-So far we have considered the evolution of one DNA site along one edge at a time (Figure \@ref(fig:sim-application)B, Table \@ref(tab:sim-single-edges)). We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of a single site along all edges, generating a specific nucleotide state at each node. We will use the same toy mammal model as above. We will consider a simplified tree (Figure \@ref(fig:sim-tree)) rather than the full mammal tree, just to keep things compact.
+So far we have considered the evolution of one DNA site along one branch at a time (Figure \@ref(fig:sim-application)B, Table \@ref(tab:sim-single-edges)). We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of a single site along all branches, generating a specific nucleotide state at each node. We will use the same toy mammal model as above. We will consider a simplified tree (Figure \@ref(fig:sim-tree)) rather than the full mammal tree, just to keep things compact.
 
 ![(\#fig:sim-tree)Simulation of states for a single DNA site on a simple tree according to our toy mammal model. Node numbers are in gray. Character states are in boxes at nodes. Branch lengths for this phylogram are in units of expected change.](phylogenetic_biology_files/figure-latex/sim-tree-1.pdf) 
-This isn't a big step from what we have already -- once we have all the machinery to simulate along a single edge, we can just iterate that to simulate evolution along a whole tree.
+This isn't a big step from what we have already -- once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along a whole tree.
 
-Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single edges, we will pick the state from the equilibrium frequencies $\mathbf{\Pi}$. That gives us the $A$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two edges that descend from it. These two edges connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each edge, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single edge at a time, it is just that the edges share a parent node so the also share a parent state.
+Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\mathbf{\Pi}$. That gives us the $A$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so the also share a parent state.
 
-There are four more edges in this tree, each connected to a terminal node. One edge has parent node 6 and child node 1 (which is the `Species_A` terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from $\mathbf{\Pi}$, we just use the state that was simulated along the edge connecting node 5 to node 6. This state is $A$. Now we simulate evolution along the edge connecting node 6 to node 1, given the state at node 6, length $t$ of the edge, and $\mathbf{P}(t)$. We then do the same for each of the other edges.
+There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the `Species_A` terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from $\mathbf{\Pi}$, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is $A$. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length $t$ of the branch, and $\mathbf{P}(t)$. We then do the same for each of the other branches.
 
-Data can be simulated on a tree of arbitrary size in this way. Just sample from $\mathbf{P}(t)$ for the root state. Then traverse the tree from the root to each of the tips, simulating the state at each of the other internal nodes and finally the terminal nodes according to the states of their parents, edge length $t$, and $\mathbf{P}(t)$.
+Data can be simulated on a tree of arbitrary size in this way. Just sample from $\mathbf{P}(t)$ for the root state. Then traverse the tree from the root to each of the tips, simulating the state at each of the other internal nodes and finally the terminal nodes according to the states of their parents, branch length $t$, and $\mathbf{P}(t)$.
 
 ## Scaling from a single site to multiple sites
 
@@ -952,9 +946,9 @@ Here we have built up the conceptual, mathematical, statistical, and computation
 
 # Inferring phylogenies from data
 
-In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given the starting state and the edge length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the edges of a phylogeny.
+In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given the starting state and the branch length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the branches of a phylogeny.
 
-We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and edge lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and edge lengths that are most probable to generate the observed data [@Felsenstein:1981vk].
+We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most probable to generate the observed data [@Felsenstein:1981vk].
 
 This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis is referred to as Maximum Likelihood (ML).
 
@@ -962,13 +956,13 @@ This relationship between simulation and inference is widely used in a variety o
 
 We will consider the toy phylogeny, along with its tip states, shown in Figure \@ref(fig:inference-toy).
 
-![(\#fig:inference-toy)The toy phylogeny we will use to examine inference. Node numbers are in black. Edge lengths are gray numbers below branches. Tip node states are within boxes.](phylogenetic_biology_files/figure-latex/inference-toy-1.pdf) 
+![(\#fig:inference-toy)The toy phylogeny we will use to examine inference. Node numbers are in black. Branch lengths are gray numbers below branches. Tip node states are within boxes.](phylogenetic_biology_files/figure-latex/inference-toy-1.pdf) 
 
-We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and edge lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). I want to emphasize that this isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
+We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). I want to emphasize that this isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
 
 ![(\#fig:inference-internal-states)The same toy tree as above, but with arbitrary internal node states (in boxes).](phylogenetic_biology_files/figure-latex/inference-internal-states-1.pdf) 
 
-Our goal now is to calculate the probability of each observed change. Recall that the matrix that contains these probabilities, given a starting state (rows), ending state (columns), and edge length $t$, is given by:
+Our goal now is to calculate the probability of each observed change. Recall that the matrix that contains these probabilities, given a starting state (rows), ending state (columns), and branch length $t$, is given by:
 
 \begin{equation} 
   \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
@@ -1010,13 +1004,13 @@ And their product $\mathbf{Q}$, with the diagonal adjusted so that rows sum to 0
 ## T  0.1475  0.4100  0.1025 -0.6600
 ```
 
-For each edge, we can now use $\mathbf{P}(t)$ to calculate the probability of a change from the start state at the parent node to the end state at the child node, given the edge length $t$. The results are shown in Figure \@ref(fig:inference-history). 
+For each branch, we can now use $\mathbf{P}(t)$ to calculate the probability of a change from the start state at the parent node to the end state at the child node, given the branch length $t$. The results are shown in Figure \@ref(fig:inference-history). 
 
 
 ![(\#fig:inference-history)The same toy tree as above, but with probabilities of the specific change along each branch above each branch (in gray).](phylogenetic_biology_files/figure-latex/inference-history-1.pdf) 
 
-Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the blue probabilities to calculate the joint probability of all of these events happening. 
-We can think of these as the probabilities of specific changes along each edge as the probabilities of the state at each child node. 
+Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the probabilities to calculate the joint probability of all of these events happening. 
+We can think of these as the probabilities of specific changes along each branch as the probabilities of the state at each child node. 
 
 <table>
  <thead>
@@ -1057,7 +1051,7 @@ We can think of these as the probabilities of specific changes along each edge a
 </tbody>
 </table>
 
-Note, though, that the probability for node 5 is missing (it has a value of `NA`, which means it is Not Available). By reference to Figure \@ref(fig:inference-history) we can see that this is the root node. This makes sense since the root is not the child of any edge, and we calculated the probabilities based on changes along edges. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
+Note, though, that the probability for node 5 is missing (it has a value of `NA`, which means it is Not Available). By reference to Figure \@ref(fig:inference-history) we can see that this is the root node. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
 
 
  node   probability
@@ -1076,7 +1070,7 @@ Here we have used much of the same machinery as we did in the previous chapter, 
 
 ## Probability of multiple histories
 
-Above we considered the joint probability of a specific set of nucleotide states at all nodes, including both tip nodes and internal nodes. Usually, though, we don't know the internal node states. We don't even know what internal nodes exist, which is why we are trying to infer the phylogeny! Instead we have observed states that we got by sequencing organisms at the tips. We want to clamp these tip states and assess their probability on a particular tree (with edge lengths) under the model. This probability is independent of a specific history of internal node states. 
+Above we considered the joint probability of a specific set of nucleotide states at all nodes, including both tip nodes and internal nodes. Usually, though, we don't know the internal node states. We don't even know what internal nodes exist, which is why we are trying to infer the phylogeny! Instead we have observed states that we got by sequencing organisms at the tips. We want to clamp these tip states and assess their probability on a particular tree (with branch lengths) under the model. This probability is independent of a specific history of internal node states. 
 
 If we aren't clamping the internal node states as well, how can we calculate the probability of just the tip node states? The key is to consider all possible internal states. Each configuration of internal node states represents one possible history that gave rise to the observed tip states. We can sum the probabilities of each of these different ways to get the tip states to find the probability of the tip states over all possible histories. We are summing the probabilities because these are mutually exclusive histories that could give rise to the observed data. For example, if we want to find the probability of getting a total of seven when rolling two dice, we need to add up the probability of each way to get seven (1+6 *or* 2+5 *or* 3+4 *or* ... 6+1). This is different from when we multiplied probabilities to find the joint probabilities of multiple events occurring together (*e.g.*, the probability of rolling a 4 *and* another 4).
 
@@ -1152,7 +1146,7 @@ T    T    A    C    T    T    T       0.0028111
 
 Note that I listed the states for all the nodes, including nodes 1-4, which are clamped. It is the last three internal nodes (n5-n7) that have variable states. The probabilities for each specific history range quite widely, from $\ensuremath{8.2902428\times 10^{-9}}$ to $0.0028111$.
 
-The sum of the probabilities for each of these different histories for n5-n7 that give rise to the observed clamped states for tip nodes n1-n4 is $0.0058252$. This probability of the data given a particular hypothesis (the topology, edge lengths, model, and model parameters) is the likelihood.
+The sum of the probabilities for each of these different histories for n5-n7 that give rise to the observed clamped states for tip nodes n1-n4 is $0.0058252$. This probability of the data given a particular hypothesis (the topology, branch lengths, model, and model parameters) is the likelihood.
 
 ## Log likelihood
 
@@ -1176,7 +1170,7 @@ This comes down to more of the same. We do everything we did above for each site
 
 At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. How do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).
 
-The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. Be reference to Equation \@ref(eq:ntrees), we can see that there are 15 possible topologies. For each, we can optimize the edge lengths to find the maximum likelihood for the topology. This is an iterative process, where each edge length is progressively refined until no change increases the likelihood. This excellent [interactive visualization](http://phylo.bio.ku.edu/mephytis/brlen-opt.html) allows you to manually optimize edge lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
+The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. Be reference to Equation \@ref(eq:ntrees), we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. This excellent [interactive visualization](http://phylo.bio.ku.edu/mephytis/brlen-opt.html) allows you to manually optimize branch lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
 
 Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.
 
@@ -1186,7 +1180,7 @@ Optimization of calculations becomes very important. For example, it isn't neces
 
 ## Optimality criteria
 
-Here we used likelihood as an optimality criterion to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony. In parsimony, the minimum number of changes along edges needed to explain the data at the tips is used as the criterion to evaluate each topology. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
+Here we used likelihood as an optimality criterion to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony. In parsimony, the minimum number of changes along branches needed to explain the data at the tips is used as the criterion to evaluate each topology. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
 
 Under some conditions parsimony and likelihood will recover similar topologies, but often they do not. This is because they are doing different things that under many conditions lead to different results [@steel2000parsimony]. For example, we do not always expect the simplest possible explanation for a given pattern to be the best explanation. If a character has a high rate of evolutionary change, then we expect many changes on a tree rather than the fewest possible. This is accommodated in a likelihood framework.
 
@@ -1206,7 +1200,7 @@ The tips in a phylogeny, be they genes, species, individuals, or some other evol
 
 One of the most common mistakes in phylogenetic analyses is to include too few taxa. There are many ways that adding taxa helps:
 
-- Adding taxa breaks up edges in the phylogeny. This often improves the performance of maximum likelihood. If you are only interested in taxa 1...20, it still helps to add in taxa 21...50, even if you end up not paying much attention to where they go. They will often improve your ability to infer relationships among the taxa you are most interested in.
+- Adding taxa breaks up branches in the phylogeny. This often improves the performance of maximum likelihood. If you are only interested in taxa 1...20, it still helps to add in taxa 21...50, even if you end up not paying much attention to where they go. They will often improve your ability to infer relationships among the taxa you are most interested in.
 
 - Adding taxa can help improve model evaluation and model parameter estimation.
 
@@ -1214,7 +1208,7 @@ One of the most common mistakes in phylogenetic analyses is to include too few t
 
 - Adding taxa provides a more rigorous test of phylogenetic hypotheses. Say you are conducting a study to investigate the phylogenetic placement of a specific enigmatic species that is so morphologically distinct from other organisms that it is hard to know where it goes. You think it may fall in Clade A, Clade B, or Clade C, so you densely sample those groups. But in fact it falls within Clade D, and your taxon sampling is such that you can't even evaluate this hypothesis because you have no taxa from Clade D in your study.
 
-- Adding more outgroup taxa often improves rooting. Skimping on outgroup sampling is one of the most common mistakes in project design. The best practice in general is to include the most closely related outgroup taxa possible, and some that are progressively more distantly related. The root and the edges that connect to it are the deepest in the tree, and can be the hardest to infer. So it is good to densely sample taxa relevant to the root.
+- Adding more outgroup taxa often improves rooting. Skimping on outgroup sampling is one of the most common mistakes in project design. The best practice in general is to include the most closely related outgroup taxa possible, and some that are progressively more distantly related. The root and the branches that connect to it are the deepest in the tree, and can be the hardest to infer. So it is good to densely sample taxa relevant to the root.
 
 There are costs to adding taxa that must be balanced against the benefits above:
 
@@ -1308,7 +1302,7 @@ Most phylogenetic studies deposit their raw data in public archives like the [NC
 When I am interested in building a phylogeny for a particular group of organisms, one of my first steps is to take a look at the [NCBI taxonomy browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi). There you can enter a taxonomic group name, and select which data you would like to see (Figure \@ref(fig:practice-cnidaria)). You can adjust the number of taxonomic levels to control whether you want to view just summaries for larger groups or get all the way down to the species level.
 
 \begin{figure}
-\includegraphics[width=6.83in]{figures/cnidaria_taxonomy_browser} \caption{A view of the sequence data available for Cnidaria. Here I have selected to view available Nucleotide, Protein, SRA, Genome, and Assembly data.}(\#fig:practice-cnidaria)
+\includegraphics[width=5in]{figures/cnidaria_taxonomy_browser} \caption{A view of the sequence data available for Cnidaria. Here I have selected to view available Nucleotide, Protein, SRA, Genome, and Assembly data.}(\#fig:practice-cnidaria)
 \end{figure}
 
 Based on this overview, you can assess which types of data (*i.e.*, which data produced by which enrichment strategy) are best for advancing your question with publicly available data. All the PCR data and most of the raw sequence data will usually be available here, but many assemblies and processed data for whole genomes, transcriptomes, and other high-throughput datasets may not be. The best practice when working with these data is to take a deep dive into the recent literature and see if these intermediate products were deposited in another public archive, or contact authors for more details.
@@ -1328,7 +1322,7 @@ Sometimes when we build phylogenies from genomic data, we are interested in the 
 
 - Duplication and loss of genome regions. Genome replication is not always perfect, and sometimes results in an organism inheriting multiple copies of a whole genome or specific genome regions from a parent. In fact, many genes are members of gene families within a species that arose via a history of duplication and subsequent differentiation. As genome regions are duplicated and sometimes lost, their evolutionary history can become distinct from that of other genome regions.
 
-- All variation that we see across species originally arises within populations. Sometimes new variants are lost, and sometimes they become fixed across entire species. If multiple variants persist through multiple speciation events, though, the evolutionary history of some genome regions can differ from that of species. This process is called Incomplete Lineage Sorting (ILS). Rates of ILS are higher on shorter edges and when populations are larger.
+- All variation that we see across species originally arises within populations. Sometimes new variants are lost, and sometimes they become fixed across entire species. If multiple variants persist through multiple speciation events, though, the evolutionary history of some genome regions can differ from that of species. This process is called Incomplete Lineage Sorting (ILS). Rates of ILS are higher on shorter branches and when populations are larger.
 
 If there are concerns about incongruent evolutionary histories in the group of taxa under investigation, there are a variety of methods available for addressing each of these sources of incongruence. In general they involve independently estimating the phylogeny of each region, and then integrating information across these independent phylogenies.
 
@@ -1358,14 +1352,14 @@ The most widely used DNA sequence evolution models include the General Time Reve
 
 These parameters are treated as follows in the GTR model (Figure \@ref(fig:evaluation-models-nested)):
 
-- $\mu$ is constant. With $\mu=1$, the edge lengths are in units of expected evolutionary change.
+- $\mu$ is constant. With $\mu=1$, the branch lengths are in units of expected evolutionary change.
 
 - The six rate parameters are constrained such that $a+b+c+d+e+f=6$. If they were all free to vary, then values that have a sum other than 6 would lead to changes in the global rate rather than the relative rates. Imagine setting them all to $10$, for example. This would be equivalent to setting them all to 1 and setting $\mu=10$. This mathematical relationship between the relative rate parameters means that only five of them can vary independently, because the sixth will depend on the other five and the fact that they all sum to 6. This means that five of the rate parameters are stochastic, and one is deterministic. For our purposes it doesn't matter which one is deterministic, only that one of them is, so I'll treat $f$ as the deterministic rate parameter.
 
 - The four equilibrium frequencies are constrained such that $\pi_A+\pi_C+\pi_G+\pi_T=1$. This is because they are exclusive frequencies, and there are no other possible states. Given that every site must be an A, C, G, or T, their frequencies must sum to $1$. This mathematical relationship between the equilibrium frequency parameters means that only three of them can vary independently -- three are stochastic and one is deterministic. Again, it doesn't matter which one is deterministic, only how many are stochastic, so I'll treat $\pi_A$ as the deterministic parameter.
 
 \begin{figure}
-\includegraphics[width=8.42in]{figures/models_dna} \caption{A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the edge lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014).}(\#fig:evaluation-models-nested)
+\includegraphics[width=8.42in]{figures/models_dna} \caption{A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the branch lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014).}(\#fig:evaluation-models-nested)
 \end{figure}
 
 The number of stochastic parameters in a model is referred to as the degrees of freedom, $df$. You can think of it is the number of knobs that can be turned freely. Models that have higher degrees of freedom are often referred to as more complex than models with fewer degrees of freedom.
@@ -1402,7 +1396,7 @@ Let's say we are comparing GTR to HKY85, and we denote the likelihood under GTR 
 
 One way to proceed would then be to select GTR if $\Delta>0$, and HKY85 if $\Delta<0$. It wouldn't be a good way to go, though, since it would pick GTR every single time. The reason is that HKY85 is nested within GTR. That means that the best possible likelihood under HKY85 is also available under GTR. Because it has more degrees of freedom, GTR has many other possible values, and chances are very good that one of those will be more likely than the parameter values that were most likely under HKY85. If comparing two nested models, the model with more degrees of freedom will never have a likelihood lower than the simpler model.
 
-This would seem to imply that more complex models are always better, but they most certainly are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and edge length based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
+This would seem to imply that more complex models are always better, but they most certainly are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch length based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
 
 When comparing nested models, the question therefore isn't whether one model has higher likelihood than the other, but whether the increase in likelihood one gets from adding parameters is worth the cost of adding the parameters. There are a few different ways to make this cost/benefit analysis.
 
@@ -1445,7 +1439,7 @@ Two additional model features are often added to address this rate heterogeneity
 
 ## Topological evaluation
 
-Maximum likelihood inference gives a point estimate of the phylogeny -- a single phylogeny (topology and edge lengths) that maximizes the probability of the observed data under the model. A maximum likelihood analysis will always return a single phylogeny, regardless of how strong the support for that phylogeny is or how much higher its likelihood is than that of other phylogenies. This is akin to presenting an estimate of mass, made from multiple observations, without showing error bars.
+Maximum likelihood inference gives a point estimate of the phylogeny -- a single phylogeny (topology and branch lengths) that maximizes the probability of the observed data under the model. A maximum likelihood analysis will always return a single phylogeny, regardless of how strong the support for that phylogeny is or how much higher its likelihood is than that of other phylogenies. This is akin to presenting an estimate of mass, made from multiple observations, without showing error bars.
 
 ### Summarizing topological support
 
@@ -1453,34 +1447,34 @@ Before we get into how to assess support for a phylogenetic hypothesis, it use h
 
 Most methods that evaluate topologies generate a large set of phylogenies, which I'll call the *sample*. Assessing support for a feature of the focal topology is a matter of assessing the frequency of phylogenies in the sample that also have that feature. We could assess the support for the focal tree as a whole by asking how frequent identical topologies are in the sample. But support can often be strong in one part of a phylogeny and weak in another. Reporting equivalence of the entire topology provides no window into that variation. This approach would also break down as taxa are added, which quickly increases them number of possible topologies and reduces the chances of any two analyses returning the exact same topologies, given the variation that is inherent in heuristic searches.
 
-Edge frequencies are far more useful. It is helpful to think of an edge as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the edge, and those on the other (Figure \@ref(fig:eval-splits)). We will consider two edges to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of edges deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.
+Branch frequencies are far more useful. It is helpful to think of an branch as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the branch, and those on the other (Figure \@ref(fig:eval-splits)). We will consider two branches to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of branches deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.
 
 
 
 \begin{figure}
-\includegraphics[width=6in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is an edge, with the identification of the edge based on which taxa are split from each other by the edge. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the edges in the focal topology.}(\#fig:eval-splits)
+\includegraphics[width=4.98in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology.}(\#fig:eval-splits)
 \end{figure}
 
 
 
 
-We can consider each edge in the focal phylogeny independently. For a given focal edge, we count the fraction of phylogenies in the sample that have the same edge, as determined by producing an identical split in taxa. We consider this frequency as the support for the focal edge. If the frequency is 1, the edge was in all the phylogenies in the sample. If it is zero, it wasn't present in any of the phylogenies in the sample. The interpretation of these frequencies, which are often reported as percents, depends on the method that was used to generate the sample.
+We can consider each branch in the focal phylogeny independently. For a given focal branch, we count the fraction of phylogenies in the sample that have the same branch, as determined by producing an identical split in taxa. We consider this frequency as the support for the focal branch. If the frequency is 1, the branch was in all the phylogenies in the sample. If it is zero, it wasn't present in any of the phylogenies in the sample. The interpretation of these frequencies, which are often reported as percents, depends on the method that was used to generate the sample.
 
-It should be noted that these support values are often referred to as "nodal support values", and are often drawn onto nodes. This is unfortunate, as they are edge support values. They are just commonly associated with child node of the edge rather than the edge itself. This obscures their meaning, and leads to serious problems when trees are re-rooted [@10.1093/molbev/msx055].
+It should be noted that these support values are often referred to as "nodal support values", and are often drawn onto nodes. This is unfortunate, as they are branch support values. They are just commonly associated with child node of the branch rather than the branch itself. This obscures their meaning, and leads to serious problems when trees are re-rooted [@10.1093/molbev/msx055].
 
 
 ### Bootstrapping
 
 The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap [@felsenstein1985confidence]. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with $n$ columns, bootstrapping generates a new matrix, also with $n$ columns, by resampling from the the original matrix with replacement. Some columns from the original matrix won't be sampled at all, some will be sampled once, and some will be sampled multiple times.
 
-Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each edge of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. An edge frequency of 100% indicates that an edge is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
+Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. An branch frequency of 100% indicates that an branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
 
 
 
 
 
 
-Note that I am not using the term "significance" when referring to bootstrap support. This is because bootstraps don't have a clear statistical interpretation. It is a scale that varies from $0$ to $1$, but is not itself a significance. It just indicates how frequently an edge is recovered when the data columns are resampled. This gives a sense of how broad support is for the edge across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.
+Note that I am not using the term "significance" when referring to bootstrap support. This is because bootstraps don't have a clear statistical interpretation. It is a scale that varies from $0$ to $1$, but is not itself a significance. It just indicates how frequently an branch is recovered when the data columns are resampled. This gives a sense of how broad support is for the branch across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.
 
 Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process.
 
@@ -1495,7 +1489,7 @@ Rather than assess the support of a particular focal topology, sometimes you wan
 
 # Bayesian phylognetics
 
-Let's take stock of what we have covered so far. We introduced models, and how to simulate data with them. We then explored how to use models to calculate the likelihood -- the probability of the observed data given the topology, edge lengths, model parameters, and model. We used likelihood as an optimality criterion in heuristic searches to find the Maximum Likelihood (ML) phylogeny. We introduced the methods to calculate the frequency of edges on a focal topology, like the ML topology, in a sample of phylogenies. We showed how to generate a sample of phylogenies by running ML searches on bootstrapped matrices, and used this to calculate bootstrap support for each edge in the ML phylogeny.
+Let's take stock of what we have covered so far. We introduced models, and how to simulate data with them. We then explored how to use models to calculate the likelihood -- the probability of the observed data given the topology, branch lengths, model parameters, and model. We used likelihood as an optimality criterion in heuristic searches to find the Maximum Likelihood (ML) phylogeny. We introduced the methods to calculate the frequency of branches on a focal topology, like the ML topology, in a sample of phylogenies. We showed how to generate a sample of phylogenies by running ML searches on bootstrapped matrices, and used this to calculate bootstrap support for each branch in the ML phylogeny.
 
 ML and bootstraps are widely used and are a critical foundation for many phylogenetic analyses. There are, however, a few things about analysis frameworks  based on optimality criteria, ML, and bootstraps that are not ideal:
 
@@ -1530,9 +1524,9 @@ Third, consider a case where the data are perfect indicators of the hypothesis. 
 
 ## Bayesian phylogenetic inference
 
-To calculate the posterior probability of a phylogenetic hypothesis, we need to address all the terms on the right side of Equation \@ref(eq:bayes-theorem). We already know how to calculate $P(D|H)$, the likelihood. What about $P(H)$ and $P(D)$? There are a variety of practical approaches to $P(H)$ that have been shown to work well in the context of phylogenetics. These include uniform priors, where all topologies are considered to be equally likely. The priors on edge length can be approximated from an exponential distribution. One of the major take-aways from the past two decades of work on Bayesian phylogenetics is that inference is quite robust to $P(H)$ when the data are informative about the phylogeny, as expected.
+To calculate the posterior probability of a phylogenetic hypothesis, we need to address all the terms on the right side of Equation \@ref(eq:bayes-theorem). We already know how to calculate $P(D|H)$, the likelihood. What about $P(H)$ and $P(D)$? There are a variety of practical approaches to $P(H)$ that have been shown to work well in the context of phylogenetics. These include uniform priors, where all topologies are considered to be equally likely. The priors on branch length can be approximated from an exponential distribution. One of the major take-aways from the past two decades of work on Bayesian phylogenetics is that inference is quite robust to $P(H)$ when the data are informative about the phylogeny, as expected.
 
-What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and edge lengths. That would be prohibitively computationally expensive to actually do. So we won't.
+What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won't.
 
 Instead, we will forego dealing with $P(D)$ at all by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling[@metropolis1953]. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
 
@@ -1554,12 +1548,12 @@ The "Markov Chain" in MCMC alludes to the fact that MCMC is a series of repeated
 4. If $R>1$, we accept $H^*$. If If $R<1$, we accept $H^*$ with probability $R$. Otherwise, we retain $H$.
 5. The result of the step above is added to the posterior sample, and becomes $H$ for the next iteration of the cycle.
 
-MCMC produces a sample of model parameters and topologies with edge lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as edge frequencies. Unlike bootstraps, though, the frequency of an edge in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that edge, *i.e.* the probability of the edge given the data. The edge lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.
+MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as branch frequencies. Unlike bootstraps, though, the frequency of an branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, *i.e.* the probability of the branch given the data. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.
 
 There are a variety of practical considerations to implementing a Bayesian phylogenetic analysis with MCMC. These include:
 
 - Selecting the appropriate model. Many of the same considerations we reviewed in the context of likelihood apply here. 
-- Selecting appropriate priors on topology, edge length, and model parameters.
+- Selecting appropriate priors on topology, branch length, and model parameters.
 - Devising an appropriate hypothesis proposal mechanism. If the new hypothesis $H^*$ is too different from $H$, it will tend to be rejected as $H$ becomes optimized. This will lead to an approximated posterior distribution that is too narrow, leading to overconfidence in a small set of hypotheses. If the steps are too small, then MCMC will tend to get trapped in local optima because they cannot find more distant better optima. There are several approaches to these challenges, including searches with multiple MCMC chains that take different step sizes.
 - The very early samples in the chain are not a good estimate of the posterior distribution, because the initial $H$ is 
 not necessarily close to a peak in the posterior. The initial samples becore MCMC settles into a stable distribution are therefore discarded as part of a "burn-in" phase.
@@ -1633,18 +1627,18 @@ Phylogenies consider the history, pattern, and process of evolution through time
 
 It is helpful to first think about how the elements of a phylogeny correspond to time. We will consider rooted trees, where the direction of time is specified and runs from the root to the tips. Each node occurs at a specific point in time, even if the specific timing is unknown. We will call this point in time the node age. There is often confusion about the description of relative time on phylogenies. I will describe the magnitude of age here as time before the present. A node minimum age is closer to the present (further forward in time) and a node with maximum age as further from the present (further back in time). A node is treated as a singular divergence event, and has no duration. This of course is an approximation of the actual biology of divergence, which can take place over a period of time as populations become increasingly isolated but gene flow may persist between them.
 
-Each edge connects two nodes. In a rooted tree, we refer to the node closer to the root (or that is the root) as the parent node, and the node closer to the tips (or that is a tip) as the child node. The starting and ending times of the edge are set by the ages of the parent and child nodes. The duration of the edge is the difference in the ages of these nodes.
+Each branch connects two nodes. In a rooted tree, we refer to the node closer to the root (or that is the root) as the parent node, and the node closer to the tips (or that is a tip) as the child node. The starting and ending times of the branch are set by the ages of the parent and child nodes. The duration of the branch is the difference in the ages of these nodes.
 
 
 ## Measurements of time on trees
 
-As discussed in Section \@ref(trees-edge-lengths), edge length can mean different things. It is up to the investigator to specify an edge length, and clearly communicate what it means. The three usual approaches are a cladogram (edge lengths are not specified and have no meaning), phylogram (edge lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where edge lengths are in units of time.
+As discussed in Section \@ref(trees-edge-lengths), branch length can mean different things. It is up to the investigator to specify an branch length, and clearly communicate what it means. The three usual approaches are a cladogram (branch lengths are not specified and have no meaning), phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where branch lengths are in units of time.
 
 ### Cladograms
 
-Because edge lengths in a cladogram have no meaning, we cannot make absolute statements about time in a cladogram. This doesn't mean, though, that we can't say anything about time -- we can still make some ordinal statements about the relative ages of nodes.
+Because branch lengths in a cladogram have no meaning, we cannot make absolute statements about time in a cladogram. This doesn't mean, though, that we can't say anything about time -- we can still make some ordinal statements about the relative ages of nodes.
 
-![(\#fig:time-cladogram)A cladogram. Tip labels are blue, nodes and node numbers are red, and edges are black.](phylogenetic_biology_files/figure-latex/time-cladogram-1.pdf) 
+![(\#fig:time-cladogram)A cladogram. Nodes and node numbers are gray, and branches are black.](phylogenetic_biology_files/figure-latex/time-cladogram-1.pdf) 
 Take a look at the cladogram in Figure \@ref(fig:time-cladogram). Consider the red node numbers. The terminal nodes are numbered 1-5, and 6-9 are internal nodes. Of those, the root is node 6. Because the tree is rooted, we know that time proceeds from the root to the tips. If you consider two nodes, where one is descended from the other, then the node closer to the root is older. There are a variety of statements we could make based on this simple relationship, including:
 
 - Node 6 is older than all other nodes in the phylogeny. This is tautological, since the root is by definition the oldest node.
@@ -1659,18 +1653,18 @@ Note that all of these assertions hold whether or not the tips have the same age
 
 ### Phylograms
 
-Strictly speaking, the only assertions we can make about time on phylograms are those that we can also make on cladograms. This is because we can't be certain of the relationships between time and edge length in the phylogram. If the rate of evolution changes in different regions of the tree, then edges of the same length would not represent time intervals of the same length. It is safest, then, to think of phylograms as cladograms when it comes to discussing time.
+Strictly speaking, the only assertions we can make about time on phylograms are those that we can also make on cladograms. This is because we can't be certain of the relationships between time and branch length in the phylogram. If the rate of evolution changes in different regions of the tree, then branches of the same length would not represent time intervals of the same length. It is safest, then, to think of phylograms as cladograms when it comes to discussing time.
 
 ### Chronograms
 
-By definition, in a chronogram edge lengths are in units of time. The age of each node is fully specified. This has a couple implications for what we can say about time. We can make ordinal statements, as we did for cladograms and phylograms, but we can also make absolute statements about the interval of time that has elapsed between two nodes. We can also make statements about the relative ages of nodes that are not descended from each other.
+By definition, in a chronogram branch lengths are in units of time. The age of each node is fully specified. This has a couple implications for what we can say about time. We can make ordinal statements, as we did for cladograms and phylograms, but we can also make absolute statements about the interval of time that has elapsed between two nodes. We can also make statements about the relative ages of nodes that are not descended from each other.
 
 
 ## Clock-like evolution
 
-If the rate of evolution were uniform and did not vary in different lineages, then the edge lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing edge lengths by the rate of change. For example, if the edge lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions were million years, then dividing each edge length by 2 would give a chronogram where the units of edge length are millions of years. This is called clock-like evolution -- changes in characters are like regular tics on a clock.
+If the rate of evolution were uniform and did not vary in different lineages, then the branch lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing branch lengths by the rate of change. For example, if the branch lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions were million years, then dividing each branch length by 2 would give a chronogram where the units of branch length are millions of years. This is called clock-like evolution -- changes in characters are like regular tics on a clock.
 
-Real data are never this tidy, but when evolutionary rates are locally fairly uniform, then phylogram edge lengths will tend to be roughly proportional to the amount of time elapsed according to a locally adjusted clock. This is called a relaxed clock model.
+Real data are never this tidy, but when evolutionary rates are locally fairly uniform, then phylogram branch lengths will tend to be roughly proportional to the amount of time elapsed according to a locally adjusted clock. This is called a relaxed clock model.
 
 ## Time calibration
 
@@ -1678,20 +1672,20 @@ The process of creating a chronogram is referred to as time calibration. There a
 
 - Get a phylogram.
 - Constrain the ages of some nodes using external evidence. This can be done by clamping them to a specific age or specifying a distribution of possible ages.
-- Adjust edge lengths so that they are consistent with the ages of the clamped nodes, also adjusting the ages of the unclamped nodes as necessary. This is done by fitting clock-like models character change, and adjusting for local variations in rate.
-- Assess robustness and confidence in the calibrated node ages and edge lengths.
+- Adjust branch lengths so that they are consistent with the ages of the clamped nodes, also adjusting the ages of the unclamped nodes as necessary. This is done by fitting clock-like models character change, and adjusting for local variations in rate.
+- Assess robustness and confidence in the calibrated node ages and branch lengths.
 
-There are multiply approaches to applying these steps. In the early days of the field, each step was done largely independently. A phylogram would be inferred, dates specified for some nodes, the edges would be stretched or shrunk to get them to fit the calibrations as closely as possible, and then the process would be repeated with slightly different input edge lengths or different calibrations to asses robustness.
+There are multiply approaches to applying these steps. In the early days of the field, each step was done largely independently. A phylogram would be inferred, dates specified for some nodes, the branches would be stretched or shrunk to get them to fit the calibrations as closely as possible, and then the process would be repeated with slightly different input branch lengths or different calibrations to asses robustness.
 
-The field has been moving toward more integrated approaches, including the simultaneous estimation of all of these features in a [Bayesian framework](https://revbayes.github.io/tutorials/dating/). A Bayesian framework is a very natural way to incorporate diverse information about topology, edge lengths, and evolutionary rates. This has intuitive appeal -- if the calibrations for two nodes indicate that they have a short edge between them, for example, then topologies that place these nodes together should be favored over other that do not.  Constraints on node ages can be incorporated as priors, for example. Unconstrained nodes would have flat priors on age, and constrained nodes would have a sharp peak around a specific age.
+The field has been moving toward more integrated approaches, including the simultaneous estimation of all of these features in a [Bayesian framework](https://revbayes.github.io/tutorials/dating/). A Bayesian framework is a very natural way to incorporate diverse information about topology, branch lengths, and evolutionary rates. This has intuitive appeal -- if the calibrations for two nodes indicate that they have a short branch between them, for example, then topologies that place these nodes together should be favored over other that do not.  Constraints on node ages can be incorporated as priors, for example. Unconstrained nodes would have flat priors on age, and constrained nodes would have a sharp peak around a specific age.
 
 ### Mathematical implications of age constraints
 
-If all the tips are clamped to the same age, then the phylogeny is referred to as being ultrametric -- each tip is the same distance from the root. An ultrametric tree is not necessarily a chronogram, though -- some of the internal nodes may have ages that violate edge lengths proportional to time.
+If all the tips are clamped to the same age, then the phylogeny is referred to as being ultrametric -- each tip is the same distance from the root. An ultrametric tree is not necessarily a chronogram, though -- some of the internal nodes may have ages that violate branch lengths proportional to time.
 
-Clamping the ages of tips reduces the number of free parameters in our tree. The way to think about this is that the more information we have, the more constrained and specific our view of the world is. Before we clamp the tip ages, any tip can be any age and all the edges are free to have any length. The ultrametric tree is nested within this set of unconstrained possibilities. The tip ages, and therefore edge lengths, in this unconstrained tree can be selected so that they are ultrametric, but the vast majority of values will lead to trees that are not ultrametric. By clamping some values with added information that some nodes (tips, in this case) are the same age, we now are allowing only a constrained subset of trees and these require fewer parameters to describe.
+Clamping the ages of tips reduces the number of free parameters in our tree. The way to think about this is that the more information we have, the more constrained and specific our view of the world is. Before we clamp the tip ages, any tip can be any age and all the branches are free to have any length. The ultrametric tree is nested within this set of unconstrained possibilities. The tip ages, and therefore branch lengths, in this unconstrained tree can be selected so that they are ultrametric, but the vast majority of values will lead to trees that are not ultrametric. By clamping some values with added information that some nodes (tips, in this case) are the same age, we now are allowing only a constrained subset of trees and these require fewer parameters to describe.
 
-It is easiest to think of this in terms of edge lengths, rather than node ages. From Section \@ref(tree-properties), we know that the number of edges in a tree is $2n-2$, where $n$ is the number of tips. This is because each of the $n$ tip nodes has an edge leading to it, and each of the $n-1$ internal nodes, with the exception of the root node, has an edge leading to it. So there are $n-2$ edges that give rise to internal nodes. This is how we arrive at our $n+n-2=2n-2$ edges in the phylogeny, each with their own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the edges leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than $n$ edge lengths for the tips, we only have $1$ edge length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with $1+n-2=n-1$ edge lengths that we need to estimate independently in our ultrametric tree.
+It is easiest to think of this in terms of branch lengths, rather than node ages. From Section \@ref(tree-properties), we know that the number of branches in a tree is $2n-2$, where $n$ is the number of tips. This is because each of the $n$ tip nodes has an branch leading to it, and each of the $n-1$ internal nodes, with the exception of the root node, has an branch leading to it. So there are $n-2$ branches that give rise to internal nodes. This is how we arrive at our $n+n-2=2n-2$ branches in the phylogeny, each with their own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the branches leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than $n$ branch lengths for the tips, we only have $1$ branch length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with $1+n-2=n-1$ branch lengths that we need to estimate independently in our ultrametric tree.
 
 
 ### Constraining node ages
@@ -1700,9 +1694,9 @@ All the tips sampled in the present day have the same age, and we can constrain 
 
 In an internal-node-calibrated phylogeny, we would infer a phylogeny with all 60 taxa (fossil and extant), note the placement of the fossil taxa, and then infer the phylogeny with only the 50 extant taxa. We would constrain internal nodes so that they are no younger than the oldest fossil that is descended from them. We are considering a phylogeny of only extant taxa, but using the fossils to constrain the minimum age of the clades they belong to. In practice, it is also necessary to place maximum ages on some of the nodes to keep the time calibration from pushing everything way back in time. Given the incompleteness of the fossil record, this is not as straight forward as constraining the minimum age of a node. If we have a fossil we can assert that the clade that contains it can be no younger than that specimen, though it may be much older. But it is harder to assert a maximum age, given that we just might not have fossils for older organisms that existed in the clade. Applying maximum ages often relies on expertise and additional information, such as knowledge that a given land mass where the organisms are exclusively found did not exist before a particular time.
 
-The internal-node-calibrated approach is simplest to implement in some respects, but has a variety of drawbacks. It doesn't make good use of all the available information. By just setting minima on clade ages, it is discarding information about the edge lengths for the fossil taxa. If the edge giving rise to a fossil is long, then we might want to mush the minimum age for a clade much further back than the age of the fossil itself, for example. This approach also doesn't work well has the fraction of fossil taxa increases in the analysis. For example, it wouldn't work at all for a phylogeny comprised exclusively of fossil taxa.
+The internal-node-calibrated approach is simplest to implement in some respects, but has a variety of drawbacks. It doesn't make good use of all the available information. By just setting minima on clade ages, it is discarding information about the branch lengths for the fossil taxa. If the branch giving rise to a fossil is long, then we might want to mush the minimum age for a clade much further back than the age of the fossil itself, for example. This approach also doesn't work well has the fraction of fossil taxa increases in the analysis. For example, it wouldn't work at all for a phylogeny comprised exclusively of fossil taxa.
 
-In a tip-calibrated phylogeny, all taxa, fossil and extant, are included as tips in the phylogeny. The age of each tip is then constrained. Any tips from the present day are constrained to have the same present age, and fossil tips are constrained according to external information such as stratigraphy. A relaxed clock is then applied to infer the ages of unconstrained nodes, which also provides inferences of edge lengths. 
+In a tip-calibrated phylogeny, all taxa, fossil and extant, are included as tips in the phylogeny. The age of each tip is then constrained. Any tips from the present day are constrained to have the same present age, and fossil tips are constrained according to external information such as stratigraphy. A relaxed clock is then applied to infer the ages of unconstrained nodes, which also provides inferences of branch lengths. 
 
 <!--chapter:end:time.rmd-->
 
@@ -1721,7 +1715,7 @@ Reconstruction [@joy2016ancestral].
 PGLS [@symonds2014primer].
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-24-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-24-2.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-2.pdf)<!-- --> 
 
 
 
@@ -1746,7 +1740,7 @@ PGLS [@symonds2014primer].
 ## Inferring covariance in the absence of phylogenetic structure
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-26-1.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 ## Phylogenetic Independent Contrasts
 
@@ -1792,7 +1786,7 @@ The [MCMC robot](https://phylogeny.uconn.edu/mcmc-robot/) by Paul Lewis is an ex
 
 # Software versions
 
-This book was rendered from the source code on $Sat Apr 23 11:17:30 PM 2022$ with the following R package versions.
+This book was rendered from the source code on $Sun Apr 24 01:20:27 AM 2022$ with the following R package versions.
 
 
 ```

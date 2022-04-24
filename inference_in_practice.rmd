@@ -12,7 +12,7 @@ The tips in a phylogeny, be they genes, species, individuals, or some other evol
 
 One of the most common mistakes in phylogenetic analyses is to include too few taxa. There are many ways that adding taxa helps:
 
-- Adding taxa breaks up edges in the phylogeny. This often improves the performance of maximum likelihood. If you are only interested in taxa 1...20, it still helps to add in taxa 21...50, even if you end up not paying much attention to where they go. They will often improve your ability to infer relationships among the taxa you are most interested in.
+- Adding taxa breaks up branches in the phylogeny. This often improves the performance of maximum likelihood. If you are only interested in taxa 1...20, it still helps to add in taxa 21...50, even if you end up not paying much attention to where they go. They will often improve your ability to infer relationships among the taxa you are most interested in.
 
 - Adding taxa can help improve model evaluation and model parameter estimation.
 
@@ -20,7 +20,7 @@ One of the most common mistakes in phylogenetic analyses is to include too few t
 
 - Adding taxa provides a more rigorous test of phylogenetic hypotheses. Say you are conducting a study to investigate the phylogenetic placement of a specific enigmatic species that is so morphologically distinct from other organisms that it is hard to know where it goes. You think it may fall in Clade A, Clade B, or Clade C, so you densely sample those groups. But in fact it falls within Clade D, and your taxon sampling is such that you can't even evaluate this hypothesis because you have no taxa from Clade D in your study.
 
-- Adding more outgroup taxa often improves rooting. Skimping on outgroup sampling is one of the most common mistakes in project design. The best practice in general is to include the most closely related outgroup taxa possible, and some that are progressively more distantly related. The root and the edges that connect to it are the deepest in the tree, and can be the hardest to infer. So it is good to densely sample taxa relevant to the root.
+- Adding more outgroup taxa often improves rooting. Skimping on outgroup sampling is one of the most common mistakes in project design. The best practice in general is to include the most closely related outgroup taxa possible, and some that are progressively more distantly related. The root and the branches that connect to it are the deepest in the tree, and can be the hardest to infer. So it is good to densely sample taxa relevant to the root.
 
 There are costs to adding taxa that must be balanced against the benefits above:
 
@@ -136,7 +136,7 @@ Sometimes when we build phylogenies from genomic data, we are interested in the 
 
 - Duplication and loss of genome regions. Genome replication is not always perfect, and sometimes results in an organism inheriting multiple copies of a whole genome or specific genome regions from a parent. In fact, many genes are members of gene families within a species that arose via a history of duplication and subsequent differentiation. As genome regions are duplicated and sometimes lost, their evolutionary history can become distinct from that of other genome regions.
 
-- All variation that we see across species originally arises within populations. Sometimes new variants are lost, and sometimes they become fixed across entire species. If multiple variants persist through multiple speciation events, though, the evolutionary history of some genome regions can differ from that of species. This process is called Incomplete Lineage Sorting (ILS). Rates of ILS are higher on shorter edges and when populations are larger.
+- All variation that we see across species originally arises within populations. Sometimes new variants are lost, and sometimes they become fixed across entire species. If multiple variants persist through multiple speciation events, though, the evolutionary history of some genome regions can differ from that of species. This process is called Incomplete Lineage Sorting (ILS). Rates of ILS are higher on shorter branches and when populations are larger.
 
 If there are concerns about incongruent evolutionary histories in the group of taxa under investigation, there are a variety of methods available for addressing each of these sources of incongruence. In general they involve independently estimating the phylogeny of each region, and then integrating information across these independent phylogenies.
 
