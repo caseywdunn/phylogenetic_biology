@@ -42,10 +42,10 @@ knitr::include_graphics("figures/graph.png")
 A phylogeny is a specific instance of a mathematical object known as a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)). 
 A graph consists of nodes, often represented as circles, connected by edges, often 
 represented by lines (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
-For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions.
+For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.
 
 
-```{r trees-graph-tree, echo=FALSE, fig.cap="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents)."}
+```{r trees-graph-tree, echo=FALSE, fig.cap="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two branches that connect it to its children, the other internal nodes each have three branches (one that connects to the parent, two to children), and the tips each have one branch (that connects to their parents)."}
 
 knitr::include_graphics("figures/graph_tree.png")
 
@@ -56,13 +56,13 @@ Phylogeny graphs (Figure \@ref(fig:trees-graph-tree)) usually have a few specifi
 - They are acyclic. This means that there is only one possible path along edges from one node to another. It isn't possible to go in circles. Exceptions can arise in cases of horizontal 
 gene transfer or hybridization.
 
-- They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three edges connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. 
+- They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three branches connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. 
 
-- They can be directed. This means that edges are not symmetric, and instead have 
-directionality. Specifically, they denote time. The node on one end of the edge 
-is older than the node on the other side of the edge. We therefore can refer to the nodes connected to a particular edge as the parent node and child node.
+- They can be directed. This means that branches are not symmetric, and instead have 
+directionality. Specifically, they denote time. The node on one end of the branch 
+is older than the node on the other end of the branch. We therefore can refer to the nodes connected to a particular branch as the parent node and child node.
 
-A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The edges, usually referred to as branches in phylogenies, indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each branch would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single branch, parent-child node relationships in the tree don't mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.
+A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The branches indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each branch would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single branch, parent-child node relationships in the tree don't mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.
 
 ## Drawing phylogenies
 
@@ -408,7 +408,7 @@ p_rooted_e14 =
   #geom_text(aes(label=node)) +
   geom_nodepoint(aes(subset=(node == mrca_t10_t3_e14 )), col="black", size=4 ) + 
   geom_nodepoint(aes(subset=(node == mrca_t9_t4_e14 )), col="gray", size=4 ) + 
-  ggtitle("(D) Rooted on gray edge")
+  ggtitle("(D) Rooted on gray branch")
 
 grid.arrange(
   p_r_unrooted,
