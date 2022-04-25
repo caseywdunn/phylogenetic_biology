@@ -117,7 +117,7 @@ Beginning in the late 1980s, molecular data became widely used for building phyl
 
 Phylogenetic Biology has always been concerned with figuring out evolutionary relationships. This domain of inquiry is referred to as phylogenetic inference. Phylogenetic inference has been vital to improved classification of species (phylogenetic taxonomy), reconstructing key features in the evolutionary history of many groups of organisms, and is extremely interesting to those who know the organisms well.
 
-Once so many advances were made in building trees, many investigators have of course asked themselves, "Now what do I do with this tree?" There has also been a growing recognition that many questions require knowing evolutionary relationships, even if those evolutionary relationships are themselves not of central interest to the investigator. This has led to the rise of another domain often referred to as phylogenetic comparative biology. Instead of ending with trees, as many phylogenetic inference projects do, phylogenetic comparative projects usually start with trees and use them to study the evolution of traits. Comparative questions include whether there is evolutionary covariance between traits, or shifts in rates of evolution along particular edges (also referred to as branches). Phylogenetic comparative methods have become an increasingly large part of the field.
+Once so many advances were made in building trees, many investigators have of course asked themselves, "Now what do I do with this tree?" There has also been a growing recognition that many questions require knowing evolutionary relationships, even if those evolutionary relationships are themselves not of central interest to the investigator. This has led to the rise of another domain often referred to as phylogenetic comparative biology. Instead of ending with trees, as many phylogenetic inference projects do, phylogenetic comparative projects usually start with trees and use them to study the evolution of traits. Comparative questions include whether there is evolutionary covariance between traits, or shifts in rates of evolution along particular branches (also referred to as edges). Phylogenetic comparative methods have become an increasingly large part of the field.
 
 Though phylogeny initially sprung from the field of comparative morphology, and much of the initial focus was on building and analyzing trees with morphological data and using them to study the evolution of morphology, the field has rapidly expanded to encompass many other categories of data. Even so, morphology continues to be vital to building phylogenies in many contexts, including when fossils are available. While most phylogenetic inference is now based on molecular data, phylogenetic comparative methods are routinely applied to all sorts of data and questions.  Phylogenetic comparative methods now play important roles in the study of physiology, ecology, genomics, medicine, and most other parts of biology. 
 
@@ -130,20 +130,20 @@ There are a few concepts that are fundamental to understanding phylogenetic anal
 
 - The topology of the phylogeny. This is the structure of the evolutionary relationships. It can be thought of the branching order of a tree.
 
-- The lengths of the edges, also known as branches, in the phylogeny. Length can mean different things, such as time elapsed or amount of expected evolutionary change.
+- The lengths of the branches in the phylogeny. Length can mean different things, such as time elapsed or amount of expected evolutionary change.
 
 - Characters. The organism attributes under consideration. These include things like leg length, geographic location, a particular site in a particular gene, a physiological attribute, or a feature of genome organization.
 
 - Character states. The particular values that can be taken by different individuals for specific characters. If leg length is a character, a leg length character state could be 4.3 mm. For a site in a DNA sequence, a character state could be `C`, `G`, `T`, or `A`.
 
-- Models. These are hypotheses about how characters evolve. They take a mathematical and statistical form. For example, a model could describe the covariance between evolutionary changes in different characters, or be a set of functions that describe the probabilities of specific state changes along an edge. Models are abstract representations of biological processes. They are deliberate simplifications that allows us to explicitly describe what we think the most important features of change are. We can make models as simple or complex as we like, but the more complex they are the more information we need to use them effectively. 
+- Models. These are hypotheses about how characters evolve. They take a mathematical and statistical form. For example, a model could describe the covariance between evolutionary changes in different characters, or be a set of functions that describe the probabilities of specific state changes along a branch. Models are abstract representations of biological processes. They are deliberate simplifications that allows us to explicitly describe what we think the most important features of change are. We can make models as simple or complex as we like, but the more complex they are the more information we need to use them effectively. 
 
 - Model parameter values. These are the specific values for terms in the model. In a model that indicates covariance between characters, the specific values in such a covariance matrix are model parameter values. If you have a set of functions that describe the probability of changing between particular states for a character, the model parameters include the rates in those functions.
 
 In order to make informative comparisons across species, both for inferring phylogenies and for phylogenetic comparative analyses, we need a unified ontological framework to refer to the same characters and character states in different organisms. This correspondence is provided by the concept of homology. Homology is a hypothesis that the same attribute is present in different entities because that attribute was present in their shared ancestor. Homology is a deceptively simple concept that can sometimes be devilishly difficult to define, test, and apply [wagner2014]. 
 
 \begin{figure}
-\includegraphics[width=9in]{figures/phylogenetic_analyses} \caption{(A) The primary components of a phylogenetic analysis. This mammal phylogeny and edge lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.}(\#fig:intro-concepts)
+\includegraphics[width=9in]{figures/phylogenetic_analyses} \caption{(A) The primary components of a phylogenetic analysis. This mammal phylogeny and branch lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.}(\#fig:intro-concepts)
 \end{figure}
 
 ## A unified perspective on phylogenetic studies
@@ -155,7 +155,7 @@ Fortunately, phylogenetic biology has a strong conceptual foundation that provid
 Let's revisit the list above, and rearrange it a bit. We have:
 
 - Topology
-- Edge lengths
+- Branch lengths
 - Characters
 - Character states of tips
 - Character states of ancestors
@@ -168,9 +168,9 @@ The investigator can generally take one of three approaches to each of these thi
 - Estimate the value
 - Don't care about the value
 
-Many phylogenetic inference studies use expert knowledge to define and clamp the characters, run some preliminary analyses to evaluate and then clamp the model, and clamp the character states at the tips according to the observed data such as gene sequences. They then estimate the topology, edge lengths, character states of ancestors, and model parameters. They then throw away the estimates of ancestral character states and model parameters, and present the topology and edge lengths as the result. The end result is that you get a tree of the inferred evolutionary relationships between your organisms of interest.
+Many phylogenetic inference studies use expert knowledge to define and clamp the characters, run some preliminary analyses to evaluate and then clamp the model, and clamp the character states at the tips according to the observed data such as gene sequences. They then estimate the topology, branch lengths, character states of ancestors, and model parameters. They then throw away the estimates of ancestral character states and model parameters, and present the topology and branch lengths as the result. The end result is that you get a tree of the inferred evolutionary relationships between your organisms of interest.
 
-Many phylogenetic comparative analyses take the same approach to characters and observed character states at the tip (both clamped), and ancestral character states (estimated, but discarded). They then take a different approach to the remaining items. They clamp the tree and edge lengths according to the results of an earlier phylogenetic inference, evaluate different models, and estimate model parameters. The models and model parameters are then the presented results. They would report, for example, that a model that allows for shifts in rates of evolution along different edges is a better fit than a model that doesn't, or provide estimates of the evolutionary covariance between traits.
+Many phylogenetic comparative analyses take the same approach to characters and observed character states at the tip (both clamped), and ancestral character states (estimated, but discarded). They then take a different approach to the remaining items. They clamp the tree and branch lengths according to the results of an earlier phylogenetic inference, evaluate different models, and estimate model parameters. The models and model parameters are then the presented results. They would report, for example, that a model that allows for shifts in rates of evolution along different branches is a better fit than a model that doesn't, or provide estimates of the evolutionary covariance between traits.
 
 Other studies apply the three approaches (clamp, estimate, don't care) in different ways across the phylogenetic study. Some combinations are very common, others very rare. Some have yet to be explored at all. There are a few reasons for this variation. One is historical. Some combinations became widespread early on and stayed that way as later studies were created in the image of earlier studies. Another reason is methodological. Some combinations are rare or nonexistent in practice because they require methods development that hasn't been done yet. Data limitations are another big issue. It takes more data to estimate more things. As you get more data, you can unclamp more things. And the biggest limitation is often computational. Phylogenetic analyses are often computationally expensive, and this can quickly become limiting. This is often the ceiling in practice, but more efficient software tools, improved methods, and new data are all helping to make analyses more tractable at the same time that more computer power is becoming available to more investigators.
 
@@ -183,13 +183,13 @@ Some studies differ only in which estimates are kept and which are thrown away. 
 
 With this framework in mind, let's take a look at a sampling of recent phylogenetic studies. 
 
-- [Nextstrain](https://nextstrain.org/sars-cov-2/) provides a frequently updated phylogeny of sars-cov-2, with associated data on geography, sampling time, and other factors [@hadfield2018nextstrain]. This has been critical to understanding and monitoring the sars-cov-2 pandemic, and intervening to disrupt transmission. They are using observed character data at the tips (virus genome sequences) to estimate topology, edge lengths, and model parameters.
+- [Nextstrain](https://nextstrain.org/sars-cov-2/) provides a frequently updated phylogeny of sars-cov-2, with associated data on geography, sampling time, and other factors [@hadfield2018nextstrain]. This has been critical to understanding and monitoring the sars-cov-2 pandemic, and intervening to disrupt transmission. They are using observed character data at the tips (virus genome sequences) to estimate topology, branch lengths, and model parameters.
 
 - Myxozoa are enigmatic parasites that live in fish. They have very few morphological traits that show clear homology with other animals. So Sally Chang, Paulyn Cartwright, and colleagues used phylogenetic inference to examine their relationships to other animals, and found strong support for their placement within Cnidaria [@chang2015genomic].
 
-- My own lab wanted to see if the evolution of gene expression is more rapid after gene duplication than after speciation [@dunn2018pairwise]. We found no evidence for such a difference. We used the results of previous studies to clamp gene phylogenies and gene expression character states at the tips, and estimated ancestral expression states to examine sifts in expression along particular edges.
+- My own lab wanted to see if the evolution of gene expression is more rapid after gene duplication than after speciation [@dunn2018pairwise]. We found no evidence for such a difference. We used the results of previous studies to clamp gene phylogenies and gene expression character states at the tips, and estimated ancestral expression states to examine sifts in expression along particular branches.
 
-- *Viburnum* is a group of plants with wide distribution in many different habitat types. Michael Landis spearheaded a collaborative project between the Edwards and Donoghue labs here at Yale EEB to understand how *Viburnum* first diversified in Asia during the Eocene and then spread across the globe [@landis2020joint]. They clamped the character states at the tips based on gene sequence data, morphology, and geographic range, developed innovative methods to simultaneously estimate the phylogeny, edge length, and ancestral geographic ranges. This is the vanguard of new approaches that simultaneously consider multiple categories of data rather than bolt together multiple independent methods that estimate one thing at a time.
+- *Viburnum* is a group of plants with wide distribution in many different habitat types. Michael Landis spearheaded a collaborative project between the Edwards and Donoghue labs here at Yale EEB to understand how *Viburnum* first diversified in Asia during the Eocene and then spread across the globe [@landis2020joint]. They clamped the character states at the tips based on gene sequence data, morphology, and geographic range, developed innovative methods to simultaneously estimate the phylogeny, branch length, and ancestral geographic ranges. This is the vanguard of new approaches that simultaneously consider multiple categories of data rather than bolt together multiple independent methods that estimate one thing at a time.
 
 This is a very exciting time in phylogenetic biology. For many years most studies followed a few basic templates. With the development of new phylogenetic methods, new tools to collect high throughput character data, and a growing interest in phylogenetic questions, the field is now in its most interesting stage of development and application yet.
 
@@ -232,11 +232,11 @@ helpful to turn to math.
 A phylogeny is a specific instance of a mathematical object known as a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)). 
 A graph consists of nodes, often represented as circles, connected by edges, often 
 represented by lines (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
-For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions.
+For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.
 
 
 \begin{figure}
-\includegraphics[width=2.89in]{figures/graph_tree} \caption{Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two edges that connect it to its children, the other internal nodes each have three edges (one that connects to the parent, two to children), and the tips each have one edge (that connects to their parents).}(\#fig:trees-graph-tree)
+\includegraphics[width=2.89in]{figures/graph_tree} \caption{Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two branches that connect it to its children, the other internal nodes each have three branches (one that connects to the parent, two to children), and the tips each have one branch (that connects to their parents).}(\#fig:trees-graph-tree)
 \end{figure}
 
 Phylogeny graphs (Figure \@ref(fig:trees-graph-tree)) usually have a few specific topological properties:
@@ -244,13 +244,13 @@ Phylogeny graphs (Figure \@ref(fig:trees-graph-tree)) usually have a few specifi
 - They are acyclic. This means that there is only one possible path along edges from one node to another. It isn't possible to go in circles. Exceptions can arise in cases of horizontal 
 gene transfer or hybridization.
 
-- They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three edges connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. 
+- They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three branches connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. 
 
-- They can be directed. This means that edges are not symmetric, and instead have 
-directionality. Specifically, they denote time. The node on one end of the edge 
-is older than the node on the other side of the edge. We therefore can refer to the nodes connected to a particular edge as the parent node and child node.
+- They can be directed. This means that branches are not symmetric, and instead have 
+directionality. Specifically, they denote time. The node on one end of the branch 
+is older than the node on the other end of the branch. We therefore can refer to the nodes connected to a particular branch as the parent node and child node.
 
-A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The edges, usually referred to as branches in phylogenies, indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each branch would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single branch, parent-child node relationships in the tree don't mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.
+A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The branches indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each branch would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single branch, parent-child node relationships in the tree don't mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.
 
 ## Drawing phylogenies
 
@@ -262,7 +262,7 @@ You will rarely see a phylogeny depicted as in Figure \@ref(fig:trees-graph-tree
 
 There is considerable variation in how the same phylogeny can be drawn (Figure \@ref(fig:trees-layouts)). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. 
 
-Rectangular layouts are the most common, because the entire branch length is along one axis of the plot. In a rectangular tree, each node is depicted as a line that is orthogonal to the branches. The confusing thing is that, because this line has the same width and color as the branches, it looks as if it is part of the branch. It isn't though-- its length is arbitrary, and it just shows which branches attach to that node. It also adds right-degree elbows where the ends of the node lines connect to the branches, forming a corner.
+Rectangular layouts are the most common, because the entire branch length is along one axis of the plot. In a rectangular tree, each node is depicted as a line that is perpendicular to the branches. If the branches are horizontal, so that time reads from right to left, these node lines are vertical lines at the end of each internal branch (Figure \@ref(fig:trees-layouts)A). The confusing thing is that, because these node lines have the same width and color as the branches, it looks as if they are part of the branches. They aren't though-- their length is arbitrary, and they just space out the daughter branches. Node lines also add right-degree elbows where the ends of the node lines connect to the branches, forming a corner.
 
 Slanted layouts avoid the node lines and elbows of rectangular layouts, but because the branches aren't parallel and can be at a variety of angles, it isn't always easy to read branch lengths on them. 
 
@@ -1487,7 +1487,7 @@ Rather than assess the support of a particular focal topology, sometimes you wan
 
 <!--chapter:end:evaluation.rmd-->
 
-# Bayesian phylognetics
+# Bayesian phylogenetics
 
 Let's take stock of what we have covered so far. We introduced models, and how to simulate data with them. We then explored how to use models to calculate the likelihood -- the probability of the observed data given the topology, branch lengths, model parameters, and model. We used likelihood as an optimality criterion in heuristic searches to find the Maximum Likelihood (ML) phylogeny. We introduced the methods to calculate the frequency of branches on a focal topology, like the ML topology, in a sample of phylogenies. We showed how to generate a sample of phylogenies by running ML searches on bootstrapped matrices, and used this to calculate bootstrap support for each branch in the ML phylogeny.
 
@@ -1518,7 +1518,7 @@ $P(H|D)$, read as "the probability of the hypothesis given the data", is the pos
 
 Let's plug in a few numbers to get some intuition for the behavior of Bayes' theorem. First, consider the case where $P(H)=0$, *i.e.* you assign a prior probability of $0$ to the hypothesis. The posterior probability, $P(H|D)$, will then also be $0$. This shows that if you believe ahead of collecting data that the hypothesis is absolutely impossible, no amount of data can change your mind and your updated hypothesis, the posterior, will also be $0$. 
 
-Second, let's consider the case where the data are just as likely under the hypothesis is they are in general. This would be like having a medical test for a specific condition where the test was so bad that the data (test result) didn't depend in any way on the hypothesis (the presence of the condition). For example, the test returns a positive 10% of the time regardless of whether you have the condition or not. In that situation, $P(D|H)=P(D)$. Since $P(D|H)$ is in the numerator and $P(D)$ is in the denominator, they cancel out. That leaves $P(H|D)=P(H)$ -- the posterior probability of the hypothesis is the same as the prior on the hypothesis. The data didn't change our understanding of the hypothesis at all. This is the behavior we want when the data have no information relevant to the hypothesis.
+Second, let's consider the case where the data are just as likely under the hypothesis as they are in general. This would be like having a medical test for a specific condition where the test was so bad that the data (test result) didn't depend in any way on the hypothesis (the presence of the condition). For example, the test returns a positive 10% of the time regardless of whether you have the condition or not. In that situation, $P(D|H)=P(D)$. Since $P(D|H)$ is in the numerator and $P(D)$ is in the denominator, they cancel out. That leaves $P(H|D)=P(H)$ -- the posterior probability of the hypothesis is the same as the prior on the hypothesis. The data didn't change our understanding of the hypothesis at all. This is the behavior we want when the data have no information relevant to the hypothesis.
 
 Third, consider a case where the data are perfect indicators of the hypothesis. You get a specific pattern in the data whenever, and only when, the hypothesis is true. Because the hypothesis and data are perfectly linked, $P(D)=P(H)$ the priors cancel out. In this case, $P(H|D)=P(D|H)$, *i.e.* the posterior becomes equal to the likelihood. This never happens in phylogenetic inference, since any given phylogeny could always generate multiple sequences at the tips. But it is the case that as the data become more informative the priors have less impact on the posterior.
 
@@ -1786,7 +1786,7 @@ The [MCMC robot](https://phylogeny.uconn.edu/mcmc-robot/) by Paul Lewis is an ex
 
 # Software versions
 
-This book was rendered from the source code on $Sun Apr 24 01:20:27 AM 2022$ with the following R package versions.
+This book was rendered from the source code on $Sun Apr 24 03:24:10 PM 2022$ with the following R package versions.
 
 
 ```
