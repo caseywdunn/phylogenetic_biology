@@ -14,7 +14,11 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
   keep_md: yes
-  fontfamily: "Gyre Schola"
   fontsize: 11pt
   always_allow_html: true
+  # https://frommindtotype.wordpress.com/2018/04/23/the-tex-gyre-font-family/
+  mainfont: Gyre Schola
+  sansfont: Gyre Heros
+  monofont: Gyre Cursor
+  
 bookdown::epub_book: default

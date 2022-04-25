@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2022-04-24"
+date: "2022-04-25"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1012,44 +1012,26 @@ For each branch, we can now use $\mathbf{P}(t)$ to calculate the probability of 
 Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the probabilities to calculate the joint probability of all of these events happening. 
 We can think of these as the probabilities of specific changes along each branch as the probabilities of the state at each child node. 
 
-<table>
- <thead>
-  <tr>
-   <th style="text-align:right;"> node </th>
-   <th style="text-align:right;"> probability </th>
-  </tr>
- </thead>
-<tbody>
-  <tr>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.7442034 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.7442034 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 0.3048887 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0.2260230 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 5 </td>
-   <td style="text-align:right;"> NA </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 6 </td>
-   <td style="text-align:right;"> 0.0195083 </td>
-  </tr>
-  <tr>
-   <td style="text-align:right;"> 7 </td>
-   <td style="text-align:right;"> 0.0652538 </td>
-  </tr>
-</tbody>
-</table>
+
+\begin{tabular}{r|r}
+\hline
+node & probability\\
+\hline
+1 & 0.7442034\\
+\hline
+2 & 0.7442034\\
+\hline
+3 & 0.3048887\\
+\hline
+4 & 0.2260230\\
+\hline
+5 & NA\\
+\hline
+6 & 0.0195083\\
+\hline
+7 & 0.0652538\\
+\hline
+\end{tabular}
 
 Note, though, that the probability for node 5 is missing (it has a value of `NA`, which means it is Not Available). By reference to Figure \@ref(fig:inference-history) we can see that this is the root node. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
 
@@ -1786,7 +1768,7 @@ The [MCMC robot](https://phylogeny.uconn.edu/mcmc-robot/) by Paul Lewis is an ex
 
 # Software versions
 
-This book was rendered from the source code on $Sun Apr 24 03:24:10 PM 2022$ with the following R package versions.
+This book was rendered from the source code on $Mon Apr 25 04:07:39 PM 2022$ with the following R package versions.
 
 
 ```
@@ -1799,53 +1781,70 @@ BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
 LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
 
 locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
- [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
-[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] ggimage_0.3.0    bookdown_0.25    scales_1.1.1     ggrepel_0.9.1    kableExtra_1.3.4
- [6] phangorn_2.8.1   Matrix_1.4-0     forcats_0.5.1    dplyr_1.0.8      purrr_0.3.4     
-[11] readr_2.1.2      tidyr_1.2.0      tibble_3.1.6     ggplot2_3.3.5    tidyverse_1.3.1 
-[16] stringr_1.4.0    phytools_1.0-1   maps_3.4.0       magrittr_2.0.3   gridExtra_2.3   
-[21] geiger_2.0.7     ape_5.6-2        ggtree_3.2.1     treeio_1.18.1   
+ [1] ggimage_0.3.0    scales_1.2.0     ggrepel_0.9.1    kableExtra_1.3.4
+ [5] phangorn_2.8.1   Matrix_1.4-0     forcats_0.5.1    dplyr_1.0.8     
+ [9] purrr_0.3.4      readr_2.1.2      tidyr_1.2.0      tibble_3.1.6    
+[13] ggplot2_3.3.5    tidyverse_1.3.1  stringr_1.4.0    phytools_1.0-3  
+[17] maps_3.4.0       magrittr_2.0.3   gridExtra_2.3    geiger_2.0.7    
+[21] ape_5.6-2        ggtree_3.2.1     treeio_1.18.1    bookdown_0.26   
 
 loaded via a namespace (and not attached):
- [1] colorspace_2.0-3        ellipsis_0.3.2          fs_1.5.2               
- [4] aplot_0.1.2             rstudioapi_0.13         farver_2.1.0           
- [7] fansi_1.0.3             mvtnorm_1.1-3           lubridate_1.8.0        
-[10] xml2_1.3.3              codetools_0.2-18        splines_4.1.3          
-[13] mnormt_2.0.2            knitr_1.38              jsonlite_1.8.0         
-[16] broom_0.7.12            dbplyr_2.1.1            png_0.1-7              
-[19] compiler_4.1.3          httr_1.4.2              backports_1.4.1        
-[22] assertthat_0.2.1        fastmap_1.1.0           lazyeval_0.2.2         
-[25] cli_3.2.0               htmltools_0.5.2         tools_4.1.3            
-[28] igraph_1.2.11           coda_0.19-4             gtable_0.3.0           
-[31] glue_1.6.2              clusterGeneration_1.3.7 tinytex_0.38           
-[34] fastmatch_1.1-3         Rcpp_1.0.8.3            jquerylib_0.1.4        
-[37] cellranger_1.1.0        vctrs_0.4.0             svglite_2.1.0          
-[40] nlme_3.1-155            xfun_0.30               rvest_1.0.2            
-[43] lifecycle_1.0.1         MASS_7.3-55             subplex_1.7            
-[46] hms_1.1.1               parallel_4.1.3          expm_0.999-6           
-[49] yaml_2.3.5              ggfun_0.0.5             sass_0.4.1             
-[52] yulab.utils_0.0.4       stringi_1.7.6           highr_0.9              
-[55] plotrix_3.8-2           tidytree_0.3.9          rlang_1.0.2            
-[58] pkgconfig_2.0.3         systemfonts_1.0.4       evaluate_0.15          
-[61] lattice_0.20-45         patchwork_1.1.1         labeling_0.4.2         
-[64] tidyselect_1.1.2        deSolve_1.31            R6_2.5.1               
-[67] magick_2.7.3            generics_0.1.2          combinat_0.0-8         
-[70] DBI_1.1.2               pillar_1.7.0            haven_2.4.3            
-[73] withr_2.5.0             mgcv_1.8-39             scatterplot3d_0.3-41   
-[76] modelr_0.1.8            crayon_1.5.1            utf8_1.2.2             
-[79] tmvnsim_1.0-2           tzdb_0.3.0              rmarkdown_2.13         
-[82] grid_4.1.3              readxl_1.4.0            reprex_2.0.1           
-[85] digest_0.6.29           webshot_0.5.2           numDeriv_2016.8-1.1    
-[88] gridGraphics_0.5-1      munsell_0.5.0           viridisLite_0.4.0      
-[91] ggplotify_0.1.0         bslib_0.3.1             quadprog_1.5-8         
+ [1] colorspace_2.0-3        ellipsis_0.3.2         
+ [3] fs_1.5.2                aplot_0.1.3            
+ [5] rstudioapi_0.13         farver_2.1.0           
+ [7] fansi_1.0.3             mvtnorm_1.1-3          
+ [9] lubridate_1.8.0         xml2_1.3.3             
+[11] codetools_0.2-18        splines_4.1.3          
+[13] mnormt_2.0.2            knitr_1.38             
+[15] jsonlite_1.8.0          broom_0.8.0            
+[17] dbplyr_2.1.1            png_0.1-7              
+[19] compiler_4.1.3          httr_1.4.2             
+[21] backports_1.4.1         assertthat_0.2.1       
+[23] fastmap_1.1.0           lazyeval_0.2.2         
+[25] cli_3.2.0               htmltools_0.5.2        
+[27] tools_4.1.3             igraph_1.3.1           
+[29] coda_0.19-4             gtable_0.3.0           
+[31] glue_1.6.2              clusterGeneration_1.3.7
+[33] tinytex_0.38            fastmatch_1.1-3        
+[35] Rcpp_1.0.8.3            cellranger_1.1.0       
+[37] vctrs_0.4.1             svglite_2.1.0          
+[39] nlme_3.1-155            xfun_0.30              
+[41] rvest_1.0.2             lifecycle_1.0.1        
+[43] MASS_7.3-55             subplex_1.8            
+[45] hms_1.1.1               parallel_4.1.3         
+[47] expm_0.999-6            yaml_2.3.5             
+[49] ggfun_0.0.6             yulab.utils_0.0.4      
+[51] stringi_1.7.6           highr_0.9              
+[53] plotrix_3.8-2           tidytree_0.3.9         
+[55] rlang_1.0.2             pkgconfig_2.0.3        
+[57] systemfonts_1.0.4       evaluate_0.15          
+[59] lattice_0.20-45         patchwork_1.1.1        
+[61] labeling_0.4.2          tidyselect_1.1.2       
+[63] deSolve_1.32            R6_2.5.1               
+[65] magick_2.7.3            generics_0.1.2         
+[67] combinat_0.0-8          DBI_1.1.2              
+[69] pillar_1.7.0            haven_2.5.0            
+[71] withr_2.5.0             mgcv_1.8-39            
+[73] scatterplot3d_0.3-41    modelr_0.1.8           
+[75] crayon_1.5.1            utf8_1.2.2             
+[77] tmvnsim_1.0-2           tzdb_0.3.0             
+[79] rmarkdown_2.13          grid_4.1.3             
+[81] readxl_1.4.0            reprex_2.0.1           
+[83] digest_0.6.29           webshot_0.5.3          
+[85] numDeriv_2016.8-1.1     gridGraphics_0.5-1     
+[87] munsell_0.5.0           viridisLite_0.4.0      
+[89] ggplotify_0.1.0         quadprog_1.5-8         
 ```
 
 <!--chapter:end:versions.rmd-->

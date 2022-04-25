@@ -104,6 +104,7 @@ RUN tlmgr update --self \
     stringenc \
     tabu \
     tex \
+    tex-gyre \
     tex-ini-files \
     texlive-scripts \
     threeparttable \
