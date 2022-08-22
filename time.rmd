@@ -9,7 +9,7 @@ Each branch connects two nodes. In a rooted tree, we refer to the node closer to
 
 ## Measurements of time on trees
 
-As discussed in Section \@ref(trees-edge-lengths), branch length can mean different things. It is up to the investigator to specify an branch length, and clearly communicate what it means. The three usual approaches are a cladogram (branch lengths are not specified and have no meaning), phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where branch lengths are in units of time.
+As discussed in Section \@ref(trees-branch-lengths), branch length can mean different things. It is up to the investigator to specify an branch length, and clearly communicate what it means. The three usual approaches are a cladogram (branch lengths are not specified and have no meaning), phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where branch lengths are in units of time.
 
 ### Cladograms
 
@@ -31,6 +31,7 @@ ggtree(phylo_tree ) +                                      # Draw the tree
   geom_tippoint(col="gray")
 
 ```
+
 Take a look at the cladogram in Figure \@ref(fig:time-cladogram). Consider the red node numbers. The terminal nodes are numbered 1-5, and 6-9 are internal nodes. Of those, the root is node 6. Because the tree is rooted, we know that time proceeds from the root to the tips. If you consider two nodes, where one is descended from the other, then the node closer to the root is older. There are a variety of statements we could make based on this simple relationship, including:
 
 - Node 6 is older than all other nodes in the phylogeny. This is tautological, since the root is by definition the oldest node.

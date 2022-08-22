@@ -914,6 +914,7 @@ In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by samplin
 So far we have considered the evolution of one DNA site along one branch at a time (Figure \@ref(fig:sim-application)B, Table \@ref(tab:sim-single-edges)). We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of a single site along all branches, generating a specific nucleotide state at each node. We will use the same toy mammal model as above. We will consider a simplified tree (Figure \@ref(fig:sim-tree)) rather than the full mammal tree, just to keep things compact.
 
 ![(\#fig:sim-tree)Simulation of states for a single DNA site on a simple tree according to our toy mammal model. Node numbers are in gray. Character states are in boxes at nodes. Branch lengths for this phylogram are in units of expected change.](phylogenetic_biology_files/figure-latex/sim-tree-1.pdf) 
+
 This isn't a big step from what we have already -- once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along a whole tree.
 
 Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\mathbf{\Pi}$. That gives us the $A$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so the also share a parent state.
@@ -1434,7 +1435,7 @@ Branch frequencies are far more useful. It is helpful to think of an branch as a
 
 
 \begin{figure}
-\includegraphics[width=4.98in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology.}(\#fig:eval-splits)
+\includegraphics[width=3.92in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology.}(\#fig:eval-splits)
 \end{figure}
 
 
@@ -1614,13 +1615,14 @@ Each branch connects two nodes. In a rooted tree, we refer to the node closer to
 
 ## Measurements of time on trees
 
-As discussed in Section \@ref(trees-edge-lengths), branch length can mean different things. It is up to the investigator to specify an branch length, and clearly communicate what it means. The three usual approaches are a cladogram (branch lengths are not specified and have no meaning), phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where branch lengths are in units of time.
+As discussed in Section \@ref(trees-branch-lengths), branch length can mean different things. It is up to the investigator to specify an branch length, and clearly communicate what it means. The three usual approaches are a cladogram (branch lengths are not specified and have no meaning), phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where branch lengths are in units of time.
 
 ### Cladograms
 
 Because branch lengths in a cladogram have no meaning, we cannot make absolute statements about time in a cladogram. This doesn't mean, though, that we can't say anything about time -- we can still make some ordinal statements about the relative ages of nodes.
 
 ![(\#fig:time-cladogram)A cladogram. Nodes and node numbers are gray, and branches are black.](phylogenetic_biology_files/figure-latex/time-cladogram-1.pdf) 
+
 Take a look at the cladogram in Figure \@ref(fig:time-cladogram). Consider the red node numbers. The terminal nodes are numbered 1-5, and 6-9 are internal nodes. Of those, the root is node 6. Because the tree is rooted, we know that time proceeds from the root to the tips. If you consider two nodes, where one is descended from the other, then the node closer to the root is older. There are a variety of statements we could make based on this simple relationship, including:
 
 - Node 6 is older than all other nodes in the phylogeny. This is tautological, since the root is by definition the oldest node.
@@ -1768,7 +1770,7 @@ The [MCMC robot](https://phylogeny.uconn.edu/mcmc-robot/) by Paul Lewis is an ex
 
 # Software versions
 
-This book was rendered from the source code on $Mon Aug 22 07:31:58 PM 2022$ with the following R package versions.
+This book was rendered from the source code on $Mon Aug 22 09:14:42 PM 2022$ with the following R package versions.
 
 
 ```
@@ -1781,74 +1783,54 @@ BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
 LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
 
 locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
- [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
+ [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
+[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods  
-[7] base     
+[1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] scales_1.2.0     ggrepel_0.9.1    kableExtra_1.3.4
- [4] phangorn_2.9.0   Matrix_1.4-1     forcats_0.5.1   
- [7] dplyr_1.0.9      purrr_0.3.4      readr_2.1.2     
-[10] tidyr_1.2.0      tibble_3.1.8     ggplot2_3.3.6   
-[13] tidyverse_1.3.2  stringr_1.4.0    phytools_1.0-3  
-[16] maps_3.4.0       magrittr_2.0.3   gridExtra_2.3   
-[19] geiger_2.0.10    ape_5.6-2        ggtree_3.4.2    
-[22] treeio_1.20.2    bookdown_0.27   
+ [1] scales_1.2.0     ggrepel_0.9.1    kableExtra_1.3.4 phangorn_2.9.0  
+ [5] Matrix_1.4-1     forcats_0.5.1    dplyr_1.0.9      purrr_0.3.4     
+ [9] readr_2.1.2      tidyr_1.2.0      tibble_3.1.8     ggplot2_3.3.6   
+[13] tidyverse_1.3.2  stringr_1.4.0    phytools_1.0-3   maps_3.4.0      
+[17] magrittr_2.0.3   gridExtra_2.3    geiger_2.0.10    ape_5.6-2       
+[21] ggtree_3.4.2     treeio_1.20.2    bookdown_0.27   
 
 loaded via a namespace (and not attached):
- [1] googledrive_2.0.0       colorspace_2.0-3       
- [3] ellipsis_0.3.2          fs_1.5.2               
- [5] aplot_0.1.6             rstudioapi_0.13        
- [7] farver_2.1.1            fansi_1.0.3            
- [9] mvtnorm_1.1-3           lubridate_1.8.0        
-[11] xml2_1.3.3              splines_4.2.1          
-[13] codetools_0.2-18        mnormt_2.1.0           
-[15] knitr_1.39              jsonlite_1.8.0         
-[17] broom_1.0.0             dbplyr_2.2.1           
-[19] png_0.1-7               compiler_4.2.1         
-[21] httr_1.4.3              backports_1.4.1        
-[23] assertthat_0.2.1        fastmap_1.1.0          
-[25] lazyeval_0.2.2          gargle_1.2.0           
-[27] cli_3.3.0               htmltools_0.5.3        
-[29] tools_4.2.1             igraph_1.3.4           
-[31] coda_0.19-4             gtable_0.3.0           
-[33] glue_1.6.2              clusterGeneration_1.3.7
-[35] fastmatch_1.1-3         Rcpp_1.0.9             
-[37] cellranger_1.1.0        vctrs_0.4.1            
-[39] svglite_2.1.0           nlme_3.1-157           
-[41] xfun_0.31               rvest_1.0.2            
-[43] ggimage_0.3.1           lifecycle_1.0.1        
-[45] googlesheets4_1.0.0     MASS_7.3-57            
-[47] subplex_1.8             hms_1.1.1              
-[49] parallel_4.2.1          expm_0.999-6           
-[51] yaml_2.3.5              ggfun_0.0.6            
-[53] yulab.utils_0.0.5       stringi_1.7.8          
-[55] highr_0.9               plotrix_3.8-2          
-[57] tidytree_0.4.0          rlang_1.0.4            
-[59] pkgconfig_2.0.3         systemfonts_1.0.4      
-[61] evaluate_0.15           lattice_0.20-45        
-[63] patchwork_1.1.1         labeling_0.4.2         
-[65] tidyselect_1.1.2        deSolve_1.33           
-[67] R6_2.5.1                magick_2.7.3           
-[69] generics_0.1.3          combinat_0.0-8         
-[71] DBI_1.1.3               mgcv_1.8-40            
-[73] pillar_1.8.0            haven_2.5.0            
-[75] withr_2.5.0             scatterplot3d_0.3-41   
-[77] modelr_0.1.8            crayon_1.5.1           
-[79] utf8_1.2.2              tzdb_0.3.0             
-[81] rmarkdown_2.14          grid_4.2.1             
-[83] readxl_1.4.0            reprex_2.0.1           
-[85] digest_0.6.29           webshot_0.5.3          
-[87] numDeriv_2016.8-1.1     gridGraphics_0.5-1     
-[89] munsell_0.5.0           viridisLite_0.4.0      
-[91] ggplotify_0.1.0         quadprog_1.5-8         
+ [1] googledrive_2.0.0       colorspace_2.0-3        ellipsis_0.3.2         
+ [4] fs_1.5.2                aplot_0.1.6             rstudioapi_0.13        
+ [7] farver_2.1.1            fansi_1.0.3             mvtnorm_1.1-3          
+[10] lubridate_1.8.0         xml2_1.3.3              splines_4.2.1          
+[13] codetools_0.2-18        mnormt_2.1.0            knitr_1.39             
+[16] jsonlite_1.8.0          broom_1.0.0             dbplyr_2.2.1           
+[19] png_0.1-7               compiler_4.2.1          httr_1.4.3             
+[22] backports_1.4.1         assertthat_0.2.1        fastmap_1.1.0          
+[25] lazyeval_0.2.2          gargle_1.2.0            cli_3.3.0              
+[28] htmltools_0.5.3         tools_4.2.1             igraph_1.3.4           
+[31] coda_0.19-4             gtable_0.3.0            glue_1.6.2             
+[34] clusterGeneration_1.3.7 tinytex_0.40            fastmatch_1.1-3        
+[37] Rcpp_1.0.9              cellranger_1.1.0        vctrs_0.4.1            
+[40] svglite_2.1.0           nlme_3.1-157            xfun_0.31              
+[43] rvest_1.0.2             ggimage_0.3.1           lifecycle_1.0.1        
+[46] googlesheets4_1.0.0     MASS_7.3-57             subplex_1.8            
+[49] hms_1.1.1               parallel_4.2.1          expm_0.999-6           
+[52] yaml_2.3.5              ggfun_0.0.6             yulab.utils_0.0.5      
+[55] stringi_1.7.8           highr_0.9               plotrix_3.8-2          
+[58] tidytree_0.4.0          rlang_1.0.4             pkgconfig_2.0.3        
+[61] systemfonts_1.0.4       evaluate_0.15           lattice_0.20-45        
+[64] patchwork_1.1.1         labeling_0.4.2          tidyselect_1.1.2       
+[67] deSolve_1.33            R6_2.5.1                magick_2.7.3           
+[70] generics_0.1.3          combinat_0.0-8          DBI_1.1.3              
+[73] mgcv_1.8-40             pillar_1.8.0            haven_2.5.0            
+[76] withr_2.5.0             scatterplot3d_0.3-41    modelr_0.1.8           
+[79] crayon_1.5.1            utf8_1.2.2              tzdb_0.3.0             
+[82] rmarkdown_2.14          grid_4.2.1              readxl_1.4.0           
+[85] reprex_2.0.1            digest_0.6.29           webshot_0.5.3          
+[88] numDeriv_2016.8-1.1     gridGraphics_0.5-1      munsell_0.5.0          
+[91] viridisLite_0.4.0       ggplotify_0.1.0         quadprog_1.5-8         
 ```
 
 <!--chapter:end:versions.rmd-->
