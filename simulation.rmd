@@ -589,9 +589,9 @@ Here we have built up the conceptual, mathematical, statistical, and computation
 
 ## Additional resources
 
-- As a grad student, I learned much of what I present here from [swofford1996molecular]. This is an incredibly lucid chapter, and the foundation for my own understanding of how to think about the likelihood of molecular sequence data on a phylogeny.
+- As a grad student, I learned much of what I present here from @swofford1996molecular. This is such a lucid introduction to the likelihood of molecular sequence data on a phylogeny.
 
-- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent [Phylo Seminar](https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg), starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s
+- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent Phylo Seminar at https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg , starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s .
 
-- A great introduction to continuous time models by John Huelsenbeck https://revbayes.github.io/tutorials/dice/
+- A great introduction to continuous time models by John Huelsenbeck is available at  https://revbayes.github.io/tutorials/dice/ .
 

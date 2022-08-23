@@ -40,7 +40,7 @@ I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read 
 
 ## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online) and 2022. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course in 2020, and Namrata Ahuja, the teaching fellow in 2022. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts.
+Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online) and 2022. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course in 2020, and Namrata Ahuja, the teaching fellow in 2022. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of Book of Proof, for his helpful advice on self publishing to facilitate student access.
 
 ## Dedication
 
@@ -491,13 +491,11 @@ That's it. That's all the information we specified in the newick file, all the i
 
 ## Additional reading
 
-I used `ggtree` [@R-ggtree] to draw the trees in this chapter. If you are interested in learning more about these tools, see:
+- I used `ggtree` [@R-ggtree] to draw the trees in this chapter. If you are interested in learning more about these tools, see:
 
-The ggtree book - https://yulab-smu.github.io/treedata-book/index.html
+- The ggtree book - https://yulab-smu.github.io/treedata-book/index.html
 
-ggtree vignettes - https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html
-
-
+- ggtree vignettes - https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html
 
 <!--chapter:end:phylogenies.rmd-->
 
@@ -933,11 +931,11 @@ Here we have built up the conceptual, mathematical, statistical, and computation
 
 ## Additional resources
 
-- As a grad student, I learned much of what I present here from [swofford1996molecular]. This is an incredibly lucid chapter, and the foundation for my own understanding of how to think about the likelihood of molecular sequence data on a phylogeny.
+- As a grad student, I learned much of what I present here from @swofford1996molecular. This is such a lucid introduction to the likelihood of molecular sequence data on a phylogeny.
 
-- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent [Phylo Seminar](https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg), starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s
+- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent Phylo Seminar at https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg , starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s .
 
-- A great introduction to continuous time models by John Huelsenbeck https://revbayes.github.io/tutorials/dice/
+- A great introduction to continuous time models by John Huelsenbeck is available at  https://revbayes.github.io/tutorials/dice/ .
 
 
 <!--chapter:end:simulation.rmd-->
@@ -1743,31 +1741,59 @@ PGLS [@symonds2014primer].
 
 Phylogenetic biology draws on a variety of themes in statistics and mathematics. Given the diverse backgrounds of people coming to phylogenetic biology, one of the challenges of introducing people to this field is ensuring a foundation in these fundamentals. Many people have a solid working grasp of many of these topics, others need a refresher, and some have never seen them.
 
-Throughout the text I have covered some of these fundamentals, but here I provide a deeper grounding and links to additional resources.
+Throughout the text I have covered some of these fundamentals, but here I provide additional resources.
 
+## Probability theory and General statistics {#stats-general}
 
-## General statistics {#stats-general}
-
-I put together this [short summary](https://bitbucket.org/caseywdunn/statistics/raw/master/statistics_in_biology.pdf) of statistical concepts commonly encountered in biology. It is short and technical, with a focus on the relationship between concepts, such as the exponential family of distributions.
-
-## Probability theory {#stats-prob}
-
-
+I put together this short summary of statistical concepts commonly encountered in biology - https://bitbucket.org/caseywdunn/statistics/raw/master/statistics_in_biology.pdf. It is short and technical, with a focus on the relationship between concepts, such as the exponential family of distributions.
 
 ## Bayes theorem {#stats-bayes}
 
-Grant Sanderson provides an excellent introduction to Bayes Theorem and conditional probability in [this video](https://youtu.be/HZGCoVF3YvM). Note that he uses $E$ for Evidence rather than $D$ for Data as is common practice in phylogenetic applications.
+Grant Sanderson of 3Blue1Brown provides an excellent introduction to Bayes Theorem and conditional probability in this video - https://youtu.be/HZGCoVF3YvM. Note that he uses $E$ for Evidence rather than $D$ for Data as is common practice in phylogenetic applications.
 
-[This video](https://youtu.be/R13BD8qKeTg) provides additional perspective, including its application to medical testing.
+This video provides additional perspective, including its application to medical testing - https://youtu.be/R13BD8qKeTg.
 
-The [MCMC robot](https://phylogeny.uconn.edu/mcmc-robot/) by Paul Lewis is an excellent interactive introduction to MCMC sampling.
+The MCMC robot by Paul Lewis is an excellent interactive introduction to MCMC sampling - https://phylogeny.uconn.edu/mcmc-robot/.
 
+
+## Linear algebra {#linear-algebra}
+
+Linear algebra is a rich field of math that springs from a surprisingly simple 
+starting point - linear combinations of 
+vectors, often represented as rows and columns of matrices. From basic 
+operations such as vector addition and scalar multiplication, one can build 
+matrix operations and many sophisticated data analyses. Many familiar data 
+analysis methods, such as regression, solving systems of equations, 
+Principal Component Analyses (PCA), and common clustering methods, are built from linear 
+algebra under the hood. So are many aspects of phylogenetic analysis, including 
+the models of evolution themselves and the representation of the phylogenetic 
+trees in matrix forms that computers can easily manupulate.
+
+Though linear algebra is fundamental to many topics at the intersection of 
+science, mathematics, and computation, most science students have far less 
+exposure to this critical field than to statistics, calculus, and other 
+quantitative topics. This is too bad, as even a basic working knowledge of 
+linear algebra can provide great insight into the tools scientists use daily 
+and allow us to better apply, implement, and extend them.
+
+The following resources are a good place to start in your own studies of 
+linear algebra:
+
+- The Essence of Linear Algebra video series by Grant Sanderson (3Blue1Brown) - https://www.3blue1brown.com/topics/linear-algebra.
+
+- Linear Algebra: Theory, Intuition, Code, by Mike X Cohen. This book is 
+accessible to scientists with little past math experience, and is very 
+reasonably priced. https://www.amazon.com/Linear-Algebra-Theory-Intuition-Code/dp/9083136604.
+
+- Data Driven Science and Engineering, by Steve Brunton and Nathan Kutz - http://www.databookuw.com/ .
+This book shows how linear algebra is applied to many powerful scientific data analyses.
+The authors have excellent companion videos organized into playlists at https://www.youtube.com/c/Eigensteve/playlists, including singular value decomposition for Chapter 1, Fourier analyses for chapter 2.
 
 <!--chapter:end:stats.rmd-->
 
 # Software versions
 
-This book was rendered from the source code on $Tue Aug 23 12:07:24 PM 2022$ with the following R package versions.
+This book was rendered from the source code on Aug 23, 2022 at 09:27:08 PM with the following R package versions.
 
 
 ```
@@ -1780,44 +1806,74 @@ BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
 LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
 
 locale:
- [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8       
- [4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
- [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C              
-[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] stats     graphics  grDevices utils     datasets 
+[6] methods   base     
 
 other attached packages:
- [1] scales_1.2.0     ggrepel_0.9.1    kableExtra_1.3.4 phangorn_2.9.0   Matrix_1.4-1     forcats_0.5.1   
- [7] dplyr_1.0.9      purrr_0.3.4      readr_2.1.2      tidyr_1.2.0      tibble_3.1.8     ggplot2_3.3.6   
-[13] tidyverse_1.3.2  stringr_1.4.0    phytools_1.0-3   maps_3.4.0       magrittr_2.0.3   gridExtra_2.3   
-[19] geiger_2.0.10    ape_5.6-2        ggtree_3.4.2     treeio_1.20.2    bookdown_0.27   
+ [1] scales_1.2.0     ggrepel_0.9.1    kableExtra_1.3.4
+ [4] phangorn_2.9.0   Matrix_1.4-1     forcats_0.5.1   
+ [7] dplyr_1.0.9      purrr_0.3.4      readr_2.1.2     
+[10] tidyr_1.2.0      tibble_3.1.8     ggplot2_3.3.6   
+[13] tidyverse_1.3.2  stringr_1.4.0    phytools_1.0-3  
+[16] maps_3.4.0       magrittr_2.0.3   gridExtra_2.3   
+[19] geiger_2.0.10    ape_5.6-2        ggtree_3.4.2    
+[22] treeio_1.20.2    bookdown_0.27   
 
 loaded via a namespace (and not attached):
- [1] googledrive_2.0.0       colorspace_2.0-3        ellipsis_0.3.2          fs_1.5.2               
- [5] aplot_0.1.6             rstudioapi_0.13         farver_2.1.1            fansi_1.0.3            
- [9] mvtnorm_1.1-3           lubridate_1.8.0         xml2_1.3.3              splines_4.2.1          
-[13] codetools_0.2-18        mnormt_2.1.0            knitr_1.39              jsonlite_1.8.0         
-[17] broom_1.0.0             dbplyr_2.2.1            png_0.1-7               compiler_4.2.1         
-[21] httr_1.4.3              backports_1.4.1         assertthat_0.2.1        fastmap_1.1.0          
-[25] lazyeval_0.2.2          gargle_1.2.0            cli_3.3.0               htmltools_0.5.3        
-[29] tools_4.2.1             igraph_1.3.4            coda_0.19-4             gtable_0.3.0           
-[33] glue_1.6.2              clusterGeneration_1.3.7 tinytex_0.40            fastmatch_1.1-3        
-[37] Rcpp_1.0.9              cellranger_1.1.0        vctrs_0.4.1             svglite_2.1.0          
-[41] nlme_3.1-157            xfun_0.31               rvest_1.0.2             ggimage_0.3.1          
-[45] lifecycle_1.0.1         googlesheets4_1.0.0     MASS_7.3-57             subplex_1.8            
-[49] hms_1.1.1               parallel_4.2.1          expm_0.999-6            yaml_2.3.5             
-[53] ggfun_0.0.6             yulab.utils_0.0.5       stringi_1.7.8           highr_0.9              
-[57] plotrix_3.8-2           tidytree_0.4.0          rlang_1.0.4             pkgconfig_2.0.3        
-[61] systemfonts_1.0.4       evaluate_0.15           lattice_0.20-45         patchwork_1.1.1        
-[65] labeling_0.4.2          tidyselect_1.1.2        deSolve_1.33            R6_2.5.1               
-[69] magick_2.7.3            generics_0.1.3          combinat_0.0-8          DBI_1.1.3              
-[73] mgcv_1.8-40             pillar_1.8.0            haven_2.5.0             withr_2.5.0            
-[77] scatterplot3d_0.3-41    modelr_0.1.8            crayon_1.5.1            utf8_1.2.2             
-[81] tzdb_0.3.0              rmarkdown_2.14          grid_4.2.1              readxl_1.4.0           
-[85] reprex_2.0.1            digest_0.6.29           webshot_0.5.3           numDeriv_2016.8-1.1    
-[89] gridGraphics_0.5-1      munsell_0.5.0           viridisLite_0.4.0       ggplotify_0.1.0        
+ [1] googledrive_2.0.0       colorspace_2.0-3       
+ [3] ellipsis_0.3.2          fs_1.5.2               
+ [5] aplot_0.1.6             rstudioapi_0.13        
+ [7] farver_2.1.1            fansi_1.0.3            
+ [9] mvtnorm_1.1-3           lubridate_1.8.0        
+[11] xml2_1.3.3              splines_4.2.1          
+[13] codetools_0.2-18        mnormt_2.1.0           
+[15] knitr_1.39              jsonlite_1.8.0         
+[17] broom_1.0.0             dbplyr_2.2.1           
+[19] png_0.1-7               compiler_4.2.1         
+[21] httr_1.4.3              backports_1.4.1        
+[23] assertthat_0.2.1        fastmap_1.1.0          
+[25] lazyeval_0.2.2          gargle_1.2.0           
+[27] cli_3.3.0               htmltools_0.5.3        
+[29] tools_4.2.1             igraph_1.3.4           
+[31] coda_0.19-4             gtable_0.3.0           
+[33] glue_1.6.2              clusterGeneration_1.3.7
+[35] tinytex_0.40            fastmatch_1.1-3        
+[37] Rcpp_1.0.9              cellranger_1.1.0       
+[39] vctrs_0.4.1             svglite_2.1.0          
+[41] nlme_3.1-157            xfun_0.31              
+[43] rvest_1.0.2             ggimage_0.3.1          
+[45] lifecycle_1.0.1         googlesheets4_1.0.0    
+[47] MASS_7.3-57             subplex_1.8            
+[49] hms_1.1.1               parallel_4.2.1         
+[51] expm_0.999-6            yaml_2.3.5             
+[53] ggfun_0.0.6             yulab.utils_0.0.5      
+[55] stringi_1.7.8           highr_0.9              
+[57] plotrix_3.8-2           tidytree_0.4.0         
+[59] rlang_1.0.4             pkgconfig_2.0.3        
+[61] systemfonts_1.0.4       evaluate_0.15          
+[63] lattice_0.20-45         patchwork_1.1.1        
+[65] labeling_0.4.2          tidyselect_1.1.2       
+[67] deSolve_1.33            R6_2.5.1               
+[69] magick_2.7.3            generics_0.1.3         
+[71] combinat_0.0-8          DBI_1.1.3              
+[73] mgcv_1.8-40             pillar_1.8.0           
+[75] haven_2.5.0             withr_2.5.0            
+[77] scatterplot3d_0.3-41    modelr_0.1.8           
+[79] crayon_1.5.1            utf8_1.2.2             
+[81] tzdb_0.3.0              rmarkdown_2.14         
+[83] grid_4.2.1              readxl_1.4.0           
+[85] reprex_2.0.1            digest_0.6.29          
+[87] webshot_0.5.3           numDeriv_2016.8-1.1    
+[89] gridGraphics_0.5-1      munsell_0.5.0          
+[91] viridisLite_0.4.0       ggplotify_0.1.0        
 [93] quadprog_1.5-8         
 ```
 

@@ -626,10 +626,8 @@ That's it. That's all the information we specified in the newick file, all the i
 
 ## Additional reading
 
-I used `ggtree` [@R-ggtree] to draw the trees in this chapter. If you are interested in learning more about these tools, see:
+- I used `ggtree` [@R-ggtree] to draw the trees in this chapter. If you are interested in learning more about these tools, see:
 
-The ggtree book - https://yulab-smu.github.io/treedata-book/index.html
+- The ggtree book - https://yulab-smu.github.io/treedata-book/index.html
 
-ggtree vignettes - https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html
-
-
+- ggtree vignettes - https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html

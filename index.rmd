@@ -88,7 +88,7 @@ I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read 
 
 ## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online) and 2022. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course in 2020, and Namrata Ahuja, the teaching fellow in 2022. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts.
+Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online) and 2022. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course in 2020, and Namrata Ahuja, the teaching fellow in 2022. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of Book of Proof, for his helpful advice on self publishing to facilitate student access.
 
 ## Dedication
 
