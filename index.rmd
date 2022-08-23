@@ -84,11 +84,11 @@ Models are at the core of modern phylogenetic biology. Models are usually taught
 
 This book is intended both for the self directed learner, and for use in a course. 
 
-I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands on work, read papers from the literature, or share student projects.
+I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands-on work, read papers from the literature, or share student projects.
 
 ## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the fall of 2020. This book started as a collection of lecture notes for this course, the first that I taught fully online. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata provided close reads of host chapters, often within hours of completing first drafts.
+Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online) and 2022. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course in 2020, and Namrata Ahuja, the teaching fellow in 2022. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts.
 
 ## Dedication
 
@@ -97,9 +97,9 @@ This book is dedicated to my sister Jenny Dunn, who has been there every step of
 
 ## Source code
 
-The source code for this manuscript is available on [github]( https://github.com/caseywdunn/phylogenetic_biology). The book was rendered from the source with `bookdown` [@bookdown2016].
+The source code for this manuscript is available on github at https://github.com/caseywdunn/phylogenetic_biology . The book was rendered from the source with `bookdown` [@bookdown2016].
 
-Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the [issue tracker](https://github.com/caseywdunn/phylogenetic_biology/issues).
+Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues .
 
 ## Other resources
 
@@ -107,18 +107,15 @@ The following sites have a wide variety of material that is relevant to the
 theory and and practice of phylogenetic biology.
 
 - An extensive list of tools, tutorials, and examples of phylogenetic tools in 
-the programming language R maintained by Briam O'Meara:
-[CRAN Task View: Phylogenetics](https://cran.r-project.org/web/views/Phylogenetics.html)
+the programming language R maintained by Briam O'Meara: https://cran.r-project.org/web/views/Phylogenetics.html
 
 - The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer 
 course on phylogenetics, with an emphasis on building phylogenetic trees. Check 
-out the faculty pages for lecture pdfs:
-[Workshop on Molecular Evolution](https://molevolworkshop.github.io)
+out the faculty pages for lecture pdfs: https://molevolworkshop.github.io
 
 - The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course 
 on phylogenetics, but with a bit more emphasis on using phylogenies to test 
-evolutionary questions:
-[Applied Phylogenetics Workshop](http://treethinkers.org/tutorials/)
+evolutionary questions: http://treethinkers.org/tutorials/
 
 The following books are great resources for learning more about phylogenetic biology:
 
