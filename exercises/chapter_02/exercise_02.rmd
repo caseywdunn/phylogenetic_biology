@@ -1,0 +1,248 @@
+---
+title: "Exercise 2"
+output: html_document
+---
+
+```{r setup, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ape)
+library(ggtree)
+library(knitr)
+```
+
+## A word on the exercises
+
+We call these exercises because they include problems that you complete and submit, but they are more than a problem set. They are also tutorials that introduce you to computational methods in phylogenetic biology. Because a complete introduction to R and other frameworks is beyond the scope of this course, we don't start from first principles of coding and computer science but instead seek to build general literacy that would allow you to understand key details of analyses others have shared and to modify and extend existing analyses to create your own analyses. Because we aren't focusing on how to implement analyses from scratch there may be some bits of code in here (e.g., for importing and preparing a dataset) that you don't understand but that aren't critical to understand to achieve the core goals of the exercise. Do feel free to ask about them, of course, if you would like to dig under the hood a bit.
+
+If you are struggling to achieve these goals, I encourage you to reach out to the professor or TA in office hours to go over some of the fundamentals of programming or to recommend some additional resources to help get you up to speed. There are a variety of great introductory R resources, including http://www.r-tutor.com/r-introduction .
+
+I encourage you to play around with the code in the exercises and try things out in addition to the assigned problems. These won't impact the grading, as long as the document still runs and you don't modify the `check_` variables. Playing with code is a great way to get to know it better and extend your super powers.
+
+## Working with phylogenies in R
+
+The technical objective of this exercise is to get you started with the following tools:
+
+- [ape](https://cran.r-project.org/web/packages/ape/ape.pdf). A library for working with trees in R. [This book](https://link.springer.com/book/10.1007%2F978-1-4614-1743-9) provides a great detailed introduction.
+
+- [ggtree](https://bioconductor.org/packages/release/bioc/html/ggtree.html). A library for rich visualization of trees. [This book](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html) provides a great detailed introduction.
+
+
+## Installing ggtree
+
+You should already have ape installed from last week.
+
+Installing ggtree is a bit more complicated than for some other libraries, because it isn't in CRAN (the primary catalog of R libraries). To install it, first open this file in RStudio. Then, in the Console window below this document, copy and paste the following two lines:
+
+    if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+    BiocManager::install("ggtree")
+
+> **_TASK:_** Install ggtree with the commands above. Then press the Knit button above to make sure that all the code runs, and you get a formatted output document. If you get errors about missing libraries, stop and fix those before proceeding.
+
+
+## Our tree
+
+Much of our focus will be on the  mammal tree that we saw in 
+[Chapter 2](http://dunnlab.org/phylogenetic_biology/phylogenies.html).
+
+```{r}
+  tree_mammal_text="((((((Lepus_europaeus:70.20096322090001,Mus_musculus:70.2009638712):3.154317,Homo_sapiens:73.3552735285):6.856746,(((Equus_hemionus:58.229796309799994,Balaenoptera_musculus:58.22982398432999):8.913111,Panthera_leo:67.14292611620002):0.811577,Corynorhinus_townsendii:67.95450331960001):12.257514):5.856834,(Loxodonta_africana:83.676113197,Dasypus_novemcinctus:83.67612211229999):2.392725):76.041131,Macropus_giganteus:162.10993597769):17.193944,Ornithorhynchus_anatinus:179.30390079);"
+
+
+  tree_mammal = read.tree( text=tree_mammal_text )
+  plot( tree_mammal )
+  
+
+```
+
+
+## Dropping tips
+
+One of the most common tasks in tree manipulation is to drop some tips. You might want to do those to prune away a species you don't have data for in a comparative analysis, or to remove outgroups.
+
+You can drop tips with the `ape` function `drop.tip()`. It takes two arguments -- a phylogeny (`tree_mammal` in our case), and a vector of labels of the tips to drop. The vector is kind of like a list, and in R is specified with `c()`. It returns another tree, which doesn't have the specified tips anymore.
+
+Let's get rid of the mouse and cat:
+
+```{r}
+
+tree_mammal_reduced = drop.tip( tree_mammal, c("Mus_musculus", "Panthera_leo") )
+
+plot( tree_mammal_reduced )
+```
+Here we create a new phylogeny, `tree_mammal_reduced`, without the tips and then plot it.
+
+
+> **_Problem 1:_** Edit the code chunk below to drop humans, whales, and elephants from `tree_mammal`.
+
+```{r}
+
+check_tree_mammal_reduced = drop.tip( tree_mammal, c("Mus_musculus", "Panthera_leo") )
+
+plot( check_tree_mammal_reduced )
+
+```
+
+
+## Drawing with ggtree
+
+So far we have used the `plot()` function in the `ape` package to draw trees. It is simple and effective, but also limited. The library `ggtree` provides a lot more flexibility for things like visualizing data on nodes and edges, adding images, labeling clades, etc.
+
+Here is the same tree as above, now drawn with `ggtree`
+
+```{r}
+
+tree_plot = ggtree( tree_mammal )
+
+tree_plot
+
+```
+
+But it is missing something pretty basic, tip labels! We have to tell it to add these in. Much as we saw in [Chapter 2](http://dunnlab.org/phylogenetic_biology/phylogenies.html#the-information-contained-in-phylogenies), we can think about the information contained in phylogenies as layers we can add in. `ggplot()` alone just draws the topology of the tree, and shows edge lengths as well if they are available. We can add more layers of information to the visualization using the `+` operator and other special functions. Each layer of information is, fittingly enough, called a layer. For a list of layers that can be added see Table 4.1 in this [ggtree book](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html).
+
+Note also that I store the plot into its own variable, `tree_plot`, and then put the named variable name right below to print it. This is nice if you generate the plot one place in your document but don't want to show it until later (or want to do something else with it later, like run it through an autograder).
+
+Let's add a layer with tip labels, using `geom_tiplab()`:
+
+```{r}
+
+tree_plot = ggtree( tree_mammal ) + 
+  geom_tiplab( fontface = "italic", offset=20 ) +
+  xlim(0, 300)
+
+tree_plot
+
+```
+
+Notice that I also did a few formatting things. Within `geom_tiplab()`, I specified that the font should be italic and that the labels should be offset a bit from the tips. I also used `xlim()` to set the time scale of the plot, which is on the x axis, to range from 0 to 300 million years. This leaves plenty of room to show the tip labels without cropping them.
+
+The code chunk above is a good general starting place for viewing trees. If your tree has edge lengths, as this one does, you will have to play around with `xlim()` a bit to get it to scale well.
+
+This ability to layer information onto a tree is very powerful, and will be how we show data and analysis results in future exercises and probably your final project as well.
+
+
+## Working with MRCA's and clades
+
+Most recent common ancestors (MRCAs) are a critical concept in phylogenetic biology. For two or more nodes, their MRCA is the youngest internal node that is their shared ancestor. The MRCA of all nodes in the tree is the root.
+
+Every internal node in the phylogeny can be uniquely referred to as the MRCA of two or more tips. This is a handy way to designate particular internal nodes, and `ape` has a built in function `getMRCA()` to do this. You give it a phylogeny and a set of nodes (designated wither by their labels or numbers), and it returns the node number for their MRCA.
+
+Let's do that here. Let's say our goal was to get the node number for the MRCA of placental mammals on the mammal tree. In the plot of the tree above, that happens to be the species from *Balaenoptera_musculus* through *Loxodonta_africana*. We can find the MRCA for this group with just these two tips.
+
+```{r}
+
+placental_node = getMRCA(tree_mammal, c("Balaenoptera_musculus", "Loxodonta_africana"))
+
+```
+
+That gives us node number `r placental_node`. Now we have have a node number - so what? Well, there are a few things we can do with it. One is to highlight the clade in the plot. We do that by adding another layer with `geom_hilight()`, which takes as an argument the MRCA of the group you want to highlight, as well as information including the color you want to apply.
+
+```{r}
+
+placental_plot = ggtree( tree_mammal ) + 
+  geom_tiplab( fontface = "italic", offset=20 ) +
+  xlim(0, 300) +
+  geom_hilight(node=placental_node, fill='darkgreen', alpha=.6)
+
+placental_plot
+
+```
+
+
+Recall from Chapter 2 that a monophyletic group, also known as a clade, is a MRCA and all of its descendants. Here we have used just two tips to identify a MRCA, and then used that MRCA to label an entire clade.
+
+Now it is your turn. 
+
+> **_Problem 2:_** Modify the code below to highlight the clade Laurasiatheria (*Balaenoptera_musculus* through *Corynorhinus_townsendii*) in the color yellow.
+
+```{r}
+
+check_laurasiatheria_node = NULL
+
+check_laurasiatheria_plot = ggtree( tree_mammal ) + 
+  geom_tiplab( fontface = "italic", offset=20 ) +
+  xlim(0, 300) +
+  geom_hilight(node=check_laurasiatheria_node, fill='darkgreen', alpha=.6)
+
+check_laurasiatheria_plot
+
+```
+
+
+## Mapping data onto the tree
+
+A common task in phylogeny visualization is to map data onto the tips of the phylogeny. Here are a couple variables for the species in our tree. `mass` is mass in grams, and `gestation` is gestation time in days.
+
+```{r}
+
+# Some mammal data from http://esapubs.org/archive/ecol/E090/184/#data
+D = data.frame(
+  species = c("Balaenoptera_musculus", "Equus_hemionus", "Dasypus_novemcinctus", "Corynorhinus_townsendii", "Homo_sapiens", "Lepus_europaeus", "Loxodonta_africana", "Macropus_giganteus", "Mus_musculus", "Ornithorhynchus_anatinus", "Panthera_leo"),
+  mass = c(154321304.50, 235248.07, 3949.01, 10.30, 58540.63, 3816.43, 3824539.93, 33409.89, 19.30, 1484.25, 158623.93),
+  gestation = c(41.99, 19.60, 274.78, 346.00, 326.97, 108.74, 67.49, 660.00, 134.00, 36.56, 12.48)
+)
+
+# A function for pretty formatting of data in tables
+kable(D)
+
+```
+Let's plot $log_{10}(mass)$ into the phylogeny tips.
+
+```{r}
+
+mass_plot = ggtree( tree_mammal ) %<+% D + 
+  geom_tiplab( fontface = "italic", offset=20 ) +
+  xlim(0, 300) +
+  geom_tippoint( aes(color=log10(mass)), size=3, alpha=1 )
+
+mass_plot
+
+```
+
+The key bits here are that we use the super ugly code fragment `%<+% D` to add our data to the plot, and we then add a layer with `geom_tippoint()` that maps the log of the mass to the color of the points at the tip.
+
+> **_Problem 3:_** Modify the code below (which currently shows body mass) to color the tips according to gestation length.
+
+```{r}
+
+check_gestation_plot = ggtree( tree_mammal ) %<+% D + 
+  geom_tiplab( fontface = "italic", offset=20 ) +
+  xlim(0, 300) +
+  geom_tippoint( aes(color=mass), size=3, alpha=1 )
+
+check_gestation_plot
+
+```
+
+
+
+## Viewing node numbers on trees
+
+It can sometimes be very helpful to view node numbers on trees. This will help you understand and debug what is going on as you identify particular nodes, map data onto the phylogeny, and perform manipulations. You can use `ggtree` to add layers with node numbers just as you would use it to show data, clade labels, and other features on trees.
+
+```{r}
+
+example_text = "(((A,B),(C,D)),E);"
+example_phylo = read.tree( text=example_text )
+
+ggtree( example_phylo ) + 
+  geom_tiplab( fontface = "italic", offset=0.2 ) +
+  geom_text2(aes(label=node), col="red", nudge_x=0.1 ) +
+  geom_nodepoint(col="red") +
+  geom_tippoint(col="red")
+
+```
+
+> **_Problem 4:_** Based on the tree above, answer the following questions.
+
+```{r}
+
+# What is the number of the node that is the MRCA of the tips labeled D and A?
+check_problem_4_1 = NULL
+
+# What is the number of the node that is the MRCA of the tips labeled C and B?
+check_problem_4_2 = NULL
+
+
+```
+
