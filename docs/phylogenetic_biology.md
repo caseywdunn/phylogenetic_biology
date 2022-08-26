@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2022-08-23"
+date: "2022-08-26"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -38,20 +38,14 @@ This book is intended both for the self directed learner, and for use in a cours
 
 I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands-on work, read papers from the literature, or share student projects.
 
-## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online) and 2022. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course in 2020, and Namrata Ahuja, the teaching fellow in 2022. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of Book of Proof, for his helpful advice on self publishing to facilitate student access.
-
-## Dedication
-
-This book is dedicated to my sister Jenny Dunn, who has been there every step of the way. I am so grateful for her adventurous spirit, quick mind, and shared love of life. Thank you Jenny.
 
 
 ## Source code
 
-The source code for this manuscript is available on github at https://github.com/caseywdunn/phylogenetic_biology . The book was rendered from the source with `bookdown` [@bookdown2016].
+This book was rendered from the source, available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016].
 
-Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues .
+Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues.
 
 ## Other resources
 
@@ -91,14 +85,15 @@ The following books provide general computational background for the topics cove
 - Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. http://practicalcomputing.org
 
 
-
-
-
 ## License
 
 ![](figures/by-nc-nd-600.png)
 
 This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+## Acknowledgements
+
+Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online) and 2022. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course in 2020, and Namrata Ahuja, the teaching fellow in 2022. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of Book of Proof, for his helpful advice on self publishing to facilitate student access.
 
 <!--chapter:end:index.rmd-->
 
@@ -1545,7 +1540,7 @@ Character types are fundamental to phylogenetics. Specifying the character types
 
 
 \begin{figure}
-\includegraphics[width=4.42in]{figures/scale-type} \caption{Scale types from measurement theory that are relevant to biology. Permissible transformations indicate the mathematical operations that can be performed on measurements of each scale type without distorting their meaning. The Domain indicates the state space, *i.e.* range of possible values. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Reproduced from Table 1 of [@houle2011measurement].}(\#fig:characters-scaletype)
+\includegraphics[width=4.42in]{figures/scale-type} \caption{Scale types from measurement theory that are relevant to biology. Permissible transformations indicate the mathematical operations that can be performed on measurements of each scale type without distorting their meaning. The Domain indicates the state space, *i.e.* range of possible values. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Reproduced from Table 1 of Houle et al. (2011).}(\#fig:characters-scaletype)
 \end{figure}
 
 Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory at large, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type". 
@@ -1793,9 +1788,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-
-This book was rendered from the source code on $Mon Apr 25 04:41:42 PM 2022$ with the following R package versions.
-
+This book was rendered from the source code on Aug 26, 2022 at 06:31:06 PM with the following R package versions.
 
 
 ```
@@ -1820,19 +1813,19 @@ attached base packages:
 [6] methods   base     
 
 other attached packages:
- [1] scales_1.2.0     ggrepel_0.9.1    kableExtra_1.3.4
- [4] phangorn_2.9.0   Matrix_1.4-1     forcats_0.5.1   
+ [1] scales_1.2.1     ggrepel_0.9.1    kableExtra_1.3.4
+ [4] phangorn_2.9.0   Matrix_1.4-1     forcats_0.5.2   
  [7] dplyr_1.0.9      purrr_0.3.4      readr_2.1.2     
 [10] tidyr_1.2.0      tibble_3.1.8     ggplot2_3.3.6   
-[13] tidyverse_1.3.2  stringr_1.4.0    phytools_1.0-3  
+[13] tidyverse_1.3.2  stringr_1.4.1    phytools_1.0-3  
 [16] maps_3.4.0       magrittr_2.0.3   gridExtra_2.3   
 [19] geiger_2.0.10    ape_5.6-2        ggtree_3.4.2    
-[22] treeio_1.20.2    bookdown_0.27   
+[22] treeio_1.20.2    bookdown_0.28   
 
 loaded via a namespace (and not attached):
  [1] googledrive_2.0.0       colorspace_2.0-3       
  [3] ellipsis_0.3.2          fs_1.5.2               
- [5] aplot_0.1.6             rstudioapi_0.13        
+ [5] aplot_0.1.6             rstudioapi_0.14        
  [7] farver_2.1.1            fansi_1.0.3            
  [9] mvtnorm_1.1-3           lubridate_1.8.0        
 [11] xml2_1.3.3              splines_4.2.1          
@@ -1840,43 +1833,42 @@ loaded via a namespace (and not attached):
 [15] knitr_1.39              jsonlite_1.8.0         
 [17] broom_1.0.0             dbplyr_2.2.1           
 [19] png_0.1-7               compiler_4.2.1         
-[21] httr_1.4.3              backports_1.4.1        
+[21] httr_1.4.4              backports_1.4.1        
 [23] assertthat_0.2.1        fastmap_1.1.0          
 [25] lazyeval_0.2.2          gargle_1.2.0           
 [27] cli_3.3.0               htmltools_0.5.3        
 [29] tools_4.2.1             igraph_1.3.4           
 [31] coda_0.19-4             gtable_0.3.0           
 [33] glue_1.6.2              clusterGeneration_1.3.7
-[35] tinytex_0.40            fastmatch_1.1-3        
-[37] Rcpp_1.0.9              cellranger_1.1.0       
-[39] vctrs_0.4.1             svglite_2.1.0          
-[41] nlme_3.1-157            xfun_0.31              
-[43] rvest_1.0.2             ggimage_0.3.1          
-[45] lifecycle_1.0.1         googlesheets4_1.0.0    
-[47] MASS_7.3-57             subplex_1.8            
-[49] hms_1.1.1               parallel_4.2.1         
-[51] expm_0.999-6            yaml_2.3.5             
-[53] ggfun_0.0.6             yulab.utils_0.0.5      
-[55] stringi_1.7.8           highr_0.9              
-[57] plotrix_3.8-2           tidytree_0.4.0         
-[59] rlang_1.0.4             pkgconfig_2.0.3        
-[61] systemfonts_1.0.4       evaluate_0.15          
-[63] lattice_0.20-45         patchwork_1.1.1        
-[65] labeling_0.4.2          tidyselect_1.1.2       
-[67] deSolve_1.33            R6_2.5.1               
-[69] magick_2.7.3            generics_0.1.3         
-[71] combinat_0.0-8          DBI_1.1.3              
-[73] mgcv_1.8-40             pillar_1.8.0           
-[75] haven_2.5.0             withr_2.5.0            
-[77] scatterplot3d_0.3-41    modelr_0.1.8           
-[79] crayon_1.5.1            utf8_1.2.2             
-[81] tzdb_0.3.0              rmarkdown_2.14         
-[83] grid_4.2.1              readxl_1.4.0           
-[85] reprex_2.0.1            digest_0.6.29          
-[87] webshot_0.5.3           numDeriv_2016.8-1.1    
-[89] gridGraphics_0.5-1      munsell_0.5.0          
-[91] viridisLite_0.4.0       ggplotify_0.1.0        
-[93] quadprog_1.5-8         
+[35] fastmatch_1.1-3         Rcpp_1.0.9             
+[37] cellranger_1.1.0        vctrs_0.4.1            
+[39] svglite_2.1.0           nlme_3.1-157           
+[41] xfun_0.32               rvest_1.0.3            
+[43] ggimage_0.3.1           lifecycle_1.0.1        
+[45] googlesheets4_1.0.1     MASS_7.3-57            
+[47] subplex_1.8             hms_1.1.2              
+[49] parallel_4.2.1          expm_0.999-6           
+[51] yaml_2.3.5              ggfun_0.0.6            
+[53] yulab.utils_0.0.5       stringi_1.7.8          
+[55] highr_0.9               plotrix_3.8-2          
+[57] tidytree_0.4.0          rlang_1.0.4            
+[59] pkgconfig_2.0.3         systemfonts_1.0.4      
+[61] evaluate_0.16           lattice_0.20-45        
+[63] patchwork_1.1.2         labeling_0.4.2         
+[65] tidyselect_1.1.2        deSolve_1.33           
+[67] R6_2.5.1                magick_2.7.3           
+[69] generics_0.1.3          combinat_0.0-8         
+[71] DBI_1.1.3               mgcv_1.8-40            
+[73] pillar_1.8.1            haven_2.5.1            
+[75] withr_2.5.0             scatterplot3d_0.3-41   
+[77] modelr_0.1.9            crayon_1.5.1           
+[79] utf8_1.2.2              tzdb_0.3.0             
+[81] rmarkdown_2.15          grid_4.2.1             
+[83] readxl_1.4.1            reprex_2.0.2           
+[85] digest_0.6.29           webshot_0.5.3          
+[87] numDeriv_2016.8-1.1     gridGraphics_0.5-1     
+[89] munsell_0.5.0           viridisLite_0.4.1      
+[91] ggplotify_0.1.0         quadprog_1.5-8         
 ```
 
 <!--chapter:end:versions.rmd-->
