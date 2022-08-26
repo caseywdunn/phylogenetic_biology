@@ -311,10 +311,10 @@ Recall that $\mu$ is the rate of *any* replacement event happening. That replace
 
 The off-diagonal elements of $\mathbf{Q}$ give the rates of substitutions, and are all $\mu \pi$. But what's up with the diagonal elements? Those correspond to replacements that do not lead to a substitution, for example an A being replaced be an A. We pick these diagonal elements to be whatever value leads the rows to sum to 0. The basic intuition of this is that we aren't creating or destroying nucleotides, just replacing them. So the net change needs to be 0. Since there are three substitutions in each row, and each substitution has rate $\mu \pi$, these diagonal elements are set to $-3 \mu \pi$.
 
-There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to factor it out into two parts [@swofford1996molecular]. The first is a $4\times4$ matrix $\mathbf{R}$, which has all the rates, and the second is a $4\times4$ matrix $\Pi$ that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation \@ref(eq:jc69-expanded)).
+There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to factor it out into two parts [@swofford1996molecular]. The first is a $4\times4$ matrix $\mathbf{R}$, which has all the rates, and the second is a $4\times4$ matrix $\boldsymbol{\Pi}$ that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation \@ref(eq:jc69-expanded)).
 
 \begin{equation}
-\mathbf{Q} = \mathbf{R}\mathbf{\Pi} =
+\mathbf{Q} = \mathbf{R}\boldsymbol{\Pi} =
 \left(\begin{array}{cccc} 
 -3\mu & \mu & \mu & \mu\\
 \mu & -3\mu & \mu & \mu\\
@@ -339,7 +339,7 @@ $\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amo
 (\#eq:jc69-prob)
 \end{equation}
 
-Raising $e$ to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$ is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\mathbf{\Pi}$, and $\mathbf{R}$, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an branch of length $t$. The diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
+Raising $e$ to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$ is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an branch of length $t$. The diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
 
 Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.
 
@@ -356,7 +356,7 @@ The simplicity of JC69 makes it a useful starting place to understand how models
 To accommodate each of these deviations from JC69, we need to add parameters to the model to explain the added complexity. There are all kinds of parameters we could add one by one, and in fact that is how the field proceeded in the decades after JC69 was described. Rather than build the models up in that way, though, it is actually easier to describe a general model that these other models, including JC69, are special cases of.
 
 \begin{equation}
-\mathbf{Q} = \mathbf{R}\mathbf{\Pi} =
+\mathbf{Q} = \mathbf{R}\boldsymbol{\Pi} =
 \left(\begin{array}{cccc} 
 - & \mu a & \mu b & \mu c\\
 \mu a & - & \mu d & \mu e\\
@@ -388,7 +388,7 @@ We now have a more complex model of DNA evolution that we can simplify by settin
 
 ## Plugging some numbers into the expanded model
 
-Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\mathbf{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along an branch. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)B.
+Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\boldsymbol{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along an branch. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)B.
 
 We are using a mammal tree, so let's pick some parameter values that roughly approximate what we see in mammals. Rather than set all the parameters independently, let's set up an HKY85 model, which accommodates non-uniform base frequencies and different transition/ tansversion ratios. First, we can clamp $\mu=1$. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters $b$ and $e$) are on the order of 4 times more frequent than transversions (captured by parameters $a$, $c$, $d$, and $f$) in mammals [@rosenberg2003]. So we will clamp $b=e=2$ and $a=c=d=f=0.5$. I picked these particular values (rather than others, such as 4 and 1) because they keep the mean of the off-diagonal entries in $\mathbf{R}$ to 1. 
 
@@ -406,10 +406,10 @@ Now we have the following values for $\mathbf{R}$:
 
 We won't specify the diagonal elements of $\mathbf{R}$ quite yet.
 
-Now we need $\mathbf{\Pi}$. We noted earlier that humans have a GC content of 41%, so we'll use that. This gave the following entries for $\mathbf{\Pi}$:
+Now we need $\boldsymbol{\Pi}$. We noted earlier that humans have a GC content of 41%, so we'll use that. This gave the following entries for $\boldsymbol{\Pi}$:
 
 \begin{equation}
-\mathbf{\Pi} =
+\boldsymbol{\Pi} =
 \left(\begin{array}{cccc}
 0.295 & 0 & 0 & 0 \\ 
 0 & 0.205 & 0 & 0 \\
@@ -440,7 +440,7 @@ diag(Q) = - rowSums(Q)
 
 ```
 
-Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\mathbf{\Pi}$ and adjusting the diagonal so that the rows each sum to 0:
+Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\boldsymbol{\Pi}$ and adjusting the diagonal so that the rows each sum to 0:
 
 
 \begin{equation}
@@ -491,7 +491,7 @@ P = exponentiate_matrix(Q*t)
 print(P)
 ```
 
-In this case, each row has the exact same values. If you look closely, they should be familiar -- they are the equilibrium frequencies from $\mathbf{\Pi}$. This matches what happened in Figures \@ref(fig:sim-saturation) and \@ref(fig:sim-analytical). As branch length increases, the expected frequencies of each nucleotide deviate further and further from the original state and approach the equilibrium frequencies specified by $\mathbf{\Pi}$.
+In this case, each row has the exact same values. If you look closely, they should be familiar -- they are the equilibrium frequencies from $\boldsymbol{\Pi}$. This matches what happened in Figures \@ref(fig:sim-saturation) and \@ref(fig:sim-analytical). As branch length increases, the expected frequencies of each nucleotide deviate further and further from the original state and approach the equilibrium frequencies specified by $\boldsymbol{\Pi}$.
 
 ## Simulation along a single branch
 
@@ -499,7 +499,7 @@ We can now calculate the probability of a specific end state given a start state
 
 We first need to set the state at the parent node. There are a couple approaches we could use to set the parent state. We could clamp it to a specific initial state, just as we did in our JC69 simulations when we set the starting state to A (Figure \@ref(fig:sim-jc-mu-sweep)). Alternatively, we could pick the starting state at random. 
 
-How do we select a starting state at random? We could draw the starting state from a bag with equal frequencies of each nucleotide (as we did at the beginning of this chapter), but our model allows us to make a more informed selection than that. We implemented $\mathbf{\Pi}$ because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let's draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this probability distribution. 
+How do we select a starting state at random? We could draw the starting state from a bag with equal frequencies of each nucleotide (as we did at the beginning of this chapter), but our model allows us to make a more informed selection than that. We implemented $\boldsymbol{\Pi}$ because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let's draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this probability distribution. 
 
 
 ```{r sim-single-edges }
@@ -530,7 +530,7 @@ kable(
 
 ```
 
-In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\mathbf{\Pi}$ as described above. I then created a random branch length $t$ by sampling from a uniform distribution that ranges from 0 to $`r Length_max`$, just to get a variety of branch lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
+In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\boldsymbol{\Pi}$ as described above. I then created a random branch length $t$ by sampling from a uniform distribution that ranges from 0 to $`r Length_max`$, just to get a variety of branch lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
 
 
 
@@ -567,11 +567,12 @@ ggtree(phy) +
   xlim(0,5)
 
 ```
+
 This isn't a big step from what we have already -- once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along a whole tree.
 
-Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\mathbf{\Pi}$. That gives us the $`r state[5]`$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so the also share a parent state.
+Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\boldsymbol{\Pi}$. That gives us the $`r state[5]`$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so the also share a parent state.
 
-There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the `Species_A` terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from $\mathbf{\Pi}$, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is $`r state[6]`$. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length $t$ of the branch, and $\mathbf{P}(t)$. We then do the same for each of the other branches.
+There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the `Species_A` terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from $\boldsymbol{\Pi}$, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is $`r state[6]`$. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length $t$ of the branch, and $\mathbf{P}(t)$. We then do the same for each of the other branches.
 
 Data can be simulated on a tree of arbitrary size in this way. Just sample from $\mathbf{P}(t)$ for the root state. Then traverse the tree from the root to each of the tips, simulating the state at each of the other internal nodes and finally the terminal nodes according to the states of their parents, branch length $t$, and $\mathbf{P}(t)$.
 
@@ -588,9 +589,9 @@ Here we have built up the conceptual, mathematical, statistical, and computation
 
 ## Additional resources
 
-- As a grad student, I learned much of what I present here from [swofford1996molecular]. This is an incredibly lucid chapter, and the foundation for my own understanding of how to think about the likelihood of molecular sequence data on a phylogeny.
+- As a grad student, I learned much of what I present here from @swofford1996molecular. This is such a lucid introduction to the likelihood of molecular sequence data on a phylogeny.
 
-- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent [Phylo Seminar](https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg), starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s
+- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent Phylo Seminar at https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg , starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s .
 
-- A great introduction to continuous time models by John Huelsenbeck https://revbayes.github.io/tutorials/dice/
+- A great introduction to continuous time models by John Huelsenbeck is available at  https://revbayes.github.io/tutorials/dice/ .
 

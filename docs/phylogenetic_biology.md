@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2022-04-25"
+date: "2022-08-23"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -36,11 +36,11 @@ Models are at the core of modern phylogenetic biology. Models are usually taught
 
 This book is intended both for the self directed learner, and for use in a course. 
 
-I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands on work, read papers from the literature, or share student projects.
+I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands-on work, read papers from the literature, or share student projects.
 
 ## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the fall of 2020. This book started as a collection of lecture notes for this course, the first that I taught fully online. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata provided close reads of host chapters, often within hours of completing first drafts.
+Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online) and 2022. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin, the graduate teaching fellow for the course in 2020, and Namrata Ahuja, the teaching fellow in 2022. Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of Book of Proof, for his helpful advice on self publishing to facilitate student access.
 
 ## Dedication
 
@@ -49,9 +49,9 @@ This book is dedicated to my sister Jenny Dunn, who has been there every step of
 
 ## Source code
 
-The source code for this manuscript is available on [github]( https://github.com/caseywdunn/phylogenetic_biology). The book was rendered from the source with `bookdown` [@bookdown2016].
+The source code for this manuscript is available on github at https://github.com/caseywdunn/phylogenetic_biology . The book was rendered from the source with `bookdown` [@bookdown2016].
 
-Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the [issue tracker](https://github.com/caseywdunn/phylogenetic_biology/issues).
+Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues .
 
 ## Other resources
 
@@ -59,18 +59,15 @@ The following sites have a wide variety of material that is relevant to the
 theory and and practice of phylogenetic biology.
 
 - An extensive list of tools, tutorials, and examples of phylogenetic tools in 
-the programming language R maintained by Briam O'Meara:
-[CRAN Task View: Phylogenetics](https://cran.r-project.org/web/views/Phylogenetics.html)
+the programming language R maintained by Briam O'Meara: https://cran.r-project.org/web/views/Phylogenetics.html
 
 - The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer 
 course on phylogenetics, with an emphasis on building phylogenetic trees. Check 
-out the faculty pages for lecture pdfs:
-[Workshop on Molecular Evolution](https://molevolworkshop.github.io)
+out the faculty pages for lecture pdfs: https://molevolworkshop.github.io
 
 - The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course 
 on phylogenetics, but with a bit more emphasis on using phylogenies to test 
-evolutionary questions:
-[Applied Phylogenetics Workshop](http://treethinkers.org/tutorials/)
+evolutionary questions: http://treethinkers.org/tutorials/
 
 The following books are great resources for learning more about phylogenetic biology:
 
@@ -494,13 +491,11 @@ That's it. That's all the information we specified in the newick file, all the i
 
 ## Additional reading
 
-I used `ggtree` [@R-ggtree] to draw the trees in this chapter. If you are interested in learning more about these tools, see:
+- I used `ggtree` [@R-ggtree] to draw the trees in this chapter. If you are interested in learning more about these tools, see:
 
-The ggtree book - https://yulab-smu.github.io/treedata-book/index.html
+- The ggtree book - https://yulab-smu.github.io/treedata-book/index.html
 
-ggtree vignettes - https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html
-
-
+- ggtree vignettes - https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html
 
 <!--chapter:end:phylogenies.rmd-->
 
@@ -704,10 +699,10 @@ Recall that $\mu$ is the rate of *any* replacement event happening. That replace
 
 The off-diagonal elements of $\mathbf{Q}$ give the rates of substitutions, and are all $\mu \pi$. But what's up with the diagonal elements? Those correspond to replacements that do not lead to a substitution, for example an A being replaced be an A. We pick these diagonal elements to be whatever value leads the rows to sum to 0. The basic intuition of this is that we aren't creating or destroying nucleotides, just replacing them. So the net change needs to be 0. Since there are three substitutions in each row, and each substitution has rate $\mu \pi$, these diagonal elements are set to $-3 \mu \pi$.
 
-There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to factor it out into two parts [@swofford1996molecular]. The first is a $4\times4$ matrix $\mathbf{R}$, which has all the rates, and the second is a $4\times4$ matrix $\Pi$ that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation \@ref(eq:jc69-expanded)).
+There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to factor it out into two parts [@swofford1996molecular]. The first is a $4\times4$ matrix $\mathbf{R}$, which has all the rates, and the second is a $4\times4$ matrix $\boldsymbol{\Pi}$ that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation \@ref(eq:jc69-expanded)).
 
 \begin{equation}
-\mathbf{Q} = \mathbf{R}\mathbf{\Pi} =
+\mathbf{Q} = \mathbf{R}\boldsymbol{\Pi} =
 \left(\begin{array}{cccc} 
 -3\mu & \mu & \mu & \mu\\
 \mu & -3\mu & \mu & \mu\\
@@ -732,7 +727,7 @@ $\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amo
 (\#eq:jc69-prob)
 \end{equation}
 
-Raising $e$ to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$ is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\mathbf{\Pi}$, and $\mathbf{R}$, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an branch of length $t$. The diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
+Raising $e$ to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$ is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an branch of length $t$. The diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
 
 Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.
 
@@ -749,7 +744,7 @@ The simplicity of JC69 makes it a useful starting place to understand how models
 To accommodate each of these deviations from JC69, we need to add parameters to the model to explain the added complexity. There are all kinds of parameters we could add one by one, and in fact that is how the field proceeded in the decades after JC69 was described. Rather than build the models up in that way, though, it is actually easier to describe a general model that these other models, including JC69, are special cases of.
 
 \begin{equation}
-\mathbf{Q} = \mathbf{R}\mathbf{\Pi} =
+\mathbf{Q} = \mathbf{R}\boldsymbol{\Pi} =
 \left(\begin{array}{cccc} 
 - & \mu a & \mu b & \mu c\\
 \mu a & - & \mu d & \mu e\\
@@ -781,7 +776,7 @@ We now have a more complex model of DNA evolution that we can simplify by settin
 
 ## Plugging some numbers into the expanded model
 
-Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\mathbf{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along an branch. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)B.
+Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\boldsymbol{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along an branch. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)B.
 
 We are using a mammal tree, so let's pick some parameter values that roughly approximate what we see in mammals. Rather than set all the parameters independently, let's set up an HKY85 model, which accommodates non-uniform base frequencies and different transition/ tansversion ratios. First, we can clamp $\mu=1$. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters $b$ and $e$) are on the order of 4 times more frequent than transversions (captured by parameters $a$, $c$, $d$, and $f$) in mammals [@rosenberg2003]. So we will clamp $b=e=2$ and $a=c=d=f=0.5$. I picked these particular values (rather than others, such as 4 and 1) because they keep the mean of the off-diagonal entries in $\mathbf{R}$ to 1. 
 
@@ -799,10 +794,10 @@ Now we have the following values for $\mathbf{R}$:
 
 We won't specify the diagonal elements of $\mathbf{R}$ quite yet.
 
-Now we need $\mathbf{\Pi}$. We noted earlier that humans have a GC content of 41%, so we'll use that. This gave the following entries for $\mathbf{\Pi}$:
+Now we need $\boldsymbol{\Pi}$. We noted earlier that humans have a GC content of 41%, so we'll use that. This gave the following entries for $\boldsymbol{\Pi}$:
 
 \begin{equation}
-\mathbf{\Pi} =
+\boldsymbol{\Pi} =
 \left(\begin{array}{cccc}
 0.295 & 0 & 0 & 0 \\ 
 0 & 0.205 & 0 & 0 \\
@@ -813,7 +808,7 @@ Now we need $\mathbf{\Pi}$. We noted earlier that humans have a GC content of 41
 
 
 
-Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\mathbf{\Pi}$ and adjusting the diagonal so that the rows each sum to 0:
+Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\boldsymbol{\Pi}$ and adjusting the diagonal so that the rows each sum to 0:
 
 
 \begin{equation}
@@ -878,7 +873,7 @@ What if the branch is very long, say $t=100$?
 ## T 0.295 0.205 0.205 0.295
 ```
 
-In this case, each row has the exact same values. If you look closely, they should be familiar -- they are the equilibrium frequencies from $\mathbf{\Pi}$. This matches what happened in Figures \@ref(fig:sim-saturation) and \@ref(fig:sim-analytical). As branch length increases, the expected frequencies of each nucleotide deviate further and further from the original state and approach the equilibrium frequencies specified by $\mathbf{\Pi}$.
+In this case, each row has the exact same values. If you look closely, they should be familiar -- they are the equilibrium frequencies from $\boldsymbol{\Pi}$. This matches what happened in Figures \@ref(fig:sim-saturation) and \@ref(fig:sim-analytical). As branch length increases, the expected frequencies of each nucleotide deviate further and further from the original state and approach the equilibrium frequencies specified by $\boldsymbol{\Pi}$.
 
 ## Simulation along a single branch
 
@@ -886,7 +881,7 @@ We can now calculate the probability of a specific end state given a start state
 
 We first need to set the state at the parent node. There are a couple approaches we could use to set the parent state. We could clamp it to a specific initial state, just as we did in our JC69 simulations when we set the starting state to A (Figure \@ref(fig:sim-jc-mu-sweep)). Alternatively, we could pick the starting state at random. 
 
-How do we select a starting state at random? We could draw the starting state from a bag with equal frequencies of each nucleotide (as we did at the beginning of this chapter), but our model allows us to make a more informed selection than that. We implemented $\mathbf{\Pi}$ because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let's draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this probability distribution. 
+How do we select a starting state at random? We could draw the starting state from a bag with equal frequencies of each nucleotide (as we did at the beginning of this chapter), but our model allows us to make a more informed selection than that. We implemented $\boldsymbol{\Pi}$ because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let's draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this probability distribution. 
 
 
 
@@ -905,7 +900,7 @@ A         0.6896113  G
 G         0.7347406  G     
 G         1.3263353  G     
 
-In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\mathbf{\Pi}$ as described above. I then created a random branch length $t$ by sampling from a uniform distribution that ranges from 0 to $2$, just to get a variety of branch lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
+In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\boldsymbol{\Pi}$ as described above. I then created a random branch length $t$ by sampling from a uniform distribution that ranges from 0 to $2$, just to get a variety of branch lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
 
 
 
@@ -914,11 +909,12 @@ In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by samplin
 So far we have considered the evolution of one DNA site along one branch at a time (Figure \@ref(fig:sim-application)B, Table \@ref(tab:sim-single-edges)). We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of a single site along all branches, generating a specific nucleotide state at each node. We will use the same toy mammal model as above. We will consider a simplified tree (Figure \@ref(fig:sim-tree)) rather than the full mammal tree, just to keep things compact.
 
 ![(\#fig:sim-tree)Simulation of states for a single DNA site on a simple tree according to our toy mammal model. Node numbers are in gray. Character states are in boxes at nodes. Branch lengths for this phylogram are in units of expected change.](phylogenetic_biology_files/figure-latex/sim-tree-1.pdf) 
+
 This isn't a big step from what we have already -- once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along a whole tree.
 
-Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\mathbf{\Pi}$. That gives us the $A$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so the also share a parent state.
+Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\boldsymbol{\Pi}$. That gives us the $A$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so the also share a parent state.
 
-There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the `Species_A` terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from $\mathbf{\Pi}$, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is $A$. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length $t$ of the branch, and $\mathbf{P}(t)$. We then do the same for each of the other branches.
+There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the `Species_A` terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from $\boldsymbol{\Pi}$, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is $A$. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length $t$ of the branch, and $\mathbf{P}(t)$. We then do the same for each of the other branches.
 
 Data can be simulated on a tree of arbitrary size in this way. Just sample from $\mathbf{P}(t)$ for the root state. Then traverse the tree from the root to each of the tips, simulating the state at each of the other internal nodes and finally the terminal nodes according to the states of their parents, branch length $t$, and $\mathbf{P}(t)$.
 
@@ -935,11 +931,11 @@ Here we have built up the conceptual, mathematical, statistical, and computation
 
 ## Additional resources
 
-- As a grad student, I learned much of what I present here from [swofford1996molecular]. This is an incredibly lucid chapter, and the foundation for my own understanding of how to think about the likelihood of molecular sequence data on a phylogeny.
+- As a grad student, I learned much of what I present here from @swofford1996molecular. This is such a lucid introduction to the likelihood of molecular sequence data on a phylogeny.
 
-- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent [Phylo Seminar](https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg), starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s
+- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent Phylo Seminar at https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg , starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s .
 
-- A great introduction to continuous time models by John Huelsenbeck https://revbayes.github.io/tutorials/dice/
+- A great introduction to continuous time models by John Huelsenbeck is available at  https://revbayes.github.io/tutorials/dice/ .
 
 
 <!--chapter:end:simulation.rmd-->
@@ -1434,7 +1430,7 @@ Branch frequencies are far more useful. It is helpful to think of an branch as a
 
 
 \begin{figure}
-\includegraphics[width=4.98in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology.}(\#fig:eval-splits)
+\includegraphics[width=3.92in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology.}(\#fig:eval-splits)
 \end{figure}
 
 
@@ -1614,13 +1610,14 @@ Each branch connects two nodes. In a rooted tree, we refer to the node closer to
 
 ## Measurements of time on trees
 
-As discussed in Section \@ref(trees-edge-lengths), branch length can mean different things. It is up to the investigator to specify an branch length, and clearly communicate what it means. The three usual approaches are a cladogram (branch lengths are not specified and have no meaning), phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where branch lengths are in units of time.
+As discussed in Section \@ref(trees-branch-lengths), branch length can mean different things. It is up to the investigator to specify an branch length, and clearly communicate what it means. The three usual approaches are a cladogram (branch lengths are not specified and have no meaning), phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where branch lengths are in units of time.
 
 ### Cladograms
 
 Because branch lengths in a cladogram have no meaning, we cannot make absolute statements about time in a cladogram. This doesn't mean, though, that we can't say anything about time -- we can still make some ordinal statements about the relative ages of nodes.
 
 ![(\#fig:time-cladogram)A cladogram. Nodes and node numbers are gray, and branches are black.](phylogenetic_biology_files/figure-latex/time-cladogram-1.pdf) 
+
 Take a look at the cladogram in Figure \@ref(fig:time-cladogram). Consider the red node numbers. The terminal nodes are numbered 1-5, and 6-9 are internal nodes. Of those, the root is node 6. Because the tree is rooted, we know that time proceeds from the root to the tips. If you consider two nodes, where one is descended from the other, then the node closer to the root is older. There are a variety of statements we could make based on this simple relationship, including:
 
 - Node 6 is older than all other nodes in the phylogeny. This is tautological, since the root is by definition the oldest node.
@@ -1744,35 +1741,65 @@ PGLS [@symonds2014primer].
 
 Phylogenetic biology draws on a variety of themes in statistics and mathematics. Given the diverse backgrounds of people coming to phylogenetic biology, one of the challenges of introducing people to this field is ensuring a foundation in these fundamentals. Many people have a solid working grasp of many of these topics, others need a refresher, and some have never seen them.
 
-Throughout the text I have covered some of these fundamentals, but here I provide a deeper grounding and links to additional resources.
+Throughout the text I have covered some of these fundamentals, but here I provide additional resources.
 
+## Probability theory and General statistics {#stats-general}
 
-## General statistics {#stats-general}
-
-I put together this [short summary](https://bitbucket.org/caseywdunn/statistics/raw/master/statistics_in_biology.pdf) of statistical concepts commonly encountered in biology. It is short and technical, with a focus on the relationship between concepts, such as the exponential family of distributions.
-
-## Probability theory {#stats-prob}
-
-
+I put together this short summary of statistical concepts commonly encountered in biology - https://bitbucket.org/caseywdunn/statistics/raw/master/statistics_in_biology.pdf. It is short and technical, with a focus on the relationship between concepts, such as the exponential family of distributions.
 
 ## Bayes theorem {#stats-bayes}
 
-Grant Sanderson provides an excellent introduction to Bayes Theorem and conditional probability in [this video](https://youtu.be/HZGCoVF3YvM). Note that he uses $E$ for Evidence rather than $D$ for Data as is common practice in phylogenetic applications.
+Grant Sanderson of 3Blue1Brown provides an excellent introduction to Bayes Theorem and conditional probability in this video - https://youtu.be/HZGCoVF3YvM. Note that he uses $E$ for Evidence rather than $D$ for Data as is common practice in phylogenetic applications.
 
-[This video](https://youtu.be/R13BD8qKeTg) provides additional perspective, including its application to medical testing.
+This video provides additional perspective, including its application to medical testing - https://youtu.be/R13BD8qKeTg.
 
-The [MCMC robot](https://phylogeny.uconn.edu/mcmc-robot/) by Paul Lewis is an excellent interactive introduction to MCMC sampling.
+The MCMC robot by Paul Lewis is an excellent interactive introduction to MCMC sampling - https://phylogeny.uconn.edu/mcmc-robot/.
 
+
+## Linear algebra {#linear-algebra}
+
+Linear algebra is a rich field of math that springs from a surprisingly simple 
+starting point - linear combinations of 
+vectors, often represented as rows and columns of matrices. From basic 
+operations such as vector addition and scalar multiplication, one can build 
+matrix operations and many sophisticated data analyses. Many familiar data 
+analysis methods, such as regression, solving systems of equations, 
+Principal Component Analyses (PCA), and common clustering methods, are built from linear 
+algebra under the hood. So are many aspects of phylogenetic analysis, including 
+the models of evolution themselves and the representation of the phylogenetic 
+trees in matrix forms that computers can easily manupulate.
+
+Though linear algebra is fundamental to many topics at the intersection of 
+science, mathematics, and computation, most science students have far less 
+exposure to this critical field than to statistics, calculus, and other 
+quantitative topics. This is too bad, as even a basic working knowledge of 
+linear algebra can provide great insight into the tools scientists use daily 
+and allow us to better apply, implement, and extend them.
+
+The following resources are a good place to start in your own studies of 
+linear algebra:
+
+- The Essence of Linear Algebra video series by Grant Sanderson (3Blue1Brown) - https://www.3blue1brown.com/topics/linear-algebra.
+
+- Linear Algebra: Theory, Intuition, Code, by Mike X Cohen. This book is 
+accessible to scientists with little past math experience, and is very 
+reasonably priced. https://www.amazon.com/Linear-Algebra-Theory-Intuition-Code/dp/9083136604.
+
+- Data Driven Science and Engineering, by Steve Brunton and Nathan Kutz - http://www.databookuw.com/ .
+This book shows how linear algebra is applied to many powerful scientific data analyses.
+The authors have excellent companion videos organized into playlists at https://www.youtube.com/c/Eigensteve/playlists, including singular value decomposition for Chapter 1, Fourier analyses for chapter 2.
 
 <!--chapter:end:stats.rmd-->
 
 # Software versions
 
+
 This book was rendered from the source code on $Mon Apr 25 04:41:42 PM 2022$ with the following R package versions.
 
 
+
 ```
-R version 4.1.3 (2022-03-10)
+R version 4.2.1 (2022-06-23)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 20.04.4 LTS
 
@@ -1789,62 +1816,67 @@ locale:
 [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] stats     graphics  grDevices utils     datasets 
+[6] methods   base     
 
 other attached packages:
- [1] ggimage_0.3.0    scales_1.2.0     ggrepel_0.9.1    kableExtra_1.3.4
- [5] phangorn_2.8.1   Matrix_1.4-0     forcats_0.5.1    dplyr_1.0.8     
- [9] purrr_0.3.4      readr_2.1.2      tidyr_1.2.0      tibble_3.1.6    
-[13] ggplot2_3.3.5    tidyverse_1.3.1  stringr_1.4.0    phytools_1.0-3  
-[17] maps_3.4.0       magrittr_2.0.3   gridExtra_2.3    geiger_2.0.7    
-[21] ape_5.6-2        ggtree_3.2.1     treeio_1.18.1    bookdown_0.26   
+ [1] scales_1.2.0     ggrepel_0.9.1    kableExtra_1.3.4
+ [4] phangorn_2.9.0   Matrix_1.4-1     forcats_0.5.1   
+ [7] dplyr_1.0.9      purrr_0.3.4      readr_2.1.2     
+[10] tidyr_1.2.0      tibble_3.1.8     ggplot2_3.3.6   
+[13] tidyverse_1.3.2  stringr_1.4.0    phytools_1.0-3  
+[16] maps_3.4.0       magrittr_2.0.3   gridExtra_2.3   
+[19] geiger_2.0.10    ape_5.6-2        ggtree_3.4.2    
+[22] treeio_1.20.2    bookdown_0.27   
 
 loaded via a namespace (and not attached):
- [1] colorspace_2.0-3        ellipsis_0.3.2         
- [3] fs_1.5.2                aplot_0.1.3            
- [5] rstudioapi_0.13         farver_2.1.0           
- [7] fansi_1.0.3             mvtnorm_1.1-3          
- [9] lubridate_1.8.0         xml2_1.3.3             
-[11] codetools_0.2-18        splines_4.1.3          
-[13] mnormt_2.0.2            knitr_1.38             
-[15] jsonlite_1.8.0          broom_0.8.0            
-[17] dbplyr_2.1.1            png_0.1-7              
-[19] compiler_4.1.3          httr_1.4.2             
-[21] backports_1.4.1         assertthat_0.2.1       
-[23] fastmap_1.1.0           lazyeval_0.2.2         
-[25] cli_3.2.0               htmltools_0.5.2        
-[27] tools_4.1.3             igraph_1.3.1           
-[29] coda_0.19-4             gtable_0.3.0           
-[31] glue_1.6.2              clusterGeneration_1.3.7
-[33] tinytex_0.38            fastmatch_1.1-3        
-[35] Rcpp_1.0.8.3            cellranger_1.1.0       
-[37] vctrs_0.4.1             svglite_2.1.0          
-[39] nlme_3.1-155            xfun_0.30              
-[41] rvest_1.0.2             lifecycle_1.0.1        
-[43] MASS_7.3-55             subplex_1.8            
-[45] hms_1.1.1               parallel_4.1.3         
-[47] expm_0.999-6            yaml_2.3.5             
-[49] ggfun_0.0.6             yulab.utils_0.0.4      
-[51] stringi_1.7.6           highr_0.9              
-[53] plotrix_3.8-2           tidytree_0.3.9         
-[55] rlang_1.0.2             pkgconfig_2.0.3        
-[57] systemfonts_1.0.4       evaluate_0.15          
-[59] lattice_0.20-45         patchwork_1.1.1        
-[61] labeling_0.4.2          tidyselect_1.1.2       
-[63] deSolve_1.32            R6_2.5.1               
-[65] magick_2.7.3            generics_0.1.2         
-[67] combinat_0.0-8          DBI_1.1.2              
-[69] pillar_1.7.0            haven_2.5.0            
-[71] withr_2.5.0             mgcv_1.8-39            
-[73] scatterplot3d_0.3-41    modelr_0.1.8           
-[75] crayon_1.5.1            utf8_1.2.2             
-[77] tmvnsim_1.0-2           tzdb_0.3.0             
-[79] rmarkdown_2.13          grid_4.1.3             
-[81] readxl_1.4.0            reprex_2.0.1           
-[83] digest_0.6.29           webshot_0.5.3          
-[85] numDeriv_2016.8-1.1     gridGraphics_0.5-1     
-[87] munsell_0.5.0           viridisLite_0.4.0      
-[89] ggplotify_0.1.0         quadprog_1.5-8         
+ [1] googledrive_2.0.0       colorspace_2.0-3       
+ [3] ellipsis_0.3.2          fs_1.5.2               
+ [5] aplot_0.1.6             rstudioapi_0.13        
+ [7] farver_2.1.1            fansi_1.0.3            
+ [9] mvtnorm_1.1-3           lubridate_1.8.0        
+[11] xml2_1.3.3              splines_4.2.1          
+[13] codetools_0.2-18        mnormt_2.1.0           
+[15] knitr_1.39              jsonlite_1.8.0         
+[17] broom_1.0.0             dbplyr_2.2.1           
+[19] png_0.1-7               compiler_4.2.1         
+[21] httr_1.4.3              backports_1.4.1        
+[23] assertthat_0.2.1        fastmap_1.1.0          
+[25] lazyeval_0.2.2          gargle_1.2.0           
+[27] cli_3.3.0               htmltools_0.5.3        
+[29] tools_4.2.1             igraph_1.3.4           
+[31] coda_0.19-4             gtable_0.3.0           
+[33] glue_1.6.2              clusterGeneration_1.3.7
+[35] tinytex_0.40            fastmatch_1.1-3        
+[37] Rcpp_1.0.9              cellranger_1.1.0       
+[39] vctrs_0.4.1             svglite_2.1.0          
+[41] nlme_3.1-157            xfun_0.31              
+[43] rvest_1.0.2             ggimage_0.3.1          
+[45] lifecycle_1.0.1         googlesheets4_1.0.0    
+[47] MASS_7.3-57             subplex_1.8            
+[49] hms_1.1.1               parallel_4.2.1         
+[51] expm_0.999-6            yaml_2.3.5             
+[53] ggfun_0.0.6             yulab.utils_0.0.5      
+[55] stringi_1.7.8           highr_0.9              
+[57] plotrix_3.8-2           tidytree_0.4.0         
+[59] rlang_1.0.4             pkgconfig_2.0.3        
+[61] systemfonts_1.0.4       evaluate_0.15          
+[63] lattice_0.20-45         patchwork_1.1.1        
+[65] labeling_0.4.2          tidyselect_1.1.2       
+[67] deSolve_1.33            R6_2.5.1               
+[69] magick_2.7.3            generics_0.1.3         
+[71] combinat_0.0-8          DBI_1.1.3              
+[73] mgcv_1.8-40             pillar_1.8.0           
+[75] haven_2.5.0             withr_2.5.0            
+[77] scatterplot3d_0.3-41    modelr_0.1.8           
+[79] crayon_1.5.1            utf8_1.2.2             
+[81] tzdb_0.3.0              rmarkdown_2.14         
+[83] grid_4.2.1              readxl_1.4.0           
+[85] reprex_2.0.1            digest_0.6.29          
+[87] webshot_0.5.3           numDeriv_2016.8-1.1    
+[89] gridGraphics_0.5-1      munsell_0.5.0          
+[91] viridisLite_0.4.0       ggplotify_0.1.0        
+[93] quadprog_1.5-8         
 ```
 
 <!--chapter:end:versions.rmd-->

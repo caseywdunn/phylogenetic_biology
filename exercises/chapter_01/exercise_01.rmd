@@ -1,0 +1,207 @@
+---
+title: "exercise 1"
+output: html_document
+---
+
+```{r setup, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ape)
+```
+
+## Introduction to working in RStudio
+
+The technical objective of this exercise is to get you started with the following tools:
+
+- [R](http://www.r-project.org). A language for statistical computing. There are many excellent libraries for phylogenetic comparative analyses, tree manipulation, and tree visualization in R. It isn't optimized for running actual phylogenetic inference analyses, that is best done with purpose-build stand-alone software tools. But it is great for everything downstream of having a tree.
+- [RStudio](https://rstudio.com/products/rstudio/download/). An interactive development environment for working with R code.
+
+> **_TASK:_** If you haven't already, download and install both tools above. 
+
+Your only direct interactions will be with RStudio, but it needs R on your system to run.
+
+> **_TASK:_** Open this rmd file (the one you are reading) in RStudio. You may get a little yellow bar at the top of the file prompting you to install some libraries. Do install them.
+
+This file is written in RMarkdown, hence the `.rmd` extension. It is a mix of three types of text:
+
+- The configuration information at the top of the file, which include the `---` marks that set it apart from the rest of the file. This is where you set up some details about how the document is interpreted and formatted. For now we won't make any changes.
+
+- Plain text, formatted in markdown. Take a look at some of these references to get a feel for markdown: [RStudio markdown cheatsheet](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf), [github guide](https://guides.github.com/features/mastering-markdown/), and this [markdown guide](https://www.markdownguide.org).
+
+- R code. This code can be in two places. The first are multi-line chunks, the second is inline code.
+
+A code chunk looks like this:
+
+```{r}
+x = 4
+y = 3
+
+z = x+y
+
+z
+```
+
+This chunk assigns values to a couple variables, creates a new variable `z` with their sum, and outputs the contents of that new variable. Most of your code, including code that makes plots, will be in chunks. 
+
+Sometimes you want to report a result right in the text. That is what inline code is for. For example, the result of the above example was `r z`. This just outputs the value of `z`.
+
+An `.rmd` file is processed with the `knit` command. There is a handy little button in RStudio right above this document, with a ball of yarn and a knitting needle, to take care of this. Knitting runs all the R code, places the results of the code in the document, and formats everything nicely to create a new pretty output file. It is a great way to write code and narrative text about that code in a single document.
+
+> **_TASK:_** Click the knit button now.
+
+RStudio will think for a few minutes, and then open a new window with your rendered document. All the code has been executed, and everything is formatted. This also creates a new `.html` file in the same folder as this file. That is just the rendered output in a format that can be opened in a web browser.
+
+
+## Submitting your assignment
+
+When you submit your ``.rmd` assignment on Canvas, Gradescope runs all your code and checks the results. You can submit our assignment as many times as you like - the only submission that will count toward your grade is the last one before the deadline. This setup gives you feedback on how you are doing, as often as you want, whenever you want.
+
+You will follow a workflow like this for most exercises:
+
+1. Download the exercise from Canvas. It will be posted before Class on Thursday, and we will usually start working on it in class on Thursday.
+
+2. Knit the file. Make sure that everything runs and you get output. The output won't yet have the correct results, but this will confirm that everything is configured properly.
+
+3. Start editing the file. When you get to a point that you want to check things, re-knit it to confirm that it runs and you get output. If it knits and looks good to you, submit it to test the results. You can work incrementally, checking each new result before heading to the next.
+
+4. Go back to 2 and repeat until all tasks are completed and you are happy with your score.
+
+For this to work, there are a couple things to keep in mind:
+
+- Don't change the name of the file after you download it. The grader expects the exact name of the original file.
+
+- The autograding works by testing the value of some specific variables after running your code. To make it completely clear what is being evaluated, I have prepended `check_` to the names of these graded variables. For example, `check_x`. These will be initialized (often with a `NULL` value) in the file you download, and you will write the code to set their value to something meaningful. Don't change the names of these special variables that will be tested. They must have the right names and right values for you to get full credit.
+
+- The autograders are only as good as the people who write them, in this case me. If you think your result is correct but you aren't getting credit for it, let the me know. You may be doing something consistent with the instructions that I didn't anticipate.
+
+> **_TASK:_** Submit this file on canvas. It should tell you that all your answers are wrong. Congratulations, everything is working!
+
+It is good practice to knit and submit the assignment before you start working. This will let you know everything is running appropriately before you get started, and help pinpoint any bugs that might arise later. If the downloaded assignment won't knit or the autograder tells you there is a problem (other than that you get 0 points), let the professor know so that things can be fixed before you start.
+
+Some future exercises will require the use of tools other than RStudio and the grading will be a bit different. This will be explained when we get to them.
+
+## Debugging
+
+Some bugs in your code may cause errors that stop R from running. The easiest way to identify those problems is to run the code in your file, without knitting. To do that, click the "Run" button above this document in RStudio, and then select "Run all" from the menu. It will run all the code in the console below, and stop at the line that throws an error. You can then type commands right in the console to explore and try solutions until you understand and fix the problem. Then you can make the change in the `rmd` file and try knitting or running it again.
+
+I strongly encourage you to knit or run your code often as you work. Identify incremental goals, then test your progress at each step of achieving those goals.
+
+## A sample problem
+
+Here is a sample problem, just to give you the hang of creating and submitting an answer. 
+
+
+> **_Problem 1:_** Edit the code block below so that the sum of `var1` and `var2` is assigned to `check_sum` 
+
+```{r}
+
+var1 = 19
+var2 = 23
+
+check_sum = NULL
+
+
+```
+ 
+ Here I use inline code to show the value of the result when you knit this file: The sum of the two variables is `r check_sum`.
+
+After you edit the code, knit this document to see if the results look good. If they do, then submit it on Canvas and check your score on Problem 1.
+
+## Phylogenies in R
+
+This is a phylogenetics course, so let's start by defining and drawing some phylogenies. We'll focus on this [next week](http://dunnlab.org/phylogenetic_biology/phylogenies.html#representation), so this is just a bit of a teaser.
+
+One of the most important tools for phylogenetic analyses in R is the package [ape](https://cran.r-project.org/web/packages/ape/ape.pdf), which is already loaded in this exercise with the `library(ape)` command in the first chunk of this exercise.
+
+The chunk below does the following:
+
+- Defines a phylogenetic tree in [newick format](https://evolution.genetics.washington.edu/phylip/newicktree.html) wit the text string `"(((A,B),(C,D)),E);"`
+
+- Assigns this text to the variable `newick_text`
+
+- Creates a phylo tree object from the newick text using the `ape` function `read.tree()`
+
+- Plots the tree
+
+```{r}
+
+example_newick = "(((A,B),(C,D)),E);"
+
+example_phylo = read.tree( text=example_newick )
+
+plot( example_phylo )
+
+```
+
+Now, it is your turn to make a tree.
+
+> **_Problem 2:_** Edit the code block below so that there is an additional tip `F` that is sister to `C`
+
+```{r}
+
+newick = "(((A,B),(C,D)),E);"
+
+check_phylo_extended = read.tree( text=newick )
+
+plot( check_phylo_extended )
+
+```
+
+Now that you have experience modifying a tree, you will next write one from scratch.
+
+    |-------------- sponge
+    |
+    |    |--------- coral
+    |    |
+    |----|    |---- crab
+         |    |
+         |----| |--- urchin
+              |-|
+                |--- human
+
+
+> **_Problem 3:_** Edit the chunk below to create a newick tree representing the topology in the ascii art phylogeny above and plot it with the `ape` functions `read.tree()` and `plot()`.
+
+```{r}
+    # add code to create newick text of tree,
+    # be sure the tip labels are spelled exactly as above
+
+    # edit the following line to store the phylo representation of the tree in check_phylo_new
+    # don't change this variable name, because it starts with check_ you know it is what will be 
+    # evaluated when grading the exercise
+    check_phylo_new = NULL
+
+    # add code to plot the tree
+```
+
+
+
+
+## Interpretting trees
+
+The tree above was a toy example. Here is a larger tree with real tips from http://vertlife.org project by the Jetz lab here at Yale and others.
+
+```{r}
+  tree_tetrapod_text="((((((((Lepus_europaeus:70.20096322090001,Mus_musculus:70.2009638712):3.154317,Homo_sapiens:73.3552735285):6.856746,(((Equus_ferus:58.229796309799994,Balaenoptera_musculus:58.22982398432999):8.913111,Panthera_leo:67.14292611620002):0.811577,Corynorhinus_townsendii:67.95450331960001):12.257514):5.856834,(Loxodonta_africana:83.676113197,Dasypus_novemcinctus:83.67612211229999):2.392725):76.041131,Macropus_giganteus:162.10993597769):17.193944,Ornithorhynchus_anatinus:179.30390079):160.6961,(Buteo_jamaicensis:300,Podarcis_lilfordi:300):40):30,Hyla_versicolor:370);"
+  tree_tetrapod = read.tree( text=tree_tetrapod_text )
+  plot( tree_tetrapod )
+```
+
+> **_Problem 4:_** Edit the code below to specify the label (ie, name) of the species designated for each question. This will require replacing the `NULL` values with species names from the tree above. It will be easier to read the tree figure in the knitted output than to read the newick data above.
+
+```{r}
+
+# Be sure to put quotes around text strings, for example:
+
+x = "dog"
+
+# Which species is sister to Balaenoptera_musculus?
+check_sister_balaenoptera = NULL
+
+
+# Which species is sister to all other species in the tree?
+check_sister_all = NULL
+
+```
+
+

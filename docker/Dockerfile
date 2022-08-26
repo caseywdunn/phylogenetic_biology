@@ -1,4 +1,7 @@
-FROM rocker/verse:4.1.3
+FROM rocker/verse:4.2.1
+
+RUN apt-get update && apt-get install -y \
+    tex-gyre
 
 RUN Rscript -e "library(BiocManager); BiocManager::install('ggtree'); \
                                       BiocManager::install('treeio');"
