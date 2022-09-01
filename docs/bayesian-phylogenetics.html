@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Comparative methods | Phylogenetic Biology</title>
+  <title>Chapter 7 Bayesian phylogenetics | Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
   <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Comparative methods | Phylogenetic Biology" />
+  <meta property="og:title" content="Chapter 7 Bayesian phylogenetics | Phylogenetic Biology" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="An introduction to Phylogenetic Biology." />
   <meta name="github-repo" content="caseywdunn/phylogenetic_biology" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Comparative methods | Phylogenetic Biology" />
+  <meta name="twitter:title" content="Chapter 7 Bayesian phylogenetics | Phylogenetic Biology" />
   <meta name="twitter:site" content="@caseywdunn" />
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="ancestral-character-state-reconstruction.html"/>
-<link rel="next" href="statistical-and-mathematical-fundamentals.html"/>
+<link rel="prev" href="evaluation.html"/>
+<link rel="next" href="additional-character-types.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -323,42 +323,66 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="comparative-methods" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> Comparative methods<a href="comparative-methods.html#comparative-methods" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="correlated-evolutionary-changes" class="section level2 hasAnchor" number="11.1">
-<h2><span class="header-section-number">11.1</span> Correlated evolutionary changes<a href="comparative-methods.html#correlated-evolutionary-changes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>PGLS <span class="citation">(<a href="#ref-symonds2014primer" role="doc-biblioref">Symonds and Blomberg 2014</a>)</span>.</p>
-<p><img src="phylogenetic_biology_files/figure-html/unnamed-chunk-16-1.png" width="2100" /><img src="phylogenetic_biology_files/figure-html/unnamed-chunk-16-2.png" width="2100" /></p>
-<pre><code>##      [,1] [,2]
-## [1,]    1    0
-## [2,]    0    1</code></pre>
-<pre><code>##      [,1] [,2]
-## [1,]  1.0  0.5
-## [2,]  0.5  1.0</code></pre>
-<pre><code>##      [,1] [,2]
-## [1,]    1    1
-## [2,]    1    1</code></pre>
+<div id="bayesian-phylogenetics" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Bayesian phylogenetics<a href="bayesian-phylogenetics.html#bayesian-phylogenetics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Let’s take stock of what we have covered so far. We introduced models, and how to simulate data with them. We then explored how to use models to calculate the likelihood – the probability of the observed data given the topology, branch lengths, model parameters, and model. We used likelihood as an optimality criterion in heuristic searches to find the Maximum Likelihood (ML) phylogeny. We introduced the methods to calculate the frequency of branches on a focal topology, like the ML topology, in a sample of phylogenies. We showed how to generate a sample of phylogenies by running ML searches on bootstrapped matrices, and used this to calculate bootstrap support for each branch in the ML phylogeny.</p>
+<p>ML and bootstraps are widely used and are a critical foundation for many phylogenetic analyses. There are, however, a few things about analysis frameworks based on optimality criteria, ML, and bootstraps that are not ideal:</p>
+<ul>
+<li><p>Whenever we apply an optimality criterion, such as ML or parsimony, to identify the “best” phylogeny, that doesn’t tell us anything about how much better this optimal phylogeny is than other hypotheses. If it is the best phylogeny by far, then this single phylogeny tells us a lot about the the phylogenetic information in our topology. If however, there are multiple phylogenies that are almost as good as the best one, as is often the case, then we would need to know about these others as well to have a good understanding of what hypotheses are consistent with our data.</p></li>
+<li><p>Likelihood is the probability of the data given the phylogenetic hypothesis. The probability of the data under the ML hypothesis will be exceptionally low, often far less than one in a million, since the ML hypothesis could generate many other data as well. This is because we are evaluating the probability of the data given the hypothesis, but often what we really want to know is the probability of the hypothesis given the data. The two are quite different, but are related. It would be nice to be more explicit about that relationship.</p></li>
+<li><p>Bootstraps are a convenient way to generate a sample of phylogenies, but their statistical interpretation is not clear. The frequencies of bootstrap supports don’t correspond in a clear way to probabilities of our hypothesis, but instead tell us something about how frequently features of the phylogeny are supported when we resample the data. In practice it turns out this is a good proxy for phylogenetic support, but it would be nice to have support values that have a more explicit statistical interpretation.</p></li>
+</ul>
+<p>All analyses include a variety of tradeoffs, and the downsides of the issues listed above are often mitigated by the multiple upsides of a ML bootstrap analysis framework. It also greatly helps that there are decades of experience with such analyses that help contextualize and interpret ML bootstrap results. This work has also produced ML methods and software packages that are highly optimized for computational efficiency, enabling the routine application of these approaches to very large datasets.</p>
+<p>Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above. Rather than focus on a single “best” topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters.</p>
+<div id="bayesian-statistics" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Bayesian statistics<a href="bayesian-phylogenetics.html#bayesian-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Bayesian statistics is much older than many other domains of statistics, but have recently seen a surge in use as computational and methodological advances allow them to be applied more effectively to a wider number of problems. The basic intuition is that our understanding of the world are not drawn from the data alone. Instead, the data are used to update our prior understanding of the world. This updated understanding is referred to as the posterior. There are many excellent introductions to Bayesian statistics, so I will not provide a full derivation here. If you would like more of a background, please consult Appendix <a href="statistical-and-mathematical-fundamentals.html#stats-bayes">A.2</a>.</p>
+<p>Bayes’ theorem establishes the the following relationships:</p>
+<p><span class="math display" id="eq:bayes-theorem">\[\begin{equation}
+  P(H|D) = \frac{P(D|H)P(H)}{P(D)}
+  \tag{7.1}
+\end{equation}\]</span></p>
+<p><span class="math inline">\(P(H|D)\)</span>, read as “the probability of the hypothesis given the data”, is the posterior probability of a given hypothesis. It takes into account prior expectations and new insight from the data. This posterior probability is what we are trying to estimate. We have already seen <span class="math inline">\(P(D|H)\)</span>, read as “the probability of the data given the hypothesis”. This is the likelihood, and from previous chapters we know how to calculate it. <span class="math inline">\(P(H)\)</span> and <span class="math inline">\(P(D)\)</span> are our prior probabilities, our world view before we collected data. <span class="math inline">\(P(H)\)</span> is the prior probability of the hypothesis, without considering the data. <span class="math inline">\(P(D)\)</span> is the prior probability of the data, without considering the hypothesis.</p>
+<p>Let’s plug in a few numbers to get some intuition for the behavior of Bayes’ theorem. First, consider the case where <span class="math inline">\(P(H)=0\)</span>, <em>i.e.</em> you assign a prior probability of <span class="math inline">\(0\)</span> to the hypothesis. The posterior probability, <span class="math inline">\(P(H|D)\)</span>, will then also be <span class="math inline">\(0\)</span>. This shows that if you believe ahead of collecting data that the hypothesis is absolutely impossible, no amount of data can change your mind and your updated hypothesis, the posterior, will also be <span class="math inline">\(0\)</span>.</p>
+<p>Second, let’s consider the case where the data are just as likely under the hypothesis as they are in general. This would be like having a medical test for a specific condition where the test was so bad that the data (test result) didn’t depend in any way on the hypothesis (the presence of the condition). For example, the test returns a positive 10% of the time regardless of whether you have the condition or not. In that situation, <span class="math inline">\(P(D|H)=P(D)\)</span>. Since <span class="math inline">\(P(D|H)\)</span> is in the numerator and <span class="math inline">\(P(D)\)</span> is in the denominator, they cancel out. That leaves <span class="math inline">\(P(H|D)=P(H)\)</span> – the posterior probability of the hypothesis is the same as the prior on the hypothesis. The data didn’t change our understanding of the hypothesis at all. This is the behavior we want when the data have no information relevant to the hypothesis.</p>
+<p>Third, consider a case where the data are perfect indicators of the hypothesis. You get a specific pattern in the data whenever, and only when, the hypothesis is true. Because the hypothesis and data are perfectly linked, <span class="math inline">\(P(D)=P(H)\)</span> the priors cancel out. In this case, <span class="math inline">\(P(H|D)=P(D|H)\)</span>, <em>i.e.</em> the posterior becomes equal to the likelihood. This never happens in phylogenetic inference, since any given phylogeny could always generate multiple sequences at the tips. But it is the case that as the data become more informative the priors have less impact on the posterior.</p>
 </div>
-<div id="inferring-covariance-in-the-absence-of-phylogenetic-structure" class="section level2 hasAnchor" number="11.2">
-<h2><span class="header-section-number">11.2</span> Inferring covariance in the absence of phylogenetic structure<a href="comparative-methods.html#inferring-covariance-in-the-absence-of-phylogenetic-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><img src="phylogenetic_biology_files/figure-html/unnamed-chunk-18-1.png" width="2100" /></p>
-</div>
-<div id="phylogenetic-independent-contrasts" class="section level2 hasAnchor" number="11.3">
-<h2><span class="header-section-number">11.3</span> Phylogenetic Independent Contrasts<a href="comparative-methods.html#phylogenetic-independent-contrasts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="phylogenetic-structure-is-the-expected-covariance-structure" class="section level2 hasAnchor" number="11.4">
-<h2><span class="header-section-number">11.4</span> Phylogenetic structure is the expected covariance structure<a href="comparative-methods.html#phylogenetic-structure-is-the-expected-covariance-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bayesian-phylogenetic-inference" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Bayesian phylogenetic inference<a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To calculate the posterior probability of a phylogenetic hypothesis, we need to address all the terms on the right side of Equation <a href="bayesian-phylogenetics.html#eq:bayes-theorem">(7.1)</a>. We already know how to calculate <span class="math inline">\(P(D|H)\)</span>, the likelihood. What about <span class="math inline">\(P(H)\)</span> and <span class="math inline">\(P(D)\)</span>? There are a variety of practical approaches to <span class="math inline">\(P(H)\)</span> that have been shown to work well in the context of phylogenetics. These include uniform priors, where all topologies are considered to be equally likely. The priors on branch length can be approximated from an exponential distribution. One of the major take-aways from the past two decades of work on Bayesian phylogenetics is that inference is quite robust to <span class="math inline">\(P(H)\)</span> when the data are informative about the phylogeny, as expected.</p>
+<p>What then, about <span class="math inline">\(P(D)\)</span>? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (<em>e.g.</em>, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won’t.</p>
+<p>Instead, we will forego dealing with <span class="math inline">\(P(D)\)</span> at all by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling<span class="citation">(<a href="#ref-metropolis1953" role="doc-biblioref">Metropolis et al. 1953</a>)</span>. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic <span class="math inline">\(R\)</span> and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.</p>
+<p>Consider the current hypothesis to be <span class="math inline">\(H\)</span>, and the newly proposed hypothesis <span class="math inline">\(H^*\)</span>. We calculate our test statistic as the ratio of the posterior probability of <span class="math inline">\(H^*\)</span> to the prior probability of <span class="math inline">\(H\)</span>:</p>
+<p><span class="math display" id="eq:bayes-mcmc">\[\begin{equation}
+  R = \frac{P(D|H^*)P(H^*)}{P(D)} \frac{P(D)}{P(D|H)P(H)} = \frac{P(D|H^*)P(H^*)}{P(D|H)P(H)}
+  \tag{7.2}
+\end{equation}\]</span></p>
+<p>Because <span class="math inline">\(P(D)\)</span> doesn’t depend on the hypothesis under consideration, it is the same in both posteriors. Because we are considering a ratio of posteriors, it cancels out. We don’t need to calculate it to derive <span class="math inline">\(R\)</span>.</p>
+<p>The “Markov Chain” in MCMC alludes to the fact that MCMC is a series of repeated events that depends only on the previous step. Each repeated cycle of events, also known as a generation, proceeds as follows:</p>
+<ol style="list-style-type: decimal">
+<li>We have hypothesis <span class="math inline">\(H\)</span></li>
+<li>We propose a new hypothesis <span class="math inline">\(H^*\)</span> by modifying <span class="math inline">\(H\)</span>.</li>
+<li>We calculate <span class="math inline">\(R\)</span> according to Equation <a href="bayesian-phylogenetics.html#eq:bayes-mcmc">(7.2)</a></li>
+<li>If <span class="math inline">\(R&gt;1\)</span>, we accept <span class="math inline">\(H^*\)</span>. If If <span class="math inline">\(R&lt;1\)</span>, we accept <span class="math inline">\(H^*\)</span> with probability <span class="math inline">\(R\)</span>. Otherwise, we retain <span class="math inline">\(H\)</span>.</li>
+<li>The result of the step above is added to the posterior sample, and becomes <span class="math inline">\(H\)</span> for the next iteration of the cycle.</li>
+</ol>
+<p>MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as branch frequencies. Unlike bootstraps, though, the frequency of an branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, <em>i.e.</em> the probability of the branch given the data. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.</p>
+<p>There are a variety of practical considerations to implementing a Bayesian phylogenetic analysis with MCMC. These include:</p>
+<ul>
+<li>Selecting the appropriate model. Many of the same considerations we reviewed in the context of likelihood apply here.</li>
+<li>Selecting appropriate priors on topology, branch length, and model parameters.</li>
+<li>Devising an appropriate hypothesis proposal mechanism. If the new hypothesis <span class="math inline">\(H^*\)</span> is too different from <span class="math inline">\(H\)</span>, it will tend to be rejected as <span class="math inline">\(H\)</span> becomes optimized. This will lead to an approximated posterior distribution that is too narrow, leading to overconfidence in a small set of hypotheses. If the steps are too small, then MCMC will tend to get trapped in local optima because they cannot find more distant better optima. There are several approaches to these challenges, including searches with multiple MCMC chains that take different step sizes.</li>
+<li>The very early samples in the chain are not a good estimate of the posterior distribution, because the initial <span class="math inline">\(H\)</span> is
+not necessarily close to a peak in the posterior. The initial samples becore MCMC settles into a stable distribution are therefore discarded as part of a “burn-in” phase.</li>
+<li>Knowing when enough generations have been sampled to adequately approximate the posterior distribution. This is often evaluated by running multiple independent MCMC analyses and stopping them if and when they have converged on similar distributions.</li>
+</ul>
 
 </div>
-</div>
-
-
-
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-symonds2014primer" class="csl-entry">
-Symonds, Matthew RE, and Simon P Blomberg. 2014. <span>“A Primer on Phylogenetic Generalised Least Squares.”</span> In <em>Modern Phylogenetic Comparative Methods and Their Application in Evolutionary Biology</em>, 105–30. Springer.
+<div id="ref-metropolis1953" class="csl-entry">
+Metropolis, Nicholas, Arianna W Rosenbluth, Marshall N Rosenbluth, Augusta H Teller, and Edward Teller. 1953. <span>“Equation of State Calculations by Fast Computing Machines.”</span> <em>The Journal of Chemical Physics</em> 21 (6): 1087–92. <a href="https://doi.org/10.1063/1.1699114">https://doi.org/10.1063/1.1699114</a>.
 </div>
 </div>
             </section>
@@ -366,8 +390,8 @@ Symonds, Matthew RE, and Simon P Blomberg. 2014. <span>“A Primer on Phylogenet
           </div>
         </div>
       </div>
-<a href="ancestral-character-state-reconstruction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statistical-and-mathematical-fundamentals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="evaluation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="additional-character-types.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
