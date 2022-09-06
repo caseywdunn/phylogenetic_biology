@@ -43,12 +43,39 @@ The following are installed on your local computer (e.g. your laptop):
 
 The following can be installed on your local computer or a remote cluster. Windows users are advised to install these programs within WSL rather than directly in Windows.
 
-- git, https://git-scm.com/downloads. Version control software that we will use to download this repository and the exercises it contains. It is not strictly a requirement, as you can also download the files from the github website. 
+
 - seq-gen, http://tree.bio.ed.ac.uk/software/seqgen/. A Windows version is not available, so on Windows it must be run in WSL.
 - IQTree, http://www.iqtree.org/
 - mafft, https://mafft.cbrc.jp/alignment/software/
 - revbayes, https://revbayes.github.io/download 
 
+
+### Optional software
+
+These items may be helpful, but are not necessary
+
+#### Markdown tools
+
+If you would like to convert markdown documents to pdfs, you will need to install LaTeX. The easiest way to do that is with [TinyTeX](https://yihui.org/tinytex/). From an R console (in RStudio or at the command line), enter the following R commands to install TinyTex:
+
+    install.packages('tinytex')
+    tinytex::install_tinytex()
+
+Markdown files are used in many contexts. If you would like to convert any markdown file to a pdf, without using RStudio, I suggest downloading and installing [pandoc](https://pandoc.org/installing.html). Then at the command line, you can convert a markdown file to any format you like. For example:
+
+    pandoc test.md -o test.pdf
+    pandoc test.md -o test.html
+    pandoc test.md -o test.docx
+
+This creates pdf, html, and docx versions of `test.md`. The input file is specified right after the `pandoc` command, and the output file is specified right after `-o`. It figures out the input and output formats from the file extensions.
+
+#### git
+
+`git` is a widely used version control tool. It is a single framework that facilitates sharing of files, collaboration, backup, and recording the history of edits. You can download the exercises with git as described in the section below.
+
+`git` can be downloaded at https://git-scm.com/downloads.
+
+You can also download a desktop app to use `git` with the online service GitHub at https://desktop.github.com/ .
 
 ## Downloading the exercises
 
