@@ -102,7 +102,7 @@ Slanted layouts avoid the node lines and elbows of rectangular layouts, but beca
 Circular layouts place the root at the center, and the tips around the circumference. This is a compact representation that works well for very large phylogenies. 
 
 
-```{r trees-layouts, echo=FALSE, fig.cap="The same tree as above, layed out in several different ways."}
+```{r trees-layouts, echo=FALSE, fig.cap="The same tree as above, laid out in several different ways."}
 
 # Derived from https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html
 
@@ -136,7 +136,7 @@ grid.arrange(
 
 ```
 
-## Some properties of trees {#tree-properties}
+## Some properties of phylogenies {#tree-properties}
 
 In a fully bifurcating phylogeny with $n$ tip nodes, the following will be the case:
 
@@ -266,7 +266,7 @@ grid.arrange(
 
 ```
 
-Any internal node in a rooted phylogeny can be described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@deQueiroz2020].
+Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@deQueiroz2020].
 
 Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
 
@@ -509,7 +509,7 @@ Branch annotations can include:
 
 - Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes at eache end of a branch need not be different in the relevant trait to have change events along the branch. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the branch that are compatible with this pattern, for example a change from A to C and then a change from C back to A.
 
-- Branch frequencies.This is how topology support values, such as bootstraps and posterior probabilities (which we'll discuss later), are stored.
+- Branch frequencies. This is how topology support values, such as bootstraps and posterior probabilities (which we'll discuss later), are stored.
 
 Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and branches that indicate the topology of the phylogeny (Figure \@ref(fig:trees-information)C). Once you have topology, you could display branch attributes. For example, you could scale the branch lengths by time (Figure \@ref(fig:trees-information)D).
 
