@@ -1,0 +1,126 @@
+---
+title: "Exercise 03"
+output: html_document
+---
+
+This document is an R markdown file, but we actually aren't going to do any R! It is just a convenient way to distribute instructions for our current activity.
+
+The technical goals of this exercise are to:
+
+- Introduce the computing cluster and how to access it. This includes running commands on it, as well as transferring files back and forth
+- Run an analysis as a job on the cluster.
+
+The phylogenetic goals of this exercise are to:
+
+- Simulate sequences, given a phylogeny, model, and model parameters.
+
+
+## Shell commands
+
+You will be using the command line today. A cheat sheet for the primary commands we will be using today are available in [Appendix 3](https://practicalcomputing.org/files/PCfB_Appendices.pdf) of the book [Practical Computing for Biologists](https://practicalcomputing.org/downloads.html) I wrote with Steve Haddock.
+
+
+## Navigating at the command line
+
+Open the shell (on the OOD web interface by selecting the `Clusters` dropdown menu at the top of the page and selecting `Grace Shell Access`). This gives you command line access to the cluster. The first thing to do is to see where you are at on the cluster. Type the following:
+
+    pwd
+    
+This will show you what directory (ief folder) you are in. On my account, it says `/home/eeb354_cwd7`. This is my home directory. Yours will have your own account name instead of `eeb354_cwd7`.
+
+Next, let's see what is in your home directory. Type the following:
+
+    ls
+
+This stands for "list" and lists the contents of the current folder. In my account I get the following:
+
+    ondemand  project  scratch60
+    
+These are three directories that I can access from right in my home folder. `project` contains shared folders for the class. `scratch60` is where you are going to run your analyses. 
+
+
+
+## Copy the assignment folder to scratch
+
+> **_TASK:_** Execute the following commands to copy the exercise folder to your scratch folder and then change your working directory to your copy of the exercise:
+
+    cp -r /gpfs/loomis/project/eeb354/eeb354_cwd7/exercises/exercise_03 scratch60/
+    cd scratch60/exercise_03
+
+To see what files are available you can then enter `ls`, or to see a bit more information about each file `ls -l`. 
+
+
+## Run your first simulation
+
+One of the files is `mammal.tre`, this is the newick mammal tree we have seen multiple times in the class. View the contents of the file with `cat`:
+
+    cat mammal.tre
+
+You can see the tree stored as newick formatted text, without any quotes.
+
+The directory also contains `job_mammal_gtr.sh`. Take a look at its contents with:
+
+    cat job_mammal_gtr.sh
+
+This is a job file. It has information to setup and then run your analysis on the cluster. More on running jobs on our cluster can be found [here](https://docs.ycrc.yale.edu/clusters-at-yale/job-scheduling/).
+
+The following lines set up some details about the job, like what to call it and how long to let it run:
+
+    #!/bin/bash
+    #SBATCH --job-name=mammal_gtr
+    #SBATCH --time=10:00
+
+This line loads the software we will use:
+    
+    module load Seq-Gen/1.3.4-GCCcore-7.3.0
+    
+And this line does the simulation:
+
+    seq-gen -mGTR -f0.295,0.205,0.205,0.295 -r0.5,2,0.5,0.5,2,0.5 -s0.001 -l40 -of < mammal.tre > mammal_gtr.fa
+
+This command executes the program `seq-gen`, which has many options that are described in the [manual](http://htmlpreview.github.io/?https://github.com/rambaut/Seq-Gen/blob/master/documentation/Seq-Gen.Manual.html). Here I have set it up to simulate 40 sites under the same model we specified in [Chapter 3](http://dunnlab.org/phylogenetic_biology/simulation.html#plugging-some-numbers-into-the-expanded-model).
+
+
+> **_Problem 1:_** Execute the following command to submit the job to the cluster:
+
+    sbatch job_mammal_gtr.sh
+
+Then check its status with:
+
+    squeue -u$USER
+
+It may take a few seconds or minutes for a computer to be allocated to your job, but once it is this job will run very fast. Keep checking with that last command until your job is done. You should now have an additional file, `mammal_gtr.fasta`. Take a look at the contents with:
+
+    cat mammal_gtr.fa
+
+This shows you the simulated data in fasta format.
+
+Rathar than scale the overall rate of change, for example by setting `mu`, I scale the branch lentgths using the argument `-s0.001`.
+
+
+> **_Problem 2:_** Take a look at the `seq-gen` options in the `job_mammal_gtr.sh`, the [seq-gen manual](http://htmlpreview.github.io/?https://github.com/rambaut/Seq-Gen/blob/master/documentation/Seq-Gen.Manual.html), and the model description in [Chapter 3](http://dunnlab.org/phylogenetic_biology/simulation.html#plugging-some-numbers-into-the-expanded-model). Answer the following questions about the `seq-gen` command we use.
+
+- What part of the command sets the nucleotide frequencies?
+
+- What does `-r0.5,2,0.5,0.5,2,0.5` do?
+
+
+> **_Problem 3:_** Copy the job script with the following command. 
+
+     cp job_mammal_gtr.sh job_mammal_gtr_scaled.sh
+     
+> Scale the tree to make the branch lengths longer by changing `-s0.001` `-s0.01`. Also change the name of the output fasta file to `mammal_gtr_scaled.fa`. Submit a job to run the new command. Answer the following question.
+
+- What impact did making the branch lengths longer have?
+
+
+## Change the model
+
+
+> **_Problem 4:_** Copy the job script with the following command, and modify the settings to simulate under a JC69 model and also to change the output file name to `mammal_jc.fa`. Run the job.
+
+    cp job_mammal_gtr.sh job_mammal_jc.sh
+
+## Download results and submit
+
+In your browser, head back over to https://ood-grace.hpc.yale.edu/pun/sys/dashboard and click on the `Files` dropdown menu at the top of the page, select `Home Directory`, and navigate to `scratch60/`. Download the `exercise_03` folder, add this document to it, compress it with zip, and submitted it for the Exercise 03 assignment.

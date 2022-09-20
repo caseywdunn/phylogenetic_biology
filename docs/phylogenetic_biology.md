@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2022-09-01"
+date: "2022-09-19"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -41,9 +41,13 @@ I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read 
 
 
 
-## Source code
+## Distribution
 
-This book was rendered from the source, available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016].
+![](figures/by-nc-nd-600.png)
+
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. If there is interest, I will also make paperbacks available for purchase at a reasonable price. Commercial use by others (e.g. the sale of printed copies by anyone other than the author) are not allowed.
+
+This book was rendered from source code, available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there.
 
 Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues.
 
@@ -87,9 +91,9 @@ The following books provide general computational background for the topics cove
 
 ## License
 
-![](figures/by-nc-nd-600.png)
 
-This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+
 
 ## Acknowledgements
 
@@ -135,7 +139,7 @@ There are a few concepts that are fundamental to understanding phylogenetic anal
 In order to make informative comparisons across species, both for inferring phylogenies and for phylogenetic comparative analyses, we need a unified ontological framework to refer to the same characters and character states in different organisms. This correspondence is provided by the concept of homology. Homology is a hypothesis that the same attribute is present in different entities because that attribute was present in their shared ancestor. Human arms and bird wings are homologous, for example. Homology is a deceptively simple concept that can sometimes be devilishly difficult to define, test, and apply [@wagner2014]. 
 
 \begin{figure}
-\includegraphics[width=9in]{figures/phylogenetic_analyses} \caption{(A) The primary components of a phylogenetic analysis. This mammal phylogeny and branch lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.}(\#fig:intro-concepts)
+\includegraphics[width=4.5in]{figures/phylogenetic_analyses} \caption{(A) The primary components of a phylogenetic analysis. This mammal phylogeny and branch lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.}(\#fig:intro-concepts)
 \end{figure}
 
 ## A unified perspective on phylogenetic studies
@@ -261,9 +265,9 @@ Slanted layouts avoid the node lines and elbows of rectangular layouts, but beca
 Circular layouts place the root at the center, and the tips around the circumference. This is a compact representation that works well for very large phylogenies. 
 
 
-![(\#fig:trees-layouts)The same tree as above, layed out in several different ways.](phylogenetic_biology_files/figure-latex/trees-layouts-1.pdf) 
+![(\#fig:trees-layouts)The same tree as above, laid out in several different ways.](phylogenetic_biology_files/figure-latex/trees-layouts-1.pdf) 
 
-## Some properties of trees {#tree-properties}
+## Some properties of phylogenies {#tree-properties}
 
 In a fully bifurcating phylogeny with $n$ tip nodes, the following will be the case:
 
@@ -313,7 +317,7 @@ A convenient way to designate groups of organisms is by their most recent common
 
 ![(\#fig:trees-groups)(A) A monophyletic group, *i.e.* a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit.](phylogenetic_biology_files/figure-latex/trees-groups-1.pdf) 
 
-Any internal node in a rooted phylogeny can be described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@deQueiroz2020].
+Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@deQueiroz2020].
 
 Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
 
@@ -378,7 +382,7 @@ Branch annotations can include:
 
 - Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes at eache end of a branch need not be different in the relevant trait to have change events along the branch. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the branch that are compatible with this pattern, for example a change from A to C and then a change from C back to A.
 
-- Branch frequencies.This is how topology support values, such as bootstraps and posterior probabilities (which we'll discuss later), are stored.
+- Branch frequencies. This is how topology support values, such as bootstraps and posterior probabilities (which we'll discuss later), are stored.
 
 Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and branches that indicate the topology of the phylogeny (Figure \@ref(fig:trees-information)C). Once you have topology, you could display branch attributes. For example, you could scale the branch lengths by time (Figure \@ref(fig:trees-information)D).
 
@@ -582,13 +586,13 @@ Let's start with a simple model of DNA evolution. At first we will also consider
 
 Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
 
-Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model $1/4$ of the time a replacement event occurs, an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution (just a replacement in kind). If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of a replacement event result in a substitution, the substitution rate is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the replacement rate.
+Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model $1/4$ of the time a replacement event occurs, an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution, just a replacement in kind. If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of a replacement event result in a substitution, the substitution rate is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the replacement rate.
 
 It might seem a bit odd to consider replacement events that don't result in substitutions, but this follows naturally from a central feature we specified for the the model - the new nucleotide doesn't depend in any way on what nucleotide was there before. If we had a process where replacements always resulted in substitutions, then excluding the replacement-in-kind events would require knowing which nucleotide should be placed so that we *don't* select it.
 
 ### Expected amount of change
 
-For the simple process described here, there are two things to consider if we want to know the amount of evolutionary change. The first is the substitution rate $\mu$, and the second is the time over which the evolutionary process acts. In our example here, that time is the length of the branch under consideration in the phylogeny.
+For the simple process described here, there are two things to consider if we want to know the amount of evolutionary change. The first is the rate $\mu$, and the second is the time over which the evolutionary process acts. In our example here, that time is the length of the branch under consideration in the phylogeny.
 
 In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over the same time interval (0-100 time units). Each black line on the bar is a replacement event randomly introduced by the computer according to our model. We use a different value of $\mu$ for each simulation (as indicated on the vertical axis). In the bottom bar, where $\mu=0$, there are no replacements (black bars) and therefore no substitutions (the whole bar is the same color). There are more replacement events as $\mu$ increases along the vertical axis.
 
@@ -606,7 +610,7 @@ Because of the linear relationship between the number of replacements and the pr
 
 ### Expected end state
 
-The machinery above shows how a model can clarify the way we think about the expected amount of change along an branch. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a  question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
+The machinery above shows how a model can clarify the way we think about the expected amount of change along a branch. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a  question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
 
 The situation is most clear after a small amount of change (when $\mu t$ is small) - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.
 
@@ -662,7 +666,7 @@ We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot 
 ![(\#fig:sim-sat-analytical)Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \@ref(eq:sim-change). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each.](phylogenetic_biology_files/figure-latex/sim-sat-analytical-1.pdf) 
 
 Let's put this back into a biological context. Our simple model allows us to 
-calculate the probability $P(t)$ of a given nucleotide state at the end (child node) of an branch given:
+calculate the probability $P(t)$ of a given nucleotide state at the end (child node) of a branch given:
 
 - The nucleotide state at the beginning (parent node) of the branch
 - Replacement rate $\mu$
@@ -670,7 +674,7 @@ calculate the probability $P(t)$ of a given nucleotide state at the end (child n
 
 This is powerful stuff. We could do a variety of things with this model machinery, for example:
 
-- Simulate evolution along an branch by sampling nucleotides for the child node from this probability distribution
+- Simulate evolution along a branch by sampling nucleotides for the child node from this probability distribution
 - Ask the probability of a given starting state given an end state
 - Evaluate how reasonable our $\mu$ model parameter value is. If, for example, we have a tree with very short branches that had different states at their parents and children, we might be skeptical of a low $\mu$ value.
 
@@ -692,7 +696,7 @@ The model we built above only has one parameter that can vary, $\mu$, so we can 
 
 Recall that $\mu$ is the rate of *any* replacement event happening. That replacement event could be an A, C, G, or T. Only three of these replacements lead to a substitution, since replacing with the original nucleotides does not lead to a change. To find the rate of *specific* replacements happening, as we need to do for the elements of this matrix, we need to apportion the total replacement rate $\mu$ to specific nucleotides. We can do that with a new term $\pi$, which is the name we will give to the equilibrium frequency of each state. This corresponds to the frequency of each nucleotide in the bag we randomly sampled from. In our simple model, $\pi=0.25$ for all nucleotides. Because $\pi$ was clamped and wasn't free to vary, it was essentially invisible in the way we previously described the model.
 
-The off-diagonal elements of $\mathbf{Q}$ give the rates of substitutions, and are all $\mu \pi$. But what's up with the diagonal elements? Those correspond to replacements that do not lead to a substitution, for example an A being replaced be an A. We pick these diagonal elements to be whatever value leads the rows to sum to 0. The basic intuition of this is that we aren't creating or destroying nucleotides, just replacing them. So the net change needs to be 0. Since there are three substitutions in each row, and each substitution has rate $\mu \pi$, these diagonal elements are set to $-3 \mu \pi$.
+The off-diagonal elements of $\mathbf{Q}$ give the rates of substitutions, and are all $\mu \pi$. But what's up with the diagonal elements? We pick these diagonal elements to be whatever value leads the rows to sum to 0. The basic intuition of this is that we aren't creating or destroying nucleotides, just replacing them. So the net change needs to be 0. Since there are three substitutions in each row, and each substitution has rate $\mu \pi$, these diagonal elements are set to $-3 \mu \pi$. The negative rates for the diagonal elements can be thought of as a rate of leaving the current state, while the positive off diagonal rates correspond to entering new states.
 
 There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to factor it out into two parts [@swofford1996molecular]. The first is a $4\times4$ matrix $\mathbf{R}$, which has all the rates, and the second is a $4\times4$ matrix $\boldsymbol{\Pi}$ that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation \@ref(eq:jc69-expanded)).
 
@@ -715,14 +719,14 @@ There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to fa
 
 (This factoring is possible because of the way matrix multiplication works. For a refresher on matrix multiplication, [this video](https://www.youtube.com/watch?v=OMA2Mwo0aZg) explains how to do it operationally, and [this series of videos](https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) explains what it is actually doing.)
 
-$\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along an branch of a given length. Before, when we were keeping things as simple as possible, we used the exponential Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
+$\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used the exponential Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
 
 \begin{equation}
 \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
 (\#eq:jc69-prob)
 \end{equation}
 
-Raising $e$ to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$ is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over an branch of length $t$. The diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
+Raising $e$ to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$ is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over a branch of length $t$. Given the single rate parameter and uniform equilibrium frequencies, the diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
 
 Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.
 
@@ -757,7 +761,7 @@ To accommodate each of these deviations from JC69, we need to add parameters to 
 
 (To keep things compact, I have followed the convention of placing $-$ in the diagonal elements, which is short for "whatever it takes to make the rows of $\mathbf{Q}$ sum to 0".)
 
-This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along an branch to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
+This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along a branch to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
 
 If we let all the parameters in the GTR model (Equation \@ref(eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is to clamp some of them. In fact, by comparison of Equations \@ref(eq:jc69-expanded)) and \@ref(eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free in JC69.
 
@@ -771,7 +775,7 @@ We now have a more complex model of DNA evolution that we can simplify by settin
 
 ## Plugging some numbers into the expanded model
 
-Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\boldsymbol{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along an branch. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)B.
+Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\boldsymbol{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along a branch. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)B.
 
 We are using a mammal tree, so let's pick some parameter values that roughly approximate what we see in mammals. Rather than set all the parameters independently, let's set up an HKY85 model, which accommodates non-uniform base frequencies and different transition/ tansversion ratios. First, we can clamp $\mu=1$. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters $b$ and $e$) are on the order of 4 times more frequent than transversions (captured by parameters $a$, $c$, $d$, and $f$) in mammals [@rosenberg2003]. So we will clamp $b=e=2$ and $a=c=d=f=0.5$. I picked these particular values (rather than others, such as 4 and 1) because they keep the mean of the off-diagonal entries in $\mathbf{R}$ to 1. 
 
@@ -1788,13 +1792,13 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Sep 01, 2022 at 12:21:15 PM with the following R package versions.
+This book was rendered from the source code on Sep 19, 2022 at 08:17:59 PM with the following R package versions.
 
 
 ```
 R version 4.2.1 (2022-06-23)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.4 LTS
+Running under: Ubuntu 20.04.5 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
@@ -1814,10 +1818,10 @@ attached base packages:
 
 other attached packages:
  [1] scales_1.2.1     ggrepel_0.9.1    kableExtra_1.3.4
- [4] phangorn_2.9.0   Matrix_1.4-1     forcats_0.5.2   
- [7] dplyr_1.0.9      purrr_0.3.4      readr_2.1.2     
+ [4] phangorn_2.10.0  Matrix_1.4-1     forcats_0.5.2   
+ [7] dplyr_1.0.10     purrr_0.3.4      readr_2.1.2     
 [10] tidyr_1.2.0      tibble_3.1.8     ggplot2_3.3.6   
-[13] tidyverse_1.3.2  stringr_1.4.1    phytools_1.0-3  
+[13] tidyverse_1.3.2  stringr_1.4.1    phytools_1.2-0  
 [16] maps_3.4.0       magrittr_2.0.3   gridExtra_2.3   
 [19] geiger_2.0.10    ape_5.6-2        ggtree_3.4.2    
 [22] treeio_1.20.2    bookdown_0.28   
@@ -1825,50 +1829,51 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] googledrive_2.0.0       colorspace_2.0-3       
  [3] ellipsis_0.3.2          fs_1.5.2               
- [5] aplot_0.1.6             rstudioapi_0.14        
- [7] farver_2.1.1            fansi_1.0.3            
- [9] mvtnorm_1.1-3           lubridate_1.8.0        
-[11] xml2_1.3.3              splines_4.2.1          
-[13] codetools_0.2-18        mnormt_2.1.0           
-[15] knitr_1.39              jsonlite_1.8.0         
-[17] broom_1.0.0             dbplyr_2.2.1           
-[19] png_0.1-7               compiler_4.2.1         
-[21] httr_1.4.4              backports_1.4.1        
-[23] assertthat_0.2.1        fastmap_1.1.0          
-[25] lazyeval_0.2.2          gargle_1.2.0           
-[27] cli_3.3.0               htmltools_0.5.3        
-[29] tools_4.2.1             igraph_1.3.4           
-[31] coda_0.19-4             gtable_0.3.0           
-[33] glue_1.6.2              clusterGeneration_1.3.7
-[35] fastmatch_1.1-3         Rcpp_1.0.9             
-[37] cellranger_1.1.0        vctrs_0.4.1            
-[39] svglite_2.1.0           nlme_3.1-157           
-[41] xfun_0.32               rvest_1.0.3            
-[43] ggimage_0.3.1           lifecycle_1.0.1        
-[45] googlesheets4_1.0.1     MASS_7.3-57            
-[47] subplex_1.8             hms_1.1.2              
-[49] parallel_4.2.1          expm_0.999-6           
-[51] yaml_2.3.5              ggfun_0.0.6            
-[53] yulab.utils_0.0.5       stringi_1.7.8          
-[55] highr_0.9               plotrix_3.8-2          
-[57] tidytree_0.4.0          rlang_1.0.4            
-[59] pkgconfig_2.0.3         systemfonts_1.0.4      
-[61] evaluate_0.16           lattice_0.20-45        
-[63] patchwork_1.1.2         labeling_0.4.2         
-[65] tidyselect_1.1.2        deSolve_1.33           
-[67] R6_2.5.1                magick_2.7.3           
-[69] generics_0.1.3          combinat_0.0-8         
-[71] DBI_1.1.3               mgcv_1.8-40            
-[73] pillar_1.8.1            haven_2.5.1            
-[75] withr_2.5.0             scatterplot3d_0.3-41   
-[77] modelr_0.1.9            crayon_1.5.1           
-[79] utf8_1.2.2              tzdb_0.3.0             
-[81] rmarkdown_2.15          grid_4.2.1             
-[83] readxl_1.4.1            reprex_2.0.2           
-[85] digest_0.6.29           webshot_0.5.3          
-[87] numDeriv_2016.8-1.1     gridGraphics_0.5-1     
-[89] munsell_0.5.0           viridisLite_0.4.1      
-[91] ggplotify_0.1.0         quadprog_1.5-8         
+ [5] aplot_0.1.7             rstudioapi_0.14        
+ [7] farver_2.1.1            optimParallel_1.0-2    
+ [9] fansi_1.0.3             mvtnorm_1.1-3          
+[11] lubridate_1.8.0         xml2_1.3.3             
+[13] splines_4.2.1           codetools_0.2-18       
+[15] mnormt_2.1.0            knitr_1.40             
+[17] jsonlite_1.8.0          broom_1.0.1            
+[19] dbplyr_2.2.1            png_0.1-7              
+[21] compiler_4.2.1          httr_1.4.4             
+[23] backports_1.4.1         assertthat_0.2.1       
+[25] fastmap_1.1.0           lazyeval_0.2.2         
+[27] gargle_1.2.0            cli_3.3.0              
+[29] htmltools_0.5.3         tools_4.2.1            
+[31] igraph_1.3.4            coda_0.19-4            
+[33] gtable_0.3.1            glue_1.6.2             
+[35] clusterGeneration_1.3.7 fastmatch_1.1-3        
+[37] Rcpp_1.0.9              cellranger_1.1.0       
+[39] vctrs_0.4.1             svglite_2.1.0          
+[41] nlme_3.1-157            xfun_0.32              
+[43] rvest_1.0.3             ggimage_0.3.1          
+[45] lifecycle_1.0.1         googlesheets4_1.0.1    
+[47] MASS_7.3-57             subplex_1.8            
+[49] hms_1.1.2               parallel_4.2.1         
+[51] expm_0.999-6            yaml_2.3.5             
+[53] ggfun_0.0.7             yulab.utils_0.0.5      
+[55] stringi_1.7.8           highr_0.9              
+[57] plotrix_3.8-2           tidytree_0.4.0         
+[59] rlang_1.0.5             pkgconfig_2.0.3        
+[61] systemfonts_1.0.4       evaluate_0.16          
+[63] lattice_0.20-45         patchwork_1.1.2        
+[65] labeling_0.4.2          tidyselect_1.1.2       
+[67] deSolve_1.33            R6_2.5.1               
+[69] magick_2.7.3            generics_0.1.3         
+[71] combinat_0.0-8          DBI_1.1.3              
+[73] mgcv_1.8-40             pillar_1.8.1           
+[75] haven_2.5.1             withr_2.5.0            
+[77] scatterplot3d_0.3-42    modelr_0.1.9           
+[79] crayon_1.5.1            utf8_1.2.2             
+[81] tzdb_0.3.0              rmarkdown_2.16         
+[83] grid_4.2.1              readxl_1.4.1           
+[85] reprex_2.0.2            digest_0.6.29          
+[87] webshot_0.5.3           numDeriv_2016.8-1.1    
+[89] gridGraphics_0.5-1      munsell_0.5.0          
+[91] viridisLite_0.4.1       ggplotify_0.1.0        
+[93] quadprog_1.5-8         
 ```
 
 <!--chapter:end:versions.rmd-->

@@ -83,14 +83,14 @@ There are a few challenges to applying the LRT to model selection in phylogeneti
 There are two other approaches commonly used in phylogenetic model selection. Where $L_i$ is the likelihood under model $i$, $k_i$ is the degrees of freedom for the model, and $n$ is sample size (*e.g.* number of sites in the alignment), these are the Akaike Information Criterion (AIC):
 
 \begin{equation} 
-  AIC_i = -2(ln(L_i) + 2k_i
+  AIC_i = -2ln(L_i) + 2k_i
   (\#eq:aic)
 \end{equation}
 
 And the Bayesian Information Criterion (BIC):
 
 \begin{equation} 
-  BIC_i = -2(ln(L_i) + k_iln(n)
+  BIC_i = -2ln(L_i) + k_iln(n)
   (\#eq:bic)
 \end{equation}
 
@@ -116,7 +116,7 @@ Before we get into how to assess support for a phylogenetic hypothesis, it use h
 
 Most methods that evaluate topologies generate a large set of phylogenies, which I'll call the *sample*. Assessing support for a feature of the focal topology is a matter of assessing the frequency of phylogenies in the sample that also have that feature. We could assess the support for the focal tree as a whole by asking how frequent identical topologies are in the sample. But support can often be strong in one part of a phylogeny and weak in another. Reporting equivalence of the entire topology provides no window into that variation. This approach would also break down as taxa are added, which quickly increases them number of possible topologies and reduces the chances of any two analyses returning the exact same topologies, given the variation that is inherent in heuristic searches.
 
-Branch frequencies are far more useful. It is helpful to think of an branch as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the branch, and those on the other (Figure \@ref(fig:eval-splits)). We will consider two branches to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of branches deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.
+Branch frequencies are far more useful. It is helpful to think of a branch as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the branch, and those on the other (Figure \@ref(fig:eval-splits)). We will consider two branches to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of branches deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.
 
 ```{r eval=FALSE}
 text_a = '((A,B),((C,D),E),(F,G));'
@@ -162,14 +162,14 @@ It should be noted that these support values are often referred to as "nodal sup
 
 The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap [@felsenstein1985confidence]. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with $n$ columns, bootstrapping generates a new matrix, also with $n$ columns, by resampling from the the original matrix with replacement. Some columns from the original matrix won't be sampled at all, some will be sampled once, and some will be sampled multiple times.
 
-Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. An branch frequency of 100% indicates that an branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
+Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. A branch frequency of 100% indicates that a branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
 
 
 
 
 
 
-Note that I am not using the term "significance" when referring to bootstrap support. This is because bootstraps don't have a clear statistical interpretation. It is a scale that varies from $0$ to $1$, but is not itself a significance. It just indicates how frequently an branch is recovered when the data columns are resampled. This gives a sense of how broad support is for the branch across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.
+Note that I am not using the term "significance" when referring to bootstrap support. This is because bootstraps don't have a clear statistical interpretation. It is a scale that varies from $0$ to $1$, but is not itself a significance. It just indicates how frequently a branch is recovered when the data columns are resampled. This gives a sense of how broad support is for the branch across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.
 
 Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process.
 
