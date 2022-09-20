@@ -127,4 +127,4 @@ Rather than scale the overall rate of change, for example by setting `mu`, I sca
 
 ## Download results and submit
 
-Click on the `Files` dropdown menu at the top of the OOD page, select `Home Directory`, and navigate to `scratch60/`. Download the `exercise_03` folder, add this document to it, compress it with zip, and submitted it for the Exercise 03 assignment.
+Click on the `Files` dropdown menu at the top of the OOD page, select `Home Directory`, and navigate to `scratch60/`. Download the `exercise_03` folder, add this document to it, compress it with zip, and submit it for the Exercise 03 assignment.
