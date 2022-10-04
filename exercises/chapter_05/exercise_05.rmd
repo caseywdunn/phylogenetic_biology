@@ -1,5 +1,5 @@
 ---
-title: "Exercise 04"
+title: "Exercise 05"
 output: html_document
 ---
 
@@ -9,34 +9,14 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ape)
 ```
 
-## Announcement!
-
-YCRC gave us our own partition, which means we don't have to wait for a bunch of other jobs to finish before ours start. Add this line with the other `#SBATCH` lines at the top of your job file to use this new partition.
-
-    #SBATCH --partition=eeb354
-
 
 ## Introduction
 
-This week's assignment will be manually graded. Submit the assignment and ask the TA to take a look at it if you run into problems or have questions about it.
 
 The goals of this exercise are to:
 - Create a multiple sequence alignment for phylogenetic analysis
-- Get data onto the cluster
 - Get comfortable writing and submitting your own job scripts
 - Collect sequences from a database for your own phylogenetic analysis
-
-There is no directory of files for the assignment this week. You are going to upload everything 
-yourself, or copy and edit previous files. Head over to the [OOD dashboard](https://ood-grace.hpc.yale.edu/pun/sys/dashboard) to get started. 
-
-Create a directory called `exercise_05` in your `scratch60/` directory on the cluster.
-
-There are a few ways to do this. If you use the shell, you can make the directory with the `mkdir` command:
-
-    cd scratch60/
-    mkdir exercise_05
-
-Alternatively, you can use file browser to go to your `scratch60/` directory, and then click the `New Dir` button to create a new directory called `exercise_05`.
 
 ## Build a Hydroidolina phylogeny
 
@@ -64,9 +44,24 @@ The line that starts with the `>` is the header line, this is the name of the se
 
 These sequences are not aligned - they are assembled gene sequences for each species.
 
-Use the file browser from the OOD dashboard to upload this file to the `scratch60/exercise_05` directory you created on the cluster. Then, in the shell, `cd` to the directory and use `ls` to confirm that it is there.
+If we proceeded with the data as-is, the whole header would be used as the taxa names, which would make for a seriously ugly tree. So let's clean up those headers. Rather than use a specialized tool, we will use a powerful form of search-and-replace called [regular expressions](https://practicalcomputing.org/files/PCfB_Appendices.pdf) to reformat them. 
 
-Now you have your data on the cluster. If we proceeded with the data as-is the whole header would be used as the taxa names, which would make for a seriously ugly tree. So let's clean up those headers. Rather than use a specialized tool, we will use a powerful form of search-and-replace called [regular expressions](https://practicalcomputing.org/files/PCfB_Appendices.pdf) to reformat them. We will use the program `sed` to run the regular expressions.
+We will search for:
+
+    >gi\|([0-9]+)\|.+\| ([a-zA-Z]+) ([a-zA-Z]+)[\. ].+
+
+and replace it with:
+
+    >\2_\3_\1
+
+The end result is a fasta file where the sequences are untouched, but the headers have the format `>genus_species_gi`, where the `gi` is a unique identifier for each sequence. I leave that in there since there can be multiple sequences from the same species. If we were using just `>genus_species`, then there would be multiple taxa with the same names which makes downstream tools choke. Including the `gi` guarantees that every taxon name is unique. It also helps keep track of where data came from.
+
+There are many programs that implement regular expressions, below are descriptions for a 
+couple. Pick whichever you like.
+
+#### `sed` at the command line
+
+Most unix like-systems, such as macOS or the Ubuntu you can install on Windows with WSL, have a `sed` command for 
 
 Shorten the headers with the following command:
 
@@ -79,30 +74,35 @@ This command has a few parts:
 - `18s.raw.fasta` is the input file name
 - `> 18s.fasta` sends the output to a file called `18s.fasta`
 
-The end result is a fasta file where the sequences are untouched, but the headers have the format `>genus_species_gi`, where the `gi` is a unique identifier for each sequence. I leave that in there since there can be multiple sequences from the same species. If we were using just `>genus_species`, then there would be multiple taxa with the same names which makes downstream tools choke. Including the `gi` guarantees that every taxon name is unique.
+#### Search and replace in VS Code
 
-`sed` runs very quickly and uses few resources, so it us OK to run it on the login node as we did here.
+Copy the file to a new file int he same directory, but without `.raw` in the name. For example, `18s.fasta`.
+
+Open the new fasta file in VS Code. Click in the contents of the fasta file to make sure it is active, and then select "Edit > Replace". Click on the `.*` button to enable regular expressions.
+
+In the Find box, enter:
+
+    >gi\|([0-9]+)\|.+\| ([a-zA-Z]+) ([a-zA-Z]+)[\. ].+
+
+In the replace box, enter:
+
+    >$2_$3_$1
+
+Notice that we use `$` instead of `\`, as for `sed`, for the replacing with captured text. That is a difference in dialect between the two implementations of regular expressions.
+
 
 
 ### Align the sequences
 
-We will use the program mafft to align the sequences. It is a bit more computationally intensive, so we should use the job scheduler. There are two ways to do this -- you can edit one of the job scripts we used in a previous exercise (just copy it to this directory and then use the editor in the online file browser), or run an interactive session. An interactive session gives you temporary interactive access to one of the compute nodes. 
+We will use the program [mafft](https://mafft.cbrc.jp/alignment/software/) to align the sequences. 
 
-Here is how you would run an interactive session at the shell on Grace:
-
-    srun --pty -t 1:00:00 --mem=8G -p interactive bash
-    cd scratch60/exercise_05/
-    
-    module load MAFFT/7.429-foss-2018b-with-extensions
     mafft 18s.fasta > 18s.aligned.fasta
 
-Those first two lines are only needed if you run this as an interactive session. The first line launches the interactive session, which puts you on a new computer node on Grace. The second line gets you back to the right directory on that node.
+You can [install mafft](https://mafft.cbrc.jp/alignment/software/) and do this locally, or adapt a job script and do it remotely on a cluster.
 
-If you want to run it as a job script, copy and edit a job script from an earlier exercise. Replace whatever was run in the earlier exercise with the last two lines above, and submit the job.
+> **_TASK:_** Align the sequences locally or on a remote cluster with the above command. If running remotely, you will need to load the MAFFT module and schedule a job.
 
-> **_TASK:_** Align the sequences using either an interactive session or with a job script. If the cluster won't provide an interactive session (perhaps because the whole class is requesting them at once) the job script will likely be allocated time sooner.
-
-After alignment, you will have a new file `18s.aligned.fasta`. Download this file to your computer from the online file browser and open it in atom. It is a fasta file, with the same headers as `18s.fasta`. But `mafft` as inserted gaps, denoted by `-`, to line up homologous nucleotides into the same columns. The gaps are needed because of insertion and deletion events that happen in the course of evolution. These are a distinct type of change from the nucleotide substitutions we have modeled. 
+After alignment, you will have a new file `18s.aligned.fasta`. Open it in VS Code. It is a fasta file, with the same headers as `18s.fasta`. But `mafft` as inserted gaps, denoted by `-`, to line up homologous nucleotides into the same columns. The gaps are needed because of insertion and deletion events that happen in the course of evolution. These are a distinct type of change from the nucleotide substitutions we have modeled. 
 
 There are many tools that can be used to view multiple sequence alignments, including [mesquite](https://www.mesquiteproject.org/). Rather than install these, though, we will use an online viewer. Head over to [MView](https://www.ebi.ac.uk/Tools/msa/mview/). From the top dropdown menu, select `DNA`. Click `Chose File` and upload your `18s.aligned.fasta` file. Then click `Submit`. Within a few minutes, you will get a nice color coded view of your alignment.
 
@@ -116,7 +116,9 @@ Describe the distribution of gaps - are they uniformly distributed, or do they g
 
 > **_Problem 2:_** Create a job script to infer a phylogeny from this alignment. Download it to your computer, and insert code in the chunk below to view it.
 
-Copy an `iqtree` job script from a previous exercise and edit it to analyze the alignment you created. The key change is to update the name of the input file. 
+Copy an `iqtree` job script from a previous exercise and edit it to analyze the alignment you created. Or run iqtree locally. The key change is to update the name of the input file, and put the output files in this directory.
+
+
 
 ```{r fig.width=12, fig.height=20}
 
@@ -208,21 +210,29 @@ If you get an error that your taxonid is invalid, then pick another (for example
 
 When your blast search finishes, click the link `MSA viewer`. This will show you a multiple sequence alignment for all the similar sequences it found in this clade. Instead of showing each letter, it shows a colored line for each nucleotide that is variable.
 
-Note if any sequences are very poorly aligned or are super short (less than about 50% of the alignment length). If they are, click the `Rows` button with a gear, unselect the problematic sequences, and click apply.
+Note if any sequences are very poorly aligned or are super short (less than about 50% of the alignment length). If they are, click the `Rows` button, unselect the problematic sequences, and click apply.
 
 Once you have refined your sampling, click `Download` and then `FASTA Alignment`. This will download a multiple sequence alignment in fasta format with the `.aln` extension. Rename the file `alignment.raw.fasta`, removing the `.aln` extension.
 
 Open the alignment in atom, and delete the first sequence (including the header). This first sequence is your query that you used as bait to get the other sequences.
 
-Upload this alignment to your `exercise_05` folder on Grace.
+Upload this alignment to your exercise folder.
 
 ### Prepare for phylogenetic inference
 
 The sequences are aligned, so we don't need to run them through mafft. But they have crazy names still, which we need to shorten. Here is a sed command for doing that (it is a bit different from the one above, since the headers have a different format)
 
     sed -E 's/>[a-zA-Z]+\|([a-zA-Z0-9\.]+)\|.+\[organism=([a-zA-Z0-9]+) ([a-zA-Z0-9]+).+?/>\2_\3_\1/g' alignment.raw.fasta > alignment.fasta
-    
+
 This will create a new file, `alignment.fasta`, with your renamed headers.
+
+Or use VS Code. Copy the alignment file to `alignment.fasta`, and open it in VS Code. This is the Find term:
+
+    >[a-zA-Z]+\|([a-zA-Z0-9\.]+)\|.+\[organism=([a-zA-Z0-9]+) ([a-zA-Z0-9]+).+?
+
+and this is the Replace term:
+
+    >$2_$3_$1
 
 > **_Problem 3:_** Generating this file `alignment.fasta`, and including it in your submission, satisfies problem 3.
 
@@ -244,5 +254,5 @@ But it gives a general overview of some key steps.
 
 ## Submit
 
-Compress the `exercise_05` folder (containing all the contents of the `exercise_05` folder on the directory and this rmd file) with zip, and submit it on canvas.
+Compress the exercise folder, including all input and output files, and submit it on canvas.
 
