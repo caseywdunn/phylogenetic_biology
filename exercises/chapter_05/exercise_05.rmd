@@ -171,14 +171,14 @@ Here we will stick with 18s. Specifically, let's look at the very first sequence
 
 ### Pick a clade
 
-Now pick a clade that you want to infer a tree for. Head on over to the [NCBI Taxonomy Browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi). This sequence is for an unidentified species of *Nectopyramis*, a siphonophore. Siphonophores are cnidarians. Ideally your bait is for a species closely related to, or within, your clade of interest. So let's stick with Cnidaria. Enter Cnidaria in the search bar, click the `Nucleotide` box since we are looking at DNA nucleotide sequences, and then clock `Go`. This will show Cnidaria and a series of subgroups, and the number of nucleotide sequences available for each. This gives an overview of the available sequence data. A few things to keep in mind:
+Now pick a clade that you want to infer a tree for. Head on over to the [NCBI Taxonomy Browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi). Click the `Nucleotide` box since we are looking at DNA nucleotide sequences, and then click `Go`. Then browse to or search for your clade. A few things to keep in mind:
 
 - The number of nucleotide sequences is for all sequences, you have no idea what genes they are at this point.
 - The taxonomy browser is *NOT* a phylogeny browser. It is a browser of taxonomic nomenclature. So sometimes names don't refer to clades, and not all clades have names.
 
 Despite these shortcomings, it is generally good enough for gathering together sequences.
 
-Pick a clade that you want to build a phylogeny for. We are going to go for a tree that has around 100 tips in it, so be sure that the number of nucleotide sequences is at least a few times larger than that (since not all the sequences are 18s, though it is one of the most commonly sequenced genes in studies that use PCR for enrichment).
+We are going to go for a tree that has around 100 tips in it, so be sure that the number of nucleotide sequences is at least a few times larger than that (since not all the sequences are 18s, though it is one of the most commonly sequenced genes in studies that use PCR for enrichment).
 
 Click on your clade, and then click on it again at the top of the page that loads. You are looking for a taxonomy ID. This number is a unique identifier for the clade.
 
