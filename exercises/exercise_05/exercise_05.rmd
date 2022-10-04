@@ -1,0 +1,248 @@
+---
+title: "Exercise 04"
+output: html_document
+---
+
+```{r setup, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ape)
+```
+
+## Announcement!
+
+YCRC gave us our own partition, which means we don't have to wait for a bunch of other jobs to finish before ours start. Add this line with the other `#SBATCH` lines at the top of your job file to use this new partition.
+
+    #SBATCH --partition=eeb354
+
+
+## Introduction
+
+This week's assignment will be manually graded. Submit the assignment and ask the TA to take a look at it if you run into problems or have questions about it.
+
+The goals of this exercise are to:
+- Create a multiple sequence alignment for phylogenetic analysis
+- Get data onto the cluster
+- Get comfortable writing and submitting your own job scripts
+- Collect sequences from a database for your own phylogenetic analysis
+
+There is no directory of files for the assignment this week. You are going to upload everything 
+yourself, or copy and edit previous files. Head over to the [OOD dashboard](https://ood-grace.hpc.yale.edu/pun/sys/dashboard) to get started. 
+
+Create a directory called `exercise_05` in your `scratch60/` directory on the cluster.
+
+There are a few ways to do this. If you use the shell, you can make the directory with the `mkdir` command:
+
+    cd scratch60/
+    mkdir exercise_05
+
+Alternatively, you can use file browser to go to your `scratch60/` directory, and then click the `New Dir` button to create a new directory called `exercise_05`.
+
+## Build a Hydroidolina phylogeny
+
+Our first step will be to analyze data for one of the three genes considered in this study:
+
+> Cartwright, P., Evans, N. M., Dunn, C. W., Marques, A. C., Miglietta, M. P., 
+Schuchert, P., & Collins, A. G. (2008). Phylogenetics of Hydroidolina 
+(Hydrozoa: Cnidaria). Journal of the Marine Biological Association of the UK, 
+88(08), 1663-1672. 
+[doi:10.1017/S0025315408002257](http://dx.doi.org/10.1017/S0025315408002257)
+
+We will consider 18S, the small nuclear ribosomal RNA. This is not a protein coding gene, it is an RNA component of the ribosome. 
+
+### Prepare the sequences
+
+The sequences are in the file `18s.raw.fasta`, available on canvas. Download it, then open it in a text editor like atom and inspect the contents. Here are the first few lines:
+
+    >gi|15282083|gb|AF358068.1| Nectopyramis sp. AGC-2001 small subunit ribosomal RNA gene, partial sequence
+    GACAACCTGGTTGATCCTGCCAGTAGTCATATGCTTGTCTCAAAGATTAAGCCATGCATGTCTAAGTATA
+    AGCACTTGTACTGTGAAACTGCGAATGGCTCATTAAATCAGTTATCGTTTATTTGATTGTACTTTACTAC
+    ATGGATACCTGTGGTAATTCTAGAGCTAATACATGCGAAAAATCCCAACTTCTGGAAGGGATGTATTTAT
+    ...
+
+The line that starts with the `>` is the header line, this is the name of the sequence. These sequences were downloaded from [NCBI](https://www.ncbi.nlm.nih.gov/) and have long complex names that include several identifiers, the species name, and the gene name. Following that are multiple lines of sequence data, and then the next header and sequences etc...
+
+These sequences are not aligned - they are assembled gene sequences for each species.
+
+Use the file browser from the OOD dashboard to upload this file to the `scratch60/exercise_05` directory you created on the cluster. Then, in the shell, `cd` to the directory and use `ls` to confirm that it is there.
+
+Now you have your data on the cluster. If we proceeded with the data as-is the whole header would be used as the taxa names, which would make for a seriously ugly tree. So let's clean up those headers. Rather than use a specialized tool, we will use a powerful form of search-and-replace called [regular expressions](https://practicalcomputing.org/files/PCfB_Appendices.pdf) to reformat them. We will use the program `sed` to run the regular expressions.
+
+Shorten the headers with the following command:
+
+    sed -E 's/>gi\|([0-9]+)\|.+\| ([a-zA-Z]+) ([a-zA-Z]+)[\. ].+/>\2_\3_\1/g' 18s.raw.fasta > 18s.fasta
+    
+This command has a few parts:
+
+- `sed` is the program we are using
+- `-E 's/>gi\|([0-9]+)\|.+\| ([a-zA-Z]+) ([a-zA-Z]+)[\. ].+/>\2_\3_\1/g'` defines the search and replace. Specifically, `>gi\|([0-9]+)\|.+\| ([a-zA-Z]+) ([a-zA-Z]+)[\. ].+` is what we are searching for and `>\2_\3_\1` is what we are replacing it with.
+- `18s.raw.fasta` is the input file name
+- `> 18s.fasta` sends the output to a file called `18s.fasta`
+
+The end result is a fasta file where the sequences are untouched, but the headers have the format `>genus_species_gi`, where the `gi` is a unique identifier for each sequence. I leave that in there since there can be multiple sequences from the same species. If we were using just `>genus_species`, then there would be multiple taxa with the same names which makes downstream tools choke. Including the `gi` guarantees that every taxon name is unique.
+
+`sed` runs very quickly and uses few resources, so it us OK to run it on the login node as we did here.
+
+
+### Align the sequences
+
+We will use the program mafft to align the sequences. It is a bit more computationally intensive, so we should use the job scheduler. There are two ways to do this -- you can edit one of the job scripts we used in a previous exercise (just copy it to this directory and then use the editor in the online file browser), or run an interactive session. An interactive session gives you temporary interactive access to one of the compute nodes. 
+
+Here is how you would run an interactive session at the shell on Grace:
+
+    srun --pty -t 1:00:00 --mem=8G -p interactive bash
+    cd scratch60/exercise_05/
+    
+    module load MAFFT/7.429-foss-2018b-with-extensions
+    mafft 18s.fasta > 18s.aligned.fasta
+
+Those first two lines are only needed if you run this as an interactive session. The first line launches the interactive session, which puts you on a new computer node on Grace. The second line gets you back to the right directory on that node.
+
+If you want to run it as a job script, copy and edit a job script from an earlier exercise. Replace whatever was run in the earlier exercise with the last two lines above, and submit the job.
+
+> **_TASK:_** Align the sequences using either an interactive session or with a job script. If the cluster won't provide an interactive session (perhaps because the whole class is requesting them at once) the job script will likely be allocated time sooner.
+
+After alignment, you will have a new file `18s.aligned.fasta`. Download this file to your computer from the online file browser and open it in atom. It is a fasta file, with the same headers as `18s.fasta`. But `mafft` as inserted gaps, denoted by `-`, to line up homologous nucleotides into the same columns. The gaps are needed because of insertion and deletion events that happen in the course of evolution. These are a distinct type of change from the nucleotide substitutions we have modeled. 
+
+There are many tools that can be used to view multiple sequence alignments, including [mesquite](https://www.mesquiteproject.org/). Rather than install these, though, we will use an online viewer. Head over to [MView](https://www.ebi.ac.uk/Tools/msa/mview/). From the top dropdown menu, select `DNA`. Click `Chose File` and upload your `18s.aligned.fasta` file. Then click `Submit`. Within a few minutes, you will get a nice color coded view of your alignment.
+
+> **_Problem 1:_** Answer the following questions about your alignment (1-2 sentences for each is fine).
+
+Does it appear that the rate of evolution is similar at all sites? Explain your reasoning.
+
+Describe the distribution of gaps - are they uniformly distributed, or do they group together? Why do you think this is?
+
+### Infer the phylogeny.
+
+> **_Problem 2:_** Create a job script to infer a phylogeny from this alignment. Download it to your computer, and insert code in the chunk below to view it.
+
+Copy an `iqtree` job script from a previous exercise and edit it to analyze the alignment you created. The key change is to update the name of the input file. 
+
+```{r fig.width=12, fig.height=20}
+
+# Insert code here to view the phylogeny
+
+```
+
+If the tree is too squished to view, adjust the width and height in the chunk options to give it more space.
+
+
+## Get your own sequences
+
+I have provided all the input you need for analyses so far. Usually, though, you will need to gather the data yourself, be it by collecting the sequences from organisms you collect or downloading them from a public archive. Here you will download them from a public archive.
+
+Ideally this would be a simple process - we would just specify the name of the clade we are interested in and the name of the gene we want to download for all members of that clade. But public archives are far messier places than one would hope. 
+
+The primary challenge you will find is that, while taxon name usage is fairly consistent, there is no uniform system for gene names. That means it really isn't even worth searching sequences by gene names when building a phylogeny. If you can't search by gene name, though, how are you to find the gene you want? The answer is to search for sequences themselves. Pick an example sequence for the gene you want, and use that as bait to fish out other sequences for that gene in your clade of interest.
+
+Here we will stick with 18s. Specifically, let's look at the very first sequence in our `18s.raw.fasta` file:
+
+    >gi|15282083|gb|AF358068.1| Nectopyramis sp. AGC-2001 small subunit ribosomal RNA gene, partial sequence
+    GACAACCTGGTTGATCCTGCCAGTAGTCATATGCTTGTCTCAAAGATTAAGCCATGCATGTCTAAGTATA
+    AGCACTTGTACTGTGAAACTGCGAATGGCTCATTAAATCAGTTATCGTTTATTTGATTGTACTTTACTAC
+    ATGGATACCTGTGGTAATTCTAGAGCTAATACATGCGAAAAATCCCAACTTCTGGAAGGGATGTATTTAT
+    TAGATTAAAAACCAATGCGAATCTTCGGGTTCGTTTTCTTGGTGATTCATGATAACTTTTCGAATCGCAT
+    GGCCTAGCGCCGGCGATATTTCATTCAAATTTCTGCCCTATCAACTGTCGATGGTAAGGTATTGGCTTAC
+    CATGGTTATAACGGGTGACGGAGAATTAGGGTTCGATTCCGGAGAGGGAGCCTGAGAAACGGCTACCACA
+    TCTAAGGAAGGCAGCAGGCTCGAAAATTACCCAATCCCGACTCGGGGAGGTAGTGACAAGAAATAACGAT
+    ACGGGGTCTTAATAGGTCTCGCAATTGGAATGAGTACAATTTAAATCCTTTAACGAGGATCAATTGGAGG
+    GCAAGTCTGGTGCCAGCAGCCGCGGTAATTCCAGCTCCAATAGCGTATATTAAAGTTGTTGCAGTTAAAA
+    AGCTCGTAGTTGGATTTCGGAGTGGGCCAGTTGGTCCGCCGCAAGGTGTGTTACTGACTGGTTTGCTCTT
+    CTTCGCAAAGACTGCGTGTGCTCTTCGTTGAGTGTGCGTAGGATTTACGACGTTTACTTTGAAAAAATTA
+    GAGTGTTCAAAGCAGGCTATTGCTTGAATACATGAGCATGGAATAATGGAATAGGACTTTGGTCCCATTT
+    TGTTGGTTTCTAGGACCGAAGTAATGATTAAGAGGGACAATTGGGGGCATCCGTATTTCGTTGTCAGAGG
+    TGAAATTCTTGGATTTACGAAAGACGAACAACTGCGAAAGCACTTGCCAAGAGTGTTTTCATTAATCAAG
+    AACGAAAGTTAGAGGATCGAAGACGATCAGATACCGTCCTAGTTCTAACCATAAACGATGTCGACTAGGG
+    ATCAGCGGGCGTTATCGTACGACCCCGTTGGCACCTTACGGGAAACCAAAGTTTCTGGATTCCGGGGGAA
+    GTATAGTCGCAAGGCCGAAACTTAAAGGAATTGACGGAAGGGCACCACCAGGAGTGGAGCCTGTGGCTCA
+    ATTTGACTCAACACGGGAAAACTTACCAGGTCCAGACATAGTAAGGATTGACAGGTTGAGAGCCCTTTCT
+    TGATTCTGTGGGTGGTGGTGCATGGCCGTTCTTAGTTGGTGGAGTGATTTGTCTGGTTAATTCCGTTAAC
+    GAACGAGACCTTAACCGGCTAAATAGTCATGCGATTCTCGAATCGTAACTGACTTCTTAGAGGGACTGTT
+    GGTGTTTAACCAAAGTCAGGAAGGCAATAACAGGTCTGTGATGCCCTTAGATGTTCTGGGCCGCACGCGC
+    GCTACACTGTCGGATTCAGCGAGTCTTAACCTTAACCGAAAGGTTTGGGTAATCTTTTGAAAGTCCGACG
+    TGATGGGGATTGATCATTGCAATTATTGATCATGAACGAGGAATTCCTAGTAAATGCGAGTCATCAGCTC
+    GCGTTGATTACGTCCCTGCCCTTTGTACACACCGCCCGTCGCTACTACCGATTGAATGGTTTAGTGAGAT
+    CTTCGGATTGGCGCCGTCGCGGCCTCACGGAAGTGATGGTGCCGAAAAGTTGCTCAAACTTGATCATTTA
+    GAGGAAGTAAAAGTCGTAACAAGGTTTCCGTAGGTGAACCTGCAGAAGGATCAAGCTTGGATCCCGGG
+    
+
+
+### Pick a clade
+
+Now pick a clade that you want to infer a tree for. Head on over to the [NCBI Taxonomy Browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi). This sequence is for an unidentified species of *Nectopyramis*, a siphonophore. Siphonophores are cnidarians. Ideally your bait is for a species closely related to, or within, your clade of interest. So let's stick with Cnidaria. Enter Cnidaria in the search bar, click the `Nucleotide` box since we are looking at DNA nucleotide sequences, and then clock `Go`. This will show Cnidaria and a series of subgroups, and the number of nucleotide sequences available for each. This gives an overview of the available sequence data. A few things to keep in mind:
+
+- The number of nucleotide sequences is for all sequences, you have no idea what genes they are at this point.
+- The taxonomy browser is *NOT* a phylogeny browser. It is a browser of taxonomic nomenclature. So sometimes names don't refer to clades, and not all clades have names.
+
+Despite these shortcomings, it is generally good enough for gathering together sequences.
+
+Pick a clade that you want to build a phylogeny for. We are going to go for a tree that has around 100 tips in it, so be sure that the number of nucleotide sequences is at least a few times larger than that (since not all the sequences are 18s, though it is one of the most commonly sequenced genes in studies that use PCR for enrichment).
+
+Click on your clade, and then click on it again at the top of the page that loads. You are looking for a taxonomy ID. This number is a unique identifier for the clade.
+
+Note the name and id here:
+
+Clade name: 
+
+Taxonomy id: 
+
+
+### Search for sequences for the clade
+
+We will use an NCBI tool called blast to search for 18S sequences for your clade of interest. Head over to the [blastn](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastSearch) page, which is for searching for nucleotide sequences with a nucleotide query.
+
+Enter the following:
+
+- Paste the bait sequence above, for Nectopyramis, into the box lebeled `Enter accession number(s), gi(s), or FASTA sequence(s)`. You can paste it with or without the header.
+
+- Paste the taxonid you got above for your clade into the `Organism` box.
+
+- In the `Optimize for` section, select `Somewhat similar sequences (blastn)`.
+
+Now click the Blast button at the bottom and wait for a result! It should take a few seconds to a few minutes.
+
+If you get an error that your taxonid is invalid, then pick another (for example the parent group). Some taxaid are not available in blast filters - I have no idea why.
+
+
+### View and download the multiple sequence alignment
+
+When your blast search finishes, click the link `MSA viewer`. This will show you a multiple sequence alignment for all the similar sequences it found in this clade. Instead of showing each letter, it shows a colored line for each nucleotide that is variable.
+
+Note if any sequences are very poorly aligned or are super short (less than about 50% of the alignment length). If they are, click the `Rows` button with a gear, unselect the problematic sequences, and click apply.
+
+Once you have refined your sampling, click `Download` and then `FASTA Alignment`. This will download a multiple sequence alignment in fasta format with the `.aln` extension. Rename the file `alignment.raw.fasta`, removing the `.aln` extension.
+
+Open the alignment in atom, and delete the first sequence (including the header). This first sequence is your query that you used as bait to get the other sequences.
+
+Upload this alignment to your `exercise_05` folder on Grace.
+
+### Prepare for phylogenetic inference
+
+The sequences are aligned, so we don't need to run them through mafft. But they have crazy names still, which we need to shorten. Here is a sed command for doing that (it is a bit different from the one above, since the headers have a different format)
+
+    sed -E 's/>[a-zA-Z]+\|([a-zA-Z0-9\.]+)\|.+\[organism=([a-zA-Z0-9]+) ([a-zA-Z0-9]+).+?/>\2_\3_\1/g' alignment.raw.fasta > alignment.fasta
+    
+This will create a new file, `alignment.fasta`, with your renamed headers.
+
+> **_Problem 3:_** Generating this file `alignment.fasta`, and including it in your submission, satisfies problem 3.
+
+### Infer the phylogeny
+
+Create a new job script called `job_clade.sh` that runs iqtree on this alignment. Submit it to the queue. Once it finishes, download the full `exercise_05` folder and add this file to it
+
+> **_Problem 4:_** Insert a code chunk below to show the tree you inferred for your clade. 
+
+Knit this document to confirm that the trees show as they should in the output (again adjusting height and width as needed to get them to fit).
+
+This is a very rough pass at building a phylogeny. For an actual analysis intended for publication, there would be a lot more to do, such as:
+
+- Curate outgroups
+- Add additional genes. Each gene for the clade would be obtained and aligned as here. You would then need to eliminate any duplicate species (since genes are combined based on species names, they need to be unique for each gene), edit the taxon names so they are the same across species (it is OK if some taxa are missing for some genes, but when the same species is sampled for multiple benes the tip name needs to be exactly the same for each), and combine the genes (for example, by concatenation).
+
+
+But it gives a general overview of some key steps.
+
+## Submit
+
+Compress the `exercise_05` folder (containing all the contents of the `exercise_05` folder on the directory and this rmd file) with zip, and submit it on canvas.
+
