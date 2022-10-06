@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2022-09-01" />
+<meta name="date" content="2022-10-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,7 +162,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i><b>0.1</b> Approach</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i><b>0.2</b> Using this book</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#source-code"><i class="fa fa-check"></i><b>0.3</b> Source code</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i><b>0.3</b> Distribution</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>0.4</b> Other resources</a></li>
 <li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
 <li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.6</b> Acknowledgements</a></li>
@@ -178,7 +178,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.1" data-path="phylogenies.html"><a href="phylogenies.html#phylogenies-are-graphs"><i class="fa fa-check"></i><b>2.1</b> Phylogenies are graphs</a></li>
 <li class="chapter" data-level="2.2" data-path="phylogenies.html"><a href="phylogenies.html#drawing-phylogenies"><i class="fa fa-check"></i><b>2.2</b> Drawing phylogenies</a></li>
-<li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of trees</a></li>
+<li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of phylogenies</a></li>
 <li class="chapter" data-level="2.4" data-path="phylogenies.html"><a href="phylogenies.html#rotating-nodes"><i class="fa fa-check"></i><b>2.4</b> Rotating nodes</a></li>
 <li class="chapter" data-level="2.5" data-path="phylogenies.html"><a href="phylogenies.html#trees-branch-lengths"><i class="fa fa-check"></i><b>2.5</b> The meaning of branch lengths</a></li>
 <li class="chapter" data-level="2.6" data-path="phylogenies.html"><a href="phylogenies.html#naming-nodes-and-groups"><i class="fa fa-check"></i><b>2.6</b> Naming nodes and groups</a></li>
@@ -392,14 +392,14 @@ Figure 2.5: Phylogeny of some mammals. Topology and branch lengths from <a href=
 <p>Slanted layouts avoid the node lines and elbows of rectangular layouts, but because the branches aren’t parallel and can be at a variety of angles, it isn’t always easy to read branch lengths on them.</p>
 <p>Circular layouts place the root at the center, and the tips around the circumference. This is a compact representation that works well for very large phylogenies.</p>
 <div class="figure"><span style="display:block;" id="fig:trees-layouts"></span>
-<img src="phylogenetic_biology_files/figure-html/trees-layouts-1.png" alt="The same tree as above, layed out in several different ways." width="2100" />
+<img src="phylogenetic_biology_files/figure-html/trees-layouts-1.png" alt="The same tree as above, laid out in several different ways." width="2100" />
 <p class="caption">
-Figure 2.6: The same tree as above, layed out in several different ways.
+Figure 2.6: The same tree as above, laid out in several different ways.
 </p>
 </div>
 </div>
 <div id="tree-properties" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Some properties of trees<a href="phylogenies.html#tree-properties" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">2.3</span> Some properties of phylogenies<a href="phylogenies.html#tree-properties" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In a fully bifurcating phylogeny with <span class="math inline">\(n\)</span> tip nodes, the following will be the case:</p>
 <ul>
 <li><p>There are <span class="math inline">\(n-1\)</span> internal nodes. For example, Figure <a href="phylogenies.html#fig:trees-graph-tree">2.4</a> shows a phylogeny with 4 tip nodes (labeled 1-4) and 3 internal nodes (labeled 5-7). The total number of nodes (tip nodes and internal nodes) is therefore <span class="math inline">\(2n-1\)</span>.</p></li>
@@ -448,7 +448,7 @@ Figure 2.8: Several types of trees. In a chronogram, branch lengths are scaled a
 Figure 2.9: (A) A monophyletic group, <em>i.e.</em> a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit.
 </p>
 </div>
-<p>Any internal node in a rooted phylogeny can be described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these <span class="citation">(<a href="#ref-deQueiroz2020" role="doc-biblioref">deQueiroz and Cantino 2020</a>)</span>.</p>
+<p>Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these <span class="citation">(<a href="#ref-deQueiroz2020" role="doc-biblioref">deQueiroz and Cantino 2020</a>)</span>.</p>
 <p>Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure <a href="phylogenies.html#fig:trees-groups">2.9</a>B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure <a href="phylogenies.html#fig:trees-groups">2.9</a>C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.</p>
 </div>
 <div id="polytomies" class="section level2 hasAnchor" number="2.7">
@@ -502,7 +502,7 @@ Figure 2.12: The root of the mammal tree is shown in black. (A) Unrooted layout.
 <li><p>Length. The value and unit of length can differ, for example it can time (as in a chronogram) or expected amount of change in a particular set of characters (as in a phylogram).</p></li>
 <li><p>Directionality. An indication of which direction time goes in along each branch. This only applies in the context of a rooted phylogenies.</p></li>
 <li><p>Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes at eache end of a branch need not be different in the relevant trait to have change events along the branch. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the branch that are compatible with this pattern, for example a change from A to C and then a change from C back to A.</p></li>
-<li><p>Branch frequencies.This is how topology support values, such as bootstraps and posterior probabilities (which we’ll discuss later), are stored.</p></li>
+<li><p>Branch frequencies. This is how topology support values, such as bootstraps and posterior probabilities (which we’ll discuss later), are stored.</p></li>
 </ul>
 <p>Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could draw an unresolved, unlabeled cladogram (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and branches that indicate the topology of the phylogeny (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>C). Once you have topology, you could display branch attributes. For example, you could scale the branch lengths by time (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>D).</p>
 <p>At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure <a href="phylogenies.html#fig:trees-information">2.13</a>A is compatible with any phylogeny with any branch lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure <a href="phylogenies.html#fig:trees-information">2.13</a>B, it is compatible with any phylogeny with any branch lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure <a href="phylogenies.html#fig:trees-information">2.13</a>D, for example by labeling internal nodes or showing character states.</p>

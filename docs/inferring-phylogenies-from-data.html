@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2022-09-01" />
+<meta name="date" content="2022-10-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,7 +162,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i><b>0.1</b> Approach</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i><b>0.2</b> Using this book</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#source-code"><i class="fa fa-check"></i><b>0.3</b> Source code</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i><b>0.3</b> Distribution</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>0.4</b> Other resources</a></li>
 <li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
 <li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.6</b> Acknowledgements</a></li>
@@ -178,7 +178,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.1" data-path="phylogenies.html"><a href="phylogenies.html#phylogenies-are-graphs"><i class="fa fa-check"></i><b>2.1</b> Phylogenies are graphs</a></li>
 <li class="chapter" data-level="2.2" data-path="phylogenies.html"><a href="phylogenies.html#drawing-phylogenies"><i class="fa fa-check"></i><b>2.2</b> Drawing phylogenies</a></li>
-<li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of trees</a></li>
+<li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of phylogenies</a></li>
 <li class="chapter" data-level="2.4" data-path="phylogenies.html"><a href="phylogenies.html#rotating-nodes"><i class="fa fa-check"></i><b>2.4</b> Rotating nodes</a></li>
 <li class="chapter" data-level="2.5" data-path="phylogenies.html"><a href="phylogenies.html#trees-branch-lengths"><i class="fa fa-check"></i><b>2.5</b> The meaning of branch lengths</a></li>
 <li class="chapter" data-level="2.6" data-path="phylogenies.html"><a href="phylogenies.html#naming-nodes-and-groups"><i class="fa fa-check"></i><b>2.6</b> Naming nodes and groups</a></li>
@@ -377,7 +377,77 @@ Figure 4.3: The same toy tree as above, but with probabilities of the specific c
 </div>
 <p>Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is <span class="math inline">\(1/6\)</span>. The probability of rolling two 4s on two fair dice is <span class="math inline">\(1/6\times1/6=1/36\)</span>. So we can take the product of all the probabilities to calculate the joint probability of all of these events happening.
 We can think of these as the probabilities of specific changes along each branch as the probabilities of the state at each child node.</p>
-<p>Note, though, that the probability for node 5 is missing (it has a value of <code>NA</code>, which means it is Not Available). By reference to Figure <a href="inferring-phylogenies-from-data.html#fig:inference-history">4.3</a> we can see that this is the root node. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to <span class="math inline">\(\mathbf{\Pi}\)</span>, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+node
+</th>
+<th style="text-align:right;">
+probability
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.7442034
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.7442034
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.3048887
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.2260230
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.0195083
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+0.0652538
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to <span class="math inline">\(\mathbf{\Pi}\)</span>, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:</p>
 <table>
 <thead>
 <tr class="header">
@@ -1100,7 +1170,7 @@ We can think of these as the probabilities of specific changes along each branch
 <div id="maximum-likelihood" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Maximum likelihood<a href="inferring-phylogenies-from-data.html#maximum-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. How do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).</p>
-<p>The small toy phylogeny considered here (Figure <a href="inferring-phylogenies-from-data.html#fig:inference-toy">4.1</a>) has four tip nodes. Be reference to Equation <a href="phylogenies.html#eq:ntrees">(2.1)</a>, we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. This excellent <a href="http://phylo.bio.ku.edu/mephytis/brlen-opt.html">interactive visualization</a> allows you to manually optimize branch lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.</p>
+<p>The small toy phylogeny considered here (Figure <a href="inferring-phylogenies-from-data.html#fig:inference-toy">4.1</a>) has four tip nodes. By reference to Equation <a href="phylogenies.html#eq:ntrees">(2.1)</a>, we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. This excellent <a href="http://phylo.bio.ku.edu/mephytis/brlen-opt.html">interactive visualization</a> allows you to manually optimize branch lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.</p>
 <p>Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.</p>
 <p>This might sound simple, but it isn’t. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima.</p>
 <p>Optimization of calculations becomes very important. For example, it isn’t necessary to recalculate all values on each new topology, since some of the calculations from previous topologies remain relevant <span class="citation">(<a href="#ref-Felsenstein:1981vk" role="doc-biblioref">J. Felsenstein 1981</a>)</span>.</p>

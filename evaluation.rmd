@@ -8,11 +8,11 @@ I have introduced the use of models of DNA evolution for simulation and inferenc
 
 Each model parameters can be treated in one of at least three ways [@Hohna2014]:
 
-- Constant. The parameter is set to a specific value before the analysis and is not free to vary.
+- Constant. The parameter is clamped to a specific value before the analysis and is not free to vary.
 
 - Stochastic. The parameter is free to vary in the analysis. This allows the value to be estimated from the data as part of the inference process.
 
-- Deterministic. The parameter value depends on the values of other parameters according to specified relationships to other parameter values. Their value can vary, but it is determined by the value of other parameters and cannot be set independently from them.
+- Deterministic. The parameter value depends on the values of other parameters according to specified mathematical relationships. Their values can vary, but are determined by the value of other parameters and cannot be set independently from them.
 
 
 The most widely used DNA sequence evolution models include the General Time Reversible model and its derivatives (Section \@ref(expanding-the-models)). The GTR model has 11 parameters (Figure \@ref(fig:evaluation-models-nested)). These include the global rate $\mu$ used to tune the overall rate of evolution. Next come the relative rate parameters $a,b,c,d,e,f$ that modify the rates of change between particular nucleotide states, so that they can differ from each other. For example, if `a=0.5` and `b=2`, then the rate of changes between C and A occur at a rate four times higher than changes between A and G. Finally we have the equilibrium frequencies $\pi_A,\pi_C,\pi_G,\pi_T$.
@@ -31,7 +31,7 @@ knitr::include_graphics("figures/models_dna.png")
 
 ```
 
-The number of stochastic parameters in a model is referred to as the degrees of freedom, $df$. You can think of it is the number of knobs that can be turned freely. Models that have higher degrees of freedom are often referred to as more complex than models with fewer degrees of freedom.
+The number of stochastic parameters in a model is referred to as the degrees of freedom, $df$. You can think of it is the number of knobs that can be turned freely during the analysis. Models that have higher degrees of freedom are often referred to as more complex than models with fewer degrees of freedom.
 
 The GTR model has $df=8$. There are $5$ stochastic relative rate parameters and $3$ stochastic equilibrium frequencies (Figure \@ref(fig:evaluation-models-nested)). The other models we have seen are nested within this. By nested I mean that they can take on a smaller subset of the parameter values than the more complex model can. Models that are nested within other models have a smaller degree of freedom. See the [iqtree DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models.
 
@@ -63,9 +63,9 @@ Let's say we are comparing GTR to HKY85, and we denote the likelihood under GTR 
   (\#eq:logs-gtr-hyk)
 \end{equation}
 
-One way to proceed would then be to select GTR if $\Delta>0$, and HKY85 if $\Delta<0$. It wouldn't be a good way to go, though, since it would pick GTR every single time. The reason is that HKY85 is nested within GTR. That means that the best possible likelihood under HKY85 is also available under GTR. Because it has more degrees of freedom, GTR has many other possible values, and chances are very good that one of those will be more likely than the parameter values that were most likely under HKY85. If comparing two nested models, the model with more degrees of freedom will never have a likelihood lower than the simpler model.
+One way to proceed would then be to select GTR if $\Delta>0$, and HKY85 if $\Delta<0$. This wouldn't be a good way to go, though, since it would pick GTR every single time. The reason is that HKY85 is nested within GTR. That means that the best possible likelihood under HKY85 is also available under GTR. Because it has more degrees of freedom, GTR has many other possible values, and chances are very good that one of those will be more likely than the parameter values that were most likely under HKY85. If comparing two nested models, the model with more degrees of freedom will never have a likelihood lower than the simpler model.
 
-This would seem to imply that more complex models are always better, but they most certainly are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch length based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
+This would seem to imply that more complex models are always better, but they most certainly are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch lengths based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
 
 When comparing nested models, the question therefore isn't whether one model has higher likelihood than the other, but whether the increase in likelihood one gets from adding parameters is worth the cost of adding the parameters. There are a few different ways to make this cost/benefit analysis.
 
@@ -83,14 +83,14 @@ There are a few challenges to applying the LRT to model selection in phylogeneti
 There are two other approaches commonly used in phylogenetic model selection. Where $L_i$ is the likelihood under model $i$, $k_i$ is the degrees of freedom for the model, and $n$ is sample size (*e.g.* number of sites in the alignment), these are the Akaike Information Criterion (AIC):
 
 \begin{equation} 
-  AIC_i = -2ln(L_i) + 2k_i
+  AIC_i = 2k_i - 2ln(L_i)
   (\#eq:aic)
 \end{equation}
 
 And the Bayesian Information Criterion (BIC):
 
 \begin{equation} 
-  BIC_i = -2ln(L_i) + k_iln(n)
+  BIC_i = k_iln(n) - 2ln(L_i)
   (\#eq:bic)
 \end{equation}
 
@@ -108,7 +108,7 @@ Two additional model features are often added to address this rate heterogeneity
 
 ## Topological evaluation
 
-Maximum likelihood inference gives a point estimate of the phylogeny -- a single phylogeny (topology and branch lengths) that maximizes the probability of the observed data under the model. A maximum likelihood analysis will always return a single phylogeny, regardless of how strong the support for that phylogeny is or how much higher its likelihood is than that of other phylogenies. This is akin to presenting an estimate of mass, made from multiple observations, without showing error bars.
+Maximum likelihood inference gives a point estimate of the phylogeny -- a single phylogeny (topology and branch lengths) that maximizes the probability of the observed data under the model. A maximum likelihood analysis will always return a single phylogeny, regardless of how strong the support for that phylogeny is or how much higher its likelihood is than that of other phylogenies. Presenting a phylogeny without any indication of topological support is akin to presenting an estimate of mass made from multiple observations without showing error bars. It is difficult to interpret the point estimate without having a sense of how much uncertainty there is. 
 
 ### Summarizing topological support
 
@@ -144,7 +144,7 @@ grid.arrange(
 
 ```
 
-```{r eval-splits, echo=FALSE, fig.cap="Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology."}
+```{r eval-splits, echo=FALSE, fig.cap="Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently above the branches throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology."}
 
 knitr::include_graphics("figures/splits.png")
 
