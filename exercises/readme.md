@@ -41,14 +41,19 @@ The following are installed on your local computer (e.g. your laptop):
 - FigTree, http://tree.bio.ed.ac.uk/software/figtree/. A stand-alone viewer for phylogenetic trees. Requires [Java](https://www.java.com/en/download/), which you will need to install if you don't have it already. 
 - Visual studio Code, https://code.visualstudio.com/. A text editor and IDE that we will use for inspecting and editing a variety of files.
 
-The following can be installed on your local computer or a remote cluster. Windows users are advised to install these programs within WSL rather than directly in Windows.
-
+The following can be installed on your local computer or a remote cluster. 
 
 - seq-gen, http://tree.bio.ed.ac.uk/software/seqgen/. A Windows version is not available, so on Windows it must be run in WSL.
 - IQTree, http://www.iqtree.org/
 - mafft, https://mafft.cbrc.jp/alignment/software/
 - revbayes, https://revbayes.github.io/download 
 
+Windows users are advised to install these programs within Ubuntu on WSL rather than directly in Windows. To install the first three on Ubuntu (revbayes must still be installed from the link above), run the following in WSL:
+
+    apt-get update
+    apt-get install iqtree seq-gen mafft 
+
+You may need to add `sudo` before each of these commands.
 
 ### Optional software
 

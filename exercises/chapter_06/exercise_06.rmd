@@ -88,9 +88,9 @@ Because the bootstrap analysis above included model selection and ML analysis, w
 In real empirical data we never know the "true" model. This poses challenges to assessing how well model selection has performed. When we simulate data, we know the exact model that data were generated under. This provides a great opportunity to assess how well model selection has performed. The downside is that some realism is lost - simulated data are much cleaner than real-world data, and just because model selection works well in this artificial setting doesn't necessarily mean that it will work on messier real data. But if it doesn't work on simulated data, then we should definitely be worried about how it is doing on actual data.
 
 
-Within your exercise directory, create a directory called `modelsim`. Copy the `mammals.tre` file from Exercise 03 into this new `exercise_06/modelsim` directory. We will use this topology for simulating the data.
+The `mammals.tre` file from Exercise 03 is included in this folder. We will use this topology for simulating the data.
 
-Then run the following commands, either in a  `job.sh` script in this new directory with the following contents, and run it with `sbatch`:
+Run the following commands, either in a  `job.sh` script in this new directory with the following contents, and run it with `sbatch`:
 
 ```
 # If running on the cluster, you need the lines to configure the job script (cope from a previous exercise), as well as the following two lines to load the programs we will use:
@@ -110,8 +110,7 @@ iqtree -s mammal_hky.fasta -nt AUTO
 seq-gen -mGTR -f0.3841,0.1182,0.1646,0.333 -r1.0051,3.5164,2.2921,0.9079,5.9252,1.0000 -s0.001 -l1000 -of < mammal.tre > mammal_gtr.fasta
 iqtree -s mammal_gtr.fasta -nt AUTO
 # GTR - 
-seq-gen -mGTR -f0.3841,0.1182,0.1646,0.333 -r1.0051,3.5164,2.2921,0.9079,5.9252,1.0000 -i0.1363 -a0.9978 -g4  -s0.001 -l1000 -of < mammal.tre > mamm
-al_gtr_ig.fasta
+seq-gen -mGTR -f0.3841,0.1182,0.1646,0.333 -r1.0051,3.5164,2.2921,0.9079,5.9252,1.0000 -i0.1363 -a0.9978 -g4  -s0.001 -l1000 -of < mammal.tre > mammal_gtr_ig.fasta
 iqtree -s mammal_gtr_ig.fasta -nt AUTO
 ```
 
