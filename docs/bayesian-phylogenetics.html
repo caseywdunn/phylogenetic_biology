@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2022-10-06" />
+<meta name="date" content="2022-10-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -255,6 +255,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="7.1" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>7.1</b> Bayesian statistics</a></li>
 <li class="chapter" data-level="7.2" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>7.2</b> Bayesian phylogenetic inference</a></li>
+<li class="chapter" data-level="7.3" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#resources"><i class="fa fa-check"></i><b>7.3</b> Resources</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a>
 <ul>
@@ -333,7 +334,7 @@ div.csl-indent {
 <li><p>Bootstraps are a convenient way to generate a sample of phylogenies, but their statistical interpretation is not clear. The frequencies of bootstrap supports don’t correspond in a clear way to probabilities of our hypothesis, but instead tell us something about how frequently features of the phylogeny are supported when we resample the data. In practice it turns out this is a good proxy for phylogenetic support, but it would be nice to have support values that have a more explicit statistical interpretation.</p></li>
 </ul>
 <p>All analyses include a variety of tradeoffs, and the downsides of the issues listed above are often mitigated by the multiple upsides of a ML bootstrap analysis framework. It also greatly helps that there are decades of experience with such analyses that help contextualize and interpret ML bootstrap results. This work has also produced ML methods and software packages that are highly optimized for computational efficiency, enabling the routine application of these approaches to very large datasets.</p>
-<p>Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above. Rather than focus on a single “best” topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters.</p>
+<p>Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above <span class="citation">Larget and Simon (<a href="#ref-larget1999markov" role="doc-biblioref">1999</a>)</span>. Rather than focus on a single “best” topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters.</p>
 <div id="bayesian-statistics" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Bayesian statistics<a href="bayesian-phylogenetics.html#bayesian-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Bayesian statistics is much older than many other domains of statistics, but have recently seen a surge in use as computational and methodological advances allow them to be applied more effectively to a wider number of problems. The basic intuition is that our understanding of the world are not drawn from the data alone. Instead, the data are used to update our prior understanding of the world. This updated understanding is referred to as the posterior. There are many excellent introductions to Bayesian statistics, so I will not provide a full derivation here. If you would like more of a background, please consult Appendix <a href="statistical-and-mathematical-fundamentals.html#stats-bayes">A.2</a>.</p>
@@ -351,7 +352,7 @@ div.csl-indent {
 <h2><span class="header-section-number">7.2</span> Bayesian phylogenetic inference<a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To calculate the posterior probability of a phylogenetic hypothesis, we need to address all the terms on the right side of Equation <a href="bayesian-phylogenetics.html#eq:bayes-theorem">(7.1)</a>. We already know how to calculate <span class="math inline">\(P(D|H)\)</span>, the likelihood. What about <span class="math inline">\(P(H)\)</span> and <span class="math inline">\(P(D)\)</span>? There are a variety of practical approaches to <span class="math inline">\(P(H)\)</span> that have been shown to work well in the context of phylogenetics. These include uniform priors, where all topologies are considered to be equally likely. The priors on branch length can be approximated from an exponential distribution. One of the major take-aways from the past two decades of work on Bayesian phylogenetics is that inference is quite robust to <span class="math inline">\(P(H)\)</span> when the data are informative about the phylogeny, as expected.</p>
 <p>What then, about <span class="math inline">\(P(D)\)</span>? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (<em>e.g.</em>, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won’t.</p>
-<p>Instead, we will forego dealing with <span class="math inline">\(P(D)\)</span> at all by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling<span class="citation">(<a href="#ref-metropolis1953" role="doc-biblioref">Metropolis et al. 1953</a>)</span>. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic <span class="math inline">\(R\)</span> and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.</p>
+<p>Instead, we will forego dealing with <span class="math inline">\(P(D)\)</span> at all by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling <span class="citation">(<a href="#ref-metropolis1953" role="doc-biblioref">Metropolis et al. 1953</a>)</span>. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic <span class="math inline">\(R\)</span> and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.</p>
 <p>Consider the current hypothesis to be <span class="math inline">\(H\)</span>, and the newly proposed hypothesis <span class="math inline">\(H^*\)</span>. We calculate our test statistic as the ratio of the posterior probability of <span class="math inline">\(H^*\)</span> to the prior probability of <span class="math inline">\(H\)</span>:</p>
 <p><span class="math display" id="eq:bayes-mcmc">\[\begin{equation}
   R = \frac{P(D|H^*)P(H^*)}{P(D)} \frac{P(D)}{P(D|H)P(H)} = \frac{P(D|H^*)P(H^*)}{P(D|H)P(H)}
@@ -360,27 +361,37 @@ div.csl-indent {
 <p>Because <span class="math inline">\(P(D)\)</span> doesn’t depend on the hypothesis under consideration, it is the same in both posteriors. Because we are considering a ratio of posteriors, it cancels out. We don’t need to calculate it to derive <span class="math inline">\(R\)</span>.</p>
 <p>The “Markov Chain” in MCMC alludes to the fact that MCMC is a series of repeated events that depends only on the previous step. Each repeated cycle of events, also known as a generation, proceeds as follows:</p>
 <ol style="list-style-type: decimal">
-<li>We have hypothesis <span class="math inline">\(H\)</span></li>
+<li>We have hypothesis <span class="math inline">\(H\)</span>.</li>
 <li>We propose a new hypothesis <span class="math inline">\(H^*\)</span> by modifying <span class="math inline">\(H\)</span>.</li>
-<li>We calculate <span class="math inline">\(R\)</span> according to Equation <a href="bayesian-phylogenetics.html#eq:bayes-mcmc">(7.2)</a></li>
+<li>We calculate <span class="math inline">\(R\)</span> according to Equation <a href="bayesian-phylogenetics.html#eq:bayes-mcmc">(7.2)</a>.</li>
 <li>If <span class="math inline">\(R&gt;1\)</span>, we accept <span class="math inline">\(H^*\)</span>. If If <span class="math inline">\(R&lt;1\)</span>, we accept <span class="math inline">\(H^*\)</span> with probability <span class="math inline">\(R\)</span>. Otherwise, we retain <span class="math inline">\(H\)</span>.</li>
 <li>The result of the step above is added to the posterior sample, and becomes <span class="math inline">\(H\)</span> for the next iteration of the cycle.</li>
 </ol>
-<p>MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as branch frequencies. Unlike bootstraps, though, the frequency of an branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, <em>i.e.</em> the probability of the branch given the data. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.</p>
+<p>MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as branch frequencies. Unlike bootstraps, though, the frequency of a branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, <em>i.e.</em> the probability of the branch given the data. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.</p>
 <p>There are a variety of practical considerations to implementing a Bayesian phylogenetic analysis with MCMC. These include:</p>
 <ul>
 <li>Selecting the appropriate model. Many of the same considerations we reviewed in the context of likelihood apply here.</li>
 <li>Selecting appropriate priors on topology, branch length, and model parameters.</li>
 <li>Devising an appropriate hypothesis proposal mechanism. If the new hypothesis <span class="math inline">\(H^*\)</span> is too different from <span class="math inline">\(H\)</span>, it will tend to be rejected as <span class="math inline">\(H\)</span> becomes optimized. This will lead to an approximated posterior distribution that is too narrow, leading to overconfidence in a small set of hypotheses. If the steps are too small, then MCMC will tend to get trapped in local optima because they cannot find more distant better optima. There are several approaches to these challenges, including searches with multiple MCMC chains that take different step sizes.</li>
 <li>The very early samples in the chain are not a good estimate of the posterior distribution, because the initial <span class="math inline">\(H\)</span> is
-not necessarily close to a peak in the posterior. The initial samples becore MCMC settles into a stable distribution are therefore discarded as part of a “burn-in” phase.</li>
+not necessarily close to a peak in the posterior. The initial samples before MCMC settles into a stable distribution are therefore discarded as part of a “burn-in” phase.</li>
 <li>Knowing when enough generations have been sampled to adequately approximate the posterior distribution. This is often evaluated by running multiple independent MCMC analyses and stopping them if and when they have converged on similar distributions.</li>
+</ul>
+</div>
+<div id="resources" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Resources<a href="bayesian-phylogenetics.html#resources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>A video introduction to Bayes Theorem: <a href="https://www.youtube.com/watch?v=HZGCoVF3YvM" class="uri">https://www.youtube.com/watch?v=HZGCoVF3YvM</a></li>
+<li>The excellent MCMC robots by Paul Lewis: <a href="https://plewis.github.io/applets/mcmc-robot/" class="uri">https://plewis.github.io/applets/mcmc-robot/</a></li>
 </ul>
 
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-larget1999markov" class="csl-entry">
+Larget, Bret, and Donald L Simon. 1999. <span>“Markov Chain Monte Carlo Algorithms for the Bayesian Analysis of Phylogenetic Trees.”</span> <em>Molecular Biology and Evolution</em> 16 (6): 750–59. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026160">https://doi.org/10.1093/oxfordjournals.molbev.a026160</a>.
+</div>
 <div id="ref-metropolis1953" class="csl-entry">
 Metropolis, Nicholas, Arianna W Rosenbluth, Marshall N Rosenbluth, Augusta H Teller, and Edward Teller. 1953. <span>“Equation of State Calculations by Fast Computing Machines.”</span> <em>The Journal of Chemical Physics</em> 21 (6): 1087–92. <a href="https://doi.org/10.1063/1.1699114">https://doi.org/10.1063/1.1699114</a>.
 </div>
