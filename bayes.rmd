@@ -39,7 +39,7 @@ To calculate the posterior probability of a phylogenetic hypothesis, we need to 
 
 What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won't.
 
-Instead, we will forego dealing with $P(D)$ at all by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling[@metropolis1953]. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
+Instead, we will forego dealing with $P(D)$ at all by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling [@metropolis1953]. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
 
 Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate our test statistic as the ratio of the posterior probability of $H^*$ to the prior probability of $H$:
 
@@ -53,13 +53,13 @@ Because $P(D)$ doesn't depend on the hypothesis under consideration, it is the s
 
 The "Markov Chain" in MCMC alludes to the fact that MCMC is a series of repeated events that depends only on the previous step. Each repeated cycle of events, also known as a generation, proceeds as follows:
 
-1. We have hypothesis $H$
+1. We have hypothesis $H$.
 2. We propose a new hypothesis $H^*$ by modifying $H$.
-3. We calculate $R$ according to Equation \@ref(eq:bayes-mcmc)
+3. We calculate $R$ according to Equation \@ref(eq:bayes-mcmc).
 4. If $R>1$, we accept $H^*$. If If $R<1$, we accept $H^*$ with probability $R$. Otherwise, we retain $H$.
 5. The result of the step above is added to the posterior sample, and becomes $H$ for the next iteration of the cycle.
 
-MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as branch frequencies. Unlike bootstraps, though, the frequency of an branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, *i.e.* the probability of the branch given the data. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.
+MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as branch frequencies. Unlike bootstraps, though, the frequency of a branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, *i.e.* the probability of the branch given the data. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.
 
 There are a variety of practical considerations to implementing a Bayesian phylogenetic analysis with MCMC. These include:
 
@@ -67,5 +67,11 @@ There are a variety of practical considerations to implementing a Bayesian phylo
 - Selecting appropriate priors on topology, branch length, and model parameters.
 - Devising an appropriate hypothesis proposal mechanism. If the new hypothesis $H^*$ is too different from $H$, it will tend to be rejected as $H$ becomes optimized. This will lead to an approximated posterior distribution that is too narrow, leading to overconfidence in a small set of hypotheses. If the steps are too small, then MCMC will tend to get trapped in local optima because they cannot find more distant better optima. There are several approaches to these challenges, including searches with multiple MCMC chains that take different step sizes.
 - The very early samples in the chain are not a good estimate of the posterior distribution, because the initial $H$ is 
-not necessarily close to a peak in the posterior. The initial samples becore MCMC settles into a stable distribution are therefore discarded as part of a "burn-in" phase.
+not necessarily close to a peak in the posterior. The initial samples before MCMC settles into a stable distribution are therefore discarded as part of a "burn-in" phase.
 - Knowing when enough generations have been sampled to adequately approximate the posterior distribution. This is often evaluated by running multiple independent MCMC analyses and stopping them if and when they have converged on similar distributions.
+
+
+## Resources
+
+- A video introduction to Bayes Theorem: https://www.youtube.com/watch?v=HZGCoVF3YvM
+- The excellent MCMC robots by Paul Lewis: https://plewis.github.io/applets/mcmc-robot/
