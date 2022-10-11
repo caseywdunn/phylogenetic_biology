@@ -1,0 +1,140 @@
+---
+title: "Exercise 06"
+output: html_document
+---
+
+```{r setup, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ape)
+```
+
+
+## Introduction
+
+The goals of this exercise are to:
+- Run a bootstrap analysis
+- More closely examine model selection in an iqtree analysis
+- Evaluate model selection when data are simulated under a known model
+
+
+## Run a bootstrap analysis
+
+This will build off of the analysis you did in Exercise 04. The same sequence alignment `siph16s.phy` is provided here.
+
+Either on the cluster (which requires copying and modifying a job script) or on your local computer (if you ahve iqtree installed) run the following:
+
+    iqtree -s siph16s.phy -bb 1000 -nt AUTO
+
+The new option `-bb 1000` instructs iqtree to run 1000 ultrafast bootstrap analyses. This generates a sample of 1000 bootstrap trees.
+
+For more information on bootstraps in iqtree see the [documentation](http://www.iqtree.org/doc/Tutorial#assessing-branch-supports-with-ultrafast-bootstrap-approximation). Note that we are using the ultrafast bootstrap, which is a bit different from the standard bootstrap we described in lecture. It is much faster, but the support values are an approximate of traditional bootstraps. An ultrafast bootstrap support value below 95% is considered to be weak support, but of course bootstraps do not have a clear statistical interpretation in terms of significance.
+
+Knit this document, with the results of your analysis in the same folder, to view the phylogeny.
+
+
+### Bootstrap support on the ML tree
+
+First we will examine the frequency of each edge in the ML tree in the bootstrap sample. When you run iqtree with a bootstrap analysis, it adds these frequencies, as percents, right to the ML tree stored with the extension `.treefile`.
+
+```{r fig.width=10, fig.height=14}
+
+phy = read.tree("siph16s.phy.treefile")
+plot(phy)
+nodelabels(phy$node.label)
+
+```
+
+Note that, like most phylogenetic tools, iqtree stores bootsrap support values as node attributes rather than as edge attributes, even though they indicate edge support. These are added to the treefile as numbers that immediately follow the closing parenthesis for each clade. The support for an edge is placed on the child node of the edge.
+
+> **_Problem 1:_** (1 point) Answer the following questions about the bootstrap results.
+
+- What is the bootstrap support for the clade of all siphonophores belonging to Forskalia? Would you consider this strong support?
+
+- Find an example of an edge that has low support in the tree. List the taxa descended from this edge. What are some alternative splits that may have been present in the bootstrapped sample of trees that conflicted with this split and reduced support for it?
+
+
+### Other summaries of the bootstrap sample
+
+Above we examined the bootstrap frequency of edges in the ML tree, but we can also examine the bootstrap sample directly. There are a couple ways to do this. One is to look at the bootstrap consensus tree. This topology includes all of the most frequent non-conflicting splits. Bootstrap consensus is stored in the file that ends with `.contree`. View the consensus tree with this chunk:
+
+```{r fig.width=10, fig.height=14}
+
+phy_con = read.tree("siph16s.phy.contree")
+plot(phy_con)
+nodelabels(phy_con$node.label)
+
+```
+
+The frequency of each edge in the consensus tree is shown as a node label. The same splits will have the same frequency in both the ML and consensus tree, because the frequencies are examined in the same bootstrap tree samples. But the topologies may be different.
+
+Another way is to look at the frequency of all the splits observed in the bootstrap tree sample. These are indicated in the file `.splits.nex`. First each taxon is ascribed a taxon number, and then the splits are shown one per line a bit further down in the file. Each line shows percent frequency of the split, and then a list of the taxa on one side of that split. This allows you to identify the frequency of splits that are not in the ML or bootstrap consensus trees.
+
+## Examine model selection on the siphonophore dataset
+
+Because the bootstrap analysis above included model selection and ML analysis, we can also examine model selection in more detail.
+
+> **_Problem 2:_** (1 point) Open `siph16s.phy.iqtree` in a text editor and answer the following questions about model selection:
+
+- What model was selected?
+
+- iqtree calculates multiple model selection criteria, but sorts the list of models by BIC and selects the model that is the best according to BIC. Are the AIC and BIC selection results equivalent? Specifically, if AIC were favored instead of BIC would a different model have been selected?
+
+- Does the selected model have the highest log likelihood (LogL)?
+
+
+## Examine model selection on simulated data
+
+In real empirical data we never know the "true" model. This poses challenges to assessing how well model selection has performed. When we simulate data, we know the exact model that data were generated under. This provides a great opportunity to assess how well model selection has performed. The downside is that some realism is lost - simulated data are much cleaner than real-world data, and just because model selection works well in this artificial setting doesn't necessarily mean that it will work on messier real data. But if it doesn't work on simulated data, then we should definitely be worried about how it is doing on actual data.
+
+
+Within your exercise directory, create a directory called `modelsim`. Copy the `mammals.tre` file from Exercise 03 into this new `exercise_06/modelsim` directory. We will use this topology for simulating the data.
+
+Then run the following commands, either in a  `job.sh` script in this new directory with the following contents, and run it with `sbatch`:
+
+```
+# If running on the cluster, you need the lines to configure the job script (cope from a previous exercise), as well as the following two lines to load the programs we will use:
+
+module load Seq-Gen
+module load IQ-TREE
+
+# the following lines run the analyses, and can be executed on your own computer if the sopftware is installed or on the cluster
+
+# JC - equal nucleotid frequencies with C=G=T=A=0.25 and all relative rates = 1
+seq-gen -mGTR -f0.25,0.25,0.25,0.25 -r1,1,1,1,1,1 -s0.001 -l1000 -of < mammal.tre > mammal_jc.fasta
+iqtree -s mammal_jc.fasta -nt AUTO
+# HKY - unequal nucleotide frequencies with C=G=0.205 and A=T=0.295; rates for transitions=2, transversions=0.5 
+seq-gen -mGTR -f0.295,0.205,0.205,0.295 -r0.5,2,0.5,0.5,2,0.5 -s0.001 -l1000 -of < mammal.tre > mammal_hky.fasta
+iqtree -s mammal_hky.fasta -nt AUTO
+# GTR - 
+seq-gen -mGTR -f0.3841,0.1182,0.1646,0.333 -r1.0051,3.5164,2.2921,0.9079,5.9252,1.0000 -s0.001 -l1000 -of < mammal.tre > mammal_gtr.fasta
+iqtree -s mammal_gtr.fasta -nt AUTO
+# GTR - 
+seq-gen -mGTR -f0.3841,0.1182,0.1646,0.333 -r1.0051,3.5164,2.2921,0.9079,5.9252,1.0000 -i0.1363 -a0.9978 -g4  -s0.001 -l1000 -of < mammal.tre > mamm
+al_gtr_ig.fasta
+iqtree -s mammal_gtr_ig.fasta -nt AUTO
+```
+
+This simulates data under 4 different models with `seqgen`. The same GTR framework is used in each case for consistency. The models differ in the parameter specification. For example, to get an HKY model the GTR parameters are set to constants that fix the transition to transversion relative rates. `iqtree` is then used to analyze each of the simulated datasets.
+
+Site heterogeneity in rates is incorporated into the final model using `-i` (fraction of invariant sites), `-a` (the alpha parameter that controls the shape of the Gamma distribution of heterogeneity), and `-g` (the number of discrete gamma categories). 
+
+
+> **_Problem 3:_** (1 points) Examine the `.iqtree` file for each analysis of simulated data. Address the following bullet points.
+
+- List what model was used for simulation and which model was selected by iqtree.
+
+- In a few sentences, summarize how close parameter estimates were to those that were used to simulated the data.
+
+- In a sentence or two, explain how well iqtree model selection performed on simulated data.
+
+
+## Model selection - the big picture
+
+> **_Problem 4:_** (1 points) Given the importance of models to phylogenetic inference, there is considerable concern about consistency and success of model selection. Based on the model selection analyses presented here (comparisons of BIC and AIC, analyses of simulated data), how do you feel about model selection in the context of phylogenetic inference? Explain and support your answer in up to about five sentences.
+
+
+## Submit
+
+Confirm that this document knits without error. Compress the exercise folder, with this file, the nitted html file, and all analysis results, and submit.
+
