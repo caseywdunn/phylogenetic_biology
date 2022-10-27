@@ -38,10 +38,19 @@ A typical RevBayes script has commands that load the data, set up the model, def
 There is a series of detailed [tutorials](https://revbayes.github.io/tutorials/) that serve as a great starting point for using RevBayes. This exercise is based off of the [Nucleotide substitution models](https://revbayes.github.io/tutorials/ctmc/) tutorial.
 
 
-## Getting set up
+## Software
 
-We are going to use a third party tool, [FigTree](https://github.com/rambaut/figtree/releases), to view the phylogenies. You may need to also install [java](https://www.oracle.com/java/technologies/javase-jre8-downloads.html) to get FigTree running. 
+[RevBayes](https://revbayes.github.io/) can be difficult to install because it requires an external library, boost. I suggest using it on a remote cluster.
 
+We will also use two desktop tools to view the results. Both require [java](https://www.oracle.com/java/technologies/javase-jre8-downloads.html), which you will need to install if you don't have it already.
+
+Install these desktop tools on your computer:
+
+- [FigTree](https://github.com/rambaut/figtree/releases), a phylogeny viewer.
+- [Tracer](http://beast.community/tracer), a trace viewer.
+
+
+## Exercise files
 
 This exercise folder contains:
 
@@ -54,20 +63,20 @@ This exercise folder contains:
 
 This exercise is a bit different than the others in that you are fallowing another existing tutorial -- [Nucleotide substitution models](https://revbayes.github.io/tutorials/ctmc/). The problems listed here related to that tutorial and the steps you take there. 
 
-That tutorial is written as if you are running the commands on your own computer. If you prefer to install revayes locally you can do that, or you can run the analyses on the cluster. 
+That tutorial is written as if you are running the commands on your own computer. We will run it on the cluster. This requires some deviations from the instructions in the tutorial. Rather than launch the scripts by opening RevBayes and running a `source()` command, you will use the `job*.sh` slurm scripts to launch revbayes and run the `.Rev` scripts. To run the JC analysis, for example, lanunch the job on the cluster with:
 
-If you run the analyses on the cluster, there are some modifications to make:
-
-- Rather than launch the scripts by opening RevBayes and running a `source()` command, you will use the `job*.sh` slurm scripts to launch revbayes on the cluster and pass the script to it at the command line.
+    sbatch job_jc.sh
 
 In the interest of time, we will skip the HKY model. Feel free to go through it if you like.
 
 
 ## Summarizing MCMC Samples
 
-To understand the MCMC sampling, plot some key variables recorded in the log file through generations. Here we will plot each replicate (ie chain) as a different color.
+To understand the MCMC sampling, plot some key variables recorded in the log file through generations. Download the output file from the cluster and place it on your computer in the same folder as this file.
 
-The tutorial suggests using a specialized program called Tracer, but we will plot the summary MCMC stats right here in R.
+You can view the log files with [Tracer](http://beast.community/tracer), or with the code below.
+
+We will plot the summary MCMC stats right here in R. Each replicate is shown as a different color.
 
 ```{r}
 
@@ -124,24 +133,26 @@ trace_jc %>%
     geom_density(alpha = 0.1)
 ```
 
-
-
-
-
-> **_Problem 1:_** (1 point) Answer the following questions about the MCMC summaries above.
+> **_Problem 1:_** (2 points) Answer the following questions about the MCMC summaries for the JC model above.
 
 - Was the burnin sufficient?
 - Does mixing look good?
-- When considering the whole run, why do you think TL starts high and then gets lower, while Likelihood starts low and gets higher?
+- When considering the whole run, why do you think tree length (TL) starts high and then gets lower, while Likelihood starts low and gets higher?
 - Did the replicates converge on similar parameter distributions?
 
-Open the tree `output_jc/primates_cytb_JC_MAP.tree` on your local computer with FigTree to inspect the tolpology, edge length, and posterior probabilities. You will need to check the `Node Labels` box and then in `Display:` select `posterior`.
+Open the tree `output_jc/primates_cytb_JC_MAP.tree` on your local computer with FigTree to inspect the topology, edge length, and posterior probabilities. You will need to check the `Node Labels` box and then in `Display:` select `posterior`.
 
-> **_Problem 2:_** (1.5 points) Answer the above questions for the GTR analyses. Copy and paste the codeblocks from above and modify them to import these results and plot them. Pick at least one other model paraemter to examine in addition to TL and Likelihood. Note that this analysis has just a single replicate. 
+> **_Problem 2:_** (1.5 points) Answer the following questions for the GTR analyses. Copy and paste the codeblocks from above and modify them to import these results and plot them, or use Tracer to view the results. Pick at least one other model paraemter to examine in addition to TL and Likelihood. Note that this analysis has just a single replicate. 
 
-> **_Problem 3:_** (1.5 points) Answer the above questions for the GTR+IG analyses. Copy and paste the codeblocks from above and modify them to import these results and plot them. Examine alpha in addition to TL and likelihood. Note that this analysis has just a single replicate. 
+- Was the burnin sufficient?
+- Does mixing look good?
+- Did the replicates converge on similar parameter distributions?
 
+> **_Problem 3:_** (1.5 points) Answer the following questions for the GTR+IG analyses. Copy and paste the codeblocks from above and modify them to import these results and plot them, or use Tracer to view the results. Examine alpha in addition to TL and likelihood. Note that this analysis has just a single replicate. 
 
+- Was the burnin sufficient?
+- Does mixing look good?
+- Did the replicates converge on similar parameter distributions?
 
 ## Submit
 

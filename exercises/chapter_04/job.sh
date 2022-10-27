@@ -1,10 +1,11 @@
 #!/bin/bash
-
-#SBATCH --job-name=siph_iqtree
-#SBATCH --time=30:00
-#SBATCH --ntasks=1
+#SBATCH --job-name=iqtree
+#SBATCH --time=2:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=1 
 #SBATCH --cpus-per-task=8
+#SBATCH -p general
 
-module load IQ-TREE/1.6.12
+module load IQ-TREE
 
 iqtree -s siph16s.phy -nt AUTO

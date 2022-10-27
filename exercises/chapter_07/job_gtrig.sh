@@ -6,6 +6,6 @@
 #SBATCH --cpus-per-task=8
 #SBATCH -p general
 
-#SBATCH --job-name=gtrig
+module load revbayes
 
 rb mcmc_GTR_Gamma_Inv.Rev 

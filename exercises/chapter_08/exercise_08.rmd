@@ -1,0 +1,57 @@
+---
+title: "Exercise 08"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ape)
+
+# Load data import, wrangling, and plotting tools from the Tidyverse. 
+# See https://r4ds.had.co.nz/ for more
+library(tidyverse)
+
+library(magrittr)
+
+```
+
+
+## Introduction
+
+The goals of this exercise are to perform a basic morphological analyses.
+
+You will use a dataset on fossil bears, featured in [this other tutorial](https://revbayes.github.io/tutorials/morph_tree/) and derived from a [previous study](https://doi.org/10.3989/egeol.40714.182).
+
+
+
+
+## Problems and tasks
+
+
+
+
+> **_Problem 1:_** (1 point) 
+
+1. Examine the data matrix bears.nex, which is in nexus format. Answer the following questions:
+
+- How many species and characters are there?
+
+- Describe the structure of the data (continuous, discrete, number of states, etc...)
+
+
+
+Next, run a phylogenetic analysis with iqtree:
+
+   iqtree -s bears.nex -bb 1000 -nt AUTO 
+
+
+
+
+> **_Problem 2:_** (2 points) Examine the `bears.nex.iqtree` log file. Indicate which which model and parameters were selected. Describe this model here.
+
+
+> **_Problem 3:_** (1 point) Insert a code block below to plot the tree with bootstrap support. Then summarize the result (for example, how well supported is the tree?)
+
