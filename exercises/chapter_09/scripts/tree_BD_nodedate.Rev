@@ -1,0 +1,53 @@
+##################################################################
+# Birth-Death Process prior on the topology and speciation times #
+##################################################################
+
+# Define exponential priors on the birth rate and death rate #
+speciation_rate ~ dnExponential(10)
+extinction_rate ~ dnExponential(10)
+
+# Specify a scale move on the speciation_rate parameter #
+moves.append( mvScale(speciation_rate, lambda=0.5,tune=true,weight=3.0) )
+
+# Specify a scale move on the extinction_rate parameter #
+moves.append( mvScale(extinction_rate, lambda=0.5,tune=true,weight=3.0) )
+
+# Create deterministic nodes for the diversification and turnover rates to monitor these parameters #
+diversification := speciation_rate - extinction_rate
+turnover := extinction_rate/speciation_rate
+
+# Fix the probability of sampling parameter (rho) to 1 #
+# because all extant bears are represented in our analysis #
+rho <- 1.0
+
+# Define min & max constraints for the root #
+extant_mrca_min <- 1.84
+extant_mrca_max <- 49.0
+
+# Specify the root age as a stochastic node drawn from a uniform distribution #
+extant_mrca ~ dnUniform(extant_mrca_min, extant_mrca_max)
+
+moves.append( mvScale(extant_mrca, lambda=1, tune=true, weight=5.0) )
+
+# Define the tree-prior distribution as the birth-death process #
+tree_dist = dnBDP(lambda=speciation_rate, mu=extinction_rate, rho=rho, rootAge=extant_mrca, samplingStrategy="uniform", condition="nTaxa", taxa=taxa)
+
+# Define clade constraints #
+clade_ursinae = clade("Melursus_ursinus", "Ursus_arctos", "Ursus_maritimus", 
+                  "Helarctos_malayanus", "Ursus_americanus", "Ursus_thibetanus")                      
+constraints = v(clade_ursinae)
+
+# Define a stochastic node for the constrained tree topology #
+timetree ~ dnConstrainedTopology(tree_dist, constraints=constraints)
+
+# Specify moves on the tree and node times #
+moves.append( mvNarrow(timetree, weight=n_taxa/2.0) )
+moves.append( mvFNPR(timetree, weight=n_taxa/10.0) )
+moves.append( mvNodeTimeSlideUniform(timetree, weight=n_taxa) )
+
+# Monitor the age of Ursinae #
+age_ursinae := tmrca(timetree, clade_ursinae)
+
+# Specify an exponetial distribution on the age of this node #
+obs_age_ursinae ~ dnExponential(1.0, offset = -age_ursinae)
+obs_age_ursinae.clamp(-1.84)

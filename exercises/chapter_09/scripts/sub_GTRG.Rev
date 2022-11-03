@@ -1,0 +1,35 @@
+#######################################
+# GTR+G nucleotide substitution model #
+#######################################
+
+# Initialize the parameters of substitution matrix #
+
+# Both the stationary frequencies and exchangeability rates #
+# are drawn from uniform Dirichlet distributions #
+
+# First the stationary frequencies #
+sf_hp <- v(1,1,1,1)
+sf ~ dnDirichlet(sf_hp)
+
+# Then the exchangeability rates #
+er_hp <- v(1,1,1,1,1,1)
+er ~ dnDirichlet(er_hp)
+
+moves.append( mvBetaSimplex(er, alpha=10.0, weight=2.0) )
+moves.append( mvBetaSimplex(sf, alpha=10.0, weight=3.0) )
+
+# Create the matrix #
+Q_cytb := fnGTR(er,sf)
+
+# Create a discretized gamma distribution of rate categories  #
+# the shape parameter is drawn from an uniform prior #
+alpha_cytb ~ dnUniform( 0.0, 1E6 )
+alpha_cytb.setValue( 1.0 )
+
+moves.append( mvScale(alpha_cytb, lambda=0.5,tune=true, weight=2.0) )
+
+rates_cytb := fnDiscretizeGamma( alpha_cytb, alpha_cytb, 4 )
+
+# Create the substitution model and clamp with our observed DNA data #
+phySeq ~ dnPhyloCTMC(tree=timetree, Q=Q_cytb, siteRates=rates_cytb, branchRates=branch_rates, type="DNA")
+phySeq.clamp(cytb)

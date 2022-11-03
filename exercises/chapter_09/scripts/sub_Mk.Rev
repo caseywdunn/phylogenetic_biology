@@ -1,0 +1,21 @@
+###########################################
+# Binary morphological substitution model #
+###########################################
+
+# Create the Q matrix. These data are binary, so we initialize the Jukes-Cantor matrix with
+# two states
+Q_morpho <- fnJC(2)
+
+# Set up Gamma-distributed rate variation.
+alpha_morpho ~ dnUniform( 0.0, 1E8 )
+rates_morpho := fnDiscretizeGamma( alpha_morpho, alpha_morpho, 4 )
+
+# Moves on the parameters to the Gamma distribution.
+moves.append( mvScale(alpha_morpho, lambda=0.5, tune=true, weight=5.0) )
+
+# Create the substitution model and clamp with our observed Standard data #
+# Here we use the option siteMatrices=true to specify that the vector Q #
+# represents a site-specific mixture of rate matrices #
+# We also condition on observing only variable characters using coding="variable" #
+phyMorpho ~ dnPhyloCTMC(tree=timetree, siteRates=rates_morpho, branchRates=branch_rates_morpho, Q=Q_morpho, type="Standard", coding="variable")
+phyMorpho.clamp(morpho)

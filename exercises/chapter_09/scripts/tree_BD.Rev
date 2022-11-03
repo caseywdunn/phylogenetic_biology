@@ -1,0 +1,45 @@
+##################################################################
+# Birth-Death Process prior on the topology and speciation times #
+##################################################################
+
+# Define exponential priors on the birth rate and death rate #
+speciation_rate ~ dnExponential(10)
+extinction_rate ~ dnExponential(10)
+
+# Specify a scale move on the speciation_rate parameter #
+moves.append( mvScale(speciation_rate, lambda=0.5,tune=true,weight=3.0) )
+
+# Specify a scale move on the extinction_rate parameter #
+moves.append( mvScale(extinction_rate, lambda=0.5,tune=true,weight=3.0) )
+
+# Create deterministic nodes for the diversification and turnover rates to monitor these parameters #
+diversification := speciation_rate - extinction_rate
+turnover := extinction_rate/speciation_rate
+
+# Fix the probability of sampling parameter (rho) to 1 #
+# because all extant bears are represented in our analysis #
+rho <- 1.0
+
+# Fix the age of the root to 1 #
+extant_mrca <- 1.0
+
+# Define the tree-prior distribution as the birth-death process #
+tree_dist = dnBDP(lambda=speciation_rate, mu=extinction_rate, rho=rho, rootAge=extant_mrca, samplingStrategy="uniform", condition="nTaxa", taxa=taxa)
+
+# Define clade constraints #
+clade_ursinae = clade("Melursus_ursinus", "Ursus_arctos", "Ursus_maritimus", 
+                  "Helarctos_malayanus", "Ursus_americanus", "Ursus_thibetanus")                      
+constraints = v(clade_ursinae)
+
+# Define a stochastic node for the constrained tree topology #
+timetree ~ dnConstrainedTopology(tree_dist, constraints=constraints)
+
+# Specify moves on the tree and node times #
+moves.append( mvNarrow(timetree, weight=n_taxa) )
+moves.append( mvFNPR(timetree, weight=n_taxa/4.0) )
+moves.append( mvNodeTimeSlideUniform(timetree, weight=n_taxa) )
+moves.append( mvSubtreeScale(timetree, weight=n_taxa/5.0) )
+
+# Monitor the age of Ursinae #
+age_ursinae := tmrca(timetree, clade_ursinae)
+

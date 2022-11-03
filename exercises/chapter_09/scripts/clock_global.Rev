@@ -1,0 +1,8 @@
+################################
+# Global molecular clock model #
+################################
+
+# we assume a strict morphological clock rate, drawn from an exponential prior #
+branch_rates ~ dnExponential(10.0)
+
+moves.append( mvScale(branch_rates,lambda=0.5,tune=true,weight=3.0) )

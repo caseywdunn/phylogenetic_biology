@@ -1,0 +1,27 @@
+############################################################
+# Uncorrelated exponential model on molecular branch rates #
+############################################################
+
+# The rate along each branch is drawn from an exponential prior #
+branch_rates_mean ~ dnExponential(10.0)
+
+# The mean will be operated on by a scale move #
+moves.append( mvScale(branch_rates_mean, lambda=0.5, tune=true, weight=3.0) )
+
+# Get the number of branches in the tree #
+n_branches <- 2 * n_taxa - 2
+
+# Create a vector of stochastic nodes #
+
+# Each element in the vector represents a branch rate #
+# The indices of the vector correspond to branch indices in the tree #
+# Using a for-loop, initialize the branch rates and assign a move to each one #
+for(i in 1:n_branches){
+    branch_rates[i] ~ dnExp(1/branch_rates_mean)
+    moves.append( mvScale(branch_rates[i], lambda=0.5, tune=true, weight=1.0) )
+}
+
+# add a move on the branch rate vector #
+moves.append( mvVectorScale(branch_rates, lambda=0.5, tune=true, weight=4.0) )
+moves.append( mvRateAgeBetaShift(tree=timetree, rates=branch_rates, tune=true, weight=n_taxa) )
+

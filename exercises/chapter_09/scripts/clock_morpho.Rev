@@ -1,0 +1,7 @@
+####################################
+# Global morphological clock model #
+####################################
+
+branch_rates_morpho ~ dnExponential(10.0)
+
+moves.append( mvScale(branch_rates_morpho,lambda=0.5,tune=true,weight=5.0) )
