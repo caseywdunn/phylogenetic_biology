@@ -1,0 +1,308 @@
+---
+title: "exercise 10"
+output: html_document
+---
+
+```{r setup, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# General data analysis packages
+library(knitr)
+library(tidyverse)
+library(magrittr)
+
+# Phylogenetics packages
+library(ape)
+library(phylobase)
+library(phytools)
+library(tidyverse)
+library(ggtree)
+
+```
+
+# Ancestral character state reconstruction
+
+The objective of this exercise is to learn to implement, interpret, and assess ancestral character state reconstruction.
+
+There are many R packages for phylogenetic analysis, including those on [this list](https://cran.r-project.org/web/views/Phylogenetics.html). Here we use several, imported above, for ancestral character state analysis and visualization. I encourage you to take a look at the manuals for these packages.
+
+## Debugging
+
+Some bugs in your code may cause errors that stop R from running. The easiest way to identify those problems is to run the code in your file, without knitting. To do that, click the "Run" button above this document in RStudio, and then select "Run all" from the menu. It will run all the code in the console below, and stop at the line that throws an error. You can then type commands right in the console to explore and try solutions until you understand and fix the problem. Then you can make the change in the `rmd` file and try knitting or running it again.
+
+I strongly encourage you to knit or run your code often as you work. Identify incremental goals, then test your progress at each step of achieving those goals.
+
+## Getting set up
+
+You will need to install the libraries listed above if you have not already. For most, you can do this in the Tools > Install Packages... menu option in RStudio.
+
+ Installing ggtree is a bit more complicated than for some other libraries, because it isn't in CRAN (the primary catalog of R libraries). You should have it already from previous exercises. If not, first open this file in RStudio. Then, in the Console window below this document, copy and paste the following two lines:
+
+    if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+    BiocManager::install("ggtree")
+
+
+
+## Preliminaries
+
+We will use a dataset, geospiza, included with the package [phylobase](https://cran.r-project.org/web/packages/phylobase/index.html). It contains a phylogeny and some morphological data for Darwin's finches.
+
+Our first goal is to parse all the data and be able to show it on a phylogeny.
+
+
+```{r}
+
+    data(geospiza_raw)
+    geoTree = geospiza_raw$tree
+    geoData = geospiza_raw$data
+    
+    # Remove one tip in tree without morphological data
+    geoTree = drop.tip(geoTree, "olivacea") 
+    
+    # The methods we use below assume that the rows of the character data are in the 
+    # same order as the tip labels. The following line takes are of this. These data 
+    # are in the correct order to begin with, but it is always good to include a line 
+    # like this to rearrange if needed.
+    
+    geoData = geoData[ match( row.names(geoData), geoTree$tip.label  ), ]
+    
+    # Double check that labels are the same, in case some were missing or duplicated
+    if(! all( row.names(geoData)==geoTree$tip.label ) ){
+      stop("Error: tip labels and dataframe rows not in same order!")
+    }
+    
+    # Count the number of tips
+    n_tips = length(geoTree$tip.label)
+    
+    # Get the root node by finding the node that is a parent (in column 1 of edge) 
+    # but not a child (in column 2 of edge)
+    root_node = geoTree$edge[(!geoTree$edge[,1] %in% geoTree$edge[,2]),1] %>% unique()
+
+    # Get the maximum distance from the root to another node, which will be for a tip.
+    # Since this tree happens to be ultrametric, this will be the root age
+    root_age = max( dist.nodes(geoTree)[,root_node] )
+    
+    # This isn't necessary, but since we don't know the units of edge length let's rescale
+    # the tree so that the age of the root is 1.
+    
+    geoTree$edge.length = geoTree$edge.length / root_age
+    
+    # And now recalculate the root age to make sure things look good
+    root_age = max( dist.nodes(geoTree)[,root_node] )
+    
+
+```
+
+Here are the data:
+
+```{r}
+# kable prints pretty tables
+kable(geoData)
+```
+
+Here is the phylogeny, with the node numbers shown:
+
+```{r}
+
+# First, get some values that will help us scale the tree on the page well. Would 
+# by nice if ggtree did that, but it doesn't.
+
+
+
+label_offset = 0.05 * root_age
+tree_width = 1.5 * root_age
+
+geo_ggtree = ggtree( geoTree ) + 
+  geom_tiplab( fontface = "italic", offset=label_offset ) +
+  xlim(0, tree_width) +
+  geom_text2(aes(label=node), col="red", nudge_x=label_offset/2 )
+
+geo_ggtree
+```
+
+Note that this tree is ultrametric. The distance from the root to each tip is `r dist.nodes(geoTree)[1,root_node]`.
+
+New we can plot character data on the tips. Let's look at wing length, which is `geoData$wingL`:
+
+```{r}
+
+# To display the node values, ggtree expects a vector where each element
+# corresponds to each node in the tree, both at the tips and at the internal 
+# nodes. Since we don't have values for the internal nodes, we will pad them 
+# with NA (Not Available) for now.
+node_values = c( geoData$wingL, rep(NA, n_tips-1) )
+
+geo_ggtree + 
+  geom_tippoint( aes(color=node_values), size=3, alpha=1 )
+
+
+```
+
+## Ancestral character state estimation
+
+Given the phylogeny (topology and edge lengths) and character data, we can now reconstruct some ancestral states. We will use the ape function `ace()`, consult the [ape manual](https://cran.r-project.org/web/packages/ape/ape.pdf) for more information.
+
+
+```{r}
+
+wing_ancestral = 
+  ace( 
+    geoData$wingL, 
+    geoTree, 
+    type="continuous", 
+    method="REML", 
+    model="BM"  
+  )
+
+wing_ancestral
+
+```
+
+This gives us a variety of information about the ancestral character reconstructions:
+
+- `$ace` contains the reconstructed ancestral character states. There is one value per internal node, and they are in the order that the internal nodes are numbered in.
+
+- `$sigma2` is the estimate of the Brownian Motion parameter.
+
+- `$CI95` are the confidence intervales on the ancestral character state reconstructions.
+
+
+Let's plot the reconstructed states on the phylogeny:
+
+
+```{r}
+
+# To display the node values, ggtree expects a vector where each element
+# corresponds to each node in the tree, both at the tips and at the internal 
+# nodes. Since we don't have values for the internal nodes, we will pad them 
+# with NA (Not Available) for now.
+node_values = c( geoData$wingL, wing_ancestral$ace )
+
+geo_ggtree + 
+  geom_tippoint( aes(color=node_values), size=3, alpha=1 ) +
+  geom_nodepoint(  aes(color=node_values), size=3, alpha=1 )
+
+```
+
+Above we used the REML (REduced Maximum-Likelihood) method of inference, an approach developed by Joe Felsenstein that mitigates problems with edge lengths under ML for continuous traits.
+
+An alternative approach is the averaging method used in Phylogenetic Independent Contrasts, also developed by Joe Felsenstein.
+
+```{r}
+
+wing_ancestral_pic = 
+  ace( 
+    geoData$wingL, 
+    geoTree, 
+    type="continuous", 
+    method="pic", 
+    model="BM"  
+  )
+
+wing_ancestral_pic
+
+```
+
+
+Let's compare the methods more directly. Here are the ancestral character state reconstructions, as a scatterplot. I've included the numbers of the nodes, as well as a blue line that indicates identical values.
+
+
+```{r}
+
+D_methods = data.frame(
+  reml = wing_ancestral$ace,
+  pic = wing_ancestral_pic$ace
+)
+
+# Add node numbers to the data frame
+D_methods$node = seq(1:nrow(D_methods)) + n_tips
+
+D_methods %>%
+  ggplot(aes(x=reml,y=pic)) +
+  geom_point() +
+  geom_text( aes(label=node), color="red", vjust = 0, nudge_y = 0.005 ) +
+  geom_abline(slope=1, intercept=0, color="blue")
+
+```
+
+
+> **_Problem 1:_** How sensitive is this analysis to the inference method used? Do any estimates fall outside of the 95% confidence intervals of the other methods? How does this make you feel about the inference?
+
+
+## Confidence and node age
+
+The code below explores the width of the confidence intervals for each reconstruction.
+
+```{r}
+
+interval_width = wing_ancestral$CI95[,2] - wing_ancestral$CI95[,1]
+
+node_values = c( rep(NA, nrow(geoData)), interval_width )
+
+kable( data.frame( node = seq(1, length(node_values)), width=node_values ) )
+
+
+geo_ggtree + 
+  geom_nodepoint(  aes(color=node_values), size=3, alpha=1 )
+
+
+```
+
+> **_Problem 2:_** Is there a relationship between node age and the width of the confidence interval? Why do you think this is?
+
+
+
+
+## Tarsus length
+
+> **_Problem 3:_** Perform the same analyses as above, but for tarsus length `tarsusL`. Also assess model sensitivity, as above. Comment your code thoroughly to explain in narrative form what it is doing. 
+
+
+## Simulation
+
+The code below simulates a new dataset under Brownian Motion on the same tree.
+
+```{r}
+
+  set.seed(42) # Use the same seed value for the simulation each time it is run
+  sim_x = fastBM(geoTree, a=2, sig2=0.5, internal = TRUE)
+  D_sim = data.frame( node = seq(1, length(sim_x)), sim_x=sim_x )
+  kable( D_sim )
+
+  geo_ggtree + 
+    geom_tippoint( aes(color=sim_x), size=3, alpha=1 ) +
+    geom_nodepoint(  aes(color=sim_x), size=3, alpha=1 )
+```
+
+
+Now let's try some ancestral character state reconstructions, and compare them to the known simulated values.
+
+```{r}
+
+tip_x = sim_x[1:n_tips]
+
+reconstruction_ancestral_x = 
+  ace( 
+    tip_x, 
+    geoTree, 
+    type="continuous", 
+    method="REML", 
+    model="BM"  
+  )
+
+reconstruction_ancestral_x
+
+D_sim$reconstruction = NA
+
+D_sim$reconstruction[(n_tips+1):nrow(D_sim)] = reconstruction_ancestral_x$ace
+
+
+D_sim[(n_tips+1):nrow(D_sim),] %>%
+  ggplot(aes(x=sim_x,y=reconstruction)) +
+  geom_point() +
+  geom_text( aes(label=node), color="red", vjust = 0, nudge_y = 0.005 ) +
+  geom_abline(slope=1, intercept=0, color="blue")
+
+```
+
+> **_Problem 4:_** How close is the sig2 value used to simulate the data to the estimated sigma2 rate (it is the first of the two values shown after `$sigma2`)? Do the simulated ancestral values fall within the 95% confidence intervals of the estimated vales? How well do you think the reconstruction did?
