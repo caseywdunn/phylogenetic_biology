@@ -3,21 +3,6 @@ FROM rocker/verse:4.2.2
 RUN apt-get update && apt-get install -y \
     tex-gyre
 
-#RUN install2.r --error \
-#    --deps TRUE \
-#    ape \
-#    geiger \
-#    ggimage \
-#    ggrepel \
-#    gridExtra \
-#    kableExtra \
-#    phytools 
- #&& Rscript -e "if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager"); \
- #               library(BiocManager); BiocManager::install('ggtree'); \
- #                                     BiocManager::install('treeio');"
-
-
-
 RUN tlmgr update --self \
  && tlmgr init-usertree \
  && tlmgr update --all \
@@ -136,7 +121,6 @@ RUN tlmgr update --self \
 RUN Rscript -e "if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager"); \
                library(BiocManager); BiocManager::install('ggtree'); \
                                      BiocManager::install('treeio');"
-
 
 RUN install2.r --error \
     --deps TRUE \
