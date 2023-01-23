@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Phylogenies and time | Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
-  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Phylogenies and time | Phylogenetic Biology" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2022-10-11" />
+<meta name="date" content="2023-01-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -92,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -346,7 +346,7 @@ Figure 9.1: A cladogram. Nodes and node numbers are gray, and branches are black
 <li>Node 6 is older than all other nodes in the phylogeny. This is tautological, since the root is by definition the oldest node.</li>
 <li>Node 7 is older than node 9. This is because 9 is descended form 7, and 7 is closer to the root.</li>
 </ul>
-<p>We can’t make any relative assertions about the ages of nodes that aren’t descended from each other. For example, we have no idea of node 8 or node node 9 is older.</p>
+<p>We can’t make any relative assertions about the ages of nodes that aren’t descended from each other. For example, we have no idea of node 8 or node 9 is older.</p>
 <p>In practice, these relative statements of age are often quite useful. For example, if Clade A is nested within Clade B, then we know that Clade A is younger than Clade B even if we don’t know the ages of any nodes. This may seem trivial, but it is implicit in many discussions of phylogenies.</p>
 <p>Note that all of these assertions hold whether or not the tips have the same age. Tips can have different ages in a variety of scenarios, such as a real-time virus phylogeny sampled through the course of a phylogeny or if some tips are fossils.</p>
 </div>
@@ -373,13 +373,13 @@ Figure 9.1: A cladogram. Nodes and node numbers are gray, and branches are black
 <li>Adjust branch lengths so that they are consistent with the ages of the clamped nodes, also adjusting the ages of the unclamped nodes as necessary. This is done by fitting clock-like models character change, and adjusting for local variations in rate.</li>
 <li>Assess robustness and confidence in the calibrated node ages and branch lengths.</li>
 </ul>
-<p>There are multiply approaches to applying these steps. In the early days of the field, each step was done largely independently. A phylogram would be inferred, dates specified for some nodes, the branches would be stretched or shrunk to get them to fit the calibrations as closely as possible, and then the process would be repeated with slightly different input branch lengths or different calibrations to asses robustness.</p>
+<p>There are multiply approaches to applying these steps. In the early days of the field, each step was done largely independently. A phylogram would be inferred, dates specified for some nodes, the branches would be stretched or shrunk to get them to fit the calibrations as closely as possible, and then the process would be repeated with slightly different input branch lengths or different calibrations to assess robustness.</p>
 <p>The field has been moving toward more integrated approaches, including the simultaneous estimation of all of these features in a <a href="https://revbayes.github.io/tutorials/dating/">Bayesian framework</a>. A Bayesian framework is a very natural way to incorporate diverse information about topology, branch lengths, and evolutionary rates. This has intuitive appeal – if the calibrations for two nodes indicate that they have a short branch between them, for example, then topologies that place these nodes together should be favored over other that do not. Constraints on node ages can be incorporated as priors, for example. Unconstrained nodes would have flat priors on age, and constrained nodes would have a sharp peak around a specific age.</p>
 <div id="mathematical-implications-of-age-constraints" class="section level3 hasAnchor" number="9.3.1">
 <h3><span class="header-section-number">9.3.1</span> Mathematical implications of age constraints<a href="phylogenies-and-time.html#mathematical-implications-of-age-constraints" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If all the tips are clamped to the same age, then the phylogeny is referred to as being ultrametric – each tip is the same distance from the root. An ultrametric tree is not necessarily a chronogram, though – some of the internal nodes may have ages that violate branch lengths proportional to time.</p>
+<p>If all the tips are the same age, then the phylogeny is referred to as being ultrametric – each tip is the same distance from the root. An ultrametric tree is not necessarily a chronogram, though – some of the internal nodes may have ages that violate branch lengths proportional to time.</p>
 <p>Clamping the ages of tips reduces the number of free parameters in our tree. The way to think about this is that the more information we have, the more constrained and specific our view of the world is. Before we clamp the tip ages, any tip can be any age and all the branches are free to have any length. The ultrametric tree is nested within this set of unconstrained possibilities. The tip ages, and therefore branch lengths, in this unconstrained tree can be selected so that they are ultrametric, but the vast majority of values will lead to trees that are not ultrametric. By clamping some values with added information that some nodes (tips, in this case) are the same age, we now are allowing only a constrained subset of trees and these require fewer parameters to describe.</p>
-<p>It is easiest to think of this in terms of branch lengths, rather than node ages. From Section <a href="phylogenies.html#tree-properties">2.3</a>, we know that the number of branches in a tree is <span class="math inline">\(2n-2\)</span>, where <span class="math inline">\(n\)</span> is the number of tips. This is because each of the <span class="math inline">\(n\)</span> tip nodes has an branch leading to it, and each of the <span class="math inline">\(n-1\)</span> internal nodes, with the exception of the root node, has an branch leading to it. So there are <span class="math inline">\(n-2\)</span> branches that give rise to internal nodes. This is how we arrive at our <span class="math inline">\(n+n-2=2n-2\)</span> branches in the phylogeny, each with their own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the branches leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than <span class="math inline">\(n\)</span> branch lengths for the tips, we only have <span class="math inline">\(1\)</span> branch length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with <span class="math inline">\(1+n-2=n-1\)</span> branch lengths that we need to estimate independently in our ultrametric tree.</p>
+<p>It is easiest to think of this in terms of branch lengths, rather than node ages. From Section <a href="phylogenies.html#tree-properties">2.3</a>, we know that the number of branches in a tree is <span class="math inline">\(2n-2\)</span>, where <span class="math inline">\(n\)</span> is the number of tips. This is because each of the <span class="math inline">\(n\)</span> tip nodes has an branch leading to it, and each of the <span class="math inline">\(n-1\)</span> internal nodes, with the exception of the root node, has an branch leading to it. So there are <span class="math inline">\(n-2\)</span> branches that give rise to internal nodes. This is how we arrive at our <span class="math inline">\(n+n-2=2n-2\)</span> branches in the phylogeny, each with their own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the branches leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than <span class="math inline">\(n\)</span> branch lengths for the tips, we only have <span class="math inline">\(1\)</span> tip branch length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with <span class="math inline">\(1+n-2=n-1\)</span> branch lengths that we need to estimate independently in our ultrametric tree.</p>
 </div>
 <div id="constraining-node-ages" class="section level3 hasAnchor" number="9.3.2">
 <h3><span class="header-section-number">9.3.2</span> Constraining node ages<a href="phylogenies-and-time.html#constraining-node-ages" class="anchor-section" aria-label="Anchor link to header"></a></h3>
