@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Phylogenies | Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Phylogenies | Phylogenetic Biology" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2023-01-23" />
+<meta name="date" content="2023-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -547,7 +547,7 @@ a different type of representation, and then draw that. Most of the figures in t
 made using similar code.</p>
 <p>Considering just the newick specificaiton of the tree, <code>"(((A,B),(C,D)),E);"</code>, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, <code>(A,B)</code> and <code>(C,D)</code>. The next set of parentheses out indicates that these two clades together form a larger clade, <code>((A,B),(C,D))</code>. Finally, the outermost parentheses indicate that the clade <code>((A,B),(C,D))</code> is sister to <code>E</code>. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting <a href="https://evolution.genetics.washington.edu/phylip/newicktree.html">description and history</a> of the newick format, which includes details on how to store other types of information in the file format.</p>
 <p>As versatile and simple as newick is for storing trees in files, it isn’t great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, branches, and their annotations. This allows us to directly encode the information noted in the section <a href="phylogenies.html#the-information-contained-in-phylogenies">The information contained in phylogenies</a>, and to readily extend the data objects as needed.</p>
-<p>The most widely used format for storing phylogenies in the R programming language is as a <code>phylo</code> object from the excellent <code>ape</code> library <span class="citation">(<a href="#ref-R-ape" role="doc-biblioref">Paradis et al. 2022</a>)</span>. The <code>read.tree()</code> function in the code block above creates a <code>phylo</code> object called <code>phylo_tree</code> based on the phylogeny we specified as text and named <code>newick_tree</code>. In a <code>phylo</code> object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to <span class="math inline">\(n\)</span> where <span class="math inline">\(n\)</span> is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes <span class="math inline">\(n+1\)</span> to <span class="math inline">\(2n-1\)</span>. The assignment of the node numbers within these ranges is arbitrary, there is no guarantee for example that the same internal node will ahve the same number each time the tree is read. The numbers of the nodes that were given when we created the <code>phylo</code> object from the newick text are shown in red in Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>.</p>
+<p>The most widely used format for storing phylogenies in the R programming language is as a <code>phylo</code> object from the excellent <code>ape</code> library <span class="citation">(<a href="#ref-R-ape" role="doc-biblioref">Paradis et al. 2023</a>)</span>. The <code>read.tree()</code> function in the code block above creates a <code>phylo</code> object called <code>phylo_tree</code> based on the phylogeny we specified as text and named <code>newick_tree</code>. In a <code>phylo</code> object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to <span class="math inline">\(n\)</span> where <span class="math inline">\(n\)</span> is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes <span class="math inline">\(n+1\)</span> to <span class="math inline">\(2n-1\)</span>. The assignment of the node numbers within these ranges is arbitrary, there is no guarantee for example that the same internal node will ahve the same number each time the tree is read. The numbers of the nodes that were given when we created the <code>phylo</code> object from the newick text are shown in red in Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>.</p>
 <p>Below we take a quick peek inside the <code>phylo</code> object we created above. The intent isn’t to learn how to manipulated trees in R quite yet, but to just show you how trees can be stored in computer memory. First, let’s take a look at the structure of the <code>phylo</code> object to see what variables it contains within it:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="phylogenies.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>( phylo_tree )</span></code></pre></div>
 <pre><code>## List of 3
@@ -597,7 +597,7 @@ deQueiroz, Kevin, and Philip D Cantino. 2020. <em>International Code of Phylogen
 Haeckel, Ernst. 1897. <em>The Evolution of Man</em>. Vol. 1. D. Appleton.
 </div>
 <div id="ref-R-ape" class="csl-entry">
-Paradis, Emmanuel, Simon Blomberg, Ben Bolker, Joseph Brown, Santiago Claramunt, Julien Claude, Hoa Sien Cuong, et al. 2022. <em>Ape: Analyses of Phylogenetics and Evolution</em>. <a href="http://ape-package.ird.fr/">http://ape-package.ird.fr/</a>.
+Paradis, Emmanuel, Simon Blomberg, Ben Bolker, Joseph Brown, Santiago Claramunt, Julien Claude, Hoa Sien Cuong, et al. 2023. <em>Ape: Analyses of Phylogenetics and Evolution</em>.
 </div>
 <div id="ref-upham2019" class="csl-entry">
 Upham, Nathan S, Jacob A Esselstyn, and Walter Jetz. 2019. <span>“Inferring the Mammal Tree: Species-Level Sets of Phylogenies for Questions in Ecology, Evolution, and Conservation.”</span> <em>PLoS Biology</em> 17 (12): e3000494. <a href="https://doi.org/10.1371/journal.pbio.3000494">https://doi.org/10.1371/journal.pbio.3000494</a>.
