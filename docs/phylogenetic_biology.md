@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2022-09-19"
+date: "2023-01-23"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1008,27 +1008,17 @@ Now that we have the probabilities of each of these changes, we can calculate th
 We can think of these as the probabilities of specific changes along each branch as the probabilities of the state at each child node. 
 
 
-\begin{tabular}{r|r}
-\hline
-node & probability\\
-\hline
-1 & 0.7442034\\
-\hline
-2 & 0.7442034\\
-\hline
-3 & 0.3048887\\
-\hline
-4 & 0.2260230\\
-\hline
-5 & NA\\
-\hline
-6 & 0.0195083\\
-\hline
-7 & 0.0652538\\
-\hline
-\end{tabular}
+ node   probability
+-----  ------------
+    1     0.7442034
+    2     0.7442034
+    3     0.3048887
+    4     0.2260230
+    5            NA
+    6     0.0195083
+    7     0.0652538
 
-Note, though, that the probability for node 5 is missing (it has a value of `NA`, which means it is Not Available). By reference to Figure \@ref(fig:inference-history) we can see that this is the root node. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
+Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
 
 
  node   probability
@@ -1147,7 +1137,7 @@ This comes down to more of the same. We do everything we did above for each site
 
 At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. How do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).
 
-The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. Be reference to Equation \@ref(eq:ntrees), we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. This excellent [interactive visualization](http://phylo.bio.ku.edu/mephytis/brlen-opt.html) allows you to manually optimize branch lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
+The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. By reference to Equation \@ref(eq:ntrees), we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. This excellent [interactive visualization](http://phylo.bio.ku.edu/mephytis/brlen-opt.html) allows you to manually optimize branch lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
 
 Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.
 
@@ -1318,11 +1308,11 @@ I have introduced the use of models of DNA evolution for simulation and inferenc
 
 Each model parameters can be treated in one of at least three ways [@Hohna2014]:
 
-- Constant. The parameter is set to a specific value before the analysis and is not free to vary.
+- Constant. The parameter is clamped to a specific value before the analysis and is not free to vary.
 
 - Stochastic. The parameter is free to vary in the analysis. This allows the value to be estimated from the data as part of the inference process.
 
-- Deterministic. The parameter value depends on the values of other parameters according to specified relationships to other parameter values. Their value can vary, but it is determined by the value of other parameters and cannot be set independently from them.
+- Deterministic. The parameter value depends on the values of other parameters according to specified mathematical relationships. Their values can vary, but are determined by the value of other parameters and cannot be set independently from them.
 
 
 The most widely used DNA sequence evolution models include the General Time Reversible model and its derivatives (Section \@ref(expanding-the-models)). The GTR model has 11 parameters (Figure \@ref(fig:evaluation-models-nested)). These include the global rate $\mu$ used to tune the overall rate of evolution. Next come the relative rate parameters $a,b,c,d,e,f$ that modify the rates of change between particular nucleotide states, so that they can differ from each other. For example, if `a=0.5` and `b=2`, then the rate of changes between C and A occur at a rate four times higher than changes between A and G. Finally we have the equilibrium frequencies $\pi_A,\pi_C,\pi_G,\pi_T$.
@@ -1339,7 +1329,7 @@ These parameters are treated as follows in the GTR model (Figure \@ref(fig:evalu
 \includegraphics[width=8.42in]{figures/models_dna} \caption{A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the branch lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014).}(\#fig:evaluation-models-nested)
 \end{figure}
 
-The number of stochastic parameters in a model is referred to as the degrees of freedom, $df$. You can think of it is the number of knobs that can be turned freely. Models that have higher degrees of freedom are often referred to as more complex than models with fewer degrees of freedom.
+The number of stochastic parameters in a model is referred to as the degrees of freedom, $df$. You can think of it is the number of knobs that can be turned freely during the analysis. Models that have higher degrees of freedom are often referred to as more complex than models with fewer degrees of freedom.
 
 The GTR model has $df=8$. There are $5$ stochastic relative rate parameters and $3$ stochastic equilibrium frequencies (Figure \@ref(fig:evaluation-models-nested)). The other models we have seen are nested within this. By nested I mean that they can take on a smaller subset of the parameter values than the more complex model can. Models that are nested within other models have a smaller degree of freedom. See the [iqtree DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models.
 
@@ -1371,9 +1361,9 @@ Let's say we are comparing GTR to HKY85, and we denote the likelihood under GTR 
   (\#eq:logs-gtr-hyk)
 \end{equation}
 
-One way to proceed would then be to select GTR if $\Delta>0$, and HKY85 if $\Delta<0$. It wouldn't be a good way to go, though, since it would pick GTR every single time. The reason is that HKY85 is nested within GTR. That means that the best possible likelihood under HKY85 is also available under GTR. Because it has more degrees of freedom, GTR has many other possible values, and chances are very good that one of those will be more likely than the parameter values that were most likely under HKY85. If comparing two nested models, the model with more degrees of freedom will never have a likelihood lower than the simpler model.
+One way to proceed would then be to select GTR if $\Delta>0$, and HKY85 if $\Delta<0$. This wouldn't be a good way to go, though, since it would pick GTR every single time. The reason is that HKY85 is nested within GTR. That means that the best possible likelihood under HKY85 is also available under GTR. Because it has more degrees of freedom, GTR has many other possible values, and chances are very good that one of those will be more likely than the parameter values that were most likely under HKY85. If comparing two nested models, the model with more degrees of freedom will never have a likelihood lower than the simpler model.
 
-This would seem to imply that more complex models are always better, but they most certainly are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch length based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
+This would seem to imply that more complex models are always better, but they most certainly are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch lengths based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
 
 When comparing nested models, the question therefore isn't whether one model has higher likelihood than the other, but whether the increase in likelihood one gets from adding parameters is worth the cost of adding the parameters. There are a few different ways to make this cost/benefit analysis.
 
@@ -1391,14 +1381,14 @@ There are a few challenges to applying the LRT to model selection in phylogeneti
 There are two other approaches commonly used in phylogenetic model selection. Where $L_i$ is the likelihood under model $i$, $k_i$ is the degrees of freedom for the model, and $n$ is sample size (*e.g.* number of sites in the alignment), these are the Akaike Information Criterion (AIC):
 
 \begin{equation} 
-  AIC_i = -2(ln(L_i) + 2k_i
+  AIC_i = 2k_i - 2ln(L_i)
   (\#eq:aic)
 \end{equation}
 
 And the Bayesian Information Criterion (BIC):
 
 \begin{equation} 
-  BIC_i = -2(ln(L_i) + k_iln(n)
+  BIC_i = k_iln(n) - 2ln(L_i)
   (\#eq:bic)
 \end{equation}
 
@@ -1416,7 +1406,7 @@ Two additional model features are often added to address this rate heterogeneity
 
 ## Topological evaluation
 
-Maximum likelihood inference gives a point estimate of the phylogeny -- a single phylogeny (topology and branch lengths) that maximizes the probability of the observed data under the model. A maximum likelihood analysis will always return a single phylogeny, regardless of how strong the support for that phylogeny is or how much higher its likelihood is than that of other phylogenies. This is akin to presenting an estimate of mass, made from multiple observations, without showing error bars.
+Maximum likelihood inference gives a point estimate of the phylogeny -- a single phylogeny (topology and branch lengths) that maximizes the probability of the observed data under the model. A maximum likelihood analysis will always return a single phylogeny, regardless of how strong the support for that phylogeny is or how much higher its likelihood is than that of other phylogenies. Presenting a phylogeny without any indication of topological support is akin to presenting an estimate of mass made from multiple observations without showing error bars. It is difficult to interpret the point estimate without having a sense of how much uncertainty there is. 
 
 ### Summarizing topological support
 
@@ -1424,12 +1414,12 @@ Before we get into how to assess support for a phylogenetic hypothesis, it use h
 
 Most methods that evaluate topologies generate a large set of phylogenies, which I'll call the *sample*. Assessing support for a feature of the focal topology is a matter of assessing the frequency of phylogenies in the sample that also have that feature. We could assess the support for the focal tree as a whole by asking how frequent identical topologies are in the sample. But support can often be strong in one part of a phylogeny and weak in another. Reporting equivalence of the entire topology provides no window into that variation. This approach would also break down as taxa are added, which quickly increases them number of possible topologies and reduces the chances of any two analyses returning the exact same topologies, given the variation that is inherent in heuristic searches.
 
-Branch frequencies are far more useful. It is helpful to think of an branch as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the branch, and those on the other (Figure \@ref(fig:eval-splits)). We will consider two branches to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of branches deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.
+Branch frequencies are far more useful. It is helpful to think of a branch as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the branch, and those on the other (Figure \@ref(fig:eval-splits)). We will consider two branches to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of branches deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.
 
 
 
 \begin{figure}
-\includegraphics[width=3.92in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently in red throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology.}(\#fig:eval-splits)
+\includegraphics[width=3.92in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently above the branches throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology.}(\#fig:eval-splits)
 \end{figure}
 
 
@@ -1444,14 +1434,14 @@ It should be noted that these support values are often referred to as "nodal sup
 
 The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap [@felsenstein1985confidence]. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with $n$ columns, bootstrapping generates a new matrix, also with $n$ columns, by resampling from the the original matrix with replacement. Some columns from the original matrix won't be sampled at all, some will be sampled once, and some will be sampled multiple times.
 
-Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. An branch frequency of 100% indicates that an branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
+Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. A branch frequency of 100% indicates that a branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
 
 
 
 
 
 
-Note that I am not using the term "significance" when referring to bootstrap support. This is because bootstraps don't have a clear statistical interpretation. It is a scale that varies from $0$ to $1$, but is not itself a significance. It just indicates how frequently an branch is recovered when the data columns are resampled. This gives a sense of how broad support is for the branch across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.
+Note that I am not using the term "significance" when referring to bootstrap support. This is because bootstraps don't have a clear statistical interpretation. It is a scale that varies from $0$ to $1$, but is not itself a significance. It just indicates how frequently a branch is recovered when the data columns are resampled. This gives a sense of how broad support is for the branch across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.
 
 Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process.
 
@@ -1478,7 +1468,7 @@ ML and bootstraps are widely used and are a critical foundation for many phyloge
 
 All analyses include a variety of tradeoffs, and the downsides of the issues listed above are often mitigated by the multiple upsides of a ML bootstrap analysis framework. It also greatly helps that there are decades of experience with such analyses that help contextualize and interpret ML bootstrap results. This work has also produced ML methods and software packages that are highly optimized for computational efficiency, enabling the routine application of these approaches to very large datasets.
 
-Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above. Rather than focus on a single "best" topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters. 
+Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above [@holder2003, @huelsenbeck2001mrbayes, @larget1999markov]. Rather than focus on a single "best" topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters. 
 
 ## Bayesian statistics
 
@@ -1505,7 +1495,7 @@ To calculate the posterior probability of a phylogenetic hypothesis, we need to 
 
 What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won't.
 
-Instead, we will forego dealing with $P(D)$ at all by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling[@metropolis1953]. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
+Instead, we will forego calculating $P(D)$ at all by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling [@metropolis1953]. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
 
 Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate our test statistic as the ratio of the posterior probability of $H^*$ to the prior probability of $H$:
 
@@ -1519,13 +1509,13 @@ Because $P(D)$ doesn't depend on the hypothesis under consideration, it is the s
 
 The "Markov Chain" in MCMC alludes to the fact that MCMC is a series of repeated events that depends only on the previous step. Each repeated cycle of events, also known as a generation, proceeds as follows:
 
-1. We have hypothesis $H$
+1. We have hypothesis $H$.
 2. We propose a new hypothesis $H^*$ by modifying $H$.
-3. We calculate $R$ according to Equation \@ref(eq:bayes-mcmc)
+3. We calculate $R$ according to Equation \@ref(eq:bayes-mcmc).
 4. If $R>1$, we accept $H^*$. If If $R<1$, we accept $H^*$ with probability $R$. Otherwise, we retain $H$.
 5. The result of the step above is added to the posterior sample, and becomes $H$ for the next iteration of the cycle.
 
-MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as branch frequencies. Unlike bootstraps, though, the frequency of an branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, *i.e.* the probability of the branch given the data. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.
+MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as branch frequencies. Unlike bootstraps, though, the frequency of a branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, *i.e.* the probability of the branch given the data. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.
 
 There are a variety of practical considerations to implementing a Bayesian phylogenetic analysis with MCMC. These include:
 
@@ -1533,8 +1523,14 @@ There are a variety of practical considerations to implementing a Bayesian phylo
 - Selecting appropriate priors on topology, branch length, and model parameters.
 - Devising an appropriate hypothesis proposal mechanism. If the new hypothesis $H^*$ is too different from $H$, it will tend to be rejected as $H$ becomes optimized. This will lead to an approximated posterior distribution that is too narrow, leading to overconfidence in a small set of hypotheses. If the steps are too small, then MCMC will tend to get trapped in local optima because they cannot find more distant better optima. There are several approaches to these challenges, including searches with multiple MCMC chains that take different step sizes.
 - The very early samples in the chain are not a good estimate of the posterior distribution, because the initial $H$ is 
-not necessarily close to a peak in the posterior. The initial samples becore MCMC settles into a stable distribution are therefore discarded as part of a "burn-in" phase.
+not necessarily close to a peak in the posterior. The initial samples before MCMC settles into a stable distribution are therefore discarded as part of a "burn-in" phase.
 - Knowing when enough generations have been sampled to adequately approximate the posterior distribution. This is often evaluated by running multiple independent MCMC analyses and stopping them if and when they have converged on similar distributions.
+
+
+## Resources
+
+- A video introduction to Bayes Theorem: https://www.youtube.com/watch?v=HZGCoVF3YvM
+- The excellent MCMC robots by Paul Lewis: https://plewis.github.io/applets/mcmc-robot/
 
 <!--chapter:end:bayes.rmd-->
 
@@ -1622,7 +1618,7 @@ Take a look at the cladogram in Figure \@ref(fig:time-cladogram). Consider the r
 - Node 6 is older than all other nodes in the phylogeny. This is tautological, since the root is by definition the oldest node.
 - Node 7 is older than node 9. This is because 9 is descended form 7, and 7 is closer to the root.
 
-We can't make any relative assertions about the ages of nodes that aren't descended from each other. For example, we have no idea of node 8 or node node 9 is older.
+We can't make any relative assertions about the ages of nodes that aren't descended from each other. For example, we have no idea of node 8 or node 9 is older.
 
 In practice, these relative statements of age are often quite useful. For example, if Clade A is nested within Clade B, then we know that Clade A is younger than Clade B even if we don't know the ages of any nodes. This may seem trivial, but it is implicit in many discussions of phylogenies.
 
@@ -1653,17 +1649,17 @@ The process of creating a chronogram is referred to as time calibration. There a
 - Adjust branch lengths so that they are consistent with the ages of the clamped nodes, also adjusting the ages of the unclamped nodes as necessary. This is done by fitting clock-like models character change, and adjusting for local variations in rate.
 - Assess robustness and confidence in the calibrated node ages and branch lengths.
 
-There are multiply approaches to applying these steps. In the early days of the field, each step was done largely independently. A phylogram would be inferred, dates specified for some nodes, the branches would be stretched or shrunk to get them to fit the calibrations as closely as possible, and then the process would be repeated with slightly different input branch lengths or different calibrations to asses robustness.
+There are multiply approaches to applying these steps. In the early days of the field, each step was done largely independently. A phylogram would be inferred, dates specified for some nodes, the branches would be stretched or shrunk to get them to fit the calibrations as closely as possible, and then the process would be repeated with slightly different input branch lengths or different calibrations to assess robustness.
 
 The field has been moving toward more integrated approaches, including the simultaneous estimation of all of these features in a [Bayesian framework](https://revbayes.github.io/tutorials/dating/). A Bayesian framework is a very natural way to incorporate diverse information about topology, branch lengths, and evolutionary rates. This has intuitive appeal -- if the calibrations for two nodes indicate that they have a short branch between them, for example, then topologies that place these nodes together should be favored over other that do not.  Constraints on node ages can be incorporated as priors, for example. Unconstrained nodes would have flat priors on age, and constrained nodes would have a sharp peak around a specific age.
 
 ### Mathematical implications of age constraints
 
-If all the tips are clamped to the same age, then the phylogeny is referred to as being ultrametric -- each tip is the same distance from the root. An ultrametric tree is not necessarily a chronogram, though -- some of the internal nodes may have ages that violate branch lengths proportional to time.
+If all the tips are the same age, then the phylogeny is referred to as being ultrametric -- each tip is the same distance from the root. An ultrametric tree is not necessarily a chronogram, though -- some of the internal nodes may have ages that violate branch lengths proportional to time.
 
 Clamping the ages of tips reduces the number of free parameters in our tree. The way to think about this is that the more information we have, the more constrained and specific our view of the world is. Before we clamp the tip ages, any tip can be any age and all the branches are free to have any length. The ultrametric tree is nested within this set of unconstrained possibilities. The tip ages, and therefore branch lengths, in this unconstrained tree can be selected so that they are ultrametric, but the vast majority of values will lead to trees that are not ultrametric. By clamping some values with added information that some nodes (tips, in this case) are the same age, we now are allowing only a constrained subset of trees and these require fewer parameters to describe.
 
-It is easiest to think of this in terms of branch lengths, rather than node ages. From Section \@ref(tree-properties), we know that the number of branches in a tree is $2n-2$, where $n$ is the number of tips. This is because each of the $n$ tip nodes has an branch leading to it, and each of the $n-1$ internal nodes, with the exception of the root node, has an branch leading to it. So there are $n-2$ branches that give rise to internal nodes. This is how we arrive at our $n+n-2=2n-2$ branches in the phylogeny, each with their own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the branches leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than $n$ branch lengths for the tips, we only have $1$ branch length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with $1+n-2=n-1$ branch lengths that we need to estimate independently in our ultrametric tree.
+It is easiest to think of this in terms of branch lengths, rather than node ages. From Section \@ref(tree-properties), we know that the number of branches in a tree is $2n-2$, where $n$ is the number of tips. This is because each of the $n$ tip nodes has an branch leading to it, and each of the $n-1$ internal nodes, with the exception of the root node, has an branch leading to it. So there are $n-2$ branches that give rise to internal nodes. This is how we arrive at our $n+n-2=2n-2$ branches in the phylogeny, each with their own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the branches leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than $n$ branch lengths for the tips, we only have $1$ tip branch length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with $1+n-2=n-1$ branch lengths that we need to estimate independently in our ultrametric tree.
 
 
 ### Constraining node ages
@@ -1693,7 +1689,7 @@ Reconstruction [@joy2016ancestral].
 PGLS [@symonds2014primer].
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-2.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-23-2.pdf)<!-- --> 
 
 
 
@@ -1718,7 +1714,7 @@ PGLS [@symonds2014primer].
 ## Inferring covariance in the absence of phylogenetic structure
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-25-1.pdf)<!-- --> 
 
 ## Phylogenetic Independent Contrasts
 
@@ -1792,17 +1788,17 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Sep 19, 2022 at 08:17:59 PM with the following R package versions.
+This book was rendered from the source code on Jan 23, 2023 at 09:52:54 PM with the following R package versions.
 
 
 ```
-R version 4.2.1 (2022-06-23)
+R version 4.2.2 (2022-10-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.5 LTS
+Running under: Ubuntu 22.04.1 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -1817,63 +1813,66 @@ attached base packages:
 [6] methods   base     
 
 other attached packages:
- [1] scales_1.2.1     ggrepel_0.9.1    kableExtra_1.3.4
- [4] phangorn_2.10.0  Matrix_1.4-1     forcats_0.5.2   
- [7] dplyr_1.0.10     purrr_0.3.4      readr_2.1.2     
-[10] tidyr_1.2.0      tibble_3.1.8     ggplot2_3.3.6   
-[13] tidyverse_1.3.2  stringr_1.4.1    phytools_1.2-0  
-[16] maps_3.4.0       magrittr_2.0.3   gridExtra_2.3   
-[19] geiger_2.0.10    ape_5.6-2        ggtree_3.4.2    
-[22] treeio_1.20.2    bookdown_0.28   
+ [1] scales_1.2.1     ggrepel_0.9.2    kableExtra_1.3.4
+ [4] phangorn_2.10.0  Matrix_1.5-1     forcats_0.5.2   
+ [7] dplyr_1.0.10     purrr_1.0.0      readr_2.1.3     
+[10] tidyr_1.2.1      tibble_3.1.8     ggplot2_3.4.0   
+[13] tidyverse_1.3.2  stringr_1.5.0    phytools_1.2-0  
+[16] maps_3.4.1       magrittr_2.0.3   gridExtra_2.3   
+[19] geiger_2.0.10    ape_5.6-2        ggtree_3.6.2    
+[22] treeio_1.22.0    bookdown_0.31   
 
 loaded via a namespace (and not attached):
  [1] googledrive_2.0.0       colorspace_2.0-3       
  [3] ellipsis_0.3.2          fs_1.5.2               
- [5] aplot_0.1.7             rstudioapi_0.14        
+ [5] aplot_0.1.9             rstudioapi_0.14        
  [7] farver_2.1.1            optimParallel_1.0-2    
  [9] fansi_1.0.3             mvtnorm_1.1-3          
-[11] lubridate_1.8.0         xml2_1.3.3             
-[13] splines_4.2.1           codetools_0.2-18       
-[15] mnormt_2.1.0            knitr_1.40             
-[17] jsonlite_1.8.0          broom_1.0.1            
-[19] dbplyr_2.2.1            png_0.1-7              
-[21] compiler_4.2.1          httr_1.4.4             
-[23] backports_1.4.1         assertthat_0.2.1       
-[25] fastmap_1.1.0           lazyeval_0.2.2         
-[27] gargle_1.2.0            cli_3.3.0              
-[29] htmltools_0.5.3         tools_4.2.1            
-[31] igraph_1.3.4            coda_0.19-4            
-[33] gtable_0.3.1            glue_1.6.2             
-[35] clusterGeneration_1.3.7 fastmatch_1.1-3        
-[37] Rcpp_1.0.9              cellranger_1.1.0       
-[39] vctrs_0.4.1             svglite_2.1.0          
-[41] nlme_3.1-157            xfun_0.32              
-[43] rvest_1.0.3             ggimage_0.3.1          
-[45] lifecycle_1.0.1         googlesheets4_1.0.1    
-[47] MASS_7.3-57             subplex_1.8            
-[49] hms_1.1.2               parallel_4.2.1         
-[51] expm_0.999-6            yaml_2.3.5             
-[53] ggfun_0.0.7             yulab.utils_0.0.5      
-[55] stringi_1.7.8           highr_0.9              
-[57] plotrix_3.8-2           tidytree_0.4.0         
-[59] rlang_1.0.5             pkgconfig_2.0.3        
-[61] systemfonts_1.0.4       evaluate_0.16          
-[63] lattice_0.20-45         patchwork_1.1.2        
-[65] labeling_0.4.2          tidyselect_1.1.2       
-[67] deSolve_1.33            R6_2.5.1               
-[69] magick_2.7.3            generics_0.1.3         
-[71] combinat_0.0-8          DBI_1.1.3              
-[73] mgcv_1.8-40             pillar_1.8.1           
-[75] haven_2.5.1             withr_2.5.0            
-[77] scatterplot3d_0.3-42    modelr_0.1.9           
-[79] crayon_1.5.1            utf8_1.2.2             
-[81] tzdb_0.3.0              rmarkdown_2.16         
-[83] grid_4.2.1              readxl_1.4.1           
-[85] reprex_2.0.2            digest_0.6.29          
-[87] webshot_0.5.3           numDeriv_2016.8-1.1    
-[89] gridGraphics_0.5-1      munsell_0.5.0          
-[91] viridisLite_0.4.1       ggplotify_0.1.0        
-[93] quadprog_1.5-8         
+[11] lubridate_1.9.0         xml2_1.3.3             
+[13] splines_4.2.2           codetools_0.2-18       
+[15] mnormt_2.1.1            cachem_1.0.6           
+[17] knitr_1.41              jsonlite_1.8.4         
+[19] broom_1.0.2             dbplyr_2.2.1           
+[21] png_0.1-8               compiler_4.2.2         
+[23] httr_1.4.4              backports_1.4.1        
+[25] assertthat_0.2.1        fastmap_1.1.0          
+[27] lazyeval_0.2.2          gargle_1.2.1           
+[29] cli_3.5.0               htmltools_0.5.4        
+[31] tools_4.2.2             igraph_1.3.5           
+[33] coda_0.19-4             gtable_0.3.1           
+[35] glue_1.6.2              clusterGeneration_1.3.7
+[37] tinytex_0.43            fastmatch_1.1-3        
+[39] Rcpp_1.0.9              cellranger_1.1.0       
+[41] jquerylib_0.1.4         vctrs_0.5.1            
+[43] svglite_2.1.1           nlme_3.1-160           
+[45] xfun_0.35               rvest_1.0.3            
+[47] ggimage_0.3.1           timechange_0.1.1       
+[49] lifecycle_1.0.3         googlesheets4_1.0.1    
+[51] MASS_7.3-58.1           subplex_1.8            
+[53] hms_1.1.2               parallel_4.2.2         
+[55] expm_0.999-7            yaml_2.3.6             
+[57] ggfun_0.0.9             yulab.utils_0.0.6      
+[59] sass_0.4.4              stringi_1.7.8          
+[61] highr_0.9               plotrix_3.8-2          
+[63] tidytree_0.4.2          rlang_1.0.6            
+[65] pkgconfig_2.0.3         systemfonts_1.0.4      
+[67] evaluate_0.19           lattice_0.20-45        
+[69] labeling_0.4.2          patchwork_1.1.2        
+[71] tidyselect_1.2.0        deSolve_1.34           
+[73] R6_2.5.1                magick_2.7.3           
+[75] generics_0.1.3          combinat_0.0-8         
+[77] DBI_1.1.3               mgcv_1.8-41            
+[79] pillar_1.8.1            haven_2.5.1            
+[81] withr_2.5.0             scatterplot3d_0.3-42   
+[83] modelr_0.1.10           crayon_1.5.2           
+[85] utf8_1.2.2              tzdb_0.3.0             
+[87] rmarkdown_2.19          grid_4.2.2             
+[89] readxl_1.4.1            reprex_2.0.2           
+[91] digest_0.6.31           webshot_0.5.4          
+[93] numDeriv_2016.8-1.1     gridGraphics_0.5-1     
+[95] munsell_0.5.0           viridisLite_0.4.1      
+[97] ggplotify_0.1.0         bslib_0.4.2            
+[99] quadprog_1.5-8         
 ```
 
 <!--chapter:end:versions.rmd-->

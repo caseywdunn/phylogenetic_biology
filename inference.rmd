@@ -163,7 +163,9 @@ Now that we have the probabilities of each of these changes, we can calculate th
 We can think of these as the probabilities of specific changes along each branch as the probabilities of the state at each child node. 
 
 ```{r}
-knitr::kable(data.frame( node=1:length(p), probability=p ))
+knitr::kable(data.frame( node=1:length(p), probability=p ),
+  format = "simple",
+  booktabs = TRUE)
 
 pi_v = diag(Pi)
 names(pi_v) = rownames(Pi)
