@@ -14,9 +14,14 @@ library(ape)
 The technical objective of this exercise is to get you started with the following tools:
 
 - [R](http://www.r-project.org). A language for statistical computing. There are many excellent libraries for phylogenetic comparative analyses, tree manipulation, and tree visualization in R. It isn't optimized for running actual phylogenetic inference analyses, that is best done with purpose-build stand-alone software tools. But it is great for everything downstream of having a tree.
-- [RStudio](https://rstudio.com/products/rstudio/download/). An interactive development environment for working with R code.
 
-> **_TASK:_** If you haven't already, download and install both tools above. 
+Then download one of the two following interactive development environments (IDEs):
+
+- [RStudio](https://posit.co/download/rstudio-desktop/). An interactive development environment for working with R code.
+
+- [VS Code](https://code.visualstudio.com/download). A general purpose text editor and IDE with [support for R](https://code.visualstudio.com/docs/languages/r).
+
+> **_TASK:_** If you haven't already, download and install R and an IDE (VSCode or RStudio) above. 
 
 Your only direct interactions will be with RStudio, but it needs R on your system to run.
 
