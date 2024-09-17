@@ -73,7 +73,7 @@ The following lines set up some details about the job, like what to call it and 
     #SBATCH --nodes=1
     #SBATCH --ntasks=1 
     #SBATCH --cpus-per-task=4
-    #SBATCH -p general
+    #SBATCH -p day
 
 This line loads the software we will use:
     
