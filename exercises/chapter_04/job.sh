@@ -4,7 +4,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1 
 #SBATCH --cpus-per-task=8
-#SBATCH -p general
+#SBATCH --mem-per-cpu=1G
+#SBATCH -p education
 
 module load IQ-TREE
 
