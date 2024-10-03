@@ -52,7 +52,7 @@ We will search for:
 
 and replace it with:
 
-    >\2_\3_\1
+    >$2_$3_$1
 
 The end result is a fasta file where the sequences are untouched, but the headers have the format `>genus_species_gi`, where the `gi` is a unique identifier for each sequence. I leave that in there since there can be multiple sequences from the same species. If we were using just `>genus_species`, then there would be multiple taxa with the same names which makes downstream tools choke. Including the `gi` guarantees that every taxon name is unique. It also helps keep track of where data came from.
 

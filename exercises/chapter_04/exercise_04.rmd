@@ -36,7 +36,7 @@ These sequences are in [phylip format](https://evolution.genetics.washington.edu
 
 There are a few things that differ from the job file for last exercise. `iqtree` can use multiple CPUs to speed things up. So we specify `#SBATCH --cpus-per-task=8` at the top of the job script to allocate 8 CPUs to the job. We also load the iqtree module. And finally we call `iqtree`:
 
-    iqtree -s siph16s.phy -nt AUTO
+    iqtree2 -s siph16s.phy -nt AUTO
 
 The `-s siph16s.phy` portion of this command specifies the input sequence alignment file name. `-nt AUTO` sets the number of threads to `AUTO`. This allows iqtree to automatically identify the optimum number of the 8 CPUs we allocated to use for the job.
 
@@ -104,7 +104,7 @@ There are a few sections of particular interest:
 
 - What is the log-likelihood of your maximum likelihood tree?
 
-- What is the substitution model selected by `igtree`? There are multiple components to the model, each separated by a `+`. Consult the [iqtree DNA models page](http://www.iqtree.org/doc/Substitution-Models#dna-models) to read more about each component of your model. Explain what each component of your model is in sentence.
+- What is the substitution model selected by `iqtree`? There are multiple components to the model, each separated by a `+`. Consult the [iqtree DNA models page](http://www.iqtree.org/doc/Substitution-Models#dna-models) to read more about each component of your model. Explain what each component of your model is in sentence.
 
 
 

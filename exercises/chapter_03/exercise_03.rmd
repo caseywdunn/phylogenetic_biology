@@ -72,8 +72,8 @@ The following lines set up some details about the job, like what to call it and 
     #SBATCH --time=2:00:00
     #SBATCH --nodes=1
     #SBATCH --ntasks=1 
-    #SBATCH --cpus-per-task=4
-    #SBATCH -p general
+    #SBATCH --mem-per-cpu=1G
+    #SBATCH -p education
 
 This line loads the software we will use:
     
