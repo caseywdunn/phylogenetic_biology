@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2023-01-23"
+date: "2024-09-12"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1689,7 +1689,7 @@ Reconstruction [@joy2016ancestral].
 PGLS [@symonds2014primer].
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-23-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-23-2.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-2.pdf)<!-- --> 
 
 
 
@@ -1714,7 +1714,7 @@ PGLS [@symonds2014primer].
 ## Inferring covariance in the absence of phylogenetic structure
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-25-1.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
 
 ## Phylogenetic Independent Contrasts
 
@@ -1788,13 +1788,13 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jan 23, 2023 at 09:52:54 PM with the following R package versions.
+This book was rendered from the source code on Sep 12, 2024 at 01:53:32 PM with the following R package versions.
 
 
 ```
 R version 4.2.2 (2022-10-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.1 LTS
+Running under: Ubuntu 22.04.4 LTS
 
 Matrix products: default
 BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
@@ -1813,66 +1813,59 @@ attached base packages:
 [6] methods   base     
 
 other attached packages:
- [1] scales_1.2.1     ggrepel_0.9.2    kableExtra_1.3.4
- [4] phangorn_2.10.0  Matrix_1.5-1     forcats_0.5.2   
- [7] dplyr_1.0.10     purrr_1.0.0      readr_2.1.3     
-[10] tidyr_1.2.1      tibble_3.1.8     ggplot2_3.4.0   
-[13] tidyverse_1.3.2  stringr_1.5.0    phytools_1.2-0  
-[16] maps_3.4.1       magrittr_2.0.3   gridExtra_2.3   
-[19] geiger_2.0.10    ape_5.6-2        ggtree_3.6.2    
-[22] treeio_1.22.0    bookdown_0.31   
+ [1] scales_1.2.1     ggrepel_0.9.3    kableExtra_1.3.4
+ [4] phangorn_2.11.1  Matrix_1.5-1     lubridate_1.9.2 
+ [7] forcats_1.0.0    dplyr_1.1.0      purrr_1.0.1     
+[10] readr_2.1.4      tidyr_1.3.0      tibble_3.2.0    
+[13] ggplot2_3.4.1    tidyverse_2.0.0  stringr_1.5.0   
+[16] phytools_1.5-1   maps_3.4.1       magrittr_2.0.3  
+[19] gridExtra_2.3    geiger_2.0.10    ape_5.7-1       
+[22] ggtree_3.6.2     treeio_1.22.0    bookdown_0.33   
 
 loaded via a namespace (and not attached):
- [1] googledrive_2.0.0       colorspace_2.0-3       
- [3] ellipsis_0.3.2          fs_1.5.2               
- [5] aplot_0.1.9             rstudioapi_0.14        
- [7] farver_2.1.1            optimParallel_1.0-2    
- [9] fansi_1.0.3             mvtnorm_1.1-3          
-[11] lubridate_1.9.0         xml2_1.3.3             
-[13] splines_4.2.2           codetools_0.2-18       
-[15] mnormt_2.1.1            cachem_1.0.6           
-[17] knitr_1.41              jsonlite_1.8.4         
-[19] broom_1.0.2             dbplyr_2.2.1           
-[21] png_0.1-8               compiler_4.2.2         
-[23] httr_1.4.4              backports_1.4.1        
-[25] assertthat_0.2.1        fastmap_1.1.0          
-[27] lazyeval_0.2.2          gargle_1.2.1           
-[29] cli_3.5.0               htmltools_0.5.4        
-[31] tools_4.2.2             igraph_1.3.5           
-[33] coda_0.19-4             gtable_0.3.1           
-[35] glue_1.6.2              clusterGeneration_1.3.7
-[37] tinytex_0.43            fastmatch_1.1-3        
-[39] Rcpp_1.0.9              cellranger_1.1.0       
-[41] jquerylib_0.1.4         vctrs_0.5.1            
-[43] svglite_2.1.1           nlme_3.1-160           
-[45] xfun_0.35               rvest_1.0.3            
-[47] ggimage_0.3.1           timechange_0.1.1       
-[49] lifecycle_1.0.3         googlesheets4_1.0.1    
-[51] MASS_7.3-58.1           subplex_1.8            
-[53] hms_1.1.2               parallel_4.2.2         
-[55] expm_0.999-7            yaml_2.3.6             
-[57] ggfun_0.0.9             yulab.utils_0.0.6      
-[59] sass_0.4.4              stringi_1.7.8          
-[61] highr_0.9               plotrix_3.8-2          
-[63] tidytree_0.4.2          rlang_1.0.6            
-[65] pkgconfig_2.0.3         systemfonts_1.0.4      
-[67] evaluate_0.19           lattice_0.20-45        
-[69] labeling_0.4.2          patchwork_1.1.2        
-[71] tidyselect_1.2.0        deSolve_1.34           
-[73] R6_2.5.1                magick_2.7.3           
-[75] generics_0.1.3          combinat_0.0-8         
-[77] DBI_1.1.3               mgcv_1.8-41            
-[79] pillar_1.8.1            haven_2.5.1            
-[81] withr_2.5.0             scatterplot3d_0.3-42   
-[83] modelr_0.1.10           crayon_1.5.2           
-[85] utf8_1.2.2              tzdb_0.3.0             
-[87] rmarkdown_2.19          grid_4.2.2             
-[89] readxl_1.4.1            reprex_2.0.2           
-[91] digest_0.6.31           webshot_0.5.4          
-[93] numDeriv_2016.8-1.1     gridGraphics_0.5-1     
-[95] munsell_0.5.0           viridisLite_0.4.1      
-[97] ggplotify_0.1.0         bslib_0.4.2            
-[99] quadprog_1.5-8         
+ [1] subplex_1.8             nlme_3.1-160           
+ [3] webshot_0.5.4           doParallel_1.0.17      
+ [5] httr_1.4.5              numDeriv_2016.8-1.1    
+ [7] tools_4.2.2             bslib_0.4.2            
+ [9] utf8_1.2.3              R6_2.5.1               
+[11] mgcv_1.8-41             lazyeval_0.2.2         
+[13] colorspace_2.1-0        withr_2.5.0            
+[15] tidyselect_1.2.0        mnormt_2.1.1           
+[17] compiler_4.2.2          cli_3.6.0              
+[19] rvest_1.0.3             expm_0.999-7           
+[21] xml2_1.3.3              labeling_0.4.2         
+[23] sass_0.4.5              mvtnorm_1.1-3          
+[25] quadprog_1.5-8          systemfonts_1.0.4      
+[27] digest_0.6.31           yulab.utils_0.0.6      
+[29] rmarkdown_2.20          svglite_2.1.1          
+[31] pkgconfig_2.0.3         htmltools_0.5.4        
+[33] plotrix_3.8-2           highr_0.10             
+[35] fastmap_1.1.1           rlang_1.0.6            
+[37] rstudioapi_0.14         optimParallel_1.0-2    
+[39] farver_2.1.1            gridGraphics_0.5-1     
+[41] jquerylib_0.1.4         generics_0.1.3         
+[43] combinat_0.0-8          jsonlite_1.8.4         
+[45] ggplotify_0.1.0         patchwork_1.1.2        
+[47] Rcpp_1.0.10             munsell_0.5.0          
+[49] fansi_1.0.4             lifecycle_1.0.3        
+[51] scatterplot3d_0.3-42    stringi_1.7.12         
+[53] yaml_2.3.7              clusterGeneration_1.3.7
+[55] MASS_7.3-58.1           grid_4.2.2             
+[57] parallel_4.2.2          lattice_0.20-45        
+[59] splines_4.2.2           hms_1.1.2              
+[61] magick_2.7.4            knitr_1.42             
+[63] pillar_1.8.1            igraph_1.4.1           
+[65] codetools_0.2-18        fastmatch_1.1-3        
+[67] glue_1.6.2              evaluate_0.20          
+[69] ggimage_0.3.1           ggfun_0.0.9            
+[71] deSolve_1.35            png_0.1-8              
+[73] vctrs_0.5.2             tzdb_0.3.0             
+[75] foreach_1.5.2           gtable_0.3.1           
+[77] cachem_1.0.7            xfun_0.37              
+[79] tidytree_0.4.2          coda_0.19-4            
+[81] viridisLite_0.4.1       iterators_1.0.14       
+[83] aplot_0.1.10            timechange_0.2.0       
+[85] ellipsis_0.3.2         
 ```
 
 <!--chapter:end:versions.rmd-->
