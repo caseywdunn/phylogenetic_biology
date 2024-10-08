@@ -22,9 +22,9 @@ The goals of this exercise are to:
 
 This will build off of the analysis you did in Exercise 04. The same sequence alignment `siph16s.phy` is provided here.
 
-Either on the cluster (which requires copying and modifying a job script) or on your local computer (if you ahve iqtree installed) run the following:
+Either on the cluster (which requires copying and modifying a job script) or on your local computer (if you have iqtree installed) run the following:
 
-    iqtree -s siph16s.phy -bb 1000 -nt AUTO
+    iqtree2 -s siph16s.phy -bb 1000 -nt AUTO
 
 The new option `-bb 1000` instructs iqtree to run 1000 ultrafast bootstrap analyses. This generates a sample of 1000 bootstrap trees.
 
@@ -45,7 +45,7 @@ nodelabels(phy$node.label)
 
 ```
 
-Note that, like most phylogenetic tools, iqtree stores bootsrap support values as node attributes rather than as edge attributes, even though they indicate edge support. These are added to the treefile as numbers that immediately follow the closing parenthesis for each clade. The support for an edge is placed on the child node of the edge.
+Note that, like most phylogenetic tools, iqtree stores bootstrap support values as node attributes rather than as edge attributes, even though they indicate edge support. These are added to the treefile as numbers that immediately follow the closing parenthesis for each clade. The support for an edge is placed on the child node of the edge.
 
 > **_Problem 1:_** (1 point) Answer the following questions about the bootstrap results.
 
@@ -102,16 +102,16 @@ module load IQ-TREE
 
 # JC - equal nucleotid frequencies with C=G=T=A=0.25 and all relative rates = 1
 seq-gen -mGTR -f0.25,0.25,0.25,0.25 -r1,1,1,1,1,1 -s0.001 -l1000 -of < mammal.tre > mammal_jc.fasta
-iqtree -s mammal_jc.fasta -nt AUTO
+iqtree2 -s mammal_jc.fasta -nt AUTO
 # HKY - unequal nucleotide frequencies with C=G=0.205 and A=T=0.295; rates for transitions=2, transversions=0.5 
 seq-gen -mGTR -f0.295,0.205,0.205,0.295 -r0.5,2,0.5,0.5,2,0.5 -s0.001 -l1000 -of < mammal.tre > mammal_hky.fasta
-iqtree -s mammal_hky.fasta -nt AUTO
+iqtree2 -s mammal_hky.fasta -nt AUTO
 # GTR - 
 seq-gen -mGTR -f0.3841,0.1182,0.1646,0.333 -r1.0051,3.5164,2.2921,0.9079,5.9252,1.0000 -s0.001 -l1000 -of < mammal.tre > mammal_gtr.fasta
-iqtree -s mammal_gtr.fasta -nt AUTO
-# GTR - 
+iqtree2 -s mammal_gtr.fasta -nt AUTO
+# GTR IG - 
 seq-gen -mGTR -f0.3841,0.1182,0.1646,0.333 -r1.0051,3.5164,2.2921,0.9079,5.9252,1.0000 -i0.1363 -a0.9978 -g4  -s0.001 -l1000 -of < mammal.tre > mammal_gtr_ig.fasta
-iqtree -s mammal_gtr_ig.fasta -nt AUTO
+iqtree2 -s mammal_gtr_ig.fasta -nt AUTO
 ```
 
 This simulates data under 4 different models with `seqgen`. The same GTR framework is used in each case for consistency. The models differ in the parameter specification. For example, to get an HKY model the GTR parameters are set to constants that fix the transition to transversion relative rates. `iqtree` is then used to analyze each of the simulated datasets.
@@ -135,5 +135,5 @@ Site heterogeneity in rates is incorporated into the final model using `-i` (fra
 
 ## Submit
 
-Confirm that this document knits without error. Compress the exercise folder, with this file, the nitted html file, and all analysis results, and submit.
+Confirm that this document knits without error. Compress the exercise folder, with this file, the knitted html file, and all analysis results, and submit.
 
