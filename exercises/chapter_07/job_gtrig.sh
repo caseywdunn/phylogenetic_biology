@@ -4,8 +4,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1 
 #SBATCH --cpus-per-task=8
-#SBATCH -p general
+#SBATCH -p education
 
-module load revbayes
+module load RevBayes
 
 rb mcmc_GTR_Gamma_Inv.Rev 

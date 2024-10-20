@@ -45,7 +45,7 @@ You will use a dataset on fossil bears, featured in [this other tutorial](https:
 
 Next, run a phylogenetic analysis with iqtree:
 
-   iqtree -s bears.nex -bb 1000 -nt AUTO 
+   iqtree2 -s bears.nex -bb 1000 -nt AUTO 
 
 
 
