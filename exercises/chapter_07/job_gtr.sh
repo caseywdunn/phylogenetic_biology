@@ -6,6 +6,6 @@
 #SBATCH --cpus-per-task=8
 #SBATCH -p education
 
-module load RevBayes
+module load RevBayes/1.2.2-GCC-12.2.0
 
 rb mcmc_GTR.Rev 
