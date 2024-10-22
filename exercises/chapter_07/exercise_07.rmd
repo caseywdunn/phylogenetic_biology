@@ -80,8 +80,24 @@ We will plot the summary MCMC stats right here in R. Each replicate is shown as 
 
 ```{r}
 
-trace_jc = 
-  read_tsv("output_jc/primates_cytb_JC.log") 
+trace_jc_run_1 <- read_tsv("output/primates_cytb_JC_run_1.log") %>%
+  mutate(Replicate_ID = as.factor(1))
+
+trace_jc_run_2 <- read_tsv("output/primates_cytb_JC_run_2.log") %>%
+  mutate(Replicate_ID = as.factor(2))
+
+trace_jc_run_3 <- read_tsv("output/primates_cytb_JC_run_3.log") %>%
+  mutate(Replicate_ID = as.factor(3))
+
+trace_jc_run_4 <- read_tsv("output/primates_cytb_JC_run_4.log") %>%
+  mutate(Replicate_ID = as.factor(4))
+
+# Combine the data frames into one
+trace_jc <- bind_rows(trace_jc_run_1, trace_jc_run_2, trace_jc_run_3, trace_jc_run_4)
+
+# Rescale iterations so they are per replicate, not total across samples
+trace_jc %<>% mutate(Iteration = Iteration %/% length(levels(trace_jc$Replicate_ID)))
+
 
 trace_jc %<>%                           # Read the data
   mutate(Replicate_ID = as.factor(Replicate_ID))                       # Convert the replicate id to a factor
