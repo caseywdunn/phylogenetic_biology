@@ -5,9 +5,9 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1 
 #SBATCH --cpus-per-task=1
-#SBATCH -p general
+#SBATCH -p education
 
-module load revbayes
+module load RevBayes/1.2.2-GCC-12.2.0
 
 # See https://revbayes.github.io/tutorials/dating/tefbd
 
