@@ -26,7 +26,7 @@ we are modeling. We don't just want models that give us the right answer, we oft
 want models that give us the right answer for the right reasons.
 
 Statisticians often note that "All models are wrong but some 
-are useful", a common aphorism expanded from a quote by @box1976science. 
+are useful", a common aphorism expanded from a quote by [@box1976science]. 
 The goal of a model isn't to be "right" in the sense of being a perfect explanation of 
 data. Real data are far too complex for any model to do this. Instead, the most useful models strike a trade-off between simplicity and adequacy. They are 
 as simple as possible, while adequately describing the phenomenon of interest. Adequacy is often 
@@ -68,7 +68,7 @@ p +
 
 ```
 
-There are a variety of useful things we could do based on these relationships between the model, model parameters, and values. Let's consider $x$ to be a variable that tell us something about the past and $y$ to be a variable that tells us something about the present or future. Use cases then include:
+There are a variety of useful things we could do based on these relationships between the model, model parameters, and values. Let's consider $x$ to be a variable that tells us something about the past and $y$ to be a variable that tells us something about the present or future. Use cases then include:
 
 - If we clamp the model (linear) and model parameters (specific values of $m$ and $b$) according to prior knowledge, and clamp $y$ according to observed data, we can estimate $x$. In this case the model is like a time machine that allows us to look into the past.
 
@@ -80,7 +80,7 @@ There are a variety of useful things we could do based on these relationships be
 
 There are some deep connections here. For example, predicting the future is basically just simulating the future based on our model and what we already know about the past and present.
 
-The models that we will use in phylogenetic biology tend to be more complex than the linear mode, but this general perspective of clamping and estimating different things still holds.
+The models that we will use in phylogenetic biology tend to be more complex than the linear model, but this general perspective of clamping and estimating different things still holds.
 
 
 ## A simple model of evolution
@@ -94,13 +94,13 @@ Let's start with a simple model of DNA evolution. At first we will also consider
 - State at the end of the branch (the nucleotide at the child node)
 
 
-```{r sim-application, echo=FALSE, fig.cap="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a cange from A to C."}
+```{r sim-application, echo=FALSE, fig.cap="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a change from A to C."}
 
 knitr::include_graphics("figures/applications.png")
 
 ```
 
-Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
+Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotide is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
 
 Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model $1/4$ of the time a replacement event occurs, an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution, just a replacement in kind. If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of a replacement event result in a substitution, the substitution rate is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the replacement rate.
 
@@ -150,7 +150,7 @@ segments %>%
 
 ```
 
-Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for branch lengths is given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)). The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
+Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for branch lengths is given as the number of expected evolutionary changes rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)). The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
 
 ```{r sim-tree-cnid, fig.cap="A published phylogeny [@zapata2015] with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time."}
 
@@ -164,9 +164,9 @@ The machinery above shows how a model can clarify the way we think about the exp
 
 The situation is most clear after a small amount of change (when $\mu t$ is small) - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.
 
-What should we expect, though, if there has been a large amount of change (when $\mu t$ is large)? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, than the initial starting state doesn't matter because whatever was there initially will probably have been replaced multiple times. It is as if had been erased and written over. If the starting state doesn't contain information about the end state, what does? 
+What should we expect, though, if there has been a large amount of change (when $\mu t$ is large)? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, then the initial starting state doesn't matter because whatever was there initially will probably have been replaced multiple times. It is as if it had been erased and written over. If the starting state doesn't contain information about the end state, what does? 
 
-Since replacements are coming from the bag that you are picking the nucleotides at random from, that bag has information about the expected states after a large number of changes. Given enough evolutionary time, our simple model will lead the expected frequency of each nucleotide in the evolving sequence to be the same as their frequencies in the bag. Since we specified that you have the same chance of grabbing any nucleotide from the bag, eventually the probability of having each of the our nucleotides is the same, 25% (Figure \@ref(fig:sim-saturation), right side). If you started with a sequence that had an A and let it evolve 100 times, after enough evolutionary time had passed to reach equilibrium you would expect to get 25 C's, 25 G's, 25 T's, and 25 A's.
+Since replacements are coming from the bag that you are picking the nucleotides at random from, that bag has information about the expected states after a large number of changes. Given enough evolutionary time, our simple model will lead the expected frequency of each nucleotide in the evolving sequence to be the same as their frequencies in the bag. Since we specified that you have the same chance of grabbing any nucleotide from the bag, eventually the probability of having each of the four nucleotides is the same, 25% (Figure \@ref(fig:sim-saturation), right side). If you started with a sequence that had an A and let it evolve 100 times, after enough evolutionary time had passed to reach equilibrium you would expect to get 25 C's, 25 G's, 25 T's, and 25 A's.
 
 ```{r}
   mu = 0.050
@@ -345,13 +345,13 @@ Wow! This was a lot of work to write a really simple model in a much more compli
 
 ## Expanding the models
 
-The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one branch in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 [@jc1969]. It is only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that we deliberately omit. 
+The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one branch in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 [@jc1969]. It has only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that we deliberately omit. 
 
 The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, including that:
 
 - The nucleotides C, G, T, and A are often not found at an equal frequency of 0.25 each. Since the nucleotides form base pairs in organisms with double stranded genomes, C and G are found at the same frequency and T and A at the same frequency. Furthermore, the frequency of the four nucleotides must add to 100%. Therefore, the frequency of all four nucleotides can be summarized with a single number, usually given as the GC content -- the percent of sites that are G or C. For example, the human genome has a GC content of 41%, which indicates nucleotide frequencies of 0.205 G, 0.205 C, 0.295 T and 0.295 A. This is quite different than the equal frequencies of 0.25 for all nucleotides expected by the JC69 model.
 
-- The rates of mutation between different nucleotides is not the same. This is in part because some nucleotides are shaped more like others, and are more likely to be substituted for each other by mistake. In particular, A and G tend to be substituted for each other because they have two rings, and C and T tend to be substituted for each other because they have one ring. These changes between A/G and C/T are referred to as transitions. All other substitutions are called transversions, and are each less likely.
+- The rates of mutation between different nucleotides are not the same. This is in part because some nucleotides are shaped more like others, and are more likely to be substituted for each other by mistake. In particular, A and G tend to be substituted for each other because they have two rings, and C and T tend to be substituted for each other because they have one ring. These changes between A/G and C/T are referred to as transitions. All other substitutions are called transversions, and are each less likely.
 
 To accommodate each of these deviations from JC69, we need to add parameters to the model to explain the added complexity. There are all kinds of parameters we could add one by one, and in fact that is how the field proceeded in the decades after JC69 was described. Rather than build the models up in that way, though, it is actually easier to describe a general model that these other models, including JC69, are special cases of.
 
@@ -384,7 +384,7 @@ There are a variety of other commonly used models that clamp these parameters in
 
 - F81 differs from HKY85 in that it sets all the rate modifiers to 1, so that $a=b=c=d=e=f=1$. It is almost as simple as JC69, except that the $\pi$ parameters vary independently.
 
-We now have a more complex model of DNA evolution that we can simplify by setting the parameters to equal each other and/or clamping them to specific values. It can accommodate much of variation observed in actual DNA sequence data. We could use it to simulate data just as we did in Figure \@ref(fig:sim-saturation), but taking into consideration things like unequal nucleotide frequencies and differences in rates of change between nucleotides. This is getting us much closer to something that provides real biological insight.
+We now have a more complex model of DNA evolution that we can simplify by setting the parameters to equal each other and/or clamping them to specific values. It can accommodate much of the variation observed in actual DNA sequence data. We could use it to simulate data just as we did in Figure \@ref(fig:sim-saturation), but taking into consideration things like unequal nucleotide frequencies and differences in rates of change between nucleotides. This is getting us much closer to something that provides real biological insight.
 
 ## Plugging some numbers into the expanded model
 
@@ -406,7 +406,7 @@ Now we have the following values for $\mathbf{R}$:
 
 We won't specify the diagonal elements of $\mathbf{R}$ quite yet.
 
-Now we need $\boldsymbol{\Pi}$. We noted earlier that humans have a GC content of 41%, so we'll use that. This gave the following entries for $\boldsymbol{\Pi}$:
+Now we need $\boldsymbol{\Pi}$. We noted earlier that humans have a GC content of 41%, so we'll use that. This gives the following entries for $\boldsymbol{\Pi}$:
 
 \begin{equation}
 \boldsymbol{\Pi} =
@@ -570,7 +570,7 @@ ggtree(phy) +
 
 This isn't a big step from what we have already -- once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along a whole tree.
 
-Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\boldsymbol{\Pi}$. That gives us the $`r state[5]`$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so the also share a parent state.
+Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\boldsymbol{\Pi}$. That gives us the $`r state[5]`$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so they also share a parent state.
 
 There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the `Species_A` terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from $\boldsymbol{\Pi}$, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is $`r state[6]`$. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length $t$ of the branch, and $\mathbf{P}(t)$. We then do the same for each of the other branches.
 
@@ -584,12 +584,12 @@ How? With one simplifying assumption -- that the evolution of each site is indep
 
 ## Concluding thoughts
 
-Here we have built up the conceptual, mathematical, statistical, and computational machinery to simulating DNA evolution on a tree. Sequence simulation is useful for a variety of things, including generating datasets under known conditions to test tools. A major value, though, is to to think in a full explicit way about how you are modeling evolution. This probabilistic model framework is the exact same one we will use as we move to our next task, inferring phylogenies from sequence data. 
+Here we have built up the conceptual, mathematical, statistical, and computational machinery to simulate DNA evolution on a tree. Sequence simulation is useful for a variety of things, including generating datasets under known conditions to test tools. A major value, though, is to to think in a fully explicit way about how you are modeling evolution. This probabilistic model framework is the exact same one we will use as we move to our next task, inferring phylogenies from sequence data. 
 
 
 ## Additional resources
 
-- As a grad student, I learned much of what I present here from @swofford1996molecular. This is such a lucid introduction to the likelihood of molecular sequence data on a phylogeny.
+- As a grad student, I learned much of what I present here from [@swofford1996molecular]. This is such a lucid introduction to the likelihood of molecular sequence data on a phylogeny.
 
 - My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent Phylo Seminar at https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg , starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s .
 

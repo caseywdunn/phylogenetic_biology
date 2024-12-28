@@ -21,7 +21,7 @@ Phylogenetics is no longer a strictly macroevolutionary field. Some of the most 
 
 There are a few concepts that are fundamental to understanding phylogenetic analyses (Figure \@ref(fig:intro-concepts)A). These include:
 
-- The topology of the phylogeny. This is the structure of the evolutionary relationships. It can be thought of the branching order of a tree.
+- The topology of the phylogeny. This is the structure of the evolutionary relationships. It can be thought of as the branching order of a tree.
 
 - The lengths of the branches in the phylogeny. Length can signify different things, such as time elapsed or amount of expected evolutionary change.
 
@@ -54,7 +54,7 @@ Consider some of the concepts we introduced above:
 - Characters
 - Character states of tips
 - Character states of ancestors
-- Model
+- Models
 - Model parameters
 
 The investigator can generally take one of three approaches to each of these (Figure \@ref(fig:intro-concepts)B). They either:
@@ -82,9 +82,9 @@ With this framework in mind, let's take a look at a sampling of recent phylogene
 
 - Myxozoa are enigmatic parasites that live in fish. They have very few morphological traits that show clear homology with other animals. So Sally Chang, Paulyn Cartwright, and colleagues used phylogenetic inference to examine their relationships to other animals, and found strong support for their placement within Cnidaria [@chang2015genomic].
 
-- My own lab wanted to see if the evolution of gene expression is more rapid after gene duplication than after speciation [@dunn2018pairwise]. We found no evidence for such a difference. We used the results of previous studies to clamp gene phylogenies and gene expression character states at the tips, and estimated ancestral expression states to examine sifts in expression along particular branches.
+- My own lab wanted to see if the evolution of gene expression is more rapid after gene duplication than after speciation [@dunn2018pairwise]. We found no evidence for such a difference. We used the results of previous studies to clamp gene phylogenies and gene expression character states at the tips, and estimated ancestral expression states to examine shifts in expression along particular branches.
 
-- *Viburnum* is a group of plants with wide distribution in many different habitat types. Michael Landis spearheaded a collaborative project between the Edwards and Donoghue labs here at Yale EEB to understand how *Viburnum* first diversified in Asia during the Eocene and then spread across the globe [@landis2020joint]. They clamped the character states at the tips based on gene sequence data, morphology, and geographic range, developed innovative methods to simultaneously estimate the phylogeny, branch length, and ancestral geographic ranges. This is the vanguard of new approaches that simultaneously consider multiple categories of data rather than bolt together multiple independent methods that estimate one thing at a time.
+- *Viburnum* is a group of plants with wide distribution in many different habitat types. Michael Landis spearheaded a collaborative project between the Edwards and Donoghue labs here at Yale EEB to understand how *Viburnum* first diversified in Asia during the Eocene and then spread across the globe [@landis2020joint]. They clamped the character states at the tips based on gene sequence data, morphology, and geographic range, then developed innovative methods to simultaneously estimate the phylogeny, branch length, and ancestral geographic ranges. This is the vanguard of new approaches that simultaneously consider multiple categories of data rather than bolt together multiple independent methods that estimate one thing at a time.
 
 This is a very exciting time in phylogenetic biology. For many years most studies followed a few basic templates. With the development of new phylogenetic methods, new tools to collect high throughput character data, and a growing interest in phylogenetic questions, the field is now in its most interesting stage of development and application yet.
 

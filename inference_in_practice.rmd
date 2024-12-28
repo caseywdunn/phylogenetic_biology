@@ -30,7 +30,7 @@ There are costs to adding taxa that must be balanced against the benefits above:
 
 There are some conditions under which you may want to exclude specific taxa, at least from some analyses:
 
-- If you suspect that they data are contaminated, incorrectly identified, or insufficiently documented.
+- If you suspect that the data are contaminated, incorrectly identified, or insufficiently documented.
 
 - Preliminary analyses suggest that the taxon has properties very different from other taxa in the study, such as a very different equilibrium frequency or an exceptionally high rate of evolution.
 
@@ -58,9 +58,9 @@ There are a couple challenges to working with transcriptomes. For one, RNA is mu
 
 ### Targeted enrichment
 
-In targeted enrichment, an investigator designs short bait sequences that are similar to conserved genome regions. They then isolate DNA from their taxa of interest, fragment it, and use the baits to fish out the conserved regions along with their neighboring sequences. This allows the investigator to created pools of DNA that are enriched for specific pre-selected regions. This is a highly cost effective way to isolate homologous sequences in across species, and works well when samples have fragmented DNA (in museum specimens, for example). 
+In targeted enrichment, an investigator designs short bait sequences that are similar to conserved genome regions. They then isolate DNA from their taxa of interest, fragment it, and use the baits to fish out the conserved regions along with their neighboring sequences. This allows the investigator to created pools of DNA that are enriched for specific pre-selected regions. This is a highly cost effective way to isolate homologous sequences across species, and works well when samples have fragmented DNA (in museum specimens, for example). 
 
-The baits are typically designed based on one or more genomes that are already available in the clade of interest. There are a few challenges to using targeted enrichment. One is that data are difficult to combine across different studies that used different baits. In addition, the design and synthesis of baits poses a large up-front investments that makes this approach best suited to larger projects.
+The baits are typically designed based on one or more genomes that are already available in the clade of interest. There are a few challenges to using targeted enrichment. One is that data are difficult to combine across different studies that used different baits. In addition, the design and synthesis of baits poses a large up-front investment that makes this approach best suited to larger projects.
 
 ### RAD-seq
 
@@ -71,7 +71,7 @@ The result is that sequences are enriched for the same regions that have a simil
 
 ### PCR
 
-The most extreme form of genome enrichment is Polymerase Chain Reaction (PCR). This method enriches for a small number of specific genome regions selected by the user. Short DNA oligonucleotide sequences are designed to flank the region of interest and target it for amplification. By placing these oligonucleotides in conserved regions and engineering them to bind slightly different sequences, they can be used to successfully enrich the same genome region from quite distantly related species. PCR enabled the first wave of DNA sequence-based phylogenetic inference starting in the 1980s, and is still widely used used today even has a variety of new enrichment methods have become available.
+The most extreme form of genome enrichment is Polymerase Chain Reaction (PCR). This method enriches for a small number of specific genome regions selected by the user. Short DNA oligonucleotide sequences are designed to flank the region of interest and target it for amplification. By placing these oligonucleotides in conserved regions and engineering them to bind slightly different sequences, they can be used to successfully enrich the same genome region from quite distantly related species. PCR enabled the first wave of DNA sequence-based phylogenetic inference starting in the 1980s, and is still widely used today even as a variety of new enrichment methods have become available.
 
 PCR is cheap and relatively easy. Because it has been used for decades to sequence a small number of genes across a wide diversity of organisms, it is a great way to collect data that can be readily analyzed in combination with publicly available data. Ironically, though, it is now very expensive per-nucleotide to collect data with PCR relative to the other methods above. That's because it is difficult to leverage the advantages of modern high-throughput sequencing, which is very cheap per nucleotide, with such a small number of short amplified sequences. As one of the most extreme forms of genome enrichment available, it provides access to a very small fraction of the genome. PCR is still a convenient way to get a tiny amount of sequence data from a large number of taxa.
 
@@ -93,15 +93,15 @@ Raw sequence data have a few properties that make them unusable for direct analy
 
 - They are ambiguous. It often isn't clear what region of the genome a sequence belongs to, due to genomic repeats, heterozygosity, and genome duplication. This ambiguity must be resolved or eliminated, depending on the application.
 
-The above technical challenges are usually addressed simultaneously in an analysis process called assembly. The goal of assembly is to predict the sequences of the original genome regions based on the raw sequence data. The general idea is to line up overlapping raw sequence data, correct errors by comparing sequences, and then to collapse all the sequences down to hypotheses about the original actual sequence from which all the raw data were generated. This is a very complex process, and still a major challenge for many genomes and transcriptomes in particular. The best approach differs quite a bit depending on the enrichment strategy, sequencing technology, and the properties of the genome (such as how repetative it is).
+The above technical challenges are usually addressed simultaneously in an analysis process called assembly. The goal of assembly is to predict the sequences of the original genome regions based on the raw sequence data. The general idea is to line up overlapping raw sequence data, correct errors by comparing sequences, and then to collapse all the sequences down to hypotheses about the original actual sequence from which all the raw data were generated. This is a very complex process, and still a major challenge for many genomes and transcriptomes in particular. The best approach differs quite a bit depending on the enrichment strategy, sequencing technology, and the properties of the genome (such as how repetitive it is).
 
 The process of assembling a genome (or genome regions) from scratch is referred to as *de novo* assembly. If high quality closely related genomes are available, they can be used for guided assembly or mapping, where the raw data are tiled onto the reference rather than assembled from scratch.
 
 ### Identification of homologous genome regions
 
-It isn't enough to collect and assemble sequence data from the taxa or interest, we need to collect and identify *homologous* sequences that represent regions that are shared because they derive the the same region in common ancestors of the taxa.
+It isn't enough to collect and assemble sequence data from the taxa of interest, we need to collect and identify *homologous* sequences that represent regions that are shared because they derive the same region in common ancestors of the taxa.
 
-Like assembly, the optimal approach for identifying homologous sequences depends greatly on the enrichment strategy used. This step is quite straight forward when targeted capture and PCR are used as enrichment strategies, because the data are from specific know regions that were often selected in part because their homology is easier to assess.
+Like assembly, the optimal approach for identifying homologous sequences depends greatly on the enrichment strategy used. This step is quite straight forward when targeted capture and PCR are used as enrichment strategies, because the data are from specific known regions that were often selected in part because their homology is easier to assess.
 
 In some cases, such as the closely related virus genomes, genomes can be directly aligned with each other along their full lengths. In larger genomes, and transcriptomes, protein coding sequences are often extracted from the assemblies and are the focus of phylogenetic analyses. There are various approaches to identifying homologous protein coding genes across taxa. One is to identify sequences for a pre-selected panel of genes that are selected because they tend to be present in most datasets, they have properties of molecular evolution that are well-suited to phylogenetic analysis, and their homology is thought to be easier to assess. Another is to compare all gene sequences across all species to identify homologous regions. This can be a bit more computational work, but has the advantage of being able to optimize gene selection to the data and question at hand.
 
@@ -130,7 +130,7 @@ The output of multiple sequence alignment is a matrix. Each row is a taxon that 
 
 ## Combining information across multiple genome regions
 
-Sometimes when we build phylogenies from genomic data, we are interested in the specific evolutionary history of the genome regions themselves. This is the case, or example, when looking at gene family evolution. Often, though, we are using the evolutionary history of the genomic regions as a proxy for the evolutionary history of the organisms, such as when we are asking questions with DNA data about how species are related to each other. There are a variety of conditions, though, under which different genome regions can have different evolutionary histories from eachother, and some of these histories deviate from the evolutionary history of the taxa as a whole [@maddison1997gene]. Processes that can lead different regions to have different evolutionary histories include:
+Sometimes when we build phylogenies from genomic data, we are interested in the specific evolutionary history of the genome regions themselves. This is the case, for example, when looking at gene family evolution. Often, though, we are using the evolutionary history of the genomic regions as a proxy for the evolutionary history of the organisms, such as when we are asking questions with DNA data about how species are related to each other. There are a variety of conditions, though, under which different genome regions can have different evolutionary histories from each other, and some of these histories deviate from the evolutionary history of the taxa as a whole [@maddison1997gene]. Processes that can lead different regions to have different evolutionary histories include:
 
 - Horizontal transfer of genome regions across species. This can occur, for example, when a virus caries DNA from one species to another. Rates of horizontal gene transfer vary greatly across different groups of organisms.
 
