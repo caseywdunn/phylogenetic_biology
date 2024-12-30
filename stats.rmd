@@ -28,7 +28,7 @@ analysis methods, such as regression, solving systems of equations,
 Principal Component Analyses (PCA), and common clustering methods, are built from linear 
 algebra under the hood. So are many aspects of phylogenetic analysis, including 
 the models of evolution themselves and the representation of the phylogenetic 
-trees in matrix forms that computers can easily manupulate.
+trees in matrix forms that computers can easily manipulate.
 
 Though linear algebra is fundamental to many topics at the intersection of 
 science, mathematics, and computation, most science students have far less 

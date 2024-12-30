@@ -20,11 +20,11 @@ The order of files in the book is specified in `_bookdown.yml`.
 
 In `phylogenetic_biology`, execute:
 
-    bookdown::render_book("index.Rmd", "bookdown::gitbook")
+    bookdown::render_book("index.rmd", "bookdown::gitbook")
 
 ### Running tests
 
-To run tests of the code, launch an R console from the `manuscript/` directory of this
+To run tests of the code, launch an R console from the root directory of this
 repository and run:
 
     library( testthat )

@@ -33,7 +33,7 @@ There are many types of organism measurements, and therefore state spaces and ch
 
 ### Nominal scale types
 
-There are several other frequent applications of nominal scale types beyond DNA sequences in phylogenetic analyses. The most common include others include other molecular sequence data, but they are also used for discrete unordered morphological character states
+There are several other frequent applications of nominal scale types beyond DNA sequences in phylogenetic analyses. The most common include other molecular sequence data, but they are also used for discrete unordered morphological character states.
 
 #### DNA nucleotides
 

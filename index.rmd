@@ -93,7 +93,7 @@ I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read 
 
 ![](figures/by-nc-nd-600.png)
 
-This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. If there is interest, I will also make paperbacks available for purchase at a reasonable price. Commercial use by others (e.g. the sale of printed copies by anyone other than the author) are not allowed.
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. If there is interest, I will also make paperbacks available for purchase at a reasonable price. Commercial use by others (e.g. the sale of printed copies by anyone other than the author) is not allowed.
 
 This book was rendered from source code, available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there.
 
@@ -105,7 +105,7 @@ The following sites have a wide variety of material that is relevant to the
 theory and and practice of phylogenetic biology.
 
 - An extensive list of tools, tutorials, and examples of phylogenetic tools in 
-the programming language R maintained by Briam O'Meara: https://cran.r-project.org/web/views/Phylogenetics.html
+the programming language R maintained by Brian O'Meara: https://cran.r-project.org/web/views/Phylogenetics.html
 
 - The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer 
 course on phylogenetics, with an emphasis on building phylogenetic trees. Check 
@@ -117,14 +117,14 @@ evolutionary questions: http://treethinkers.org/tutorials/
 
 The following books are great resources for learning more about phylogenetic biology:
 
-- Baum, D. and Smith, S. (2012). Tree Thinking. An Introduction to Phylogenetic 
-Biology. [Roberts Publishers](http://www.roberts-publishers.com/tree-thinking-an-introduction-to-phylogenetic-biology.html).
+- Baum, D. and Smith, S. (2013). Tree Thinking. An Introduction to Phylogenetic 
+Biology. [Roberts Publishers](https://store.macmillanlearning.com/us/product/Tree-Thinking-An-Introduction-to-Phylogenetic-Biology/p/1936221160).
 
-- Paradis, E. (2011) Analysis of Phylogenetics and Evolution with R. 
-[Springer](http://www.springer.com/life+sciences/evolutionary+%26+developmental+biology/book/978-0-387-32914-7)
+- Paradis, E. (2012) Analysis of Phylogenetics and Evolution with R. 
+[Springer](https://link.springer.com/book/10.1007/978-1-4614-1743-9)
 
-- Felsenstein, J. (2004) Inferring phylogenies. 
-[Sinauer Associates](http://www.sinauer.com/detail.php?id=1775).
+- Felsenstein, J. (2003) Inferring phylogenies. 
+[Sinauer Associates](https://global.oup.com/academic/product/inferring-phylogenies-9780878931774?cc=ca&lang=en).
 
 - Swofford, D. L., Olsen, G. J., Waddell, P. J., & Hillis, D. M. (1996). 
 Phylogenetic inference. In: Molecular Systematics, Second Edition. eds: D. M. 
@@ -132,7 +132,7 @@ Hillis, C Moritz, & B. K. Mable. [Sinauer Associates](http://www.sinauer.com/det
 
 The following books provide general computational background for the topics covered here:
 
-- Wickham, H., Grolemund, G (2017) R for Data Science. https://r4ds.had.co.nz
+- Wickham, H., Grolemund, G (2017) R for Data Science. https://r4ds.hadley.nz/
 
 - Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. http://practicalcomputing.org
 
