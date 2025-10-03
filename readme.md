@@ -40,6 +40,12 @@ In `docker/`, build the container image with:
 docker build -t phylogenetic_biology .
 ```
 
+If building on a macOS host running on apple silicon, instead use:
+
+``` bash
+docker build --platform=linux/amd64 -t phylogenetic_biology .
+```
+
 The model for executing the manuscript in docker follows that at
 https://github.com/caseywdunn/comparative_expression_2017/tree/master/docker .
 

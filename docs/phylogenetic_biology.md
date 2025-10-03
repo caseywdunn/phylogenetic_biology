@@ -3,7 +3,7 @@ title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 github-repo: caseywdunn/phylogenetic_biology
 twitter-handle: caseywdunn
-date: "2024-09-12"
+date: "2025-10-03"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -400,7 +400,7 @@ So far we have focused on phylogenies in the abstract sense as mathematical grap
 One way is to store a text representation of the tree. This is conveneint because text files are easy to work with, and can be viewed and edited with a variety of existing text editors. Newick, a phylogenetic data format ironed out over dinner at [Newick's Lobster House](https://www.yelp.com/biz/newicks-lobster-house-dover), does exactly this. The newick format is widely used for storing phylogenies in text files, and is supported as a way to read and write trees by almost every phylogenetic software tool. The basic idea is to designate each clade within a pair of parentheses.
 
 
-```r
+``` r
 # Define the newick text that includes the tip labels and 
 # tree topology
 newick_text = "(((A,B),(C,D)),E);"
@@ -435,7 +435,7 @@ The most widely used format for storing phylogenies in the R programming languag
 Below we take a quick peek inside the `phylo` object we created above. The intent isn't to learn how to manipulated trees in R quite yet, but to just show you how trees can be stored in computer memory. First, let's take a look at the structure of the `phylo` object to see what variables it contains within it:
 
 
-```r
+``` r
 str( phylo_tree )
 ```
 
@@ -452,7 +452,7 @@ We can see that there are three slots (each designated with a `$`) within this `
 
 
 
-```r
+``` r
 phylo_tree$edge
 ```
 
@@ -475,7 +475,7 @@ You can discern all sorts of things about the tree from this simple array. The t
 There is one other important piece of information that we specified in the newick files - the tip labels. Those are located in another slot within the `phylo` object:
 
 
-```r
+``` r
 phylo_tree$tip.label
 ```
 
@@ -1460,15 +1460,15 @@ Let's take stock of what we have covered so far. We introduced models, and how t
 
 ML and bootstraps are widely used and are a critical foundation for many phylogenetic analyses. There are, however, a few things about analysis frameworks  based on optimality criteria, ML, and bootstraps that are not ideal:
 
-- Whenever we apply an optimality criterion, such as ML or parsimony, to identify the "best" phylogeny, that doesn't tell us anything about how much better this optimal phylogeny is than other hypotheses. If it is the best phylogeny by far, then this single phylogeny tells us a lot about the the phylogenetic information in our topology. If however, there are multiple phylogenies that are almost as good as the best one, as is often the case, then we would need to know about these others as well to have a good understanding of what hypotheses are consistent with our data.
+- Whenever we apply an optimality criterion, such as ML or parsimony, to identify the "best" phylogeny, that doesn't tell us anything about how much better this optimal phylogeny is than other hypotheses. If it is the best phylogeny by far, then this single phylogeny tells us a lot about the the phylogenetic information in our analysis. If however, there are multiple phylogenies that are almost as good as the best one, as is often the case, then we would need to know about these others as well to have a good understanding of what hypotheses are consistent with our data.
 
 - Likelihood is the probability of the data given the phylogenetic hypothesis. The probability of the data under the ML hypothesis will be exceptionally low, often far less than one in a million, since the ML hypothesis could generate many other data as well. This is because we are evaluating the probability of the data given the hypothesis, but often what we really want to know is the probability of the hypothesis given the data. The two are quite different, but are related. It would be nice to be more explicit about that relationship.
 
 - Bootstraps are a convenient way to generate a sample of phylogenies, but their statistical interpretation is not clear. The frequencies of bootstrap supports don't correspond in a clear way to probabilities of our hypothesis, but instead tell us something about how frequently features of the phylogeny are supported when we resample the data. In practice it turns out this is a good proxy for phylogenetic support, but it would be nice to have support values that have a more explicit statistical interpretation.
 
-All analyses include a variety of tradeoffs, and the downsides of the issues listed above are often mitigated by the multiple upsides of a ML bootstrap analysis framework. It also greatly helps that there are decades of experience with such analyses that help contextualize and interpret ML bootstrap results. This work has also produced ML methods and software packages that are highly optimized for computational efficiency, enabling the routine application of these approaches to very large datasets.
+All analyses include a variety of tradeoffs, and the downsides of the issues listed above are often mitigated by the multiple upsides of a ML bootstrap analysis framework. It also greatly helps that there are decades of experience with ML analyses that help contextualize and interpret ML bootstrap results. This work has produced ML methods and software packages that are highly optimized for computational efficiency, enabling the routine application of these approaches to very large datasets.
 
-Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above [@holder2003, @huelsenbeck2001mrbayes, @larget1999markov]. Rather than focus on a single "best" topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters. 
+Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above [@holder2003, @huelsenbeck2001mrbayes, @larget1999markov, @chen2014bayesian]. Rather than focus on a single "best" topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters. 
 
 ## Bayesian statistics
 
@@ -1485,9 +1485,9 @@ $P(H|D)$, read as "the probability of the hypothesis given the data", is the pos
 
 Let's plug in a few numbers to get some intuition for the behavior of Bayes' theorem. First, consider the case where $P(H)=0$, *i.e.* you assign a prior probability of $0$ to the hypothesis. The posterior probability, $P(H|D)$, will then also be $0$. This shows that if you believe ahead of collecting data that the hypothesis is absolutely impossible, no amount of data can change your mind and your updated hypothesis, the posterior, will also be $0$. 
 
-Second, let's consider the case where the data are just as likely under the hypothesis as they are in general. This would be like having a medical test for a specific condition where the test was so bad that the data (test result) didn't depend in any way on the hypothesis (the presence of the condition). For example, the test returns a positive 10% of the time regardless of whether you have the condition or not. In that situation, $P(D|H)=P(D)$. Since $P(D|H)$ is in the numerator and $P(D)$ is in the denominator, they cancel out. That leaves $P(H|D)=P(H)$ -- the posterior probability of the hypothesis is the same as the prior on the hypothesis. The data didn't change our understanding of the hypothesis at all. This is the behavior we want when the data have no information relevant to the hypothesis.
+Second, let's consider the case where the data are just as likely under the hypothesis as they are under other hypotheses. This would be like having a medical test for a specific condition where the test was so bad that the data (test result) didn't depend in any way on the hypothesis (the presence of the condition). For example, the test returns a positive 10% of the time regardless of whether you have the condition or not. In that situation, $P(D|H)=P(D)$. Since $P(D|H)$ is in the numerator and $P(D)$ is in the denominator, they cancel out. That leaves $P(H|D)=P(H)$ -- the posterior probability of the hypothesis is the same as the prior on the hypothesis. The data didn't change our understanding of the hypothesis at all. This is the behavior we want when the data have no information relevant to the hypothesis.
 
-Third, consider a case where the data are perfect indicators of the hypothesis. You get a specific pattern in the data whenever, and only when, the hypothesis is true. Because the hypothesis and data are perfectly linked, $P(D)=P(H)$ the priors cancel out. In this case, $P(H|D)=P(D|H)$, *i.e.* the posterior becomes equal to the likelihood. This never happens in phylogenetic inference, since any given phylogeny could always generate multiple sequences at the tips. But it is the case that as the data become more informative the priors have less impact on the posterior.
+Third, consider a case where the data are perfect indicators of the hypothesis. You get a specific pattern in the data whenever, and only when, the hypothesis is true. Because the hypothesis and data are perfectly linked, $P(D)=P(H)$ the priors cancel out. In this case, $P(H|D)=P(D|H)$, *i.e.* the posterior becomes equal to the likelihood. This never happens in phylogenetic inference, since any given phylogeny could always generate multiple sequences at the tips. But it is the case that as the data become more informative, the priors have less impact on the posterior.
 
 ## Bayesian phylogenetic inference
 
@@ -1495,7 +1495,7 @@ To calculate the posterior probability of a phylogenetic hypothesis, we need to 
 
 What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won't.
 
-Instead, we will forego calculating $P(D)$ at all by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling [@metropolis1953]. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
+Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling [@metropolis1953]. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
 
 Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate our test statistic as the ratio of the posterior probability of $H^*$ to the prior probability of $H$:
 
@@ -1515,7 +1515,9 @@ The "Markov Chain" in MCMC alludes to the fact that MCMC is a series of repeated
 4. If $R>1$, we accept $H^*$. If If $R<1$, we accept $H^*$ with probability $R$. Otherwise, we retain $H$.
 5. The result of the step above is added to the posterior sample, and becomes $H$ for the next iteration of the cycle.
 
-MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, as branch frequencies. Unlike bootstraps, though, the frequency of a branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, *i.e.* the probability of the branch given the data. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.
+MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, with branch frequencies. Unlike bootstraps, though, the frequency of a branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, *i.e.* the probability of the branch given the data and our priors. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.
+
+## Bayesian phylogenetic inference in practice
 
 There are a variety of practical considerations to implementing a Bayesian phylogenetic analysis with MCMC. These include:
 
@@ -1526,6 +1528,15 @@ There are a variety of practical considerations to implementing a Bayesian phylo
 not necessarily close to a peak in the posterior. The initial samples before MCMC settles into a stable distribution are therefore discarded as part of a "burn-in" phase.
 - Knowing when enough generations have been sampled to adequately approximate the posterior distribution. This is often evaluated by running multiple independent MCMC analyses and stopping them if and when they have converged on similar distributions.
 
+The ability to specify a prior can be a great advantage of Bayesian analyses. A prior is an explicit, principled way to incorporate prior knowledge into a new analysis. For example, if you are very confident that a particular clade exists based on external evidence, you could design a topology prior that favors topologies that include that clade over topologies that don't. If you have external information about model parameters, you could set a prior that constrains these parameters. These are cases of what are called informative priors-- they are nonuniform, and intentionally constrain results based on external information. In many cases, though, investigators use relatively uninformative priors that give equal probabilities to all hypotheses. This allows the posterior to be dominated by the data, and is appropriate when the investigator doesn't have external information to include in the prior or wants to focus on signal in a particular dataset. If you are ever concerned about the impact of your priors on your posteriors, you can run your analysis without any data-- the posterior will then be determined entirely by the prior. This gives you a good understanding of the impact of your prior on the posterior, and by comparing this empty analysis to an analysis with data you can get a good sense of the impact of your data on the posterior.
+
+Bayesian phylogenetic software stores samples of the run at regular intervals, for example every hundred generations (where a generation is a single MCMC proposal). Typically, there are two output files, a tree file and a trace file. The tree file has one line per sample, each with a tree in newick format. The trace file also has one line per sample. There are multiple columns, each with with a model parameter or run statistic. It is called a trace file because you can plot each of these columns to trace the progress of the MCMC run.
+
+![(\#fig:bayes-trace)Plot of log likelihood trace for a bayesian analysis. An appropriate burn-in of 100,000 generations is indicated with a dashed vertical line.](phylogenetic_biology_files/figure-latex/bayes-trace-1.pdf) 
+
+Investigators should at minimum examine the trace of log likelihood (Figure \@ref(fig:bayes-trace)). There are a few things to look for. First, an appropriate burn-in should be identified. This is the number of generations at the start of the run that are discarded as the MCMC chain settles into the sampling process. During the burn-in, the log likelihood rapidly climbs as the chain moves toward higher likelihood regions of tree and model space. In the example provided here, 100,000 generations is sufficient. Second, the investigator should examine the post-burn-in sampling process to make sure it is well mixed. It should appear noisy, as it does here, indicating that trees and model parameters with a range of likelihoods are sampled. There should not be any sudden major jumps or longer term trends, which could indicate that the sampling process is not adequate (longer runs may be required).
+
+Once the trace file has been examined, the investigator turns to the tree file. All pre-burn-in trees are discarded. You then pick a focal tree, which could be the maximum likelihood tree or consensus of the post-burn-in bayesian trees. The frequency of each edge in the focal tree is then calculated from the set of post burn-in trees and recorded as the posterior probability of that edge. These are then plotted onto the tree, often along with the maximum likelihood bootstrap scores.
 
 ## Resources
 
@@ -1536,59 +1547,112 @@ not necessarily close to a peak in the posterior. The initial samples before MCM
 
 # Additional character types
 
-Character types are fundamental to phylogenetics. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory [@houle2011measurement] -- a field that sits at the intersection of math, statistics, and philosophy that concerns the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually an exciting and grounding framework for understanding many of the central aspects of what we do in science.
+So far we have considered a single type of character data -- DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies, such as morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.
+
+We can group character types based on some shared features. For example, some data are discrete values (such as DNA), others have continuous values (such as mass or length), and still others have countable values (such as number of body segments) that have integer values that come in discrete values like DNA but these integers are ordered and convey magnitude. 
+
+Rather than approach each new character type in an *ad hoc* way, it is important to examine these more general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory [@houle2011measurement] -- a field that sits at the intersection of math, statistics, and philosophy that concerns the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually an exciting and grounding framework for understanding many of the central aspects of what we do in science.
 
 
-\begin{figure}
-\includegraphics[width=4.42in]{figures/scale-type} \caption{Scale types from measurement theory that are relevant to biology. Permissible transformations indicate the mathematical operations that can be performed on measurements of each scale type without distorting their meaning. The Domain indicates the state space, *i.e.* range of possible values. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Reproduced from Table 1 of Houle et al. (2011).}(\#fig:characters-scaletype)
-\end{figure}
+\begin{table}
 
-Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory at large, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type". 
+\caption{(\#tab:char-scale-types)Scale types, modified from Houle (2011).}
+\centering
+\begin{tabular}[t]{l|l|l|l|l|l|l}
+\hline
+Scale type & Domain & Measurement type & Permissible transformations & Arbitrary parameters & Meaningful comparisons & Biological examples\\
+\hline
+Nominal & Any set of symbols & Discrete & Any one-to-one mapping & Countable & Equivalence & Species, genes\\
+\hline
+Ordinal & Ordered symbols & Discrete & Any monotonically increasing function & Countable & Order & Social dominance\\
+\hline
+Interval & Real numbers & Continuous & \$x \textbackslash{}rightarrow ax + b\$ & 2 & Order, differences & Dates, Malthusian fitness, relative temperature (arbitrary 0, e.g. Celsius and Fahrenheit)\\
+\hline
+Log-interval & Positive real numbers & Continuous & \$x \textbackslash{}rightarrow ax\textasciicircum{}b\$ & 2 & Order, ratios & Body size\\
+\hline
+Difference & Real numbers & Continuous & \$x \textbackslash{}rightarrow x + a\$ & 1 & Order, differences & Log-transformed ratio-scale variables\\
+\hline
+Ratio & Positive real numbers & Continuous & \$x \textbackslash{}rightarrow ax\$ & 1 & Order, ratios, differences & Length, mass, duration, absolute temperature (e.g. Kelvin)\\
+\hline
+Absolute & Defined & Continuous & None & 0 & Any & Probability\\
+\hline
+\end{tabular}
+\end{table}
 
-To date we have considered only one specific biological measurement - DNA nucleotide sequence data. Measurements of DNA sequences have the following attributes:
 
-- A DNA character is discrete and unordered. It is discrete because it has a finite number of specific states that it can take on. It is unordered because changes don't have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types corresponds to a nominal scale type.
-- There are 4 possible states, corresponding to each of the 4 nucleotides -- `A`, `C`, `G`, and `T`. This defines the state space of the character, it can take on these particular values and no others.
+Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Scale category column. Permissible transformations indicate the mathematical operations that can be performed without distorting measurement meaning. Arbitrary parameters are the number of values that must be specified to establish a numerical system. For example, for a ratio scale type zero means absence and one arbitrary parameter must be specified, such as an object of standard mass or length. For an interval scale type, zero is arbitrary and two parameters must be specified, such as the temperature at which water freezes and boils.  Meaningful comparisons indicates comparisons that can be made between measurements of each scale type.
 
-There are many other types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types. Changing the state space for discrete characters changes the dimensions of the model matrices we have used. Changing scale types requires entirely new model types, since different mathematical operations are permissible and sensical for different scale types.
+There are many types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types, *i.e.* scale types. Different scale types require different models of evolution. The biggest distinction is between discrete character types, like DNA, and continuous character types, like mass, that require radically different models of evolution.
 
-## Nominal scale types
+## Discrete character types
+
+### Nominal scale types
 
 There are several other frequent applications of nominal scale types beyond DNA sequences in phylogenetic analyses. The most common include others include other molecular sequence data, but they are also used for discrete unordered morphological character states
 
-### Amino acids
+#### DNA nucleotides
+
+Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides -- `A`, `C`, `G`, and `T`. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states that it can take. They are unordered because changes don't have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types corresponds to a nominal scale type.
+
+#### Amino acids
 
 Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more model parameters than for DNA data.
 
 There are a few reasons why protein sequences are often considered rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another reason is that synonymous changes in protein coding DNA sequences quickly saturate for more distant evolutionary comparisons. This makes it difficult to align sequences, and means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.
 
-### Codons
+#### Codons
 
 Since there are 4 possible DNA nucleotides and codons are 3 nucleotides long, there are $4^3=64$ possible codons. Each one of these codons corresponds to a specific amino acid or stop codon. In some cases, it is most interesting to consider each of the 64 codons as a discrete character state. The models then have matrices that have dimensions of 64 (as opposed to 4 for nucleotides and 20 for amino acids).
 
-### Morphology
+#### Morphology
 
-Direct analogs of the DNA sequence evolution models we have explored in previous chapters are often applied to discrete unordered morphological traits, such as the presence or absence of limbs [@harmon2018phylogenetic, chapter 7].
+Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs [@harmon2018phylogenetic, chapter 7].
 
-## Ordinal scale types
+### Ordinal scale types
 
-Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is a ranking, *i.e.* some values are larger than others [@houle2011measurement, Table 1]. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. Models for the evolution of ordinal data typically disallow instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of 4 digits.
+Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is an ordering, *i.e.* some values are larger than others and there are different distances between the values [@houle2011measurement, Table 1]. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendege or the number of digits on a vertebrate forelimb.
+
+Models for the evolution of ordinal data can be described with the same language we used for nominal scale types, the rates for changes between non-adjacent values are just set to zero. 5, for example, will have a nonzero rate of change to 6 and 4 and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of 4 digits.
+
+Such a rate matrix that explains the changes between 0-6 digits would have this form, if the rates were the same between all states:
+
+\begin{equation}
+\mathbf{Q} = 
+\left(\begin{array}{ccccccc} 
+-\mu & \mu & 0 & 0 & 0 & 0 & 0 \\
+\mu & -2\mu & \mu & 0 & 0 & 0 & 0 \\
+0 & \mu & -2\mu & \mu & 0 & 0 & 0 \\
+0 & 0 & \mu & -2\mu & \mu & 0 & 0 \\
+0 & 0 & 0 & \mu & -2\mu & \mu & 0 \\
+0 & 0 & 0 & 0 & \mu & -2\mu & \mu \\
+0 & 0 & 0 & 0 & 0 & \mu & -\mu \\
+\end{array}\right)
+\end{equation}
+
 
 ## Continuous data
 
-Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate can take on a value within some range of real numbers. These character states are often lumped together by phylogenetic biologists under the single umbrella of continuous character data, since they can take on any one of an infinite number of values in a continuous range. Measurement theory, on the other hand, identifies multiple scale types that all have continuous values, but that have very different state spaces (*i.e.*, ranges of values), interpretations, and sensible mathematical interpretations. Many of the critical methodological challenges in phylogenetic biology right now will require distinguishing between the different continuous scale types and developing appropriate models for each.
+Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate can take on a value within some range of real numbers. These character states are often lumped together by phylogenetic biologists under the single umbrella of continuous character data, since any two values can have values between them. Measurement theory, on the other hand, identifies multiple scale types that all have continuous values.
 
 The evolution of continuous measurements, regardless of specific scale type, are often modeled with the Brownian Motion (BM) family of models. At any point in time, the value can take an incremental step up or down. There are two parameters - the starting value, and the step size per unit time.
 
-The use of BM models for phylogenetic analysis of continuous data is a pragmatic choice, as it greatly simplifies many calculations but there are many ways in which BM doesn't actually describe the evolution of continuous traits. For example, BM can result in a value that is any real number, positive or negative, whereas many biological measurements that are considered in a phylogenetic perspective can only take on positive values. Sometimes these discrepancies have little impact, and sometimes they can lead to entirely wrong conclusions.
+The use of BM models for phylogenetic analysis of continuous data is a pragmatic choice, as it greatly simplifies many calculations. But there are many ways in which BM doesn't actually describe the evolution of continuous traits. For example, BM can result in a value that is any real number, positive or negative, whereas many biological measurements that are considered in a phylogenetic perspective can only take on positive values. Sometimes these discrepancies have little impact, and sometimes they can lead to entirely wrong conclusions.
+
+
+![(\#fig:char-brownian)Multiple brownian motion trajectories.](phylogenetic_biology_files/figure-latex/char-brownian-1.pdf) 
+
+### Difference scale type
+
+It is so named because differences are invariant with respect to units. 
 
 ### Ratio scale type
 
 The most commonly encountered continuous scale type in phylogenetic analyses is the ratio scale type [@houle2011measurement, Table 1]. These measurements can take on values that are positive real numbers. They include many common continuous measurements, such as mass, length, and time interval. The name "ratio scale type" refers to the fact that ratios of these measurements are invariant with respect to units. If the ratio of body lengths of frog A to frog B is 2.38 when measured in centimeters, it will also be 2.38 when measured in inches, miles, or any other unit of length.
 
-### Difference scale type
 
-Ratio scale type data are often log transformed before phylogenetic analysis. This places them on a different scale type - the difference scale type. It is so named because differences are invariant with respect to units. 
+Ratio scale type data are often log transformed before phylogenetic analysis. This converts them to difference scale types.
+
+
 
 
 
@@ -1596,16 +1660,16 @@ Ratio scale type data are often log transformed before phylogenetic analysis. Th
 
 # Phylogenies and time
 
-Phylogenies consider the history, pattern, and process of evolution through time, so time is a critical feature of phylogenetic analyses. The specific considerations of time vary across analyses and studies, depending on the data available and the questions asked.
+Phylogenies consider the history, pattern, and process of evolution through time, so time is often a critical feature of phylogenetic analyses. The specific considerations of time vary across analyses and studies, depending on the data available and the questions asked.
 
-It is helpful to first think about how the elements of a phylogeny correspond to time. We will consider rooted trees, where the direction of time is specified and runs from the root to the tips. Each node occurs at a specific point in time, even if the specific timing is unknown. We will call this point in time the node age. There is often confusion about the description of relative time on phylogenies. I will describe the magnitude of age here as time before the present. A node minimum age is closer to the present (further forward in time) and a node with maximum age as further from the present (further back in time). A node is treated as a singular divergence event, and has no duration. This of course is an approximation of the actual biology of divergence, which can take place over a period of time as populations become increasingly isolated but gene flow may persist between them.
+It is helpful to step back and think about how the elements of a phylogeny correspond to time. We will here consider rooted trees, where the direction of time is specified and runs from the root to the tips. Each node occurs at a specific point in time, even if the specific time is unknown. We will call this point in time the node age. There is often confusion about the description of relative time on phylogenies. I will describe the magnitude of age here as time before the present. A node minimum age is closer to the present (further forward in time and closer to the tips) and a node with maximum age as further from the present (further back in time). A node is treated as a singular divergence event, and has no duration. This of course is an approximation of the actual biology of divergence, which can take place over a period of time as populations become increasingly isolated.
 
-Each branch connects two nodes. In a rooted tree, we refer to the node closer to the root (or that is the root) as the parent node, and the node closer to the tips (or that is a tip) as the child node. The starting and ending times of the branch are set by the ages of the parent and child nodes. The duration of the branch is the difference in the ages of these nodes.
+Each edge (branch) connects two nodes. In a rooted tree, we refer to the node closer to the root (or that is the root) as the parent node, and the node closer to the tips (or that is a tip) as the child node. The starting and ending times of the edge are set by the ages of the parent and child nodes. The duration of the edge is the difference in the ages of these nodes.
 
 
 ## Measurements of time on trees
 
-As discussed in Section \@ref(trees-branch-lengths), branch length can mean different things. It is up to the investigator to specify an branch length, and clearly communicate what it means. The three usual approaches are a cladogram (branch lengths are not specified and have no meaning), phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where branch lengths are in units of time.
+As discussed in Section \@ref(trees-branch-lengths), branch length can mean different things. It is up to the investigator to specify a branch length and clearly communicate what it means in the tree at hand. The three usual approaches are a cladogram (a tree in which branch lengths have no meaning), phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where branch lengths are in units of time. These trees types differ in what we can say about time.
 
 ### Cladograms
 
@@ -1613,64 +1677,56 @@ Because branch lengths in a cladogram have no meaning, we cannot make absolute s
 
 ![(\#fig:time-cladogram)A cladogram. Nodes and node numbers are gray, and branches are black.](phylogenetic_biology_files/figure-latex/time-cladogram-1.pdf) 
 
-Take a look at the cladogram in Figure \@ref(fig:time-cladogram). Consider the red node numbers. The terminal nodes are numbered 1-5, and 6-9 are internal nodes. Of those, the root is node 6. Because the tree is rooted, we know that time proceeds from the root to the tips. If you consider two nodes, where one is descended from the other, then the node closer to the root is older. There are a variety of statements we could make based on this simple relationship, including:
+Take a look at the cladogram in Figure \@ref(fig:time-cladogram). Consider the gray node numbers. The terminal nodes are numbered 1-5, and 6-9 are internal nodes. Of those, the root is node 6. Because the tree is rooted, we know that time proceeds from the root to the tips. If you consider two nodes, where one is descended from the other, then the node closer to the root is older. There are a variety of statements we could make based on this simple relationship, including:
 
 - Node 6 is older than all other nodes in the phylogeny. This is tautological, since the root is by definition the oldest node.
 - Node 7 is older than node 9. This is because 9 is descended form 7, and 7 is closer to the root.
 
-We can't make any relative assertions about the ages of nodes that aren't descended from each other. For example, we have no idea of node 8 or node 9 is older.
+We can't make any relative assertions, though, about the ages of nodes that aren't descended from each other. For example, we have no idea if node 8 or node 9 is older.
 
-In practice, these relative statements of age are often quite useful. For example, if Clade A is nested within Clade B, then we know that Clade A is younger than Clade B even if we don't know the ages of any nodes. This may seem trivial, but it is implicit in many discussions of phylogenies.
+In practice, these relative statements of age are often quite useful. For example, if Clade A is nested within Clade B, then we know that Clade A is younger than Clade B even if we don't know the ages of any nodes. This may seem trivial, but it is important information that is implicit in many discussions of phylogenies.
 
-Note that all of these assertions hold whether or not the tips have the same age. Tips can have different ages in a variety of scenarios, such as a real-time virus phylogeny sampled through the course of a phylogeny or if some tips are fossils.
+
 
 
 ### Phylograms
 
-Strictly speaking, the only assertions we can make about time on phylograms are those that we can also make on cladograms. This is because we can't be certain of the relationships between time and branch length in the phylogram. If the rate of evolution changes in different regions of the tree, then branches of the same length would not represent time intervals of the same length. It is safest, then, to think of phylograms as cladograms when it comes to discussing time.
+Strictly speaking, the only assertions we can make about time on phylograms are those that we can also make on cladograms. This is because we can't be certain of the relationships between time and branch length in the phylogram. If the rate of evolution changes in different regions of the tree, then branches of the same length would not represent time intervals of the same length. Phylograms therefore have the same information about time as cladograms do.
+
+
 
 ### Chronograms
 
-By definition, in a chronogram branch lengths are in units of time. The age of each node is fully specified. This has a couple implications for what we can say about time. We can make ordinal statements, as we did for cladograms and phylograms, but we can also make absolute statements about the interval of time that has elapsed between two nodes. We can also make statements about the relative ages of nodes that are not descended from each other.
+By definition, in a chronogram branch lengths are in units of time. The age of each node is specified. This has a couple implications for what we can say about time. We can make ordinal statements, as we did for cladograms and phylograms. But we can also make absolute statements about the interval of time that has elapsed between two nodes. We can also make statements about the relative ages of nodes that are not descended from each other.
 
-
-## Clock-like evolution
-
-If the rate of evolution were uniform and did not vary in different lineages, then the branch lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing branch lengths by the rate of change. For example, if the branch lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions were million years, then dividing each branch length by 2 would give a chronogram where the units of branch length are millions of years. This is called clock-like evolution -- changes in characters are like regular tics on a clock.
-
-Real data are never this tidy, but when evolutionary rates are locally fairly uniform, then phylogram branch lengths will tend to be roughly proportional to the amount of time elapsed according to a locally adjusted clock. This is called a relaxed clock model.
 
 ## Time calibration
 
-The process of creating a chronogram is referred to as time calibration. There are a few parts to the process:
+The process of creating a chronogram is referred to as time calibration. In essence, external information about the ages of some nodes are used to constrain the ages of other nodes.
 
-- Get a phylogram.
-- Constrain the ages of some nodes using external evidence. This can be done by clamping them to a specific age or specifying a distribution of possible ages.
-- Adjust branch lengths so that they are consistent with the ages of the clamped nodes, also adjusting the ages of the unclamped nodes as necessary. This is done by fitting clock-like models character change, and adjusting for local variations in rate.
-- Assess robustness and confidence in the calibrated node ages and branch lengths.
+If the rate of evolution were uniform and did not vary in different lineages, then the branch lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing branch lengths by the rate of change. For example, if the branch lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions were million years, then dividing each branch length by 2 would give a chronogram where the units of branch length are millions of years. This is called clock-like evolution -- changes in characters are like regular tics on a clock. No real data evolve in a perfectly clock-like way, so time calibration of phylogenies instead relies on relaxed clock models that allow local variations in evolutionary rate.
 
-There are multiply approaches to applying these steps. In the early days of the field, each step was done largely independently. A phylogram would be inferred, dates specified for some nodes, the branches would be stretched or shrunk to get them to fit the calibrations as closely as possible, and then the process would be repeated with slightly different input branch lengths or different calibrations to assess robustness.
+If all the tip nodes of a phylogeny are the same distance from the root, the tree is referred to as being ultrametric. If all the tips on a chronogram are sampled at the same time, then the chronogram is expected to be ultrametric because the same amount of time has elapsed from the root to each tip. An ultrametric tree is not necessarily a chronogram, though. Some of the internal nodes may have ages that violate branch lengths proportional to time, or a phylogram could be constrained to be ultrametric without calibrating any of the branch lengths according to time.
 
-The field has been moving toward more integrated approaches, including the simultaneous estimation of all of these features in a [Bayesian framework](https://revbayes.github.io/tutorials/dating/). A Bayesian framework is a very natural way to incorporate diverse information about topology, branch lengths, and evolutionary rates. This has intuitive appeal -- if the calibrations for two nodes indicate that they have a short branch between them, for example, then topologies that place these nodes together should be favored over other that do not.  Constraints on node ages can be incorporated as priors, for example. Unconstrained nodes would have flat priors on age, and constrained nodes would have a sharp peak around a specific age.
+In the early days of the field, phylogenetic inference was done separately from time calibration. A phylogram would first be inferred. The phylogram would then be modified into a chronogram. This would involve stretching and shrinking branches to make the tree ultrametric and to constrain some internal nodes to fit fossil calibration dates. This modification of branch lengths was not made with consideration of the underlying trait data. 
 
-### Mathematical implications of age constraints
-
-If all the tips are the same age, then the phylogeny is referred to as being ultrametric -- each tip is the same distance from the root. An ultrametric tree is not necessarily a chronogram, though -- some of the internal nodes may have ages that violate branch lengths proportional to time.
-
-Clamping the ages of tips reduces the number of free parameters in our tree. The way to think about this is that the more information we have, the more constrained and specific our view of the world is. Before we clamp the tip ages, any tip can be any age and all the branches are free to have any length. The ultrametric tree is nested within this set of unconstrained possibilities. The tip ages, and therefore branch lengths, in this unconstrained tree can be selected so that they are ultrametric, but the vast majority of values will lead to trees that are not ultrametric. By clamping some values with added information that some nodes (tips, in this case) are the same age, we now are allowing only a constrained subset of trees and these require fewer parameters to describe.
-
-It is easiest to think of this in terms of branch lengths, rather than node ages. From Section \@ref(tree-properties), we know that the number of branches in a tree is $2n-2$, where $n$ is the number of tips. This is because each of the $n$ tip nodes has an branch leading to it, and each of the $n-1$ internal nodes, with the exception of the root node, has an branch leading to it. So there are $n-2$ branches that give rise to internal nodes. This is how we arrive at our $n+n-2=2n-2$ branches in the phylogeny, each with their own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the branches leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than $n$ branch lengths for the tips, we only have $1$ tip branch length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with $1+n-2=n-1$ branch lengths that we need to estimate independently in our ultrametric tree.
+Subsequent approaches instead unify phylogenetic inference and time calibration. Using external information, such as fossils and the sampling times of tips, branch lengths are inferred in units of time under relaxed clock models that allow rates of evolution to vary across the tree to accommodate these constraints. Because the external calibrations allow rates and time to be inferred independently (unlike an unconstrained phylogram, where they are conflated), this time calibrated inference produces a chronogram.
 
 
-### Constraining node ages
+## The implications of constraining node ages
 
-All the tips sampled in the present day have the same age, and we can constrain them accordingly as described above. But to time calibrate our tree we need to constrain nodes at multiple time points. This is what allows us to establish rates that we can use to infer the ages of unconstrained nodes. There are two broad approaches to applying multiple constraints through time. The investigator can either constrain the ages of internal nodes (internal-node-calibrated phylogenies), in which all tips still have the same age, or some tips can be allowed to have ages that precede the present day (tip-calibrated phylogenies). We will illustrate both approaches with an example a study where we have 50 living organisms all sampled in the present day, and 10 fossils sampled across a range of times. We have a morphological character matrix for all, and can infer phylograms that we find to be consistent with a relaxed clock model. 
+Clamping the ages of nodes reduces the number of free parameters in our tree. The way to think about this is that the more information we have, the more constrained and specific our view of the world is. Consider first constraining tip ages to make a tree ultrametric. Before we clamp the tip ages, any tip can be any age and all the branches are free to have any length. The ultrametric tree is nested within this set of unconstrained possibilities. The tip ages, and therefore branch lengths, in this unconstrained tree can be selected so that they are ultrametric, but the vast majority of values will lead to trees that are not ultrametric. By clamping some values with added information that some nodes (tips, in this case) are the same age, we now are allowing only a constrained subset of trees and these require fewer parameters to describe.
 
-In an internal-node-calibrated phylogeny, we would infer a phylogeny with all 60 taxa (fossil and extant), note the placement of the fossil taxa, and then infer the phylogeny with only the 50 extant taxa. We would constrain internal nodes so that they are no younger than the oldest fossil that is descended from them. We are considering a phylogeny of only extant taxa, but using the fossils to constrain the minimum age of the clades they belong to. In practice, it is also necessary to place maximum ages on some of the nodes to keep the time calibration from pushing everything way back in time. Given the incompleteness of the fossil record, this is not as straight forward as constraining the minimum age of a node. If we have a fossil we can assert that the clade that contains it can be no younger than that specimen, though it may be much older. But it is harder to assert a maximum age, given that we just might not have fossils for older organisms that existed in the clade. Applying maximum ages often relies on expertise and additional information, such as knowledge that a given land mass where the organisms are exclusively found did not exist before a particular time.
+Consider this same task in terms of branch lengths, rather than node ages. From Section \@ref(tree-properties), we know that the number of branches in a tree is $2n-2$, where $n$ is the number of tips. This is because each of the $n$ tip nodes has an branch leading to it, and each of the $n-1$ internal nodes, with the exception of the root node, has an branch leading to it. So there are $n-2$ branches that give rise to internal nodes. This is how we arrive at our $n+n-2=2n-2$ branches in the phylogeny, each with their own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the branches leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than $n$ branch lengths for the tips, we only have $1$ tip branch length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with $1+n-2=n-1$ branch lengths that we need to estimate independently in our ultrametric tree.
 
-The internal-node-calibrated approach is simplest to implement in some respects, but has a variety of drawbacks. It doesn't make good use of all the available information. By just setting minima on clade ages, it is discarding information about the branch lengths for the fossil taxa. If the branch giving rise to a fossil is long, then we might want to mush the minimum age for a clade much further back than the age of the fossil itself, for example. This approach also doesn't work well has the fraction of fossil taxa increases in the analysis. For example, it wouldn't work at all for a phylogeny comprised exclusively of fossil taxa.
 
-In a tip-calibrated phylogeny, all taxa, fossil and extant, are included as tips in the phylogeny. The age of each tip is then constrained. Any tips from the present day are constrained to have the same present age, and fossil tips are constrained according to external information such as stratigraphy. A relaxed clock is then applied to infer the ages of unconstrained nodes, which also provides inferences of branch lengths. 
+### Time calibration in practice
+
+The use of character data and time calibrations to infer time calibrated phylogenies fall into two broad categories. The first is to use information from fossils (or other historical data) to constrain the ages of internal nodes. A Bayesian framework provides a natural framework for this -- node ages can by specified as priors on the tree. For example, if a given fossil is known to fall within a particular clade, then the most recent common ancestor of that clade can be constrained to be at least as old as the fossil and possibly older. 
+
+While this can work well in some situations, there are several drawbacks to this method. In practice, it is also necessary to place maximum ages on some of the nodes to keep the time calibration from pushing everything way back in time. Given the incompleteness of the fossil record, this is not as straight forward as constraining the minimum age of a node. If we have a fossil we can assert that the clade that contains it can be no younger than that specimen, though it may be much older. But it is harder to assert a maximum age, given that we just might not have fossils for older organisms that existed in the clade. Applying maximum ages often relies on expertise and additional information, such as knowledge that a given land mass where the organisms are exclusively found did not exist before a particular time.
+
+Models known as the "fossilized birth–death" (FBD) process don't use fossils as external constraints on internal nodes, they instead include fossils right in the tree as their own tips [@heath2014calibration]. Unlike extant tips, which all have the same age (i.e., today), the ages of these fossil tips are then constrained with geological data. This approach provides the ability to also include parameters for fossil preservation and sampling. FBD methods require that the character matrix includes data that can be scored in the fossils.
 
 <!--chapter:end:time.rmd-->
 
@@ -1788,17 +1844,17 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Sep 12, 2024 at 01:53:32 PM with the following R package versions.
+This book was rendered from the source code on Oct 03, 2025 at 03:31:17 PM with the following R package versions.
 
 
 ```
-R version 4.2.2 (2022-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.4 LTS
+R version 4.5.1 (2025-06-13)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 24.04.3 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.20.so
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -1808,64 +1864,67 @@ locale:
  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 
+time zone: Etc/UTC
+tzcode source: system (glibc)
+
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets 
 [6] methods   base     
 
 other attached packages:
- [1] scales_1.2.1     ggrepel_0.9.3    kableExtra_1.3.4
- [4] phangorn_2.11.1  Matrix_1.5-1     lubridate_1.9.2 
- [7] forcats_1.0.0    dplyr_1.1.0      purrr_1.0.1     
-[10] readr_2.1.4      tidyr_1.3.0      tibble_3.2.0    
-[13] ggplot2_3.4.1    tidyverse_2.0.0  stringr_1.5.0   
-[16] phytools_1.5-1   maps_3.4.1       magrittr_2.0.3  
-[19] gridExtra_2.3    geiger_2.0.10    ape_5.7-1       
-[22] ggtree_3.6.2     treeio_1.22.0    bookdown_0.33   
+ [1] scales_1.4.0     ggrepel_0.9.6    kableExtra_1.4.0
+ [4] phangorn_2.12.1  Matrix_1.7-3     lubridate_1.9.4 
+ [7] forcats_1.0.1    dplyr_1.1.4      purrr_1.1.0     
+[10] readr_2.1.5      tidyr_1.3.1      tibble_3.3.0    
+[13] ggplot2_4.0.0    tidyverse_2.0.0  stringr_1.5.2   
+[16] magrittr_2.0.4   gridExtra_2.3    geiger_2.0.11   
+[19] phytools_2.5-2   maps_3.4.3       ape_5.8-1       
+[22] ggtree_3.16.3    treeio_1.32.0    bookdown_0.44   
 
 loaded via a namespace (and not attached):
- [1] subplex_1.8             nlme_3.1-160           
- [3] webshot_0.5.4           doParallel_1.0.17      
- [5] httr_1.4.5              numDeriv_2016.8-1.1    
- [7] tools_4.2.2             bslib_0.4.2            
- [9] utf8_1.2.3              R6_2.5.1               
-[11] mgcv_1.8-41             lazyeval_0.2.2         
-[13] colorspace_2.1-0        withr_2.5.0            
-[15] tidyselect_1.2.0        mnormt_2.1.1           
-[17] compiler_4.2.2          cli_3.6.0              
-[19] rvest_1.0.3             expm_0.999-7           
-[21] xml2_1.3.3              labeling_0.4.2         
-[23] sass_0.4.5              mvtnorm_1.1-3          
-[25] quadprog_1.5-8          systemfonts_1.0.4      
-[27] digest_0.6.31           yulab.utils_0.0.6      
-[29] rmarkdown_2.20          svglite_2.1.1          
-[31] pkgconfig_2.0.3         htmltools_0.5.4        
-[33] plotrix_3.8-2           highr_0.10             
-[35] fastmap_1.1.1           rlang_1.0.6            
-[37] rstudioapi_0.14         optimParallel_1.0-2    
-[39] farver_2.1.1            gridGraphics_0.5-1     
-[41] jquerylib_0.1.4         generics_0.1.3         
-[43] combinat_0.0-8          jsonlite_1.8.4         
-[45] ggplotify_0.1.0         patchwork_1.1.2        
-[47] Rcpp_1.0.10             munsell_0.5.0          
-[49] fansi_1.0.4             lifecycle_1.0.3        
-[51] scatterplot3d_0.3-42    stringi_1.7.12         
-[53] yaml_2.3.7              clusterGeneration_1.3.7
-[55] MASS_7.3-58.1           grid_4.2.2             
-[57] parallel_4.2.2          lattice_0.20-45        
-[59] splines_4.2.2           hms_1.1.2              
-[61] magick_2.7.4            knitr_1.42             
-[63] pillar_1.8.1            igraph_1.4.1           
-[65] codetools_0.2-18        fastmatch_1.1-3        
-[67] glue_1.6.2              evaluate_0.20          
-[69] ggimage_0.3.1           ggfun_0.0.9            
-[71] deSolve_1.35            png_0.1-8              
-[73] vctrs_0.5.2             tzdb_0.3.0             
-[75] foreach_1.5.2           gtable_0.3.1           
-[77] cachem_1.0.7            xfun_0.37              
-[79] tidytree_0.4.2          coda_0.19-4            
-[81] viridisLite_0.4.1       iterators_1.0.14       
-[83] aplot_0.1.10            timechange_0.2.0       
-[85] ellipsis_0.3.2         
+ [1] mnormt_2.1.1            rlang_1.1.6            
+ [3] compiler_4.5.1          mgcv_1.9-3             
+ [5] png_0.1-8               systemfonts_1.3.1      
+ [7] vctrs_0.6.5             combinat_0.0-8         
+ [9] quadprog_1.5-8          crayon_1.5.3           
+[11] pkgconfig_2.0.3         fastmap_1.2.0          
+[13] magick_2.9.0            labeling_0.4.3         
+[15] subplex_1.9             deSolve_1.40           
+[17] rmarkdown_2.30          tzdb_0.5.0             
+[19] bit_4.6.0               tinytex_0.57           
+[21] xfun_0.53               aplot_0.2.9            
+[23] clusterGeneration_1.3.8 jsonlite_2.0.0         
+[25] uuid_1.2-1              parallel_4.5.1         
+[27] R6_2.6.1                stringi_1.8.7          
+[29] RColorBrewer_1.1-3      numDeriv_2016.8-1.1    
+[31] Rcpp_1.1.0              iterators_1.0.14       
+[33] knitr_1.50              optimParallel_1.0-2    
+[35] splines_4.5.1           igraph_2.1.4           
+[37] timechange_0.3.0        tidyselect_1.2.1       
+[39] rstudioapi_0.17.1       yaml_2.3.10            
+[41] doParallel_1.0.17       codetools_0.2-20       
+[43] lattice_0.22-7          withr_3.0.2            
+[45] S7_0.2.0                coda_0.19-4.1          
+[47] evaluate_1.0.5          ggimage_0.3.4          
+[49] gridGraphics_0.5-1      xml2_1.4.0             
+[51] pillar_1.11.1           foreach_1.5.2          
+[53] ggfun_0.2.0             generics_0.1.4         
+[55] vroom_1.6.6             hms_1.1.3              
+[57] tidytree_0.4.6          glue_1.8.0             
+[59] scatterplot3d_0.3-44    lazyeval_0.2.2         
+[61] tools_4.5.1             ggiraph_0.9.1          
+[63] fs_1.6.6                mvtnorm_1.3-3          
+[65] fastmatch_1.1-6         grid_4.5.1             
+[67] nlme_3.1-168            patchwork_1.3.2        
+[69] cli_3.6.5               rappdirs_0.3.3         
+[71] DEoptim_2.2-8           textshaping_1.0.3      
+[73] expm_1.0-0              viridisLite_0.4.2      
+[75] svglite_2.2.1           gtable_0.3.6           
+[77] yulab.utils_0.2.1       digest_0.6.37          
+[79] ggplotify_0.1.3         htmlwidgets_1.6.4      
+[81] farver_2.1.2            htmltools_0.5.8.1      
+[83] lifecycle_1.0.4         bit64_4.6.0-1          
+[85] MASS_7.3-65            
 ```
 
 <!--chapter:end:versions.rmd-->
