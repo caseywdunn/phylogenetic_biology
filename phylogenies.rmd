@@ -369,23 +369,29 @@ d_n11$color[ mrca_t5_t2_n11 ] = "gray"
 
 
 s = 40
-p_r_unrooted = 
-  tree_r %>% 
-  ggtree( layout="unrooted", branch.length="none", aes(color=I(color)) ) %<+% d_n11 + 
-  geom_tiplab(offset=0.2) +
+p_r_unrooted =
+  tree_r %>%
+  ggtree( layout="unrooted", branch.length="none", aes(color=I(color)) ) %<+% d_n11 +
+  geom_tiplab(offset=0) +
   #geom_text(aes(label=node)) +
-  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="black", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="gray", size=4 ) + 
-  ggtitle("(A) Unrooted")
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="black", size=4 ) +
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="gray", size=4 ) +
+  ggtitle("(A) Unrooted") +
+  theme(plot.title = element_text(hjust = 0)) +
+  xlim(-6, 6) +
+  # ylim(-8, 4) # Clips at top
+  # ylim(-6, 6) # Clips at top, better
+  ylim(-4, 8)
 
-p_r_rooted_n11 = 
-  tree_r %>% 
-  ggtree( branch.length="none", aes(color=I(color)) ) %<+% d_n11 + 
+p_r_rooted_n11 =
+  tree_r %>%
+  ggtree( branch.length="none", aes(color=I(color)) ) %<+% d_n11 +
   geom_tiplab(offset=0.1) +
   #geom_text(aes(label=node)) +
-  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="black", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="gray", size=4 ) + 
-  ggtitle("(B) Rooted on black node")
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="black", size=4 ) +
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="gray", size=4 ) +
+  ggtitle("(B) Rooted on black node") +
+  hexpand(0.3)
 
 
 tree_r_n17 = tree_r %>%  phytools::reroot( node=mrca_t9_t4_n11 ) %>% di2multi()
@@ -397,14 +403,15 @@ d_n17 = data.frame( node=1:n_nodes, color="black" )
 d_n17$color[ mrca_t5_t2_n17 ] = "gray" 
 
 
-p_r_rooted_n17 = 
-  tree_r_n17 %>% 
-  ggtree( branch.length="none", aes(color=I(color)) ) %<+% d_n17 + 
+p_r_rooted_n17 =
+  tree_r_n17 %>%
+  ggtree( branch.length="none", aes(color=I(color)) ) %<+% d_n17 +
   geom_tiplab(offset=0.1) +
   #geom_text(aes(label=node)) +
-  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n17 )), col="black", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n17 )), col="gray", size=4 ) + 
-  ggtitle("(C) Rooted on gray node")
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_n17 )), col="black", size=4 ) +
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_n17 )), col="gray", size=4 ) +
+  ggtitle("(C) Rooted on gray node") +
+  hexpand(0.3)
 
 tree_r_e14 = tree_r %>%  phytools::reroot( node=mrca_t5_t2_n11 )
 mrca_t10_t3_e14 = getMRCA(tree_r_e14, which(tree_r_e14$tip.label %in% c('t10','t3')))
@@ -416,14 +423,15 @@ n_nodes = max(tree_r_e14$edge)
 d_e14 = data.frame( node=1:n_nodes, color="black" )
 d_e14$color[ c(mrca_t1_t10_e14, mrca_t5_t2_e14) ] = "gray"
 
-p_rooted_e14 = 
-  tree_r_e14 %>% 
-  ggtree( branch.length="none", aes(color=I(color)) )  %<+% d_e14 + 
+p_rooted_e14 =
+  tree_r_e14 %>%
+  ggtree( branch.length="none", aes(color=I(color)) )  %<+% d_e14 +
   geom_tiplab(offset=0.1) +
   #geom_text(aes(label=node)) +
-  geom_nodepoint(aes(subset=(node == mrca_t10_t3_e14 )), col="black", size=4 ) + 
-  geom_nodepoint(aes(subset=(node == mrca_t9_t4_e14 )), col="gray", size=4 ) + 
-  ggtitle("(D) Rooted on gray branch")
+  geom_nodepoint(aes(subset=(node == mrca_t10_t3_e14 )), col="black", size=4 ) +
+  geom_nodepoint(aes(subset=(node == mrca_t9_t4_e14 )), col="gray", size=4 ) +
+  ggtitle("(D) Rooted on gray branch") +
+  hexpand(0.3)
 
 grid.arrange(
   p_r_unrooted,
@@ -469,7 +477,7 @@ g_tree_tetrapod = ggtree(tree_tetrapod) %<+% d
 root_node = tree$edge[ ! tree$edge[ ,1] %in% tree$edge[ ,2]  ,1] %>% unique()
 
 p_unrooted = ggtree(tree, layout="unrooted") %<+% d_ingroup +
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=30, size=phylopic_size_small ) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0, size=phylopic_size_small ) +
   ggtitle("(A) unrooted layout") +
   geom_nodepoint(aes(subset=(node == root_node )), col="black")
 
@@ -538,29 +546,31 @@ The amount of information in a phylogeny varies greatly depending on a variety o
 
 ```{r trees-information, echo=FALSE, fig.cap="Adding information to a phylogeny makes it more specific."}
 
+offset = 0.5
+
 tree_star = di2multi(tree, 1e6)
 
 p_min = tree_star %>%
   ggtree( branch.length="none" ) %<+% d_ingroup +
-  #geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=phylopic_offset_small, size=phylopic_size_small ) +
+  #geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small ) +
   xlim(0, 2) +
   ggtitle("(A) Unlabeled 11 tips comb cladogram")
 
 p_images = tree_star %>%
   ggtree( branch.length="none" ) %<+% d_ingroup +
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=phylopic_offset_small, size=phylopic_size_small ) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.1, size=phylopic_size_small ) +
   xlim(0, 2) +
   ggtitle("(B) Add tip images")
 
 p_topo = tree %>%
   ggtree( branch.length="none" ) %<+% d_ingroup +
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=phylopic_offset_small, size=phylopic_size_small ) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.75, size=phylopic_size_small ) +
   xlim(0, 15) +
   ggtitle("(C) Add topology")
 
 p_bl = tree %>%
   ggtree( ) %<+% d_ingroup +
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=phylopic_offset_small, size=phylopic_size_small ) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=20.0, size=phylopic_size_small ) +
   xlim(0, 400) +
   ggtitle("(D) Add branch lengths")
 

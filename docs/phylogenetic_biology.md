@@ -195,6 +195,8 @@ This is a very exciting time in phylogenetic biology. For many years most studie
 # Phylogenies
 
 
+
+
 \begin{figure}
 \includegraphics[width=4.56in]{figures/darwin} \caption{Darwin's depiction of the evolutionary relationships between organisms (Darwin, 1859).}(\#fig:trees-darwin)
 \end{figure}
@@ -1745,7 +1747,7 @@ Reconstruction [@joy2016ancestral].
 PGLS [@symonds2014primer].
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-16-2.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-17-1.pdf)<!-- --> ![](phylogenetic_biology_files/figure-latex/unnamed-chunk-17-2.pdf)<!-- --> 
 
 
 
@@ -1770,7 +1772,7 @@ PGLS [@symonds2014primer].
 ## Inferring covariance in the absence of phylogenetic structure
 
 
-![](phylogenetic_biology_files/figure-latex/unnamed-chunk-18-1.pdf)<!-- --> 
+![](phylogenetic_biology_files/figure-latex/unnamed-chunk-19-1.pdf)<!-- --> 
 
 ## Phylogenetic Independent Contrasts
 
@@ -1844,7 +1846,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 03, 2025 at 03:31:17 PM with the following R package versions.
+This book was rendered from the source code on Oct 03, 2025 at 10:20:00 PM with the following R package versions.
 
 
 ```
@@ -1872,59 +1874,61 @@ attached base packages:
 [6] methods   base     
 
 other attached packages:
- [1] scales_1.4.0     ggrepel_0.9.6    kableExtra_1.4.0
- [4] phangorn_2.12.1  Matrix_1.7-3     lubridate_1.9.4 
- [7] forcats_1.0.1    dplyr_1.1.4      purrr_1.1.0     
-[10] readr_2.1.5      tidyr_1.3.1      tibble_3.3.0    
-[13] ggplot2_4.0.0    tidyverse_2.0.0  stringr_1.5.2   
-[16] magrittr_2.0.4   gridExtra_2.3    geiger_2.0.11   
-[19] phytools_2.5-2   maps_3.4.3       ape_5.8-1       
-[22] ggtree_3.16.3    treeio_1.32.0    bookdown_0.44   
+ [1] bookdown_0.44    scales_1.4.0     ggrepel_0.9.6   
+ [4] kableExtra_1.4.0 phangorn_2.12.1  Matrix_1.7-3    
+ [7] lubridate_1.9.4  forcats_1.0.1    dplyr_1.1.4     
+[10] purrr_1.1.0      readr_2.1.5      tidyr_1.3.1     
+[13] tibble_3.3.0     ggplot2_4.0.0    tidyverse_2.0.0 
+[16] stringr_1.5.2    magrittr_2.0.4   gridExtra_2.3   
+[19] geiger_2.0.11    phytools_2.5-2   maps_3.4.3      
+[22] ggtree_3.16.3    treeio_1.32.0    ape_5.8-1       
 
 loaded via a namespace (and not attached):
  [1] mnormt_2.1.1            rlang_1.1.6            
  [3] compiler_4.5.1          mgcv_1.9-3             
  [5] png_0.1-8               systemfonts_1.3.1      
  [7] vctrs_0.6.5             combinat_0.0-8         
- [9] quadprog_1.5-8          crayon_1.5.3           
-[11] pkgconfig_2.0.3         fastmap_1.2.0          
+ [9] quadprog_1.5-8          pkgconfig_2.0.3        
+[11] crayon_1.5.3            fastmap_1.2.0          
 [13] magick_2.9.0            labeling_0.4.3         
 [15] subplex_1.9             deSolve_1.40           
 [17] rmarkdown_2.30          tzdb_0.5.0             
-[19] bit_4.6.0               tinytex_0.57           
-[21] xfun_0.53               aplot_0.2.9            
-[23] clusterGeneration_1.3.8 jsonlite_2.0.0         
-[25] uuid_1.2-1              parallel_4.5.1         
-[27] R6_2.6.1                stringi_1.8.7          
-[29] RColorBrewer_1.1-3      numDeriv_2016.8-1.1    
-[31] Rcpp_1.1.0              iterators_1.0.14       
-[33] knitr_1.50              optimParallel_1.0-2    
-[35] splines_4.5.1           igraph_2.1.4           
-[37] timechange_0.3.0        tidyselect_1.2.1       
-[39] rstudioapi_0.17.1       yaml_2.3.10            
-[41] doParallel_1.0.17       codetools_0.2-20       
-[43] lattice_0.22-7          withr_3.0.2            
-[45] S7_0.2.0                coda_0.19-4.1          
-[47] evaluate_1.0.5          ggimage_0.3.4          
-[49] gridGraphics_0.5-1      xml2_1.4.0             
-[51] pillar_1.11.1           foreach_1.5.2          
-[53] ggfun_0.2.0             generics_0.1.4         
-[55] vroom_1.6.6             hms_1.1.3              
-[57] tidytree_0.4.6          glue_1.8.0             
-[59] scatterplot3d_0.3-44    lazyeval_0.2.2         
-[61] tools_4.5.1             ggiraph_0.9.1          
-[63] fs_1.6.6                mvtnorm_1.3-3          
-[65] fastmatch_1.1-6         grid_4.5.1             
-[67] nlme_3.1-168            patchwork_1.3.2        
-[69] cli_3.6.5               rappdirs_0.3.3         
-[71] DEoptim_2.2-8           textshaping_1.0.3      
-[73] expm_1.0-0              viridisLite_0.4.2      
-[75] svglite_2.2.1           gtable_0.3.6           
-[77] yulab.utils_0.2.1       digest_0.6.37          
-[79] ggplotify_0.1.3         htmlwidgets_1.6.4      
-[81] farver_2.1.2            htmltools_0.5.8.1      
-[83] lifecycle_1.0.4         bit64_4.6.0-1          
-[85] MASS_7.3-65            
+[19] tinytex_0.57            bit_4.6.0              
+[21] xfun_0.53               cachem_1.1.0           
+[23] aplot_0.2.9             clusterGeneration_1.3.8
+[25] jsonlite_2.0.0          uuid_1.2-1             
+[27] parallel_4.5.1          R6_2.6.1               
+[29] bslib_0.9.0             stringi_1.8.7          
+[31] RColorBrewer_1.1-3      jquerylib_0.1.4        
+[33] numDeriv_2016.8-1.1     Rcpp_1.1.0             
+[35] iterators_1.0.14        knitr_1.50             
+[37] optimParallel_1.0-2     splines_4.5.1          
+[39] igraph_2.1.4            timechange_0.3.0       
+[41] tidyselect_1.2.1        rstudioapi_0.17.1      
+[43] yaml_2.3.10             doParallel_1.0.17      
+[45] codetools_0.2-20        lattice_0.22-7         
+[47] withr_3.0.2             S7_0.2.0               
+[49] coda_0.19-4.1           evaluate_1.0.5         
+[51] ggimage_0.3.4           gridGraphics_0.5-1     
+[53] xml2_1.4.0              pillar_1.11.1          
+[55] rsconnect_1.5.1         foreach_1.5.2          
+[57] ggfun_0.2.0             generics_0.1.4         
+[59] vroom_1.6.6             hms_1.1.3              
+[61] tidytree_0.4.6          glue_1.8.0             
+[63] scatterplot3d_0.3-44    lazyeval_0.2.2         
+[65] tools_4.5.1             ggiraph_0.9.1          
+[67] fs_1.6.6                mvtnorm_1.3-3          
+[69] fastmatch_1.1-6         grid_4.5.1             
+[71] nlme_3.1-168            patchwork_1.3.2        
+[73] cli_3.6.5               rappdirs_0.3.3         
+[75] DEoptim_2.2-8           textshaping_1.0.3      
+[77] expm_1.0-0              viridisLite_0.4.2      
+[79] svglite_2.2.1           gtable_0.3.6           
+[81] yulab.utils_0.2.1       sass_0.4.10            
+[83] digest_0.6.37           ggplotify_0.1.3        
+[85] htmlwidgets_1.6.4       farver_2.1.2           
+[87] htmltools_0.5.8.1       lifecycle_1.0.4        
+[89] bit64_4.6.0-1           MASS_7.3-65            
 ```
 
 <!--chapter:end:versions.rmd-->
