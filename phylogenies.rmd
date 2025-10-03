@@ -1,5 +1,11 @@
 # Phylogenies
 
+```{r echo=FALSE}
+
+phylopic_size_small = 0.1
+
+```
+
 
 ```{r trees-darwin, echo=FALSE, fig.cap="Darwin's depiction of the evolutionary relationships between organisms (Darwin, 1859)."}
 
@@ -84,9 +90,9 @@ tree = read.tree( text=tree_mammal_text )
 d_ingroup = d %>% filter( group=="ingroup" )
 g_tree = ggtree(tree) %<+% d_ingroup
 
-p = g_tree + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  geom_tiplab( aes(label=str_replace(label, "_", " " )), fontface = "italic", offset = 40) +
+p = g_tree +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=12, size=0.08 ) +
+  geom_tiplab( aes(label=str_replace(label, "_", " " )), fontface = "italic", offset = 35) +
   xlim(0, 400)
 
 p
@@ -106,21 +112,22 @@ Circular layouts place the root at the center, and the tips around the circumfer
 
 # Derived from https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html
 
+offset = 15
 
-p_rect = g_tree + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+p_rect = g_tree +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small ) +
   xlim(0, 400) + ggtitle("(A) rectangular layout")
 
-p_slanted = ggtree(tree, layout="slanted") %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+p_slanted = ggtree(tree, layout="slanted") %<+% d_ingroup +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small ) +
   xlim(0, 400) + ggtitle("(B) slanted layout")
 
-p_circ = ggtree(tree, layout="circular") %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+p_circ = ggtree(tree, layout="circular") %<+% d_ingroup +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small ) +
   xlim(0, 400)  + ggtitle("(C) circular layout")
 
-p_vert = g_tree + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+p_vert = g_tree +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small ) +
   xlim(0, 400) + ggtitle("(D) vertical layout") + coord_flip()
 
 library("gridExtra")
@@ -165,11 +172,13 @@ One of the most important things to keep in mind when interpreting a phylogeny i
 
 ```{r trees-rotations, echo=FALSE, fig.cap="The exact same phylogeny, drawn a few times with different node rotations."}
 
+offset=15
+
 n_tips = length(tree$tip.label)
 nodes_internal = seq( n_tips+1, 2*n_tips-1 ) %>% sample()
 
-p_r1 = g_tree + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+p_r1 = g_tree +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small ) +
   xlim(0, 400) + ggtitle("(A)")
 
 p_r2 = ggtree::rotate( p_r1, nodes_internal[1] ) + ggtitle("(B)")
@@ -205,16 +214,16 @@ tree_noised = tree
 # Noise up the edge lengths so that the phylograms don't have uniform edge lengths
 tree_noised$edge.length = tree_noised$edge.length * rpois(length(tree_noised$edge.length), lambda = 100)/100
 
-p_chronogram = g_tree + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+p_chronogram = g_tree +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=15, size=phylopic_size_small ) +
   xlim(0, 400) + ggtitle("(A) chronogram")
 
-p_phylogram = ggtree(tree_noised) %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+p_phylogram = ggtree(tree_noised) %<+% d_ingroup +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=15, size=phylopic_size_small ) +
   xlim(0, 400) + ggtitle("(B) phylogram")
 
-p_cladogram = ggtree(tree_noised, branch.length="none") %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+p_cladogram = ggtree(tree_noised, branch.length="none") %<+% d_ingroup +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5, size=phylopic_size_small ) +
   xlim(0, 15) + ggtitle("(C) cladogram")
 
 grid.arrange(
@@ -236,23 +245,27 @@ A convenient way to designate groups of organisms is by their most recent common
 ```{r trees-groups, echo=FALSE, fig.cap="(A) A monophyletic group, *i.e.* a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit."}
 
 
-p_mono = ggtree(tree) %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+p_mono = ggtree(tree) %<+% d_ingroup +
   geom_hilight(node=16, fill='gray', alpha=.6) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=15, size=phylopic_size_small ) +
+  xlim(0, 400) +
   # geom_text2(aes(label=node)) +
   ggtitle("(A) Monophyletic group")
 
-p_poly = ggtree(tree) %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+p_poly = ggtree(tree) %<+% d_ingroup +
   geom_hilight(node=2, fill='gray', alpha=.6) +
   geom_hilight(node=3, fill='gray', alpha=.6) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=15, size=phylopic_size_small ) +
+  xlim(0, 400) +
   # geom_text2(aes(label=node)) +
   ggtitle("(B) Polyphyletic group")
 
-p_para = ggtree(tree) %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+p_para = ggtree(tree) %<+% d_ingroup +
   geom_hilight(node=16, fill='gray') +
   geom_hilight(node=1, fill='white', alpha=1.0) +
+  geom_tree() +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=15, size=phylopic_size_small ) +
+  xlim(0, 400) +
   # geom_text2(aes(label=node)) +
   ggtitle("(C) Paraphyletic group")
 
@@ -279,10 +292,12 @@ A phylogeny that consists entirely of a single polytomy is said to be entirely u
 
 ```{r trees-polytomies, echo=FALSE, fig.cap="(A) The fully resolved mammal tree used in other figures. (B-C) Different polytomies created in this tree by collapsing some groups. (D) A fully unresolved comb tree."}
 
+offset = 0.5
+
 tree_comb = di2multi(tree, 1e6)
 
 p_resolved = ggtree(tree, branch.length="none") %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small ) +
   xlim(0, 15) + 
   #geom_text2(aes(label=node)) +
   ggtitle("(A) fully resolved")
@@ -292,7 +307,7 @@ tree_poly16 = tree
 tree_poly16$edge.length[5] = 0
 tree_poly16 = di2multi(tree_poly16, 0.1)
 p_poly16 = ggtree(tree_poly16, branch.length="none") %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small  ) +
   xlim(0, 15) + 
   #geom_text2(aes(label=node)) +
   ggtitle("(B) with polytomy")
@@ -302,14 +317,14 @@ tree_poly18 = tree
 tree_poly18$edge.length[c(10,11)] = 0
 tree_poly18 = di2multi(tree_poly18, 0.1)
 p_poly18 = ggtree(tree_poly18, branch.length="none") %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small ) +
   xlim(0, 15) + 
   #geom_text2(aes(label=node)) +
   ggtitle("(C) with polytomy")
 
 
 p_comb = ggtree(tree_comb, branch.length="none") %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.5 ) +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small ) +
   xlim(0, 15) + 
   ggtitle("(D) comb")
 
@@ -366,7 +381,7 @@ p_r_unrooted =
 p_r_rooted_n11 = 
   tree_r %>% 
   ggtree( branch.length="none", aes(color=I(color)) ) %<+% d_n11 + 
-  geom_tiplab(offset=0.2) +
+  geom_tiplab(offset=0.1) +
   #geom_text(aes(label=node)) +
   geom_nodepoint(aes(subset=(node == mrca_t10_t3_n11 )), col="black", size=4 ) + 
   geom_nodepoint(aes(subset=(node == mrca_t9_t4_n11 )), col="gray", size=4 ) + 
@@ -385,7 +400,7 @@ d_n17$color[ mrca_t5_t2_n17 ] = "gray"
 p_r_rooted_n17 = 
   tree_r_n17 %>% 
   ggtree( branch.length="none", aes(color=I(color)) ) %<+% d_n17 + 
-  geom_tiplab(offset=0.2) +
+  geom_tiplab(offset=0.1) +
   #geom_text(aes(label=node)) +
   geom_nodepoint(aes(subset=(node == mrca_t10_t3_n17 )), col="black", size=4 ) + 
   geom_nodepoint(aes(subset=(node == mrca_t9_t4_n17 )), col="gray", size=4 ) + 
@@ -404,7 +419,7 @@ d_e14$color[ c(mrca_t1_t10_e14, mrca_t5_t2_e14) ] = "gray"
 p_rooted_e14 = 
   tree_r_e14 %>% 
   ggtree( branch.length="none", aes(color=I(color)) )  %<+% d_e14 + 
-  geom_tiplab(offset=0.2) +
+  geom_tiplab(offset=0.1) +
   #geom_text(aes(label=node)) +
   geom_nodepoint(aes(subset=(node == mrca_t10_t3_e14 )), col="black", size=4 ) + 
   geom_nodepoint(aes(subset=(node == mrca_t9_t4_e14 )), col="gray", size=4 ) + 
@@ -453,30 +468,34 @@ g_tree_tetrapod = ggtree(tree_tetrapod) %<+% d
 # get the root node
 root_node = tree$edge[ ! tree$edge[ ,1] %in% tree$edge[ ,2]  ,1] %>% unique()
 
-p_unrooted = ggtree(tree, layout="unrooted") %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  ggtitle("(A) unrooted layout") + 
+p_unrooted = ggtree(tree, layout="unrooted") %<+% d_ingroup +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=30, size=phylopic_size_small ) +
+  ggtitle("(A) unrooted layout") +
   geom_nodepoint(aes(subset=(node == root_node )), col="black")
 
-p_rooted = tree %>% 
-  ggtree() %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+p_rooted = tree %>%
+  ggtree() %<+% d_ingroup +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=20, size=phylopic_size_small ) +
   xlim(0, 400) +
-  ggtitle("(B) rooted layout") + 
+  ggtitle("(B) rooted layout") +
   geom_nodepoint(aes(subset=(node == root_node )), col="black")
 
-p_tetra = g_tree_tetrapod + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
-  ggtitle("(C) with outgroup taxa") + 
+p_tetra = g_tree_tetrapod +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=20, size=phylopic_size_small/1.3 ) +
+  ggtitle("(C) with outgroup taxa") +
   geom_nodepoint(aes(subset=(node == mammal_mrca )), col="black") +
   geom_nodepoint(aes(subset=(node == tetrapod_root_node )), col="gray") +
-  xlim(0, 500)
+  xlim(0, 400)
 
 grid.arrange(
-  p_unrooted,
-  p_rooted,
-  p_tetra,
-  ncol=2
+    p_unrooted,
+    p_rooted,
+    p_tetra,
+    grid::nullGrob(),  # Empty space
+    layout_matrix = rbind(c(1, 2),
+                          c(3, 4)),
+    widths = c(1, 1),  # Equal width for columns
+    heights = c(1, 1.3)
   )
 
 ```
@@ -521,27 +540,27 @@ The amount of information in a phylogeny varies greatly depending on a variety o
 
 tree_star = di2multi(tree, 1e6)
 
-p_min = tree_star %>% 
-  ggtree( branch.length="none" ) %<+% d_ingroup + 
-  #geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=2 ) +
+p_min = tree_star %>%
+  ggtree( branch.length="none" ) %<+% d_ingroup +
+  #geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=phylopic_offset_small, size=phylopic_size_small ) +
   xlim(0, 2) +
   ggtitle("(A) Unlabeled 11 tips comb cladogram")
 
-p_images = tree_star %>% 
-  ggtree( branch.length="none" ) %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.2 ) +
+p_images = tree_star %>%
+  ggtree( branch.length="none" ) %<+% d_ingroup +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=phylopic_offset_small, size=phylopic_size_small ) +
   xlim(0, 2) +
   ggtitle("(B) Add tip images")
 
-p_topo = tree %>% 
-  ggtree( branch.length="none" ) %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.2 ) +
+p_topo = tree %>%
+  ggtree( branch.length="none" ) %<+% d_ingroup +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=phylopic_offset_small, size=phylopic_size_small ) +
   xlim(0, 15) +
   ggtitle("(C) Add topology")
 
-p_bl = tree %>% 
-  ggtree( ) %<+% d_ingroup + 
-  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=0.2 ) +
+p_bl = tree %>%
+  ggtree( ) %<+% d_ingroup +
+  geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=phylopic_offset_small, size=phylopic_size_small ) +
   xlim(0, 400) +
   ggtitle("(D) Add branch lengths")
 

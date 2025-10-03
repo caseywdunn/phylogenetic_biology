@@ -191,7 +191,6 @@ div.csl-indent {
 <li class="chapter" data-level="2.8" data-path="phylogenies.html"><a href="phylogenies.html#rooting"><i class="fa fa-check"></i><b>2.8</b> Rooting</a></li>
 <li class="chapter" data-level="2.9" data-path="phylogenies.html"><a href="phylogenies.html#the-information-contained-in-phylogenies"><i class="fa fa-check"></i><b>2.9</b> The information contained in phylogenies</a></li>
 <li class="chapter" data-level="2.10" data-path="phylogenies.html"><a href="phylogenies.html#representation"><i class="fa fa-check"></i><b>2.10</b> Representation</a></li>
-<li class="chapter" data-level="2.11" data-path="phylogenies.html"><a href="phylogenies.html#additional-reading"><i class="fa fa-check"></i><b>2.11</b> Additional reading</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a>
 <ul>
@@ -575,16 +574,7 @@ made using similar code.</p>
 <p>There is one other important piece of information that we specified in the newick files - the tip labels. Those are located in another slot within the <code>phylo</code> object:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="phylogenies.html#cb6-1" tabindex="-1"></a>phylo_tree<span class="sc">$</span>tip.label</span></code></pre></div>
 <pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot;</code></pre>
-<p>We can see that this is just a vector of labels. They correspond to the labels of nodes one through five, all the tip labels, in consecutive order.</p>
-<p>That’s it. That’s all the information we specified in the newick file, all the information in the <code>phylo</code> object, and all the information that is needed to draw Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>. The newick tree is easy to store and manipulate with simple text tools, the <code>phylo</code> object is a powerful and flexible way to represent the tree in computer memory, and the figure is easy to read at a glance.</p>
-</div>
-<div id="additional-reading" class="section level2 hasAnchor" number="2.11">
-<h2><span class="header-section-number">2.11</span> Additional reading<a href="phylogenies.html#additional-reading" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li><p>I used <code>ggtree</code> <span class="citation">(<a href="#ref-R-ggtree">Yu et al. 2025</a>)</span> to draw the trees in this chapter. If you are interested in learning more about these tools, see:</p></li>
-<li><p>The ggtree book - <a href="https://yulab-smu.github.io/treedata-book/index.html" class="uri">https://yulab-smu.github.io/treedata-book/index.html</a></p></li>
-<li><p>ggtree vignettes - <a href="https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html" class="uri">https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html</a></p></li>
-</ul>
+<p>We can see that this is just a vector of labels. They correspond to the labels of nodes one through five, all the</p>
 
 </div>
 </div>
@@ -604,9 +594,6 @@ Haeckel, Ernst. 1897. <em>The Evolution of Man</em>. Vol. 1. D. Appleton.
 </div>
 <div id="ref-upham2019" class="csl-entry">
 Upham, Nathan S, Jacob A Esselstyn, and Walter Jetz. 2019. <span>“Inferring the Mammal Tree: Species-Level Sets of Phylogenies for Questions in Ecology, Evolution, and Conservation.”</span> <em>PLoS Biology</em> 17 (12): e3000494. <a href="https://doi.org/10.1371/journal.pbio.3000494">https://doi.org/10.1371/journal.pbio.3000494</a>.
-</div>
-<div id="ref-R-ggtree" class="csl-entry">
-Yu, Guangchuang, Tommy Tsan-Yuk Lam, and Shuangbin Xu. 2025. <em>Ggtree: An r Package for Visualization of Tree and Annotation Data</em>. <a href="https://doi.org/10.18129/B9.bioc.ggtree">https://doi.org/10.18129/B9.bioc.ggtree</a>.
 </div>
 </div>
             </section>
