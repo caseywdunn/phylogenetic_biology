@@ -1,7 +1,10 @@
---- 
+---
 title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 edition: 0.9.0
+isbn_paperback: "XXX"
+isbn_hardback: "YYY"
+doi: "ZZZ"
 github-repo: caseywdunn/phylogenetic_biology
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -17,6 +20,9 @@ always_allow_html: true
 ```{r create-frontpage, include=FALSE}
 edition_value <- rmarkdown::metadata$edition
 current_year <- format(Sys.Date(), "%Y")
+doi_value <- rmarkdown::metadata$doi
+isbn_hardback_value <- rmarkdown::metadata$isbn_hardback
+isbn_paperback_value <- rmarkdown::metadata$isbn_paperback
 frontpage_content <- sprintf('
 
 \\newpage
@@ -42,6 +48,13 @@ frontpage_content <- sprintf('
 \t\t\\textbf{Casey W. Dunn}
 
 \t\thttp://dunnlab.org
+
+\t\t\\vspace{1.5cm}
+\t\t DOI: %s
+
+\t\t ISBN %s Hardback
+
+\t\t ISBN %s Paperback
 
 \t\t\\vfill
 \t\t\t
@@ -82,7 +95,7 @@ Thank you Jenny.}
 \\vspace*{\\fill}
 
 \\newpage
-', edition_value, current_year)
+', edition_value, doi_value, isbn_hardback_value, isbn_paperback_value, current_year)
 
 writeLines(frontpage_content, "frontpage.tex")
 ```
