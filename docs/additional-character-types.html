@@ -52,6 +52,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -289,14 +291,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration-in-practice"><i class="fa fa-check"></i><b>9.3.1</b> Time calibration in practice</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>10</b> Ancestral character state reconstruction</a></li>
-<li class="chapter" data-level="11" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>11</b> Comparative methods</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="comparative-methods.html"><a href="comparative-methods.html#correlated-evolutionary-changes"><i class="fa fa-check"></i><b>11.1</b> Correlated evolutionary changes</a></li>
-<li class="chapter" data-level="11.2" data-path="comparative-methods.html"><a href="comparative-methods.html#inferring-covariance-in-the-absence-of-phylogenetic-structure"><i class="fa fa-check"></i><b>11.2</b> Inferring covariance in the absence of phylogenetic structure</a></li>
-<li class="chapter" data-level="11.3" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>11.3</b> Phylogenetic Independent Contrasts</a></li>
-<li class="chapter" data-level="11.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-structure-is-the-expected-covariance-structure"><i class="fa fa-check"></i><b>11.4</b> Phylogenetic structure is the expected covariance structure</a></li>
-</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
 <ul>
@@ -331,91 +325,196 @@ div.csl-indent {
 <p>So far we have considered a single type of character data – DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies, such as morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.</p>
 <p>We can group character types based on some shared features. For example, some data are discrete values (such as DNA), others have continuous values (such as mass or length), and still others have countable values (such as number of body segments) that have integer values that come in discrete values like DNA but these integers are ordered and convey magnitude.</p>
 <p>Rather than approach each new character type in an <em>ad hoc</em> way, it is important to examine these more general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (<em>i.e.</em>, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory <span class="citation">(<a href="#ref-houle2011measurement">Houle et al. 2011</a>)</span> – a field that sits at the intersection of math, statistics, and philosophy that concerns the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like “measurement theory”, you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually an exciting and grounding framework for understanding many of the central aspects of what we do in science.</p>
-<table>
-<caption><span id="tab:char-scale-types">Table 8.1: </span>Scale types, modified from Houle (2011).</caption>
-<colgroup>
-<col width="5%" />
-<col width="9%" />
-<col width="7%" />
-<col width="16%" />
-<col width="9%" />
-<col width="11%" />
-<col width="40%" />
-</colgroup>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:char-scale-types">Table 8.1: </span><span id="tab:char-scale-types">Table 8.2: </span>Scale types, modified from Houle (2011).
+</caption>
 <thead>
-<tr class="header">
-<th align="left">Scale type</th>
-<th align="left">Domain</th>
-<th align="left">Measurement type</th>
-<th align="left">Permissible transformations</th>
-<th align="left">Arbitrary parameters</th>
-<th align="left">Meaningful comparisons</th>
-<th align="left">Biological examples</th>
+<tr>
+<th style="text-align:left;">
+Scale type
+</th>
+<th style="text-align:left;">
+Domain
+</th>
+<th style="text-align:left;">
+Measurement type
+</th>
+<th style="text-align:left;">
+Permissible transformations
+</th>
+<th style="text-align:left;">
+Arbitrary parameters
+</th>
+<th style="text-align:left;">
+Meaningful comparisons
+</th>
+<th style="text-align:left;">
+Biological examples
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Nominal</td>
-<td align="left">Any set of symbols</td>
-<td align="left">Discrete</td>
-<td align="left">Any one-to-one mapping</td>
-<td align="left">Countable</td>
-<td align="left">Equivalence</td>
-<td align="left">Species, genes</td>
+<tr>
+<td style="text-align:left;">
+Nominal
+</td>
+<td style="text-align:left;">
+Any set of symbols
+</td>
+<td style="text-align:left;">
+Discrete
+</td>
+<td style="text-align:left;">
+Any one-to-one mapping
+</td>
+<td style="text-align:left;">
+Countable
+</td>
+<td style="text-align:left;">
+Equivalence
+</td>
+<td style="text-align:left;width: 3cm; ">
+Species, genes
+</td>
 </tr>
-<tr class="even">
-<td align="left">Ordinal</td>
-<td align="left">Ordered symbols</td>
-<td align="left">Discrete</td>
-<td align="left">Any monotonically increasing function</td>
-<td align="left">Countable</td>
-<td align="left">Order</td>
-<td align="left">Social dominance</td>
+<tr>
+<td style="text-align:left;">
+Ordinal
+</td>
+<td style="text-align:left;">
+Ordered symbols
+</td>
+<td style="text-align:left;">
+Discrete
+</td>
+<td style="text-align:left;">
+Any monotonically increasing function
+</td>
+<td style="text-align:left;">
+Countable
+</td>
+<td style="text-align:left;">
+Order
+</td>
+<td style="text-align:left;width: 3cm; ">
+Social dominance
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Interval</td>
-<td align="left">Real numbers</td>
-<td align="left">Continuous</td>
-<td align="left"><span class="math inline">\(x \rightarrow ax + b\)</span></td>
-<td align="left">2</td>
-<td align="left">Order, differences</td>
-<td align="left">Dates, Malthusian fitness, relative temperature (arbitrary 0, <em>e.g.</em>, Celsius and Fahrenheit)</td>
+<tr>
+<td style="text-align:left;">
+Interval
+</td>
+<td style="text-align:left;">
+Real numbers
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(x \rightarrow ax + b\)</span>
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Order, differences
+</td>
+<td style="text-align:left;width: 3cm; ">
+Dates, Malthusian fitness, relative temperature (arbitrary 0, e.g., Celsius and Fahrenheit)
+</td>
 </tr>
-<tr class="even">
-<td align="left">Log-interval</td>
-<td align="left">Positive real numbers</td>
-<td align="left">Continuous</td>
-<td align="left"><span class="math inline">\(x \rightarrow ax^b\)</span></td>
-<td align="left">2</td>
-<td align="left">Order, ratios</td>
-<td align="left">Body size</td>
+<tr>
+<td style="text-align:left;">
+Log-interval
+</td>
+<td style="text-align:left;">
+Positive real numbers
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(x \rightarrow ax^b\)</span>
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+Order, ratios
+</td>
+<td style="text-align:left;width: 3cm; ">
+Body size
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Difference</td>
-<td align="left">Real numbers</td>
-<td align="left">Continuous</td>
-<td align="left"><span class="math inline">\(x \rightarrow x + a\)</span></td>
-<td align="left">1</td>
-<td align="left">Order, differences</td>
-<td align="left">Log-transformed ratio-scale variables</td>
+<tr>
+<td style="text-align:left;">
+Difference
+</td>
+<td style="text-align:left;">
+Real numbers
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(x \rightarrow x + a\)</span>
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Order, differences
+</td>
+<td style="text-align:left;width: 3cm; ">
+Log-transformed ratio-scale variables
+</td>
 </tr>
-<tr class="even">
-<td align="left">Ratio</td>
-<td align="left">Positive real numbers</td>
-<td align="left">Continuous</td>
-<td align="left"><span class="math inline">\(x \rightarrow ax\)</span></td>
-<td align="left">1</td>
-<td align="left">Order, ratios, differences</td>
-<td align="left">Length, mass, duration, absolute temperature (<em>e.g.</em>, Kelvin)</td>
+<tr>
+<td style="text-align:left;">
+Ratio
+</td>
+<td style="text-align:left;">
+Positive real numbers
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(x \rightarrow ax\)</span>
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Order, ratios, differences
+</td>
+<td style="text-align:left;width: 3cm; ">
+Length, mass, duration, absolute temperature (e.g., Kelvin)
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Absolute</td>
-<td align="left">Defined</td>
-<td align="left">Continuous</td>
-<td align="left">None</td>
-<td align="left">0</td>
-<td align="left">Any</td>
-<td align="left">Probability</td>
+<tr>
+<td style="text-align:left;">
+Absolute
+</td>
+<td style="text-align:left;">
+Defined
+</td>
+<td style="text-align:left;">
+Continuous
+</td>
+<td style="text-align:left;">
+None
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+Any
+</td>
+<td style="text-align:left;width: 3cm; ">
+Probability
+</td>
 </tr>
 </tbody>
 </table>

@@ -8,20 +8,25 @@ Rather than approach each new character type in an *ad hoc* way, it is important
 
 
 ```{r char-scale-types, echo=FALSE}
-knitr::kable(
-  data.frame(
-    `Scale type` = c("Nominal", "Ordinal", "Interval", "Log-interval", "Difference", "Ratio", "Absolute"),
-    `Domain` = c("Any set of symbols", "Ordered symbols", "Real numbers", "Positive real numbers", "Real numbers", "Positive real numbers", "Defined"),
-    `Measurement type` = c("Discrete", "Discrete", "Continuous", "Continuous", "Continuous", "Continuous", "Continuous"),
-    `Permissible transformations` = c("Any one-to-one mapping", "Any monotonically increasing function", "$x \\rightarrow ax + b$", "$x \\rightarrow ax^b$", "$x \\rightarrow x + a$", "$x \\rightarrow ax$", "None"),
-    `Arbitrary parameters` = c("Countable", "Countable", "2", "2", "1", "1", "0"),
-    `Meaningful comparisons` = c("Equivalence", "Order", "Order, differences", "Order, ratios", "Order, differences", "Order, ratios, differences", "Any"),
-    `Biological examples` = c("Species, genes", "Social dominance", "Dates, Malthusian fitness, relative temperature (arbitrary 0, *e.g.*, Celsius and Fahrenheit)", "Body size", "Log-transformed ratio-scale variables", "Length, mass, duration, absolute temperature (*e.g.*, Kelvin)", "Probability")
-  ),
-  col.names = c("Scale type", "Domain", "Measurement type", "Permissible transformations", "Arbitrary parameters", "Meaningful comparisons", "Biological examples"),
-  check.names = FALSE,
-  caption = "Scale types, modified from Houle (2011)."
+df <- data.frame(
+  `Scale type` = c("Nominal", "Ordinal", "Interval", "Log-interval", "Difference", "Ratio", "Absolute"),
+  `Domain` = c("Any set of symbols", "Ordered symbols", "Real numbers", "Positive real numbers", "Real numbers", "Positive real numbers", "Defined"),
+  `Measurement type` = c("Discrete", "Discrete", "Continuous", "Continuous", "Continuous", "Continuous", "Continuous"),
+  `Permissible transformations` = c("Any one-to-one mapping", "Any monotonically increasing function", "\\(x \\rightarrow ax + b\\)", "\\(x \\rightarrow ax^b\\)", "\\(x \\rightarrow x + a\\)", "\\(x \\rightarrow ax\\)", "None"),
+  `Arbitrary parameters` = c("Countable", "Countable", "2", "2", "1", "1", "0"),
+  `Meaningful comparisons` = c("Equivalence", "Order", "Order, differences", "Order, ratios", "Order, differences", "Order, ratios, differences", "Any"),
+  `Biological examples` = c("Species, genes", "Social dominance", "Dates, Malthusian fitness, relative temperature (arbitrary 0, e.g., Celsius and Fahrenheit)", "Body size", "Log-transformed ratio-scale variables", "Length, mass, duration, absolute temperature (e.g., Kelvin)", "Probability"),
+  check.names = FALSE
 )
+
+knitr::kable(df,
+  col.names = c("Scale type", "Domain", "Measurement type", "Permissible transformations", "Arbitrary parameters", "Meaningful comparisons", "Biological examples"),
+  caption = "Scale types, modified from Houle (2011).",
+  escape = FALSE,
+  booktabs = TRUE
+) %>%
+  kableExtra::kable_styling(latex_options = c("scale_down")) %>%
+  kableExtra::column_spec(7, width = "3cm")
 ```
 
 

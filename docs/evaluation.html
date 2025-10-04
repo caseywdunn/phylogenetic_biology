@@ -52,6 +52,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -289,14 +291,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration-in-practice"><i class="fa fa-check"></i><b>9.3.1</b> Time calibration in practice</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>10</b> Ancestral character state reconstruction</a></li>
-<li class="chapter" data-level="11" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>11</b> Comparative methods</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="comparative-methods.html"><a href="comparative-methods.html#correlated-evolutionary-changes"><i class="fa fa-check"></i><b>11.1</b> Correlated evolutionary changes</a></li>
-<li class="chapter" data-level="11.2" data-path="comparative-methods.html"><a href="comparative-methods.html#inferring-covariance-in-the-absence-of-phylogenetic-structure"><i class="fa fa-check"></i><b>11.2</b> Inferring covariance in the absence of phylogenetic structure</a></li>
-<li class="chapter" data-level="11.3" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>11.3</b> Phylogenetic Independent Contrasts</a></li>
-<li class="chapter" data-level="11.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-structure-is-the-expected-covariance-structure"><i class="fa fa-check"></i><b>11.4</b> Phylogenetic structure is the expected covariance structure</a></li>
-</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
 <ul>
@@ -347,7 +341,7 @@ div.csl-indent {
 <li><p>The four equilibrium frequencies are constrained such that <span class="math inline">\(\pi_A+\pi_C+\pi_G+\pi_T=1\)</span>. This is because they are exclusive frequencies, and there are no other possible states. Given that every site must be an A, C, G, or T, their frequencies must sum to <span class="math inline">\(1\)</span>. This mathematical relationship between the equilibrium frequency parameters means that only three of them can vary independently – three are stochastic and one is deterministic. Again, it doesn’t matter which one is deterministic, only how many are stochastic, so I’ll treat <span class="math inline">\(\pi_A\)</span> as the deterministic parameter.</p></li>
 </ul>
 <div class="figure"><span style="display:block;" id="fig:evaluation-models-nested"></span>
-<img src="figures/models_dna.png" alt="A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the branch lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014)." width="404" />
+<img src="figures/models_dna.png" alt="A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the branch lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014)." width="202" />
 <p class="caption">
 Figure 6.1: A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here <span class="math inline">\(\mu=1\)</span>, such that the branch lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014).
 </p>

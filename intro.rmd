@@ -1,3 +1,5 @@
+\mainmatter
+
 # Introduction {#intro}
 
 Phylogenetic biology is the study of evolutionary relationships, and the use of those relationships to study other aspects of biology.

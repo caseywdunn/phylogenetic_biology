@@ -2,8 +2,8 @@
 title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 edition: 0.9.0
-isbn_paperback: "XXX"
-isbn_hardback: "YYY"
+isbn_paperback: "979-8-9934524-0-1"
+isbn_hardback: "979-8-9934524-1-8"
 doi: "ZZZ"
 github-repo: caseywdunn/phylogenetic_biology
 date: "2025-10-04"
@@ -99,6 +99,8 @@ The following books provide general computational background for the topics cove
 Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online), 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access.
 
 <!--chapter:end:index.rmd-->
+
+\mainmatter
 
 # Introduction {#intro}
 
@@ -197,7 +199,7 @@ This is a very exciting time in phylogenetic biology. For many years most studie
 
 
 \begin{figure}
-\includegraphics[width=4.56in]{figures/darwin} \caption{Darwin's depiction of the evolutionary relationships between organisms (Darwin, 1859).}(\#fig:trees-darwin)
+\includegraphics[width=5in]{figures/darwin} \caption{Darwin's depiction of the evolutionary relationships between organisms (Darwin, 1859).}(\#fig:trees-darwin)
 \end{figure}
 
 Phylogenies represent evolutionary relationships. The only figure in Darwin's Origin of Species [@darwin1859] was a phylogeny (Figure \@ref(fig:trees-darwin)), though he didn't call it that.
@@ -1327,7 +1329,7 @@ These parameters are treated as follows in the GTR model (Figure \@ref(fig:evalu
 - The four equilibrium frequencies are constrained such that $\pi_A+\pi_C+\pi_G+\pi_T=1$. This is because they are exclusive frequencies, and there are no other possible states. Given that every site must be an A, C, G, or T, their frequencies must sum to $1$. This mathematical relationship between the equilibrium frequency parameters means that only three of them can vary independently -- three are stochastic and one is deterministic. Again, it doesn't matter which one is deterministic, only how many are stochastic, so I'll treat $\pi_A$ as the deterministic parameter.
 
 \begin{figure}
-\includegraphics[width=8.42in]{figures/models_dna} \caption{A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the branch lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014).}(\#fig:evaluation-models-nested)
+\includegraphics[width=4.21in]{figures/models_dna} \caption{A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the branch lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014).}(\#fig:evaluation-models-nested)
 \end{figure}
 
 The number of stochastic parameters in a model is referred to as the degrees of freedom, $df$. You can think of it is the number of knobs that can be turned freely during the analysis. Models that have higher degrees of freedom are often referred to as more complex than models with fewer degrees of freedom.
@@ -1556,28 +1558,24 @@ Rather than approach each new character type in an *ad hoc* way, it is important
 
 
 \begin{table}
-
+\centering
 \caption{(\#tab:char-scale-types)Scale types, modified from Houle (2011).}
 \centering
-\begin{tabular}[t]{l|l|l|l|l|l|l}
-\hline
+\resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{
+\begin{tabular}[t]{llllll>{\raggedright\arraybackslash}p{3cm}}
+\toprule
 Scale type & Domain & Measurement type & Permissible transformations & Arbitrary parameters & Meaningful comparisons & Biological examples\\
-\hline
+\midrule
 Nominal & Any set of symbols & Discrete & Any one-to-one mapping & Countable & Equivalence & Species, genes\\
-\hline
 Ordinal & Ordered symbols & Discrete & Any monotonically increasing function & Countable & Order & Social dominance\\
-\hline
-Interval & Real numbers & Continuous & \$x \textbackslash{}rightarrow ax + b\$ & 2 & Order, differences & Dates, Malthusian fitness, relative temperature (arbitrary 0, *e.g.*, Celsius and Fahrenheit)\\
-\hline
-Log-interval & Positive real numbers & Continuous & \$x \textbackslash{}rightarrow ax\textasciicircum{}b\$ & 2 & Order, ratios & Body size\\
-\hline
-Difference & Real numbers & Continuous & \$x \textbackslash{}rightarrow x + a\$ & 1 & Order, differences & Log-transformed ratio-scale variables\\
-\hline
-Ratio & Positive real numbers & Continuous & \$x \textbackslash{}rightarrow ax\$ & 1 & Order, ratios, differences & Length, mass, duration, absolute temperature (*e.g.*, Kelvin)\\
-\hline
+Interval & Real numbers & Continuous & \(x \rightarrow ax + b\) & 2 & Order, differences & Dates, Malthusian fitness, relative temperature (arbitrary 0, e.g., Celsius and Fahrenheit)\\
+Log-interval & Positive real numbers & Continuous & \(x \rightarrow ax^b\) & 2 & Order, ratios & Body size\\
+Difference & Real numbers & Continuous & \(x \rightarrow x + a\) & 1 & Order, differences & Log-transformed ratio-scale variables\\
+\addlinespace
+Ratio & Positive real numbers & Continuous & \(x \rightarrow ax\) & 1 & Order, ratios, differences & Length, mass, duration, absolute temperature (e.g., Kelvin)\\
 Absolute & Defined & Continuous & None & 0 & Any & Probability\\
-\hline
-\end{tabular}
+\bottomrule
+\end{tabular}}
 \end{table}
 
 
@@ -1791,7 +1789,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 04, 2025 at 02:32:41 PM with the following R package versions.
+This book was rendered from the source code on Oct 04, 2025 at 08:09:37 PM with the following R package versions.
 
 
 ```

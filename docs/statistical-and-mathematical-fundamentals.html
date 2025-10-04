@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="comparative-methods.html"/>
+<link rel="prev" href="phylogenies-and-time.html"/>
 <link rel="next" href="software-versions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -52,6 +52,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -289,14 +291,6 @@ div.csl-indent {
 <li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration-in-practice"><i class="fa fa-check"></i><b>9.3.1</b> Time calibration in practice</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>10</b> Ancestral character state reconstruction</a></li>
-<li class="chapter" data-level="11" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>11</b> Comparative methods</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="comparative-methods.html"><a href="comparative-methods.html#correlated-evolutionary-changes"><i class="fa fa-check"></i><b>11.1</b> Correlated evolutionary changes</a></li>
-<li class="chapter" data-level="11.2" data-path="comparative-methods.html"><a href="comparative-methods.html#inferring-covariance-in-the-absence-of-phylogenetic-structure"><i class="fa fa-check"></i><b>11.2</b> Inferring covariance in the absence of phylogenetic structure</a></li>
-<li class="chapter" data-level="11.3" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>11.3</b> Phylogenetic Independent Contrasts</a></li>
-<li class="chapter" data-level="11.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-structure-is-the-expected-covariance-structure"><i class="fa fa-check"></i><b>11.4</b> Phylogenetic structure is the expected covariance structure</a></li>
-</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
 <ul>
@@ -326,21 +320,21 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="statistical-and-mathematical-fundamentals" class="section level1 hasAnchor" number="12">
+<div id="statistical-and-mathematical-fundamentals" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Appendix A</span> Statistical and mathematical fundamentals<a href="statistical-and-mathematical-fundamentals.html#statistical-and-mathematical-fundamentals" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Phylogenetic biology draws on a variety of themes in statistics and mathematics. Given the diverse backgrounds of people coming to phylogenetic biology, one of the challenges of introducing people to this field is ensuring a foundation in these fundamentals. Many people have a solid working grasp of many of these topics, others need a refresher, and some have never seen them.</p>
 <p>Throughout the text I have covered some of these fundamentals, but here I provide additional resources.</p>
-<div id="stats-general" class="section level2 hasAnchor" number="12.1">
+<div id="stats-general" class="section level2 hasAnchor" number="10.1">
 <h2><span class="header-section-number">A.1</span> Probability theory and General statistics<a href="statistical-and-mathematical-fundamentals.html#stats-general" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>I put together this short summary of statistical concepts commonly encountered in biology - <a href="https://bitbucket.org/caseywdunn/statistics/raw/master/statistics_in_biology.pdf" class="uri">https://bitbucket.org/caseywdunn/statistics/raw/master/statistics_in_biology.pdf</a>. It is short and technical, with a focus on the relationship between concepts, such as the exponential family of distributions.</p>
 </div>
-<div id="stats-bayes" class="section level2 hasAnchor" number="12.2">
+<div id="stats-bayes" class="section level2 hasAnchor" number="10.2">
 <h2><span class="header-section-number">A.2</span> Bayes theorem<a href="statistical-and-mathematical-fundamentals.html#stats-bayes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Grant Sanderson of 3Blue1Brown provides an excellent introduction to Bayes Theorem and conditional probability in this video - <a href="https://youtu.be/HZGCoVF3YvM" class="uri">https://youtu.be/HZGCoVF3YvM</a>. Note that he uses <span class="math inline">\(E\)</span> for Evidence rather than <span class="math inline">\(D\)</span> for Data as is common practice in phylogenetic applications.</p>
 <p>This video provides additional perspective, including its application to medical testing - <a href="https://youtu.be/R13BD8qKeTg" class="uri">https://youtu.be/R13BD8qKeTg</a>.</p>
 <p>The MCMC robot by Paul Lewis is an excellent interactive introduction to MCMC sampling - <a href="https://phylogeny.uconn.edu/mcmc-robot/" class="uri">https://phylogeny.uconn.edu/mcmc-robot/</a>.</p>
 </div>
-<div id="linear-algebra" class="section level2 hasAnchor" number="12.3">
+<div id="linear-algebra" class="section level2 hasAnchor" number="10.3">
 <h2><span class="header-section-number">A.3</span> Linear algebra<a href="statistical-and-mathematical-fundamentals.html#linear-algebra" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Linear algebra is a rich field of math that springs from a surprisingly simple
 starting point - linear combinations of
@@ -377,7 +371,7 @@ The authors have excellent companion videos organized into playlists at <a href=
           </div>
         </div>
       </div>
-<a href="comparative-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="phylogenies-and-time.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="software-versions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
