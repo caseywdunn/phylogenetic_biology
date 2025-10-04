@@ -71,4 +71,4 @@ Changes look like this:
 
 The live web book at https://dunnlab.org/phylogenetic_biology/ reflects the contents of the `docs` folder on the `master` branch.
 
-The digital version of the book is not assigned an ISBN. The paperback gets an ISBN-B, and the hard cover an ISBN-A. Both ISBNs are included on the title page so that the same files can be used for both. ISBN numbers are only incremented on major releases.
+The digital version of the book is not assigned an ISBN. The paperback gets an ISBN-B, and the hardback an ISBN-A. Both ISBNs are included on the title page so that the same files can be used for both. ISBN numbers are only incremented on major releases.
