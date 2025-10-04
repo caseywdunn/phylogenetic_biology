@@ -68,9 +68,19 @@ And then build the book with:
 
 ### Versioning and identifiers
 
-Editions follow software versioning standards of `Major.Minor.Patch`, eg `Edition 1.0.13`. These are reflected as tags in the git repository, eg `v1.0.13`.
+Editions follow software versioning standards of `Major.Minor.Patch`, e.g. `Edition 1.0.13`. These are reflected as tags in the git repository, eg `v1.0.13`. The edition is set at the top of `index.html`.
 
-Github releases are done when the major or minor version are incremented, but not for patches.
+[GitHub releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) are done when the major or minor version are incremented, but not for patches.
 
-Zenodo is used for DOI generation, and the concept doi is included in the text of the book. Version DOIs (triggered by github releases) are not.
+Zenodo is used for [DOI generation](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content). The concept doi is included in the text of the book. Version DOIs (triggered by github releases) are not.
 
+A lightweight gitflow model is used. Changes and fixes are usually made on issue branches, eg `issue-54`, that are branched of `dev` and then merged into `dev` when complete. Minor patches can be made on `dev`. Only changes for release are merged into `master`.
+
+Changes look like this:
+
+- Modifications are made to `dev`, directly or merged in from issue branches.
+- The edition is incremented and committed.
+- `dev` is merged into `master`
+- If `Major` or `Minor` versions are incremented, a [release is generated](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) on the `master` branch, along with release notes. The release notes serve as the version history for the book.
+
+The live web book at https://dunnlab.org/phylogenetic_biology/ reflects the contents of the `docs` folder on the `master` branch.
