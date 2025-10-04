@@ -13,7 +13,7 @@ library(knitr)
 
 ## A word on the exercises
 
-We call these exercises because they include problems that you complete and submit, but they are more than a problem set. They are also tutorials that introduce you to computational methods in phylogenetic biology. Because a complete introduction to R and other frameworks is beyond the scope of this course, we don't start from first principles of coding and computer science. Instead, we seek to build general literacy that will allow you to understand key details of analyses others have shared, and to modify and extend existing analyses to create your own analyses. Because we aren't focusing on how to implement analyses from scratch, there may be some bits of code in here (e.g., for importing and preparing a dataset) that you don't understand but that aren't critical to understand to achieve the core goals of the exercise. Do feel free to ask about them, of course, if you would like to dig under the hood a bit.
+We call these exercises because they include problems that you complete and submit, but they are more than a problem set. They are also tutorials that introduce you to computational methods in phylogenetic biology. Because a complete introduction to R and other frameworks is beyond the scope of this course, we don't start from first principles of coding and computer science. Instead, we seek to build general literacy that will allow you to understand key details of analyses others have shared, and to modify and extend existing analyses to create your own analyses. Because we aren't focusing on how to implement analyses from scratch, there may be some bits of code in here (*e.g.*, for importing and preparing a dataset) that you don't understand but that aren't critical to understand to achieve the core goals of the exercise. Do feel free to ask about them, of course, if you would like to dig under the hood a bit.
 
 If you are struggling to achieve these goals, I encourage you to reach out to the professor or TA in office hours to go over some of the fundamentals of programming or to recommend some additional resources to help get you up to speed. There are a variety of great introductory R resources, including http://www.r-tutor.com/r-introduction .
 
@@ -123,7 +123,7 @@ This ability to layer information onto a tree is very powerful, and will be how 
 
 ## Working with MRCA's and clades
 
-Most recent common ancestors (MRCAs) are a critical concept in phylogenetic biology. For two or more nodes, their MRCA is the youngest internal node (i.e., clostest to the tips) that is their shared ancestor. The MRCA of all nodes in the tree is the root.
+Most recent common ancestors (MRCAs) are a critical concept in phylogenetic biology. For two or more nodes, their MRCA is the youngest internal node (*i.e.*, clostest to the tips) that is their shared ancestor. The MRCA of all nodes in the tree is the root.
 
 Every internal node in the phylogeny can be uniquely referred to as the MRCA of two or more tips. This is a handy way to designate particular internal nodes, and `ape` has a built in function `getMRCA()` to do this. You give it a phylogeny and a set of nodes (designated wither by their labels or numbers), and it returns the node number for their MRCA.
 

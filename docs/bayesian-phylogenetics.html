@@ -16,14 +16,14 @@
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 7 Bayesian phylogenetics | Phylogenetic Biology" />
-  <meta name="twitter:site" content="@caseywdunn" />
+  
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
 
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2025-10-03" />
+<meta name="date" content="2025-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,10 +167,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i><b>0.1</b> Approach</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i><b>0.2</b> Using this book</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i><b>0.3</b> Distribution</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#license-and-distribution"><i class="fa fa-check"></i><b>0.3</b> License and Distribution</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>0.4</b> Other resources</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.6</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -347,9 +346,9 @@ div.csl-indent {
   \tag{7.1}
 \end{equation}\]</span></p>
 <p><span class="math inline">\(P(H|D)\)</span>, read as “the probability of the hypothesis given the data”, is the posterior probability of a given hypothesis. It takes into account prior expectations and new insight from the data. This posterior probability is what we are trying to estimate. We have already seen <span class="math inline">\(P(D|H)\)</span>, read as “the probability of the data given the hypothesis”. This is the likelihood, and from previous chapters we know how to calculate it. <span class="math inline">\(P(H)\)</span> and <span class="math inline">\(P(D)\)</span> are our prior probabilities, our world view before we collected data. <span class="math inline">\(P(H)\)</span> is the prior probability of the hypothesis, without considering the data. <span class="math inline">\(P(D)\)</span> is the prior probability of the data, without considering the hypothesis.</p>
-<p>Let’s plug in a few numbers to get some intuition for the behavior of Bayes’ theorem. First, consider the case where <span class="math inline">\(P(H)=0\)</span>, <em>i.e.</em> you assign a prior probability of <span class="math inline">\(0\)</span> to the hypothesis. The posterior probability, <span class="math inline">\(P(H|D)\)</span>, will then also be <span class="math inline">\(0\)</span>. This shows that if you believe ahead of collecting data that the hypothesis is absolutely impossible, no amount of data can change your mind and your updated hypothesis, the posterior, will also be <span class="math inline">\(0\)</span>.</p>
+<p>Let’s plug in a few numbers to get some intuition for the behavior of Bayes’ theorem. First, consider the case where <span class="math inline">\(P(H)=0\)</span>, <em>i.e.</em>, you assign a prior probability of <span class="math inline">\(0\)</span> to the hypothesis. The posterior probability, <span class="math inline">\(P(H|D)\)</span>, will then also be <span class="math inline">\(0\)</span>. This shows that if you believe ahead of collecting data that the hypothesis is absolutely impossible, no amount of data can change your mind and your updated hypothesis, the posterior, will also be <span class="math inline">\(0\)</span>.</p>
 <p>Second, let’s consider the case where the data are just as likely under the hypothesis as they are under other hypotheses. This would be like having a medical test for a specific condition where the test was so bad that the data (test result) didn’t depend in any way on the hypothesis (the presence of the condition). For example, the test returns a positive 10% of the time regardless of whether you have the condition or not. In that situation, <span class="math inline">\(P(D|H)=P(D)\)</span>. Since <span class="math inline">\(P(D|H)\)</span> is in the numerator and <span class="math inline">\(P(D)\)</span> is in the denominator, they cancel out. That leaves <span class="math inline">\(P(H|D)=P(H)\)</span> – the posterior probability of the hypothesis is the same as the prior on the hypothesis. The data didn’t change our understanding of the hypothesis at all. This is the behavior we want when the data have no information relevant to the hypothesis.</p>
-<p>Third, consider a case where the data are perfect indicators of the hypothesis. You get a specific pattern in the data whenever, and only when, the hypothesis is true. Because the hypothesis and data are perfectly linked, <span class="math inline">\(P(D)=P(H)\)</span> the priors cancel out. In this case, <span class="math inline">\(P(H|D)=P(D|H)\)</span>, <em>i.e.</em> the posterior becomes equal to the likelihood. This never happens in phylogenetic inference, since any given phylogeny could always generate multiple sequences at the tips. But it is the case that as the data become more informative, the priors have less impact on the posterior.</p>
+<p>Third, consider a case where the data are perfect indicators of the hypothesis. You get a specific pattern in the data whenever, and only when, the hypothesis is true. Because the hypothesis and data are perfectly linked, <span class="math inline">\(P(D)=P(H)\)</span> the priors cancel out. In this case, <span class="math inline">\(P(H|D)=P(D|H)\)</span>, <em>i.e.</em>, the posterior becomes equal to the likelihood. This never happens in phylogenetic inference, since any given phylogeny could always generate multiple sequences at the tips. But it is the case that as the data become more informative, the priors have less impact on the posterior.</p>
 </div>
 <div id="bayesian-phylogenetic-inference" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Bayesian phylogenetic inference<a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -370,7 +369,7 @@ div.csl-indent {
 <li>If <span class="math inline">\(R&gt;1\)</span>, we accept <span class="math inline">\(H^*\)</span>. If If <span class="math inline">\(R&lt;1\)</span>, we accept <span class="math inline">\(H^*\)</span> with probability <span class="math inline">\(R\)</span>. Otherwise, we retain <span class="math inline">\(H\)</span>.</li>
 <li>The result of the step above is added to the posterior sample, and becomes <span class="math inline">\(H\)</span> for the next iteration of the cycle.</li>
 </ol>
-<p>MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, with branch frequencies. Unlike bootstraps, though, the frequency of a branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, <em>i.e.</em> the probability of the branch given the data and our priors. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.</p>
+<p>MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, with branch frequencies. Unlike bootstraps, though, the frequency of a branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, <em>i.e.</em>, the probability of the branch given the data and our priors. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.</p>
 </div>
 <div id="bayesian-phylogenetic-inference-in-practice" class="section level2 hasAnchor" number="7.3">
 <h2><span class="header-section-number">7.3</span> Bayesian phylogenetic inference in practice<a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference-in-practice" class="anchor-section" aria-label="Anchor link to header"></a></h2>

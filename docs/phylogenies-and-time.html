@@ -16,14 +16,14 @@
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 9 Phylogenies and time | Phylogenetic Biology" />
-  <meta name="twitter:site" content="@caseywdunn" />
+  
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
 
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2025-10-03" />
+<meta name="date" content="2025-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,10 +167,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i><b>0.1</b> Approach</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i><b>0.2</b> Using this book</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i><b>0.3</b> Distribution</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#license-and-distribution"><i class="fa fa-check"></i><b>0.3</b> License and Distribution</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>0.4</b> Other resources</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.6</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -377,7 +376,7 @@ Figure 9.1: A cladogram. Nodes and node numbers are gray, and branches are black
 <h3><span class="header-section-number">9.3.1</span> Time calibration in practice<a href="phylogenies-and-time.html#time-calibration-in-practice" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The use of character data and time calibrations to infer time calibrated phylogenies fall into two broad categories. The first is to use information from fossils (or other historical data) to constrain the ages of internal nodes. A Bayesian framework provides a natural framework for this – node ages can by specified as priors on the tree. For example, if a given fossil is known to fall within a particular clade, then the most recent common ancestor of that clade can be constrained to be at least as old as the fossil and possibly older.</p>
 <p>While this can work well in some situations, there are several drawbacks to this method. In practice, it is also necessary to place maximum ages on some of the nodes to keep the time calibration from pushing everything way back in time. Given the incompleteness of the fossil record, this is not as straight forward as constraining the minimum age of a node. If we have a fossil we can assert that the clade that contains it can be no younger than that specimen, though it may be much older. But it is harder to assert a maximum age, given that we just might not have fossils for older organisms that existed in the clade. Applying maximum ages often relies on expertise and additional information, such as knowledge that a given land mass where the organisms are exclusively found did not exist before a particular time.</p>
-<p>Models known as the “fossilized birth–death” (FBD) process don’t use fossils as external constraints on internal nodes, they instead include fossils right in the tree as their own tips <span class="citation">(<a href="#ref-heath2014calibration">Heath et al. 2014</a>)</span>. Unlike extant tips, which all have the same age (i.e., today), the ages of these fossil tips are then constrained with geological data. This approach provides the ability to also include parameters for fossil preservation and sampling. FBD methods require that the character matrix includes data that can be scored in the fossils.</p>
+<p>Models known as the “fossilized birth–death” (FBD) process don’t use fossils as external constraints on internal nodes, they instead include fossils right in the tree as their own tips <span class="citation">(<a href="#ref-heath2014calibration">Heath et al. 2014</a>)</span>. Unlike extant tips, which all have the same age (<em>i.e.</em>, today), the ages of these fossil tips are then constrained with geological data. This approach provides the ability to also include parameters for fossil preservation and sampling. FBD methods require that the character matrix includes data that can be scored in the fossils.</p>
 
 </div>
 </div>

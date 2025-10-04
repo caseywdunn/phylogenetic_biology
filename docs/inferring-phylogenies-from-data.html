@@ -16,14 +16,14 @@
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Inferring phylogenies from data | Phylogenetic Biology" />
-  <meta name="twitter:site" content="@caseywdunn" />
+  
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
 
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2025-10-03" />
+<meta name="date" content="2025-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,10 +167,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i><b>0.1</b> Approach</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i><b>0.2</b> Using this book</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i><b>0.3</b> Distribution</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#license-and-distribution"><i class="fa fa-check"></i><b>0.3</b> License and Distribution</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>0.4</b> Other resources</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.6</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -380,7 +379,7 @@ Figure 4.3: The same toy tree as above, but with probabilities of the specific c
 </p>
 </div>
 <p>Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is <span class="math inline">\(1/6\)</span>. The probability of rolling two 4s on two fair dice is <span class="math inline">\(1/6\times1/6=1/36\)</span>. So we can take the product of all the probabilities to calculate the joint probability of all of these events happening.
-We can think of these as the probabilities of specific changes along each branch as the probabilities of the state at each child node.</p>
+We can think of the probabilities of specific changes along each branch as the probabilities of the state at each child node given the state at the parent node.</p>
 <table>
 <thead>
 <tr class="header">
@@ -1136,7 +1135,7 @@ We can think of these as the probabilities of specific changes along each branch
 </div>
 <div id="likelihood-for-multiple-sites" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Likelihood for multiple sites<a href="inferring-phylogenies-from-data.html#likelihood-for-multiple-sites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We new need to expand this model from a single site to multiple sites within a gene or even across whole genomes.</p>
+<p>The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We now need to expand this model from a single site to multiple sites within a gene or even across whole genomes.</p>
 <p>This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.</p>
 </div>
 <div id="maximum-likelihood" class="section level2 hasAnchor" number="4.5">

@@ -160,7 +160,7 @@ ggtree(phy) +
 ```
 
 Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the probabilities to calculate the joint probability of all of these events happening. 
-We can think of these as the probabilities of specific changes along each branch as the probabilities of the state at each child node. 
+We can think of the probabilities of specific changes along each branch as the probabilities of the state at each child node given the state at the parent node.
 
 ```{r}
 knitr::kable(data.frame( node=1:length(p), probability=p ),
@@ -246,7 +246,7 @@ We can calculate joint log probabilities as sums of log probabilities for each e
 
 ## Likelihood for multiple sites
 
-The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We new need to expand this model from a single site to multiple sites within a gene or even across whole genomes.
+The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We now need to expand this model from a single site to multiple sites within a gene or even across whole genomes.
 
 This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.
 

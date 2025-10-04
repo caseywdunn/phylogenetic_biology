@@ -4,6 +4,8 @@ This repository contains all the text, source code, and supporting material for 
 
 The formatted book can be viewed at http://dunnlab.org/phylogenetic_biology/index.html .
 
+Please submit any errors you find or suggestions you have via the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues .
+
 
 ## License
 
@@ -63,3 +65,12 @@ And then build the book with:
 
     library(bookdown)
     bookdown::render_book("index.rmd", "bookdown::gitbook")
+
+### Versioning and identifiers
+
+Editions follow software versioning standards of `Major.Minor.Patch`, eg `Edition 1.0.13`. These are reflected as tags in the git repository, eg `v1.0.13`.
+
+Github releases are done when the major or minor version are incremented, but not for patches.
+
+Zenodo is used for DOI generation, and the concept doi is included in the text of the book. Version DOIs (triggered by github releases) are not.
+

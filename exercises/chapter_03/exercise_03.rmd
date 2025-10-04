@@ -26,7 +26,7 @@ Open the shell in a terminal window (the exact details of this will depend on wh
 
     pwd
     
-This will show you what directory (i.e. folder) you are in. On my account, it says `/home/eeb354_cwd7`. This is my home directory. Yours will be different.
+This will show you what directory (*i.e.*, folder) you are in. On my account, it says `/home/eeb354_cwd7`. This is my home directory. Yours will be different.
 
 Next, let's see what is in your home directory. Type the following:
 

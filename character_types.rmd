@@ -16,7 +16,7 @@ knitr::kable(
     `Permissible transformations` = c("Any one-to-one mapping", "Any monotonically increasing function", "$x \\rightarrow ax + b$", "$x \\rightarrow ax^b$", "$x \\rightarrow x + a$", "$x \\rightarrow ax$", "None"),
     `Arbitrary parameters` = c("Countable", "Countable", "2", "2", "1", "1", "0"),
     `Meaningful comparisons` = c("Equivalence", "Order", "Order, differences", "Order, ratios", "Order, differences", "Order, ratios, differences", "Any"),
-    `Biological examples` = c("Species, genes", "Social dominance", "Dates, Malthusian fitness, relative temperature (arbitrary 0, e.g. Celsius and Fahrenheit)", "Body size", "Log-transformed ratio-scale variables", "Length, mass, duration, absolute temperature (e.g. Kelvin)", "Probability")
+    `Biological examples` = c("Species, genes", "Social dominance", "Dates, Malthusian fitness, relative temperature (arbitrary 0, *e.g.*, Celsius and Fahrenheit)", "Body size", "Log-transformed ratio-scale variables", "Length, mass, duration, absolute temperature (*e.g.*, Kelvin)", "Probability")
   ),
   col.names = c("Scale type", "Domain", "Measurement type", "Permissible transformations", "Arbitrary parameters", "Meaningful comparisons", "Biological examples"),
   check.names = FALSE,
@@ -27,7 +27,7 @@ knitr::kable(
 
 Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Scale category column. Permissible transformations indicate the mathematical operations that can be performed without distorting measurement meaning. Arbitrary parameters are the number of values that must be specified to establish a numerical system. For example, for a ratio scale type zero means absence and one arbitrary parameter must be specified, such as an object of standard mass or length. For an interval scale type, zero is arbitrary and two parameters must be specified, such as the temperature at which water freezes and boils.  Meaningful comparisons indicates comparisons that can be made between measurements of each scale type.
 
-There are many types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types, *i.e.* scale types. Different scale types require different models of evolution. The biggest distinction is between discrete character types, like DNA, and continuous character types, like mass, that require radically different models of evolution.
+There are many types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types, *i.e.*, scale types. Different scale types require different models of evolution. The biggest distinction is between discrete character types, like DNA, and continuous character types, like mass, that require radically different models of evolution.
 
 ## Discrete character types
 
@@ -55,7 +55,7 @@ Direct analogs of the DNA sequence evolution models are often applied to discret
 
 ### Ordinal scale types
 
-Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is an ordering, *i.e.* some values are larger than others and there are different distances between the values [@houle2011measurement, Table 1]. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendege or the number of digits on a vertebrate forelimb.
+Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is an ordering, *i.e.*, some values are larger than others and there are different distances between the values [@houle2011measurement, Table 1]. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendege or the number of digits on a vertebrate forelimb.
 
 Models for the evolution of ordinal data can be described with the same language we used for nominal scale types, the rates for changes between non-adjacent values are just set to zero. 5, for example, will have a nonzero rate of change to 6 and 4 and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of 4 digits.
 

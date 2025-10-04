@@ -16,14 +16,14 @@
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 3 Simulation | Phylogenetic Biology" />
-  <meta name="twitter:site" content="@caseywdunn" />
+  
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
 
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2025-10-03" />
+<meta name="date" content="2025-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,10 +167,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i><b>0.1</b> Approach</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i><b>0.2</b> Using this book</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i><b>0.3</b> Distribution</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#license-and-distribution"><i class="fa fa-check"></i><b>0.3</b> License and Distribution</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>0.4</b> Other resources</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.6</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -383,7 +382,7 @@ Figure 3.2: A linear model with <span class="math inline">\(m=0.5\)</span> and <
 <li><p>If we clamp the model (linear) and model parameters (specific values of <span class="math inline">\(m\)</span> and <span class="math inline">\(b\)</span>) according to prior knowledge, and clamp <span class="math inline">\(x\)</span> according to values we make up, we can simulate <span class="math inline">\(y\)</span>. In this case the model is like a world-builder that tells us what we would expect to see under the specified conditions. This is very helpful for getting a sense of whether our models are working well (Do they generate results that look like what we see?), examining counterfactual situations that don’t exist, or building datasets to test software tools.</p></li>
 </ul>
 <p>There are some deep connections here. For example, predicting the future is basically just simulating the future based on our model and what we already know about the past and present.</p>
-<p>The models that we will use in phylogenetic biology tend to be more complex than the linear mode, but this general perspective of clamping and estimating different things still holds.</p>
+<p>The models that we will use in phylogenetic biology tend to be more complex than the linear model, but this general perspective of clamping and estimating different things still holds.</p>
 </div>
 <div id="a-simple-model-of-evolution" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> A simple model of evolution<a href="simulation.html#a-simple-model-of-evolution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -396,9 +395,9 @@ Figure 3.2: A linear model with <span class="math inline">\(m=0.5\)</span> and <
 <li>State at the end of the branch (the nucleotide at the child node)</li>
 </ul>
 <div class="figure"><span style="display:block;" id="fig:sim-application"></span>
-<img src="figures/applications.png" alt="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.* a cange from A to C." width="226" />
+<img src="figures/applications.png" alt="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a cange from A to C." width="226" />
 <p class="caption">
-Figure 3.3: Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), <em>i.e.</em> a cange from A to C.
+Figure 3.3: Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), <em>i.e.</em>, a cange from A to C.
 </p>
 </div>
 <p>Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate <span class="math inline">\(\mu\)</span>, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn’t depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.</p>
@@ -725,7 +724,7 @@ Figure 3.10: Simulation of states for a single DNA site on a simple tree accordi
 </div>
 <div id="concluding-thoughts" class="section level2 hasAnchor" number="3.9">
 <h2><span class="header-section-number">3.9</span> Concluding thoughts<a href="simulation.html#concluding-thoughts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Here we have built up the conceptual, mathematical, statistical, and computational machinery to simulating DNA evolution on a tree. Sequence simulation is useful for a variety of things, including generating datasets under known conditions to test tools. A major value, though, is to to think in a full explicit way about how you are modeling evolution. This probabilistic model framework is the exact same one we will use as we move to our next task, inferring phylogenies from sequence data.</p>
+<p>Here we have built up the conceptual, mathematical, statistical, and computational machinery to simulating DNA evolution on a tree. Sequence simulation is useful for a variety of things, including generating datasets under known conditions to test tools. A major value, though, is to think in a full explicit way about how you are modeling evolution. This probabilistic model framework is the exact same one we will use as we move to our next task, inferring phylogenies from sequence data.</p>
 </div>
 <div id="additional-resources" class="section level2 hasAnchor" number="3.10">
 <h2><span class="header-section-number">3.10</span> Additional resources<a href="simulation.html#additional-resources" class="anchor-section" aria-label="Anchor link to header"></a></h2>

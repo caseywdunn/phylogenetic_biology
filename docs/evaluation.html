@@ -16,14 +16,14 @@
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 6 Evaluation | Phylogenetic Biology" />
-  <meta name="twitter:site" content="@caseywdunn" />
+  
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
 
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2025-10-03" />
+<meta name="date" content="2025-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -167,10 +167,9 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i><b>0.1</b> Approach</a></li>
 <li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i><b>0.2</b> Using this book</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i><b>0.3</b> Distribution</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#license-and-distribution"><i class="fa fa-check"></i><b>0.3</b> License and Distribution</a></li>
 <li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>0.4</b> Other resources</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.5</b> License</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.6</b> Acknowledgements</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -369,7 +368,7 @@ Figure 6.1: A hierarchical view of DNA substitution models. The number of degree
   \tag{6.1}
 \end{equation}\]</span></p>
 <p>If this difference, which we can call <span class="math inline">\(\Delta\)</span>, in log likelihoods is positive, then the model corresponding to <span class="math inline">\(a\)</span> is more likely. If it is negative, then the model corresponding to <span class="math inline">\(b\)</span> is more likely.</p>
-<p>Let’s say we are comparing GTR to HKY85, and we denote the likelihood under GTR as <span class="math inline">\(L_{GTR}\)</span> and the likelihood under HKY85 as <span class="math inline">\(L_{HKY85}\)</span>. We’ll put the model with more parameters, GTR in this case, in the numerator, <em>i.e.</em> set <span class="math inline">\(a\)</span> above to <span class="math inline">\(L_{GTR}\)</span> and <span class="math inline">\(b\)</span> to <span class="math inline">\(L_{HKY85}\)</span>.</p>
+<p>Let’s say we are comparing GTR to HKY85, and we denote the likelihood under GTR as <span class="math inline">\(L_{GTR}\)</span> and the likelihood under HKY85 as <span class="math inline">\(L_{HKY85}\)</span>. We’ll put the model with more parameters, GTR in this case, in the numerator, <em>i.e.</em>, set <span class="math inline">\(a\)</span> above to <span class="math inline">\(L_{GTR}\)</span> and <span class="math inline">\(b\)</span> to <span class="math inline">\(L_{HKY85}\)</span>.</p>
 <p><span class="math display" id="eq:logs-gtr-hyk">\[\begin{equation}
   \Delta = ln(\frac{L_{GTR}}{L_{HKY85}}) = ln(L_{GTR}) - ln(L_{HKY85})
   \tag{6.2}
@@ -384,7 +383,7 @@ Figure 6.1: A hierarchical view of DNA substitution models. The number of degree
 \end{equation}\]</span></p>
 <p>We can compare this test statistic <span class="math inline">\(\delta\)</span> to the appropriate <span class="math inline">\(\chi^2\)</span> distribution to assess if the more complex model has a significantly greater likelihood. If not, we stick with the simpler model. It is important to note that it is only appropriate for comparing <em>nested</em> models.</p>
 <p>There are a few challenges to applying the LRT to model selection in phylogenetics <span class="citation">(<a href="#ref-posada2004model">Posada and Buckley 2004</a>)</span>. One issue is that the test presumes that one of the models is correct <span class="citation">(<a href="#ref-zhang1999performance">Zhang 1999</a>)</span>, but in phylogenetics models are always simplifications of the evolutionary process at hand. The impact of violating this assumption varies across data sets and analyses, but can lead do undesirable behavior in real-world applications.</p>
-<p>There are two other approaches commonly used in phylogenetic model selection. Where <span class="math inline">\(L_i\)</span> is the likelihood under model <span class="math inline">\(i\)</span>, <span class="math inline">\(k_i\)</span> is the degrees of freedom for the model, and <span class="math inline">\(n\)</span> is sample size (<em>e.g.</em> number of sites in the alignment), these are the Akaike Information Criterion (AIC):</p>
+<p>There are two other approaches commonly used in phylogenetic model selection. Where <span class="math inline">\(L_i\)</span> is the likelihood under model <span class="math inline">\(i\)</span>, <span class="math inline">\(k_i\)</span> is the degrees of freedom for the model, and <span class="math inline">\(n\)</span> is sample size (<em>e.g.</em>, number of sites in the alignment), these are the Akaike Information Criterion (AIC):</p>
 <p><span class="math display" id="eq:aic">\[\begin{equation}
   AIC_i = 2k_i - 2ln(L_i)
   \tag{6.4}
