@@ -50,17 +50,17 @@ I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read 
 
 ## Distribution
 
-There are several ways you can read this book:
+There are several ways you can get this book:
 
 - You can read an html version for free at https://dunnlab.org/phylogenetic_biology/
 
 - The book is rendered from source code available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
 
-- Snapshots of source code for each edition are also available on Zenodo via the the book's DOI at https://doi.org/XXX
+- Snapshots of source code for each edition are also available on Zenodo via the the book's DOI at https://doi.org/10.5281/zenodo.17267993.
 
-- You can purchase a paperback from your favorite book retailer. Search for ISBN XXX.
+- You can purchase a paperback from your favorite book retailer. Search for ISBN 979-8-9934524-0-1.
 
-- You can purchase a hardback from your favorite book retailer. Search for ISBN XXX.
+- You can purchase a hardback from your favorite book retailer. Search for ISBN 979-8-9934524-1-8.
 
 Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues.
 
@@ -114,7 +114,7 @@ Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the fi
 
 ![](figures/by-nc-nd-600.png)
 
-This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. I will also make hard copies available for purchase at a reasonable price. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
 
 <!--chapter:end:index.rmd-->
 
@@ -1807,7 +1807,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 05, 2025 at 10:56:19 AM with the following R package versions.
+This book was rendered from the source code on Oct 05, 2025 at 12:13:02 PM with the following R package versions.
 
 
 ```
