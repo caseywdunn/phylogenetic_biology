@@ -6,7 +6,7 @@ isbn_paperback: "979-8-9934524-0-1"
 isbn_hardback: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
-date: "2025-10-04"
+date: "2025-10-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -16,6 +16,8 @@ description: "An introduction to Phylogenetic Biology."
 fig_caption: yes
 always_allow_html: true
 ---
+
+
 
 
 
@@ -1789,7 +1791,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 04, 2025 at 08:41:30 PM with the following R package versions.
+This book was rendered from the source code on Oct 05, 2025 at 01:40:19 AM with the following R package versions.
 
 
 ```
