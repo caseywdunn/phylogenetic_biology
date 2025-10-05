@@ -8,7 +8,6 @@ output:
 Here we will build the machinery to implement models of DNA evolution. Our first 
 application of these models will be to simulate data.
 
-
 ## Models
 
 Models are representations of processes. They are abstractions in the sense that they leave out things that aren't thought to be important, and they are idealized in the sense that they are deliberately simplified [@godfrey2016philosophy, 21].
@@ -41,7 +40,6 @@ of the things you would like to do with a map. So all maps are simplifications (
 ```{r sim-maps, echo=FALSE, fig.cap="Four maps of the Yale campus, varying in complexity and focus. (A) A satellite image of New Haven, including much of Yale campus, from Google Maps. This image has a very large amount of information. (B) A street map of the same region, also from Google Maps. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points."}
 
 knitr::include_graphics("figures/maps.png")
-
 ```
 
 Let's examine one of the most common models, the linear model:
@@ -65,7 +63,6 @@ p +
   xlim(-5,5) + 
   ylim(-5,5) +
   theme_classic()
-
 ```
 
 There are a variety of useful things we could do based on these relationships between the model, model parameters, and values. Let's consider $x$ to be a variable that tell us something about the past and $y$ to be a variable that tells us something about the present or future. Use cases then include:
@@ -82,10 +79,9 @@ There are some deep connections here. For example, predicting the future is basi
 
 The models that we will use in phylogenetic biology tend to be more complex than the linear model, but this general perspective of clamping and estimating different things still holds.
 
-
 ## A simple model of evolution
 
-Let's start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single branch in a phylogeny (Figure \@ref(fig:sim-application)). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:
+Let's start with a simple model of DNA evolution. At first we will consider only a single nucleotide position along a single branch in a phylogeny (Figure \@ref(fig:sim-application)). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:
 
 - Model structure
 - Model parameters
@@ -93,14 +89,12 @@ Let's start with a simple model of DNA evolution. At first we will also consider
 - State at the start of the branch (the nucleotide at the parent node)
 - State at the end of the branch (the nucleotide at the child node)
 
-
 ```{r sim-application, echo=FALSE, fig.cap="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a cange from A to C."}
 
 knitr::include_graphics("figures/applications.png")
-
 ```
 
-Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
+When DNA is replicated, the appropriate nucleotide is usually incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
 
 Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model $1/4$ of the time a replacement event occurs, an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution, just a replacement in kind. If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of a replacement event result in a substitution, the substitution rate is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the replacement rate.
 
@@ -114,12 +108,12 @@ In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over th
 
 ```{r sim-jc-mu-sweep, fig.cap="Each horizontal bar is a simulation of evolution of a single nucleotide position through time, $t$, for a specified value of $\\mu$. Each simulation starts out as an A. Black vertical lines correspond to replacement events, which don't all lead to substitutions (a new color). "}
 
-  t = 100  # total time to consider
+  t = 100 # total time to consider
   mu_step = 0.01
   mu_values = seq( 0, 0.1, mu_step )
   
   segments = lapply( mu_values, function(x){
-    sim_jc( mu=x, t, first = "A" ) %>% mutate ( mu=x  )
+    sim_jc( mu=x, t, first = "A" ) %>% mutate ( mu=x )
   }  ) %>%
     bind_rows()
   
@@ -131,36 +125,34 @@ In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over th
     geom_segment( mapping=aes(x=start, xend=start, y=mu, yend=mu+delta ) ) +
     xlim( 0, t) +
     xlab( "time" ) +
+    ylab( expression(mu) ) +
     scale_fill_grey()
-    
-  
 ```
 
 As $\mu$ increases (going up on the vertical axis), the number of replacement events over the same time interval increases (Figure \@ref(fig:sim-jc-mu-n)). This reflects the simple linear relationship $n=\mu t$, where $n$ is the number of expected replacement events.
 
-```{r sim-jc-mu-n, fig.cap="The number of replacement events increases linearly with the replacement rate $\\mu$. This plot is from the same simulation as that shown in Figure \\@ref(fig:sim-jc-mu-sweep). The line is a linear model fit to the data. Since $n=\\mu t$, and in this case $t=100$, the slope of $n$ on $t$ is estimated to be near 100."}
+```{r sim-jc-mu-n, fig.cap="The number of replacement events increases linearly with the replacement rate $\\mu$. This plot is from the same simulation as that shown in Figure \\@ref(fig:sim-jc-mu-sweep). The line is a linear model fit to the data. Since $n=\\mu t$, and in this case $t=100$, the slope of $n$ on $\\mu$ is estimated to be near 100."}
 
-segments %>% 
-  group_by(mu ) %>% 
-  summarise( replacements = n()-1) %>% 
-  ggplot( aes(x=mu, y=replacements) ) + 
-    geom_point (  ) + 
+segments %>%
+  group_by(mu ) %>%
+  summarise( replacements = n()-1) %>%
+  ggplot( aes(x=mu, y=replacements) ) +
+    geom_point (  ) +
     geom_smooth( method = "lm", se = FALSE, color="grey" ) +
+    xlab( expression(mu) ) +
     ylab("n (replacements)")
-
 ```
 
-Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for branch lengths is given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)). The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
+Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for branch lengths is given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)) [@zapata2015]. The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
 
-```{r sim-tree-cnid, fig.cap="A published phylogeny [@zapata2015] with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time."}
+```{r sim-tree-cnid, fig.cap="A published phylogeny (Zapata, 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time."}
 
 knitr::include_graphics("figures/Fig_cnidaria.png")
-
 ```
 
 ### Expected end state
 
-The machinery above shows how a model can clarify the way we think about the expected amount of change along a branch. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a  question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
+The machinery above shows how a model can clarify the way we think about the expected amount of change along a branch. Often, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor this question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
 
 The situation is most clear after a small amount of change (when $\mu t$ is small) - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.
 
@@ -173,7 +165,6 @@ Since replacements are coming from the bag that you are picking the nucleotides 
   n_replicates = 1000
 ```
 
-
 ```{r sim-saturation, cache=TRUE, fig.cap="Stacked bar plots indicating the frequency of each nucleotide after simulated evolution for a specified amount of time. The rate of evolution is $\\mu=0.050$. There are 1000 replicate simulations for each value of time. At time $t=0$ (no evolution), the end result is always the same as the initial value, which is fixed at A in these simulations. As the length of time increases, the four nucleotides converge on equal proportions of 0.25 each." }
 
 
@@ -182,7 +173,7 @@ Since replacements are coming from the bag that you are picking the nucleotides 
   
   simulations = 
     lapply( t_values, function(x){
-      sim_jc( mu=mu, t=x, first = "A", n=100 ) %>% mutate ( time=x  ) %>% slice_tail( n=1 )
+      sim_jc( mu=mu, t=x, first = "A", n=100 ) %>% mutate ( time=x ) %>% slice_tail( n=1 )
     }  ) %>% 
     bind_rows()
   
@@ -194,8 +185,6 @@ Since replacements are coming from the bag that you are picking the nucleotides 
       ylab( "P" ) +
       labs(fill = "nucleotide state") +
       scale_fill_grey()
-  
-
 ```
 
 ### Analytical approach
@@ -214,7 +203,6 @@ something is a DNA site and the process is mutation. In both cases, we take as i
 
 For our sequence evolution model, we need two exponential functions [@swofford1996molecular]:
 
-
 \begin{equation}
   P\left(t\right) = \frac{1}{4} + \frac{3}{4} e^{-\mu t} 
   (\#eq:sim-stay)
@@ -224,7 +212,6 @@ For our sequence evolution model, we need two exponential functions [@swofford19
   P\left(t\right) = \frac{1}{4} - \frac{1}{4} e^{-\mu t} 
   (\#eq:sim-change)
 \end{equation}
-
 
 Equation \@ref(eq:sim-stay) shows the probability of the final state being the same as 
 the beginning state. So if you start with an A, this would give you the probability 
@@ -248,10 +235,9 @@ p +
   ylim(0,1) +
   xlab( "t" ) + 
   ylab( "P" )
-
 ```
 
-We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) instead of from actual simulations of changes along branches. 
+We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) instead of from simulations of changes along branches. 
 
 ```{r sim-sat-analytical, cache=TRUE, fig.cap="Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \\@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \\@ref(eq:sim-change). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." }
 
@@ -273,9 +259,6 @@ We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot 
       ylab( "P" ) +
       labs(fill = "nucleotide state") +
       scale_fill_grey()
-  
-
-
 ```
 
 Let's put this back into a biological context. Our simple model allows us to 
@@ -291,10 +274,9 @@ This is powerful stuff. We could do a variety of things with this model machiner
 - Ask the probability of a given starting state given an end state
 - Evaluate how reasonable our $\mu$ model parameter value is. If, for example, we have a tree with very short branches that had different states at their parents and children, we might be skeptical of a low $\mu$ value.
 
-
 ## Generalizing the simple model
 
-The model we built above only has one parameter that can vary, $\mu$, so we can describe the model parameters very simply. This is convenient, but leaves some of the things that are happening under the hood a bit opaque. Let's rewrite this simple model in a way that makes it a bit clearer how we are using this parameter, and also reveals some other parameters that are there but that we ignored until now because they were clamped. First, we need to represent the model as a $4\times4$ rate matrix, which we will call $\mathbf{Q}$, as defined in Equation \@ref(eq:jc69). Each row corresponds to one of the four possible nucleotides (A, C, G, T, in that order from top to bottom), and each column corresponds to one of the four possible nucleotides (A, C, G, T, in that order from left to right). Each of the elements in the matrix is the instantaneous rate of change from the nucleotide of the corresponding row, to the nucleotide of the corresponding column. 
+The model we built above only has one parameter that can vary, $\mu$, so we can describe the model parameters very simply. This is convenient, but leaves some things happening under the hood a bit opaque. Let's rewrite this simple model to make it clearer how we are using this parameter, and also reveals some other parameters that are there but that we ignored until now because they were clamped. First, we need to represent the model as a $4\times4$ rate matrix, which we will call $\mathbf{Q}$, as defined in Equation \@ref(eq:jc69). Each row corresponds to one of the four possible nucleotides (A, C, G, T, in that order from top to bottom), and each column corresponds to one of the four possible nucleotides (A, C, G, T, in that order from left to right). Each of the elements in the matrix is the instantaneous rate of change from the nucleotide of the corresponding row, to the nucleotide of the corresponding column. 
 
 \begin{equation}
 \mathbf{Q} = 
@@ -330,18 +312,18 @@ There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to fa
 (\#eq:jc69-expanded)
 \end{equation}
 
-(This factoring is possible because of the way matrix multiplication works. For a refresher on matrix multiplication, [this video](https://www.youtube.com/watch?v=OMA2Mwo0aZg) explains how to do it operationally, and [this series of videos](https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) explains what it is actually doing.)
+(See Section \@ref(linear-algebra) for resources on linear algebra if you are unfamiliar with the intution and mechanics of matrix multiplication.) 
 
-$\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used the exponential Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
+$\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used exponential equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
 
 \begin{equation}
 \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
 (\#eq:jc69-prob)
 \end{equation}
 
-Raising $e$ to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$, known as the substitution probability matrix, is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over a branch of length $t$. Given the single rate parameter and uniform equilibrium frequencies, the diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
+Raising $e$ to the power of a matrix is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$, known as the substitution probability matrix, is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row and column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over a branch of length $t$. Given the single rate parameter and uniform equilibrium frequencies, the diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
 
-Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.
+This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.
 
 ## Expanding the models
 
@@ -437,11 +419,9 @@ Q = R %*% Pi
 colnames(Q) = c("A", "C", "G", "T")
 
 diag(Q) = - rowSums(Q)
-
 ```
 
 Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\boldsymbol{\Pi}$ and adjusting the diagonal so that the rows each sum to 0:
-
 
 \begin{equation}
 \mathbf{Q} = \mathbf{R\Pi} =
@@ -453,17 +433,14 @@ Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\boldsymbol{\
 \end{array}\right)
 \end{equation}
 
-This is our instantaneous rate matrix. From here on out I will switch from mathematical 
+This is our instantaneous rate matrix. From here on I will switch from mathematical 
 notation to computational representations, since we are doing more calculations. Here is what the contents of $\mathbf{Q}$ look like when outputted from R:
 
 ```{r}
 Q
 ```
 
-
-
 Now we need to exponentiate $\mathbf{Q}$ it to get $\mathbf{P}(t)$, according to Equation \@ref(eq:jc69-prob). If we do that numerically, we need to specify $t$ before we do the exponentiation. So, for example, $\mathbf{P}(1)$ is:
-
 
 ```{r}
 t = 1
@@ -501,7 +478,6 @@ We first need to set the state at the parent node. There are a couple approaches
 
 How do we select a starting state at random? We could draw the starting state from a bag with equal frequencies of each nucleotide (as we did at the beginning of this chapter), but our model allows us to make a more informed selection than that. We implemented $\boldsymbol{\Pi}$ because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let's draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this probability distribution. 
 
-
 ```{r sim-single-edges }
 
 n = 10
@@ -527,16 +503,13 @@ kable(
   booktabs = TRUE,
   caption = 'Each row is simulated evolution along a single edge.' 
 ) # %>% kable_styling()
-
 ```
 
 In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\boldsymbol{\Pi}$ as described above. I then created a random branch length $t$ by sampling from a uniform distribution that ranges from 0 to $`r Length_max`$, just to get a variety of branch lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
 
-
-
 ## Scaling from a single branch to a whole tree
 
-So far we have considered the evolution of one DNA site along one branch at a time (Figure \@ref(fig:sim-application)B, Table \@ref(tab:sim-single-edges)). We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of a single site along all branches, generating a specific nucleotide state at each node. We will use the same toy mammal model as above. We will consider a simplified tree (Figure \@ref(fig:sim-tree)) rather than the full mammal tree, just to keep things compact.
+So far we have considered the evolution of one DNA site along one branch at a time (Figure \@ref(fig:sim-application)B, Table \@ref(tab:sim-single-edges)). We will now expand to a whole tree, keeping our focus on simulation. Our goal is to use the model to simulate the evolution of a single site along all branches, generating a specific nucleotide state at each node. We will use the same toy model of sequence evolution as above. We will consider a simplified tree (Figure \@ref(fig:sim-tree)) to keep things compact.
 
 ```{r sim-tree, fig.cap="Simulation of states for a single DNA site on a simple tree according to our toy mammal model. Node numbers are in gray. Character states are in boxes at nodes. Branch lengths for this phylogram are in units of expected change."}
 
@@ -548,7 +521,7 @@ phy = read.tree( text = tree_text )
 # [1] "A" "B" "C" "D"
 # MRCA AB - 6
 # MRCA CD - 7
-# root   -  5
+# root    - 5
 
 state = rep( NA, max(phy$edge)  )
 
@@ -565,10 +538,9 @@ ggtree(phy) +
   geom_label(aes(label=state)) +
   geom_text2(aes(label=node), col="gray", nudge_x=0.2 ) +
   xlim(0,5)
-
 ```
 
-This isn't a big step from what we have already -- once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along a whole tree.
+This isn't a big step from what we have already -- once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along all the branches in a whole tree.
 
 Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\boldsymbol{\Pi}$. That gives us the $`r state[5]`$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so the also share a parent state.
 
@@ -578,20 +550,16 @@ Data can be simulated on a tree of arbitrary size in this way. Just sample from 
 
 ## Scaling from a single site to multiple sites
 
-So far we have considered evolution at a single DNA site across a whole phylogeny. Genomes have from thousands to billions of sites, though. Here we expand our simulations from a single nucleotide at a time to arbitrarily long DNA sequences.
-
-How? With one simplifying assumption -- that the evolution of each site is independent of the evolution at other sites. We just simulate one site at a time, and then stick all the results together into a sequence. 
+So far we have considered evolution at a single DNA site across a whole phylogeny. Genomes have from thousands to billions of sites, though. We can trivially expand our simulations from a single nucleotide at a time to arbitrarily long DNA sequences.How? With one simplifying assumption -- that the evolution of each site is independent of the evolution at other sites. We just simulate one site at a time, and then stick all the results together into a sequence. 
 
 ## Concluding thoughts
 
 Here we have built up the conceptual, mathematical, statistical, and computational machinery to simulating DNA evolution on a tree. Sequence simulation is useful for a variety of things, including generating datasets under known conditions to test tools. A major value, though, is to think in a full explicit way about how you are modeling evolution. This probabilistic model framework is the exact same one we will use as we move to our next task, inferring phylogenies from sequence data. 
 
-
 ## Additional resources
 
 - As a grad student, I learned much of what I present here from @swofford1996molecular. This is such a lucid introduction to the likelihood of molecular sequence data on a phylogeny.
 
-- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent Phylo Seminar at https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg , starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s .
+- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent Phylo Seminar at <https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg>, starting with <https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s>.
 
-- A great introduction to continuous time models by John Huelsenbeck is available at  https://revbayes.github.io/tutorials/dice/ .
-
+- A great introduction to continuous time models by John Huelsenbeck is available at <https://revbayes.github.io/tutorials/dice/>.

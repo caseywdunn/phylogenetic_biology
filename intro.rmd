@@ -18,7 +18,6 @@ Though phylogeny initially sprung from the field of comparative morphology, and 
 
 Phylogenetics is no longer a strictly macroevolutionary field. Some of the most exciting work in recent years has been at the interface of population genetics and phylogenetic biology, helping to unify our perspectives on micro and macroevolution. Phylogenies are now also routinely used to study the evolution of genes and other molecular characters, and also to dive into extremely recent and fast evolutionary processes within species, such as virus pandemics.
 
-
 ## Core concepts
 
 There are a few concepts that are fundamental to understanding phylogenetic analyses (Figure \@ref(fig:intro-concepts)A). These include:
@@ -47,7 +46,7 @@ knitr::include_graphics("figures/phylogenetic_analyses.png")
 
 Phylogenetics is such a diverse and quickly growing field that sometimes studies can seem to be more different from each other than they are. This is a shame, as it is a lost opportunity to share ideas across domains in the field and to apply what is learned in one context to another context.
 
-Fortunately, phylogenetic biology has a strong conceptual foundation that provides a unified perspective on  phylogenetic studies [@Hohna2014]. Once you have this in mind, you can better see the relationships between what may initially appear to be very different methods, questions, and analyses.
+Fortunately, phylogenetic biology has a strong conceptual foundation that provides a unified perspective on phylogenetic studies [@Hohna2014]. Once you have this in mind, you can better see the relationships between what may initially appear to be very different methods, questions, and analyses.
 
 Consider some of the concepts we introduced above:
 
@@ -75,7 +74,6 @@ Once you dig in, the "don't care" case is surprisingly interesting. Sometimes if
 
 Some studies differ only in which estimates are kept and which are thrown away. One person's nuisance is another's bread and butter. One study may keep ancestral character states and discard model parameters, and another study may run essentially the same analysis but discard ancestral character states and keep model parameters.
 
-
 ## Applications
 
 With this framework in mind, let's take a look at a sampling of recent phylogenetic studies. 
@@ -89,4 +87,3 @@ With this framework in mind, let's take a look at a sampling of recent phylogene
 - *Viburnum* is a group of plants with wide distribution in many different habitat types. Michael Landis spearheaded a collaborative project between the Edwards and Donoghue labs here at Yale EEB to understand how *Viburnum* first diversified in Asia during the Eocene and then spread across the globe [@landis2020joint]. They clamped the character states at the tips based on gene sequence data, morphology, and geographic range, developed innovative methods to simultaneously estimate the phylogeny, branch length, and ancestral geographic ranges. This is the vanguard of new approaches that simultaneously consider multiple categories of data rather than bolt together multiple independent methods that estimate one thing at a time.
 
 This is a very exciting time in phylogenetic biology. For many years most studies followed a few basic templates. With the development of new phylogenetic methods, new tools to collect high throughput character data, and a growing interest in phylogenetic questions, the field is now in its most interesting stage of development and application yet.
-

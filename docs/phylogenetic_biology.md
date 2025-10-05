@@ -2,6 +2,7 @@
 title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 edition: 0.9.0
+major_edition_year: 2025
 isbn_paperback: "979-8-9934524-0-1"
 isbn_hardback: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
@@ -29,10 +30,6 @@ always_allow_html: true
 
 
 
-
-
-
-
 # Preface {-}
 
 ## Approach
@@ -47,39 +44,42 @@ This book is intended both for the self directed learner, and for use in a cours
 
 I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands-on work, read papers from the literature, or share student projects.
 
-
 ## Distribution
 
 There are several ways you can get this book:
 
-- You can read an html version for free at https://dunnlab.org/phylogenetic_biology/
+- You can read an html version for free at <https://dunnlab.org/phylogenetic_biology/>
 
-- The book is rendered from source code available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
+- The book is rendered from source code available at <https://github.com/caseywdunn/phylogenetic_biology>, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
 
-- Snapshots of source code for each edition are also available on Zenodo via the the book's DOI at https://doi.org/10.5281/zenodo.17267993.
+- Snapshots of source code for each edition are also available on Zenodo via the the book's DOI at <https://doi.org/10.5281/zenodo.17267993>.
 
 - You can purchase a paperback from your favorite book retailer. Search for ISBN 979-8-9934524-0-1.
 
 - You can purchase a hardback from your favorite book retailer. Search for ISBN 979-8-9934524-1-8.
 
-Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues.
+Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at <https://github.com/caseywdunn/phylogenetic_biology/issues>.
+
+You are currently reading Edition 0.9.0 of the book. Please cite it as follows:
+
+> Dunn CW. Phylogenetic Biology. Edition 0.9.0. New Haven, CT: Casey W. Dunn; 2025. ISBN 979-8-9934524-0-1. doi:10.5281/zenodo.17267993 
 
 ## Other resources
 
 The following sites have a wide variety of material that is relevant to the 
 theory and and practice of phylogenetic biology.
 
-- An extensive list of tools, tutorials, and examples of phylogenetic tools in 
-the programming language R maintained by Briam O'Meara. https://cran.r-project.org/web/views/Phylogenetics.html
+- An extensive list of tools, tutorials, and examples of phylogenetic tools in
+the programming language R maintained by Briam O'Meara. <https://cran.r-project.org/web/views/Phylogenetics.html>
 
-- Liam Revell has an excellent blog on phylogenetic methods. https://blog.phytools.org/
+- Liam Revell has an excellent blog on phylogenetic methods. <https://blog.phytools.org/>
 
-- The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer 
-course on phylogenetics, with an emphasis on building phylogenetic trees. https://molevolworkshop.github.io
+- The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer
+course on phylogenetics, with an emphasis on building phylogenetic trees. <https://molevolworkshop.github.io>
 
-- The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course 
-on phylogenetics, but with a bit more emphasis on using phylogenies to test 
-evolutionary questions. http://treethinkers.org/tutorials/
+- The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course
+on phylogenetics, but with a bit more emphasis on using phylogenies to test
+evolutionary questions. <http://treethinkers.org/tutorials/>
 
 The following are some of the many great books for learning more about phylogenetic methods:
 
@@ -102,9 +102,9 @@ Hillis, C Moritz, & B. K. Mable. [Sinauer Associates](http://www.sinauer.com/det
 
 The following books provide general computational background for the topics covered here:
 
-- Wickham, H., Grolemund, G (2017) R for Data Science. https://r4ds.had.co.nz
+- Wickham, H., Grolemund, G (2017) R for Data Science. <https://r4ds.had.co.nz>
 
-- Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. http://practicalcomputing.org
+- Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. <http://practicalcomputing.org>
 
 ## Acknowledgements
 
@@ -112,9 +112,9 @@ Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the fi
 
 ## License
 
-![](figures/by-nc-nd-600.png)
+![CC-BY-NC-ND-4.0](figures/by-nc-nd-600.png)
 
-This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at <http://dunnlab.org/phylogenetic_biology/>, ensuring access to all students worldwide. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
 
 <!--chapter:end:index.rmd-->
 
@@ -137,7 +137,6 @@ Many questions in biology require knowing evolutionary relationships, even if th
 Though phylogeny initially sprung from the field of comparative morphology, and much of the initial focus was on building and analyzing trees with morphological data and using them to study the evolution of morphology, the field has rapidly expanded to encompass many other categories of data. Even so, morphology continues to be vital to building phylogenies in many contexts, including when fossils are available. While most phylogenetic inference is now based on molecular data, phylogenetic comparative methods are routinely applied to all sorts of data and questions.  Phylogenetic comparative methods now play important roles in the study of physiology, ecology, genomics, medicine, and most other parts of biology. 
 
 Phylogenetics is no longer a strictly macroevolutionary field. Some of the most exciting work in recent years has been at the interface of population genetics and phylogenetic biology, helping to unify our perspectives on micro and macroevolution. Phylogenies are now also routinely used to study the evolution of genes and other molecular characters, and also to dive into extremely recent and fast evolutionary processes within species, such as virus pandemics.
-
 
 ## Core concepts
 
@@ -165,7 +164,7 @@ In order to make informative comparisons across species, both for inferring phyl
 
 Phylogenetics is such a diverse and quickly growing field that sometimes studies can seem to be more different from each other than they are. This is a shame, as it is a lost opportunity to share ideas across domains in the field and to apply what is learned in one context to another context.
 
-Fortunately, phylogenetic biology has a strong conceptual foundation that provides a unified perspective on  phylogenetic studies [@Hohna2014]. Once you have this in mind, you can better see the relationships between what may initially appear to be very different methods, questions, and analyses.
+Fortunately, phylogenetic biology has a strong conceptual foundation that provides a unified perspective on phylogenetic studies [@Hohna2014]. Once you have this in mind, you can better see the relationships between what may initially appear to be very different methods, questions, and analyses.
 
 Consider some of the concepts we introduced above:
 
@@ -193,7 +192,6 @@ Once you dig in, the "don't care" case is surprisingly interesting. Sometimes if
 
 Some studies differ only in which estimates are kept and which are thrown away. One person's nuisance is another's bread and butter. One study may keep ancestral character states and discard model parameters, and another study may run essentially the same analysis but discard ancestral character states and keep model parameters.
 
-
 ## Applications
 
 With this framework in mind, let's take a look at a sampling of recent phylogenetic studies. 
@@ -208,11 +206,9 @@ With this framework in mind, let's take a look at a sampling of recent phylogene
 
 This is a very exciting time in phylogenetic biology. For many years most studies followed a few basic templates. With the development of new phylogenetic methods, new tools to collect high throughput character data, and a growing interest in phylogenetic questions, the field is now in its most interesting stage of development and application yet.
 
-
 <!--chapter:end:intro.rmd-->
 
 # Phylogenies
-
 
 
 
@@ -224,7 +220,6 @@ Phylogenies represent evolutionary relationships. The only figure in Darwin's Or
 
 Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haeckel's tree in the manuscript [@haeckel1897] where he coined the term phylogeny (Figure \@ref(fig:trees-haeckel)).
 
-
 ![(\#fig:trees-haeckel)Haeckel's hypothesis of the animal phylogeny [@haeckel1897], drawn as an actual tree.](figures/haeckel.jpg) 
 
 Not all trees in biology are phylogenies, though. For example, 
@@ -235,7 +230,6 @@ to a drug.
 
 It is helpful, then, to be more precise about the components of a phylogeny, and 
 what each of those parts represent.
-
 
 ## Phylogenies are graphs
 
@@ -250,7 +244,6 @@ A phylogeny is a specific instance of a mathematical object known as a [graph](h
 A graph consists of nodes (also called verteces), often represented as circles, connected by edges, often 
 represented by lines (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
 For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.
-
 
 \begin{figure}
 \includegraphics[width=2.89in]{figures/graph_tree} \caption{Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (ie, there are no paths that go in circles). The graph is bifurcating-- the root node has two branches that connect it to its children, the other internal nodes each have three branches (one that connects to the parent, two to children), and the tips each have one branch (that connects to their parents).}(\#fig:trees-graph-tree)
@@ -275,7 +268,7 @@ Here we will work with some mammal phylogenies, mostly because their silhouette 
 
 You will rarely see a phylogeny depicted as in Figure \@ref(fig:trees-graph-tree), with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the branches (Figure \@ref(fig:trees-mammal)), with the nodes implied at the ends of branches. The nodes are implied.
 
-![(\#fig:trees-mammal)Phylogeny of some mammals. Topology and branch lengths  from http://vertlife.org.  The organism silhouettes are from http://phylopic.org/. Note that node circles are not drawn, instead nodes are implied at ends of branches.](phylogenetic_biology_files/figure-latex/trees-mammal-1.pdf) 
+![(\#fig:trees-mammal)Phylogeny of some mammals. Topology and branch lengths from http://vertlife.org.  The organism silhouettes are from http://phylopic.org/. Note that node circles are not drawn, instead nodes are implied at ends of branches.](phylogenetic_biology_files/figure-latex/trees-mammal-1.pdf) 
 
 There is considerable variation in how the same phylogeny can be drawn (Figure \@ref(fig:trees-layouts)). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. 
 
@@ -284,7 +277,6 @@ Rectangular layouts are the most common, because the entire branch length is alo
 Slanted layouts avoid the node lines and elbows of rectangular layouts, but because the branches aren't parallel and can be at a variety of angles, it isn't always easy to read branch lengths on them. 
 
 Circular layouts place the root at the center, and the tips around the circumference. This is a compact representation that works well for very large phylogenies. 
-
 
 ![(\#fig:trees-layouts)The same tree as above, laid out in several different ways.](phylogenetic_biology_files/figure-latex/trees-layouts-1.pdf) 
 
@@ -313,7 +305,7 @@ This gets big really, really fast as $n$ increases. For a phylogeny of 5 tips th
 
 ## Rotating nodes
 
-One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn't convey any information. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure \@ref(fig:trees-rotations)). The topology remains unchanged. It's the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this -- https://vimeo.com/148794860 . The major implication of this is that you should never read a phylogeny across the tips to see, for example, which species are more closely related. You always need to look at the structure of the phylogeny itself.
+One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn't convey any information. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure \@ref(fig:trees-rotations)). The topology remains unchanged. It's the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this -- <https://vimeo.com/148794860>. The major implication of this is that you should never read a phylogeny across the tips to see, for example, which species are more closely related. You always need to look at the structure of the phylogeny itself.
 
 ![(\#fig:trees-rotations)The exact same phylogeny, drawn a few times with different node rotations.](phylogenetic_biology_files/figure-latex/trees-rotations-1.pdf) 
 
@@ -329,7 +321,6 @@ It is always good practice whenever you show a phylogeny to indicate whether it 
 
 ![(\#fig:trees-types)Several types of trees. In a chronogram, branch lengths are scaled according to time. In a phylogram, branch lengths are scaled according to expected amount of evolutionary change, which can differ across characters and branches. In a cladogram, the branch lengths have no meaning. ](phylogenetic_biology_files/figure-latex/trees-types-1.pdf) 
 
-
 ## Naming nodes and groups
 
 One of the most useful applications of phylogenies is to concisely refer to groups of organisms in light of their evolutionary history.
@@ -342,7 +333,6 @@ Any internal node in a rooted phylogeny can be uniquely described as the MRCA of
 
 Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
 
-
 ## Polytomies
 
 Some phylogenies are not strictly bifurcating. An internal node with more than two branches connecting it to descendants is called a polytomy (Figure \@ref(fig:trees-polytomies)B-D). This can be due to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages (a hard polytomy).
@@ -350,7 +340,6 @@ Some phylogenies are not strictly bifurcating. An internal node with more than t
 A phylogeny that consists entirely of a single polytomy is said to be entirely unresolved -- it has no topological information. When laid out in a rectangular format, it looks like a comb (Figure \@ref(fig:trees-polytomies)D). When laid out in a slanted format it looks like a star. So you will hear fully unresolved trees referred to as comb or star phylogenies.
 
 ![(\#fig:trees-polytomies)(A) The fully resolved mammal tree used in other figures. (B-C) Different polytomies created in this tree by collapsing some groups. (D) A fully unresolved comb tree.](phylogenetic_biology_files/figure-latex/trees-polytomies-1.pdf) 
-
 
 ## Rooting
 
@@ -372,11 +361,9 @@ What information can we use to root a phylogeny? There are a couple approaches. 
 
 The more common approach to rooting a phylogeny is to use an outgroup (Figure \@ref(fig:trees-rooting)). If the ingroup is the group of organisms you are interested in (*e.g.*, mammals), the outgroup is a set of animals that you strongly believe do not fall within the ingroup. If you place the root anywhere in the outgroup, then the most recent common ancestor of the ingroup will be the root of the ingroup. Rooting this way works better when a larger number of outgroup species are considered, and the outgroup species include the organisms most closely related to the ingroup. Including too few outgroups is one of the most common mistakes in published phylogenies.
 
-
 ![(\#fig:trees-rooting)The root of the mammal tree is shown in black. (A) Unrooted layout. (B) Rooted layout. (C) Rooted layout, including outgroup. The root for the whole tree, shown in gray, is placed in the outgroup. The node where the ingroup is attached to the rest of the tree is the ingroup root. In this case, that is the black mammal root.](phylogenetic_biology_files/figure-latex/trees-rooting-1.pdf) 
 
 Always be careful interpreting root position when looking at a published phylogeny. Unrooted phylogenies are often drawn as if they are rooted, often by picking a random rooting point or making a good guess of where the root is. This is in part because rooted phylogeny figures tend to be easier to read than unrooted figures. If the figure legend or text doesn't state how the tree was rooted, best to assume that it wasn't rigorously rooted if this is critical to the analyses at hand.
-
 
 ## The information contained in phylogenies
 
@@ -393,7 +380,6 @@ Node annotations can include:
 - Geographical locations.
 
 - Whether the node is the root.
-
 
 Branch annotations can include:
 
@@ -412,7 +398,6 @@ At each step in this process of layering on information, the phylogeny is compat
 The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate branch lengths, for example, while another couldn't care less about branch lengths and is only interested in topology.
 
 ![(\#fig:trees-information)Adding information to a phylogeny makes it more specific.](phylogenetic_biology_files/figure-latex/trees-information-1.pdf) 
-
 
 ## Representation
 
@@ -472,7 +457,6 @@ str( phylo_tree )
 We can see that there are three slots (each designated with a `$`) within this `phylo` object. `Nnode` is just the number of internal nodes. The real magic is `edge`, which encodes the topology of the tree. It is just an array with one row per edge (*i.e.*, branch), and two columns. The value in column 1 is the number of the node that is the parent of the branch, and the value in column 2 is the number of the node that is the child of the branch. Here are the complete contents of the `edge` slot:
 
 
-
 ``` r
 phylo_tree$edge
 ```
@@ -508,14 +492,13 @@ We can see that this is just a vector of labels. They correspond to the labels o
 
 That's it. That's all the information we specified in the newick file, all the information in the `phylo` object, and all the information that is needed to draw Figure \@ref(fig:trees-newick). The newick tree is easy to store and manipulate with simple text tools, the `phylo` object is a powerful and flexible way to represent the tree in computer memory, and the figure is easy to read at a glance.
 
-
 ## Additional reading
 
 I used `ggtree` [@R-ggtree] to draw the trees in this chapter. If you are interested in learning more about these tools, see:
 
 - The ggtree book [@yu2023]
 
-- ggtree vignettes - https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html
+- ggtree vignettes - <https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html>
 
 <!--chapter:end:phylogenies.rmd-->
 
@@ -528,7 +511,6 @@ output:
 
 Here we will build the machinery to implement models of DNA evolution. Our first 
 application of these models will be to simulate data.
-
 
 ## Models
 
@@ -589,10 +571,9 @@ There are some deep connections here. For example, predicting the future is basi
 
 The models that we will use in phylogenetic biology tend to be more complex than the linear model, but this general perspective of clamping and estimating different things still holds.
 
-
 ## A simple model of evolution
 
-Let's start with a simple model of DNA evolution. At first we will also consider only a single nucleotide position along a single branch in a phylogeny (Figure \@ref(fig:sim-application)). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:
+Let's start with a simple model of DNA evolution. At first we will consider only a single nucleotide position along a single branch in a phylogeny (Figure \@ref(fig:sim-application)). The goal is to build an intuitive integrated understanding of the mathematical and statistical relationships among:
 
 - Model structure
 - Model parameters
@@ -600,12 +581,11 @@ Let's start with a simple model of DNA evolution. At first we will also consider
 - State at the start of the branch (the nucleotide at the parent node)
 - State at the end of the branch (the nucleotide at the child node)
 
-
 \begin{figure}
 \includegraphics[width=4.72in]{figures/applications} \caption{Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a cange from A to C.}(\#fig:sim-application)
 \end{figure}
 
-Imagine that when the DNA is being replicated, most of the time the appropriate nucleotide is incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
+When DNA is replicated, the appropriate nucleotide is usually incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
 
 Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model $1/4$ of the time a replacement event occurs, an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution, just a replacement in kind. If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of a replacement event result in a substitution, the substitution rate is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the replacement rate.
 
@@ -621,24 +601,23 @@ In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over th
 
 As $\mu$ increases (going up on the vertical axis), the number of replacement events over the same time interval increases (Figure \@ref(fig:sim-jc-mu-n)). This reflects the simple linear relationship $n=\mu t$, where $n$ is the number of expected replacement events.
 
-![(\#fig:sim-jc-mu-n)The number of replacement events increases linearly with the replacement rate $\mu$. This plot is from the same simulation as that shown in Figure \@ref(fig:sim-jc-mu-sweep). The line is a linear model fit to the data. Since $n=\mu t$, and in this case $t=100$, the slope of $n$ on $t$ is estimated to be near 100.](phylogenetic_biology_files/figure-latex/sim-jc-mu-n-1.pdf) 
+![(\#fig:sim-jc-mu-n)The number of replacement events increases linearly with the replacement rate $\mu$. This plot is from the same simulation as that shown in Figure \@ref(fig:sim-jc-mu-sweep). The line is a linear model fit to the data. Since $n=\mu t$, and in this case $t=100$, the slope of $n$ on $\mu$ is estimated to be near 100.](phylogenetic_biology_files/figure-latex/sim-jc-mu-n-1.pdf) 
 
-Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for branch lengths is given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)). The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
+Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for branch lengths is given as the number of expected evolutionary change rather than absolute time (years, months, etc). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)) [@zapata2015]. The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
 
 \begin{figure}
-\includegraphics[width=4.9in]{figures/Fig_cnidaria} \caption{A published phylogeny [@zapata2015] with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.}(\#fig:sim-tree-cnid)
+\includegraphics[width=4.9in]{figures/Fig_cnidaria} \caption{A published phylogeny (Zapata, 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.}(\#fig:sim-tree-cnid)
 \end{figure}
 
 ### Expected end state
 
-The machinery above shows how a model can clarify the way we think about the expected amount of change along a branch. Many times, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor such a  question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
+The machinery above shows how a model can clarify the way we think about the expected amount of change along a branch. Often, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor this question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
 
 The situation is most clear after a small amount of change (when $\mu t$ is small) - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.
 
 What should we expect, though, if there has been a large amount of change (when $\mu t$ is large)? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, than the initial starting state doesn't matter because whatever was there initially will probably have been replaced multiple times. It is as if had been erased and written over. If the starting state doesn't contain information about the end state, what does? 
 
 Since replacements are coming from the bag that you are picking the nucleotides at random from, that bag has information about the expected states after a large number of changes. Given enough evolutionary time, our simple model will lead the expected frequency of each nucleotide in the evolving sequence to be the same as their frequencies in the bag. Since we specified that you have the same chance of grabbing any nucleotide from the bag, eventually the probability of having each of the our nucleotides is the same, 25% (Figure \@ref(fig:sim-saturation), right side). If you started with a sequence that had an A and let it evolve 100 times, after enough evolutionary time had passed to reach equilibrium you would expect to get 25 C's, 25 G's, 25 T's, and 25 A's.
-
 
 
 
@@ -660,7 +639,6 @@ something is a DNA site and the process is mutation. In both cases, we take as i
 
 For our sequence evolution model, we need two exponential functions [@swofford1996molecular]:
 
-
 \begin{equation}
   P\left(t\right) = \frac{1}{4} + \frac{3}{4} e^{-\mu t} 
   (\#eq:sim-stay)
@@ -670,7 +648,6 @@ For our sequence evolution model, we need two exponential functions [@swofford19
   P\left(t\right) = \frac{1}{4} - \frac{1}{4} e^{-\mu t} 
   (\#eq:sim-change)
 \end{equation}
-
 
 Equation \@ref(eq:sim-stay) shows the probability of the final state being the same as 
 the beginning state. So if you start with an A, this would give you the probability 
@@ -682,7 +659,7 @@ Now consider the case after infinite change (or just a large amount of change, a
 
 ![(\#fig:sim-analytical)The probability of observing a particular end state at time $t$, given the start state A and $\mu=0.05$. The solid line is the probability of observing the original start state (as described by Equation \@ref(eq:sim-stay)), the dashed line is the probability of observing each of the three other states (as described by Equation \@ref(eq:sim-change)).](phylogenetic_biology_files/figure-latex/sim-analytical-1.pdf) 
 
-We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) instead of from actual simulations of changes along branches. 
+We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) instead of from simulations of changes along branches. 
 
 ![(\#fig:sim-sat-analytical)Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \@ref(eq:sim-change). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each.](phylogenetic_biology_files/figure-latex/sim-sat-analytical-1.pdf) 
 
@@ -699,10 +676,9 @@ This is powerful stuff. We could do a variety of things with this model machiner
 - Ask the probability of a given starting state given an end state
 - Evaluate how reasonable our $\mu$ model parameter value is. If, for example, we have a tree with very short branches that had different states at their parents and children, we might be skeptical of a low $\mu$ value.
 
-
 ## Generalizing the simple model
 
-The model we built above only has one parameter that can vary, $\mu$, so we can describe the model parameters very simply. This is convenient, but leaves some of the things that are happening under the hood a bit opaque. Let's rewrite this simple model in a way that makes it a bit clearer how we are using this parameter, and also reveals some other parameters that are there but that we ignored until now because they were clamped. First, we need to represent the model as a $4\times4$ rate matrix, which we will call $\mathbf{Q}$, as defined in Equation \@ref(eq:jc69). Each row corresponds to one of the four possible nucleotides (A, C, G, T, in that order from top to bottom), and each column corresponds to one of the four possible nucleotides (A, C, G, T, in that order from left to right). Each of the elements in the matrix is the instantaneous rate of change from the nucleotide of the corresponding row, to the nucleotide of the corresponding column. 
+The model we built above only has one parameter that can vary, $\mu$, so we can describe the model parameters very simply. This is convenient, but leaves some things happening under the hood a bit opaque. Let's rewrite this simple model to make it clearer how we are using this parameter, and also reveals some other parameters that are there but that we ignored until now because they were clamped. First, we need to represent the model as a $4\times4$ rate matrix, which we will call $\mathbf{Q}$, as defined in Equation \@ref(eq:jc69). Each row corresponds to one of the four possible nucleotides (A, C, G, T, in that order from top to bottom), and each column corresponds to one of the four possible nucleotides (A, C, G, T, in that order from left to right). Each of the elements in the matrix is the instantaneous rate of change from the nucleotide of the corresponding row, to the nucleotide of the corresponding column. 
 
 \begin{equation}
 \mathbf{Q} = 
@@ -738,18 +714,18 @@ There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to fa
 (\#eq:jc69-expanded)
 \end{equation}
 
-(This factoring is possible because of the way matrix multiplication works. For a refresher on matrix multiplication, [this video](https://www.youtube.com/watch?v=OMA2Mwo0aZg) explains how to do it operationally, and [this series of videos](https://www.youtube.com/watch?v=fNk_zzaMoSs&list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) explains what it is actually doing.)
+(See Section \@ref(linear-algebra) for resources on linear algebra if you are unfamiliar with the intution and mechanics of matrix multiplication.) 
 
-$\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used the exponential Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
+$\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used exponential equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
 
 \begin{equation}
 \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
 (\#eq:jc69-prob)
 \end{equation}
 
-Raising $e$ to the power of a matrix like this is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$, known as the substitution probability matrix, is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row corresponds to one of the four possible nucleotides (A, C, G, T), and each column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over a branch of length $t$. Given the single rate parameter and uniform equilibrium frequencies, the diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
+Raising $e$ to the power of a matrix is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$, known as the substitution probability matrix, is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$ and $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row and column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over a branch of length $t$. Given the single rate parameter and uniform equilibrium frequencies, the diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
 
-Wow! This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.
+This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.
 
 ## Expanding the models
 
@@ -830,7 +806,6 @@ Now we need $\boldsymbol{\Pi}$. We noted earlier that humans have a GC content o
 
 Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\boldsymbol{\Pi}$ and adjusting the diagonal so that the rows each sum to 0:
 
-
 \begin{equation}
 \mathbf{Q} = \mathbf{R\Pi} =
 \left(\begin{array}{cccc} 
@@ -841,7 +816,7 @@ Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\boldsymbol{\
 \end{array}\right)
 \end{equation}
 
-This is our instantaneous rate matrix. From here on out I will switch from mathematical 
+This is our instantaneous rate matrix. From here on I will switch from mathematical 
 notation to computational representations, since we are doing more calculations. Here is what the contents of $\mathbf{Q}$ look like when outputted from R:
 
 
@@ -853,10 +828,7 @@ notation to computational representations, since we are doing more calculations.
 ## T  0.1475  0.4100  0.1025 -0.6600
 ```
 
-
-
 Now we need to exponentiate $\mathbf{Q}$ it to get $\mathbf{P}(t)$, according to Equation \@ref(eq:jc69-prob). If we do that numerically, we need to specify $t$ before we do the exponentiation. So, for example, $\mathbf{P}(1)$ is:
-
 
 
 ```
@@ -904,7 +876,6 @@ We first need to set the state at the parent node. There are a couple approaches
 How do we select a starting state at random? We could draw the starting state from a bag with equal frequencies of each nucleotide (as we did at the beginning of this chapter), but our model allows us to make a more informed selection than that. We implemented $\boldsymbol{\Pi}$ because we wanted to describe cases where the nucleotides do not occur at uniform frequencies, so let's draw from that distribution instead. For the toy mammal model we made above, that is 0.205 G, 0.205 C, 0.295 T and 0.295 A. We just sample a single nucleotide from this probability distribution. 
 
 
-
 Table: (\#tab:sim-single-edges)Each row is simulated evolution along a single edge.
 
 Parent       Length  Child 
@@ -922,15 +893,13 @@ G         1.3263353  G
 
 In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\boldsymbol{\Pi}$ as described above. I then created a random branch length $t$ by sampling from a uniform distribution that ranges from 0 to $2$, just to get a variety of branch lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
 
-
-
 ## Scaling from a single branch to a whole tree
 
-So far we have considered the evolution of one DNA site along one branch at a time (Figure \@ref(fig:sim-application)B, Table \@ref(tab:sim-single-edges)). We will now expand to a whole tree, keeping our focus for now on simulation. Our goal is to use the model to simulate the evolution of a single site along all branches, generating a specific nucleotide state at each node. We will use the same toy mammal model as above. We will consider a simplified tree (Figure \@ref(fig:sim-tree)) rather than the full mammal tree, just to keep things compact.
+So far we have considered the evolution of one DNA site along one branch at a time (Figure \@ref(fig:sim-application)B, Table \@ref(tab:sim-single-edges)). We will now expand to a whole tree, keeping our focus on simulation. Our goal is to use the model to simulate the evolution of a single site along all branches, generating a specific nucleotide state at each node. We will use the same toy model of sequence evolution as above. We will consider a simplified tree (Figure \@ref(fig:sim-tree)) to keep things compact.
 
 ![(\#fig:sim-tree)Simulation of states for a single DNA site on a simple tree according to our toy mammal model. Node numbers are in gray. Character states are in boxes at nodes. Branch lengths for this phylogram are in units of expected change.](phylogenetic_biology_files/figure-latex/sim-tree-1.pdf) 
 
-This isn't a big step from what we have already -- once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along a whole tree.
+This isn't a big step from what we have already -- once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along all the branches in a whole tree.
 
 Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\boldsymbol{\Pi}$. That gives us the $A$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so the also share a parent state.
 
@@ -940,23 +909,19 @@ Data can be simulated on a tree of arbitrary size in this way. Just sample from 
 
 ## Scaling from a single site to multiple sites
 
-So far we have considered evolution at a single DNA site across a whole phylogeny. Genomes have from thousands to billions of sites, though. Here we expand our simulations from a single nucleotide at a time to arbitrarily long DNA sequences.
-
-How? With one simplifying assumption -- that the evolution of each site is independent of the evolution at other sites. We just simulate one site at a time, and then stick all the results together into a sequence. 
+So far we have considered evolution at a single DNA site across a whole phylogeny. Genomes have from thousands to billions of sites, though. We can trivially expand our simulations from a single nucleotide at a time to arbitrarily long DNA sequences.How? With one simplifying assumption -- that the evolution of each site is independent of the evolution at other sites. We just simulate one site at a time, and then stick all the results together into a sequence. 
 
 ## Concluding thoughts
 
 Here we have built up the conceptual, mathematical, statistical, and computational machinery to simulating DNA evolution on a tree. Sequence simulation is useful for a variety of things, including generating datasets under known conditions to test tools. A major value, though, is to think in a full explicit way about how you are modeling evolution. This probabilistic model framework is the exact same one we will use as we move to our next task, inferring phylogenies from sequence data. 
 
-
 ## Additional resources
 
 - As a grad student, I learned much of what I present here from @swofford1996molecular. This is such a lucid introduction to the likelihood of molecular sequence data on a phylogeny.
 
-- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent Phylo Seminar at https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg , starting with https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s .
+- My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent Phylo Seminar at <https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg>, starting with <https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s>.
 
-- A great introduction to continuous time models by John Huelsenbeck is available at  https://revbayes.github.io/tutorials/dice/ .
-
+- A great introduction to continuous time models by John Huelsenbeck is available at <https://revbayes.github.io/tutorials/dice/>.
 
 <!--chapter:end:simulation.rmd-->
 
@@ -1807,7 +1772,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 05, 2025 at 12:13:02 PM with the following R package versions.
+This book was rendered from the source code on Oct 05, 2025 at 03:08:28 PM with the following R package versions.
 
 
 ```

@@ -41,4 +41,4 @@ This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDe
 
 ## Development
 
-See [development.md] fpr details on compiling and releasing the book.
+See [development.md](development.md) for details on compiling and releasing the book.

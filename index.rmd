@@ -2,6 +2,7 @@
 title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
 edition: 0.9.0
+major_edition_year: 2025
 isbn_paperback: "979-8-9934524-0-1"
 isbn_hardback: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
@@ -19,7 +20,7 @@ always_allow_html: true
 
 ```{r create-frontpage, include=FALSE}
 edition_value <- rmarkdown::metadata$edition
-current_year <- format(Sys.Date(), "%Y")
+major_edition_year_value <- rmarkdown::metadata$major_edition_year
 doi_value <- rmarkdown::metadata$doi
 isbn_hardback_value <- rmarkdown::metadata$isbn_hardback
 isbn_paperback_value <- rmarkdown::metadata$isbn_paperback
@@ -78,9 +79,6 @@ frontpage_content <- sprintf('
 \t\tCover by Casey W. Dunn.
 \t\t\t
 
-
-
-
 \\newpage
 \\thispagestyle{empty}
 
@@ -89,7 +87,6 @@ frontpage_content <- sprintf('
 \\vspace*{\\fill}
 
 \\begin{center}
-
 
 \\emph{This book is dedicated to my sister Jenny Dunn, who has been there every step of the way.
 I am so grateful for her adventurous spirit, quick mind, and shared love of life.
@@ -100,7 +97,7 @@ Thank you Jenny.}
 \\vspace*{\\fill}
 
 \\newpage
-', edition_value, doi_value, isbn_hardback_value, isbn_paperback_value, current_year)
+', edition_value, doi_value, isbn_hardback_value, isbn_paperback_value, major_edition_year_value)
 
 writeLines(frontpage_content, "frontpage.tex")
 ```
@@ -137,7 +134,7 @@ preferred-citation:
   license: CC-BY-NC-ND-4.0
   repository-code: https://github.com/%s
   url: http://dunnlab.org/phylogenetic_biology/
-', current_year, edition_value, doi_value, isbn_paperback_value, rmarkdown::metadata$`github-repo`)
+', major_edition_year_value, edition_value, doi_value, isbn_paperback_value, rmarkdown::metadata$`github-repo`)
 
 writeLines(citation_content, "CITATION.cff")
 ```
@@ -164,7 +161,6 @@ writeLines(citation_content, "CITATION.cff")
 	set.seed( 23456 )
 ```
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   message = FALSE,
@@ -189,10 +185,7 @@ knitr::opts_chunk$set(
   } else{
     # github specific settings
   }
-
 ```
-
-
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
@@ -200,7 +193,6 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'ape', 'geiger', 'ggtree', 'treeio', 'phytools'
 ), 'packages.bib')
 ```
-
 
 # Preface {-}
 
@@ -216,39 +208,42 @@ This book is intended both for the self directed learner, and for use in a cours
 
 I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands-on work, read papers from the literature, or share student projects.
 
-
 ## Distribution
 
 There are several ways you can get this book:
 
-- You can read an html version for free at https://dunnlab.org/phylogenetic_biology/
+- You can read an html version for free at <https://dunnlab.org/phylogenetic_biology/>
 
-- The book is rendered from source code available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
+- The book is rendered from source code available at <https://github.com/caseywdunn/phylogenetic_biology>, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
 
-- Snapshots of source code for each edition are also available on Zenodo via the the book's DOI at https://doi.org/`r doi_value`.
+- Snapshots of source code for each edition are also available on Zenodo via the the book's DOI at <https://doi.org/`r doi_value`>.
 
 - You can purchase a paperback from your favorite book retailer. Search for ISBN `r isbn_paperback_value`.
 
 - You can purchase a hardback from your favorite book retailer. Search for ISBN `r isbn_hardback_value`.
 
-Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues.
+Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at <https://github.com/caseywdunn/phylogenetic_biology/issues>.
+
+You are currently reading Edition `r edition_value` of the book. Please cite it as follows:
+
+> Dunn CW. Phylogenetic Biology. Edition `r edition_value`. New Haven, CT: Casey W. Dunn; `r major_edition_year_value`. ISBN `r isbn_paperback_value`. doi:`r doi_value` 
 
 ## Other resources
 
 The following sites have a wide variety of material that is relevant to the 
 theory and and practice of phylogenetic biology.
 
-- An extensive list of tools, tutorials, and examples of phylogenetic tools in 
-the programming language R maintained by Briam O'Meara. https://cran.r-project.org/web/views/Phylogenetics.html
+- An extensive list of tools, tutorials, and examples of phylogenetic tools in
+the programming language R maintained by Briam O'Meara. <https://cran.r-project.org/web/views/Phylogenetics.html>
 
-- Liam Revell has an excellent blog on phylogenetic methods. https://blog.phytools.org/
+- Liam Revell has an excellent blog on phylogenetic methods. <https://blog.phytools.org/>
 
-- The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer 
-course on phylogenetics, with an emphasis on building phylogenetic trees. https://molevolworkshop.github.io
+- The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer
+course on phylogenetics, with an emphasis on building phylogenetic trees. <https://molevolworkshop.github.io>
 
-- The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course 
-on phylogenetics, but with a bit more emphasis on using phylogenies to test 
-evolutionary questions. http://treethinkers.org/tutorials/
+- The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course
+on phylogenetics, but with a bit more emphasis on using phylogenies to test
+evolutionary questions. <http://treethinkers.org/tutorials/>
 
 The following are some of the many great books for learning more about phylogenetic methods:
 
@@ -271,9 +266,9 @@ Hillis, C Moritz, & B. K. Mable. [Sinauer Associates](http://www.sinauer.com/det
 
 The following books provide general computational background for the topics covered here:
 
-- Wickham, H., Grolemund, G (2017) R for Data Science. https://r4ds.had.co.nz
+- Wickham, H., Grolemund, G (2017) R for Data Science. <https://r4ds.had.co.nz>
 
-- Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. http://practicalcomputing.org
+- Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. <http://practicalcomputing.org>
 
 ## Acknowledgements
 
@@ -281,6 +276,6 @@ Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the fi
 
 ## License
 
-![](figures/by-nc-nd-600.png)
+![CC-BY-NC-ND-4.0](figures/by-nc-nd-600.png)
 
-This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at <http://dunnlab.org/phylogenetic_biology/>, ensuring access to all students worldwide. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
