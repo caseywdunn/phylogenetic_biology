@@ -6,6 +6,10 @@ The formatted book can be viewed at http://dunnlab.org/phylogenetic_biology/inde
 
 Please submit any errors you find or suggestions you have via the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues .
 
+The source code for the book is available at:
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17267993.svg)](https://doi.org/10.5281/zenodo.17267993)
+
 ## Description
 
 **Phylogenetic Biology** offers a modern, model-centered introduction to phylogenetic methods that places simulation and intuitive understanding at the foundation of inference. 

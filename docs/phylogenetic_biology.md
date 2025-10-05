@@ -4,7 +4,7 @@ author: "Casey W. Dunn"
 edition: 0.9.0
 isbn_paperback: "979-8-9934524-0-1"
 isbn_hardback: "979-8-9934524-1-8"
-doi: "ZZZ"
+doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
 date: "2025-10-04"
 site: bookdown::bookdown_site
@@ -1789,7 +1789,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 04, 2025 at 08:09:37 PM with the following R package versions.
+This book was rendered from the source code on Oct 04, 2025 at 08:41:30 PM with the following R package versions.
 
 
 ```

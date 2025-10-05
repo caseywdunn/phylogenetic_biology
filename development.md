@@ -69,6 +69,20 @@ Changes look like this:
 - `dev` is merged into `master`
 - If `Major` or `Minor` versions are incremented, a [release is generated](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) on the `master` branch, along with release notes. The release notes serve as the version history for the book.
 
+So, for example:
+
+    git checkout master
+    git merge dev
+    git push
+    git tag -a v0.9.0 -m "Edition 0.9.0"
+    git push origin --tags
+
+Then create the release on GitHub.
+
 The live web book at https://dunnlab.org/phylogenetic_biology/ reflects the contents of the `docs` folder on the `master` branch.
 
 The digital version of the book is not assigned an ISBN. The paperback gets an ISBN-B, and the hardback an ISBN-A. Both ISBNs are included on the title page so that the same files can be used for both. ISBN numbers are only incremented on major releases.
+
+## Other
+
+`CITATION.cff` can be validated with [this](https://citation-file-format.github.io/tutorials/).
