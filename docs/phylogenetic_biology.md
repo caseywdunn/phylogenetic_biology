@@ -39,6 +39,8 @@ always_allow_html: true
 
 Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative - they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
 
+This book is not a comprehensive treatment of phylogenetic biology, it is focused on teaching some of the key concepts and methods at the core of the field. This will provide a foundation for the many other rich areas of the field, from its interfaces with population genetics to comparative genomics to comparative methods at a macroevolutionary scale.
+
 ## Using this book
 
 This book is intended both for the self directed learner, and for use in a course. 
@@ -46,15 +48,19 @@ This book is intended both for the self directed learner, and for use in a cours
 I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands-on work, read papers from the literature, or share student projects.
 
 
+## Distribution
 
+There are several ways you can read this book:
 
-## License and Distribution
+- You can read an html version for free at https://dunnlab.org/phylogenetic_biology/
 
-![](figures/by-nc-nd-600.png)
+- The book is rendered from source code available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
 
-This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. I will also make hard copies available for purchase at a reasonable price. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
+- Snapshots of source code for each edition are also available on Zenodo via the the book's DOI at https://doi.org/XXX
 
-This book was rendered from source code, available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there.
+- You can purchase a paperback from your favorite book retailer. Search for ISBN XXX.
+
+- You can purchase a hardback from your favorite book retailer. Search for ISBN XXX.
 
 Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues.
 
@@ -64,26 +70,31 @@ The following sites have a wide variety of material that is relevant to the
 theory and and practice of phylogenetic biology.
 
 - An extensive list of tools, tutorials, and examples of phylogenetic tools in 
-the programming language R maintained by Briam O'Meara: https://cran.r-project.org/web/views/Phylogenetics.html
+the programming language R maintained by Briam O'Meara. https://cran.r-project.org/web/views/Phylogenetics.html
+
+- Liam Revell has an excellent blog on phylogenetic methods. https://blog.phytools.org/
 
 - The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer 
-course on phylogenetics, with an emphasis on building phylogenetic trees. Check 
-out the faculty pages for lecture pdfs: https://molevolworkshop.github.io
+course on phylogenetics, with an emphasis on building phylogenetic trees. https://molevolworkshop.github.io
 
 - The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course 
 on phylogenetics, but with a bit more emphasis on using phylogenies to test 
-evolutionary questions: http://treethinkers.org/tutorials/
+evolutionary questions. http://treethinkers.org/tutorials/
 
-The following books are great resources for learning more about phylogenetic biology:
+The following are some of the many great books for learning more about phylogenetic methods:
 
 - Baum, D. and Smith, S. (2012). Tree Thinking. An Introduction to Phylogenetic 
 Biology. [Roberts Publishers](http://www.roberts-publishers.com/tree-thinking-an-introduction-to-phylogenetic-biology.html).
 
+- Felsenstein, J. (2004) Inferring phylogenies. 
+[Sinauer Associates](http://www.sinauer.com/detail.php?id=1775).
+
+- Garamszegi, LZ. (2014) Modern Phylogenetic Comparative Methods and Their Application in Evolutionary Biology. [Springer](https://link.springer.com/book/10.1007/978-3-662-43550-2)
+
 - Paradis, E. (2011) Analysis of Phylogenetics and Evolution with R. 
 [Springer](http://www.springer.com/life+sciences/evolutionary+%26+developmental+biology/book/978-0-387-32914-7)
 
-- Felsenstein, J. (2004) Inferring phylogenies. 
-[Sinauer Associates](http://www.sinauer.com/detail.php?id=1775).
+- Revell, LJ, Harmon, LJ (2022) Phylogenetic Comparative Methods in R. [Princeton](https://press.princeton.edu/books/paperback/9780691219035/phylogenetic-comparative-methods-in-r)
 
 - Swofford, D. L., Olsen, G. J., Waddell, P. J., & Hillis, D. M. (1996). 
 Phylogenetic inference. In: Molecular Systematics, Second Edition. eds: D. M. 
@@ -95,10 +106,15 @@ The following books provide general computational background for the topics cove
 
 - Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. http://practicalcomputing.org
 
-
 ## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online), 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access.
+Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online), 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation and feedback. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Other lab members provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access. I am also very grateful to the students and faculty of the Workshop on Molecular Evolution at Woods Hole.
+
+## License
+
+![](figures/by-nc-nd-600.png)
+
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. I will also make hard copies available for purchase at a reasonable price. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
 
 <!--chapter:end:index.rmd-->
 
@@ -112,7 +128,7 @@ Phylogenetic biology is the study of evolutionary relationships, and the use of 
 
 At the dawn of the field, in the second half of the 19th century [@darwin1859; @haeckel1897], phylogenetic biology was largely a speculative endeavor. People looked at similarities and differences across organisms, and made hypotheses about the evolutionary relationships that would give rise to those patterns. It wasn't until the second half of the 20th century that explicit methods were developed to infer phylogenetic relationships [@hennig1966]. This ushered in decades of accelerating phylogenetic methods development that continues to this day. The introduction of explicit model-based approaches to phylogenetic inference was particularly influential [@Felsenstein:1981vk]. These new methods were computationally intensive, but fortunately their rise paralleled the rapid development and widespread availability of powerful computers. 
 
-Beginning in the late 1980s, molecular data became widely used for building phylogenies of extant organisms with data from fragments of a few genes. Starting in about 2010, new generations of high-throughput sequencing technology made it possible to collect sequences for thousands of genes from a broad diversity of organisms in a single study, and right now we are in the earliest days of building phylogenies from broadly sampled high-quality chromosome-level genome assemblies. 
+Beginning in the late 1980s, molecular data became widely used for building phylogenies of extant organisms with sequence fragments of a few genes. Starting in about 2010, new generations of high-throughput sequencing technology made it possible to collect sequences for thousands of genes from a broad diversity of organisms in a single study, and right now we are in the earliest days of building phylogenies from broadly sampled high-quality chromosome-level genome assemblies. 
 
 Phylogenetic Biology has always been concerned with figuring out evolutionary relationships. This domain of inquiry is referred to as phylogenetic inference. Phylogenetic inference has been vital to improved classification of species (phylogenetic taxonomy), reconstructing key features in the evolutionary history of many groups of organisms, and is extremely interesting to those who know the organisms well.
 
@@ -231,7 +247,7 @@ helpful to turn to math.
 \end{figure}
 
 A phylogeny is a specific instance of a mathematical object known as a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)). 
-A graph consists of nodes, often represented as circles, connected by edges, often 
+A graph consists of nodes (also called verteces), often represented as circles, connected by edges, often 
 represented by lines (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
 For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.
 
@@ -242,7 +258,7 @@ For example, nodes could be people, and edges family relationships, connections 
 
 Phylogeny graphs (Figure \@ref(fig:trees-graph-tree)) usually have a few specific topological properties:
 
-- They are acyclic. This means that there is only one possible path along edges from one node to another. It isn't possible to go in circles. Exceptions can arise in cases of horizontal 
+- They are acyclic. This means that there is only one possible path along edges from one node to another. It isn't possible to go in circles. Exceptions can arise, for example in cases of horizontal 
 gene transfer or hybridization.
 
 - They tend to be bifurcating. This means that each internal node has one parent node and two daughter nodes, and therefore three branches connected to it. This represents the biological understanding of speciation, which usually proceeds by one lineage giving rise to two lineages. 
@@ -303,7 +319,7 @@ One of the most important things to keep in mind when interpreting a phylogeny i
 
 ## The meaning of branch lengths {#trees-branch-lengths}
 
-Another type of variation in phylogeny depiction is the meaning of branch length (Figure \@ref(fig:trees-types)). A phylogeny where branch lengths are scaled to time is known as a chronogram. Chronograms of organisms all sampled at the same time will be ultrametric, ie the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
+The meaning of branch lengths can vary from tree to tree (Figure \@ref(fig:trees-types)). A phylogeny where branch lengths are scaled to time is known as a chronogram. Chronograms of organisms all sampled at the same time will be ultrametric, *i.e.*, the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
 
 In many cases we don't have the information needed to scale branches to time, which requires fossil calibrations. Most published phylogenies therefore scale the branches according to the expected amount of evolutionary change in the characters under consideration. The longer the branch, the greater the expected change. The rate of evolution usually varies a bit across branches, so phylograms are not usually ultrametric. 
 
@@ -340,7 +356,7 @@ A phylogeny that consists entirely of a single polytomy is said to be entirely u
 
 All the phylogenies we have seen so far are rooted -- we know what the oldest point is in the tree, and call it the root node. This special internal node has no branch connecting it to a parent node, and all other nodes in the phylogeny are its descendants. One consequence of having a rooted tree is that we know the direction of time along each branch -- time proceeds from the root to the tips. This provides a clear parent-child relationship between nodes at the ends of each branch.
 
-Not all phylogenies are rooted. Sometimes we just don't care -- some questions and methods don't depend on where the root is, so we don't have to bother placing it. Sometimes we just don't know -- placing the root in a phylogeny takes information that sometimes we don't have. There are many phylogenetic studies focused on identifying the location of the root in various groups of organisms, this is often an interesting and important question. 
+Not all phylogenies are rooted. Sometimes we just don't care where the root is -- some questions and methods don't depend on the root, so we don't have to bother placing it. Sometimes we just don't know -- placing the root in a phylogeny takes information that sometimes we don't have. There are many phylogenetic studies focused on identifying the location of the root in various groups of organisms, this is often an interesting and important question. 
 
 Even when we don't know where the root of a phylogeny is, we often want to talk about other aspects of the tree, such as the topology and branch lengths. This means we need to think about how to think about unrooted phylogenies. 
 
@@ -348,7 +364,7 @@ There are some basic things we can't take for granted in an unrooted phylogeny. 
 
 ![(\#fig:trees-rooted-abstract)These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray branch (D). Each of these elements are in the exact same topological positions in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three branches attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray branch, a new unrooted node is added along the branch. This new node is bifurcating.](phylogenetic_biology_files/figure-latex/trees-rooted-abstract-1.pdf) 
 
-The root could fall at any point in an unrooted phylogeny, either along a branch or right at an internal node. You can think of rooting a phylogeny as grabbing the point that you think is the root and dragging it until all the branches point away from it (Figure \@ref(fig:trees-rooted-abstract)B-D). If you grab at some point along a branch (Figure \@ref(fig:trees-rooted-abstract)D), this creates a new node that is the root. This new root node has two branches connecting it to descendants (these two branches arise by splitting the single branch along which the root was placed). Since it has no branch connecting it to a parent, it differs from other internal nodes in having only two branches connected to it (instead of three, or more in the case of polytomies). The end results of rooting along a branch is that you add a node to the phylogeny and the root is resolved (not a polytomy).
+The root could fall at any point in an unrooted phylogeny, either along a branch or right at a node. You can think of rooting a phylogeny as grabbing the point that you think is the root and dragging it until all the branches point away from it (Figure \@ref(fig:trees-rooted-abstract)B-D). If you grab at some point along a branch (Figure \@ref(fig:trees-rooted-abstract)D), this creates a new node that is the root. This new root node has two branches connecting it to descendants (these two branches arise by splitting the single branch along which the root was placed). Since it has no branch connecting it to a parent, it differs from other internal nodes in having only two branches connected to it (instead of three, or more in the case of polytomies). The end results of rooting along a branch is that you add a node to the phylogeny and the root is resolved (not a polytomy).
 
 Things are a bit different if you root at an existing internal node (Figure \@ref(fig:trees-rooted-abstract)B-C). Because the existing node becomes the root, the number of nodes in the tree remains unchanged. So far so good. But since internal nodes in a bifurcating tree all have three branches connected to them, when an internal node becomes the root the root is a polytomy. This seems like a pain, so why not always root along a branch? There are a few reasons. One is that rooting along a branch requires that we pick a specific point along the branch where the root goes, for example in the middle or somewhere else. That decision can take information that we don't have. Another reason is that the creation and destruction of nodes associated with rooting along branches gets cumbersome and problematic, especially when there are specific data associated with internal nodes.
 
@@ -427,7 +443,7 @@ ggtree(phylo_tree ) +
 
 ![(\#fig:trees-newick)Defining and drawing a Newick tree. Tip labels (letters) are black, nodes and node numbers are gray, and branches are black.](phylogenetic_biology_files/figure-latex/trees-newick-1.pdf) 
 
-In Figure \@ref(fig:trees-newick), you can see how to define a newick tree, convert it to 
+In the R code above, for Figure \@ref(fig:trees-newick), you can see how to define a newick tree, convert it to 
 a different type of representation, and then draw that. Most of the figures in this text were 
 made using similar code.
 
@@ -435,7 +451,7 @@ Considering just the newick specificaiton of the tree, `"(((A,B),(C,D)),E);"`, y
 
 As versatile and simple as newick is for storing trees in files, it isn't great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, branches, and their annotations. This allows us to directly encode the information noted in the section [The information contained in phylogenies], and to readily extend the data objects as needed.
 
-The most widely used format for storing phylogenies in the R programming language is as a `phylo` object from the excellent `ape` library [@R-ape]. The ` read.tree() ` function in the code block above creates a `phylo` object called `phylo_tree` based on the phylogeny we specified as text and named `newick_tree`. In a `phylo` object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to $n$ where $n$ is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes $n+1$ to $2n-1$. The assignment of the node numbers within these ranges is arbitrary, there is no guarantee for example that the same internal node will ahve the same number each time the tree is read. The numbers of the nodes that were given when we created the `phylo` object from the newick text are shown in red in Figure \@ref(fig:trees-newick).
+The most widely used format for storing phylogenies in the R programming language is as a `phylo` object from the excellent `ape` library [@R-ape]. The ` read.tree() ` function in the code block above creates a `phylo` object called `phylo_tree` based on the phylogeny we specified as text and named `newick_tree`. In a `phylo` object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to $n$ where $n$ is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes $n+1$ to $2n-1$. The assignment of the node numbers within these ranges is arbitrary, and there is no guarantee that the same nodes will ahve the same numbers each time the tree is read. The numbers of the nodes that were given when we created the `phylo` object from the newick text are shown in red in Figure \@ref(fig:trees-newick).
 
 Below we take a quick peek inside the `phylo` object we created above. The intent isn't to learn how to manipulated trees in R quite yet, but to just show you how trees can be stored in computer memory. First, let's take a look at the structure of the `phylo` object to see what variables it contains within it:
 
@@ -495,9 +511,9 @@ That's it. That's all the information we specified in the newick file, all the i
 
 ## Additional reading
 
-- I used `ggtree` [@R-ggtree] to draw the trees in this chapter. If you are interested in learning more about these tools, see:
+I used `ggtree` [@R-ggtree] to draw the trees in this chapter. If you are interested in learning more about these tools, see:
 
-- The ggtree book - https://yulab-smu.github.io/treedata-book/index.html
+- The ggtree book [@yu2023]
 
 - ggtree vignettes - https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html
 
@@ -1791,7 +1807,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 05, 2025 at 01:40:19 AM with the following R package versions.
+This book was rendered from the source code on Oct 05, 2025 at 10:56:19 AM with the following R package versions.
 
 
 ```

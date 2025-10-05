@@ -208,6 +208,8 @@ knitr::write_bib(c(
 
 Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative - they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
 
+This book is not a comprehensive treatment of phylogenetic biology, it is focused on teaching some of the key concepts and methods at the core of the field. This will provide a foundation for the many other rich areas of the field, from its interfaces with population genetics to comparative genomics to comparative methods at a macroevolutionary scale.
+
 ## Using this book
 
 This book is intended both for the self directed learner, and for use in a course. 
@@ -215,15 +217,19 @@ This book is intended both for the self directed learner, and for use in a cours
 I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands-on work, read papers from the literature, or share student projects.
 
 
+## Distribution
 
+There are several ways you can read this book:
 
-## License and Distribution
+- You can read an html version for free at https://dunnlab.org/phylogenetic_biology/
 
-![](figures/by-nc-nd-600.png)
+- The book is rendered from source code available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
 
-This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. I will also make hard copies available for purchase at a reasonable price. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
+- Snapshots of source code for each edition are also available on Zenodo via the the book's DOI at https://doi.org/XXX
 
-This book was rendered from source code, available at https://github.com/caseywdunn/phylogenetic_biology, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there.
+- You can purchase a paperback from your favorite book retailer. Search for ISBN XXX.
+
+- You can purchase a hardback from your favorite book retailer. Search for ISBN XXX.
 
 Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues.
 
@@ -233,26 +239,31 @@ The following sites have a wide variety of material that is relevant to the
 theory and and practice of phylogenetic biology.
 
 - An extensive list of tools, tutorials, and examples of phylogenetic tools in 
-the programming language R maintained by Briam O'Meara: https://cran.r-project.org/web/views/Phylogenetics.html
+the programming language R maintained by Briam O'Meara. https://cran.r-project.org/web/views/Phylogenetics.html
+
+- Liam Revell has an excellent blog on phylogenetic methods. https://blog.phytools.org/
 
 - The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer 
-course on phylogenetics, with an emphasis on building phylogenetic trees. Check 
-out the faculty pages for lecture pdfs: https://molevolworkshop.github.io
+course on phylogenetics, with an emphasis on building phylogenetic trees. https://molevolworkshop.github.io
 
 - The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course 
 on phylogenetics, but with a bit more emphasis on using phylogenies to test 
-evolutionary questions: http://treethinkers.org/tutorials/
+evolutionary questions. http://treethinkers.org/tutorials/
 
-The following books are great resources for learning more about phylogenetic biology:
+The following are some of the many great books for learning more about phylogenetic methods:
 
 - Baum, D. and Smith, S. (2012). Tree Thinking. An Introduction to Phylogenetic 
 Biology. [Roberts Publishers](http://www.roberts-publishers.com/tree-thinking-an-introduction-to-phylogenetic-biology.html).
 
+- Felsenstein, J. (2004) Inferring phylogenies. 
+[Sinauer Associates](http://www.sinauer.com/detail.php?id=1775).
+
+- Garamszegi, LZ. (2014) Modern Phylogenetic Comparative Methods and Their Application in Evolutionary Biology. [Springer](https://link.springer.com/book/10.1007/978-3-662-43550-2)
+
 - Paradis, E. (2011) Analysis of Phylogenetics and Evolution with R. 
 [Springer](http://www.springer.com/life+sciences/evolutionary+%26+developmental+biology/book/978-0-387-32914-7)
 
-- Felsenstein, J. (2004) Inferring phylogenies. 
-[Sinauer Associates](http://www.sinauer.com/detail.php?id=1775).
+- Revell, LJ, Harmon, LJ (2022) Phylogenetic Comparative Methods in R. [Princeton](https://press.princeton.edu/books/paperback/9780691219035/phylogenetic-comparative-methods-in-r)
 
 - Swofford, D. L., Olsen, G. J., Waddell, P. J., & Hillis, D. M. (1996). 
 Phylogenetic inference. In: Molecular Systematics, Second Edition. eds: D. M. 
@@ -264,7 +275,12 @@ The following books provide general computational background for the topics cove
 
 - Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. http://practicalcomputing.org
 
-
 ## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online), 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation, feedback, and patience. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Members of my lab provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access.
+Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online), 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation and feedback. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Other lab members provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access. I am also very grateful to the students and faculty of the Workshop on Molecular Evolution at Woods Hole.
+
+## License
+
+![](figures/by-nc-nd-600.png)
+
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at http://dunnlab.org/phylogenetic_biology/, ensuring access to all students worldwide. I will also make hard copies available for purchase at a reasonable price. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
