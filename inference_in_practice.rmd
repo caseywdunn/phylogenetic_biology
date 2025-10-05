@@ -38,15 +38,27 @@ There are some conditions under which you may want to exclude specific taxa, at 
 
 ## Collecting sequence data
 
-Once you have a general idea about taxon sampling, you will need to consider which genome regions to include in your analyses. To build a phylogeny, you need homologous characters across the taxa under investigation. In the context of DNA analyses, this means that you need overlapping genome regions across the taxa that will be in your phylogeny.  
+Once you have a general idea about taxon sampling, you will need to consider which genome regions to include in your analyses. To build a phylogeny, you need homologous characters across the taxa under investigation. In the context of DNA analyses, this means that you need overlapping genome regions across the taxa that will be in your phylogeny.
 
-Decisions about which specific taxa to include interact quite a bit with decisions about which genome regions you will consider, so there is often quite a bit of back and forth as you refine these decisions. At the coarsest level, if you are collecting data yourself you will often need to decide if you are going to capture a larger amount of data from fewer taxa or a smaller amount of data from many taxa. If you are using publicly available data, then your taxon and genome region sampling will be strongly constrained by what data are already available.
+Decisions about which specific taxa to include interact quite a bit with decisions about which genome regions you will consider, so there is often back and forth as you refine these decisions. If you are using publicly available data, your taxon and genome region sampling will be strongly constrained by what data are already available.
 
-Decisions about what genome regions to include can be thought of as decisions about which genome enrichment strategy to use. These strategies restrict data acquisition (sequencing) to particular regions. Here I describe common enrichment strategies along a spectrum of increasing enrichment, from no enrichment (whole genome sequencing) to enrichment for a small number of specific genes. 
+Decisions about what genome regions to include can be thought of as decisions about which genome enrichment strategy to use. These strategies restrict sequencing and analyses to particular regions. Until recently, sequencing was far more expensive. The enrichemt strategy was optimized to reduce sequencing costs, and as much of the data were analyzed as possible. The sequencing enrichment strategy was the analysis enrichemnt strategy. The landscape is very different now. It is often cheaper, and always easier, to sequence all DNA without enrichment. This often provides far more data than can be (or needs to be) analyzed for the question at hand, and only a small subset of data may have clear homology across taxa. This has flipped enrichment strategies on their head. Rather than take extensive steps to enrich DNA for particular regions prior to sequencing and then analyze as much of the data as possible, it is more cost effective and productive to skip enrichment and shotgun sequence all the DNA in the sample, and then apply computational methods to enrich the data for a small subset of regions that are most relevant to the question at hand
+
+Here I describe common DNA enrichment strategies along a spectrum of increasing enrichment, from no enrichment (whole genome sequencing) to enrichment for a small number of specific genes. 
 
 ### Whole genomes
 
-Phylogenies are now routinely inferred without enrichment of any genome regions -- the full genome is sequenced and analyzed. This is possible due to advances in DNA sequencing technologies, as well as improved methods for processing raw genome data into useful annotated genome sequences. Full genome phylogenetic analyses are still largely restricted to organisms with small genomes, in particular viruses. This has been a very powerful tool, for example, to investigate virus transmission through human populations. It is still expensive and difficult to build phylogenies with large genome sequences, though this is rapidly changing.
+It is now routine for phylogenetic studies to use shotgun sequencing to sequence entire genomes of sampled taxa without any sample enrichment at all. This is often cheaper and more productive than taking steps to only sequence regions of interest. Studies differ greatly, though, in how these whole genome data are used. In clades with small genomes with minimal sequence divergence, such as some viruses and bacteria, entire genomes can be sequenced and aligned in full.
+
+For larger genomes, such as plants and animals, data are processed to isolate a subset of homologous regions across taxa. The processing depends on the questions at hand and genomic resources already available. Several strategies include:
+
+- Mapping reads to reference genomes and calling variable sites. If genome assemblies are already available (or can be produced) for the clade of interest, then reads from each new sample can be mapped to the genome. Sites that are variable at the same mapped sites can then be used for phylogenetic inference. This makes excellent use of the full dataset, often providing hundreds of thousand of phylogenetically informative sites. It is limitted, though, to studies where reference genomes are available and are comparable across the taxa included in the analysis.
+
+- Assembling and analyzing organelle genomes. Sometimes mitochondrial and plastid genomes are sufficient for answering the questions that motivate a study. Because these genomes are small compared to nuclear genomes, they can often be readilly assembled from raw sequence reads and then aligned and analyzed. This approach can be taken regardless of existing genome resources.
+
+- Using other methods to isolate homologous regions across studies. The number of tools that can process raw reads to isolate homologous genome reqions across samples without the need for a reference genome is growing. These tools include sharkmer, written be Sam Church and me and available at <https://github.com/caseywdunn/sharkmer>, which can produce gene sequences given Polymerase Chain Reaction (PCR) primer sequences and raw DNA sequence data.
+
+Multiple of the strategies above can be used in the same study, they are not exclusive. Apart from reduced expenses in the lab, one of the values of whole genome sequencing is that it is compatible with so many downstream analysis methods
 
 ### Transcriptomes
 
@@ -54,7 +66,7 @@ A transcriptome is the collection of RNA in a cell or collection of cells. Becau
 
 In a typical phylogenetic study based on transcriptome data, messenger RNA (mRNA), which encodes the protein coding genes, is isolated. mRNA is then copied to complimentary DNA (cDNA) and sequenced. Because many of the same genes are highly expressed across species and tissues, there is considerable overlap between the genes in transcriptome datasets from different samples. Many investigators are interested in protein coding genes for other purposes as well, so transcriptomes are a very cost-effective way to collect data from a broad diversity of species that can be used for multiple purposes.
 
-There are a couple challenges to working with transcriptomes. For one, RNA is much less stable than DNA. It is therefore critical to take considerable care when collecting, storing, and processing tissue for transcriptome studies. 
+There are a couple challenges to working with transcriptomes. For one, RNA is much less stable than DNA. It is therefore critical to take considerable care when collecting, storing, and processing tissue for transcriptome studies. Transcriptome sequencing only captures genes that are geing actively expressed, leading to missing data for some genes in some samples. As sequencing costs have fallen, genome sequencing has become a better option than transcriptome sequences for most phylogenetic projects.
 
 ### Targeted enrichment
 
@@ -68,7 +80,6 @@ Like targeted enrichment, RAD-seq enriches for sequence data from specific regio
 
 The result is that sequences are enriched for the same regions that have a similar distance between the same restriction enzyme sites across taxa. This is a powerful way to get a consistent subset of the genome across many different samples. It doesn't require a big investment in baits at the outset, but there are a few important limitations. First, it only works well on taxa that are quite closely related, since differences in restriction site placement evolve relatively quickly and enrichment overlap falls quickly with evolutionary distance. Rad-seq therefore is most often used when looking at evolutionary relationships within species or among very closely related species. Second, there is very little control over which specific genome regions are sequenced. For example, if you want to build a phylogeny and look at the evolution of a particular gene, you can't readily engineer the sample enrichment to enrich for that specific gene.
 
-
 ### PCR
 
 The most extreme form of genome enrichment is Polymerase Chain Reaction (PCR). This method enriches for a small number of specific genome regions selected by the user. Short DNA oligonucleotide sequences are designed to flank the region of interest and target it for amplification. By placing these oligonucleotides in conserved regions and engineering them to bind slightly different sequences, they can be used to successfully enrich the same genome region from quite distantly related species. PCR enabled the first wave of DNA sequence-based phylogenetic inference starting in the 1980s, and is still widely used used today even has a variety of new enrichment methods have become available.
@@ -77,7 +88,7 @@ PCR is cheap and relatively easy. Because it has been used for decades to sequen
 
 ## Data processing upstream of phylogenetic analyses
 
-The above section describes how different enrichment strategies work when collecting sequence data for phylogenetic analyses, but the differences are not limited to what happens at the bench. Each enrichment strategy requires its own series of data processing steps to get the data ready for phylogenetic inference. These steps vary greatly across enrichment approaches, requiring distinct methods and software tools. Exploring them in detail is beyond the scope of this text, but there are a few general aspects I will address.
+Each enrichment strategy requires its own series of data processing steps to get the data ready for phylogenetic inference. These steps vary greatly across enrichment approaches, requiring distinct methods and software tools. Exploring them in detail is beyond the scope of this text, but there are a few general aspects I will address.
 
 The overall goal of the data processing that occurs upstream of the actual phylogenetic analysis has two primary objectives, estimating the sequence of the sampled genome regions and identification of homologous sequences across taxa.
 
@@ -99,7 +110,7 @@ The process of assembling a genome (or genome regions) from scratch is referred 
 
 ### Identification of homologous genome regions
 
-It isn't enough to collect and assemble sequence data from the taxa or interest, we need to collect and identify *homologous* sequences that represent regions that are shared because they derive the the same region in common ancestors of the taxa.
+It isn't enough to collect and assemble sequence data from the taxa or interest, we need to collect and identify homologous sequences that represent regions that are shared because they derive the the same region in common ancestors of the taxa.
 
 Like assembly, the optimal approach for identifying homologous sequences depends greatly on the enrichment strategy used. This step is quite straight forward when targeted capture and PCR are used as enrichment strategies, because the data are from specific know regions that were often selected in part because their homology is easier to assess.
 
@@ -107,20 +118,18 @@ In some cases, such as the closely related virus genomes, genomes can be directl
 
 ## Working with publicly available data
 
-Most phylogenetic studies include at least some publicly available data from previously published studies. Some rely entirely on publicly available data, while others add new sequence data as well. The primary repositories for DNA sequence data in published studies, including phylogenetic studies, are [NCBI](https://www.ncbi.nlm.nih.gov/) and [EMBL-EBI](https://www.ebi.ac.uk/). Many of the same data are available in each. 
+Most phylogenetic studies include at least some publicly available data from previously published studies. Some rely entirely on publicly available data, while others add new sequence data as well. The primary repositories for DNA sequence data in published studies, including phylogenetic studies, are [NCBI](https://www.ncbi.nlm.nih.gov/), [EMBL-EBI](https://www.ebi.ac.uk/), [DDBJ](https://www.ddbj.nig.ac.jp/index-e.html), and [NGDC](https://ngdc.cncb.ac.cn/?lang=en). Many of the same data are available across multiple of these platforms. 
 
-Most phylogenetic studies deposit their raw data in public archives like the [NCBI Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra), but these can require considerable processing (including assembly) before they can be used for phylogenetic inference. It can be hard to track down assemblies and other intermediate products that are easier to work with since they are not consistently deposited in centralized data archives. Wrangling publicly available data and getting it ready for analysis can be one of the most time consuming components of a phylogenetic inference project. This is one of the major challenges to conducting phylogenetic analyses of DNA sequence data at this time.
+Most phylogenetic studies deposit their raw data in these public archives, but these can require considerable processing (including assembly) before they can be used for phylogenetic inference. It can be hard to track down assemblies and other intermediate products that are easier to work with since they are not consistently deposited in centralized data archives. Wrangling publicly available data and getting it ready for analysis can be one of the most time consuming components of a phylogenetic inference project. This is one of the major challenges to conducting phylogenetic analyses of DNA sequence data at this time.
 
 When I am interested in building a phylogeny for a particular group of organisms, one of my first steps is to take a look at the [NCBI taxonomy browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi). There you can enter a taxonomic group name, and select which data you would like to see (Figure \@ref(fig:practice-cnidaria)). You can adjust the number of taxonomic levels to control whether you want to view just summaries for larger groups or get all the way down to the species level.
 
 ```{r practice-cnidaria, echo=FALSE, fig.cap="A view of the sequence data available for Cnidaria. Here I have selected to view available Nucleotide, Protein, SRA, Genome, and Assembly data."}
 
 knitr::include_graphics("figures/cnidaria_taxonomy_browser.png")
-
 ```
 
 Based on this overview, you can assess which types of data (*i.e.*, which data produced by which enrichment strategy) are best for advancing your question with publicly available data. All the PCR data and most of the raw sequence data will usually be available here, but many assemblies and processed data for whole genomes, transcriptomes, and other high-throughput datasets may not be. The best practice when working with these data is to take a deep dive into the recent literature and see if these intermediate products were deposited in another public archive, or contact authors for more details.
-
 
 ## Homologous sites
 
@@ -141,4 +150,3 @@ Sometimes when we build phylogenies from genomic data, we are interested in the 
 If there are concerns about incongruent evolutionary histories in the group of taxa under investigation, there are a variety of methods available for addressing each of these sources of incongruence. In general they involve independently estimating the phylogeny of each region, and then integrating information across these independent phylogenies.
 
 In cases where such differences are expected to be rare or have little impact, it is common practice to concatenate alignments. Each homologous gene region is aligned independently, and then the alignments are joined end to end into a giant super-alignment. In this case, information is integrated across regions prior to phylogenetic inference.
-

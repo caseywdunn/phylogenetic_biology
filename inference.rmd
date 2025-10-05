@@ -2,7 +2,7 @@
 
 In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given the starting state and the branch length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the branches of a phylogeny.
 
-We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most probable to generate the observed data [@Felsenstein:1981vk].
+We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data [@Felsenstein:1981vk].
 
 This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis is referred to as Maximum Likelihood (ML).
 
@@ -30,15 +30,15 @@ rownames(node_states) = NULL
 get_edge_states = function( phy, states){
   D = tibble(
     parent = phy$edge[,1],
-    child  = phy$edge[,2],
-    start  = states[ phy$edge[,1] ],
-    end    = states[ phy$edge[,2] ],
+    child = phy$edge[,2],
+    start = states[ phy$edge[,1] ],
+    end   = states[ phy$edge[,2] ],
     edge_length = phy$edge.length
   )
   D
 }
 
-get_edge_prob  = function( start, end, edge_length, Q ){
+get_edge_prob = function( start, end, edge_length, Q ){
   P = exponentiate_matrix(Q*edge_length)
   P[ start, end ]
 }
@@ -103,7 +103,7 @@ ggtree(phy) +
 
 ```
 
-We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). I want to emphasize that this isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
+We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). This isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
 
 ```{r inference-internal-states, fig.cap="The same toy tree as above, but with arbitrary internal node states (in boxes)."}
 
@@ -145,7 +145,6 @@ Q
 
 For each branch, we can now use $\mathbf{P}(t)$ to calculate the probability of a change from the start state at the parent node to the end state at the child node, given the branch length $t$. The results are shown in Figure \@ref(fig:inference-history). 
 
-
 ```{r inference-history, fig.cap="The same toy tree as above, but with probabilities of the specific change along each branch above each branch (in gray)."}
 
 
@@ -156,7 +155,6 @@ ggtree(phy) +
   geom_text2(aes(label=edge_lengths), col="gray", nudge_x=-0.12, nudge_y=-0.1 ) +
   geom_text2(aes(label=round(p,3)), col="gray", nudge_x=-0.15, nudge_y=0.1 ) +
   xlim(0,2)
-
 ```
 
 Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the probabilities to calculate the joint probability of all of these events happening. 
@@ -193,7 +191,7 @@ example_prob = prod(p)
 
 The joint probability of all these states can now be calculated as the product of each state. This comes out to $`r example_prob`$. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of $`r round(example_prob*1e6,1)`$ times out of a million simulations.
 
-Here we have used much of the same machinery as we did in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.
+Here we use much of the same machinery as in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.
 
 ## Probability of multiple histories
 
@@ -201,7 +199,7 @@ Above we considered the joint probability of a specific set of nucleotide states
 
 If we aren't clamping the internal node states as well, how can we calculate the probability of just the tip node states? The key is to consider all possible internal states. Each configuration of internal node states represents one possible history that gave rise to the observed tip states. We can sum the probabilities of each of these different ways to get the tip states to find the probability of the tip states over all possible histories. We are summing the probabilities because these are mutually exclusive histories that could give rise to the observed data. For example, if we want to find the probability of getting a total of seven when rolling two dice, we need to add up the probability of each way to get seven (1+6 *or* 2+5 *or* 3+4 *or* ... 6+1). This is different from when we multiplied probabilities to find the joint probabilities of multiple events occurring together (*e.g.*, the probability of rolling a 4 *and* another 4).
 
-This is a small tree, with only 3 internal nodes that can each have 4 states. This gives $4^3=64$ possible histories. That is small enough to list them out below. I also include the probability of each specific history, calculated exactly as I did above (the example above corresponds to row 60 here).
+This is a small tree, with only 3 internal nodes that can each have 4 states. This gives $4^3=64$ possible histories. That is small enough to list them out below. I also include the probability of each specific history, calculated as I did above (the example above corresponds to row 60 here).
 
 ```{r}
 
@@ -242,14 +240,13 @@ The likelihood of these data on this phylogeny, $`r sum(history_probs)`$, is not
   (\#eq:logs)
 \end{equation}
 
-We can calculate joint log probabilities as sums of log probabilities for each event, rather than as the log of products of the probabilities. Addition is much faster than multiplication for computers (since multiplication is a series of addition operations), so this speeds things up. For these reasons you will almost always see log likelihoods, rather than just likelihoods, published in the literature. Note that because likelihoods are probabilities and therefore range from 0--1, the log likelihoods will range from $-\infty$ (for probabilities very close to 0) to $0$ (for probabilities close to 1). Since likelihoods tend to be small, they end up as log likelihoods that are negative numbers with large absolute values.
+We can calculate joint log probabilities as sums of log probabilities for each event, rather than as the log of products of the probabilities. You will almost always see log likelihoods, rather than just likelihoods, published in the literature. Note that because likelihoods are probabilities and therefore range from 0--1, the log likelihoods will range from $-\infty$ (for probabilities very close to 0) to $0$ (for probabilities close to 1). Since likelihoods tend to be small, they end up as log likelihoods that are negative numbers with large absolute values.
 
 ## Likelihood for multiple sites
 
 The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We now need to expand this model from a single site to multiple sites within a gene or even across whole genomes.
 
 This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.
-
 
 ## Maximum likelihood
 
