@@ -14,7 +14,6 @@ Each model parameters can be treated in one of at least three ways [@Hohna2014]:
 
 - Deterministic. The parameter value depends on the values of other parameters according to specified mathematical relationships. Their values can vary, but are determined by the value of other parameters and cannot be set independently from them.
 
-
 The most widely used DNA sequence evolution models include the General Time Reversible model and its derivatives (Section \@ref(expanding-the-models)). The GTR model has 11 parameters (Figure \@ref(fig:evaluation-models-nested)). These include the global rate $\mu$ used to tune the overall rate of evolution. Next come the relative rate parameters $a,b,c,d,e,f$ that modify the rates of change between particular nucleotide states, so that they can differ from each other. For example, if `a=0.5` and `b=2`, then the rate of changes between C and A occur at a rate four times higher than changes between A and G. Finally we have the equilibrium frequencies $\pi_A,\pi_C,\pi_G,\pi_T$.
 
 These parameters are treated as follows in the GTR model (Figure \@ref(fig:evaluation-models-nested)):
@@ -140,8 +139,6 @@ grid.arrange(
   ggtree(phy_d) + geom_tiplab( aes(label=label)),
   ggtree(phy_focal) + geom_tiplab( aes(label=label)),
   ncol=2)
-
-
 ```
 
 ```{r eval-splits, echo=FALSE, fig.cap="Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently above the branches throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology."}
@@ -150,13 +147,9 @@ knitr::include_graphics("figures/splits.png")
 
 ```
 
-
-
-
 We can consider each branch in the focal phylogeny independently. For a given focal branch, we count the fraction of phylogenies in the sample that have the same branch, as determined by producing an identical split in taxa. We consider this frequency as the support for the focal branch. If the frequency is 1, the branch was in all the phylogenies in the sample. If it is zero, it wasn't present in any of the phylogenies in the sample. The interpretation of these frequencies, which are often reported as percents, depends on the method that was used to generate the sample.
 
 It should be noted that these support values are often referred to as "nodal support values", and are often drawn onto nodes. This is unfortunate, as they are branch support values. They are just commonly associated with child node of the branch rather than the branch itself. This obscures their meaning, and leads to serious problems when trees are re-rooted [@10.1093/molbev/msx055].
-
 
 ### Bootstrapping
 
@@ -164,18 +157,10 @@ The most widely used approach to assessing confidence in maximum likelihood phyl
 
 Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. A branch frequency of 100% indicates that a branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
 
-
-
-
-
-
 Note that I am not using the term "significance" when referring to bootstrap support. This is because bootstraps don't have a clear statistical interpretation. It is a scale that varies from $0$ to $1$, but is not itself a significance. It just indicates how frequently a branch is recovered when the data columns are resampled. This gives a sense of how broad support is for the branch across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.
 
 Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process.
 
-
 ## Topology tests
 
 Rather than assess the support of a particular focal topology, sometimes you want to assess how significant the difference in support is for specific phylogenies. There are several different topology tests that address these questions. They include the SOWH test [@swofford1996molecular], among others.
-
-

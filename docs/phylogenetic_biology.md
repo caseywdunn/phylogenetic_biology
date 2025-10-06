@@ -929,7 +929,7 @@ Here we have built up the conceptual, mathematical, statistical, and computation
 
 In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given the starting state and the branch length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the branches of a phylogeny.
 
-We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most probable to generate the observed data [@Felsenstein:1981vk].
+We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data [@Felsenstein:1981vk].
 
 This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis is referred to as Maximum Likelihood (ML).
 
@@ -939,7 +939,7 @@ We will consider the toy phylogeny, along with its tip states, shown in Figure \
 
 ![(\#fig:inference-toy)The toy phylogeny we will use to examine inference. Node numbers are in black. Branch lengths are gray numbers below branches. Tip node states are within boxes.](phylogenetic_biology_files/figure-latex/inference-toy-1.pdf) 
 
-We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). I want to emphasize that this isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
+We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). This isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
 
 ![(\#fig:inference-internal-states)The same toy tree as above, but with arbitrary internal node states (in boxes).](phylogenetic_biology_files/figure-latex/inference-internal-states-1.pdf) 
 
@@ -987,7 +987,6 @@ And their product $\mathbf{Q}$, with the diagonal adjusted so that rows sum to 0
 
 For each branch, we can now use $\mathbf{P}(t)$ to calculate the probability of a change from the start state at the parent node to the end state at the child node, given the branch length $t$. The results are shown in Figure \@ref(fig:inference-history). 
 
-
 ![(\#fig:inference-history)The same toy tree as above, but with probabilities of the specific change along each branch above each branch (in gray).](phylogenetic_biology_files/figure-latex/inference-history-1.pdf) 
 
 Now that we have the probabilities of each of these changes, we can calculate the joint probability of all these changes. When we want to calculate the joint probability of multiple independent events, we take the product of the probability of each specific event. For example, the probability of rolling a 4 on a fair die is $1/6$. The probability of rolling two 4s on two fair dice is $1/6\times1/6=1/36$. So we can take the product of all the probabilities to calculate the joint probability of all of these events happening. 
@@ -1019,7 +1018,7 @@ Note, though, that the probability for node 5, the root node, is missing. This m
 
 The joint probability of all these states can now be calculated as the product of each state. This comes out to $\ensuremath{1.4332602\times 10^{-5}}$. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of $14.3$ times out of a million simulations.
 
-Here we have used much of the same machinery as we did in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.
+Here we use much of the same machinery as in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.
 
 ## Probability of multiple histories
 
@@ -1027,7 +1026,7 @@ Above we considered the joint probability of a specific set of nucleotide states
 
 If we aren't clamping the internal node states as well, how can we calculate the probability of just the tip node states? The key is to consider all possible internal states. Each configuration of internal node states represents one possible history that gave rise to the observed tip states. We can sum the probabilities of each of these different ways to get the tip states to find the probability of the tip states over all possible histories. We are summing the probabilities because these are mutually exclusive histories that could give rise to the observed data. For example, if we want to find the probability of getting a total of seven when rolling two dice, we need to add up the probability of each way to get seven (1+6 *or* 2+5 *or* 3+4 *or* ... 6+1). This is different from when we multiplied probabilities to find the joint probabilities of multiple events occurring together (*e.g.*, the probability of rolling a 4 *and* another 4).
 
-This is a small tree, with only 3 internal nodes that can each have 4 states. This gives $4^3=64$ possible histories. That is small enough to list them out below. I also include the probability of each specific history, calculated exactly as I did above (the example above corresponds to row 60 here).
+This is a small tree, with only 3 internal nodes that can each have 4 states. This gives $4^3=64$ possible histories. That is small enough to list them out below. I also include the probability of each specific history, calculated as I did above (the example above corresponds to row 60 here).
 
 
 n1   n2   n3   n4   n5   n6   n7    probability
@@ -1110,14 +1109,13 @@ The likelihood of these data on this phylogeny, $0.0058252$, is not a big number
   (\#eq:logs)
 \end{equation}
 
-We can calculate joint log probabilities as sums of log probabilities for each event, rather than as the log of products of the probabilities. Addition is much faster than multiplication for computers (since multiplication is a series of addition operations), so this speeds things up. For these reasons you will almost always see log likelihoods, rather than just likelihoods, published in the literature. Note that because likelihoods are probabilities and therefore range from 0--1, the log likelihoods will range from $-\infty$ (for probabilities very close to 0) to $0$ (for probabilities close to 1). Since likelihoods tend to be small, they end up as log likelihoods that are negative numbers with large absolute values.
+We can calculate joint log probabilities as sums of log probabilities for each event, rather than as the log of products of the probabilities. You will almost always see log likelihoods, rather than just likelihoods, published in the literature. Note that because likelihoods are probabilities and therefore range from 0--1, the log likelihoods will range from $-\infty$ (for probabilities very close to 0) to $0$ (for probabilities close to 1). Since likelihoods tend to be small, they end up as log likelihoods that are negative numbers with large absolute values.
 
 ## Likelihood for multiple sites
 
 The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We now need to expand this model from a single site to multiple sites within a gene or even across whole genomes.
 
 This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.
-
 
 ## Maximum likelihood
 
@@ -1141,7 +1139,7 @@ Under some conditions parsimony and likelihood will recover similar topologies, 
 
 # Molecular inference in practice
 
-In the last chapter we examined the mathematical and statistical underpinning of phylogenetic inference with maximum likelihood. In this chapter we examine some of the project design considerations and decisions you will need to make in implementing a phylogenetic analysis. We are sticking with DNA sequence data for now, but we will extend these approaches to other types of data later.
+In the last chapter we examined the mathematical and statistical underpinnings of phylogenetic inference with maximum likelihood. In this chapter we examine some of the project design considerations and decisions you will need to make in implementing a phylogenetic analysis. We are sticking with DNA sequence data for now, but we will extend these approaches to other types of data later. This is an introduction to the decisions you will face and some of the approaches available, not a comprehensive explanation of how to implement a study.
 
 ## Your question
 
@@ -1157,21 +1155,21 @@ One of the most common mistakes in phylogenetic analyses is to include too few t
 
 - Adding taxa can help improve model evaluation and model parameter estimation.
 
-- Adding taxa reduces the number of assumptions going into a study. You are almost always inferring a phylogeny because you are uncertain at the outset about evolutionary relationships. If, for example, you only include a couple of species from Clade B because you assume it is monophyletic, this poor sampling may be insufficient to reveal that Clade C is in fact nested within Clade B. With insufficient sampling of Clade B, it may instead appear that the two groups are sister clades.
+- Adding taxa reduces the number of assumptions going into a study. You are almost always inferring a phylogeny because you are uncertain at the outset about evolutionary relationships. If, for example, you include only a couple of species from Clade B because you assume it is monophyletic, this poor sampling may be insufficient to reveal that Clade C is in fact nested within Clade B. With insufficient sampling of Clade B, it may instead appear that the two groups are sister clades.
 
-- Adding taxa provides a more rigorous test of phylogenetic hypotheses. Say you are conducting a study to investigate the phylogenetic placement of a specific enigmatic species that is so morphologically distinct from other organisms that it is hard to know where it goes. You think it may fall in Clade A, Clade B, or Clade C, so you densely sample those groups. But in fact it falls within Clade D, and your taxon sampling is such that you can't even evaluate this hypothesis because you have no taxa from Clade D in your study.
+- Adding taxa provides a more rigorous test of phylogenetic hypotheses. Suppose you are conducting a study to investigate the phylogenetic placement of a specific enigmatic species that is so morphologically distinct from other organisms that it is hard to know where it goes. You think it may fall in Clade A, Clade B, or Clade C, so you densely sample those groups. But in fact it falls within Clade D, and your taxon sampling is such that you can't even evaluate this hypothesis because you have no taxa from Clade D in your study.
 
-- Adding more outgroup taxa often improves rooting. Skimping on outgroup sampling is one of the most common mistakes in project design. The best practice in general is to include the most closely related outgroup taxa possible, and some that are progressively more distantly related. The root and the branches that connect to it are the deepest in the tree, and can be the hardest to infer. So it is good to densely sample taxa relevant to the root.
+- Adding more outgroup taxa often improves rooting. Skimping on outgroup sampling is one of the most common mistakes in project design. The best practice in general is to include the most closely related outgroup taxa possible, and some that are progressively more distantly related. The root and the branches that connect to it are the deepest in the tree, and can be the hardest to infer. It is good to densely sample taxa relevant to the root.
 
 There are costs to adding taxa that must be balanced against the benefits above:
 
 - If you are collecting the data, it costs money to add taxa. That money may be best allocated in other ways.
 
-- Adding taxa can considerably increase the computational demand of analyses. This can increase the time and cost of analysis, and maybe even make an analysis unfeasible on the computers available to the investigator.
+- Adding taxa can considerably increase the computational demand of analyses. This can increase the time and cost of analysis, or even make an analysis unfeasible on the computers available to the investigator.
 
 There are some conditions under which you may want to exclude specific taxa, at least from some analyses:
 
-- If you suspect that they data are contaminated, incorrectly identified, or insufficiently documented.
+- If you suspect that the data are contaminated, incorrectly identified, or insufficiently documented.
 
 - Preliminary analyses suggest that the taxon has properties very different from other taxa in the study, such as a very different equilibrium frequency or an exceptionally high rate of evolution.
 
@@ -1179,78 +1177,85 @@ There are some conditions under which you may want to exclude specific taxa, at 
 
 ## Collecting sequence data
 
-Once you have a general idea about taxon sampling, you will need to consider which genome regions to include in your analyses. To build a phylogeny, you need homologous characters across the taxa under investigation. In the context of DNA analyses, this means that you need overlapping genome regions across the taxa that will be in your phylogeny.  
+You will also need to consider which genome regions to include in your analyses. To build a phylogeny, you need homologous characters across the taxa under investigation. In the context of DNA analyses, this means that you need overlapping genome regions across the taxa that will be in your phylogeny. Decisions about which specific taxa to include interact with decisions about which genome regions you will consider, so there is often back and forth as you refine these decisions. If you are using publicly available data, your taxon and genome region sampling will be strongly constrained by what data are already available.
 
-Decisions about which specific taxa to include interact quite a bit with decisions about which genome regions you will consider, so there is often quite a bit of back and forth as you refine these decisions. At the coarsest level, if you are collecting data yourself you will often need to decide if you are going to capture a larger amount of data from fewer taxa or a smaller amount of data from many taxa. If you are using publicly available data, then your taxon and genome region sampling will be strongly constrained by what data are already available.
+You will need to decide if and how to enrich for particular genome regions prior to phylogenetic analyses. Enrichment occurs in two stages. The first is sample enrichment. It takes place at the lab bench after you extract your DNA and before you sequence, and uses molecular methods to bias which DNA regions are sequenced. The second is data enrichment. It takes place after you sequence and before you perform phylogenetic analyses, and uses computational methods to obtain a useful subset of data best suited to your question.
 
-Decisions about what genome regions to include can be thought of as decisions about which genome enrichment strategy to use. These strategies restrict data acquisition (sequencing) to particular regions. Here I describe common enrichment strategies along a spectrum of increasing enrichment, from no enrichment (whole genome sequencing) to enrichment for a small number of specific genes. 
+Here I consider a few sample enrichment strategies. I start with methods that use the least sample enrichment since, as sequencing technologies improve and fall in price, these will become more favorable for a given project.
 
 ### Whole genomes
 
-Phylogenies are now routinely inferred without enrichment of any genome regions -- the full genome is sequenced and analyzed. This is possible due to advances in DNA sequencing technologies, as well as improved methods for processing raw genome data into useful annotated genome sequences. Full genome phylogenetic analyses are still largely restricted to organisms with small genomes, in particular viruses. This has been a very powerful tool, for example, to investigate virus transmission through human populations. It is still expensive and difficult to build phylogenies with large genome sequences, though this is rapidly changing.
+It is now routine for phylogenetic studies to use shotgun sequencing to sequence entire genomes of sampled taxa without any sample enrichment at all. This is often cheaper and more productive than taking steps to only sequence regions of interest. Studies differ greatly, though, in how these whole genome data are used. In clades with small genomes with minimal sequence divergence, such as some viruses and bacteria, entire genomes can be sequenced and assembled. 
+
+For larger genomes, such as plants and animals, data are processed to isolate a subset of homologous regions across taxa. The processing depends on the questions at hand and genomic resources already available. Several strategies include:
+
+- Mapping reads to reference genomes and calling variable sites. If genome assemblies are available for the clade of interest, then reads from each new sample can be mapped to the genome. Sites that are variable at the same mapped sites can then be used for phylogenetic inference. This makes excellent use of the full dataset, often providing hundreds of thousand of phylogenetically informative sites. It is limited, though, to studies where reference genomes are available and are comparable across the taxa included in the analysis.
+
+- Assembling and analyzing organelle genomes. Sometimes mitochondrial and plastid genomes are sufficient for answering the questions that motivate a study. Because these genomes are small compared to nuclear genomes, they can often be readily assembled from raw sequence reads and then aligned and analyzed. This approach can be applied regardless of existing genome resources.
+
+- Using other methods to isolate homologous regions across studies. The number of tools that can process raw reads to isolate homologous genome regions across samples without the need for a reference genome is growing. These tools include sharkmer, written by Sam Church and me and available at <https://github.com/caseywdunn/sharkmer>, which can produce gene sequences given Polymerase Chain Reaction (PCR) primer sequences and raw DNA sequence data.
+
+Multiple strategies above are often used in the same study, they are not exclusive. Apart from reduced expenses in the lab, one of the values of whole genome sequencing is that it is compatible with so many downstream analysis methods.
 
 ### Transcriptomes
 
-A transcriptome is the collection of RNA in a cell or collection of cells. Because RNA is transcribed from the genome, sequencing the RNA gives a snapshot of an enriched subset of the genome. Whereas the other enrichment approaches described below are implemented by the investigator at the bench, transcriptome sequencing largely relies on a natural process in the living cell (transcription) to enrich for particular genome regions.
+A transcriptome is the collection of RNA in a cell or collection of cells. Because RNA is transcribed from the genome, sequencing the RNA gives a snapshot of an enriched subset of the genome. Whereas the other enrichment approaches described are implemented by the investigator at the bench, transcriptome sequencing largely relies on a natural process in the living cell (transcription) to enrich for particular genome regions.
 
-In a typical phylogenetic study based on transcriptome data, messenger RNA (mRNA), which encodes the protein coding genes, is isolated. mRNA is then copied to complimentary DNA (cDNA) and sequenced. Because many of the same genes are highly expressed across species and tissues, there is considerable overlap between the genes in transcriptome datasets from different samples. Many investigators are interested in protein coding genes for other purposes as well, so transcriptomes are a very cost-effective way to collect data from a broad diversity of species that can be used for multiple purposes.
+In a typical phylogenetic study based on transcriptome data, messenger RNA (mRNA), which encodes the protein coding genes, is isolated. mRNA is then copied to complementary DNA (cDNA) and sequenced. Because many of the same genes are highly expressed across species and tissues, there is considerable overlap between the genes in transcriptome datasets from different samples. Many investigators are interested in protein coding genes for other purposes as well, adding value to the transcriptome data.
 
-There are a couple challenges to working with transcriptomes. For one, RNA is much less stable than DNA. It is therefore critical to take considerable care when collecting, storing, and processing tissue for transcriptome studies. 
+There are a couple challenges to working with transcriptomes. For one, RNA is much less stable than DNA. It is therefore critical to take considerable care when collecting, storing, and processing tissue for transcriptome studies. Transcriptome sequencing only captures genes that are being expressed, leading to missing data for some genes in some samples. As sequencing costs have fallen, genome sequencing has become a better option than transcriptome sequencing for most phylogenetic projects.
 
 ### Targeted enrichment
 
-In targeted enrichment, an investigator designs short bait sequences that are similar to conserved genome regions. They then isolate DNA from their taxa of interest, fragment it, and use the baits to fish out the conserved regions along with their neighboring sequences. This allows the investigator to created pools of DNA that are enriched for specific pre-selected regions. This is a highly cost effective way to isolate homologous sequences in across species, and works well when samples have fragmented DNA (in museum specimens, for example). 
+In targeted enrichment, an investigator designs short bait sequences that are similar to conserved genome regions. They then isolate DNA from their taxa of interest, fragment it, and use the baits to fish out the conserved regions along with their neighboring sequences. This allows the investigator to create pools of DNA that are enriched for specific pre-selected regions. This is a highly cost-effective way to isolate homologous sequences in across species, and works well when samples have fragmented DNA (in museum specimens, for example). 
 
-The baits are typically designed based on one or more genomes that are already available in the clade of interest. There are a few challenges to using targeted enrichment. One is that data are difficult to combine across different studies that used different baits. In addition, the design and synthesis of baits poses a large up-front investments that makes this approach best suited to larger projects.
+The baits are typically designed based on one or more genomes that are already available in the clade of interest. There are a few challenges to using targeted enrichment. One is that data are difficult to combine across different studies that used different baits. In addition, the design and synthesis of baits require a large up-front investment that makes this approach best suited to larger projects.
 
 ### RAD-seq
 
 Like targeted enrichment, RAD-seq enriches for sequence data from specific regions scattered across the genome. It differs, though, in that it uses intrinsic properties of the genome for enrichment, rather than user-designed baits. Genomic DNA is digested with one or two restriction enzymes that cut the genome at specific small sequences, and leave the DNA with particular overhangs at the cut end. These cut fragments are then size-selected. If cutting with two restriction enzymes, the fragments that have different overhangs (because they were cut once with each enzyme) are then further enriched. The fragments are then sequenced.
 
-The result is that sequences are enriched for the same regions that have a similar distance between the same restriction enzyme sites across taxa. This is a powerful way to get a consistent subset of the genome across many different samples. It doesn't require a big investment in baits at the outset, but there are a few important limitations. First, it only works well on taxa that are quite closely related, since differences in restriction site placement evolve relatively quickly and enrichment overlap falls quickly with evolutionary distance. Rad-seq therefore is most often used when looking at evolutionary relationships within species or among very closely related species. Second, there is very little control over which specific genome regions are sequenced. For example, if you want to build a phylogeny and look at the evolution of a particular gene, you can't readily engineer the sample enrichment to enrich for that specific gene.
-
+The result is that sequences are enriched for regions with similar distances between restriction enzyme sites across taxa. This is a powerful way to get a consistent subset of the genome across many different samples. It doesn't require a big investment in baits at the outset, but there are a few important limitations. First, it only works well on closely related taxa, since differences in restriction site placement evolve relatively quickly and enrichment overlap falls quickly with evolutionary distance. RAD-seq therefore is most often used when looking at evolutionary relationships within species or among very closely related species. Second, there is very little control over which specific genome regions are sequenced. For example, if you want to build a phylogeny and look at the evolution of a particular gene, you can't readily engineer the sample enrichment to target that specific gene.
 
 ### PCR
 
-The most extreme form of genome enrichment is Polymerase Chain Reaction (PCR). This method enriches for a small number of specific genome regions selected by the user. Short DNA oligonucleotide sequences are designed to flank the region of interest and target it for amplification. By placing these oligonucleotides in conserved regions and engineering them to bind slightly different sequences, they can be used to successfully enrich the same genome region from quite distantly related species. PCR enabled the first wave of DNA sequence-based phylogenetic inference starting in the 1980s, and is still widely used used today even has a variety of new enrichment methods have become available.
+The most extreme form of genome enrichment is PCR. This method enriches for a small number of specific genome regions selected by the user. Short DNA oligonucleotide sequences are designed to flank the region of interest and target it for amplification. By placing these oligonucleotides in conserved regions and engineering them to bind slightly different sequences, they can be used to successfully enrich the same genome region from quite distantly related species. PCR enabled the first wave of DNA sequence-based phylogenetic inference starting in the 1980s, and is still widely used today even as a variety of new enrichment methods have become available.
 
-PCR is cheap and relatively easy. Because it has been used for decades to sequence a small number of genes across a wide diversity of organisms, it is a great way to collect data that can be readily analyzed in combination with publicly available data. Ironically, though, it is now very expensive per-nucleotide to collect data with PCR relative to the other methods above. That's because it is difficult to leverage the advantages of modern high-throughput sequencing, which is very cheap per nucleotide, with such a small number of short amplified sequences. As one of the most extreme forms of genome enrichment available, it provides access to a very small fraction of the genome. PCR is still a convenient way to get a tiny amount of sequence data from a large number of taxa.
+PCR is cheap and relatively easy. Because it has been used for decades to sequence a small number of genes across a wide diversity of organisms, it is a great way to collect data to analyze in combination with publicly available data. Ironically, though, it is now very expensive per nucleotide to collect data with PCR relative to the other methods above. That is because it is difficult to leverage the advantages of modern high-throughput sequencing, which is very cheap per nucleotide, with such a small number of short amplified sequences. As one of the most extreme forms of genome enrichment available, it provides access to a very small fraction of the genome. PCR is still a convenient way to get a tiny amount of sequence data from a large number of taxa.
 
 ## Data processing upstream of phylogenetic analyses
 
-The above section describes how different enrichment strategies work when collecting sequence data for phylogenetic analyses, but the differences are not limited to what happens at the bench. Each enrichment strategy requires its own series of data processing steps to get the data ready for phylogenetic inference. These steps vary greatly across enrichment approaches, requiring distinct methods and software tools. Exploring them in detail is beyond the scope of this text, but there are a few general aspects I will address.
-
-The overall goal of the data processing that occurs upstream of the actual phylogenetic analysis has two primary objectives, estimating the sequence of the sampled genome regions and identification of homologous sequences across taxa.
+Each enrichment strategy requires its own series of data processing steps to get the data ready for phylogenetic inference. These steps vary greatly across enrichment approaches, requiring distinct methods and software tools. The data processing that occurs upstream of the actual phylogenetic analysis has two primary objectives, estimating the sequence of the sampled genome regions and enrichment of homologous sequences across taxa.
 
 ### Estimation of original sequences
 
 Raw sequence data have a few properties that make them unusable for direct analysis:
 
-- They are redundant. The same genome regions are sequenced multiple times. PCR products are typically sequenced a couple times (once in each direction), and high throughput sequencing often sequences each region hundreds or thousands of times.
+- They are redundant. The same genome regions are sequenced multiple times. PCR products are typically sequenced a couple of times (once in each direction), and high throughput sequencing often sequences each region hundreds or thousands of times.
 
-- They have many errors. These are introduced during sample preparation at the bench, by the sequencing instruments during data acquisition, and in the initial base calling that generates the sequence file. Errors in raw data vary across sequencing technology, and are on the order of a few per hundreds or thousands of nucleotides.
+- They have many errors. These are introduced during sample preparation at the bench, by the sequencing instruments during data acquisition, and in the initial base calling that generates the sequence file. Errors in raw data vary across sequencing technologies, and are on the order of a few per hundreds or thousands of nucleotides.
 
-- They are fragmented. Many times the raw sequences do not span the full genome region of interest, and must be tiled together to predict longer regions.
+- They are fragmented. Often the raw sequences do not span the full genome region of interest, and must be tiled together to predict longer regions.
 
 - They are ambiguous. It often isn't clear what region of the genome a sequence belongs to, due to genomic repeats, heterozygosity, and genome duplication. This ambiguity must be resolved or eliminated, depending on the application.
 
-The above technical challenges are usually addressed simultaneously in an analysis process called assembly. The goal of assembly is to predict the sequences of the original genome regions based on the raw sequence data. The general idea is to line up overlapping raw sequence data, correct errors by comparing sequences, and then to collapse all the sequences down to hypotheses about the original actual sequence from which all the raw data were generated. This is a very complex process, and still a major challenge for many genomes and transcriptomes in particular. The best approach differs quite a bit depending on the enrichment strategy, sequencing technology, and the properties of the genome (such as how repetative it is).
+The above technical challenges are usually addressed simultaneously in an analysis process called assembly. The goal of assembly is to predict the sequences of the original genome regions based on the raw sequence data. The general idea is to line up overlapping raw sequence data, correct errors by comparing sequences, and collapse all the sequences down to hypotheses about the original actual sequence from which all the raw data were generated. This is a very complex process, and still a major challenge for many genomes and transcriptomes in particular. The best approach differs quite a bit depending on the enrichment strategy, sequencing technology, and the properties of the genome (such as how repetitive it is).
 
-The process of assembling a genome (or genome regions) from scratch is referred to as *de novo* assembly. If high quality closely related genomes are available, they can be used for guided assembly or mapping, where the raw data are tiled onto the reference rather than assembled from scratch.
+The process of assembling a genome (or genome regions) from scratch is referred to as *de novo* assembly. If high-quality closely related genomes are available, they can be used for guided assembly or mapping, where the raw data are tiled onto the reference rather than assembled from scratch.
 
 ### Identification of homologous genome regions
 
-It isn't enough to collect and assemble sequence data from the taxa or interest, we need to collect and identify *homologous* sequences that represent regions that are shared because they derive the the same region in common ancestors of the taxa.
+It isn't enough to collect and assemble sequence data from the taxa of interest. We also need to collect and identify homologous sequences that represent regions that are shared because they derive from the same region in common ancestors of the taxa.
 
-Like assembly, the optimal approach for identifying homologous sequences depends greatly on the enrichment strategy used. This step is quite straight forward when targeted capture and PCR are used as enrichment strategies, because the data are from specific know regions that were often selected in part because their homology is easier to assess.
+Like assembly, the optimal approach for identifying homologous sequences depends greatly on the enrichment strategy used. This step is quite straight forward when targeted capture and PCR are used as enrichment strategies, because the data are from specific known regions that were often selected in part because their homology is easier to assess.
 
-In some cases, such as the closely related virus genomes, genomes can be directly aligned with each other along their full lengths. In larger genomes, and transcriptomes, protein coding sequences are often extracted from the assemblies and are the focus of phylogenetic analyses. There are various approaches to identifying homologous protein coding genes across taxa. One is to identify sequences for a pre-selected panel of genes that are selected because they tend to be present in most datasets, they have properties of molecular evolution that are well-suited to phylogenetic analysis, and their homology is thought to be easier to assess. Another is to compare all gene sequences across all species to identify homologous regions. This can be a bit more computational work, but has the advantage of being able to optimize gene selection to the data and question at hand.
+In some cases, such as with closely related viruses, genomes can be directly aligned with each other along their full lengths. In larger genomes and transcriptomes, protein coding sequences are often extracted from the assemblies and are the focus of phylogenetic analyses. There are various approaches to identifying homologous protein coding genes across taxa. One is to identify sequences for a preselected panel of genes that are selected because they tend to be present in most datasets, they have properties of molecular evolution that are well-suited to phylogenetic analysis, and their homology is thought to be easier to assess. Another is to compare all gene sequences across all species to identify homologous regions. This is more computational work, but has the advantage of optimizing gene selection to the data and question at hand.
 
 ## Working with publicly available data
 
-Most phylogenetic studies include at least some publicly available data from previously published studies. Some rely entirely on publicly available data, while others add new sequence data as well. The primary repositories for DNA sequence data in published studies, including phylogenetic studies, are [NCBI](https://www.ncbi.nlm.nih.gov/) and [EMBL-EBI](https://www.ebi.ac.uk/). Many of the same data are available in each. 
+Most phylogenetic studies include at least some publicly available data from previously published studies. Some rely entirely on publicly available data, while others add new sequence data as well. The primary repositories for DNA sequence data in published studies, including phylogenetic studies, are [NCBI](https://www.ncbi.nlm.nih.gov/), [EMBL-EBI](https://www.ebi.ac.uk/), [DDBJ](https://www.ddbj.nig.ac.jp/index-e.html), and [NGDC](https://ngdc.cncb.ac.cn/?lang=en). Many of the same data are available across these platforms. 
 
-Most phylogenetic studies deposit their raw data in public archives like the [NCBI Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra), but these can require considerable processing (including assembly) before they can be used for phylogenetic inference. It can be hard to track down assemblies and other intermediate products that are easier to work with since they are not consistently deposited in centralized data archives. Wrangling publicly available data and getting it ready for analysis can be one of the most time consuming components of a phylogenetic inference project. This is one of the major challenges to conducting phylogenetic analyses of DNA sequence data at this time.
+Most phylogenetic studies deposit their raw data in these public archives, but the raw data can require considerable processing (including assembly) for use in phylogenetic inference. It is often hard to track down assemblies and other intermediate products that are easier to work with since they are not consistently deposited in centralized data archives. Wrangling publicly available data and getting it ready for analysis can be one of the most time-consuming components of a phylogenetic inference project. This is one of the major challenges to conducting phylogenetic analyses of DNA sequence data at this time.
 
 When I am interested in building a phylogeny for a particular group of organisms, one of my first steps is to take a look at the [NCBI taxonomy browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi). There you can enter a taxonomic group name, and select which data you would like to see (Figure \@ref(fig:practice-cnidaria)). You can adjust the number of taxonomic levels to control whether you want to view just summaries for larger groups or get all the way down to the species level.
 
@@ -1260,7 +1265,6 @@ When I am interested in building a phylogeny for a particular group of organisms
 
 Based on this overview, you can assess which types of data (*i.e.*, which data produced by which enrichment strategy) are best for advancing your question with publicly available data. All the PCR data and most of the raw sequence data will usually be available here, but many assemblies and processed data for whole genomes, transcriptomes, and other high-throughput datasets may not be. The best practice when working with these data is to take a deep dive into the recent literature and see if these intermediate products were deposited in another public archive, or contact authors for more details.
 
-
 ## Homologous sites
 
 Once you have collected homologous sequences for one or more genome regions across your taxa of interest, you next need to identify homologous nucleotide sites within these regions. This process is referred to as multiple sequence alignment (MSA). Rather than rely on explicit models of molecular evolution, multiple sequence alignment usually relies on similarities between sequences. The general idea is to slide the sequences along each other and insert gaps as needed so that similarity at each site is optimized while reducing the number of gaps introduced. 
@@ -1269,18 +1273,17 @@ The output of multiple sequence alignment is a matrix. Each row is a taxon that 
 
 ## Combining information across multiple genome regions
 
-Sometimes when we build phylogenies from genomic data, we are interested in the specific evolutionary history of the genome regions themselves. This is the case, or example, when looking at gene family evolution. Often, though, we are using the evolutionary history of the genomic regions as a proxy for the evolutionary history of the organisms, such as when we are asking questions with DNA data about how species are related to each other. There are a variety of conditions, though, under which different genome regions can have different evolutionary histories from eachother, and some of these histories deviate from the evolutionary history of the taxa as a whole [@maddison1997gene]. Processes that can lead different regions to have different evolutionary histories include:
+Sometimes when we build phylogenies from genomic data, we are interested in the specific evolutionary history of the genome regions themselves. This is the case, for example, when looking at gene family evolution. Often, though, we are using the evolutionary history of the genome regions as a proxy for the evolutionary history of the organisms, such as when we are asking questions with DNA data about how species are related to each other. There are a variety of conditions, though, under which different genome regions can have different evolutionary histories from each other, and some of these histories deviate from the evolutionary history of the taxa as a whole [@maddison1997gene]. Processes that can lead different regions to have different evolutionary histories include:
 
-- Horizontal transfer of genome regions across species. This can occur, for example, when a virus caries DNA from one species to another. Rates of horizontal gene transfer vary greatly across different groups of organisms.
+- Horizontal transfer of genome regions across species. This can occur, for example, when a virus carries DNA from one species to another. Rates of horizontal gene transfer vary greatly across different groups of organisms.
 
 - Duplication and loss of genome regions. Genome replication is not always perfect, and sometimes results in an organism inheriting multiple copies of a whole genome or specific genome regions from a parent. In fact, many genes are members of gene families within a species that arose via a history of duplication and subsequent differentiation. As genome regions are duplicated and sometimes lost, their evolutionary history can become distinct from that of other genome regions.
 
 - All variation that we see across species originally arises within populations. Sometimes new variants are lost, and sometimes they become fixed across entire species. If multiple variants persist through multiple speciation events, though, the evolutionary history of some genome regions can differ from that of species. This process is called Incomplete Lineage Sorting (ILS). Rates of ILS are higher on shorter branches and when populations are larger.
 
-If there are concerns about incongruent evolutionary histories in the group of taxa under investigation, there are a variety of methods available for addressing each of these sources of incongruence. In general they involve independently estimating the phylogeny of each region, and then integrating information across these independent phylogenies.
+If there are concerns about incongruent evolutionary histories in the group of taxa under investigation, there are a variety of methods available for addressing each of these sources of incongruence. In general, they involve independently estimating the phylogeny of each region, and then integrating information across these independent phylogenies.
 
-In cases where such differences are expected to be rare or have little impact, it is common practice to concatenate alignments. Each homologous gene region is aligned independently, and then the alignments are joined end to end into a giant super-alignment. In this case, information is integrated across regions prior to phylogenetic inference.
-
+In cases where such differences are expected to be rare or have little impact, it is common practice to concatenate alignments. Each homologous gene region is aligned independently and then the alignments are joined end to end into a giant superalignment. In this case, information is integrated across regions prior to phylogenetic inference.
 
 <!--chapter:end:inference_in_practice.rmd-->
 
@@ -1299,7 +1302,6 @@ Each model parameters can be treated in one of at least three ways [@Hohna2014]:
 - Stochastic. The parameter is free to vary in the analysis. This allows the value to be estimated from the data as part of the inference process.
 
 - Deterministic. The parameter value depends on the values of other parameters according to specified mathematical relationships. Their values can vary, but are determined by the value of other parameters and cannot be set independently from them.
-
 
 The most widely used DNA sequence evolution models include the General Time Reversible model and its derivatives (Section \@ref(expanding-the-models)). The GTR model has 11 parameters (Figure \@ref(fig:evaluation-models-nested)). These include the global rate $\mu$ used to tune the overall rate of evolution. Next come the relative rate parameters $a,b,c,d,e,f$ that modify the rates of change between particular nucleotide states, so that they can differ from each other. For example, if `a=0.5` and `b=2`, then the rate of changes between C and A occur at a rate four times higher than changes between A and G. Finally we have the equilibrium frequencies $\pi_A,\pi_C,\pi_G,\pi_T$.
 
@@ -1408,13 +1410,9 @@ Branch frequencies are far more useful. It is helpful to think of a branch as a 
 \includegraphics[width=3.92in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently above the branches throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology.}(\#fig:eval-splits)
 \end{figure}
 
-
-
-
 We can consider each branch in the focal phylogeny independently. For a given focal branch, we count the fraction of phylogenies in the sample that have the same branch, as determined by producing an identical split in taxa. We consider this frequency as the support for the focal branch. If the frequency is 1, the branch was in all the phylogenies in the sample. If it is zero, it wasn't present in any of the phylogenies in the sample. The interpretation of these frequencies, which are often reported as percents, depends on the method that was used to generate the sample.
 
 It should be noted that these support values are often referred to as "nodal support values", and are often drawn onto nodes. This is unfortunate, as they are branch support values. They are just commonly associated with child node of the branch rather than the branch itself. This obscures their meaning, and leads to serious problems when trees are re-rooted [@10.1093/molbev/msx055].
-
 
 ### Bootstrapping
 
@@ -1422,21 +1420,13 @@ The most widely used approach to assessing confidence in maximum likelihood phyl
 
 Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. A branch frequency of 100% indicates that a branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
 
-
-
-
-
-
 Note that I am not using the term "significance" when referring to bootstrap support. This is because bootstraps don't have a clear statistical interpretation. It is a scale that varies from $0$ to $1$, but is not itself a significance. It just indicates how frequently a branch is recovered when the data columns are resampled. This gives a sense of how broad support is for the branch across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.
 
 Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process.
 
-
 ## Topology tests
 
 Rather than assess the support of a particular focal topology, sometimes you want to assess how significant the difference in support is for specific phylogenies. There are several different topology tests that address these questions. They include the SOWH test [@swofford1996molecular], among others.
-
-
 
 <!--chapter:end:evaluation.rmd-->
 
@@ -1772,7 +1762,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 05, 2025 at 03:08:28 PM with the following R package versions.
+This book was rendered from the source code on Oct 05, 2025 at 10:52:43 PM with the following R package versions.
 
 
 ```
