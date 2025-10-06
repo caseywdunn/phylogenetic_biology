@@ -7,7 +7,7 @@ isbn_paperback: "979-8-9934524-0-1"
 isbn_hardback: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
-date: "2025-10-05"
+date: "2025-10-06"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1291,11 +1291,11 @@ In cases where such differences are expected to be rare or have little impact, i
 
 ## Model evaluation
 
-I have introduced the use of models of DNA evolution for simulation and inference, but I haven't explained how to select a model. Given a dataset, consisting of aligned DNA sequences for a set of taxa that correspond to tips on a phylogeny, how do you decide which model to use?
+We have examined models of DNA evolution in simulation and inference, but not yet how to select a model. Given a dataset, consisting of aligned DNA sequences for a set of taxa that correspond to tips on a phylogeny, how do you decide which model to use?
 
 ### Model structure
 
-Each model parameters can be treated in one of at least three ways [@Hohna2014]:
+Each model parameter can be treated in one of three ways [@Hohna2014]:
 
 - Constant. The parameter is clamped to a specific value before the analysis and is not free to vary.
 
@@ -1309,9 +1309,9 @@ These parameters are treated as follows in the GTR model (Figure \@ref(fig:evalu
 
 - $\mu$ is constant. With $\mu=1$, the branch lengths are in units of expected evolutionary change.
 
-- The six rate parameters are constrained such that $a+b+c+d+e+f=6$. If they were all free to vary, then values that have a sum other than 6 would lead to changes in the global rate rather than the relative rates. Imagine setting them all to $10$, for example. This would be equivalent to setting them all to 1 and setting $\mu=10$. This mathematical relationship between the relative rate parameters means that only five of them can vary independently, because the sixth will depend on the other five and the fact that they all sum to 6. This means that five of the rate parameters are stochastic, and one is deterministic. For our purposes it doesn't matter which one is deterministic, only that one of them is, so I'll treat $f$ as the deterministic rate parameter.
+- The six rate parameters are constrained such that $a+b+c+d+e+f=6$. If they were all free to vary, then values that have a sum other than 6 would lead to changes in the global rate rather than the relative rates. Imagine setting them all to $10$, for example. This would be equivalent to setting them all to 1 and setting $\mu=10$. This mathematical relationship between the relative rate parameters means that only five of them can vary independently, because the sixth will depend on the other five and the fact that they all sum to 6. This means that five of the rate parameters are stochastic, and one is deterministic. For our purposes it doesn't matter which one is deterministic, only that one of them is. I'll treat $f$ as the deterministic rate parameter.
 
-- The four equilibrium frequencies are constrained such that $\pi_A+\pi_C+\pi_G+\pi_T=1$. This is because they are exclusive frequencies, and there are no other possible states. Given that every site must be an A, C, G, or T, their frequencies must sum to $1$. This mathematical relationship between the equilibrium frequency parameters means that only three of them can vary independently -- three are stochastic and one is deterministic. Again, it doesn't matter which one is deterministic, only how many are stochastic, so I'll treat $\pi_A$ as the deterministic parameter.
+- The four equilibrium frequencies are constrained such that $\pi_A+\pi_C+\pi_G+\pi_T=1$. This is because they are exclusive frequencies, and there are no other possible states. Given that every site must be an A, C, G, or T, their frequencies must sum to $1$. This mathematical relationship between the equilibrium frequency parameters means that only three of them can vary independently -- three are stochastic and one is deterministic. Again, it doesn't matter which one is deterministic, only how many are stochastic. I'll treat $\pi_A$ as the deterministic parameter.
 
 \begin{figure}
 \includegraphics[width=4.21in]{figures/models_dna} \caption{A hierarchical view of DNA substitution models. The number of degrees of freedom is determined by the number of independent stochastic parameters (boxes with rounded corners). All other parameters are either constant (set to a specific value ahead of the analysis; boxes with straight lines) or deterministic (their value depends on the value of other parameters according to specified relationships; boxes with dashed lines). Here $\mu=1$, such that the branch lengths in the phylogeny are the expected amount of evolutionary change. The models are listed from top to bottom by increasing nestedness. Rates are ordered so that transitions and transversions are adjacent. Any model could be realized as a subset of the possible parameter space of the models above it. The visual nomenclature is inspired by Hohna et al. (2014).}(\#fig:evaluation-models-nested)
@@ -1321,11 +1321,11 @@ The number of stochastic parameters in a model is referred to as the degrees of 
 
 The GTR model has $df=8$. There are $5$ stochastic relative rate parameters and $3$ stochastic equilibrium frequencies (Figure \@ref(fig:evaluation-models-nested)). The other models we have seen are nested within this. By nested I mean that they can take on a smaller subset of the parameter values than the more complex model can. Models that are nested within other models have a smaller degree of freedom. See the [iqtree DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models.
 
-The HKY85 model has $df=4$ (Figure \@ref(fig:evaluation-models-nested)). There is $1$ stochastic relative rate parameter, which determines the transition to transversion ratio. There are the same $3$ stochastic equilibrium frequency parameters as in the GTR model. There are many values that a GTR model can take that an HKY85 model cannot, for example $b$ can differ from $e$ in GTR but not in HKY85. Every value that HKY85 can take can also be taken by GTR. For example, in HKY85 $b=e$, and in GTR $b$ and $e$ are independent stochastic variables that can be different or that can take on the same value. Because every possible value of HKY85 is also possible in GTR, and GTR has more degrees of freedom than GTR, HKY85 is nested within GTR.
+The HKY85 model has $df=4$ (Figure \@ref(fig:evaluation-models-nested)). There is $1$ stochastic relative rate parameter, which determines the transition to transversion ratio. There are the same $3$ stochastic equilibrium frequency parameters as in the GTR model. There are many values that a GTR model can take that an HKY85 model cannot, for example $b$ can differ from $e$ in GTR but not in HKY85. Every value that HKY85 can take can also be taken by GTR. For example, in HKY85 $b=e$, and in GTR $b$ and $e$ are independent stochastic variables that can be different or that can take on the same value. Because every possible value of HKY85 is also possible in GTR, and GTR has more degrees of freedom than HKY85, HKY85 is nested within GTR.
 
 Likewise, F81 is nested within HKY85 (and therefore GTR as well). It has $df=3$, the same $3$ stochastic equilibrium frequency parameters as in the GTR and HKY85 models. All the relative rates are constant and set to $1$. Any value that F81 can take can also be taken by HKY85 or GTR.
 
-The first model we introduced, JC, has $df=0$. All the relative rates are constant at $1$, and all the equilibrium frequencies are constant at $1$. In typical use, $\mu=1$. All the other models mentioned above have stochastic parameters that can take on these values, so JC is nested within them all.
+The first model we introduced, JC, has $df=0$. All the relative rates are constant at $1$, and all the equilibrium frequencies are constant at $0.25$. In typical use, $\mu=1$. All the other models mentioned above have stochastic parameters that can take on these values, so JC is nested within them all.
 
 Though nested models always have different degrees of freedom, there is no guarantee that models with different degrees of freedom have a nested relationship. It could be that the simpler model has some stochastic parameters that are not stochastic in the more complex model, even though the more complex model has a greater number of free parameters overall. That would allow the simpler model to take on values that the more complex model cannot, violating the nested relationship. When evaluating nestedness it is therefore critical to consider model structure, not just the degrees of freedom.
 
@@ -1333,14 +1333,14 @@ Though nested models always have different degrees of freedom, there is no guara
 
 In our previous examinations of inference, we used likelihood as an optimality criterion when looking for the phylogeny that best explains our data. Similarly, we can search for the model that best explains the data. We can pick a reasonable phylogeny and evaluate the likelihood of the data under each of the models we would like to consider. In each case we also optimize the model parameter values for each model to make sure we are comparing the models in the best possible light.
 
-We can then make a series of pairwise comparisons between models, where we consider the ratio of their likelihoods. This is the gist of what is called a likelihood ratio test (LRT). Instead of considering the ratio of likelihoods, we can consider  the difference of their log likelihoods since:
+We can then make a series of pairwise comparisons between models, where we consider the ratio of their likelihoods. This is the gist of a likelihood Ratio Test (LRT). Instead of considering the ratio of likelihoods, we can consider the difference in their log likelihoods since:
 
 \begin{equation} 
-  ln(\frac{a}{b}) = ln(a) - ln(b)
+  \Delta = ln(\frac{a}{b}) = ln(a) - ln(b)
   (\#eq:logs-diff)
 \end{equation}
 
-If this difference, which we can call $\Delta$, in log likelihoods is positive, then the model corresponding to $a$ is more likely. If it is negative, then the model corresponding to $b$ is more likely.
+If this difference $\Delta$ is positive, then the model corresponding to $a$ is more likely. If it is negative, then the model corresponding to $b$ is more likely.
 
 Let's say we are comparing GTR to HKY85, and we denote the likelihood under GTR as $L_{GTR}$ and the likelihood under HKY85 as $L_{HKY85}$. We'll put the model with more parameters, GTR in this case, in the numerator, *i.e.*, set $a$ above to $L_{GTR}$ and $b$ to $L_{HKY85}$. 
 
@@ -1351,7 +1351,7 @@ Let's say we are comparing GTR to HKY85, and we denote the likelihood under GTR 
 
 One way to proceed would then be to select GTR if $\Delta>0$, and HKY85 if $\Delta<0$. This wouldn't be a good way to go, though, since it would pick GTR every single time. The reason is that HKY85 is nested within GTR. That means that the best possible likelihood under HKY85 is also available under GTR. Because it has more degrees of freedom, GTR has many other possible values, and chances are very good that one of those will be more likely than the parameter values that were most likely under HKY85. If comparing two nested models, the model with more degrees of freedom will never have a likelihood lower than the simpler model.
 
-This would seem to imply that more complex models are always better, but they most certainly are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch lengths based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
+This would seem to imply that more complex models are always better, but they are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch lengths based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
 
 When comparing nested models, the question therefore isn't whether one model has higher likelihood than the other, but whether the increase in likelihood one gets from adding parameters is worth the cost of adding the parameters. There are a few different ways to make this cost/benefit analysis.
 
@@ -1388,7 +1388,7 @@ To decide whether to use LRT, AIC, or BIC model selection criteria, you need to 
 
 The GTR model, and its nested derivatives, capture only a small subset of evolutionary processes and therefore can't describe many of patterns in observed data. One of the most obvious patterns you will notice when inspecting multiple sequence alignments is that the amount of variation is very different across sites. Some columns will be highly variable, while others are nearly constant. This pattern is due to extensive heterogeneity across sites in rate of evolution. 
 
-Two additional model features are often added to address this rate heterogeneity - `I` and `G`. The I parameter is the fraction of sites that are invariant and effectively have a rate of zero. `G` accommodates rate heterogeneity across sites that do vary [@yang1994maximum]. This is modeled with a continuous $\Gamma$ distribution that is divided into discrete rate categories, usually 4, to speed up computations. Sites are assigned to these different rate categories. To specify the shape of the $\Gamma$ distribution, and therefore the rates of the categories, a parameter referred to as $\alpha$ is used.
+Two additional model features are often added to address this rate heterogeneity - `I` and `G`. These add additional degrees of freedom. The `I` parameter is the fraction of sites that are invariant and effectively have a rate of zero. `G` accommodates rate heterogeneity across sites that do vary [@yang1994maximum]. This is modeled with a continuous $\Gamma$ distribution that is divided into discrete rate categories, usually 4, to speed up computations. Sites are assigned to these different rate categories. To specify the shape of the $\Gamma$ distribution, and therefore the rates of the categories, a parameter referred to as $\alpha$ is used.
 
 `I` and `G` can be added to GTR and its derivative models. Model selection routines usually examine a panel of models without these rate heterogeneity features, then with `I`, `G`, and `I+G`.  The models with `I+G` are often selected, reflecting the importance of accommodating rate heterogeneity in real data.
 
@@ -1398,16 +1398,16 @@ Maximum likelihood inference gives a point estimate of the phylogeny -- a single
 
 ### Summarizing topological support
 
-Before we get into how to assess support for a phylogenetic hypothesis, it use helpful to think about what that support means and how it is viewed on a phylogeny. Given a specific topology, such as a maximum likelihood phylogeny, how can we summarize and present support for that topology? I'll refer to the topology we are evaluating as the *focal topology*.
+Before we get into how to assess support for a phylogenetic hypothesis, it is helpful to think about what that support means and how it is viewed on a phylogeny. Given a specific topology, such as a maximum likelihood phylogeny, how can we summarize and present support for that topology? I'll refer to the topology we are evaluating as the *focal topology*.
 
-Most methods that evaluate topologies generate a large set of phylogenies, which I'll call the *sample*. Assessing support for a feature of the focal topology is a matter of assessing the frequency of phylogenies in the sample that also have that feature. We could assess the support for the focal tree as a whole by asking how frequent identical topologies are in the sample. But support can often be strong in one part of a phylogeny and weak in another. Reporting equivalence of the entire topology provides no window into that variation. This approach would also break down as taxa are added, which quickly increases them number of possible topologies and reduces the chances of any two analyses returning the exact same topologies, given the variation that is inherent in heuristic searches.
+Most methods that evaluate topologies generate a large set of phylogenies, which I'll call the *sample*. Assessing support for a feature of the focal topology is a matter of assessing the frequency of phylogenies in the sample that also have that feature. We could assess the support for the focal tree as a whole by asking how frequent identical topologies are in the sample. But support can often be strong in one part of a phylogeny and weak in another. Reporting equivalence of the entire topology provides no window into that variation. This approach would also break down as taxa are added, which quickly increases the number of possible topologies and reduces the chances of any two analyses returning the exact same topologies, given the variation that is inherent in heuristic searches.
 
 Branch frequencies are far more useful. It is helpful to think of a branch as a split (also sometimes called a bipartition) that separates all the taxa in a phylogeny into two groups - those on one side of the branch, and those on the other (Figure \@ref(fig:eval-splits)). We will consider two branches to be equivalent if they lead to the same taxon split. This allows us to discuss the equivalence of branches deep in a phylogeny, even when there are many other topological variations elsewhere in the phylogeny.
 
 
 
 \begin{figure}
-\includegraphics[width=3.92in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, with the identification of the branch based on which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently above the branches throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology.}(\#fig:eval-splits)
+\includegraphics[width=3.92in]{figures/splits} \caption{Four phylogenies in a sample, one focal phylogeny, and a table of splits found in all of these topologies. A split is a branch, identified by which taxa are split from each other by the branch. The splits table shows the binary encoding of each split, where taxa on the same side of the split have the same binary number (0 or 1). The assignment of 1 or 0 to a particular side of the split is arbitrary. Identical splits are labeled consistently above the branches throughout the figure. The frequency of the split is based on the proportion of sample phylogenies that contain the splits. The frequencies of the sample splits are shown as percentages on the branches in the focal topology.}(\#fig:eval-splits)
 \end{figure}
 
 We can consider each branch in the focal phylogeny independently. For a given focal branch, we count the fraction of phylogenies in the sample that have the same branch, as determined by producing an identical split in taxa. We consider this frequency as the support for the focal branch. If the frequency is 1, the branch was in all the phylogenies in the sample. If it is zero, it wasn't present in any of the phylogenies in the sample. The interpretation of these frequencies, which are often reported as percents, depends on the method that was used to generate the sample.
@@ -1426,7 +1426,7 @@ Many phylogenetic inference programs do not run full independent maximum likelih
 
 ## Topology tests
 
-Rather than assess the support of a particular focal topology, sometimes you want to assess how significant the difference in support is for specific phylogenies. There are several different topology tests that address these questions. They include the SOWH test [@swofford1996molecular], among others.
+Rather than assess the support of a particular focal topology, sometimes you want to assess how significant the difference in support is for specific phylogenies. There are several different topology tests that address these questions. They include the SOWH test [@swofford1996molecular], KH test [@kishino1989], SH test [@Shimodaira1999], AU test [@Shimodaira2002]. Some of these are implemented in popular maximum likelihood software tools including iqtree [@Minh2020]. Their performance differs across conditions and their assumptions differ, so care should be taken in selecting and evaluating these tests [@Goldman2000;@Markowski2023].
 
 <!--chapter:end:evaluation.rmd-->
 
@@ -1762,7 +1762,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 05, 2025 at 10:52:43 PM with the following R package versions.
+This book was rendered from the source code on Oct 06, 2025 at 01:16:34 AM with the following R package versions.
 
 
 ```
