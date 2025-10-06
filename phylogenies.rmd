@@ -88,7 +88,6 @@ p = g_tree +
   xlim(0, 400)
 
 p
-
 ```
 
 There is considerable variation in how the same phylogeny can be drawn (Figure \@ref(fig:trees-layouts)). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny. 

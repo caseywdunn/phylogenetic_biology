@@ -1434,23 +1434,23 @@ Rather than assess the support of a particular focal topology, sometimes you wan
 
 Let's take stock of what we have covered so far. We introduced models, and how to simulate data with them. We then explored how to use models to calculate the likelihood -- the probability of the observed data given the topology, branch lengths, model parameters, and model. We used likelihood as an optimality criterion in heuristic searches to find the Maximum Likelihood (ML) phylogeny. We introduced the methods to calculate the frequency of branches on a focal topology, like the ML topology, in a sample of phylogenies. We showed how to generate a sample of phylogenies by running ML searches on bootstrapped matrices, and used this to calculate bootstrap support for each branch in the ML phylogeny.
 
-ML and bootstraps are widely used and are a critical foundation for many phylogenetic analyses. There are, however, a few things about analysis frameworks  based on optimality criteria, ML, and bootstraps that are not ideal:
+ML and bootstraps are widely used and are a critical foundation for many phylogenetic analyses. There are, however, a few things about analysis frameworks based on optimality criteria, ML, and bootstraps that are not ideal:
 
-- Whenever we apply an optimality criterion, such as ML or parsimony, to identify the "best" phylogeny, that doesn't tell us anything about how much better this optimal phylogeny is than other hypotheses. If it is the best phylogeny by far, then this single phylogeny tells us a lot about the the phylogenetic information in our analysis. If however, there are multiple phylogenies that are almost as good as the best one, as is often the case, then we would need to know about these others as well to have a good understanding of what hypotheses are consistent with our data.
+- Whenever we apply an optimality criterion, such as ML or parsimony, to identify the "best" phylogeny, that doesn't tell us anything about how much better this optimal phylogeny is than other hypotheses. If it is the best phylogeny by far, then this single phylogeny tells us a lot about the phylogenetic information in our analysis. If however, there are multiple phylogenies that are almost as good as the best one, as is often the case, then we would need to know about these others as well to have a good understanding of what hypotheses are consistent with our data.
 
 - Likelihood is the probability of the data given the phylogenetic hypothesis. The probability of the data under the ML hypothesis will be exceptionally low, often far less than one in a million, since the ML hypothesis could generate many other data as well. This is because we are evaluating the probability of the data given the hypothesis, but often what we really want to know is the probability of the hypothesis given the data. The two are quite different, but are related. It would be nice to be more explicit about that relationship.
 
 - Bootstraps are a convenient way to generate a sample of phylogenies, but their statistical interpretation is not clear. The frequencies of bootstrap supports don't correspond in a clear way to probabilities of our hypothesis, but instead tell us something about how frequently features of the phylogeny are supported when we resample the data. In practice it turns out this is a good proxy for phylogenetic support, but it would be nice to have support values that have a more explicit statistical interpretation.
 
-All analyses include a variety of tradeoffs, and the downsides of the issues listed above are often mitigated by the multiple upsides of a ML bootstrap analysis framework. It also greatly helps that there are decades of experience with ML analyses that help contextualize and interpret ML bootstrap results. This work has produced ML methods and software packages that are highly optimized for computational efficiency, enabling the routine application of these approaches to very large datasets.
+All analyses include a variety of tradeoffs, and the issues listed above are often mitigated by the multiple upsides of a ML bootstrap analysis framework. It also greatly helps that there are decades of experience with ML analyses that help contextualize and interpret ML bootstrap results. This work has produced ML methods and software packages that are highly optimized for computational efficiency, enabling the routine application of these approaches to very large datasets.
 
 Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above [@holder2003, @huelsenbeck2001mrbayes, @larget1999markov, @chen2014bayesian]. Rather than focus on a single "best" topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters. 
 
 ## Bayesian statistics
 
-Bayesian statistics is much older than many other domains of statistics, but have recently seen a surge in use as computational and methodological advances allow them to be applied more effectively to a wider number of problems. The basic intuition is that our understanding of the world are not drawn from the data alone. Instead, the data are used to update our prior understanding of the world. This updated understanding is referred to as the posterior. There are many excellent introductions to Bayesian statistics, so I will not provide a full derivation here. If you would like more of a background, please consult Appendix \@ref(stats-bayes).
+Bayesian statistics is much older than many other domains of statistics, but have recently seen a surge in use as computational and methodological advances allow them to be applied more effectively to a wider number of problems. The basic intuition is that our understanding of the world is not drawn from the data alone. Instead, the data are used to update our prior understanding of the world. This updated understanding is referred to as the posterior. There are many excellent introductions to Bayesian statistics, so I will not provide a full derivation here. If you would like more of a background, please consult Appendix \@ref(stats-bayes).
 
-Bayes' theorem establishes the the following relationships:
+Bayes' theorem establishes the following relationships:
 
 \begin{equation} 
   P(H|D) = \frac{P(D|H)P(H)}{P(D)} 
@@ -1471,15 +1471,14 @@ To calculate the posterior probability of a phylogenetic hypothesis, we need to 
 
 What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won't.
 
-Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling [@metropolis1953]. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
+Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling [@metropolis1953]. MCMC is a widely used to approximate complex probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypothesis that are either rejected or accepted based on a specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
 
-Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate our test statistic as the ratio of the posterior probability of $H^*$ to the prior probability of $H$:
+Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate our test statistic as the ratio of the posterior probability of $H^*$ to the posterior probability of $H$:
 
 \begin{equation} 
   R = \frac{P(D|H^*)P(H^*)}{P(D)} \frac{P(D)}{P(D|H)P(H)} = \frac{P(D|H^*)P(H^*)}{P(D|H)P(H)}
   (\#eq:bayes-mcmc)
 \end{equation}
-
 
 Because $P(D)$ doesn't depend on the hypothesis under consideration, it is the same in both posteriors. Because we are considering a ratio of posteriors, it cancels out. We don't need to calculate it to derive $R$.
 
@@ -1488,7 +1487,7 @@ The "Markov Chain" in MCMC alludes to the fact that MCMC is a series of repeated
 1. We have hypothesis $H$.
 2. We propose a new hypothesis $H^*$ by modifying $H$.
 3. We calculate $R$ according to Equation \@ref(eq:bayes-mcmc).
-4. If $R>1$, we accept $H^*$. If If $R<1$, we accept $H^*$ with probability $R$. Otherwise, we retain $H$.
+4. If $R>1$, we accept $H^*$. If $R<1$, we accept $H^*$ with probability $R$. Otherwise, we retain $H$.
 5. The result of the step above is added to the posterior sample, and becomes $H$ for the next iteration of the cycle.
 
 MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, with branch frequencies. Unlike bootstraps, though, the frequency of a branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, *i.e.*, the probability of the branch given the data and our priors. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.
@@ -1506,7 +1505,7 @@ not necessarily close to a peak in the posterior. The initial samples before MCM
 
 The ability to specify a prior can be a great advantage of Bayesian analyses. A prior is an explicit, principled way to incorporate prior knowledge into a new analysis. For example, if you are very confident that a particular clade exists based on external evidence, you could design a topology prior that favors topologies that include that clade over topologies that don't. If you have external information about model parameters, you could set a prior that constrains these parameters. These are cases of what are called informative priors-- they are nonuniform, and intentionally constrain results based on external information. In many cases, though, investigators use relatively uninformative priors that give equal probabilities to all hypotheses. This allows the posterior to be dominated by the data, and is appropriate when the investigator doesn't have external information to include in the prior or wants to focus on signal in a particular dataset. If you are ever concerned about the impact of your priors on your posteriors, you can run your analysis without any data-- the posterior will then be determined entirely by the prior. This gives you a good understanding of the impact of your prior on the posterior, and by comparing this empty analysis to an analysis with data you can get a good sense of the impact of your data on the posterior.
 
-Bayesian phylogenetic software stores samples of the run at regular intervals, for example every hundred generations (where a generation is a single MCMC proposal). Typically, there are two output files, a tree file and a trace file. The tree file has one line per sample, each with a tree in newick format. The trace file also has one line per sample. There are multiple columns, each with with a model parameter or run statistic. It is called a trace file because you can plot each of these columns to trace the progress of the MCMC run.
+Bayesian phylogenetic software stores samples of the run at regular intervals, for example every hundred generations (where a generation is a single MCMC proposal). Typically, there are two output files, a tree file and a trace file. The tree file has one line per sample, each with a tree in newick format. The trace file also has one line per sample. There are multiple columns, each with a model parameter or run statistic. It is called a trace file because you can plot each of these columns to trace the progress of the MCMC run.
 
 ![(\#fig:bayes-trace)Plot of log likelihood trace for a bayesian analysis. An appropriate burn-in of 100,000 generations is indicated with a dashed vertical line.](phylogenetic_biology_files/figure-latex/bayes-trace-1.pdf) 
 
@@ -1516,8 +1515,8 @@ Once the trace file has been examined, the investigator turns to the tree file. 
 
 ## Resources
 
-- A video introduction to Bayes Theorem: https://www.youtube.com/watch?v=HZGCoVF3YvM
-- The excellent MCMC robots by Paul Lewis: https://plewis.github.io/applets/mcmc-robot/
+- A video introduction to Bayes Theorem: <https://www.youtube.com/watch?v=HZGCoVF3YvM>
+- The excellent MCMC robots by Paul Lewis: <https://plewis.github.io/applets/mcmc-robot/>
 
 <!--chapter:end:bayes.rmd-->
 
@@ -1762,7 +1761,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 06, 2025 at 01:16:34 AM with the following R package versions.
+This book was rendered from the source code on Oct 06, 2025 at 01:44:47 AM with the following R package versions.
 
 
 ```

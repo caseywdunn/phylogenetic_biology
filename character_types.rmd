@@ -2,10 +2,9 @@
 
 So far we have considered a single type of character data -- DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies, such as morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.
 
-We can group character types based on some shared features. For example, some data are discrete values (such as DNA), others have continuous values (such as mass or length), and still others have countable values (such as number of body segments) that have integer values that come in discrete values like DNA but these integers are ordered and convey magnitude. 
+We can group character types based on some shared features. For example, some data are discrete values (such as DNA), others have continuous values (such as mass or length), and still others have countable values (such as number of body segments).
 
-Rather than approach each new character type in an *ad hoc* way, it is important to examine these more general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory [@houle2011measurement] -- a field that sits at the intersection of math, statistics, and philosophy that concerns the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually an exciting and grounding framework for understanding many of the central aspects of what we do in science.
-
+Rather than approach each new character type in an *ad hoc* way, it is important to examine their general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory [@houle2011measurement]. This field sits at the intersection of math, statistics, and philosophy. It considers the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually a fascinating and grounding framework for understanding many of the central aspects of what we do in science.
 
 ```{r char-scale-types, echo=FALSE}
 df <- data.frame(
@@ -29,7 +28,6 @@ knitr::kable(df,
   kableExtra::column_spec(7, width = "3cm")
 ```
 
-
 Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Scale category column. Permissible transformations indicate the mathematical operations that can be performed without distorting measurement meaning. Arbitrary parameters are the number of values that must be specified to establish a numerical system. For example, for a ratio scale type zero means absence and one arbitrary parameter must be specified, such as an object of standard mass or length. For an interval scale type, zero is arbitrary and two parameters must be specified, such as the temperature at which water freezes and boils.  Meaningful comparisons indicates comparisons that can be made between measurements of each scale type.
 
 There are many types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types, *i.e.*, scale types. Different scale types require different models of evolution. The biggest distinction is between discrete character types, like DNA, and continuous character types, like mass, that require radically different models of evolution.
@@ -38,11 +36,11 @@ There are many types of organism measurements, and therefore state spaces and ch
 
 ### Nominal scale types
 
-There are several other frequent applications of nominal scale types beyond DNA sequences in phylogenetic analyses. The most common include others include other molecular sequence data, but they are also used for discrete unordered morphological character states
+There are several other frequent applications of nominal scale types beyond DNA sequences in phylogenetic analyses. These include other molecular sequence data, such as proteins, and also discrete unordered morphological character states.
 
 #### DNA nucleotides
 
-Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides -- `A`, `C`, `G`, and `T`. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states that it can take. They are unordered because changes don't have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types corresponds to a nominal scale type.
+Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides -- `A`, `C`, `G`, and `T`. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states. They are unordered because changes don't have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types correspond to a nominal scale type.
 
 #### Amino acids
 
@@ -60,7 +58,7 @@ Direct analogs of the DNA sequence evolution models are often applied to discret
 
 ### Ordinal scale types
 
-Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is an ordering, *i.e.*, some values are larger than others and there are different distances between the values [@houle2011measurement, Table 1]. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendege or the number of digits on a vertebrate forelimb.
+Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is an ordering, *i.e.*, some values are larger than others and there are different distances between the values [@houle2011measurement, Table 1]. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendage or the number of digits on a vertebrate forelimb.
 
 Models for the evolution of ordinal data can be described with the same language we used for nominal scale types, the rates for changes between non-adjacent values are just set to zero. 5, for example, will have a nonzero rate of change to 6 and 4 and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of 4 digits.
 
@@ -79,7 +77,6 @@ Such a rate matrix that explains the changes between 0-6 digits would have this 
 \end{array}\right)
 \end{equation}
 
-
 ## Continuous data
 
 Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate can take on a value within some range of real numbers. These character states are often lumped together by phylogenetic biologists under the single umbrella of continuous character data, since any two values can have values between them. Measurement theory, on the other hand, identifies multiple scale types that all have continuous values.
@@ -87,7 +84,6 @@ Many characters, such as body mass, limb length, protein abundance, maximum swim
 The evolution of continuous measurements, regardless of specific scale type, are often modeled with the Brownian Motion (BM) family of models. At any point in time, the value can take an incremental step up or down. There are two parameters - the starting value, and the step size per unit time.
 
 The use of BM models for phylogenetic analysis of continuous data is a pragmatic choice, as it greatly simplifies many calculations. But there are many ways in which BM doesn't actually describe the evolution of continuous traits. For example, BM can result in a value that is any real number, positive or negative, whereas many biological measurements that are considered in a phylogenetic perspective can only take on positive values. Sometimes these discrepancies have little impact, and sometimes they can lead to entirely wrong conclusions.
-
 
 ```{r char-brownian, fig.cap="Multiple brownian motion trajectories."}
 # Number of trajectories and steps
@@ -123,9 +119,4 @@ It is so named because differences are invariant with respect to units.
 
 The most commonly encountered continuous scale type in phylogenetic analyses is the ratio scale type [@houle2011measurement, Table 1]. These measurements can take on values that are positive real numbers. They include many common continuous measurements, such as mass, length, and time interval. The name "ratio scale type" refers to the fact that ratios of these measurements are invariant with respect to units. If the ratio of body lengths of frog A to frog B is 2.38 when measured in centimeters, it will also be 2.38 when measured in inches, miles, or any other unit of length.
 
-
 Ratio scale type data are often log transformed before phylogenetic analysis. This converts them to difference scale types.
-
-
-
-

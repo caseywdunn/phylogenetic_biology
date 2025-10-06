@@ -89,7 +89,7 @@ Let's start with a simple model of DNA evolution. At first we will consider only
 - State at the start of the branch (the nucleotide at the parent node)
 - State at the end of the branch (the nucleotide at the child node)
 
-```{r sim-application, echo=FALSE, fig.cap="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a cange from A to C."}
+```{r sim-application, echo=FALSE, fig.cap="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a change from A to C."}
 
 knitr::include_graphics("figures/applications.png")
 ```
@@ -312,7 +312,7 @@ There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to fa
 (\#eq:jc69-expanded)
 \end{equation}
 
-(See Section \@ref(linear-algebra) for resources on linear algebra if you are unfamiliar with the intution and mechanics of matrix multiplication.) 
+(See Section \@ref(linear-algebra) for resources on linear algebra if you are unfamiliar with the intuition and mechanics of matrix multiplication.) 
 
 $\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used exponential equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
 
@@ -358,7 +358,7 @@ To accommodate each of these deviations from JC69, we need to add parameters to 
 
 This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along a branch to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
 
-If we let all the parameters in the GTR model (Equation \@ref(eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is to clamp some of them. In fact, by comparison of Equations \@ref(eq:jc69-expanded)) and \@ref(eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free in JC69.
+If we let all the parameters in the GTR model (Equation \@ref(eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is to clamp some of them. In fact, by comparison of Equations \@ref(eq:jc69-expanded) and \@ref(eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free in JC69.
 
 There are a variety of other commonly used models that clamp these parameters in different ways, some leaving more freedom than others. Some that are widely used and have very specific biological motivation have their own names, like JC69 (the motivation for this model is that it is so simple). Examples of other named models include:
 
