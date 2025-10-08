@@ -7,7 +7,7 @@ isbn_paperback: "979-8-9934524-0-1"
 isbn_hardback: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
-date: "2025-10-06"
+date: "2025-10-07"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -582,7 +582,7 @@ Let's start with a simple model of DNA evolution. At first we will consider only
 - State at the end of the branch (the nucleotide at the child node)
 
 \begin{figure}
-\includegraphics[width=4.72in]{figures/applications} \caption{Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a cange from A to C.}(\#fig:sim-application)
+\includegraphics[width=4.72in]{figures/applications} \caption{Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a change from A to C.}(\#fig:sim-application)
 \end{figure}
 
 When DNA is replicated, the appropriate nucleotide is usually incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotides is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
@@ -714,7 +714,7 @@ There is a lot going in in $\mathbf{Q}$. To make sense of it all, it helps to fa
 (\#eq:jc69-expanded)
 \end{equation}
 
-(See Section \@ref(linear-algebra) for resources on linear algebra if you are unfamiliar with the intution and mechanics of matrix multiplication.) 
+(See Section \@ref(linear-algebra) for resources on linear algebra if you are unfamiliar with the intuition and mechanics of matrix multiplication.) 
 
 $\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used exponential equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
 
@@ -760,7 +760,7 @@ To accommodate each of these deviations from JC69, we need to add parameters to 
 
 This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along a branch to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
 
-If we let all the parameters in the GTR model (Equation \@ref(eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is to clamp some of them. In fact, by comparison of Equations \@ref(eq:jc69-expanded)) and \@ref(eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free in JC69.
+If we let all the parameters in the GTR model (Equation \@ref(eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is to clamp some of them. In fact, by comparison of Equations \@ref(eq:jc69-expanded) and \@ref(eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free in JC69.
 
 There are a variety of other commonly used models that clamp these parameters in different ways, some leaving more freedom than others. Some that are widely used and have very specific biological motivation have their own names, like JC69 (the motivation for this model is that it is so simple). Examples of other named models include:
 
@@ -1467,7 +1467,7 @@ Third, consider a case where the data are perfect indicators of the hypothesis. 
 
 ## Bayesian phylogenetic inference
 
-To calculate the posterior probability of a phylogenetic hypothesis, we need to address all the terms on the right side of Equation \@ref(eq:bayes-theorem). We already know how to calculate $P(D|H)$, the likelihood. What about $P(H)$ and $P(D)$? There are a variety of practical approaches to $P(H)$ that have been shown to work well in the context of phylogenetics. These include uniform priors, where all topologies are considered to be equally likely. The priors on branch length can be approximated from an exponential distribution. One of the major take-aways from the past two decades of work on Bayesian phylogenetics is that inference is quite robust to $P(H)$ when the data are informative about the phylogeny, as expected.
+To calculate the posterior probability of a phylogenetic hypothesis, we need to address all the terms on the right side of Equation \@ref(eq:bayes-theorem). We already know how to calculate $P(D|H)$, the likelihood. What about $P(H)$ and $P(D)$? There are a variety of practical approaches to $P(H)$ that have been shown to work well in the context of phylogenetics. These include uniform priors, where all topologies are considered to be equally likely. The priors on branch length can be approximated from an exponential distribution. One of the major takeaways from the past two decades of work on Bayesian phylogenetics is that inference is quite robust to $P(H)$ when the data are informative about the phylogeny, as expected.
 
 What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won't.
 
@@ -1524,10 +1524,9 @@ Once the trace file has been examined, the investigator turns to the tree file. 
 
 So far we have considered a single type of character data -- DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies, such as morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.
 
-We can group character types based on some shared features. For example, some data are discrete values (such as DNA), others have continuous values (such as mass or length), and still others have countable values (such as number of body segments) that have integer values that come in discrete values like DNA but these integers are ordered and convey magnitude. 
+We can group character types based on shared features. Some data, such as the A C G and T of DNA, are discrete unordered values (*e.g.*, C is not greater than A, or less than T). Others have continuous values, such as mass or length, that fall in a particular order on the real number line (). Still others, such as the number of bristles on a leg segment, have countable values represented with integeres that are both discrete and ordered.
 
-Rather than approach each new character type in an *ad hoc* way, it is important to examine these more general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory [@houle2011measurement] -- a field that sits at the intersection of math, statistics, and philosophy that concerns the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually an exciting and grounding framework for understanding many of the central aspects of what we do in science.
-
+Rather than approach each new character type in an *ad hoc* way, it is important to examine their general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory [@houle2011measurement]. This field sits at the intersection of math, statistics, and philosophy. It considers the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually a fascinating and grounding framework for understanding many of the central aspects of what we do in science.
 
 \begin{table}
 \centering
@@ -1550,7 +1549,6 @@ Absolute & Defined & Continuous & None & 0 & Any & Probability\\
 \end{tabular}}
 \end{table}
 
-
 Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Scale category column. Permissible transformations indicate the mathematical operations that can be performed without distorting measurement meaning. Arbitrary parameters are the number of values that must be specified to establish a numerical system. For example, for a ratio scale type zero means absence and one arbitrary parameter must be specified, such as an object of standard mass or length. For an interval scale type, zero is arbitrary and two parameters must be specified, such as the temperature at which water freezes and boils.  Meaningful comparisons indicates comparisons that can be made between measurements of each scale type.
 
 There are many types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types, *i.e.*, scale types. Different scale types require different models of evolution. The biggest distinction is between discrete character types, like DNA, and continuous character types, like mass, that require radically different models of evolution.
@@ -1559,11 +1557,11 @@ There are many types of organism measurements, and therefore state spaces and ch
 
 ### Nominal scale types
 
-There are several other frequent applications of nominal scale types beyond DNA sequences in phylogenetic analyses. The most common include others include other molecular sequence data, but they are also used for discrete unordered morphological character states
+There are several other frequent applications of nominal scale types beyond DNA sequences in phylogenetic analyses. These include other molecular sequence data, such as proteins, and also discrete unordered morphological character states.
 
 #### DNA nucleotides
 
-Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides -- `A`, `C`, `G`, and `T`. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states that it can take. They are unordered because changes don't have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types corresponds to a nominal scale type.
+Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides -- `A`, `C`, `G`, and `T`. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states. They are unordered because changes don't have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types correspond to a nominal scale type.
 
 #### Amino acids
 
@@ -1581,7 +1579,7 @@ Direct analogs of the DNA sequence evolution models are often applied to discret
 
 ### Ordinal scale types
 
-Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is an ordering, *i.e.*, some values are larger than others and there are different distances between the values [@houle2011measurement, Table 1]. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendege or the number of digits on a vertebrate forelimb.
+Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is an ordering, *i.e.*, some values are larger than others and there are different distances between the values [@houle2011measurement, Table 1]. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendage or the number of digits on a vertebrate forelimb.
 
 Models for the evolution of ordinal data can be described with the same language we used for nominal scale types, the rates for changes between non-adjacent values are just set to zero. 5, for example, will have a nonzero rate of change to 6 and 4 and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of 4 digits.
 
@@ -1600,7 +1598,6 @@ Such a rate matrix that explains the changes between 0-6 digits would have this 
 \end{array}\right)
 \end{equation}
 
-
 ## Continuous data
 
 Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate can take on a value within some range of real numbers. These character states are often lumped together by phylogenetic biologists under the single umbrella of continuous character data, since any two values can have values between them. Measurement theory, on the other hand, identifies multiple scale types that all have continuous values.
@@ -1608,7 +1605,6 @@ Many characters, such as body mass, limb length, protein abundance, maximum swim
 The evolution of continuous measurements, regardless of specific scale type, are often modeled with the Brownian Motion (BM) family of models. At any point in time, the value can take an incremental step up or down. There are two parameters - the starting value, and the step size per unit time.
 
 The use of BM models for phylogenetic analysis of continuous data is a pragmatic choice, as it greatly simplifies many calculations. But there are many ways in which BM doesn't actually describe the evolution of continuous traits. For example, BM can result in a value that is any real number, positive or negative, whereas many biological measurements that are considered in a phylogenetic perspective can only take on positive values. Sometimes these discrepancies have little impact, and sometimes they can lead to entirely wrong conclusions.
-
 
 ![(\#fig:char-brownian)Multiple brownian motion trajectories.](phylogenetic_biology_files/figure-latex/char-brownian-1.pdf) 
 
@@ -1620,12 +1616,7 @@ It is so named because differences are invariant with respect to units.
 
 The most commonly encountered continuous scale type in phylogenetic analyses is the ratio scale type [@houle2011measurement, Table 1]. These measurements can take on values that are positive real numbers. They include many common continuous measurements, such as mass, length, and time interval. The name "ratio scale type" refers to the fact that ratios of these measurements are invariant with respect to units. If the ratio of body lengths of frog A to frog B is 2.38 when measured in centimeters, it will also be 2.38 when measured in inches, miles, or any other unit of length.
 
-
 Ratio scale type data are often log transformed before phylogenetic analysis. This converts them to difference scale types.
-
-
-
-
 
 <!--chapter:end:character_types.rmd-->
 
@@ -1761,7 +1752,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 06, 2025 at 01:44:47 AM with the following R package versions.
+This book was rendered from the source code on Oct 07, 2025 at 07:41:44 PM with the following R package versions.
 
 
 ```
@@ -1789,15 +1780,14 @@ attached base packages:
 [6] methods   base     
 
 other attached packages:
- [1] testthat_3.2.3   bookdown_0.44    scales_1.4.0    
- [4] ggrepel_0.9.6    kableExtra_1.4.0 phangorn_2.12.1 
- [7] Matrix_1.7-3     lubridate_1.9.4  forcats_1.0.1   
-[10] dplyr_1.1.4      purrr_1.1.0      readr_2.1.5     
-[13] tidyr_1.3.1      tibble_3.3.0     ggplot2_4.0.0   
-[16] tidyverse_2.0.0  stringr_1.5.2    magrittr_2.0.4  
-[19] gridExtra_2.3    geiger_2.0.11    phytools_2.5-2  
-[22] maps_3.4.3       ggtree_3.16.3    treeio_1.32.0   
-[25] ape_5.8-1       
+ [1] scales_1.4.0     ggrepel_0.9.6    kableExtra_1.4.0
+ [4] phangorn_2.12.1  Matrix_1.7-3     lubridate_1.9.4 
+ [7] forcats_1.0.1    dplyr_1.1.4      purrr_1.1.0     
+[10] readr_2.1.5      tidyr_1.3.1      tibble_3.3.0    
+[13] ggplot2_4.0.0    tidyverse_2.0.0  stringr_1.5.2   
+[16] magrittr_2.0.4   gridExtra_2.3    geiger_2.0.11   
+[19] phytools_2.5-2   maps_3.4.3       ape_5.8-1       
+[22] ggtree_3.16.3    treeio_1.32.0    bookdown_0.44   
 
 loaded via a namespace (and not attached):
  [1] mnormt_2.1.1            rlang_1.1.6            
@@ -1809,45 +1799,42 @@ loaded via a namespace (and not attached):
 [13] magick_2.9.0            labeling_0.4.3         
 [15] subplex_1.9             deSolve_1.40           
 [17] rmarkdown_2.30          tzdb_0.5.0             
-[19] waldo_0.6.2             tinytex_0.57           
-[21] bit_4.6.0               xfun_0.53              
-[23] cachem_1.1.0            aplot_0.2.9            
-[25] clusterGeneration_1.3.8 jsonlite_2.0.0         
-[27] uuid_1.2-1              parallel_4.5.1         
-[29] R6_2.6.1                bslib_0.9.0            
-[31] stringi_1.8.7           RColorBrewer_1.1-3     
-[33] pkgload_1.4.1           brio_1.1.5             
-[35] jquerylib_0.1.4         numDeriv_2016.8-1.1    
-[37] Rcpp_1.1.0              iterators_1.0.14       
-[39] knitr_1.50              optimParallel_1.0-2    
-[41] splines_4.5.1           igraph_2.1.4           
-[43] timechange_0.3.0        tidyselect_1.2.1       
-[45] rstudioapi_0.17.1       yaml_2.3.10            
-[47] doParallel_1.0.17       codetools_0.2-20       
-[49] lattice_0.22-7          withr_3.0.2            
-[51] S7_0.2.0                coda_0.19-4.1          
-[53] evaluate_1.0.5          ggimage_0.3.4          
-[55] desc_1.4.3              gridGraphics_0.5-1     
-[57] xml2_1.4.0              pillar_1.11.1          
-[59] rsconnect_1.5.1         foreach_1.5.2          
-[61] ggfun_0.2.0             generics_0.1.4         
-[63] rprojroot_2.1.1         vroom_1.6.6            
-[65] hms_1.1.3               tidytree_0.4.6         
-[67] glue_1.8.0              scatterplot3d_0.3-44   
-[69] lazyeval_0.2.2          tools_4.5.1            
-[71] ggiraph_0.9.1           fs_1.6.6               
-[73] mvtnorm_1.3-3           fastmatch_1.1-6        
-[75] grid_4.5.1              nlme_3.1-168           
-[77] patchwork_1.3.2         cli_3.6.5              
-[79] rappdirs_0.3.3          DEoptim_2.2-8          
-[81] textshaping_1.0.3       expm_1.0-0             
-[83] viridisLite_0.4.2       svglite_2.2.1          
-[85] gtable_0.3.6            yulab.utils_0.2.1      
-[87] sass_0.4.10             digest_0.6.37          
-[89] ggplotify_0.1.3         htmlwidgets_1.6.4      
-[91] farver_2.1.2            htmltools_0.5.8.1      
-[93] lifecycle_1.0.4         bit64_4.6.0-1          
-[95] MASS_7.3-65            
+[19] tinytex_0.57            bit_4.6.0              
+[21] xfun_0.53               cachem_1.1.0           
+[23] aplot_0.2.9             clusterGeneration_1.3.8
+[25] jsonlite_2.0.0          uuid_1.2-1             
+[27] parallel_4.5.1          R6_2.6.1               
+[29] bslib_0.9.0             stringi_1.8.7          
+[31] RColorBrewer_1.1-3      jquerylib_0.1.4        
+[33] numDeriv_2016.8-1.1     Rcpp_1.1.0             
+[35] iterators_1.0.14        knitr_1.50             
+[37] optimParallel_1.0-2     splines_4.5.1          
+[39] igraph_2.1.4            timechange_0.3.0       
+[41] tidyselect_1.2.1        rstudioapi_0.17.1      
+[43] yaml_2.3.10             doParallel_1.0.17      
+[45] codetools_0.2-20        lattice_0.22-7         
+[47] withr_3.0.2             S7_0.2.0               
+[49] coda_0.19-4.1           evaluate_1.0.5         
+[51] ggimage_0.3.4           gridGraphics_0.5-1     
+[53] xml2_1.4.0              pillar_1.11.1          
+[55] rsconnect_1.5.1         foreach_1.5.2          
+[57] ggfun_0.2.0             generics_0.1.4         
+[59] vroom_1.6.6             hms_1.1.3              
+[61] tidytree_0.4.6          glue_1.8.0             
+[63] scatterplot3d_0.3-44    lazyeval_0.2.2         
+[65] tools_4.5.1             ggiraph_0.9.1          
+[67] fs_1.6.6                mvtnorm_1.3-3          
+[69] fastmatch_1.1-6         grid_4.5.1             
+[71] nlme_3.1-168            patchwork_1.3.2        
+[73] cli_3.6.5               rappdirs_0.3.3         
+[75] DEoptim_2.2-8           textshaping_1.0.3      
+[77] expm_1.0-0              viridisLite_0.4.2      
+[79] svglite_2.2.1           gtable_0.3.6           
+[81] yulab.utils_0.2.1       sass_0.4.10            
+[83] digest_0.6.37           ggplotify_0.1.3        
+[85] htmlwidgets_1.6.4       farver_2.1.2           
+[87] htmltools_0.5.8.1       lifecycle_1.0.4        
+[89] bit64_4.6.0-1           MASS_7.3-65            
 ```
 
 <!--chapter:end:versions.rmd-->
