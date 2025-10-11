@@ -7,7 +7,7 @@ isbn_paperback: "979-8-9934524-0-1"
 isbn_hardback: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
-date: "2025-10-07"
+date: "2025-10-11"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1524,32 +1524,32 @@ Once the trace file has been examined, the investigator turns to the tree file. 
 
 So far we have considered a single type of character data -- DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies, such as morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.
 
-We can group character types based on shared features. Some data, such as the A C G and T of DNA, are discrete unordered values (*e.g.*, C is not greater than A, or less than T). Others have continuous values, such as mass or length, that fall in a particular order on the real number line (). Still others, such as the number of bristles on a leg segment, have countable values represented with integeres that are both discrete and ordered.
+We can group character types based on shared features. Some data, such as the nucleotides of DNA, are discrete unordered values from a finite set ${A, C, G, T}$ where the elements have no inherent ordering (e.g., $C$ is not greater than $A$, or less than $T$).  Others have continuous values, such as mass or length, that fall in a particular order on the real number line ($2.5$ is less than $3.2$). Still others, such as the number of bristles on a leg segment, have countable values represented with integers. These values are both discrete (there are no integers between $3$ and $4$) and ordered ($3$ is less than $4$). If we consider these different character types, it is clear that we not only measure and record them differently, but that the measurements themselves have different properties requiring different analysis methods. We could not, for example, construct a matrix like Equation \@ref(eq:jc69) with rows and columns for every possible length in millimeters for flower petals.
 
-Rather than approach each new character type in an *ad hoc* way, it is important to examine their general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory [@houle2011measurement]. This field sits at the intersection of math, statistics, and philosophy. It considers the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually a fascinating and grounding framework for understanding many of the central aspects of what we do in science.
+Rather than approach each new character type in an *ad hoc* way, it is important to examine their general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory [@houle2011measurement]. This field sits at the intersection of math, statistics, and philosophy. It considers the relationships between measurements and the reality they represent, and clarifies what information the measurements contain. It examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually a fascinating and grounding framework for understanding many of the central aspects of what we do in science.
 
 \begin{table}
 \centering
 \caption{(\#tab:char-scale-types)Scale types, modified from Houle (2011).}
 \centering
 \resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{
-\begin{tabular}[t]{llllll>{\raggedright\arraybackslash}p{3cm}}
+\begin{tabular}[t]{llll>{\raggedright\arraybackslash}p{3cm}}
 \toprule
-Scale type & Domain & Measurement type & Permissible transformations & Arbitrary parameters & Meaningful comparisons & Biological examples\\
+Scale type & Domain & Measurement type & Meaningful comparisons & Biological examples\\
 \midrule
-Nominal & Any set of symbols & Discrete & Any one-to-one mapping & Countable & Equivalence & Species, genes\\
-Ordinal & Ordered symbols & Discrete & Any monotonically increasing function & Countable & Order & Social dominance\\
-Interval & Real numbers & Continuous & \(x \rightarrow ax + b\) & 2 & Order, differences & Dates, Malthusian fitness, relative temperature (arbitrary 0, e.g., Celsius and Fahrenheit)\\
-Log-interval & Positive real numbers & Continuous & \(x \rightarrow ax^b\) & 2 & Order, ratios & Body size\\
-Difference & Real numbers & Continuous & \(x \rightarrow x + a\) & 1 & Order, differences & Log-transformed ratio-scale variables\\
+Nominal & Any set of symbols & Discrete & Equivalence & Species, genes\\
+Ordinal & Ordered symbols & Discrete & Order & Social dominance\\
+Interval & Real numbers & Continuous & Order, differences & Dates, Malthusian fitness, relative temperature (arbitrary 0, e.g., Celsius and Fahrenheit)\\
+Log-interval & Positive real numbers & Continuous & Order, ratios & Body size\\
+Difference & Real numbers & Continuous & Order, differences & Log-transformed ratio-scale variables\\
 \addlinespace
-Ratio & Positive real numbers & Continuous & \(x \rightarrow ax\) & 1 & Order, ratios, differences & Length, mass, duration, absolute temperature (e.g., Kelvin)\\
-Absolute & Defined & Continuous & None & 0 & Any & Probability\\
+Ratio & Positive real numbers & Continuous & Order, ratios, differences & Length, mass, duration, absolute temperature (e.g., Kelvin)\\
+Absolute & Defined & Continuous & Any & Probability\\
 \bottomrule
 \end{tabular}}
 \end{table}
 
-Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Scale category column. Permissible transformations indicate the mathematical operations that can be performed without distorting measurement meaning. Arbitrary parameters are the number of values that must be specified to establish a numerical system. For example, for a ratio scale type zero means absence and one arbitrary parameter must be specified, such as an object of standard mass or length. For an interval scale type, zero is arbitrary and two parameters must be specified, such as the temperature at which water freezes and boils.  Meaningful comparisons indicates comparisons that can be made between measurements of each scale type.
+Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Measurement type column. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type.
 
 There are many types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types, *i.e.*, scale types. Different scale types require different models of evolution. The biggest distinction is between discrete character types, like DNA, and continuous character types, like mass, that require radically different models of evolution.
 
@@ -1752,7 +1752,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Oct 07, 2025 at 07:41:44 PM with the following R package versions.
+This book was rendered from the source code on Oct 11, 2025 at 01:58:16 AM with the following R package versions.
 
 
 ```
@@ -1794,12 +1794,12 @@ loaded via a namespace (and not attached):
  [3] compiler_4.5.1          mgcv_1.9-3             
  [5] png_0.1-8               systemfonts_1.3.1      
  [7] vctrs_0.6.5             combinat_0.0-8         
- [9] quadprog_1.5-8          pkgconfig_2.0.3        
-[11] crayon_1.5.3            fastmap_1.2.0          
+ [9] quadprog_1.5-8          crayon_1.5.3           
+[11] pkgconfig_2.0.3         fastmap_1.2.0          
 [13] magick_2.9.0            labeling_0.4.3         
 [15] subplex_1.9             deSolve_1.40           
 [17] rmarkdown_2.30          tzdb_0.5.0             
-[19] tinytex_0.57            bit_4.6.0              
+[19] bit_4.6.0               tinytex_0.57           
 [21] xfun_0.53               cachem_1.1.0           
 [23] aplot_0.2.9             clusterGeneration_1.3.8
 [25] jsonlite_2.0.0          uuid_1.2-1             
