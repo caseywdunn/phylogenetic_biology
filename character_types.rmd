@@ -28,7 +28,7 @@ knitr::kable(df,
   kableExtra::column_spec(5, width = "3cm")
 ```
 
-Because biological measurement developed pragmatically rather than from measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Measurement type column. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type.
+Because biological measurement developed pragmatically rather than from measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Measurement type column. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Our comparisons should be constrained to respect the physical realities that our measurements represent, and measurement theory gives us formal tools to evaluate this. We should not, for example, compute the numerical difference between ordinal states, like social dominance ranks, because the actual physical or evolutionary distances between those ranks are unknown and unequal.  
 
 There are many types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types, *i.e.*, scale types. Different scale types require different models of evolution.
 
@@ -42,9 +42,9 @@ Measurements of DNA sequences have 4 possible states, corresponding to each of t
 
 #### Amino acids
 
-Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more model parameters than for DNA data.
+Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more parameters in models of protein evolution than in models of DNA evolution.
 
-There are a few reasons why protein sequences are often considered rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another is that synonymous changes in protein coding DNA sequences quickly saturate for more distant evolutionary comparisons. This means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.
+There are a few reasons why protein sequences are often considered in phylogenetic analyses rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another is that synonymous changes in protein coding DNA sequences quickly saturate for more distant evolutionary comparisons. This means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.
 
 #### Codons
 
@@ -64,7 +64,7 @@ Interval scale types include measurements such as the number of digits on a fore
 
 Models for the evolution of interval data can be described with the same language we used for nominal scale types. The rates for changes between non-adjacent values are just set to zero. $5$, for example, will have a nonzero rate of change to $6$ and $4$ and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of $4$ digits.
 
-Such a rate matrix that explains the changes between 0-6 digits would have this form, if the rates were the same between all states:
+Such a rate matrix describing the changes between 0-6 digits would have this form, if the rates were the same between all states:
 
 \begin{equation}
 \mathbf{Q} = 
@@ -81,13 +81,37 @@ Such a rate matrix that explains the changes between 0-6 digits would have this 
 
 ## Continuous data
 
-Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate can take on a value within some range of real numbers. These character states are often lumped together by phylogenetic biologists under the single umbrella of continuous character data, since any two values can have values between them. Measurement theory, on the other hand, identifies multiple scale types that all have continuous values.
+Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate, can take values across a continuous range of real numbers. In phylogenetics, these traits are typically grouped under the umbrella of continuous character data, since values can vary smoothly and intermediate values are possible between any two observations.
 
-The evolution of continuous measurements, regardless of specific scale type, are often modeled with the Brownian Motion (BM) family of models. At any point in time, the value can take an incremental step up or down. There are two parameters - the starting value, and the step size per unit time.
+Measurement theory distinguishes several different scale types (for example, interval and ratio scales) that may all have continuous values. In phylogenetic comparative analyses, these distinctions are usually ignored, and the traits are analyzed using a common set of evolutionary models. Sometimes, ignoring these distinctions has little practical impact, but sometimes it has major consequences.
 
-The use of BM models for phylogenetic analysis of continuous data is a pragmatic choice, as it greatly simplifies many calculations. But there are many ways in which BM doesn't actually describe the evolution of continuous traits. For example, BM can result in a value that is any real number, positive or negative, whereas many biological measurements that are considered in a phylogenetic perspective can only take on positive values. Sometimes these discrepancies have little impact, and sometimes they can lead to entirely wrong conclusions.
+### Brownian Motion
 
-```{r char-brownian, fig.cap="Multiple brownian motion trajectories."}
+The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM). In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.
+
+Under BM, the expected change in the trait value is zero. This is not because there is no change under Brownian motion. It is because increases are just as common as decreases. If you run the same BM simulation many times and average the results, the average change across all of them will be zero. Each one, however, can be quite different from the original value and from each other. This is because the variance of the trait value increases linearly with time. The longer two lineages evolve independently, or the faster the change, the more different their trait values are expected to become. 
+
+Mathematically, Brownian motion can be written as
+
+\[
+dX(t) \sim \mathcal{N}(0, \sigma^2 dt)
+\]
+
+where $X(t)$ is the trait value at time $t$, and $\sigma^2$ is the diffusion rate, describing the amount of variance accumulated per unit of evolutionary time.
+
+In phylogenetic applications of the Brownian motion model there are two primary parameters. One is the initial state, $X_0$, which is the initial trait value. The other is the diffusion rate, $\sigma^2$, which determines how quickly trait variance accumulates through time. Along a branch of length $t$, the trait value at the descendant node is modeled as
+
+\[
+X_{\text{descendant}} \sim \mathcal{N}(X_{\text{ancestor}}, \sigma^2 t)
+\]
+
+This means that the expected trait value at the end of the branch is equal to the value at the beginning of the branch, while the variance around that expectation grows in proportion to the branch length.
+
+One reason BM is widely used is that it leads to a convenient statistical formulation. The vector of trait values observed at the tips of a phylogeny follows a multivariate normal distribution whose covariance structure is determined by the shared branch lengths of the tree. This property allows efficient likelihood-based and Bayesian inference.
+
+The BM model is primarily used because it provides a mathematically tractable approximation to trait evolution. However, many biological traits do not actually evolve according to the assumptions of BM and violate the fundamental nature of the measurements being analyzed. For example, BM allows trait values to take any real number, including negative values. Many biological measurements, such as body mass or metabolic rate, are strictly positive. Sometimes these violations have little impact on inference, especially when the observed trait variation is far from biologically impossible values. In other cases, however, they can lead to misleading conclusions if the model poorly reflects the underlying evolutionary processes.
+
+```{r char-brownian, fig.cap="Multiple Brownian motion trajectories."}
 # Number of trajectories and steps
 n_trajectories = 50
 n_steps = 100
@@ -107,18 +131,26 @@ df_brownian = data.frame(time = rep(time_points, n_trajectories),
 # Plot all trajectories with alpha = 0.3
 p_brownian = ggplot(data = df_brownian, aes(x = time, y = position, group = trajectory)) +
   geom_line(color = "gray", alpha = 0.3) +
-  ylab("value") + 
+  ylab("Trait value") + 
   theme_classic()
 
 p_brownian
 ```
 
-### Difference scale type
 
-It is so named because differences are invariant with respect to units. 
 
-### Ratio scale type
+### Ornstein–Uhlenbeck Models
 
-The most commonly encountered continuous scale type in phylogenetic analyses is the ratio scale type [@houle2011measurement, Table 1]. These measurements can take on values that are positive real numbers. They include many common continuous measurements, such as mass, length, and time interval. The name "ratio scale type" refers to the fact that ratios of these measurements are invariant with respect to units. If the ratio of body lengths of frog A to frog B is 2.38 when measured in centimeters, it will also be 2.38 when measured in inches, miles, or any other unit of length.
+Brownian motion assumes that there is no preferred trait value or directional trend in evolution. In reality, traits are often subject to constraints, such as stabilizing selection or metabolic constraints, that lead values to stay near a particular optimum. The Ornstein–Uhlenbeck (OU) model is a common variation of Brownian motion that can accommodate these constraints. 
 
-Ratio scale type data are often log transformed before phylogenetic analysis. This converts them to difference scale types.
+In the OU process, trait evolution is still driven by random fluctuations, but there is also a deterministic tendency for the trait value to move toward an optimum. The model can be written as
+
+\[
+dX(t) = \alpha(\theta - X(t))dt + \sigma dW(t)
+\]
+
+where $X(t)$ is the trait value at time $t$, $\theta$ is the optimal trait value, $\alpha$ describes the strength of attraction toward that optimum, and $\sigma$ controls the magnitude of random fluctuations.
+
+The OU model therefore includes both stochastic variation and a restoring force that pulls the trait toward an optimal value. When $\alpha$ is large, trait values tend to remain close to the optimum. When $\alpha$ is small, the restoring force is weak and trait values can wander more widely.
+
+The Brownian motion model can be understood as a special case of the OU model. If the strength of attraction toward the optimum approaches zero ($\alpha = 0$), the restoring force disappears and the process reduces to pure Brownian motion. In this sense, OU models generalize Brownian motion by allowing evolutionary processes that include stabilizing selection or adaptive optima.

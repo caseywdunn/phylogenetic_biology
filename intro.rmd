@@ -22,7 +22,7 @@ Phylogenetics is no longer a strictly macroevolutionary field. Some of the most 
 
 There are a few concepts that are fundamental to understanding phylogenetic analyses (Figure \@ref(fig:intro-concepts)A). These include:
 
-- The topology of the phylogeny. This is the structure of the evolutionary relationships. It can be thought of the branching order of a tree.
+- The topology of the phylogeny. This is the structure of the evolutionary relationships. It can be thought of as the branching order of a tree.
 
 - The lengths of the branches in the phylogeny. Length can signify different things, such as time elapsed or amount of expected evolutionary change.
 

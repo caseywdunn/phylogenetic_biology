@@ -142,8 +142,11 @@ writeLines(citation_content, "CITATION.cff")
 ```{r preliminaries, include=FALSE}
 	# The following should be installed from github with the specified 
 	# devtools command. You will need to install devtools first.
-	library( treeio ) # devtools::install_github("GuangchuangYu/treeio")
-	library( ggtree ) # devtools::install_github("GuangchuangYu/ggtree")
+  library( renv )
+	library( treeio )
+	library( ggtree )
+  # Initialize ggtree cache to fix print error in non-interactive sessions
+  yulab.utils::initial_cache_item(item = "ggtree")      
 	library( ape )
   library( geiger )
 	library( gridExtra )
@@ -159,6 +162,7 @@ writeLines(citation_content, "CITATION.cff")
 
 	source( "functions.R" )
 	set.seed( 23456 )
+
 ```
 
 ```{r setup, include=FALSE}
@@ -231,7 +235,7 @@ You are currently reading Edition `r edition_value` of the book. Please cite it 
 ## Other resources
 
 The following sites have a wide variety of material that is relevant to the 
-theory and and practice of phylogenetic biology.
+theory and practice of phylogenetic biology.
 
 - An extensive list of tools, tutorials, and examples of phylogenetic tools in
 the programming language R maintained by Briam O'Meara. <https://cran.r-project.org/web/views/Phylogenetics.html>
