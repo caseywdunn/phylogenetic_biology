@@ -67,7 +67,7 @@ You are currently reading Edition 0.9.0 of the book. Please cite it as follows:
 ## Other resources
 
 The following sites have a wide variety of material that is relevant to the 
-theory and and practice of phylogenetic biology.
+theory and practice of phylogenetic biology.
 
 - An extensive list of tools, tutorials, and examples of phylogenetic tools in
 the programming language R maintained by Briam O'Meara. <https://cran.r-project.org/web/views/Phylogenetics.html>
@@ -142,7 +142,7 @@ Phylogenetics is no longer a strictly macroevolutionary field. Some of the most 
 
 There are a few concepts that are fundamental to understanding phylogenetic analyses (Figure \@ref(fig:intro-concepts)A). These include:
 
-- The topology of the phylogeny. This is the structure of the evolutionary relationships. It can be thought of the branching order of a tree.
+- The topology of the phylogeny. This is the structure of the evolutionary relationships. It can be thought of as the branching order of a tree.
 
 - The lengths of the branches in the phylogeny. Length can signify different things, such as time elapsed or amount of expected evolutionary change.
 
@@ -241,7 +241,7 @@ helpful to turn to math.
 \end{figure}
 
 A phylogeny is a specific instance of a mathematical object known as a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)). 
-A graph consists of nodes (also called verteces), often represented as circles, connected by edges, often 
+A graph consists of nodes (also called vertices), often represented as circles, connected by edges, often 
 represented by lines (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
 For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.
 
@@ -260,7 +260,7 @@ gene transfer or hybridization.
 directionality. Specifically, they denote time. The node on one end of the branch 
 is older than the node on the other end of the branch. We therefore can refer to the nodes connected to a particular branch as the parent node and child node.
 
-A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The branches indicate evolutionary relationships between those entities. You could imagine as, an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each branch would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single branch, parent-child node relationships in the tree don't mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.
+A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The branches indicate evolutionary relationships between those entities. You could imagine, as an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each branch would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single branch, parent-child node relationships in the tree don't mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.
 
 ## Drawing phylogenies
 
@@ -329,7 +329,7 @@ A convenient way to designate groups of organisms is by their most recent common
 
 ![(\#fig:trees-groups)(A) A monophyletic group, *i.e.*, a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit.](phylogenetic_biology_files/figure-latex/trees-groups-1.pdf) 
 
-Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and duck billed platyups. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@deQueiroz2020].
+Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and platypus. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@deQueiroz2020].
 
 Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
 
@@ -1786,7 +1786,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Mar 16, 2026 at 07:29:20 PM with the following R package versions.
+This book was rendered from the source code on Mar 16, 2026 at 11:52:59 PM with the following R package versions.
 
 
 ```
@@ -1821,7 +1821,8 @@ other attached packages:
 [13] ggplot2_4.0.0    tidyverse_2.0.0  stringr_1.5.2   
 [16] magrittr_2.0.4   gridExtra_2.3    geiger_2.0.11   
 [19] phytools_2.5-2   maps_3.4.3       ape_5.8-1       
-[22] ggtree_4.0.4     treeio_1.34.0    bookdown_0.45   
+[22] ggtree_4.0.4     treeio_1.34.0    renv_1.1.8      
+[25] bookdown_0.45   
 
 loaded via a namespace (and not attached):
  [1] mnormt_2.1.1            rlang_1.1.6            
@@ -1849,26 +1850,25 @@ loaded via a namespace (and not attached):
 [45] coda_0.19-4.1           evaluate_1.0.5         
 [47] ggimage_0.3.4           gridGraphics_0.5-1     
 [49] xml2_1.4.1              pillar_1.11.1          
-[51] rsconnect_1.6.0         foreach_1.5.2          
-[53] ggfun_0.2.0             generics_0.1.4         
-[55] vroom_1.6.6             hms_1.1.4              
-[57] tidytree_0.4.6          glue_1.8.0             
-[59] gdtools_0.4.4           scatterplot3d_0.3-44   
-[61] lazyeval_0.2.2          tools_4.5.1            
-[63] ggiraph_0.9.2           fs_1.6.6               
-[65] mvtnorm_1.3-3           fastmatch_1.1-6        
-[67] grid_4.5.1              nlme_3.1-168           
-[69] patchwork_1.3.2         cli_3.6.5              
-[71] rappdirs_0.3.3          DEoptim_2.2-8          
-[73] textshaping_1.0.4       fontBitstreamVera_0.1.1
-[75] expm_1.0-0              viridisLite_0.4.2      
-[77] svglite_2.2.2           gtable_0.3.6           
-[79] yulab.utils_0.2.1       digest_0.6.37          
-[81] fontquiver_0.2.1        ggplotify_0.1.3        
-[83] htmlwidgets_1.6.4       farver_2.1.2           
-[85] htmltools_0.5.8.1       lifecycle_1.0.4        
-[87] fontLiberation_0.1.0    bit64_4.6.0-1          
-[89] MASS_7.3-65            
+[51] foreach_1.5.2           ggfun_0.2.0            
+[53] generics_0.1.4          vroom_1.6.6            
+[55] hms_1.1.4               tidytree_0.4.6         
+[57] glue_1.8.0              gdtools_0.4.4          
+[59] scatterplot3d_0.3-44    lazyeval_0.2.2         
+[61] tools_4.5.1             ggiraph_0.9.2          
+[63] fs_1.6.6                mvtnorm_1.3-3          
+[65] fastmatch_1.1-6         grid_4.5.1             
+[67] nlme_3.1-168            patchwork_1.3.2        
+[69] cli_3.6.5               rappdirs_0.3.3         
+[71] DEoptim_2.2-8           textshaping_1.0.4      
+[73] fontBitstreamVera_0.1.1 expm_1.0-0             
+[75] viridisLite_0.4.2       svglite_2.2.2          
+[77] gtable_0.3.6            yulab.utils_0.2.1      
+[79] digest_0.6.37           fontquiver_0.2.1       
+[81] ggplotify_0.1.3         htmlwidgets_1.6.4      
+[83] farver_2.1.2            htmltools_0.5.8.1      
+[85] lifecycle_1.0.4         fontLiberation_0.1.0   
+[87] bit64_4.6.0-1           MASS_7.3-65            
 ```
 
 <!--chapter:end:versions.rmd-->

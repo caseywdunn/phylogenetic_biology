@@ -7,6 +7,10 @@ RUN apt-get update && apt-get install -y \
     texlive-xetex \
     && rm -rf /var/lib/apt/lists/*
 
+# Install renv itself, then restore the project library from the lockfile
+RUN Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
+# RUN Rscript -e "renv::restore(prompt = FALSE)"
+
 RUN Rscript -e "if (!require('BiocManager', quietly = TRUE)) install.packages('BiocManager'); \
     library(BiocManager); \
     BiocManager::install('ggtree', update=FALSE, ask=FALSE); \

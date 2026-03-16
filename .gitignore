@@ -5,6 +5,8 @@ phylogenetic_biology.knit.md
 phylogenetic_biology.utf8.md
 
 *.tex
+!preamble.tex
+!after_body.tex
 *.log
 *.aux
 *.out
