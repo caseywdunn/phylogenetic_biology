@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Additional character types | Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
-  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Additional character types | Phylogenetic Biology" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2025-10-07" />
+<meta name="date" content="2026-03-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -271,11 +271,12 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="8.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1.1</b> Nominal scale types</a></li>
 <li class="chapter" data-level="8.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>8.1.2</b> Ordinal scale types</a></li>
+<li class="chapter" data-level="8.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#interval-scale-types"><i class="fa fa-check"></i><b>8.1.3</b> Interval scale types</a></li>
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.2</b> Continuous data</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="additional-character-types.html"><a href="additional-character-types.html#difference-scale-type"><i class="fa fa-check"></i><b>8.2.1</b> Difference scale type</a></li>
-<li class="chapter" data-level="8.2.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ratio-scale-type"><i class="fa fa-check"></i><b>8.2.2</b> Ratio scale type</a></li>
+<li class="chapter" data-level="8.2.1" data-path="additional-character-types.html"><a href="additional-character-types.html#brownian-motion"><i class="fa fa-check"></i><b>8.2.1</b> Brownian Motion</a></li>
+<li class="chapter" data-level="8.2.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ornsteinuhlenbeck-models"><i class="fa fa-check"></i><b>8.2.2</b> Ornstein–Uhlenbeck Models</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a>
@@ -323,9 +324,9 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="additional-character-types" class="section level1 hasAnchor" number="8">
 <h1><span class="header-section-number">Chapter 8</span> Additional character types<a href="additional-character-types.html#additional-character-types" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>So far we have considered a single type of character data – DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies, such as morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.</p>
-<p>We can group character types based on shared features. Some data, such as the A C G and T of DNA, are discrete unordered values (<em>e.g.</em>, C is not greater than A, or less than T). Others have continuous values, such as mass or length, that fall in a particular order on the real number line (). Still others, such as the number of bristles on a leg segment, have countable values represented with integeres that are both discrete and ordered.</p>
-<p>Rather than approach each new character type in an <em>ad hoc</em> way, it is important to examine their general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (<em>i.e.</em>, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The identification of which character type your data correspond to is a decision about measurement theory <span class="citation">(<a href="#ref-houle2011measurement">Houle et al. 2011</a>)</span>. This field sits at the intersection of math, statistics, and philosophy. It considers the relationships between measurements and the reality they represent, clarifies what information the measurements contain, examines which mathematical operations we can perform with them, and reveals what actual transforms those operations correspond to. With a name like “measurement theory”, you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually a fascinating and grounding framework for understanding many of the central aspects of what we do in science.</p>
+<p>So far we have considered a single type of character data – DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies. These include morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.</p>
+<p>We can group character types based on shared features. Some data, such as the nucleotides of DNA, are discrete unordered values from a finite set <span class="math inline">\(\{A, C, G, T\}\)</span> where the elements have no inherent ordering (e.g., <span class="math inline">\(C\)</span> is not greater than <span class="math inline">\(A\)</span>, or less than <span class="math inline">\(T\)</span>). Others have continuous values, such as mass or length, that fall in a particular order on the real number line (<span class="math inline">\(2.5\)</span> is less than <span class="math inline">\(3.2\)</span>). Still others, such as the number of bristles on a leg segment, have countable values represented with integers. These values are both discrete (there are no integers between <span class="math inline">\(3\)</span> and <span class="math inline">\(4\)</span>) and ordered (<span class="math inline">\(3\)</span> is less than <span class="math inline">\(4\)</span>). If we consider these different character types, it is clear that we not only measure and record them differently, but that the measurements themselves have different properties requiring different analysis methods. We could not, for example, construct a matrix like Equation <a href="simulation.html#eq:jc69">(3.5)</a> with rows and columns for every possible length in millimeters for flower petals.</p>
+<p>Rather than approach each new character type in an <em>ad hoc</em> way, it is better to examine their general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (<em>i.e.</em>, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The character type your data correspond to is an intrinsic property that must be correctly identified. The criteria for making this evaluation and understandings its implications are part of measurement theory <span class="citation">(<a href="#ref-houle2011measurement">Houle et al. 2011</a>)</span>. This field sits at the intersection of math, statistics, and philosophy. It considers the relationships between measurements and the reality they represent, and clarifies what information the measurements contain. It examines which mathematical operations we can perform with them while preserving their meaning, and reveals what actual transforms those operations correspond to. With a name like “measurement theory”, you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually a fascinating and grounding framework for understanding many of the central aspects of what we do in science.</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:char-scale-types">Table 8.1: </span><span id="tab:char-scale-types">Table 8.2: </span>Scale types, modified from Houle (2011).
@@ -340,12 +341,6 @@ Domain
 </th>
 <th style="text-align:left;">
 Measurement type
-</th>
-<th style="text-align:left;">
-Permissible transformations
-</th>
-<th style="text-align:left;">
-Arbitrary parameters
 </th>
 <th style="text-align:left;">
 Meaningful comparisons
@@ -367,12 +362,6 @@ Any set of symbols
 Discrete
 </td>
 <td style="text-align:left;">
-Any one-to-one mapping
-</td>
-<td style="text-align:left;">
-Countable
-</td>
-<td style="text-align:left;">
 Equivalence
 </td>
 <td style="text-align:left;width: 3cm; ">
@@ -388,12 +377,6 @@ Ordered symbols
 </td>
 <td style="text-align:left;">
 Discrete
-</td>
-<td style="text-align:left;">
-Any monotonically increasing function
-</td>
-<td style="text-align:left;">
-Countable
 </td>
 <td style="text-align:left;">
 Order
@@ -413,12 +396,6 @@ Real numbers
 Continuous
 </td>
 <td style="text-align:left;">
-<span class="math inline">\(x \rightarrow ax + b\)</span>
-</td>
-<td style="text-align:left;">
-2
-</td>
-<td style="text-align:left;">
 Order, differences
 </td>
 <td style="text-align:left;width: 3cm; ">
@@ -434,12 +411,6 @@ Positive real numbers
 </td>
 <td style="text-align:left;">
 Continuous
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(x \rightarrow ax^b\)</span>
-</td>
-<td style="text-align:left;">
-2
 </td>
 <td style="text-align:left;">
 Order, ratios
@@ -459,12 +430,6 @@ Real numbers
 Continuous
 </td>
 <td style="text-align:left;">
-<span class="math inline">\(x \rightarrow x + a\)</span>
-</td>
-<td style="text-align:left;">
-1
-</td>
-<td style="text-align:left;">
 Order, differences
 </td>
 <td style="text-align:left;width: 3cm; ">
@@ -480,12 +445,6 @@ Positive real numbers
 </td>
 <td style="text-align:left;">
 Continuous
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(x \rightarrow ax\)</span>
-</td>
-<td style="text-align:left;">
-1
 </td>
 <td style="text-align:left;">
 Order, ratios, differences
@@ -505,12 +464,6 @@ Defined
 Continuous
 </td>
 <td style="text-align:left;">
-None
-</td>
-<td style="text-align:left;">
-0
-</td>
-<td style="text-align:left;">
 Any
 </td>
 <td style="text-align:left;width: 3cm; ">
@@ -519,21 +472,20 @@ Probability
 </tr>
 </tbody>
 </table>
-<p>Since the practice of measurement in evolutionary biology proceeded pragmatically and largely independent of measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call “character type” is referred to in measurement theory, and many other fields of science, as “scale type” (Table <a href="additional-character-types.html#tab:char-scale-types">8.1</a>). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Scale category column. Permissible transformations indicate the mathematical operations that can be performed without distorting measurement meaning. Arbitrary parameters are the number of values that must be specified to establish a numerical system. For example, for a ratio scale type zero means absence and one arbitrary parameter must be specified, such as an object of standard mass or length. For an interval scale type, zero is arbitrary and two parameters must be specified, such as the temperature at which water freezes and boils. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type.</p>
-<p>There are many types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types, <em>i.e.</em>, scale types. Different scale types require different models of evolution. The biggest distinction is between discrete character types, like DNA, and continuous character types, like mass, that require radically different models of evolution.</p>
+<p>Because biological measurement developed pragmatically rather than from measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call “character type” is referred to in measurement theory, and many other fields of science, as “scale type” (Table <a href="additional-character-types.html#tab:char-scale-types">8.1</a>). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Measurement type column. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Our comparisons should be constrained to respect the physical realities that our measurements represent, and measurement theory gives us formal tools to evaluate this. We should not, for example, compute the numerical difference between ordinal states, like social dominance ranks, because the actual physical or evolutionary distances between those ranks are unknown and unequal.</p>
+<p>There are many types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types, <em>i.e.</em>, scale types. Different scale types require different models of evolution.</p>
 <div id="discrete-character-types" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Discrete character types<a href="additional-character-types.html#discrete-character-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="nominal-scale-types" class="section level3 hasAnchor" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> Nominal scale types<a href="additional-character-types.html#nominal-scale-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>There are several other frequent applications of nominal scale types beyond DNA sequences in phylogenetic analyses. These include other molecular sequence data, such as proteins, and also discrete unordered morphological character states.</p>
 <div id="dna-nucleotides" class="section level4 hasAnchor" number="8.1.1.1">
 <h4><span class="header-section-number">8.1.1.1</span> DNA nucleotides<a href="additional-character-types.html#dna-nucleotides" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides – <code>A</code>, <code>C</code>, <code>G</code>, and <code>T</code>. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states. They are unordered because changes don’t have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types correspond to a nominal scale type.</p>
+<p>Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides – <span class="math inline">\(\{A, C, G, T\}\)</span>. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states. They are unordered because changes don’t have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types correspond to a nominal scale type.</p>
 </div>
 <div id="amino-acids" class="section level4 hasAnchor" number="8.1.1.2">
 <h4><span class="header-section-number">8.1.1.2</span> Amino acids<a href="additional-character-types.html#amino-acids" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more model parameters than for DNA data.</p>
-<p>There are a few reasons why protein sequences are often considered rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another reason is that synonymous changes in protein coding DNA sequences quickly saturate for more distant evolutionary comparisons. This makes it difficult to align sequences, and means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.</p>
+<p>Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more parameters in models of protein evolution than in models of DNA evolution.</p>
+<p>There are a few reasons why protein sequences are often considered in phylogenetic analyses rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another is that synonymous changes in protein coding DNA sequences quickly saturate for more distant evolutionary comparisons. This means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.</p>
 </div>
 <div id="codons" class="section level4 hasAnchor" number="8.1.1.3">
 <h4><span class="header-section-number">8.1.1.3</span> Codons<a href="additional-character-types.html#codons" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -546,9 +498,13 @@ Probability
 </div>
 <div id="ordinal-scale-types" class="section level3 hasAnchor" number="8.1.2">
 <h3><span class="header-section-number">8.1.2</span> Ordinal scale types<a href="additional-character-types.html#ordinal-scale-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Ordinal scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is an ordering, <em>i.e.</em>, some values are larger than others and there are different distances between the values <span class="citation">(<a href="#ref-houle2011measurement">Houle et al. 2011</a>, Table 1)</span>. Character measurements on an ordinal scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendage or the number of digits on a vertebrate forelimb.</p>
-<p>Models for the evolution of ordinal data can be described with the same language we used for nominal scale types, the rates for changes between non-adjacent values are just set to zero. 5, for example, will have a nonzero rate of change to 6 and 4 and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of 4 digits.</p>
-<p>Such a rate matrix that explains the changes between 0-6 digits would have this form, if the rates were the same between all states:</p>
+<p>Ordinal scale types include any kind of ranking, such as position in a social hierarchy <span class="citation">(<a href="#ref-houle2011measurement">Houle et al. 2011</a>, Table 1)</span>. They have an ordering, <em>i.e.</em>, some values are larger than others. But there is no statement about the distance between the values. In a pecking order for chickens, <span class="math inline">\(1\)</span> is dominant over <span class="math inline">\(2\)</span> and <span class="math inline">\(2\)</span> over <span class="math inline">\(3\)</span>, but that doesn’t indicate that there is a similar difference between <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span> as there is between <span class="math inline">\(2\)</span> and <span class="math inline">\(3\)</span>.</p>
+</div>
+<div id="interval-scale-types" class="section level3 hasAnchor" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> Interval scale types<a href="additional-character-types.html#interval-scale-types" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Interval scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is an ordering, <em>i.e.</em>, some values are larger than others and there are uniform distances between the values <span class="citation">(<a href="#ref-houle2011measurement">Houle et al. 2011</a>, Table 1)</span>. Character measurements on an interval scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendage or the number of digits on a vertebrate forelimb.</p>
+<p>Models for the evolution of interval data can be described with the same language we used for nominal scale types. The rates for changes between non-adjacent values are just set to zero. <span class="math inline">\(5\)</span>, for example, will have a nonzero rate of change to <span class="math inline">\(6\)</span> and <span class="math inline">\(4\)</span> and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of <span class="math inline">\(4\)</span> digits.</p>
+<p>Such a rate matrix describing the changes between 0-6 digits would have this form, if the rates were the same between all states:</p>
 <p><span class="math display">\[\begin{equation}
 \mathbf{Q} =
 \left(\begin{array}{ccccccc}
@@ -565,23 +521,41 @@ Probability
 </div>
 <div id="continuous-data" class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Continuous data<a href="additional-character-types.html#continuous-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate can take on a value within some range of real numbers. These character states are often lumped together by phylogenetic biologists under the single umbrella of continuous character data, since any two values can have values between them. Measurement theory, on the other hand, identifies multiple scale types that all have continuous values.</p>
-<p>The evolution of continuous measurements, regardless of specific scale type, are often modeled with the Brownian Motion (BM) family of models. At any point in time, the value can take an incremental step up or down. There are two parameters - the starting value, and the step size per unit time.</p>
-<p>The use of BM models for phylogenetic analysis of continuous data is a pragmatic choice, as it greatly simplifies many calculations. But there are many ways in which BM doesn’t actually describe the evolution of continuous traits. For example, BM can result in a value that is any real number, positive or negative, whereas many biological measurements that are considered in a phylogenetic perspective can only take on positive values. Sometimes these discrepancies have little impact, and sometimes they can lead to entirely wrong conclusions.</p>
+<p>Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate, can take values across a continuous range of real numbers. In phylogenetics, these traits are typically grouped under the umbrella of continuous character data, since values can vary smoothly and intermediate values are possible between any two observations.</p>
+<p>Measurement theory distinguishes several different scale types (for example, interval and ratio scales) that may all have continuous values. In phylogenetic comparative analyses, these distinctions are usually ignored, and the traits are analyzed using a common set of evolutionary models. Sometimes, ignoring these distinctions has little practical impact, but sometimes it has major consequences.</p>
+<div id="brownian-motion" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Brownian Motion<a href="additional-character-types.html#brownian-motion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM). In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.</p>
+<p>Under BM, the expected change in the trait value is zero. This is not because there is no change under Brownian motion. It is because increases are just as common as decreases. If you run the same BM simulation many times and average the results, the average change across all of them will be zero. Each one, however, can be quite different from the original value and from each other. This is because the variance of the trait value increases linearly with time. The longer two lineages evolve independently, or the faster the change, the more different their trait values are expected to become.</p>
+<p>Mathematically, Brownian motion can be written as</p>
+<p><span class="math display">\[
+dX(t) \sim \mathcal{N}(0, \sigma^2 dt)
+\]</span></p>
+<p>where <span class="math inline">\(X(t)\)</span> is the trait value at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(\sigma^2\)</span> is the diffusion rate, describing the amount of variance accumulated per unit of evolutionary time.</p>
+<p>In phylogenetic applications of the Brownian motion model there are two primary parameters. One is the initial state, <span class="math inline">\(X_0\)</span>, which is the initial trait value. The other is the diffusion rate, <span class="math inline">\(\sigma^2\)</span>, which determines how quickly trait variance accumulates through time. Along a branch of length <span class="math inline">\(t\)</span>, the trait value at the descendant node is modeled as</p>
+<p><span class="math display">\[
+X_{\text{descendant}} \sim \mathcal{N}(X_{\text{ancestor}}, \sigma^2 t)
+\]</span></p>
+<p>This means that the expected trait value at the end of the branch is equal to the value at the beginning of the branch, while the variance around that expectation grows in proportion to the branch length.</p>
+<p>One reason BM is widely used is that it leads to a convenient statistical formulation. The vector of trait values observed at the tips of a phylogeny follows a multivariate normal distribution whose covariance structure is determined by the shared branch lengths of the tree. This property allows efficient likelihood-based and Bayesian inference.</p>
+<p>The BM model is primarily used because it provides a mathematically tractable approximation to trait evolution. However, many biological traits do not actually evolve according to the assumptions of BM and violate the fundamental nature of the measurements being analyzed. For example, BM allows trait values to take any real number, including negative values. Many biological measurements, such as body mass or metabolic rate, are strictly positive. Sometimes these violations have little impact on inference, especially when the observed trait variation is far from biologically impossible values. In other cases, however, they can lead to misleading conclusions if the model poorly reflects the underlying evolutionary processes.</p>
 <div class="figure"><span style="display:block;" id="fig:char-brownian"></span>
-<img src="phylogenetic_biology_files/figure-html/char-brownian-1.png" alt="Multiple brownian motion trajectories." width="2100" />
+<img src="phylogenetic_biology_files/figure-html/char-brownian-1.png" alt="Multiple Brownian motion trajectories." width="2100" />
 <p class="caption">
-Figure 8.1: Multiple brownian motion trajectories.
+Figure 8.1: Multiple Brownian motion trajectories.
 </p>
 </div>
-<div id="difference-scale-type" class="section level3 hasAnchor" number="8.2.1">
-<h3><span class="header-section-number">8.2.1</span> Difference scale type<a href="additional-character-types.html#difference-scale-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>It is so named because differences are invariant with respect to units.</p>
 </div>
-<div id="ratio-scale-type" class="section level3 hasAnchor" number="8.2.2">
-<h3><span class="header-section-number">8.2.2</span> Ratio scale type<a href="additional-character-types.html#ratio-scale-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The most commonly encountered continuous scale type in phylogenetic analyses is the ratio scale type <span class="citation">(<a href="#ref-houle2011measurement">Houle et al. 2011</a>, Table 1)</span>. These measurements can take on values that are positive real numbers. They include many common continuous measurements, such as mass, length, and time interval. The name “ratio scale type” refers to the fact that ratios of these measurements are invariant with respect to units. If the ratio of body lengths of frog A to frog B is 2.38 when measured in centimeters, it will also be 2.38 when measured in inches, miles, or any other unit of length.</p>
-<p>Ratio scale type data are often log transformed before phylogenetic analysis. This converts them to difference scale types.</p>
+<div id="ornsteinuhlenbeck-models" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Ornstein–Uhlenbeck Models<a href="additional-character-types.html#ornsteinuhlenbeck-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Brownian motion assumes that there is no preferred trait value or directional trend in evolution. In reality, traits are often subject to constraints, such as stabilizing selection or metabolic constraints, that lead values to stay near a particular optimum. The Ornstein–Uhlenbeck (OU) model is a common variation of Brownian motion that can accommodate these constraints.</p>
+<p>In the OU process, trait evolution is still driven by random fluctuations, but there is also a deterministic tendency for the trait value to move toward an optimum. The model can be written as</p>
+<p><span class="math display">\[
+dX(t) = \alpha(\theta - X(t))dt + \sigma dW(t)
+\]</span></p>
+<p>where <span class="math inline">\(X(t)\)</span> is the trait value at time <span class="math inline">\(t\)</span>, <span class="math inline">\(\theta\)</span> is the optimal trait value, <span class="math inline">\(\alpha\)</span> describes the strength of attraction toward that optimum, and <span class="math inline">\(\sigma\)</span> controls the magnitude of random fluctuations.</p>
+<p>The OU model therefore includes both stochastic variation and a restoring force that pulls the trait toward an optimal value. When <span class="math inline">\(\alpha\)</span> is large, trait values tend to remain close to the optimum. When <span class="math inline">\(\alpha\)</span> is small, the restoring force is weak and trait values can wander more widely.</p>
+<p>The Brownian motion model can be understood as a special case of the OU model. If the strength of attraction toward the optimum approaches zero (<span class="math inline">\(\alpha = 0\)</span>), the restoring force disappears and the process reduces to pure Brownian motion. In this sense, OU models generalize Brownian motion by allowing evolutionary processes that include stabilizing selection or adaptive optima.</p>
 
 </div>
 </div>
