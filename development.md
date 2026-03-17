@@ -22,17 +22,29 @@ repository and run:
 
 Make sure you have [docker installed](https://docs.docker.com/install/#supported-platforms).
 
-In `docker/`, build the container image with:
+### Building the Docker image
+
+**Important**: Build from the repository root (not the `docker/` directory) to include renv files in the build context.
+
+From the repository root, build the container image with:
 
 ``` bash
-docker build -t phylogenetic_biology .
+docker build -f docker/Dockerfile -t phylogenetic_biology:latest .
 ```
 
 If building on a macOS host running on apple silicon, instead use:
 
 ``` bash
-docker build --platform=linux/amd64 -t phylogenetic_biology .
+docker build --platform=linux/amd64 -f docker/Dockerfile -t phylogenetic_biology:latest .
 ```
+
+To tag the image with a version:
+
+``` bash
+docker tag phylogenetic_biology:latest phylogenetic_biology:YYYYMMDD_NN
+```
+
+### Running the Docker container
 
 The model for executing the manuscript in docker follows that at
 https://github.com/caseywdunn/comparative_expression_2017/tree/master/docker .
@@ -40,7 +52,7 @@ https://github.com/caseywdunn/comparative_expression_2017/tree/master/docker .
 To run an RStudio session:
 
 ``` bash
-docker run --rm  -dP -e PASSWORD=secret123 -e USERID=$UID -v /path/to/phylogenetic_biology:/phylogenetic_biology -p 8787:8787 phylogenetic_biology
+docker run --rm -dP -e PASSWORD=secret123 -e USERID=$UID -v /path/to/phylogenetic_biology:/phylogenetic_biology -p 8787:8787 phylogenetic_biology:latest
 ```
 
 Then go to [http://localhost:8787/](http://localhost:8787/) in your browser. Log in with user/password rstudio/secret123 (Password can be anything except "rstudio"). From the console, you can jump to the repo's R directory with the R command:
@@ -51,6 +63,40 @@ And then build the book with:
 
     library(bookdown)
     bookdown::render_book("index.rmd", "bookdown::gitbook")
+
+Or build the PDF version:
+
+    bookdown::render_book("index.rmd", "bookdown::pdf_book")
+
+### Managing R packages with renv
+
+This project uses [renv](https://rstudio.github.io/renv/) for R package management. The `renv.lock` file captures all package dependencies and versions.
+
+When you build the Docker image, packages are automatically installed via `renv::restore()` based on the lockfile.
+
+#### Adding new packages
+
+If you need to add a package that isn't automatically detected by renv (e.g., packages that are only "Suggests" dependencies):
+
+1. From the repository root, use the existing Docker image to record the package:
+
+``` bash
+docker run --rm -v $(pwd):/project -w /project phylogenetic_biology:latest R --vanilla -s -e "renv::record('package_name')"
+```
+
+2. Rebuild the Docker image to include the new package:
+
+``` bash
+docker build -f docker/Dockerfile -t phylogenetic_biology:latest .
+```
+
+Alternatively, if working directly in R (not in Docker):
+
+``` r
+renv::record('package_name')    # Add package to lockfile
+renv::install('package_name')   # Install package
+renv::snapshot()                # Update lockfile with all dependencies
+```
 
 ## Versioning and identifiers
 

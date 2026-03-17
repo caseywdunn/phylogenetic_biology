@@ -7,7 +7,7 @@ isbn_paperback: "979-8-9934524-0-1"
 isbn_hardback: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
-date: "2026-03-16"
+date: "2026-03-17"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1786,7 +1786,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Mar 16, 2026 at 11:52:59 PM with the following R package versions.
+This book was rendered from the source code on Mar 17, 2026 at 01:42:16 AM with the following R package versions.
 
 
 ```
@@ -1831,7 +1831,7 @@ loaded via a namespace (and not attached):
  [7] vctrs_0.6.5             combinat_0.0-8         
  [9] quadprog_1.5-8          crayon_1.5.3           
 [11] pkgconfig_2.0.3         fastmap_1.2.0          
-[13] magick_2.9.0            labeling_0.4.3         
+[13] magick_2.9.1            labeling_0.4.3         
 [15] subplex_1.9             deSolve_1.40           
 [17] rmarkdown_2.30          tzdb_0.5.0             
 [19] bit_4.6.0               tinytex_0.57           
@@ -1848,7 +1848,7 @@ loaded via a namespace (and not attached):
 [41] codetools_0.2-20        lattice_0.22-7         
 [43] withr_3.0.2             S7_0.2.0               
 [45] coda_0.19-4.1           evaluate_1.0.5         
-[47] ggimage_0.3.4           gridGraphics_0.5-1     
+[47] ggimage_0.3.5           gridGraphics_0.5-1     
 [49] xml2_1.4.1              pillar_1.11.1          
 [51] foreach_1.5.2           ggfun_0.2.0            
 [53] generics_0.1.4          vroom_1.6.6            
