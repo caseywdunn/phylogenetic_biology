@@ -209,9 +209,9 @@ node_states_list = lapply(seq_len(ncol(node_states)), function(i) node_states[,i
 
 
 
-history_probs = 
-  node_states_list %>% 
-  map( get_tree_prob, phy, R, Pi ) %>%
+history_probs =
+  node_states_list %>%
+  purrr::map( get_tree_prob, phy, R, Pi ) %>%
   unlist()
 
 history_D = as.data.frame(t(node_states))
