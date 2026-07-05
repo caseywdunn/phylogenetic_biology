@@ -22,6 +22,47 @@ repository and run:
 
 Make sure you have [docker installed](https://docs.docker.com/install/#supported-platforms).
 
+### Linux host setup (use docker-ce, not Docker Desktop)
+
+On a Linux host, install the native `docker-ce` daemon rather than Docker Desktop. Docker Desktop for Linux runs the engine inside a VM and bridges host paths through a fuse layer with directory-entry caching. That cache breaks git's atomic-rename ref updates: after a `git commit` on the host, files like `.git/refs/heads/<branch>` and `.git/index` are stale inside the container, and `git status` disagrees between host and container. The mixed host+container workflow (editing and git on host, R execution in container) requires real, uncached bind mounts.
+
+Install on Ubuntu (per [Docker's official instructions](https://docs.docker.com/engine/install/ubuntu/)):
+
+``` bash
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+  | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+sudo usermod -aG docker $USER          # run docker without sudo
+sudo systemctl enable --now docker     # start now and on every boot
+```
+
+Log out and back in (or reboot) so the `docker` group takes effect. Verify:
+
+``` bash
+docker info --format '{{.OperatingSystem}}'   # should NOT say "Docker Desktop"
+docker run --rm hello-world
+```
+
+If migrating from Docker Desktop, save any images you want to keep to a tar first (`docker save phylogenetic_biology:latest | gzip > image.tar.gz`) — Docker Desktop's images live in its VM and are invisible to `docker-ce`. Restore with `docker load < image.tar.gz` after installing `docker-ce`.
+
+To confirm real bind mounts are in effect, compare inodes host vs. container:
+
+``` bash
+# host
+stat -c '%i' ~/repos/phylogenetic_biology/.git/refs/heads/dev
+# inside the container
+stat -c '%i' /phylogenetic_biology/.git/refs/heads/dev
+```
+
+Matching inodes = real kernel bind mount, no drift.
+
 ### Building the Docker image
 
 **Important**: Build from the repository root (not the `docker/` directory) to include renv files in the build context.

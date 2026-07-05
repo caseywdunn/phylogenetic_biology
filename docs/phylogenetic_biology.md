@@ -1786,7 +1786,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 05, 2026 at 01:44:04 PM with the following R package versions.
+This book was rendered from the source code on Jul 05, 2026 at 02:44:04 PM with the following R package versions.
 
 
 ```
@@ -1815,14 +1815,13 @@ attached base packages:
 
 other attached packages:
  [1] scales_1.4.0     ggrepel_0.9.6    kableExtra_1.4.0
- [4] phangorn_2.12.1  Matrix_1.7-3     magrittr_2.0.4  
- [7] gridExtra_2.3    geiger_2.0.11    phytools_2.5-2  
-[10] maps_3.4.3       ape_5.8-1        ggtree_4.0.4    
-[13] treeio_1.34.0    renv_1.1.8       lubridate_1.9.4 
-[16] forcats_1.0.1    stringr_1.5.2    dplyr_1.1.4     
-[19] purrr_1.1.0      readr_2.1.5      tidyr_1.3.1     
-[22] tibble_3.3.0     ggplot2_4.0.0    tidyverse_2.0.0 
-[25] testthat_3.2.3  
+ [4] phangorn_2.12.1  Matrix_1.7-3     lubridate_1.9.4 
+ [7] forcats_1.0.1    dplyr_1.1.4      purrr_1.1.0     
+[10] readr_2.1.5      tidyr_1.3.1      tibble_3.3.0    
+[13] ggplot2_4.0.0    tidyverse_2.0.0  stringr_1.5.2   
+[16] magrittr_2.0.4   gridExtra_2.3    geiger_2.0.11   
+[19] phytools_2.5-2   maps_3.4.3       ape_5.8-1       
+[22] ggtree_4.0.4     treeio_1.34.0    renv_1.1.8      
 
 loaded via a namespace (and not attached):
  [1] mnormt_2.1.1            rlang_1.1.6            
@@ -1835,46 +1834,41 @@ loaded via a namespace (and not attached):
 [15] subplex_1.9             deSolve_1.40           
 [17] rmarkdown_2.30          tzdb_0.5.0             
 [19] bit_4.6.0               tinytex_0.57           
-[21] waldo_0.6.2             xfun_0.53              
-[23] cachem_1.1.0            aplot_0.2.9            
-[25] clusterGeneration_1.3.8 jsonlite_2.0.0         
-[27] parallel_4.5.1          R6_2.6.1               
-[29] bslib_0.9.0             stringi_1.8.7          
-[31] RColorBrewer_1.1-3      pkgload_1.4.1          
-[33] brio_1.1.5              jquerylib_0.1.4        
-[35] numDeriv_2016.8-1.1     Rcpp_1.1.0             
-[37] bookdown_0.45           iterators_1.0.14       
-[39] knitr_1.50              optimParallel_1.0-2    
-[41] splines_4.5.1           igraph_2.2.1           
-[43] timechange_0.3.0        tidyselect_1.2.1       
-[45] rstudioapi_0.17.1       yaml_2.3.10            
-[47] doParallel_1.0.17       codetools_0.2-20       
-[49] lattice_0.22-7          withr_3.0.2            
-[51] S7_0.2.0                ggimage_0.3.5          
-[53] coda_0.19-4.1           evaluate_1.0.5         
-[55] gridGraphics_0.5-1      desc_1.4.3             
-[57] xml2_1.4.1              pillar_1.11.1          
-[59] rsconnect_1.6.0         foreach_1.5.2          
-[61] ggfun_0.2.0             generics_0.1.4         
-[63] vroom_1.6.6             rprojroot_2.1.1        
-[65] hms_1.1.4               tidytree_0.4.6         
-[67] glue_1.8.0              gdtools_0.4.4          
-[69] scatterplot3d_0.3-44    lazyeval_0.2.2         
-[71] tools_4.5.1             ggiraph_0.9.2          
-[73] fs_1.6.6                mvtnorm_1.3-3          
-[75] fastmatch_1.1-6         grid_4.5.1             
-[77] nlme_3.1-168            patchwork_1.3.2        
-[79] cli_3.6.5               rappdirs_0.3.3         
-[81] DEoptim_2.2-8           textshaping_1.0.4      
-[83] fontBitstreamVera_0.1.1 expm_1.0-0             
-[85] viridisLite_0.4.2       svglite_2.2.2          
-[87] gtable_0.3.6            yulab.utils_0.2.1      
-[89] sass_0.4.10             digest_0.6.37          
-[91] fontquiver_0.2.1        ggplotify_0.1.3        
-[93] htmlwidgets_1.6.4       farver_2.1.2           
-[95] htmltools_0.5.8.1       lifecycle_1.0.4        
-[97] bit64_4.6.0-1           fontLiberation_0.1.0   
-[99] MASS_7.3-65            
+[21] xfun_0.53               aplot_0.2.9            
+[23] clusterGeneration_1.3.8 jsonlite_2.0.0         
+[25] parallel_4.5.1          R6_2.6.1               
+[27] stringi_1.8.7           RColorBrewer_1.1-3     
+[29] numDeriv_2016.8-1.1     Rcpp_1.1.0             
+[31] bookdown_0.45           iterators_1.0.14       
+[33] knitr_1.50              optimParallel_1.0-2    
+[35] splines_4.5.1           igraph_2.2.1           
+[37] timechange_0.3.0        tidyselect_1.2.1       
+[39] rstudioapi_0.17.1       yaml_2.3.10            
+[41] doParallel_1.0.17       codetools_0.2-20       
+[43] lattice_0.22-7          withr_3.0.2            
+[45] S7_0.2.0                coda_0.19-4.1          
+[47] evaluate_1.0.5          ggimage_0.3.5          
+[49] gridGraphics_0.5-1      xml2_1.4.1             
+[51] pillar_1.11.1           foreach_1.5.2          
+[53] ggfun_0.2.0             generics_0.1.4         
+[55] vroom_1.6.6             hms_1.1.4              
+[57] tidytree_0.4.6          glue_1.8.0             
+[59] gdtools_0.4.4           scatterplot3d_0.3-44   
+[61] lazyeval_0.2.2          tools_4.5.1            
+[63] ggiraph_0.9.2           fs_1.6.6               
+[65] mvtnorm_1.3-3           fastmatch_1.1-6        
+[67] grid_4.5.1              nlme_3.1-168           
+[69] patchwork_1.3.2         cli_3.6.5              
+[71] rappdirs_0.3.3          DEoptim_2.2-8          
+[73] textshaping_1.0.4       fontBitstreamVera_0.1.1
+[75] expm_1.0-0              viridisLite_0.4.2      
+[77] svglite_2.2.2           gtable_0.3.6           
+[79] yulab.utils_0.2.1       digest_0.6.37          
+[81] fontquiver_0.2.1        ggplotify_0.1.3        
+[83] htmlwidgets_1.6.4       farver_2.1.2           
+[85] htmltools_0.5.8.1       lifecycle_1.0.4        
+[87] fontLiberation_0.1.0    bit64_4.6.0-1          
+[89] MASS_7.3-65            
 ```
 
 <!--chapter:end:versions.rmd-->
