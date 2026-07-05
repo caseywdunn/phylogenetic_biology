@@ -1,171 +1,240 @@
 # Comparative methods
 
-## Correlated evolutionary changes
+In the previous chapter we used the tree to look back in time and estimate the states of ancestors. Here we use the tree for a different purpose: rather than reconstructing particular historical states, we ask general questions about how traits evolve. This is the domain of phylogenetic comparative methods, one of the largest and fastest growing areas of phylogenetic biology (Chapter \@ref(intro)). Its questions are wide-ranging, including whether two traits tend to change together, whether the rate of evolution differs across the tree, whether a trait is drawn toward some optimum, and many more topics. This chapter concentrates on the first and most common of them, the evolutionary correlation between two traits.
 
-PGLS [@symonds2014primer].
+A recurring theme of phylogenetic comparative biology is that we cannot treat the tips of a tree as independent observations. Species are connected by a shared evolutionary history, and that history leaves a very specific statistical imprint on their trait values. Ignoring it leads to wrong conclusions and limits what questiosns can even be asked.
 
+## Species are not independent observations
 
-```{r}
+Suppose we measure two traits across a set of species, say body mass and metabolic rate, and we want to know whether they tend to evolve together. The naive approach is to treat each species as an independent data point, plot one trait against the other, and fit an ordinary regression. This is exactly what we would do with independent samples in an introductory statistics course.
 
-# Scale edge lengths so that root has specified age
-scale_phy = function(phy, age=1){
-  node_root = phy$edge[(!phy$edge[,1] %in% phy$edge[,2]),1] %>% unique()
-  age_root = max( dist.nodes(phy)[,node_root] )
+The problem is that species are not independent samples. Two species that diverged from a common ancestor a short time ago have had very little time to evolve apart, and so they tend to resemble each other on essentially every trait, simply because they inherited most of their features from that recent common ancestor. Two species whose lineages separated hundreds of millions of years ago have had far more opportunity to diverge. The tree tells us how much shared history each pair of species has, and therefore how much we should expect them to resemble one another before we invoke any relationship between the traits themselves.
+
+This was the central insight of a landmark paper by Joe Felsenstein [@felsenstein1985phylogenies]. If we ignore the tree, we are effectively counting closely related species as if they were independent replicates, when in reality they are close to being a single replicate observed several times. Our sample size is inflated, our confidence intervals are too narrow, and we will routinely find "significant" relationships that are nothing more than the shadow of shared ancestry.
+
+### A simulation of the problem
+
+We can see the problem directly by simulating traits that we know are not evolutionarily related, and then asking what an analysis that ignores the tree would conclude. To do this we need two trees that share the same tips but differ in how much history those tips share.
+
+```{r comp-helpers, echo=FALSE}
+# Scale edge lengths so that the root has a specified age
+scale_phy = function(phy, age = 1){
+  node_root = phy$edge[(!phy$edge[,1] %in% phy$edge[,2]), 1] %>% unique()
+  age_root = max( dist.nodes(phy)[, node_root] )
   phy$edge.length = phy$edge.length / age_root * age
   phy
 }
 
-# Transform edge lengths to squish length into root edges or other edges.
-# Also rescaled age of root to 1
-# x = 1 all length in tip edges
-# x = 0 no transform
-# x = -1 all length in root edges
+# Transform edge lengths to move length into the tip edges or the deep edges,
+# holding the root age at one.
+#   x =  1  all length in tip edges (a "star" tree, no shared history)
+#   x =  0  no transform
+#   x = -1  all length in deep edges (maximal shared history)
 squish_phy = function( phy, x ){
-  node_root = phy$edge[(!phy$edge[,1] %in% phy$edge[,2]),1] %>% unique()
+  node_root = phy$edge[(!phy$edge[,1] %in% phy$edge[,2]), 1] %>% unique()
   n_tips = length(phy$tip.label)
-  
-  mult_deep = 1 - x
-  mult_shallow = 1 + x   
 
-  edges_root = which(phy$edge[,1]==node_root)
+  mult_deep = 1 - x
+  mult_shallow = 1 + x
+
+  edges_root = which(phy$edge[,1] == node_root)
   phy$edge.length[edges_root] = phy$edge.length[edges_root] * mult_deep
-  
+
   edges_tip = which( phy$edge[,2] <= n_tips )
   phy$edge.length[edges_tip] = phy$edge.length[edges_tip] * mult_shallow
-  
+
   edges = 1:nrow(phy$edge)
-  edges_mid = which( ! edges %in% c(edges_root, edges_tip)  )
-  
-  if(x>0){
+  edges_mid = which( ! edges %in% c(edges_root, edges_tip) )
+
+  if(x > 0){
     phy$edge.length[edges_mid] = phy$edge.length[edges_mid] * mult_deep
-  } else if (x<0){
+  } else if (x < 0){
     phy$edge.length[edges_mid] = phy$edge.length[edges_mid] * mult_shallow
   }
 
-  
-  tip_ages = dist.nodes(phy)[1:n_tips,node_root]
+  tip_ages = dist.nodes(phy)[1:n_tips, node_root]
   trim = max(tip_ages) - min(tip_ages)
   tips_long = which(tip_ages > min(tip_ages))
   tips_edges_long = phy$edge[,2] %in% tips_long
   phy$edge.length[tips_edges_long] = phy$edge.length[tips_edges_long] - trim
-  
-  
-  # Scale root age to one
+
   phy = scale_phy(phy)
-  
   return(phy)
 }
 
 tree_text = "((((A:1,B:1):1,(C:1,D:1):1):1,((E:1,F:1):1,(G:1,H:1):1):1):1,(((I:1,J:1):1,(K:1,L:1):1):1,((M:1,N:1):1,(O:1,P:1):1):1):1);"
-phy = read.tree(text=tree_text)
+phy = read.tree(text = tree_text)
 phy = scale_phy( phy )
-# plot( phy )
 
-phy_star = squish_phy(phy, 1)
-phy_deep = squish_phy(phy, -0.98 )
-
-label_offset = 0.05
-tree_width = 1.5
-ggtree_deep = ggtree( phy_deep ) + 
-  geom_tiplab( fontface = "italic", offset=label_offset ) +
-  xlim(0, tree_width) +
-  geom_text2(aes(label=node), col="red", nudge_x=label_offset/2 )
-
-plot(phy_star)
-plot(phy_deep)
-
+phy_star = squish_phy(phy, 1)      # no shared history
+phy_deep = squish_phy(phy, -0.98)  # deep shared history
 ```
 
+```{r comp-two-trees, echo=FALSE, fig.cap="Two trees with the same sixteen tips, each scaled to the same root age. (A) A star tree, in which all of the evolutionary change happens on the terminal branches, so the tips share essentially no history. (B) A tree with deep structure, in which most of the change is shared along internal branches, so closely related tips share most of their history.", fig.height=4}
+par(mfrow = c(1, 2), mar = c(1, 1, 2, 1))
+plot(phy_star, main = "(A) Star tree")
+plot(phy_deep, main = "(B) Deep structure")
+```
 
+Figure \@ref(fig:comp-two-trees) shows two trees over the same sixteen tips. In the star tree, every lineage descends independently from the root, so no two tips share any history beyond the root itself. In the tree with deep structure, most of the branch length is internal and shared, so sister tips are nearly identical by inheritance.
 
-```{r}
+Now we simulate two traits on each tree under Brownian motion (Section \@ref(continuous-data)), with no evolutionary covariance between them. Any apparent relationship between the two traits at the tips must therefore be an artifact of the tree, not a real association.
+
+```{r comp-independence, echo=FALSE, fig.cap="Two traits simulated independently under Brownian motion, with no evolutionary covariance between them, shown at the tips of the star tree and the deep tree. On the star tree the tips form an uncorrelated cloud, as they should for independent traits. On the deep tree, closely related tips (adjacent letters) cluster together, and this clustering can produce a strong apparent relationship between the two traits even though none exists.", fig.height=4}
 set.seed(123456)
 
-cov_matrix <- function(diag_term=1, cov_term=0) {
-  G=2
-  trueCovariance = matrix(cov_term,G,G)
-  diag(trueCovariance) = diag_term
-
-  trueCovariance
+# Simulate a single trait under BM on a tree, returning a plain vector
+sim_bm = function(phy){
+  x = sim.char(phy, matrix(1), nsim = 1, model = "BM", root = 0)
+  as.vector(x)
 }
 
-plot_matrix <- function(m, ... ) {
-	# Basic plotting
-	nr <- nrow(m)
-	nc <- ncol(m)
-	image(1:nc, 1:nr, t(m[nr:1, ]), axes=F,xlab="", ylab="", ... )
+make_df = function(phy, label){
+  data.frame(
+    X1 = sim_bm(phy),
+    X2 = sim_bm(phy),
+    tree = label,
+    name = phy$tip.label
+  )
 }
-
-a_off_diag = 0
-b_off_diag = 0.5
-c_off_diag = 1
-cov_a = cov_matrix(1, a_off_diag)
-cov_b = cov_matrix(1, b_off_diag)
-cov_c = cov_matrix(1, c_off_diag)
-
-cov_a
-cov_b
-cov_c
-```
-## Inferring covariance in the absence of phylogenetic structure
-
-
-```{r}
-
-sim_char = function( phy, cov_sim ){
-  x = sim.char(phy, cov_sim, nsim = 1, model = "BM", root = 0)
-  
-  # Convert array to matrix
-  n_rows = dim(x)[1]
-  x = matrix(x, nrow = n_rows)
-  
-  x
-}
-
-Z_star_a = sim_char(phy_star, cov_a)
-Z_star_b = sim_char(phy_star, cov_b)
-Z_star_c = sim_char(phy_star, cov_c)
-
-Z_deep_a = sim_char(phy_deep, cov_a)
-Z_deep_b = sim_char(phy_deep, cov_b)
-Z_deep_c = sim_char(phy_deep, cov_c)
-
 
 D = rbind(
-  data.frame(Z_star_a) %>% mutate(tree="star", cov = a_off_diag, node=1:nrow(Z_star_a), name = phy$tip.label ),
-  data.frame(Z_star_b) %>% mutate(tree="star", cov = b_off_diag, node=1:nrow(Z_star_b), name = phy$tip.label ),
-  data.frame(Z_star_c) %>% mutate(tree="star", cov = c_off_diag, node=1:nrow(Z_star_c), name = phy$tip.label ),
-  data.frame(Z_deep_a) %>% mutate(tree="deep", cov = a_off_diag, node=1:nrow(Z_deep_a), name = phy$tip.label ),
-  data.frame(Z_deep_b) %>% mutate(tree="deep", cov = b_off_diag, node=1:nrow(Z_deep_b), name = phy$tip.label ),
-  data.frame(Z_deep_c) %>% mutate(tree="deep", cov = c_off_diag, node=1:nrow(Z_deep_c), name = phy$tip.label )
+  make_df(phy_star, "star tree"),
+  make_df(phy_deep, "deep tree")
 )
 
+# Order the facets star-then-deep so they match the tree panels in the
+# previous figure, rather than ggplot's default alphabetical order.
+D$tree = factor(D$tree, levels = c("star tree", "deep tree"))
 
-
-
-D %>% 
-  filter(cov==0) %>%
-  ggplot(aes(x=X1, y=X2, color=cov )) +
-  #geom_text( aes(label=name), color="red", vjust = 0, nudge_y = 0.01 ) +
-  geom_text_repel(aes(label=name), color="black") +
+ggplot(D, aes(x = X1, y = X2)) +
   geom_point() +
-  facet_wrap(~tree)
-
-
+  geom_text_repel(aes(label = name), size = 3) +
+  facet_wrap(~tree, scales = "free") +
+  labs(x = "Trait 1", y = "Trait 2") +
+  theme_classic()
 ```
 
-## Phylogenetic Independent Contrasts
+Figure \@ref(fig:comp-independence) shows the result. On the star tree, where the tips share no history, the two independent traits form the uncorrelated cloud we would expect. On the deep tree, sister tips (adjacent letters, such as A and B, or O and P) cluster tightly together in both traits at once, because they inherited both trait values from a recent common ancestor. These clusters can line up to suggest a strong relationship between the two traits even though we simulated them to be completely independent. An ordinary regression on the deep-tree tips, treating each species as an independent point, would happily report a relationship that does not exist. This is the phenomenon Felsenstein warned about, and it is why we need methods that account for the tree.
 
-```{r}
+## Phylogenetic independent contrasts
 
-  
+Felsenstein's own solution to the problem was elegant, and it remains one of the clearest ways to understand and apply phylogenetic comparative methods [@felsenstein1985phylogenies]. Rather than write the non-independence down and correct for it all at once, he worked directly on the tree, from the tips toward the root, re-expressing the correlated tip values as a set of quantities that are independent under Brownian motion. The method builds on the ancestral character state reconstruction of the previous chapter.
 
+Consider two lineages, $i$ and $j$, that descend from the same node, with observed trait values $x_i$ and $x_j$ and branch lengths $v_i$ and $v_j$. Their *contrast* is the standardized difference between them:
+
+\begin{equation}
+c = \frac{x_i - x_j}{\sqrt{v_i + v_j}}
+(\#eq:comp-contrast)
+\end{equation}
+
+The numerator, $x_i - x_j$, is the key. Because both lineages inherited the same value from their shared ancestor, that ancestral value cancels in the difference, leaving only the independent evolution that happened along the two branches since they diverged. The denominator standardizes the contrast: under Brownian motion the variance of the difference is proportional to $v_i + v_j$, so dividing by $\sqrt{v_i + v_j}$ puts contrasts taken across short branches and long branches on a common scale. The standardized contrasts then all have the same variance, and they are independent of one another.
+
+Having taken the contrast at a node, Felsenstein pruned the two descendants from the tree and replaced them with their ancestor. He estimated the ancestor's trait value as the inverse-branch-length-weighted average of its two descendants, $(x_i/v_i + x_j/v_j)/(1/v_i + 1/v_j)$ -- the closer descendant counting for more -- which is exactly the Brownian-motion ancestral state estimate (Equation \@ref(eq:anc-bm)). Because that ancestor is now an estimate rather than an observation, its own branch is lengthened slightly, by $v_i v_j / (v_i + v_j)$, to carry the extra uncertainty forward. With the pair collapsed to a single reconstructed tip, the same operation applies at the next node down, and so on until the root.
+
+A rooted tree with $n$ tips has $n-1$ internal nodes and therefore yields $n-1$ contrasts, one fewer than the number of species. This is the appropriate sample size for an evolutionary question. It reflects the number of independent opportunities for change on the tree, rather than the number of species, which overcounts because of shared ancestry.
+
+To test whether two traits are evolutionarily related, we compute the contrasts for each trait separately and examine the relationship between the two sets. Because the contrasts are independent, an ordinary regression of one set on the other is now valid. By convention it is fit through the origin: the direction in which we happen to subtract each pair of descendants is arbitrary, so a contrast and its negative are equally valid, and only a line through the origin respects that symmetry.
+
+```{r comp-pic, fig.cap="Phylogenetic independent contrasts for two traits, computed on a tree with strong structure. Each point is a contrast at one internal node, comparing the two lineages that descend from it. Because the contrasts are independent under Brownian motion, an ordinary regression through the origin (dashed line) is a valid test of whether the two traits are evolutionarily related.", echo=FALSE}
+set.seed(7)
+phy_pic = rcoal(40)
+
+# Two traits simulated with real evolutionary covariance between them
+R = matrix(c(1, 0.7, 0.7, 1), 2, 2)
+traits = sim.char(phy_pic, R, nsim = 1, model = "BM", root = 0)[, , 1]
+trait_x = traits[, 1]
+trait_y = traits[, 2]
+
+# Standardized independent contrasts for each trait
+cx = pic(trait_x, phy_pic)
+cy = pic(trait_y, phy_pic)
+
+fit = lm(cy ~ cx + 0)
+
+ggplot(data.frame(cx = cx, cy = cy), aes(x = cx, y = cy)) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = coef(fit)[1], linetype = "dashed") +
+  labs(x = "Contrasts in trait 1", y = "Contrasts in trait 2") +
+  theme_classic()
 ```
 
+Figure \@ref(fig:comp-pic) shows contrasts for two traits that were simulated with a genuine evolutionary covariance between them. Here the relationship in the contrasts is real, and the regression through the origin recovers it. The same procedure applied to the independent traits of Figure \@ref(fig:comp-independence) would show no such relationship, because the shared ancestry that produced the spurious clustering has been differenced away.
 
+## The expected covariance structure
 
-## Phylogenetic structure is the expected covariance structure
+Independent contrasts handle shared history by transforming the correlated tip values into a set of contrasts that are independent under Brownian motion. There is another, complementary perspective. Instead of transforming the data to independence, it describes the shared history explicitly, as a covariance matrix among the tips.
 
-```{r}
+Under Brownian motion, the trait values at the tips of a tree follow a multivariate normal distribution. The mean of that distribution is the root state, and the covariance between any two tips is proportional to the amount of evolutionary time they share, *i.e.* the distance from the root to their most recent common ancestor. This is intuitive: two tips accumulate the same random changes along every branch they share, and independent changes only after they diverge, so the more history they share, the more their trait values covary. A tip shares its entire root-to-tip path with itself, so its variance (its covariance with itself) is proportional to its total distance from the root.
 
+We can read this expected covariance structure directly off the tree. Consider the small four-tip tree in Figure \@ref(fig:comp-vcv-tree), drawn with its branch lengths.
+
+```{r comp-vcv-tree, echo=FALSE, fig.cap="A four-tip tree drawn with its branch lengths; the horizontal axis is distance from the root. The covariance between two tips is the distance from the root to their most recent common ancestor -- the depth of the internal node (gray) at which their lineages join. Sisters A and B join at the deeper node (distance 2), A and C (and B and C) join at the older node (distance 1), and D joins the others only at the root (distance 0). The variance of each tip is its total distance from the root, here 3 for every tip because the tree is ultrametric. These depths are exactly the entries of the covariance matrix in Equation \\@ref(eq:comp-vcv)."}
+small = read.tree(text = "(((A:1,B:1):1,C:2):1,D:3);")
+ggtree(small) +
+  geom_tiplab(fontface = "italic", offset = 0.08) +
+  geom_nodepoint(color = "gray50", size = 2) +
+  theme_tree2() +
+  scale_x_continuous("Distance from root", breaks = 0:3, limits = c(0, 3.6))
 ```
+
+To turn this tree into a matrix, we take the tips two at a time and measure how much evolutionary history each pair shares. There are two kinds of entry. A *diagonal* entry is the variance of a single tip, and equals its total distance from the root -- the full length of the path from the root out to that tip. An *off-diagonal* entry is the covariance between two different tips, and equals the length of the path they share: the distance from the root to their most recent common ancestor, the node at which their two lineages join.
+
+Working through the tips of Figure \@ref(fig:comp-vcv-tree):
+
+- Every tip sits at distance 3 from the root, so every diagonal entry, the variance, is 3.
+- A and B are sisters. Their lineages join at the deeper internal node, at distance 2 from the root, so the path they share -- and therefore their covariance -- is 2.
+- A and C join further back, at the older internal node at distance 1 from the root, so their covariance is 1. The same holds for B and C.
+- D branches off at the root itself, so it shares no path with A, B, or C, and all of its covariances are 0.
+
+Collecting these values gives the phylogenetic variance-covariance matrix. We will call it $\boldsymbol{\Sigma}$, a symbol kept deliberately distinct from the tip names, with one row and one column for each tip:
+
+\begin{equation}
+\boldsymbol{\Sigma} =
+\begin{array}{cc}
+ & \begin{array}{cccc} A & B & C & D \end{array} \\
+\begin{array}{c} A \\ B \\ C \\ D \end{array} &
+\left(\begin{array}{cccc}
+3 & 2 & 1 & 0\\
+2 & 3 & 1 & 0\\
+1 & 1 & 3 & 0\\
+0 & 0 & 0 & 3
+\end{array}\right)
+\end{array}
+(\#eq:comp-vcv)
+\end{equation}
+
+The diagonal, running from top left to bottom right, holds the variances, all equal here because the tree is ultrametric. Every other entry is a covariance, and the pattern of large and small values mirrors the tree: closely related tips such as A and B share a great deal of history and have a large covariance, while the distantly attached D shares none and has covariances of zero. Reading down the row for D, or across its column, gives all zeros. This matrix is a complete description of the non-independence induced by the tree, and it is exactly what the next method takes as its input.
+
+## Phylogenetic generalized least squares
+
+Independent contrasts turn out to be one instance of a more general and flexible framework. That framework is phylogenetic generalized least squares, abbreviated PGLS [@grafen1989phylogenetic; @symonds2014primer].
+
+Ordinary least squares regression assumes that the residuals, the deviations of the data from the fitted line, are independent and identically distributed. Generalized least squares relaxes this assumption by allowing the residuals to have a specified covariance structure. And we have just built exactly such a structure: the phylogenetic variance-covariance matrix $\boldsymbol{\Sigma}$ of Equation \@ref(eq:comp-vcv). In PGLS we fit a regression in which the residuals are assumed to covary according to $\boldsymbol{\Sigma}$. The method effectively down-weights the contribution of species that share a great deal of history, so that a cluster of closely related species counts for less than the same number of independent lineages.
+
+```{r comp-pgls, echo=FALSE, comment=NA}
+library(nlme)
+
+df = data.frame(species = names(trait_x), x = trait_x, y = trait_y)
+
+# PGLS: a regression with residuals structured by the Brownian covariance of the tree
+fit_pgls = gls(y ~ x, data = df,
+               correlation = corBrownian(phy = phy_pic, form = ~species))
+
+# The PGLS slope and the independent-contrasts slope are identical
+c(pgls_slope = unname(coef(fit_pgls)["x"]),
+  contrasts_slope = unname(coef(fit)[1]))
+```
+
+Independent contrasts are the special case of PGLS in which the covariance structure $\boldsymbol{\Sigma}$ is the one implied by Brownian motion. For that model the two methods are mathematically equivalent: the slope from the PGLS regression is identical to the slope from regressing the contrasts through the origin. Felsenstein's node-by-node pruning and the matrix-based regression are two routes to the same estimate.
+
+Because PGLS is more genral, it has become the more widely used of the two. Because it is expressed as a regression with a specified covariance structure, it accommodates things that are awkward under the contrasts formulation. We can include multiple predictors, categorical variables, and continuous covariates in the same model. More importantly, we can change the assumed covariance structure to reflect a different model of evolution. If we think the trait evolves under an Ornstein-Uhlenbeck process (Section \@ref(continuous-data)) rather than pure Brownian motion, we substitute the covariance structure implied by that model. The tree still supplies the non-independence, but we now have a whole family of models describing how that non-independence accumulates.
+
+It is worth being precise about what these methods do, because they are easily misdescribed [@uyeda2018rethinking]. It is common to say that they "remove the phylogenetic signal" or "correct for the fact that species are not independent," but neither phrasing is quite right. Ordinary regression does not assume that the observations themselves are independent; it assumes that the *residuals* -- the part of one trait left unexplained by the other -- are independent. What independent contrasts and PGLS do is account for the covariance of those residuals, and they discard no biological signal in doing so; the contrasts are themselves the evolutionary changes. A subtler and more important caution is that correctly accounting for shared history does not, by itself, show that two traits are causally related. A single unreplicated event -- one ancient branch on which both traits happened to shift -- can produce a strongly significant contrast or PGLS slope even when nothing connects the traits, and neither method guards against this. Shared history is not just a statistical nuisance to be swept away.
+
+## Beyond correlated evolution
+
+Testing for correlated evolution between two traits is the most common comparative analysis, and it is where the core ideas are clearest, but it is far from the only question comparative methods can address [@harmon2018phylogenetic]. The same framework of an explicit evolutionary model on a fixed tree supports a much broader set of investigations.
+
+We can ask whether the rate of evolution itself varies across the tree, for example whether a particular clade diversified in a trait much faster than its relatives. We can ask whether a trait is subject to stabilizing selection toward an optimum, using the Ornstein-Uhlenbeck model, and whether different parts of the tree are drawn toward different optima. We can fit and compare these competing models using the model evaluation tools developed earlier in the book, asking which model of trait evolution the data support. In every case the logic is the one we have built up here: specify a model of how the trait evolves, use the tree to describe the resulting non-independence among species, and then estimate parameters or compare models in that light.
+

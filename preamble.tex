@@ -4,3 +4,24 @@
 
 % Define book size
 \usepackage[paperwidth=7in, paperheight=10in, margin=1in]{geometry}
+
+% Running headers.
+% The default book class typesets running heads in ALL CAPS at full size. On
+% this narrow (~5in) text block, long section titles then run into the page
+% number (e.g. "...DISCRETE CHARACTERS101"). Use smaller, mixed-case running
+% heads so long titles fit, with the page number on the outer edge and the
+% running title on the inner edge (further from the page number).
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small\thepage}
+\fancyhead[RE]{\small\nouppercase{\leftmark}}
+\fancyhead[LO]{\small\nouppercase{\rightmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+% Chapter-opening pages use the "plain" style; put their page number in the foot.
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\small\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}

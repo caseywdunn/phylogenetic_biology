@@ -18,14 +18,23 @@ df <- data.frame(
   check.names = FALSE
 )
 
-knitr::kable(df,
+tbl <- knitr::kable(df,
   col.names = c("Scale type", "Domain", "Measurement type", "Meaningful comparisons", "Biological examples"),
   caption = "Scale types, modified from Houle (2011).",
   escape = FALSE,
   booktabs = TRUE
-) %>%
-  kableExtra::kable_styling(latex_options = c("scale_down")) %>%
-  kableExtra::column_spec(5, width = "3cm")
+)
+
+# scale_down and the column width are LaTeX-only formatting. Applying
+# kable_styling in HTML output pulls in the kableExtra "kePrint" dependency,
+# which bookdown's gitbook build fails to copy into libs/. Guard it to PDF.
+if (knitr::is_latex_output()) {
+  tbl <- tbl %>%
+    kableExtra::kable_styling(latex_options = c("scale_down")) %>%
+    kableExtra::column_spec(5, width = "3cm")
+}
+
+tbl
 ```
 
 Because biological measurement developed pragmatically rather than from measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Measurement type column. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Our comparisons should be constrained to respect the physical realities that our measurements represent, and measurement theory gives us formal tools to evaluate this. We should not, for example, compute the numerical difference between ordinal states, like social dominance ranks, because the actual physical or evolutionary distances between those ranks are unknown and unequal.  
@@ -79,7 +88,7 @@ Such a rate matrix describing the changes between 0-6 digits would have this for
 \end{array}\right)
 \end{equation}
 
-## Continuous data
+## Continuous data {#continuous-data}
 
 Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate, can take values across a continuous range of real numbers. In phylogenetics, these traits are typically grouped under the umbrella of continuous character data, since values can vary smoothly and intermediate values are possible between any two observations.
 

@@ -436,7 +436,7 @@ Considering just the newick specificaiton of the tree, `"(((A,B),(C,D)),E);"`, y
 
 As versatile and simple as newick is for storing trees in files, it isn't great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, branches, and their annotations. This allows us to directly encode the information noted in the section [The information contained in phylogenies], and to readily extend the data objects as needed.
 
-The most widely used format for storing phylogenies in the R programming language is as a `phylo` object from the excellent `ape` library [@R-ape]. The ` read.tree() ` function in the code block above creates a `phylo` object called `phylo_tree` based on the phylogeny we specified as text and named `newick_tree`. In a `phylo` object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to $n$ where $n$ is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes $n+1$ to $2n-1$. The assignment of the node numbers within these ranges is arbitrary, and there is no guarantee that the same nodes will ahve the same numbers each time the tree is read. The numbers of the nodes that were given when we created the `phylo` object from the newick text are shown in red in Figure \@ref(fig:trees-newick).
+The most widely used format for storing phylogenies in the R programming language is as a `phylo` object from the excellent `ape` library [@R-ape]. The ` read.tree() ` function in the code block above creates a `phylo` object called `phylo_tree` based on the phylogeny we specified as text and named `newick_tree`. In a `phylo` object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to $n$ where $n$ is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes $n+1$ to $2n-1$. The assignment of the node numbers within these ranges is arbitrary, and there is no guarantee that the same nodes will ahve the same numbers each time the tree is read. The numbers of the nodes that were given when we created the `phylo` object from the newick text are shown in gray in Figure \@ref(fig:trees-newick).
 
 Below we take a quick peek inside the `phylo` object we created above. The intent isn't to learn how to manipulated trees in R quite yet, but to just show you how trees can be stored in computer memory. First, let's take a look at the structure of the `phylo` object to see what variables it contains within it:
 
@@ -1600,7 +1600,7 @@ Such a rate matrix describing the changes between 0-6 digits would have this for
 \end{array}\right)
 \end{equation}
 
-## Continuous data
+## Continuous data {#continuous-data}
 
 Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate, can take values across a continuous range of real numbers. In phylogenetics, these traits are typically grouped under the umbrella of continuous character data, since values can vary smoothly and intermediate values are possible between any two observations.
 
@@ -1722,9 +1722,186 @@ The use of character data and time calibrations to infer time calibrated phyloge
 
 While this can work well in some situations, there are several drawbacks to this method. In practice, it is also necessary to place maximum ages on some of the nodes to keep the time calibration from pushing everything way back in time. Given the incompleteness of the fossil record, this is not as straight forward as constraining the minimum age of a node. If we have a fossil we can assert that the clade that contains it can be no younger than that specimen, though it may be much older. But it is harder to assert a maximum age, given that we just might not have fossils for older organisms that existed in the clade. Applying maximum ages often relies on expertise and additional information, such as knowledge that a given land mass where the organisms are exclusively found did not exist before a particular time.
 
-Models known as the "fossilized birth–death" (FBD) process don't use fossils as external constraints on internal nodes, they instead include fossils right in the tree as their own tips [@heath2014calibration]. Unlike extant tips, which all have the same age (*i.e.*, today), the ages of these fossil tips are then constrained with geological data. This approach provides the ability to also include parameters for fossil preservation and sampling. FBD methods require that the character matrix includes data that can be scored in the fossils.
+Models known as the "fossilized birth–death" (FBD) process don't use fossils as external constraints on internal nodes, they instead include fossils right in the tree as their own tips [@heath2014calibration]. Unlike extant tips, which all have the same age (*i.e.*, today), the ages of these fossil tips are then constrained with geological data. This approach provides the ability to also include parameters for fossil preservation and sampling. FBD methods require that the character matrix includes data that can be scored in the fossils. The FBD process has since grown into a broad family of models with applications spanning paleobiology, macroevolution, and epidemiology; @wright2022integrating provide an accessible overview.
 
 <!--chapter:end:time.rmd-->
+
+# Ancestral character state reconstruction
+
+ We learned about models of evolution and how to run these models forward in time, from the root to the tips, to simulate the evolution of characters. In the chapters on inference, we used the same machinery to estimate the tree and model parameters that best explain the states we see at the tips. Here we turn to a different product of the same tools -- learning about the states of the characters at the internal nodes of the tree. Estimating these states is called ancestral character state reconstruction [@joy2016ancestral; @revell2025ancestral].
+
+Recall the framing from Chapter \@ref(intro). A phylogenetic analysis has several components -- the tree, the branch lengths, the model, the model parameters, the character states at the tips, and the character states at the ancestors. Different studies clamp some of these, estimate others, and then keep or discard the estimates depending on the question. Ancestral character state reconstruction is the case where the character states at the internal nodes are what we want to estimate and keep. To get them, we usually clamp the tree, the branch lengths, and the observed states at the tips, and then estimate the states at the ancestors.
+
+There are many applications of ancestral character state reconstruction, and learning about long-dead ancestors has long been a central goal of evolutionary biology [@pagel1999inferring]. These methods can seem like a time machine -- they can give us a glimpse into the past, indicating the color of a flower, the presence of a limb, or the body size of an organism that lived tens of millions of years ago and left no direct record. It is one of the most evocative things we can do with a phylogeny, and also one of the easiest to misuse. A reconstruction is not an observation but an estimate, only as good as the model and data behind it, and we take up the cautions that come with that at the end of the chapter.
+
+## Reconstructing discrete characters
+
+We already have all of the machinery we need to reconstruct discrete ancestral states under a model of evolution. In the chapters on simulation and inference we described the evolution of a discrete character with a rate matrix $\mathbf{Q}$, and we saw that the probability of moving from one state to another along a branch of length $t$ is given by the matrix exponential $\mathbf{P}(t) = e^{\mathbf{Q}t}$ (Equation \@ref(eq:jc69-prob)). The same model that let us simulate data and compute the likelihood of a tree also lets us compute the probability of each state at each internal node.
+
+The simplest Markovian model for a discrete character with $k$ states is the Mk model, a direct generalization of the Jukes-Cantor model to $k$ states in which all changes occur at the same rate. Just as with DNA models, we can relax this assumption to allow different rates for different transitions.
+
+There are two distinct questions we might ask about the ancestral states, and it is important to keep them separate. The first is the *marginal* reconstruction -- for a single node, what is the probability of each possible state, averaging over all possible states at every other internal node? The second is the *joint* reconstruction -- what is the single most probable assignment of states to *all* internal nodes considered together? The marginal reconstruction is the more commonly reported, because it gives us a probability for each state at each node, and therefore an explicit measure of uncertainty. It is the one we focus on here.
+
+To see how these probabilities are actually computed, recall how we found the likelihood of a tree in the chapter on inference. We listed every possible combination of states at the internal nodes -- every possible history that could connect the observed tips -- and computed the probability of each one as the product of the per-branch transition probabilities from $\mathbf{P}(t) = e^{\mathbf{Q}t}$ (Equation \@ref(eq:prob)) together with the frequency of the state at the root. Summing over all of those histories gave the likelihood of the observed tip states.
+
+Marginal reconstruction reuses exactly that calculation. To find the probability that one particular internal node is in a given state, we add up the probabilities of just those histories in which that node holds that state, and divide by the sum over all histories. Repeating this for each possible state gives the set of probabilities we draw as the pie at that node. Because every history threads from the root, through the node, and out to the tips, this ratio automatically folds in the states of the descendants below the node, the states elsewhere in the tree, and the branch lengths on every side. That is why a node flanked by short branches leading to tips that agree is reconstructed sharply, while one reached only across long branches is pulled toward an uninformative, near-even split.
+
+Listing every history is only feasible on very small trees. In practice the same sums are obtained efficiently by a two-pass traversal of the tree -- a downpass that gathers information from each node's descendants and an uppass that gathers it from the rest of the tree -- but the quantity being computed is precisely the ratio just described. The *joint* reconstruction asks a different question of the same histories: rather than summing, it picks out the single assignment of states to all internal nodes at once that has the highest probability.
+
+![(\#fig:ancestral-discrete)Marginal ancestral state reconstruction of a binary character under an equal-rates Mk model. Tips are scored as present (black) or absent (white). Each pie at an internal node shows the estimated probability of each state at that node. Nodes near well-sampled clusters of tips are reconstructed with high confidence, while deeper nodes are more uncertain.](phylogenetic_biology_files/figure-latex/ancestral-discrete-1.pdf) 
+
+Figure \@ref(fig:ancestral-discrete) shows a reconstruction of this kind for a small binary character. Note that the reconstruction is not a set of hard assignments but a set of probabilities, drawn here as pie charts at each node. Nodes that sit just above a cluster of tips that agree with each other are reconstructed with high confidence. Deeper nodes, where the descendant tips disagree and long branches allow ample opportunity for change, are reconstructed with much more uncertainty. Those uncertain pies are a feature, not a nuisance. They are the model honestly telling us that the data do not strongly favor one state over another.
+
+The reconstruction depends on the model. If we had allowed the rate of gains to differ from the rate of losses, or fit a model in which one state is much harder to leave than another, the reconstructed probabilities at the internal nodes could shift substantially. This is why model selection, discussed in the chapter on evaluating models, matters as much here as it does in phylogenetic inference.
+
+## Reconstructing continuous characters
+
+For continuous characters we reconstruct ancestral states under a continuous model of evolution, most often the Brownian motion model introduced in Section \@ref(continuous-data). Recall that under Brownian motion the expected change along a branch is zero, and the variance of the change grows in proportion to the branch length. The observed trait values at the tips of the tree follow a multivariate normal distribution whose covariance structure is set by the shared branch lengths of the tree.
+
+Under Brownian motion the maximum likelihood estimate of the trait value at an internal node has a satisfying intuition. It is a weighted average of the values in the two subtrees descending from the node, where the weights are inversely proportional to the branch lengths (including the variance accumulated deeper in each subtree). A descendant reached by a short branch is a more reliable guide to the ancestor than one reached by a long branch, and so it counts for more in the average. The reconstructed value at the root is a weighted average of the entire tree.
+
+Concretely, the estimate is built up from the tips toward the root by the same kind of pruning we used for the discrete case. Summarize each tip by its observed value and a variance equal to its branch length (in units of the rate $\sigma^2$). At an internal node joining two descendants that carry estimates $\hat{x}_i$ and $\hat{x}_j$ with variances $v_i$ and $v_j$, combine them by inverse-variance weighting,
+
+\begin{equation}
+\hat{x} = \frac{\hat{x}_i / v_i + \hat{x}_j / v_j}{1 / v_i + 1 / v_j},
+(\#eq:anc-bm)
+\end{equation}
+
+so that the descendant reached by the shorter, lower-variance branch pulls the estimate more strongly toward itself. The combined estimate carries its own variance, $1 / (1/v_i + 1/v_j)$, to which we add the node's branch length before passing it further toward the root. Sweeping all the way to the root yields its maximum likelihood estimate together with the variance that becomes its confidence interval. The estimate at any other internal node follows from the same rule applied on both sides of the node -- equivalently, from re-rooting the tree at that node and reading off the new root estimate -- so it reflects the descendants below and the rest of the tree above in the same inverse-variance way.
+
+![(\#fig:ancestral-continuous)Maximum likelihood reconstruction of a continuous character evolving under Brownian motion. A grayscale gradient (light = low, dark = high) maps trait values along the branches, interpolating between the estimated ancestral values at the nodes and the observed values at the tips. The reconstruction is a smooth, branch-length-weighted interpolation, and estimates at deep nodes are pulled toward the overall mean of the tree.](phylogenetic_biology_files/figure-latex/ancestral-continuous-1.pdf) 
+
+Figure \@ref(fig:ancestral-continuous) shows a continuous reconstruction, with the estimated trait value mapped as a grayscale gradient along the branches of the tree. Because the reconstruction at each node is an average of its descendants, the reconstructed values are smoother and less extreme than the tip values. Deep nodes in particular are pulled toward the middle of the observed range. This is a direct consequence of the model. Brownian motion has no memory of direction and no tendency toward any particular value, so in the absence of information the best guess for an ancestor is the average of its descendants.
+
+Just as with discrete characters, we can quantify the uncertainty in these estimates, and the same pruning that produces each estimate also produces its variance. That variance -- the $1 / (1/v_i + 1/v_j)$ term we tracked up the tree in Equation \@ref(eq:anc-bm) -- is small when a node is pinned down by short branches to informative tips and large when the node is reachable only across long branches. Multiplying it by the estimated diffusion rate $\sigma^2$ gives the variance of the estimate itself, and because trait values are normally distributed under Brownian motion, an approximate 95% confidence interval is the estimate plus or minus about two standard errors (twice the square root of that variance). Interval width therefore grows for nodes that are deeper in the tree and further from the observed tips, whose estimates pool information across longer, higher-variance paths. The reconstruction at the root is often accompanied by a strikingly wide interval, which again is the model being honest -- a single trait diffusing randomly for a long time tells us very little about where it started.
+
+## Cautions and limitations
+
+Reconstructions are only as good as the model. Every reconstructed state is conditional on the model of evolution we assumed, the tree we clamped, and the branch lengths we used. Change the model and the reconstruction can change, and reconstructions can be strikingly sensitive to this -- a badly misspecified model can yield confident but wrong ancestral states [@revell2025ancestral]. A reconstruction is best understood as a statement of the form "if the character evolved like this, on this tree, then the ancestor probably looked like this."
+
+Uncertainty grows with depth. Both the discrete pies and the continuous confidence intervals tend to become less informative as we move away from the tips and toward the root. Deep ancestral states, which are often the ones we most want to know, are frequently the ones we can say the least about.
+
+Time-reversible models cannot detect directional trends. Many standard models, including Brownian motion and the reversible substitution models, are symmetric with respect to the direction of change. If a trait actually evolved with a consistent directional bias -- say, a lineage-wide trend toward larger body size -- a reversible model applied only to the surviving tips can be systematically misled about ancestral values [@schluter1997likelihood]. Fossil data, when available, can constrain reconstructions in ways that living tips alone cannot.
+
+<!--chapter:end:ancestral.rmd-->
+
+# Comparative methods
+
+In the previous chapter we used the tree to look back in time and estimate the states of ancestors. Here we use the tree for a different purpose: rather than reconstructing particular historical states, we ask general questions about how traits evolve. This is the domain of phylogenetic comparative methods, one of the largest and fastest growing areas of phylogenetic biology (Chapter \@ref(intro)). Its questions are wide-ranging, including whether two traits tend to change together, whether the rate of evolution differs across the tree, whether a trait is drawn toward some optimum, and many more topics. This chapter concentrates on the first and most common of them, the evolutionary correlation between two traits.
+
+A recurring theme of phylogenetic comparative biology is that we cannot treat the tips of a tree as independent observations. Species are connected by a shared evolutionary history, and that history leaves a very specific statistical imprint on their trait values. Ignoring it leads to wrong conclusions and limits what questiosns can even be asked.
+
+## Species are not independent observations
+
+Suppose we measure two traits across a set of species, say body mass and metabolic rate, and we want to know whether they tend to evolve together. The naive approach is to treat each species as an independent data point, plot one trait against the other, and fit an ordinary regression. This is exactly what we would do with independent samples in an introductory statistics course.
+
+The problem is that species are not independent samples. Two species that diverged from a common ancestor a short time ago have had very little time to evolve apart, and so they tend to resemble each other on essentially every trait, simply because they inherited most of their features from that recent common ancestor. Two species whose lineages separated hundreds of millions of years ago have had far more opportunity to diverge. The tree tells us how much shared history each pair of species has, and therefore how much we should expect them to resemble one another before we invoke any relationship between the traits themselves.
+
+This was the central insight of a landmark paper by Joe Felsenstein [@felsenstein1985phylogenies]. If we ignore the tree, we are effectively counting closely related species as if they were independent replicates, when in reality they are close to being a single replicate observed several times. Our sample size is inflated, our confidence intervals are too narrow, and we will routinely find "significant" relationships that are nothing more than the shadow of shared ancestry.
+
+### A simulation of the problem
+
+We can see the problem directly by simulating traits that we know are not evolutionarily related, and then asking what an analysis that ignores the tree would conclude. To do this we need two trees that share the same tips but differ in how much history those tips share.
+
+
+
+![(\#fig:comp-two-trees)Two trees with the same sixteen tips, each scaled to the same root age. (A) A star tree, in which all of the evolutionary change happens on the terminal branches, so the tips share essentially no history. (B) A tree with deep structure, in which most of the change is shared along internal branches, so closely related tips share most of their history.](phylogenetic_biology_files/figure-latex/comp-two-trees-1.pdf) 
+
+Figure \@ref(fig:comp-two-trees) shows two trees over the same sixteen tips. In the star tree, every lineage descends independently from the root, so no two tips share any history beyond the root itself. In the tree with deep structure, most of the branch length is internal and shared, so sister tips are nearly identical by inheritance.
+
+Now we simulate two traits on each tree under Brownian motion (Section \@ref(continuous-data)), with no evolutionary covariance between them. Any apparent relationship between the two traits at the tips must therefore be an artifact of the tree, not a real association.
+
+![(\#fig:comp-independence)Two traits simulated independently under Brownian motion, with no evolutionary covariance between them, shown at the tips of the star tree and the deep tree. On the star tree the tips form an uncorrelated cloud, as they should for independent traits. On the deep tree, closely related tips (adjacent letters) cluster together, and this clustering can produce a strong apparent relationship between the two traits even though none exists.](phylogenetic_biology_files/figure-latex/comp-independence-1.pdf) 
+
+Figure \@ref(fig:comp-independence) shows the result. On the star tree, where the tips share no history, the two independent traits form the uncorrelated cloud we would expect. On the deep tree, sister tips (adjacent letters, such as A and B, or O and P) cluster tightly together in both traits at once, because they inherited both trait values from a recent common ancestor. These clusters can line up to suggest a strong relationship between the two traits even though we simulated them to be completely independent. An ordinary regression on the deep-tree tips, treating each species as an independent point, would happily report a relationship that does not exist. This is the phenomenon Felsenstein warned about, and it is why we need methods that account for the tree.
+
+## Phylogenetic independent contrasts
+
+Felsenstein's own solution to the problem was elegant, and it remains one of the clearest ways to understand and apply phylogenetic comparative methods [@felsenstein1985phylogenies]. Rather than write the non-independence down and correct for it all at once, he worked directly on the tree, from the tips toward the root, re-expressing the correlated tip values as a set of quantities that are independent under Brownian motion. The method builds on the ancestral character state reconstruction of the previous chapter.
+
+Consider two lineages, $i$ and $j$, that descend from the same node, with observed trait values $x_i$ and $x_j$ and branch lengths $v_i$ and $v_j$. Their *contrast* is the standardized difference between them:
+
+\begin{equation}
+c = \frac{x_i - x_j}{\sqrt{v_i + v_j}}
+(\#eq:comp-contrast)
+\end{equation}
+
+The numerator, $x_i - x_j$, is the key. Because both lineages inherited the same value from their shared ancestor, that ancestral value cancels in the difference, leaving only the independent evolution that happened along the two branches since they diverged. The denominator standardizes the contrast: under Brownian motion the variance of the difference is proportional to $v_i + v_j$, so dividing by $\sqrt{v_i + v_j}$ puts contrasts taken across short branches and long branches on a common scale. The standardized contrasts then all have the same variance, and they are independent of one another.
+
+Having taken the contrast at a node, Felsenstein pruned the two descendants from the tree and replaced them with their ancestor. He estimated the ancestor's trait value as the inverse-branch-length-weighted average of its two descendants, $(x_i/v_i + x_j/v_j)/(1/v_i + 1/v_j)$ -- the closer descendant counting for more -- which is exactly the Brownian-motion ancestral state estimate (Equation \@ref(eq:anc-bm)). Because that ancestor is now an estimate rather than an observation, its own branch is lengthened slightly, by $v_i v_j / (v_i + v_j)$, to carry the extra uncertainty forward. With the pair collapsed to a single reconstructed tip, the same operation applies at the next node down, and so on until the root.
+
+A rooted tree with $n$ tips has $n-1$ internal nodes and therefore yields $n-1$ contrasts, one fewer than the number of species. This is the appropriate sample size for an evolutionary question. It reflects the number of independent opportunities for change on the tree, rather than the number of species, which overcounts because of shared ancestry.
+
+To test whether two traits are evolutionarily related, we compute the contrasts for each trait separately and examine the relationship between the two sets. Because the contrasts are independent, an ordinary regression of one set on the other is now valid. By convention it is fit through the origin: the direction in which we happen to subtract each pair of descendants is arbitrary, so a contrast and its negative are equally valid, and only a line through the origin respects that symmetry.
+
+![(\#fig:comp-pic)Phylogenetic independent contrasts for two traits, computed on a tree with strong structure. Each point is a contrast at one internal node, comparing the two lineages that descend from it. Because the contrasts are independent under Brownian motion, an ordinary regression through the origin (dashed line) is a valid test of whether the two traits are evolutionarily related.](phylogenetic_biology_files/figure-latex/comp-pic-1.pdf) 
+
+Figure \@ref(fig:comp-pic) shows contrasts for two traits that were simulated with a genuine evolutionary covariance between them. Here the relationship in the contrasts is real, and the regression through the origin recovers it. The same procedure applied to the independent traits of Figure \@ref(fig:comp-independence) would show no such relationship, because the shared ancestry that produced the spurious clustering has been differenced away.
+
+## The expected covariance structure
+
+Independent contrasts handle shared history by transforming the correlated tip values into a set of contrasts that are independent under Brownian motion. There is another, complementary perspective. Instead of transforming the data to independence, it describes the shared history explicitly, as a covariance matrix among the tips.
+
+Under Brownian motion, the trait values at the tips of a tree follow a multivariate normal distribution. The mean of that distribution is the root state, and the covariance between any two tips is proportional to the amount of evolutionary time they share, *i.e.* the distance from the root to their most recent common ancestor. This is intuitive: two tips accumulate the same random changes along every branch they share, and independent changes only after they diverge, so the more history they share, the more their trait values covary. A tip shares its entire root-to-tip path with itself, so its variance (its covariance with itself) is proportional to its total distance from the root.
+
+We can read this expected covariance structure directly off the tree. Consider the small four-tip tree in Figure \@ref(fig:comp-vcv-tree), drawn with its branch lengths.
+
+![(\#fig:comp-vcv-tree)A four-tip tree drawn with its branch lengths; the horizontal axis is distance from the root. The covariance between two tips is the distance from the root to their most recent common ancestor -- the depth of the internal node (gray) at which their lineages join. Sisters A and B join at the deeper node (distance 2), A and C (and B and C) join at the older node (distance 1), and D joins the others only at the root (distance 0). The variance of each tip is its total distance from the root, here 3 for every tip because the tree is ultrametric. These depths are exactly the entries of the covariance matrix in Equation \@ref(eq:comp-vcv).](phylogenetic_biology_files/figure-latex/comp-vcv-tree-1.pdf) 
+
+To turn this tree into a matrix, we take the tips two at a time and measure how much evolutionary history each pair shares. There are two kinds of entry. A *diagonal* entry is the variance of a single tip, and equals its total distance from the root -- the full length of the path from the root out to that tip. An *off-diagonal* entry is the covariance between two different tips, and equals the length of the path they share: the distance from the root to their most recent common ancestor, the node at which their two lineages join.
+
+Working through the tips of Figure \@ref(fig:comp-vcv-tree):
+
+- Every tip sits at distance 3 from the root, so every diagonal entry, the variance, is 3.
+- A and B are sisters. Their lineages join at the deeper internal node, at distance 2 from the root, so the path they share -- and therefore their covariance -- is 2.
+- A and C join further back, at the older internal node at distance 1 from the root, so their covariance is 1. The same holds for B and C.
+- D branches off at the root itself, so it shares no path with A, B, or C, and all of its covariances are 0.
+
+Collecting these values gives the phylogenetic variance-covariance matrix. We will call it $\boldsymbol{\Sigma}$, a symbol kept deliberately distinct from the tip names, with one row and one column for each tip:
+
+\begin{equation}
+\boldsymbol{\Sigma} =
+\begin{array}{cc}
+ & \begin{array}{cccc} A & B & C & D \end{array} \\
+\begin{array}{c} A \\ B \\ C \\ D \end{array} &
+\left(\begin{array}{cccc}
+3 & 2 & 1 & 0\\
+2 & 3 & 1 & 0\\
+1 & 1 & 3 & 0\\
+0 & 0 & 0 & 3
+\end{array}\right)
+\end{array}
+(\#eq:comp-vcv)
+\end{equation}
+
+The diagonal, running from top left to bottom right, holds the variances, all equal here because the tree is ultrametric. Every other entry is a covariance, and the pattern of large and small values mirrors the tree: closely related tips such as A and B share a great deal of history and have a large covariance, while the distantly attached D shares none and has covariances of zero. Reading down the row for D, or across its column, gives all zeros. This matrix is a complete description of the non-independence induced by the tree, and it is exactly what the next method takes as its input.
+
+## Phylogenetic generalized least squares
+
+Independent contrasts turn out to be one instance of a more general and flexible framework. That framework is phylogenetic generalized least squares, abbreviated PGLS [@grafen1989phylogenetic; @symonds2014primer].
+
+Ordinary least squares regression assumes that the residuals, the deviations of the data from the fitted line, are independent and identically distributed. Generalized least squares relaxes this assumption by allowing the residuals to have a specified covariance structure. And we have just built exactly such a structure: the phylogenetic variance-covariance matrix $\boldsymbol{\Sigma}$ of Equation \@ref(eq:comp-vcv). In PGLS we fit a regression in which the residuals are assumed to covary according to $\boldsymbol{\Sigma}$. The method effectively down-weights the contribution of species that share a great deal of history, so that a cluster of closely related species counts for less than the same number of independent lineages.
+
+
+```
+     pgls_slope contrasts_slope 
+      0.7384165       0.7384165 
+```
+
+Independent contrasts are the special case of PGLS in which the covariance structure $\boldsymbol{\Sigma}$ is the one implied by Brownian motion. For that model the two methods are mathematically equivalent: the slope from the PGLS regression is identical to the slope from regressing the contrasts through the origin. Felsenstein's node-by-node pruning and the matrix-based regression are two routes to the same estimate.
+
+Because PGLS is more genral, it has become the more widely used of the two. Because it is expressed as a regression with a specified covariance structure, it accommodates things that are awkward under the contrasts formulation. We can include multiple predictors, categorical variables, and continuous covariates in the same model. More importantly, we can change the assumed covariance structure to reflect a different model of evolution. If we think the trait evolves under an Ornstein-Uhlenbeck process (Section \@ref(continuous-data)) rather than pure Brownian motion, we substitute the covariance structure implied by that model. The tree still supplies the non-independence, but we now have a whole family of models describing how that non-independence accumulates.
+
+It is worth being precise about what these methods do, because they are easily misdescribed [@uyeda2018rethinking]. It is common to say that they "remove the phylogenetic signal" or "correct for the fact that species are not independent," but neither phrasing is quite right. Ordinary regression does not assume that the observations themselves are independent; it assumes that the *residuals* -- the part of one trait left unexplained by the other -- are independent. What independent contrasts and PGLS do is account for the covariance of those residuals, and they discard no biological signal in doing so; the contrasts are themselves the evolutionary changes. A subtler and more important caution is that correctly accounting for shared history does not, by itself, show that two traits are causally related. A single unreplicated event -- one ancient branch on which both traits happened to shift -- can produce a strongly significant contrast or PGLS slope even when nothing connects the traits, and neither method guards against this. Shared history is not just a statistical nuisance to be swept away.
+
+## Beyond correlated evolution
+
+Testing for correlated evolution between two traits is the most common comparative analysis, and it is where the core ideas are clearest, but it is far from the only question comparative methods can address [@harmon2018phylogenetic]. The same framework of an explicit evolutionary model on a fixed tree supports a much broader set of investigations.
+
+We can ask whether the rate of evolution itself varies across the tree, for example whether a particular clade diversified in a trait much faster than its relatives. We can ask whether a trait is subject to stabilizing selection toward an optimum, using the Ornstein-Uhlenbeck model, and whether different parts of the tree are drawn toward different optima. We can fit and compare these competing models using the model evaluation tools developed earlier in the book, asking which model of trait evolution the data support. In every case the logic is the one we have built up here: specify a model of how the trait evolves, use the tree to describe the resulting non-independence among species, and then estimate parameters or compare models in that light.
+
+
+<!--chapter:end:comparative.rmd-->
 
 # (APPENDIX) Appendix {-} 
 
@@ -1786,7 +1963,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 05, 2026 at 02:44:04 PM with the following R package versions.
+This book was rendered from the source code on Jul 05, 2026 at 10:36:04 PM with the following R package versions.
 
 
 ```
@@ -1814,14 +1991,15 @@ attached base packages:
 [6] methods   base     
 
 other attached packages:
- [1] scales_1.4.0     ggrepel_0.9.6    kableExtra_1.4.0
- [4] phangorn_2.12.1  Matrix_1.7-3     lubridate_1.9.4 
- [7] forcats_1.0.1    dplyr_1.1.4      purrr_1.1.0     
-[10] readr_2.1.5      tidyr_1.3.1      tibble_3.3.0    
-[13] ggplot2_4.0.0    tidyverse_2.0.0  stringr_1.5.2   
-[16] magrittr_2.0.4   gridExtra_2.3    geiger_2.0.11   
-[19] phytools_2.5-2   maps_3.4.3       ape_5.8-1       
-[22] ggtree_4.0.4     treeio_1.34.0    renv_1.1.8      
+ [1] nlme_3.1-168     scales_1.4.0     ggrepel_0.9.6   
+ [4] kableExtra_1.4.0 phangorn_2.12.1  Matrix_1.7-3    
+ [7] lubridate_1.9.4  forcats_1.0.1    dplyr_1.1.4     
+[10] purrr_1.1.0      readr_2.1.5      tidyr_1.3.1     
+[13] tibble_3.3.0     ggplot2_4.0.0    tidyverse_2.0.0 
+[16] stringr_1.5.2    magrittr_2.0.4   gridExtra_2.3   
+[19] geiger_2.0.11    phytools_2.5-2   maps_3.4.3      
+[22] ape_5.8-1        ggtree_4.0.4     treeio_1.34.0   
+[25] renv_1.1.8      
 
 loaded via a namespace (and not attached):
  [1] mnormt_2.1.1            rlang_1.1.6            
@@ -1834,41 +2012,42 @@ loaded via a namespace (and not attached):
 [15] subplex_1.9             deSolve_1.40           
 [17] rmarkdown_2.30          tzdb_0.5.0             
 [19] bit_4.6.0               tinytex_0.57           
-[21] xfun_0.53               aplot_0.2.9            
-[23] clusterGeneration_1.3.8 jsonlite_2.0.0         
-[25] parallel_4.5.1          R6_2.6.1               
-[27] stringi_1.8.7           RColorBrewer_1.1-3     
-[29] numDeriv_2016.8-1.1     Rcpp_1.1.0             
-[31] bookdown_0.45           iterators_1.0.14       
-[33] knitr_1.50              optimParallel_1.0-2    
-[35] splines_4.5.1           igraph_2.2.1           
-[37] timechange_0.3.0        tidyselect_1.2.1       
-[39] rstudioapi_0.17.1       yaml_2.3.10            
-[41] doParallel_1.0.17       codetools_0.2-20       
-[43] lattice_0.22-7          withr_3.0.2            
-[45] S7_0.2.0                coda_0.19-4.1          
-[47] evaluate_1.0.5          ggimage_0.3.5          
-[49] gridGraphics_0.5-1      xml2_1.4.1             
-[51] pillar_1.11.1           foreach_1.5.2          
-[53] ggfun_0.2.0             generics_0.1.4         
-[55] vroom_1.6.6             hms_1.1.4              
-[57] tidytree_0.4.6          glue_1.8.0             
-[59] gdtools_0.4.4           scatterplot3d_0.3-44   
-[61] lazyeval_0.2.2          tools_4.5.1            
-[63] ggiraph_0.9.2           fs_1.6.6               
-[65] mvtnorm_1.3-3           fastmatch_1.1-6        
-[67] grid_4.5.1              nlme_3.1-168           
-[69] patchwork_1.3.2         cli_3.6.5              
-[71] rappdirs_0.3.3          DEoptim_2.2-8          
-[73] textshaping_1.0.4       fontBitstreamVera_0.1.1
-[75] expm_1.0-0              viridisLite_0.4.2      
-[77] svglite_2.2.2           gtable_0.3.6           
-[79] yulab.utils_0.2.1       digest_0.6.37          
-[81] fontquiver_0.2.1        ggplotify_0.1.3        
-[83] htmlwidgets_1.6.4       farver_2.1.2           
-[85] htmltools_0.5.8.1       lifecycle_1.0.4        
-[87] fontLiberation_0.1.0    bit64_4.6.0-1          
-[89] MASS_7.3-65            
+[21] xfun_0.53               cachem_1.1.0           
+[23] aplot_0.2.9             clusterGeneration_1.3.8
+[25] jsonlite_2.0.0          parallel_4.5.1         
+[27] R6_2.6.1                bslib_0.9.0            
+[29] stringi_1.8.7           RColorBrewer_1.1-3     
+[31] jquerylib_0.1.4         numDeriv_2016.8-1.1    
+[33] Rcpp_1.1.0              bookdown_0.45          
+[35] iterators_1.0.14        knitr_1.50             
+[37] optimParallel_1.0-2     splines_4.5.1          
+[39] igraph_2.2.1            timechange_0.3.0       
+[41] tidyselect_1.2.1        rstudioapi_0.17.1      
+[43] yaml_2.3.10             doParallel_1.0.17      
+[45] codetools_0.2-20        lattice_0.22-7         
+[47] withr_3.0.2             S7_0.2.0               
+[49] coda_0.19-4.1           evaluate_1.0.5         
+[51] ggimage_0.3.5           gridGraphics_0.5-1     
+[53] xml2_1.4.1              pillar_1.11.1          
+[55] foreach_1.5.2           ggfun_0.2.0            
+[57] generics_0.1.4          vroom_1.6.6            
+[59] hms_1.1.4               tidytree_0.4.6         
+[61] glue_1.8.0              gdtools_0.4.4          
+[63] scatterplot3d_0.3-44    lazyeval_0.2.2         
+[65] tools_4.5.1             ggiraph_0.9.2          
+[67] fs_1.6.6                mvtnorm_1.3-3          
+[69] fastmatch_1.1-6         grid_4.5.1             
+[71] patchwork_1.3.2         cli_3.6.5              
+[73] rappdirs_0.3.3          DEoptim_2.2-8          
+[75] textshaping_1.0.4       fontBitstreamVera_0.1.1
+[77] expm_1.0-0              viridisLite_0.4.2      
+[79] svglite_2.2.2           gtable_0.3.6           
+[81] yulab.utils_0.2.1       sass_0.4.10            
+[83] digest_0.6.37           fontquiver_0.2.1       
+[85] ggplotify_0.1.3         htmlwidgets_1.6.4      
+[87] farver_2.1.2            htmltools_0.5.8.1      
+[89] lifecycle_1.0.4         fontLiberation_0.1.0   
+[91] bit64_4.6.0-1           MASS_7.3-65            
 ```
 
 <!--chapter:end:versions.rmd-->

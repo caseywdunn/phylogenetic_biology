@@ -17,9 +17,9 @@ rmd_files: [
   "bayes.rmd",
   "character_types.rmd",
   "time.rmd",
-#  "ancestral.rmd",
-#  "comparative.rmd",
-  
+  "ancestral.rmd",
+  "comparative.rmd",
+
   "appendix.rmd",
   "stats.rmd",
   "versions.rmd",

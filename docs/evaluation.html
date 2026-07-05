@@ -52,8 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -293,6 +291,23 @@ div.csl-indent {
 <li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration-in-practice"><i class="fa fa-check"></i><b>9.3.1</b> Time calibration in practice</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="10" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>10</b> Ancestral character state reconstruction</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#reconstructing-discrete-characters"><i class="fa fa-check"></i><b>10.1</b> Reconstructing discrete characters</a></li>
+<li class="chapter" data-level="10.2" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#reconstructing-continuous-characters"><i class="fa fa-check"></i><b>10.2</b> Reconstructing continuous characters</a></li>
+<li class="chapter" data-level="10.3" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#cautions-and-limitations"><i class="fa fa-check"></i><b>10.3</b> Cautions and limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>11</b> Comparative methods</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="comparative-methods.html"><a href="comparative-methods.html#species-are-not-independent-observations"><i class="fa fa-check"></i><b>11.1</b> Species are not independent observations</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="comparative-methods.html"><a href="comparative-methods.html#a-simulation-of-the-problem"><i class="fa fa-check"></i><b>11.1.1</b> A simulation of the problem</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>11.2</b> Phylogenetic independent contrasts</a></li>
+<li class="chapter" data-level="11.3" data-path="comparative-methods.html"><a href="comparative-methods.html#the-expected-covariance-structure"><i class="fa fa-check"></i><b>11.3</b> The expected covariance structure</a></li>
+<li class="chapter" data-level="11.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-generalized-least-squares"><i class="fa fa-check"></i><b>11.4</b> Phylogenetic generalized least squares</a></li>
+<li class="chapter" data-level="11.5" data-path="comparative-methods.html"><a href="comparative-methods.html#beyond-correlated-evolution"><i class="fa fa-check"></i><b>11.5</b> Beyond correlated evolution</a></li>
+</ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
 <ul>
@@ -418,7 +433,7 @@ Figure 6.2: Four phylogenies in a sample, one focal phylogeny, and a table of sp
 </div>
 <div id="bootstrapping" class="section level3 hasAnchor" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Bootstrapping<a href="evaluation.html#bootstrapping" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap <span class="citation">(<a href="#ref-felsenstein1985confidence">Felsenstein 1985</a>)</span>. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with <span class="math inline">\(n\)</span> columns, bootstrapping generates a new matrix, also with <span class="math inline">\(n\)</span> columns, by resampling from the the original matrix with replacement. Some columns from the original matrix won’t be sampled at all, some will be sampled once, and some will be sampled multiple times.</p>
+<p>The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap <span class="citation">(<a href="#ref-felsenstein1985confidence">Felsenstein 1985a</a>)</span>. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with <span class="math inline">\(n\)</span> columns, bootstrapping generates a new matrix, also with <span class="math inline">\(n\)</span> columns, by resampling from the the original matrix with replacement. Some columns from the original matrix won’t be sampled at all, some will be sampled once, and some will be sampled multiple times.</p>
 <p>Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated form the original data matrix) in the sample of bootstrap phylogenies. A branch frequency of 100% indicates that a branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.</p>
 <p>Note that I am not using the term “significance” when referring to bootstrap support. This is because bootstraps don’t have a clear statistical interpretation. It is a scale that varies from <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span>, but is not itself a significance. It just indicates how frequently a branch is recovered when the data columns are resampled. This gives a sense of how broad support is for the branch across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.</p>
 <p>Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process.</p>
@@ -439,7 +454,7 @@ Burnham, KP, and DR Anderson. 2002. <em>Model Selection and Multimodel Inference
 Czech, Lucas, Jaime Huerta-Cepas, and Alexandros Stamatakis. 2017. <span>“<span class="nocase">A Critical Review on the Use of Support Values in Tree Viewers and Bioinformatics Toolkits</span>.”</span> <em>Molecular Biology and Evolution</em> 34 (6): 1535–42. <a href="https://doi.org/10.1093/molbev/msx055">https://doi.org/10.1093/molbev/msx055</a>.
 </div>
 <div id="ref-felsenstein1985confidence" class="csl-entry">
-Felsenstein, Joseph. 1985. <span>“Confidence Limits on Phylogenies: An Approach Using the Bootstrap.”</span> <em>Evolution</em> 39 (4): 783–91. <a href="https://doi.org/10.1111/j.1558-5646.1985.tb00420.x">https://doi.org/10.1111/j.1558-5646.1985.tb00420.x</a>.
+Felsenstein, Joseph. 1985a. <span>“Confidence Limits on Phylogenies: An Approach Using the Bootstrap.”</span> <em>Evolution</em> 39 (4): 783–91. <a href="https://doi.org/10.1111/j.1558-5646.1985.tb00420.x">https://doi.org/10.1111/j.1558-5646.1985.tb00420.x</a>.
 </div>
 <div id="ref-Goldman2000" class="csl-entry">
 Goldman, Nick, Jon P. Anderson, and Allen G. Rodrigo. 2000. <span>“Likelihood-Based Tests of Topologies in Phylogenetics.”</span> <em>Systematic Biology</em> 49 (4): 652–70. <a href="https://doi.org/10.1080/106351500750049752">https://doi.org/10.1080/106351500750049752</a>.

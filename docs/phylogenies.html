@@ -52,8 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -292,6 +290,23 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration-in-practice"><i class="fa fa-check"></i><b>9.3.1</b> Time calibration in practice</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>10</b> Ancestral character state reconstruction</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#reconstructing-discrete-characters"><i class="fa fa-check"></i><b>10.1</b> Reconstructing discrete characters</a></li>
+<li class="chapter" data-level="10.2" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#reconstructing-continuous-characters"><i class="fa fa-check"></i><b>10.2</b> Reconstructing continuous characters</a></li>
+<li class="chapter" data-level="10.3" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#cautions-and-limitations"><i class="fa fa-check"></i><b>10.3</b> Cautions and limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>11</b> Comparative methods</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="comparative-methods.html"><a href="comparative-methods.html#species-are-not-independent-observations"><i class="fa fa-check"></i><b>11.1</b> Species are not independent observations</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="comparative-methods.html"><a href="comparative-methods.html#a-simulation-of-the-problem"><i class="fa fa-check"></i><b>11.1.1</b> A simulation of the problem</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>11.2</b> Phylogenetic independent contrasts</a></li>
+<li class="chapter" data-level="11.3" data-path="comparative-methods.html"><a href="comparative-methods.html#the-expected-covariance-structure"><i class="fa fa-check"></i><b>11.3</b> The expected covariance structure</a></li>
+<li class="chapter" data-level="11.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-generalized-least-squares"><i class="fa fa-check"></i><b>11.4</b> Phylogenetic generalized least squares</a></li>
+<li class="chapter" data-level="11.5" data-path="comparative-methods.html"><a href="comparative-methods.html#beyond-correlated-evolution"><i class="fa fa-check"></i><b>11.5</b> Beyond correlated evolution</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
@@ -545,7 +560,7 @@ a different type of representation, and then draw that. Most of the figures in t
 made using similar code.</p>
 <p>Considering just the newick specificaiton of the tree, <code>"(((A,B),(C,D)),E);"</code>, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, <code>(A,B)</code> and <code>(C,D)</code>. The next set of parentheses out indicates that these two clades together form a larger clade, <code>((A,B),(C,D))</code>. Finally, the outermost parentheses indicate that the clade <code>((A,B),(C,D))</code> is sister to <code>E</code>. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting <a href="https://evolution.genetics.washington.edu/phylip/newicktree.html">description and history</a> of the newick format, which includes details on how to store other types of information in the file format.</p>
 <p>As versatile and simple as newick is for storing trees in files, it isn’t great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, branches, and their annotations. This allows us to directly encode the information noted in the section <a href="phylogenies.html#the-information-contained-in-phylogenies">The information contained in phylogenies</a>, and to readily extend the data objects as needed.</p>
-<p>The most widely used format for storing phylogenies in the R programming language is as a <code>phylo</code> object from the excellent <code>ape</code> library <span class="citation">(<a href="#ref-R-ape"><span class="nocase">Paradis et al.</span> 2024</a>)</span>. The <code>read.tree()</code> function in the code block above creates a <code>phylo</code> object called <code>phylo_tree</code> based on the phylogeny we specified as text and named <code>newick_tree</code>. In a <code>phylo</code> object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to <span class="math inline">\(n\)</span> where <span class="math inline">\(n\)</span> is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes <span class="math inline">\(n+1\)</span> to <span class="math inline">\(2n-1\)</span>. The assignment of the node numbers within these ranges is arbitrary, and there is no guarantee that the same nodes will ahve the same numbers each time the tree is read. The numbers of the nodes that were given when we created the <code>phylo</code> object from the newick text are shown in red in Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>.</p>
+<p>The most widely used format for storing phylogenies in the R programming language is as a <code>phylo</code> object from the excellent <code>ape</code> library <span class="citation">(<a href="#ref-R-ape"><span class="nocase">Paradis et al.</span> 2024</a>)</span>. The <code>read.tree()</code> function in the code block above creates a <code>phylo</code> object called <code>phylo_tree</code> based on the phylogeny we specified as text and named <code>newick_tree</code>. In a <code>phylo</code> object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to <span class="math inline">\(n\)</span> where <span class="math inline">\(n\)</span> is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes <span class="math inline">\(n+1\)</span> to <span class="math inline">\(2n-1\)</span>. The assignment of the node numbers within these ranges is arbitrary, and there is no guarantee that the same nodes will ahve the same numbers each time the tree is read. The numbers of the nodes that were given when we created the <code>phylo</code> object from the newick text are shown in gray in Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>.</p>
 <p>Below we take a quick peek inside the <code>phylo</code> object we created above. The intent isn’t to learn how to manipulated trees in R quite yet, but to just show you how trees can be stored in computer memory. First, let’s take a look at the structure of the <code>phylo</code> object to see what variables it contains within it:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="phylogenies.html#cb2-1" tabindex="-1"></a><span class="fu">str</span>( phylo_tree )</span></code></pre></div>
 <pre><code>## List of 3
