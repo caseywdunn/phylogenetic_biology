@@ -89,8 +89,7 @@ frontpage_content <- sprintf('
 \\begin{center}
 
 \\emph{This book is dedicated to my sister Jenny Dunn, who has been there every step of the way.
-I am so grateful for her adventurous spirit, quick mind, and shared love of life.
-Thank you Jenny.}
+I am so grateful for her adventurous spirit, quick mind, and love of life.}
 
 \\end{center}
 
@@ -204,7 +203,7 @@ knitr::write_bib(c(
 
 Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative - they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
 
-This book is not a comprehensive treatment of phylogenetic biology, it is focused on teaching some of the key concepts and methods at the core of the field. This will provide a foundation for the many other rich areas of the field, from its interfaces with population genetics to comparative genomics to comparative methods at a macroevolutionary scale.
+This book is not a comprehensive treatment of phylogenetic biology, it is focused on teaching some of the key concepts and methods. This will provide a foundation for the many other rich areas of the field, from its interfaces with population genetics to comparative genomics to comparative methods at a macroevolutionary scale. It is in no way an overview of all of phylogenetic biology, which has grown into a very large field. Ommissions of topics do not imply that they are unimportant.
 
 ## Using this book
 
