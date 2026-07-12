@@ -1,8 +1,8 @@
 # Phylogenetic Biology
 
-This repository contains all the text, source code, and supporting material for the book *Phylogenetic Biology*, by [Casey Dunn](http://dunnlab.org/).
+This repository contains all the text, source code, and supporting material for the book *Phylogenetic Biology*, by [Casey Dunn](https://dunnlab.org/).
 
-The formatted book can be viewed at http://dunnlab.org/phylogenetic_biology/index.html .
+The formatted book can be viewed at https://dunnlab.org/phylogenetic_biology/index.html .
 
 Please submit any errors you find or suggestions you have via the issue tracker at https://github.com/caseywdunn/phylogenetic_biology/issues .
 

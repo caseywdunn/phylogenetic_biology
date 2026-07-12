@@ -179,7 +179,7 @@ the book; per-version DOIs are created automatically when a GitHub release is
 made.
 
 The digital (HTML and PDF) edition is not assigned an ISBN. The paperback and
-hardback each have their own ISBN, and both are printed on the copyright page so
+hardcover each have their own ISBN, and both are printed on the copyright page so
 the same interior files serve both formats. New ISBNs are assigned only at major
 versions.
 

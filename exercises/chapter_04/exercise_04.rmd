@@ -66,7 +66,7 @@ Now that you have done the computational heavy lifting on the cluster, you can m
 
 Of the files that `iqtree` generates, `siph16s.phy.treefile` is the actual phylogeny it inferred.
 
-> **_Problem 2:_** Knit this rmd document to view the phylogeny with the code below. Note that this file needs to be in the same directory as the files you downloaded from the cluster for this code to work. If you produce knitted output with a tree, and the html output file is in this folder, you have completed this problem.
+> **_Problem 2:_** Knit this rmd document to view the phylogeny with the code below. Note that this file needs to be in the same directory as the files you downloaded from the cluster for this code to work. If you produce knitted output with a tree, and the HTML output file is in this folder, you have completed this problem.
 
 ```{r fig.width=10, fig.height=14}
 

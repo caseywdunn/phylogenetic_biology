@@ -32,6 +32,8 @@ always_allow_html: true
 
 # Preface {-}
 
+
+
 ## Approach
 
 Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative - they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
@@ -62,7 +64,7 @@ Please submit any errors you find, typos, or suggestions that you have for impro
 
 You are currently reading the First Edition (Version 1.0.0) of the book. Please cite it as follows:
 
-> Dunn CW. Phylogenetic Biology. First Edition (Version 1.0.0). New Haven, CT: Casey W. Dunn; 2026. ISBN 979-8-9934524-0-1. doi:10.5281/zenodo.17267993
+> Dunn CW. Phylogenetic Biology. First Edition. New Haven, CT: Casey W. Dunn; 2026. ISBN 979-8-9934524-0-1. doi:10.5281/zenodo.17267993
 
 This book follows [semantic versioning](https://semver.org/) (major.minor.patch). The major version is the edition: a new edition marks a substantial revision and carries a new ISBN, minor versions add or revise content while keeping earlier citations valid, and patch versions make editorial corrections. The online edition at <https://dunnlab.org/phylogenetic_biology/> is updated continuously as new versions are released, while each released version is permanently archived on Zenodo through the DOI above.
 
@@ -110,7 +112,7 @@ The following books provide general computational background for the topics cove
 
 ## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online), 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation and feedback. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Other lab members provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access. I am also very grateful to the students and faculty of the Workshop on Molecular Evolution at Woods Hole.
+Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online), 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation and feedback. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Other lab members provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access. I am also very grateful to the students and faculty of the Workshop on Molecular Evolution at Woods Hole. Finally, I thank the artist James Prosek for generously allowing me to use his work *Moth Cluster IV* for the cover.
 
 
 
@@ -1960,7 +1962,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 12, 2026 at 03:45:15 PM with the following R package versions.
+This book was rendered from the source code on Jul 12, 2026 at 06:10:53 PM with the following R package versions.
 
 
 ```

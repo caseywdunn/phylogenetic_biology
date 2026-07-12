@@ -4,7 +4,7 @@ author: "Casey W. Dunn"
 version: 1.0.0
 major_edition_year: 2026
 isbn_paperback: "979-8-9934524-0-1"
-isbn_hardback: "979-8-9934524-1-8"
+isbn_hardcover: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
 date: "`r Sys.Date()`"
@@ -22,7 +22,7 @@ always_allow_html: true
 version_value <- rmarkdown::metadata$version
 major_edition_year_value <- rmarkdown::metadata$major_edition_year
 doi_value <- rmarkdown::metadata$doi
-isbn_hardback_value <- rmarkdown::metadata$isbn_hardback
+isbn_hardcover_value <- rmarkdown::metadata$isbn_hardcover
 isbn_paperback_value <- rmarkdown::metadata$isbn_paperback
 
 # The edition is derived from the major component of the semantic version: major
@@ -40,11 +40,6 @@ edition_ordinal <- if (major_version >= 1 && major_version <= length(edition_ord
 }
 edition_label <- if (major_version >= 1) paste0(edition_ordinal, " Edition") else NULL
 edition_label_safe <- if (!is.null(edition_label)) edition_label else paste0("Version ", version_value)
-edition_cff <- if (!is.null(edition_label)) {
-  paste0(edition_label, " (Version ", version_value, ")")
-} else {
-  paste0("Version ", version_value)
-}
 
 # Title-page edition/version block (raw LaTeX): the edition in bold, with the
 # precise version below it. Both derive from the single version string above.
@@ -83,7 +78,7 @@ frontpage_content <- sprintf('
 \\vspace{2cm}
 {\\large Casey W. Dunn}
 
-http://dunnlab.org
+https://dunnlab.org
 \\end{center}
 \\vspace*{\\fill}
 \\begin{center}
@@ -111,15 +106,19 @@ New Haven, CT, USA
 
 \\noindent ISBN %s (paperback)
 
-\\noindent ISBN %s (hardback)
+\\noindent ISBN %s (hardcover)
 
 \\noindent Library of Congress Control Number: 2026918096
 
-\\noindent DOI: %s
+\\noindent DOI: https://doi.org/%s
 
 \\medskip
 
-\\noindent Cover by Casey W. Dunn.
+\\noindent Cover art: \\emph{Moth Cluster IV} (2016), pen, ink and silkscreen on paper, 65 $\\times$ 140 inches. \\copyright{} James Prosek; image courtesy of the artist.
+
+\\medskip
+
+\\noindent Cover design by Casey W. Dunn.
 
 %% --- Dedication (recto) ---
 \\clearrecto
@@ -133,7 +132,7 @@ I am so grateful for her adventurous spirit, quick mind, and love of life.}
 \\vspace*{\\fill}
 
 \\clearpage
-', edition_version_tex, major_edition_year_value, isbn_paperback_value, isbn_hardback_value, doi_value)
+', edition_version_tex, major_edition_year_value, isbn_paperback_value, isbn_hardcover_value, doi_value)
 
 writeLines(frontpage_content, "frontpage.tex")
 ```
@@ -169,8 +168,8 @@ preferred-citation:
   isbn: "%s"
   license: CC-BY-NC-ND-4.0
   repository-code: https://github.com/%s
-  url: http://dunnlab.org/phylogenetic_biology/
-', major_edition_year_value, edition_cff, doi_value, isbn_paperback_value, rmarkdown::metadata$`github-repo`)
+  url: https://dunnlab.org/phylogenetic_biology/
+', major_edition_year_value, edition_label_safe, doi_value, isbn_paperback_value, rmarkdown::metadata$`github-repo`)
 
 writeLines(citation_content, "CITATION.cff")
 ```
@@ -236,6 +235,14 @@ knitr::write_bib(c(
 
 # Preface {-}
 
+```{r cover-html, echo=FALSE, eval=knitr::is_html_output() && file.exists("figures/cover.png"), fig.align='center', out.width='70%', fig.cap="Cover art: *Moth Cluster IV* (2016), pen, ink and silkscreen on paper, 65 × 140 inches. © James Prosek; image courtesy of the artist."}
+# Simplified cover shown only in the HTML edition. The PDF and print editions
+# carry the full cover art, with the credit on the copyright page. Guarded on
+# is_html_output() and file.exists() so the build does not fail before the
+# image is added at figures/cover.png.
+knitr::include_graphics("figures/cover.png")
+```
+
 ## Approach
 
 Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative - they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
@@ -252,7 +259,7 @@ I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read 
 
 There are several ways you can get this book:
 
-- You can read an html version for free at <https://dunnlab.org/phylogenetic_biology/>
+- You can read an HTML version for free at <https://dunnlab.org/phylogenetic_biology/>
 
 - The book is rendered from source code available at <https://github.com/caseywdunn/phylogenetic_biology>, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
 
@@ -260,13 +267,13 @@ There are several ways you can get this book:
 
 - You can purchase a paperback from your favorite book retailer. Search for ISBN `r isbn_paperback_value`.
 
-- You can purchase a hardback from your favorite book retailer. Search for ISBN `r isbn_hardback_value`.
+- You can purchase a hardcover from your favorite book retailer. Search for ISBN `r isbn_hardcover_value`.
 
 Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at <https://github.com/caseywdunn/phylogenetic_biology/issues>.
 
 You are currently reading the `r edition_label_safe` (Version `r version_value`) of the book. Please cite it as follows:
 
-> Dunn CW. Phylogenetic Biology. `r edition_label_safe` (Version `r version_value`). New Haven, CT: Casey W. Dunn; `r major_edition_year_value`. ISBN `r isbn_paperback_value`. doi:`r doi_value`
+> Dunn CW. Phylogenetic Biology. `r edition_label_safe`. New Haven, CT: Casey W. Dunn; `r major_edition_year_value`. ISBN `r isbn_paperback_value`. https://doi.org/`r doi_value`
 
 This book follows [semantic versioning](https://semver.org/) (major.minor.patch). The major version is the edition: a new edition marks a substantial revision and carries a new ISBN, minor versions add or revise content while keeping earlier citations valid, and patch versions make editorial corrections. The online edition at <https://dunnlab.org/phylogenetic_biology/> is updated continuously as new versions are released, while each released version is permanently archived on Zenodo through the DOI above.
 
@@ -314,7 +321,7 @@ The following books provide general computational background for the topics cove
 
 ## Acknowledgements
 
-Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online), 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation and feedback. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Other lab members provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access. I am also very grateful to the students and faculty of the Workshop on Molecular Evolution at Woods Hole.
+Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the first course I taught fully online), 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation and feedback. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Other lab members provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access. I am also very grateful to the students and faculty of the Workshop on Molecular Evolution at Woods Hole. Finally, I thank the artist James Prosek for generously allowing me to use his work *Moth Cluster IV* for the cover.
 
 ```{r license, echo=FALSE, results='asis'}
 # The license appears on the PDF copyright page, which is generated in the
@@ -326,7 +333,7 @@ if (knitr::is_html_output()) {
 
 ![CC-BY-NC-ND-4.0](figures/by-nc-nd-600.png)
 
-This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at <http://dunnlab.org/phylogenetic_biology/>, ensuring access to all students worldwide. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) is not allowed.
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at <https://dunnlab.org/phylogenetic_biology/>, ensuring access to all students worldwide. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) is not allowed.
 ')
 }
 ```

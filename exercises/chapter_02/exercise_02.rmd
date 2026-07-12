@@ -43,7 +43,7 @@ Installing ggtree is a bit more complicated than for some other libraries, becau
 ## Our tree
 
 Much of our focus will be on the  mammal tree that we saw in 
-[Chapter 2](http://dunnlab.org/phylogenetic_biology/phylogenies.html).
+[Chapter 2](https://dunnlab.org/phylogenetic_biology/phylogenies.html).
 
 ```{r}
   tree_mammal_text="((((((Lepus_europaeus:70.20096322090001,Mus_musculus:70.2009638712):3.154317,Homo_sapiens:73.3552735285):6.856746,(((Equus_hemionus:58.229796309799994,Balaenoptera_musculus:58.22982398432999):8.913111,Panthera_leo:67.14292611620002):0.811577,Corynorhinus_townsendii:67.95450331960001):12.257514):5.856834,(Loxodonta_africana:83.676113197,Dasypus_novemcinctus:83.67612211229999):2.392725):76.041131,Macropus_giganteus:162.10993597769):17.193944,Ornithorhynchus_anatinus:179.30390079);"
@@ -98,7 +98,7 @@ tree_plot
 
 ```
 
-But it is missing something pretty basic, tip labels! We have to tell it to add these in. Much as we saw in [Chapter 2](http://dunnlab.org/phylogenetic_biology/phylogenies.html#the-information-contained-in-phylogenies), we can think about the information contained in phylogenies as layers we can add in. `ggtree()` alone just draws the topology of the tree, and shows edge lengths as well if they are available. We can add more layers of information to the visualization using the `+` operator and other special functions. Each layer of information is, fittingly enough, called a layer. For a list of layers that can be added see Table 4.1 in this [ggtree book](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html).
+But it is missing something pretty basic, tip labels! We have to tell it to add these in. Much as we saw in [Chapter 2](https://dunnlab.org/phylogenetic_biology/phylogenies.html#the-information-contained-in-phylogenies), we can think about the information contained in phylogenies as layers we can add in. `ggtree()` alone just draws the topology of the tree, and shows edge lengths as well if they are available. We can add more layers of information to the visualization using the `+` operator and other special functions. Each layer of information is, fittingly enough, called a layer. For a list of layers that can be added see Table 4.1 in this [ggtree book](https://guangchuangyu.github.io/ggtree-book/chapter-ggtree.html).
 
 Note also that I store the plot into its own variable, `tree_plot`, and then put the named variable name right below to print it. This is nice if you generate the plot one place in your document but don't want to show it until later (or want to do something else with it later, like run it through an autograder).
 

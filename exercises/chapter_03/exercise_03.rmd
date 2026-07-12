@@ -83,7 +83,7 @@ And this line does the simulation:
 
     seq-gen -mGTR -f0.295,0.205,0.205,0.295 -r0.5,2,0.5,0.5,2,0.5 -s0.001 -l40 -of < mammal.tre > mammal_gtr.fa
 
-This command executes the program `seq-gen`, which has many options that are described in the [manual](http://htmlpreview.github.io/?https://github.com/rambaut/Seq-Gen/blob/master/documentation/Seq-Gen.Manual.html). Here I have set it up to simulate 40 sites under the same model we specified in [Chapter 3](http://dunnlab.org/phylogenetic_biology/simulation.html#plugging-some-numbers-into-the-expanded-model).
+This command executes the program `seq-gen`, which has many options that are described in the [manual](http://htmlpreview.github.io/?https://github.com/rambaut/Seq-Gen/blob/master/documentation/Seq-Gen.Manual.html). Here I have set it up to simulate 40 sites under the same model we specified in [Chapter 3](https://dunnlab.org/phylogenetic_biology/simulation.html#plugging-some-numbers-into-the-expanded-model).
 
 
 > **_Problem 1:_** Execute the following command to submit the job to the cluster:
@@ -102,7 +102,7 @@ This shows you the simulated data in fasta format.
 
 Rather than scale the overall rate of change, for example by setting `mu`, I scale the branch lentgths using the argument `-s0.001`.
 
-> **_Problem 2:_** Take a look at the `seq-gen` options in the `job_mammal_gtr.sh`, the [seq-gen manual](http://htmlpreview.github.io/?https://github.com/rambaut/Seq-Gen/blob/master/documentation/Seq-Gen.Manual.html), and the model description in [Chapter 3](http://dunnlab.org/phylogenetic_biology/simulation.html#plugging-some-numbers-into-the-expanded-model). Answer the following questions about the `seq-gen` command we use.
+> **_Problem 2:_** Take a look at the `seq-gen` options in the `job_mammal_gtr.sh`, the [seq-gen manual](http://htmlpreview.github.io/?https://github.com/rambaut/Seq-Gen/blob/master/documentation/Seq-Gen.Manual.html), and the model description in [Chapter 3](https://dunnlab.org/phylogenetic_biology/simulation.html#plugging-some-numbers-into-the-expanded-model). Answer the following questions about the `seq-gen` command we use.
 
 - What part of the command sets the nucleotide frequencies?
 
