@@ -1952,7 +1952,7 @@ linear algebra:
 
 - The *Essence of linear algebra* video series by Grant Sanderson (3Blue1Brown) - https://www.3blue1brown.com/topics/linear-algebra.
 
-- *Introduction to Linear Algebra* by Gilbert Strang [@strang2016] is a widely used and comprehensive textbook, paired with his well-known MIT lecture series.
+- *Introduction to Linear Algebra* by Gilbert Strang [@strang2023] is a widely used and comprehensive textbook, paired with his well-known MIT lecture series.
 
 - Linear Algebra: Theory, Intuition, Code, by Mike X Cohen. This book is 
 accessible to scientists with little past math experience, and is very 
@@ -1966,7 +1966,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 12, 2026 at 07:31:04 PM with the following R package versions.
+This book was rendered from the source code on Jul 12, 2026 at 07:55:04 PM with the following R package versions.
 
 
 ```
