@@ -6,7 +6,7 @@ Throughout the text I have covered some of these fundamentals, but here I provid
 
 ## Probability theory and general statistics {#stats-general}
 
-I put together this short summary of statistical concepts commonly encountered in biology - https://bitbucket.org/caseywdunn/statistics/raw/master/statistics_in_biology.pdf. It is short and technical, with a focus on the relationship between concepts, such as the exponential family of distributions.
+I put together this short summary of statistical concepts commonly encountered in biology - https://raw.githubusercontent.com/caseywdunn/statistics/master/statistics_in_biology.pdf. It is short and technical, with a focus on the relationship between concepts, such as the exponential family of distributions.
 
 ## Bayes' theorem {#stats-bayes}
 

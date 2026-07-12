@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2026-07-05" />
+<meta name="date" content="2026-07-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -273,8 +273,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="8.2" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.2</b> Continuous data</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="additional-character-types.html"><a href="additional-character-types.html#brownian-motion"><i class="fa fa-check"></i><b>8.2.1</b> Brownian Motion</a></li>
-<li class="chapter" data-level="8.2.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ornsteinuhlenbeck-models"><i class="fa fa-check"></i><b>8.2.2</b> Ornstein–Uhlenbeck Models</a></li>
+<li class="chapter" data-level="8.2.1" data-path="additional-character-types.html"><a href="additional-character-types.html#brownian-motion"><i class="fa fa-check"></i><b>8.2.1</b> Brownian motion</a></li>
+<li class="chapter" data-level="8.2.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ornsteinuhlenbeck-models"><i class="fa fa-check"></i><b>8.2.2</b> Ornstein–Uhlenbeck models</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a>
@@ -311,8 +311,8 @@ div.csl-indent {
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> Probability theory and General statistics</a></li>
-<li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.2</b> Bayes theorem</a></li>
+<li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> Probability theory and general statistics</a></li>
+<li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.2</b> Bayes’ theorem</a></li>
 <li class="chapter" data-level="A.3" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#linear-algebra"><i class="fa fa-check"></i><b>A.3</b> Linear algebra</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="software-versions.html"><a href="software-versions.html"><i class="fa fa-check"></i><b>B</b> Software versions</a></li>
@@ -364,7 +364,7 @@ div.csl-indent {
 <ul>
 <li><p>If you suspect that the data are contaminated, incorrectly identified, or insufficiently documented.</p></li>
 <li><p>Preliminary analyses suggest that the taxon has properties very different from other taxa in the study, such as a very different equilibrium frequency or an exceptionally high rate of evolution.</p></li>
-<li><p>The taxon has a very high fraction of missing data. Sometimes missing data makes a taxon unstable, which can obscure well supported relationships between other taxa. Sometimes missing data can interact with other factors to lead to bias in the placement of the taxon.</p></li>
+<li><p>The taxon has a very high fraction of missing data. Sometimes missing data make a taxon unstable, which can obscure well supported relationships between other taxa. Sometimes missing data can interact with other factors to lead to bias in the placement of the taxon.</p></li>
 </ul>
 </div>
 <div id="collecting-sequence-data" class="section level2 hasAnchor" number="5.3">
@@ -377,21 +377,21 @@ div.csl-indent {
 <p>It is now routine for phylogenetic studies to use shotgun sequencing to sequence entire genomes of sampled taxa without any sample enrichment at all. This is often cheaper and more productive than taking steps to only sequence regions of interest. Studies differ greatly, though, in how these whole genome data are used. In clades with small genomes with minimal sequence divergence, such as some viruses and bacteria, entire genomes can be sequenced and assembled.</p>
 <p>For larger genomes, such as plants and animals, data are processed to isolate a subset of homologous regions across taxa. The processing depends on the questions at hand and genomic resources already available. Several strategies include:</p>
 <ul>
-<li><p>Mapping reads to reference genomes and calling variable sites. If genome assemblies are available for the clade of interest, then reads from each new sample can be mapped to the genome. Sites that are variable at the same mapped sites can then be used for phylogenetic inference. This makes excellent use of the full dataset, often providing hundreds of thousand of phylogenetically informative sites. It is limited, though, to studies where reference genomes are available and are comparable across the taxa included in the analysis.</p></li>
+<li><p>Mapping reads to reference genomes and calling variable sites. If genome assemblies are available for the clade of interest, then reads from each new sample can be mapped to the genome. Sites that are variable across samples can then be used for phylogenetic inference. This makes excellent use of the full dataset, often providing hundreds of thousands of phylogenetically informative sites. It is limited, though, to studies where reference genomes are available and are comparable across the taxa included in the analysis.</p></li>
 <li><p>Assembling and analyzing organelle genomes. Sometimes mitochondrial and plastid genomes are sufficient for answering the questions that motivate a study. Because these genomes are small compared to nuclear genomes, they can often be readily assembled from raw sequence reads and then aligned and analyzed. This approach can be applied regardless of existing genome resources.</p></li>
 <li><p>Using other methods to isolate homologous regions across studies. The number of tools that can process raw reads to isolate homologous genome regions across samples without the need for a reference genome is growing. These tools include sharkmer, written by Sam Church and me and available at <a href="https://github.com/caseywdunn/sharkmer" class="uri">https://github.com/caseywdunn/sharkmer</a>, which can produce gene sequences given Polymerase Chain Reaction (PCR) primer sequences and raw DNA sequence data.</p></li>
 </ul>
-<p>Multiple strategies above are often used in the same study, they are not exclusive. Apart from reduced expenses in the lab, one of the values of whole genome sequencing is that it is compatible with so many downstream analysis methods.</p>
+<p>Multiple strategies above are often used in the same study; they are not exclusive. Apart from reduced expenses in the lab, one of the values of whole genome sequencing is that it is compatible with so many downstream analysis methods.</p>
 </div>
 <div id="transcriptomes" class="section level3 hasAnchor" number="5.3.2">
 <h3><span class="header-section-number">5.3.2</span> Transcriptomes<a href="molecular-inference-in-practice.html#transcriptomes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A transcriptome is the collection of RNA in a cell or collection of cells. Because RNA is transcribed from the genome, sequencing the RNA gives a snapshot of an enriched subset of the genome. Whereas the other enrichment approaches described are implemented by the investigator at the bench, transcriptome sequencing largely relies on a natural process in the living cell (transcription) to enrich for particular genome regions.</p>
 <p>In a typical phylogenetic study based on transcriptome data, messenger RNA (mRNA), which encodes the protein coding genes, is isolated. mRNA is then copied to complementary DNA (cDNA) and sequenced. Because many of the same genes are highly expressed across species and tissues, there is considerable overlap between the genes in transcriptome datasets from different samples. Many investigators are interested in protein coding genes for other purposes as well, adding value to the transcriptome data.</p>
-<p>There are a couple challenges to working with transcriptomes. For one, RNA is much less stable than DNA. It is therefore critical to take considerable care when collecting, storing, and processing tissue for transcriptome studies. Transcriptome sequencing only captures genes that are being expressed, leading to missing data for some genes in some samples. As sequencing costs have fallen, genome sequencing has become a better option than transcriptome sequencing for most phylogenetic projects.</p>
+<p>There are a couple of challenges to working with transcriptomes. For one, RNA is much less stable than DNA. It is therefore critical to take considerable care when collecting, storing, and processing tissue for transcriptome studies. Transcriptome sequencing only captures genes that are being expressed, leading to missing data for some genes in some samples. As sequencing costs have fallen, genome sequencing has become a better option than transcriptome sequencing for most phylogenetic projects.</p>
 </div>
 <div id="targeted-enrichment" class="section level3 hasAnchor" number="5.3.3">
 <h3><span class="header-section-number">5.3.3</span> Targeted enrichment<a href="molecular-inference-in-practice.html#targeted-enrichment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In targeted enrichment, an investigator designs short bait sequences that are similar to conserved genome regions. They then isolate DNA from their taxa of interest, fragment it, and use the baits to fish out the conserved regions along with their neighboring sequences. This allows the investigator to create pools of DNA that are enriched for specific pre-selected regions. This is a highly cost-effective way to isolate homologous sequences in across species, and works well when samples have fragmented DNA (in museum specimens, for example).</p>
+<p>In targeted enrichment, an investigator designs short bait sequences that are similar to conserved genome regions. They then isolate DNA from their taxa of interest, fragment it, and use the baits to fish out the conserved regions along with their neighboring sequences. This allows the investigator to create pools of DNA that are enriched for specific pre-selected regions. This is a highly cost-effective way to isolate homologous sequences across species, and works well when samples have fragmented DNA (in museum specimens, for example).</p>
 <p>The baits are typically designed based on one or more genomes that are already available in the clade of interest. There are a few challenges to using targeted enrichment. One is that data are difficult to combine across different studies that used different baits. In addition, the design and synthesis of baits require a large up-front investment that makes this approach best suited to larger projects.</p>
 </div>
 <div id="rad-seq" class="section level3 hasAnchor" number="5.3.4">
@@ -407,13 +407,13 @@ div.csl-indent {
 </div>
 <div id="data-processing-upstream-of-phylogenetic-analyses" class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> Data processing upstream of phylogenetic analyses<a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Each enrichment strategy requires its own series of data processing steps to get the data ready for phylogenetic inference. These steps vary greatly across enrichment approaches, requiring distinct methods and software tools. The data processing that occurs upstream of the actual phylogenetic analysis has two primary objectives, estimating the sequence of the sampled genome regions and enrichment of homologous sequences across taxa.</p>
+<p>Each enrichment strategy requires its own series of data processing steps to get the data ready for phylogenetic inference. These steps vary greatly across enrichment approaches, requiring distinct methods and software tools. The data processing that occurs upstream of the actual phylogenetic analysis has two primary objectives: estimating the sequence of the sampled genome regions, and enriching for homologous sequences across taxa.</p>
 <div id="estimation-of-original-sequences" class="section level3 hasAnchor" number="5.4.1">
 <h3><span class="header-section-number">5.4.1</span> Estimation of original sequences<a href="molecular-inference-in-practice.html#estimation-of-original-sequences" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Raw sequence data have a few properties that make them unusable for direct analysis:</p>
 <ul>
-<li><p>They are redundant. The same genome regions are sequenced multiple times. PCR products are typically sequenced a couple of times (once in each direction), and high throughput sequencing often sequences each region hundreds or thousands of times.</p></li>
-<li><p>They have many errors. These are introduced during sample preparation at the bench, by the sequencing instruments during data acquisition, and in the initial base calling that generates the sequence file. Errors in raw data vary across sequencing technologies, and are on the order of a few per hundreds or thousands of nucleotides.</p></li>
+<li><p>They are redundant. The same genome regions are sequenced multiple times. PCR products are typically sequenced a couple of times (once in each direction), and high-throughput sequencing often sequences each region hundreds or thousands of times.</p></li>
+<li><p>They have many errors. These are introduced during sample preparation at the bench, by the sequencing instruments during data acquisition, and in the initial base calling that generates the sequence file. Errors in raw data vary across sequencing technologies, and are on the order of a few per hundred or thousand nucleotides.</p></li>
 <li><p>They are fragmented. Often the raw sequences do not span the full genome region of interest, and must be tiled together to predict longer regions.</p></li>
 <li><p>They are ambiguous. It often isn’t clear what region of the genome a sequence belongs to, due to genomic repeats, heterozygosity, and genome duplication. This ambiguity must be resolved or eliminated, depending on the application.</p></li>
 </ul>
@@ -423,7 +423,7 @@ div.csl-indent {
 <div id="identification-of-homologous-genome-regions" class="section level3 hasAnchor" number="5.4.2">
 <h3><span class="header-section-number">5.4.2</span> Identification of homologous genome regions<a href="molecular-inference-in-practice.html#identification-of-homologous-genome-regions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It isn’t enough to collect and assemble sequence data from the taxa of interest. We also need to collect and identify homologous sequences that represent regions that are shared because they derive from the same region in common ancestors of the taxa.</p>
-<p>Like assembly, the optimal approach for identifying homologous sequences depends greatly on the enrichment strategy used. This step is quite straight forward when targeted capture and PCR are used as enrichment strategies, because the data are from specific known regions that were often selected in part because their homology is easier to assess.</p>
+<p>Like assembly, the optimal approach for identifying homologous sequences depends greatly on the enrichment strategy used. This step is quite straightforward when targeted capture and PCR are used as enrichment strategies, because the data are from specific known regions that were often selected in part because their homology is easier to assess.</p>
 <p>In some cases, such as with closely related viruses, genomes can be directly aligned with each other along their full lengths. In larger genomes and transcriptomes, protein coding sequences are often extracted from the assemblies and are the focus of phylogenetic analyses. There are various approaches to identifying homologous protein coding genes across taxa. One is to identify sequences for a preselected panel of genes that are selected because they tend to be present in most datasets, they have properties of molecular evolution that are well-suited to phylogenetic analysis, and their homology is thought to be easier to assess. Another is to compare all gene sequences across all species to identify homologous regions. This is more computational work, but has the advantage of optimizing gene selection to the data and question at hand.</p>
 </div>
 </div>
@@ -451,7 +451,7 @@ Figure 5.1: A view of the sequence data available for Cnidaria. Here I have sele
 <ul>
 <li><p>Horizontal transfer of genome regions across species. This can occur, for example, when a virus carries DNA from one species to another. Rates of horizontal gene transfer vary greatly across different groups of organisms.</p></li>
 <li><p>Duplication and loss of genome regions. Genome replication is not always perfect, and sometimes results in an organism inheriting multiple copies of a whole genome or specific genome regions from a parent. In fact, many genes are members of gene families within a species that arose via a history of duplication and subsequent differentiation. As genome regions are duplicated and sometimes lost, their evolutionary history can become distinct from that of other genome regions.</p></li>
-<li><p>All variation that we see across species originally arises within populations. Sometimes new variants are lost, and sometimes they become fixed across entire species. If multiple variants persist through multiple speciation events, though, the evolutionary history of some genome regions can differ from that of species. This process is called Incomplete Lineage Sorting (ILS). Rates of ILS are higher on shorter branches and when populations are larger.</p></li>
+<li><p>All variation that we see across species originally arises within populations. Sometimes new variants are lost, and sometimes they become fixed across entire species. If multiple variants persist through multiple speciation events, though, the evolutionary history of some genome regions can differ from that of species. This process is called incomplete lineage sorting (ILS). Rates of ILS are higher on shorter branches and when populations are larger.</p></li>
 </ul>
 <p>If there are concerns about incongruent evolutionary histories in the group of taxa under investigation, there are a variety of methods available for addressing each of these sources of incongruence. In general, they involve independently estimating the phylogeny of each region, and then integrating information across these independent phylogenies.</p>
 <p>In cases where such differences are expected to be rare or have little impact, it is common practice to concatenate alignments. Each homologous gene region is aligned independently and then the alignments are joined end to end into a giant superalignment. In this case, information is integrated across regions prior to phylogenetic inference.</p>

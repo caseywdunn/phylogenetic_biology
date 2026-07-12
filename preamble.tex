@@ -2,8 +2,25 @@
 \usepackage{float}
 \usepackage{afterpage}
 
+% Suppress the default pandoc/LaTeX title page. pandoc emits \maketitle from the
+% YAML title/author/date, which produces a redundant title page (stamped with the
+% build date) in front of our own front matter. The real title, copyright, and
+% dedication pages are supplied by frontpage.tex (generated from index.rmd and
+% included via before_body), so make \maketitle a no-op here.
+\renewcommand{\maketitle}{}
+
+% Advance to the next recto (odd) page, leaving any skipped verso completely
+% blank -- no header, no page number. Used in the generated front matter
+% (frontpage.tex) to put the title page and dedication on rectos, with the
+% copyright page on the verso of the title page.
+\newcommand{\clearrecto}{\clearpage\ifodd\value{page}\else\thispagestyle{empty}\null\clearpage\fi}
+
 % Define book size
-\usepackage[paperwidth=7in, paperheight=10in, margin=1in]{geometry}
+% margin sets the base 1in margin on all sides; bindingoffset adds a 0.25in
+% gutter to the inner (spine) edge, mirrored on recto/verso, so the inside
+% margin is 1.25in and the outside 1in -- the conventional allowance for
+% perfect binding.
+\usepackage[paperwidth=7in, paperheight=10in, margin=1in, bindingoffset=0.25in]{geometry}
 
 % Running headers.
 % The default book class typesets running heads in ALL CAPS at full size. On
