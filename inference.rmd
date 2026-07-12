@@ -1,10 +1,10 @@
 # Inferring phylogenies from data
 
-In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given the starting state and the branch length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the branches of a phylogeny.
+In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$ (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given the starting state and the branch length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the branches of a phylogeny.
 
 We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data [@Felsenstein:1981vk].
 
-This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis is referred to as Maximum Likelihood (ML).
+This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the likelihood. Searching for the most likely hypothesis is referred to as maximum likelihood (ML).
 
 ## Probability of a single history
 
@@ -103,7 +103,7 @@ ggtree(phy) +
 
 ```
 
-We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). This isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
+We will start by calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). This isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
 
 ```{r inference-internal-states, fig.cap="The same toy tree as above, but with arbitrary internal node states (in boxes)."}
 
@@ -173,7 +173,7 @@ root_prob = pi_v[ example_states[root_node] ]
 
 ```
 
-Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
+Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in, our full set of probabilities is:
 
 ```{r}
 
@@ -191,7 +191,7 @@ example_prob = prod(p)
 
 The joint probability of all these states can now be calculated as the product of each state. This comes out to $`r example_prob`$. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of $`r round(example_prob*1e6,1)`$ times out of a million simulations.
 
-Here we use much of the same machinery as in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.
+Here we use much of the same machinery as in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see, their mathematical implementation shares many features.
 
 ## Probability of multiple histories
 

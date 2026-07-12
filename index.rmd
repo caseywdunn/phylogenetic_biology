@@ -203,11 +203,11 @@ knitr::write_bib(c(
 
 Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative - they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
 
-This book is not a comprehensive treatment of phylogenetic biology, it is focused on teaching some of the key concepts and methods. This will provide a foundation for the many other rich areas of the field, from its interfaces with population genetics to comparative genomics to comparative methods at a macroevolutionary scale. It is in no way an overview of all of phylogenetic biology, which has grown into a very large field. Ommissions of topics do not imply that they are unimportant.
+This book is not a comprehensive treatment of phylogenetic biology, it is focused on teaching some of the key concepts and methods. This will provide a foundation for the many other rich areas of the field, from its interfaces with population genetics to comparative genomics to comparative methods at a macroevolutionary scale. It is in no way an overview of all of phylogenetic biology, which has grown into a very large field. Omissions of topics do not imply that they are unimportant.
 
 ## Using this book
 
-This book is intended both for the self directed learner, and for use in a course. 
+This book is intended both for the self-directed learner and for use in a course. 
 
 I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands-on work, read papers from the literature, or share student projects.
 
@@ -219,7 +219,7 @@ There are several ways you can get this book:
 
 - The book is rendered from source code available at <https://github.com/caseywdunn/phylogenetic_biology>, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
 
-- Snapshots of source code for each edition are also available on Zenodo via the the book's DOI at <https://doi.org/`r doi_value`>.
+- Snapshots of source code for each edition are also available on Zenodo via the book's DOI at <https://doi.org/`r doi_value`>.
 
 - You can purchase a paperback from your favorite book retailer. Search for ISBN `r isbn_paperback_value`.
 
@@ -237,7 +237,7 @@ The following sites have a wide variety of material that is relevant to the
 theory and practice of phylogenetic biology.
 
 - An extensive list of tools, tutorials, and examples of phylogenetic tools in
-the programming language R maintained by Briam O'Meara. <https://cran.r-project.org/web/views/Phylogenetics.html>
+the programming language R maintained by Brian O'Meara. <https://cran.r-project.org/web/views/Phylogenetics.html>
 
 - Liam Revell has an excellent blog on phylogenetic methods. <https://blog.phytools.org/>
 
@@ -281,4 +281,4 @@ Thanks in particular to the students of Yale EEB354 in the falls of 2020 (the fi
 
 ![CC-BY-NC-ND-4.0](figures/by-nc-nd-600.png)
 
-This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at <http://dunnlab.org/phylogenetic_biology/>, ensuring access to all students worldwide. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) are not allowed.
+This work is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License]( http://creativecommons.org/licenses/by-nc-nd/4.0/). It is available to read online for free at <http://dunnlab.org/phylogenetic_biology/>, ensuring access to all students worldwide. Commercial use by others (*e.g.*, the sale of printed copies by anyone other than the author) is not allowed.
