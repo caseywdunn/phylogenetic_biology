@@ -424,7 +424,7 @@ div.csl-indent {
 <h3><span class="header-section-number">5.4.2</span> Identification of homologous genome regions<a href="molecular-inference-in-practice.html#identification-of-homologous-genome-regions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It isn’t enough to collect and assemble sequence data from the taxa of interest. We also need to collect and identify homologous sequences that represent regions that are shared because they derive from the same region in common ancestors of the taxa.</p>
 <p>Like assembly, the optimal approach for identifying homologous sequences depends greatly on the enrichment strategy used. This step is quite straightforward when targeted capture and PCR are used as enrichment strategies, because the data are from specific known regions that were often selected in part because their homology is easier to assess.</p>
-<p>In some cases, such as with closely related viruses, genomes can be directly aligned with each other along their full lengths. In larger genomes and transcriptomes, protein coding sequences are often extracted from the assemblies and are the focus of phylogenetic analyses. There are various approaches to identifying homologous protein coding genes across taxa. One is to identify sequences for a preselected panel of genes that are selected because they tend to be present in most datasets, they have properties of molecular evolution that are well-suited to phylogenetic analysis, and their homology is thought to be easier to assess. Another is to compare all gene sequences across all species to identify homologous regions. This is more computational work, but has the advantage of optimizing gene selection to the data and question at hand.</p>
+<p>In some cases, such as with closely related viruses, genomes can be directly aligned with each other along their full lengths. In larger genomes and transcriptomes, protein coding sequences are often extracted from the assemblies and are the focus of phylogenetic analyses. There are various approaches to identifying homologous protein coding genes across taxa. One is to identify sequences for a preselected panel of genes that are selected because they tend to be present in most datasets, they have properties of molecular evolution that are well-suited to phylogenetic analysis, and their homology is thought to be easier to assess. Another is to compare all gene sequences across all species to identify homologous regions, using tools such as OrthoFinder <span class="citation">(<a href="#ref-emms2019">Emms and Kelly 2019</a>)</span>. This is more computational work, but has the advantage of optimizing gene selection to the data and question at hand.</p>
 </div>
 </div>
 <div id="working-with-publicly-available-data" class="section level2 hasAnchor" number="5.5">
@@ -442,8 +442,8 @@ Figure 5.1: A view of the sequence data available for Cnidaria. Here I have sele
 </div>
 <div id="homologous-sites" class="section level2 hasAnchor" number="5.6">
 <h2><span class="header-section-number">5.6</span> Homologous sites<a href="molecular-inference-in-practice.html#homologous-sites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Once you have collected homologous sequences for one or more genome regions across your taxa of interest, you next need to identify homologous nucleotide sites within these regions. This process is referred to as multiple sequence alignment (MSA). Rather than rely on explicit models of molecular evolution, multiple sequence alignment usually relies on similarities between sequences. The general idea is to slide the sequences along each other and insert gaps as needed so that similarity at each site is optimized while reducing the number of gaps introduced.</p>
-<p>The output of multiple sequence alignment is a matrix. Each row is a taxon that will correspond to a tip in the phylogeny. Each column is a single nucleotide site that is hypothesized to be homologous across taxa. There are multiple file formats that are used to store aligned sequences, including fasta, nexus, and phylip.</p>
+<p>Once you have collected homologous sequences for one or more genome regions across your taxa of interest, you next need to identify homologous nucleotide sites within these regions. This process is referred to as multiple sequence alignment (MSA). Rather than rely on explicit models of molecular evolution, multiple sequence alignment usually relies on similarities between sequences. The general idea is to slide the sequences along each other and insert gaps as needed so that similarity at each site is optimized while reducing the number of gaps introduced. Widely used multiple sequence alignment programs include MAFFT <span class="citation">(<a href="#ref-katoh2013">Katoh and Standley 2013</a>)</span> and MUSCLE <span class="citation">(<a href="#ref-edgar2004">Edgar 2004</a>)</span>.</p>
+<p>The output of multiple sequence alignment is a matrix. Each row is a taxon that will correspond to a tip in the phylogeny. Each column is a single nucleotide site that is hypothesized to be homologous across taxa. There are multiple file formats that are used to store aligned sequences, including fasta, nexus <span class="citation">(<a href="#ref-maddison1997nexus">Maddison et al. 1997</a>)</span>, and phylip.</p>
 </div>
 <div id="combining-information-across-multiple-genome-regions" class="section level2 hasAnchor" number="5.7">
 <h2><span class="header-section-number">5.7</span> Combining information across multiple genome regions<a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -460,6 +460,18 @@ Figure 5.1: A view of the sequence data available for Cnidaria. Here I have sele
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-edgar2004" class="csl-entry">
+Edgar, Robert C. 2004. <span>“MUSCLE: Multiple Sequence Alignment with High Accuracy and High Throughput.”</span> <em>Nucleic Acids Research</em> 32 (5): 1792–97. <a href="https://doi.org/10.1093/nar/gkh340">https://doi.org/10.1093/nar/gkh340</a>.
+</div>
+<div id="ref-emms2019" class="csl-entry">
+Emms, David M., and Steven Kelly. 2019. <span>“OrthoFinder: Phylogenetic Orthology Inference for Comparative Genomics.”</span> <em>Genome Biology</em> 20 (1): 238. <a href="https://doi.org/10.1186/s13059-019-1832-y">https://doi.org/10.1186/s13059-019-1832-y</a>.
+</div>
+<div id="ref-katoh2013" class="csl-entry">
+Katoh, Kazutaka, and Daron M. Standley. 2013. <span>“MAFFT Multiple Sequence Alignment Software Version 7: Improvements in Performance and Usability.”</span> <em>Molecular Biology and Evolution</em> 30 (4): 772–80. <a href="https://doi.org/10.1093/molbev/mst010">https://doi.org/10.1093/molbev/mst010</a>.
+</div>
+<div id="ref-maddison1997nexus" class="csl-entry">
+Maddison, David R., David L. Swofford, and Wayne P. Maddison. 1997. <span>“NEXUS: An Extensible File Format for Systematic Information.”</span> <em>Systematic Biology</em> 46 (4): 590–621. <a href="https://doi.org/10.1093/sysbio/46.4.590">https://doi.org/10.1093/sysbio/46.4.590</a>.
+</div>
 <div id="ref-maddison1997gene" class="csl-entry">
 Maddison, Wayne P. 1997. <span>“Gene Trees in Species Trees.”</span> <em>Systematic Biology</em> 46 (3): 523–36. <a href="https://doi.org/10.1093/sysbio/46.3.523">https://doi.org/10.1093/sysbio/46.3.523</a>.
 </div>

@@ -10,7 +10,7 @@ There are many applications of ancestral character state reconstruction, and lea
 
 We already have all of the machinery we need to reconstruct discrete ancestral states under a model of evolution. In the chapters on simulation and inference we described the evolution of a discrete character with a rate matrix $\mathbf{Q}$, and we saw that the probability of moving from one state to another along a branch of length $t$ is given by the matrix exponential $\mathbf{P}(t) = e^{\mathbf{Q}t}$ (Equation \@ref(eq:jc69-prob)). The same model that let us simulate data and compute the likelihood of a tree also lets us compute the probability of each state at each internal node.
 
-The simplest Markovian model for a discrete character with $k$ states is the Mk model, a direct generalization of the Jukes-Cantor model to $k$ states in which all changes occur at the same rate. Just as with DNA models, we can relax this assumption to allow different rates for different transitions.
+The simplest Markovian model for a discrete character with $k$ states is the Mk model [@lewis2001], a direct generalization of the Jukes-Cantor model to $k$ states in which all changes occur at the same rate. Just as with DNA models, we can relax this assumption to allow different rates for different transitions.
 
 There are two distinct questions we might ask about the ancestral states, and it is important to keep them separate. The first is the *marginal* reconstruction -- for a single node, what is the probability of each possible state, averaging over all possible states at every other internal node? The second is the *joint* reconstruction -- what is the single most probable assignment of states to *all* internal nodes considered together? The marginal reconstruction is the more commonly reported, because it gives us a probability for each state at each node, and therefore an explicit measure of uncertainty. It is the one we focus on here.
 
@@ -81,7 +81,7 @@ Just as with discrete characters, we can quantify the uncertainty in these estim
 
 ## Cautions and limitations
 
-Reconstructions are only as good as the model. Every reconstructed state is conditional on the model of evolution we assumed, the tree we clamped, and the branch lengths we used. Change the model and the reconstruction can change, and reconstructions can be strikingly sensitive to this -- a badly misspecified model can yield confident but wrong ancestral states [@revell2025ancestral]. A reconstruction is best understood as a statement of the form "if the character evolved like this, on this tree, then the ancestor probably looked like this."
+Reconstructions are only as good as the model [@cunningham1998]. Every reconstructed state is conditional on the model of evolution we assumed, the tree we clamped, and the branch lengths we used. Change the model and the reconstruction can change, and reconstructions can be strikingly sensitive to this -- a badly misspecified model can yield confident but wrong ancestral states [@revell2025ancestral]. A reconstruction is best understood as a statement of the form "if the character evolved like this, on this tree, then the ancestor probably looked like this."
 
 Uncertainty grows with depth. Both the discrete pies and the continuous confidence intervals tend to become less informative as we move away from the tips and toward the root. Deep ancestral states, which are often the ones we most want to know, are frequently the ones we can say the least about.
 

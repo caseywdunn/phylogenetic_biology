@@ -370,7 +370,7 @@ helpful to turn to math.</p>
 Figure 2.3: Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating.
 </p>
 </div>
-<p>A phylogeny is a specific instance of a mathematical object known as a <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graph</a>.
+<p>A phylogeny is a specific instance of a mathematical object known as a <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graph</a> <span class="citation">(<a href="#ref-west2001">West 2001</a>)</span>.
 A graph consists of nodes (also called vertices), often represented as circles, connected by edges, often
 represented by lines (Figure <a href="phylogenies.html#fig:trees-graph">2.3</a>). Graphs are useful representations of a variety of systems.
 For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.</p>
@@ -380,7 +380,7 @@ For example, nodes could be people, and edges family relationships, connections 
 Figure 2.4: Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (<em>i.e.</em>, there are no paths that go in circles). The graph is bifurcating – the root node has two branches that connect it to its children; the other internal nodes each have three branches (one that connects to the parent, two to children); and the tips each have one branch (that connects to its parent).
 </p>
 </div>
-<p>Phylogeny graphs (Figure <a href="phylogenies.html#fig:trees-graph-tree">2.4</a>) usually have a few specific topological properties:</p>
+<p>Phylogeny graphs (Figure <a href="phylogenies.html#fig:trees-graph-tree">2.4</a>) usually have a few specific topological properties. The mathematical properties of phylogenetic trees, including the many results that follow from these properties, are treated in detail by <span class="citation">Semple and Steel (<a href="#ref-semple2003">2003</a>)</span>.</p>
 <ul>
 <li><p>They are acyclic. This means that there is only one possible path along edges from one node to another. It isn’t possible to go in circles. Exceptions can arise, for example in cases of horizontal
 gene transfer or hybridization.</p></li>
@@ -431,7 +431,7 @@ Figure 2.6: The same tree as above, laid out in several different ways.
 </div>
 <div id="rotating-nodes" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Rotating nodes<a href="phylogenies.html#rotating-nodes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn’t convey any information. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure <a href="phylogenies.html#fig:trees-rotations">2.7</a>). The topology remains unchanged. It’s the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this – <a href="https://vimeo.com/148794860" class="uri">https://vimeo.com/148794860</a>. The major implication of this is that you should never read a phylogeny across the tips to see, for example, which species are more closely related. You always need to look at the structure of the phylogeny itself.</p>
+<p>One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn’t convey any information <span class="citation">(<a href="#ref-baum2012">Baum and Smith 2012</a>)</span>. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure <a href="phylogenies.html#fig:trees-rotations">2.7</a>). The topology remains unchanged. It’s the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this – <a href="https://vimeo.com/148794860" class="uri">https://vimeo.com/148794860</a>. The major implication of this is that you should never read a phylogeny across the tips to see, for example, which species are more closely related. You always need to look at the structure of the phylogeny itself.</p>
 <div class="figure"><span style="display:block;" id="fig:trees-rotations"></span>
 <img src="phylogenetic_biology_files/figure-html/trees-rotations-1.png" alt="The exact same phylogeny, drawn a few times with different node rotations." width="2100" />
 <p class="caption">
@@ -462,7 +462,7 @@ Figure 2.8: Several types of trees. In a chronogram, branch lengths are scaled a
 Figure 2.9: (A) A monophyletic group, <em>i.e.</em>, a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit.
 </p>
 </div>
-<p>Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and platypus. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these <span class="citation">(<a href="#ref-deQueiroz2020"><span class="nocase">deQueiroz and Cantino</span> 2020</a>)</span>.</p>
+<p>Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and platypus. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these <span class="citation">(<a href="#ref-dequeiroz2007">Queiroz 2007</a>; <a href="#ref-deQueiroz2020"><span class="nocase">deQueiroz and Cantino</span> 2020</a>)</span>.</p>
 <p>Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure <a href="phylogenies.html#fig:trees-groups">2.9</a>B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure <a href="phylogenies.html#fig:trees-groups">2.9</a>C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.</p>
 </div>
 <div id="polytomies" class="section level2 hasAnchor" number="2.7">
@@ -600,6 +600,9 @@ made using similar code.</p>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-baum2012" class="csl-entry">
+Baum, David A., and Stacey D. Smith. 2012. <em>Tree Thinking: An Introduction to Phylogenetic Biology</em>. Roberts; Company Publishers.
+</div>
 <div id="ref-darwin1859" class="csl-entry">
 Darwin, Charles. 1859. <em>The Origin of Species by Means of Natural Selection: Or, the Preservation of Favored Races in the Struggle for Life</em>.
 </div>
@@ -612,8 +615,17 @@ Haeckel, Ernst. 1897. <em>The Evolution of Man</em>. Vol. 1. D. Appleton.
 <div id="ref-R-ape" class="csl-entry">
 <span class="nocase">Paradis, Emmanuel, Simon Blomberg, Ben Bolker, et al.</span> 2024. <em>Ape: Analyses of Phylogenetics and Evolution</em>. <a href="https://github.com/emmanuelparadis/ape">https://github.com/emmanuelparadis/ape</a>.
 </div>
+<div id="ref-dequeiroz2007" class="csl-entry">
+Queiroz, Kevin de. 2007. <span>“Toward an Integrated System of Clade Names.”</span> <em>Systematic Biology</em> 56 (6): 956–74. <a href="https://doi.org/10.1080/10635150701656378">https://doi.org/10.1080/10635150701656378</a>.
+</div>
+<div id="ref-semple2003" class="csl-entry">
+Semple, Charles, and Mike Steel. 2003. <em>Phylogenetics</em>. Vol. 24. Oxford Lecture Series in Mathematics and Its Applications. Oxford University Press. <a href="https://doi.org/10.1093/oso/9780198509424.001.0001">https://doi.org/10.1093/oso/9780198509424.001.0001</a>.
+</div>
 <div id="ref-upham2019" class="csl-entry">
 Upham, Nathan S, Jacob A Esselstyn, and Walter Jetz. 2019. <span>“Inferring the Mammal Tree: Species-Level Sets of Phylogenies for Questions in Ecology, Evolution, and Conservation.”</span> <em>PLoS Biology</em> 17 (12): e3000494. <a href="https://doi.org/10.1371/journal.pbio.3000494">https://doi.org/10.1371/journal.pbio.3000494</a>.
+</div>
+<div id="ref-west2001" class="csl-entry">
+West, Douglas B. 2001. <em>Introduction to Graph Theory</em>. 2nd ed. Prentice Hall.
 </div>
 <div id="ref-yu2023" class="csl-entry">
 Yu, Guangchuang. 2023. <em>Data Integration, Manipulation and Visualization of Phylogenetic Trees</em>. Chapman; Hall/CRC.

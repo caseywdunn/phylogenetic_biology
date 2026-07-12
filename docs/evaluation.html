@@ -393,19 +393,19 @@ Figure 6.1: A hierarchical view of DNA substitution models. The number of degree
   \tag{6.3}
 \end{equation}\]</span></p>
 <p>We can compare this test statistic <span class="math inline">\(\delta\)</span> to the appropriate <span class="math inline">\(\chi^2\)</span> distribution to assess if the more complex model has a significantly greater likelihood. If not, we stick with the simpler model. It is important to note that it is only appropriate for comparing <em>nested</em> models.</p>
-<p>There are a few challenges to applying the LRT to model selection in phylogenetics <span class="citation">(<a href="#ref-posada2004model">Posada and Buckley 2004</a>)</span>. One issue is that the test presumes that one of the models is correct <span class="citation">(<a href="#ref-zhang1999performance">Zhang 1999</a>)</span>, but in phylogenetics models are always simplifications of the evolutionary process at hand. The impact of violating this assumption varies across datasets and analyses, but can lead to undesirable behavior in real-world applications.</p>
-<p>There are two other approaches commonly used in phylogenetic model selection. Where <span class="math inline">\(L_i\)</span> is the likelihood under model <span class="math inline">\(i\)</span>, <span class="math inline">\(k_i\)</span> is the degrees of freedom for the model, and <span class="math inline">\(n\)</span> is sample size (<em>e.g.</em>, number of sites in the alignment), these are the Akaike Information Criterion (AIC):</p>
+<p>There are a few challenges to applying the LRT to model selection in phylogenetics <span class="citation">(<a href="#ref-posada2001">Posada and Crandall 2001</a>; <a href="#ref-posada2004model">Posada and Buckley 2004</a>)</span>. One issue is that the test presumes that one of the models is correct <span class="citation">(<a href="#ref-zhang1999performance">Zhang 1999</a>)</span>, but in phylogenetics models are always simplifications of the evolutionary process at hand. The impact of violating this assumption varies across datasets and analyses, but can lead to undesirable behavior in real-world applications.</p>
+<p>There are two other approaches commonly used in phylogenetic model selection. Where <span class="math inline">\(L_i\)</span> is the likelihood under model <span class="math inline">\(i\)</span>, <span class="math inline">\(k_i\)</span> is the degrees of freedom for the model, and <span class="math inline">\(n\)</span> is sample size (<em>e.g.</em>, number of sites in the alignment), these are the Akaike Information Criterion (AIC) <span class="citation">(<a href="#ref-akaike1974">Akaike 1974</a>)</span>:</p>
 <p><span class="math display" id="eq:aic">\[\begin{equation}
   AIC_i = 2k_i - 2ln(L_i)
   \tag{6.4}
 \end{equation}\]</span></p>
-<p>And the Bayesian Information Criterion (BIC):</p>
+<p>And the Bayesian Information Criterion (BIC) <span class="citation">(<a href="#ref-schwarz1978">Schwarz 1978</a>)</span>:</p>
 <p><span class="math display" id="eq:bic">\[\begin{equation}
   BIC_i = k_iln(n) - 2ln(L_i)
   \tag{6.5}
 \end{equation}\]</span></p>
 <p>To apply either of these criteria, they are calculated for each model and the model with the <em>lowest</em> value is selected. Adding parameters increases the value, penalizing any increase in likelihood they provide. These criteria have multiple advantages over LRT, including that they can be used to compare non-nested models <span class="citation">(<a href="#ref-Burnham2002">Burnham and Anderson 2002</a>)</span>.</p>
-<p>To decide whether to use LRT, AIC, or BIC model selection criteria, you need to run a model selection criterion selection analysis. Just kidding. To decide which to use, you should apply your knowledge of phylogenetic methods critically. In many cases, these different approaches will lead to very similar decisions about model selection. As an example of a fairly typical approach, the program iqtree runs AIC and BIC analyses, but proceeds under the model selected by BIC unless you explicitly step in to apply a different model. If, on inspection of the analysis results, you find that AIC selects a very different model, it would be prudent to run your analyses under that model as well to see if it leads to differences that are relevant to the questions that motivate your project.</p>
+<p>To decide whether to use LRT, AIC, or BIC model selection criteria, you need to run a model selection criterion selection analysis. Just kidding. To decide which to use, you should apply your knowledge of phylogenetic methods critically. In many cases, these different approaches will lead to very similar decisions about model selection. As an example of a fairly typical approach, the program iqtree runs AIC and BIC analyses through ModelFinder <span class="citation">(<a href="#ref-kalyaanamoorthy2017">Kalyaanamoorthy et al. 2017</a>)</span>, but proceeds under the model selected by BIC unless you explicitly step in to apply a different model. If, on inspection of the analysis results, you find that AIC selects a very different model, it would be prudent to run your analyses under that model as well to see if it leads to differences that are relevant to the questions that motivate your project.</p>
 </div>
 <div id="adding-complexity-to-dna-evolution-models" class="section level3 hasAnchor" number="6.1.3">
 <h3><span class="header-section-number">6.1.3</span> Adding complexity to DNA evolution models<a href="evaluation.html#adding-complexity-to-dna-evolution-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -436,7 +436,7 @@ Figure 6.2: Four phylogenies in a sample, one focal phylogeny, and a table of sp
 <p>The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap <span class="citation">(<a href="#ref-felsenstein1985confidence">Felsenstein 1985a</a>)</span>. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with <span class="math inline">\(n\)</span> columns, bootstrapping generates a new matrix, also with <span class="math inline">\(n\)</span> columns, by resampling from the original matrix with replacement. Some columns from the original matrix won’t be sampled at all, some will be sampled once, and some will be sampled multiple times.</p>
 <p>Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated from the original data matrix) in the sample of bootstrap phylogenies. A branch frequency of 100% indicates that a branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.</p>
 <p>Note that I am not using the term “significance” when referring to bootstrap support. This is because bootstraps don’t have a clear statistical interpretation. It is a scale that varies from <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span>, but is not itself a significance. It just indicates how frequently a branch is recovered when the data columns are resampled. This gives a sense of how broad support is for the branch across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.</p>
-<p>Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process.</p>
+<p>Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process. One widely used example is the ultrafast bootstrap approximation <span class="citation">(<a href="#ref-hoang2018">Hoang et al. 2018</a>)</span>.</p>
 </div>
 </div>
 <div id="topology-tests" class="section level2 hasAnchor" number="6.3">
@@ -447,6 +447,9 @@ Figure 6.2: Four phylogenies in a sample, one focal phylogeny, and a table of sp
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-akaike1974" class="csl-entry">
+Akaike, Hirotugu. 1974. <span>“A New Look at the Statistical Model Identification.”</span> <em>IEEE Transactions on Automatic Control</em> 19 (6): 716–23. <a href="https://doi.org/10.1109/TAC.1974.1100705">https://doi.org/10.1109/TAC.1974.1100705</a>.
+</div>
 <div id="ref-Burnham2002" class="csl-entry">
 Burnham, KP, and DR Anderson. 2002. <em>Model Selection and Multimodel Inference: A Practical Information-Theoretic Approach</em>. 2nd ed. Springer. <a href="https://doi.org/10.1007/b97636">https://doi.org/10.1007/b97636</a>.
 </div>
@@ -459,8 +462,14 @@ Felsenstein, Joseph. 1985a. <span>“Confidence Limits on Phylogenies: An Approa
 <div id="ref-Goldman2000" class="csl-entry">
 Goldman, Nick, Jon P. Anderson, and Allen G. Rodrigo. 2000. <span>“Likelihood-Based Tests of Topologies in Phylogenetics.”</span> <em>Systematic Biology</em> 49 (4): 652–70. <a href="https://doi.org/10.1080/106351500750049752">https://doi.org/10.1080/106351500750049752</a>.
 </div>
+<div id="ref-hoang2018" class="csl-entry">
+Hoang, Diep Thi, Olga Chernomor, Arndt von Haeseler, Bui Quang Minh, and Le Sy Vinh. 2018. <span>“UFBoot2: Improving the Ultrafast Bootstrap Approximation.”</span> <em>Molecular Biology and Evolution</em> 35 (2): 518–22. <a href="https://doi.org/10.1093/molbev/msx281">https://doi.org/10.1093/molbev/msx281</a>.
+</div>
 <div id="ref-Hohna2014" class="csl-entry">
 Hohna, S., T. A. Heath, B. Boussau, M. J. Landis, F. Ronquist, and J. P. Huelsenbeck. 2014. <span>“Probabilistic Graphical Model Representation in Phylogenetics.”</span> Journal Article. <em>Syst Biol</em> 63 (5): 753–71. <a href="https://doi.org/10.1093/sysbio/syu039">https://doi.org/10.1093/sysbio/syu039</a>.
+</div>
+<div id="ref-kalyaanamoorthy2017" class="csl-entry">
+Kalyaanamoorthy, Subha, Bui Quang Minh, Thomas K. F. Wong, Arndt von Haeseler, and Lars S. Jermiin. 2017. <span>“ModelFinder: Fast Model Selection for Accurate Phylogenetic Estimates.”</span> <em>Nature Methods</em> 14 (6): 587–89. <a href="https://doi.org/10.1038/nmeth.4285">https://doi.org/10.1038/nmeth.4285</a>.
 </div>
 <div id="ref-kishino1989" class="csl-entry">
 Kishino, Hirohisa, and Masami Hasegawa. 1989. <span>“Evaluation of the Maximum Likelihood Estimate of the Evolutionary Tree Topologies from DNA Sequence Data, and the Branching Order in Hominoidea.”</span> <em>Journal of Molecular Evolution</em> 29 (2): 170–79. <a href="https://doi.org/10.1007/BF02100115">https://doi.org/10.1007/BF02100115</a>.
@@ -473,6 +482,12 @@ Minh, Bui Quang, Heiko A Schmidt, Olga Chernomor, et al. 2020. <span>“IQ-TREE 
 </div>
 <div id="ref-posada2004model" class="csl-entry">
 Posada, David, and Thomas R Buckley. 2004. <span>“Model Selection and Model Averaging in Phylogenetics: Advantages of Akaike Information Criterion and Bayesian Approaches over Likelihood Ratio Tests.”</span> <em>Systematic Biology</em> 53 (5): 793–808. <a href="https://doi.org/10.1080/10635150490522304">https://doi.org/10.1080/10635150490522304</a>.
+</div>
+<div id="ref-posada2001" class="csl-entry">
+Posada, David, and Keith A. Crandall. 2001. <span>“Selecting the Best-Fit Model of Nucleotide Substitution.”</span> <em>Systematic Biology</em> 50 (4): 580–601. <a href="https://doi.org/10.1080/106351501750435121">https://doi.org/10.1080/106351501750435121</a>.
+</div>
+<div id="ref-schwarz1978" class="csl-entry">
+Schwarz, Gideon. 1978. <span>“Estimating the Dimension of a Model.”</span> <em>The Annals of Statistics</em> 6 (2): 461–64. <a href="https://doi.org/10.1214/aos/1176344136">https://doi.org/10.1214/aos/1176344136</a>.
 </div>
 <div id="ref-Shimodaira1999" class="csl-entry">
 Shimodaira, H, and M Hasegawa. 1999. <span>“Multiple Comparisons of Log-Likelihoods with Applications to Phylogenetic Inference.”</span> <em>Molecular Biology and Evolution</em> 16 (8): 1114–14. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a026201">https://doi.org/10.1093/oxfordjournals.molbev.a026201</a>.

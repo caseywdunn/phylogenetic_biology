@@ -433,7 +433,7 @@ div.csl-indent {
 </div>
 <div id="morphology" class="section level4 hasAnchor" number="8.1.1.4">
 <h4><span class="header-section-number">8.1.1.4</span> Morphology<a href="additional-character-types.html#morphology" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs <span class="citation">(<a href="#ref-harmon2018phylogenetic">Harmon 2018, chap. 7</a>)</span>.</p>
+<p>Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs <span class="citation">(<a href="#ref-harmon2018phylogenetic">Harmon 2018, chap. 7</a>)</span>. The most widely used of these is the Mk model <span class="citation">(<a href="#ref-lewis2001">Lewis 2001</a>)</span>, a <span class="math inline">\(k\)</span>-state generalization of the Jukes-Cantor model in which all changes among <span class="math inline">\(k\)</span> states occur at equal rates.</p>
 </div>
 </div>
 <div id="ordinal-scale-types" class="section level3 hasAnchor" number="8.1.2">
@@ -465,7 +465,7 @@ div.csl-indent {
 <p>Measurement theory distinguishes several different scale types (for example, interval and ratio scales) that may all have continuous values. In phylogenetic comparative analyses, these distinctions are usually ignored, and the traits are analyzed using a common set of evolutionary models. Sometimes, ignoring these distinctions has little practical impact, but sometimes it has major consequences.</p>
 <div id="brownian-motion" class="section level3 hasAnchor" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> Brownian motion<a href="additional-character-types.html#brownian-motion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM). In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.</p>
+<p>The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM) <span class="citation">(<a href="#ref-felsenstein1973continuous">Felsenstein 1973</a>, <a href="#ref-felsenstein1985phylogenies">1985b</a>)</span>. In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.</p>
 <p>Under BM, the expected change in the trait value is zero. This is not because there is no change under Brownian motion. It is because increases are just as common as decreases. If you run the same BM simulation many times and average the results, the average change across all of them will be zero. Each one, however, can be quite different from the original value and from each other. This is because the variance of the trait value increases linearly with time. The longer two lineages evolve independently, or the faster the change, the more different their trait values are expected to become.</p>
 <p>Mathematically, Brownian motion can be written as</p>
 <p><span class="math display">\[
@@ -488,7 +488,7 @@ Figure 8.1: Multiple Brownian motion trajectories.
 </div>
 <div id="ornsteinuhlenbeck-models" class="section level3 hasAnchor" number="8.2.2">
 <h3><span class="header-section-number">8.2.2</span> Ornstein–Uhlenbeck models<a href="additional-character-types.html#ornsteinuhlenbeck-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Brownian motion assumes that there is no preferred trait value or directional trend in evolution. In reality, traits are often subject to constraints, such as stabilizing selection or metabolic constraints, that lead values to stay near a particular optimum. The Ornstein–Uhlenbeck (OU) model is a common variation of Brownian motion that can accommodate these constraints.</p>
+<p>Brownian motion assumes that there is no preferred trait value or directional trend in evolution. In reality, traits are often subject to constraints, such as stabilizing selection or metabolic constraints, that lead values to stay near a particular optimum. The Ornstein–Uhlenbeck (OU) model is a common variation of Brownian motion that can accommodate these constraints <span class="citation">(<a href="#ref-hansen1997">Hansen 1997</a>; <a href="#ref-butler2004">Butler and King 2004</a>)</span>.</p>
 <p>In the OU process, trait evolution is still driven by random fluctuations, but there is also a deterministic tendency for the trait value to move toward an optimum. The model can be written as</p>
 <p><span class="math display">\[
 dX(t) = \alpha(\theta - X(t))dt + \sigma dW(t)
@@ -502,11 +502,26 @@ dX(t) = \alpha(\theta - X(t))dt + \sigma dW(t)
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-butler2004" class="csl-entry">
+Butler, Marguerite A., and Aaron A. King. 2004. <span>“Phylogenetic Comparative Analysis: A Modeling Approach for Adaptive Evolution.”</span> <em>The American Naturalist</em> 164 (6): 683–95. <a href="https://doi.org/10.1086/426002">https://doi.org/10.1086/426002</a>.
+</div>
+<div id="ref-felsenstein1973continuous" class="csl-entry">
+Felsenstein, Joseph. 1973. <span>“<a href="https://www.ncbi.nlm.nih.gov/pubmed/4741844">Maximum-Likelihood Estimation of Evolutionary Trees from Continuous Characters</a>.”</span> <em>American Journal of Human Genetics</em> 25 (5): 471–92.
+</div>
+<div id="ref-felsenstein1985phylogenies" class="csl-entry">
+Felsenstein, Joseph. 1985b. <span>“Phylogenies and the Comparative Method.”</span> <em>The American Naturalist</em> 125 (1): 1–15. <a href="https://doi.org/10.1086/284325">https://doi.org/10.1086/284325</a>.
+</div>
+<div id="ref-hansen1997" class="csl-entry">
+Hansen, Thomas F. 1997. <span>“Stabilizing Selection and the Comparative Analysis of Adaptation.”</span> <em>Evolution</em> 51 (5): 1341–51. <a href="https://doi.org/10.1111/j.1558-5646.1997.tb01457.x">https://doi.org/10.1111/j.1558-5646.1997.tb01457.x</a>.
+</div>
 <div id="ref-harmon2018phylogenetic" class="csl-entry">
 Harmon, Luke. 2018. <em>Phylogenetic Comparative Methods: Learning from Trees</em>. <a href="https://lukejharmon.github.io/pcm/">https://lukejharmon.github.io/pcm/</a>.
 </div>
 <div id="ref-houle2011measurement" class="csl-entry">
 Houle, David, Christophe Pélabon, Günter P Wagner, and Thomas F Hansen. 2011. <span>“Measurement and Meaning in Biology.”</span> <em>The Quarterly Review of Biology</em> 86 (1): 3–34. <a href="https://doi.org/10.1086/658408">https://doi.org/10.1086/658408</a>.
+</div>
+<div id="ref-lewis2001" class="csl-entry">
+Lewis, Paul O. 2001. <span>“A Likelihood Approach to Estimating Phylogeny from Discrete Morphological Character Data.”</span> <em>Systematic Biology</em> 50 (6): 913–25. <a href="https://doi.org/10.1080/106351501753462876">https://doi.org/10.1080/106351501753462876</a>.
 </div>
 </div>
             </section>

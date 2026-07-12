@@ -4,7 +4,7 @@ author: "Casey W. Dunn"
 version: 1.0.0
 major_edition_year: 2026
 isbn_paperback: "979-8-9934524-0-1"
-isbn_hardback: "979-8-9934524-1-8"
+isbn_hardcover: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
 date: "2026-07-12"
@@ -50,7 +50,7 @@ I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read 
 
 There are several ways you can get this book:
 
-- You can read an html version for free at <https://dunnlab.org/phylogenetic_biology/>
+- You can read an HTML version for free at <https://dunnlab.org/phylogenetic_biology/>
 
 - The book is rendered from source code available at <https://github.com/caseywdunn/phylogenetic_biology>, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
 
@@ -58,13 +58,13 @@ There are several ways you can get this book:
 
 - You can purchase a paperback from your favorite book retailer. Search for ISBN 979-8-9934524-0-1.
 
-- You can purchase a hardback from your favorite book retailer. Search for ISBN 979-8-9934524-1-8.
+- You can purchase a hardcover from your favorite book retailer. Search for ISBN 979-8-9934524-1-8.
 
 Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at <https://github.com/caseywdunn/phylogenetic_biology/issues>.
 
 You are currently reading the First Edition (Version 1.0.0) of the book. Please cite it as follows:
 
-> Dunn CW. Phylogenetic Biology. First Edition. New Haven, CT: Casey W. Dunn; 2026. ISBN 979-8-9934524-0-1. doi:10.5281/zenodo.17267993
+> Dunn CW. Phylogenetic Biology. First Edition. New Haven, CT: Casey W. Dunn; 2026. ISBN 979-8-9934524-0-1. https://doi.org/10.5281/zenodo.17267993
 
 This book follows [semantic versioning](https://semver.org/) (major.minor.patch). The major version is the edition: a new edition marks a substantial revision and carries a new ISBN, minor versions add or revise content while keeping earlier citations valid, and patch versions make editorial corrections. The online edition at <https://dunnlab.org/phylogenetic_biology/> is updated continuously as new versions are released, while each released version is permanently archived on Zenodo through the DOI above.
 
@@ -128,11 +128,11 @@ Phylogenetic biology is the study of evolutionary relationships, and the use of 
 
 At the dawn of the field, in the second half of the 19th century [@darwin1859; @haeckel1897], phylogenetic biology was largely a speculative endeavor. People looked at similarities and differences across organisms, and made hypotheses about the evolutionary relationships that would give rise to those patterns. It wasn't until the second half of the 20th century that explicit methods were developed to infer phylogenetic relationships [@hennig1966]. This ushered in decades of accelerating phylogenetic methods development that continues to this day. The introduction of explicit model-based approaches to phylogenetic inference was particularly influential [@Felsenstein:1981vk]. These new methods were computationally intensive, but fortunately their rise paralleled the rapid development and widespread availability of powerful computers. 
 
-Beginning in the late 1980s, molecular data became widely used for building phylogenies of extant organisms with sequence fragments of a few genes. Starting in about 2010, new generations of high-throughput sequencing technology made it possible to collect sequences for thousands of genes from a broad diversity of organisms in a single study, and right now we are in the earliest days of building phylogenies from broadly sampled high-quality chromosome-level genome assemblies. 
+Beginning in the late 1980s, molecular data became widely used for building phylogenies of extant organisms with sequence fragments of a few genes. Starting in about 2010, new generations of high-throughput sequencing technology made it possible to collect sequences for thousands of genes from a broad diversity of organisms in a single study [@lemmon2013], and right now we are in the earliest days of building phylogenies from broadly sampled high-quality chromosome-level genome assemblies. 
 
-Phylogenetic biology has always been concerned with figuring out evolutionary relationships. This domain of inquiry is referred to as phylogenetic inference. Phylogenetic inference has been vital to improving the classification of species (phylogenetic taxonomy) and to reconstructing key features in the evolutionary history of many groups of organisms, and it is of deep interest to those who know the organisms well.
+Phylogenetic biology has always been concerned with figuring out evolutionary relationships. This domain of inquiry is referred to as phylogenetic inference. Phylogenetic inference has been vital to improving the classification of species (phylogenetic taxonomy) [@dequeiroz2007] and to reconstructing key features in the evolutionary history of many groups of organisms, and it is of deep interest to those who know the organisms well.
 
-Many questions in biology require knowing evolutionary relationships, even if those evolutionary relationships are themselves not of central interest to the investigator. This has led to the rise of another domain often referred to as phylogenetic comparative biology. Instead of ending with trees, as many phylogenetic inference projects do, phylogenetic comparative projects usually start with trees and use them to study the evolution of traits. Comparative questions include whether there is evolutionary covariance between traits, or shifts in rates of evolution along particular branches (also referred to as edges). Phylogenetic comparative methods have become an increasingly large part of the field.
+Many questions in biology require knowing evolutionary relationships, even if those evolutionary relationships are themselves not of central interest to the investigator. This has led to the rise of another domain often referred to as phylogenetic comparative biology [@felsenstein1985phylogenies]. Instead of ending with trees, as many phylogenetic inference projects do, phylogenetic comparative projects usually start with trees and use them to study the evolution of traits. Comparative questions include whether there is evolutionary covariance between traits, or shifts in rates of evolution along particular branches (also referred to as edges). Phylogenetic comparative methods have become an increasingly large part of the field.
 
 Though phylogeny initially sprung from the field of comparative morphology, and much of the initial focus was on building and analyzing trees with morphological data and using them to study the evolution of morphology, the field has rapidly expanded to encompass many other categories of data. Even so, morphology continues to be vital to building phylogenies in many contexts, including when fossils are available. While most phylogenetic inference is now based on molecular data, phylogenetic comparative methods are routinely applied to all sorts of data and questions. Phylogenetic comparative methods now play important roles in the study of physiology, ecology, genomics, medicine, and most other parts of biology. 
 
@@ -240,8 +240,8 @@ helpful to turn to math.
 \includegraphics[width=2.5in]{figures/graph} \caption{Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating.}(\#fig:trees-graph)
 \end{figure}
 
-A phylogeny is a specific instance of a mathematical object known as a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)). 
-A graph consists of nodes (also called vertices), often represented as circles, connected by edges, often 
+A phylogeny is a specific instance of a mathematical object known as a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) [@west2001].
+A graph consists of nodes (also called vertices), often represented as circles, connected by edges, often
 represented by lines (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
 For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.
 
@@ -249,7 +249,7 @@ For example, nodes could be people, and edges family relationships, connections 
 \includegraphics[width=2.89in]{figures/graph_tree} \caption{Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (*i.e.*, there are no paths that go in circles). The graph is bifurcating -- the root node has two branches that connect it to its children; the other internal nodes each have three branches (one that connects to the parent, two to children); and the tips each have one branch (that connects to its parent).}(\#fig:trees-graph-tree)
 \end{figure}
 
-Phylogeny graphs (Figure \@ref(fig:trees-graph-tree)) usually have a few specific topological properties:
+Phylogeny graphs (Figure \@ref(fig:trees-graph-tree)) usually have a few specific topological properties. The mathematical properties of phylogenetic trees, including the many results that follow from these properties, are treated in detail by @semple2003.
 
 - They are acyclic. This means that there is only one possible path along edges from one node to another. It isn't possible to go in circles. Exceptions can arise, for example in cases of horizontal 
 gene transfer or hybridization.
@@ -305,7 +305,7 @@ This gets big really, really fast as $n$ increases. For a phylogeny of 5 tips th
 
 ## Rotating nodes
 
-One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn't convey any information. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure \@ref(fig:trees-rotations)). The topology remains unchanged. It's the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this -- <https://vimeo.com/148794860>. The major implication of this is that you should never read a phylogeny across the tips to see, for example, which species are more closely related. You always need to look at the structure of the phylogeny itself.
+One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn't convey any information [@baum2012]. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure \@ref(fig:trees-rotations)). The topology remains unchanged. It's the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this -- <https://vimeo.com/148794860>. The major implication of this is that you should never read a phylogeny across the tips to see, for example, which species are more closely related. You always need to look at the structure of the phylogeny itself.
 
 ![(\#fig:trees-rotations)The exact same phylogeny, drawn a few times with different node rotations.](phylogenetic_biology_files/figure-latex/trees-rotations-1.pdf) 
 
@@ -329,7 +329,7 @@ A convenient way to designate groups of organisms is by their most recent common
 
 ![(\#fig:trees-groups)(A) A monophyletic group, *i.e.*, a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit.](phylogenetic_biology_files/figure-latex/trees-groups-1.pdf) 
 
-Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and platypus. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@deQueiroz2020].
+Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and platypus. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@dequeiroz2007; @deQueiroz2020].
 
 Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
 
@@ -757,15 +757,15 @@ To accommodate each of these deviations from JC69, we need to add parameters to 
 
 (To keep things compact, I have followed the convention of placing $-$ in the diagonal elements, which is short for "whatever it takes to make the rows of $\mathbf{Q}$ sum to 0".)
 
-This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along a branch to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
+This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution [@tavare1986]. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along a branch to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
 
 If we let all the parameters in the GTR model (Equation \@ref(eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is to clamp some of them. In fact, by comparison of Equations \@ref(eq:jc69-expanded) and \@ref(eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free in JC69.
 
 There are a variety of other commonly used models that clamp these parameters in different ways, some leaving more freedom than others. Some that are widely used and have very specific biological motivation have their own names, like JC69 (the motivation for this model is that it is so simple). Examples of other named models include:
 
-- HKY85 differs from GTR in setting some rate modifiers equal to each other so that there are two rates, $b=e$ for transitions (A to G, and C to T) and $a=c=d=f$ for transversions (all other changes). It still lets all the $\pi$ parameters vary independently.
+- HKY85 [@hasegawa1985] differs from GTR in setting some rate modifiers equal to each other so that there are two rates, $b=e$ for transitions (A to G, and C to T) and $a=c=d=f$ for transversions (all other changes). It still lets all the $\pi$ parameters vary independently, unlike the earlier two-parameter model of @kimura1980, which also distinguishes transition and transversion rates but holds the base frequencies equal.
 
-- F81 differs from HKY85 in that it sets all the rate modifiers to 1, so that $a=b=c=d=e=f=1$. It is almost as simple as JC69, except that the $\pi$ parameters vary independently.
+- F81 [@Felsenstein:1981vk] differs from HKY85 in that it sets all the rate modifiers to 1, so that $a=b=c=d=e=f=1$. It is almost as simple as JC69, except that the $\pi$ parameters vary independently.
 
 We now have a more complex model of DNA evolution that we can simplify by setting the parameters to equal each other and/or clamping them to specific values. It can accommodate much of the variation observed in actual DNA sequence data. We could use it to simulate data just as we did in Figure \@ref(fig:sim-saturation), but taking into consideration things like unequal nucleotide frequencies and differences in rates of change between nucleotides. This is getting us much closer to something that provides real biological insight.
 
@@ -918,6 +918,8 @@ Here we have built up the conceptual, mathematical, statistical, and computation
 
 - As a grad student, I learned much of what I present here from @swofford1996molecular. This is such a lucid introduction to the likelihood of molecular sequence data on a phylogeny.
 
+- @yang2014 gives a thorough and rigorous treatment of these substitution models and the statistical framework built on them.
+
 - My own thinking about presenting this material was heavily influenced by Paul Lewis's wonderful lectures at the annual Workshop on Molecular Evolution at Woods Hole. Some of his lectures are now available online as part of the excellent Phylo Seminar at <https://www.youtube.com/channel/UCbAzhfySv7nLCrNYqZvBSMg>, starting with <https://www.youtube.com/watch?v=1r4z0YJq580&t=2111s>.
 
 - A great introduction to continuous time models by John Huelsenbeck is available at <https://revbayes.github.io/tutorials/dice/>.
@@ -930,7 +932,7 @@ In the previous chapter we built modeling machinery that allowed us to specify a
 
 We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data [@Felsenstein:1981vk].
 
-This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the likelihood. Searching for the most likely hypothesis is referred to as maximum likelihood (ML).
+This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the likelihood. Searching for the most likely hypothesis is referred to as maximum likelihood (ML). A comprehensive reference on the whole endeavor of phylogenetic inference is @felsenstein2004.
 
 ## Probability of a single history
 
@@ -1124,13 +1126,13 @@ The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has fo
 
 Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.
 
-This might sound simple, but it isn't. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima.
+This might sound simple, but it isn't. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima. Widely used maximum likelihood inference programs include RAxML [@stamatakis2014] and IQ-TREE [@nguyen2015].
 
 Optimization of calculations becomes very important. For example, it isn't necessary to recalculate all values on each new topology, since some of the calculations from previous topologies remain relevant [@Felsenstein:1981vk].
 
 ## Optimality criteria
 
-Here we used likelihood as an optimality criterion to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony. In parsimony, the minimum number of changes along branches needed to explain the data at the tips is used as the criterion to evaluate each topology. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
+Here we used likelihood as an optimality criterion to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony. In parsimony, the minimum number of changes along branches needed to explain the data at the tips is used as the criterion to evaluate each topology [@fitch1971]. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
 
 Under some conditions parsimony and likelihood will recover similar topologies, but often they do not. This is because they are doing different things that under many conditions lead to different results [@steel2000parsimony]. For example, we do not always expect the simplest possible explanation for a given pattern to be the best explanation. If a character has a high rate of evolutionary change, then we expect many changes on a tree rather than the fewest possible. This is accommodated in a likelihood framework.
 
@@ -1248,7 +1250,7 @@ It isn't enough to collect and assemble sequence data from the taxa of interest.
 
 Like assembly, the optimal approach for identifying homologous sequences depends greatly on the enrichment strategy used. This step is quite straightforward when targeted capture and PCR are used as enrichment strategies, because the data are from specific known regions that were often selected in part because their homology is easier to assess.
 
-In some cases, such as with closely related viruses, genomes can be directly aligned with each other along their full lengths. In larger genomes and transcriptomes, protein coding sequences are often extracted from the assemblies and are the focus of phylogenetic analyses. There are various approaches to identifying homologous protein coding genes across taxa. One is to identify sequences for a preselected panel of genes that are selected because they tend to be present in most datasets, they have properties of molecular evolution that are well-suited to phylogenetic analysis, and their homology is thought to be easier to assess. Another is to compare all gene sequences across all species to identify homologous regions. This is more computational work, but has the advantage of optimizing gene selection to the data and question at hand.
+In some cases, such as with closely related viruses, genomes can be directly aligned with each other along their full lengths. In larger genomes and transcriptomes, protein coding sequences are often extracted from the assemblies and are the focus of phylogenetic analyses. There are various approaches to identifying homologous protein coding genes across taxa. One is to identify sequences for a preselected panel of genes that are selected because they tend to be present in most datasets, they have properties of molecular evolution that are well-suited to phylogenetic analysis, and their homology is thought to be easier to assess. Another is to compare all gene sequences across all species to identify homologous regions, using tools such as OrthoFinder [@emms2019]. This is more computational work, but has the advantage of optimizing gene selection to the data and question at hand.
 
 ## Working with publicly available data
 
@@ -1266,9 +1268,9 @@ Based on this overview, you can assess which types of data (*i.e.*, which data p
 
 ## Homologous sites
 
-Once you have collected homologous sequences for one or more genome regions across your taxa of interest, you next need to identify homologous nucleotide sites within these regions. This process is referred to as multiple sequence alignment (MSA). Rather than rely on explicit models of molecular evolution, multiple sequence alignment usually relies on similarities between sequences. The general idea is to slide the sequences along each other and insert gaps as needed so that similarity at each site is optimized while reducing the number of gaps introduced. 
+Once you have collected homologous sequences for one or more genome regions across your taxa of interest, you next need to identify homologous nucleotide sites within these regions. This process is referred to as multiple sequence alignment (MSA). Rather than rely on explicit models of molecular evolution, multiple sequence alignment usually relies on similarities between sequences. The general idea is to slide the sequences along each other and insert gaps as needed so that similarity at each site is optimized while reducing the number of gaps introduced. Widely used multiple sequence alignment programs include MAFFT [@katoh2013] and MUSCLE [@edgar2004].
 
-The output of multiple sequence alignment is a matrix. Each row is a taxon that will correspond to a tip in the phylogeny. Each column is a single nucleotide site that is hypothesized to be homologous across taxa. There are multiple file formats that are used to store aligned sequences, including fasta, nexus, and phylip.
+The output of multiple sequence alignment is a matrix. Each row is a taxon that will correspond to a tip in the phylogeny. Each column is a single nucleotide site that is hypothesized to be homologous across taxa. There are multiple file formats that are used to store aligned sequences, including fasta, nexus [@maddison1997nexus], and phylip.
 
 ## Combining information across multiple genome regions
 
@@ -1363,16 +1365,16 @@ The simplest is to slightly modify the way we compare the log likelihoods, so th
 
 We can compare this test statistic $\delta$ to the appropriate $\chi^2$ distribution to assess if the more complex model has a significantly greater likelihood. If not, we stick with the simpler model. It is important to note that it is only appropriate for comparing *nested* models.
 
-There are a few challenges to applying the LRT to model selection in phylogenetics [@posada2004model]. One issue is that the test presumes that one of the models is correct [@zhang1999performance], but in phylogenetics models are always simplifications of the evolutionary process at hand. The impact of violating this assumption varies across datasets and analyses, but can lead to undesirable behavior in real-world applications.
+There are a few challenges to applying the LRT to model selection in phylogenetics [@posada2001; @posada2004model]. One issue is that the test presumes that one of the models is correct [@zhang1999performance], but in phylogenetics models are always simplifications of the evolutionary process at hand. The impact of violating this assumption varies across datasets and analyses, but can lead to undesirable behavior in real-world applications.
 
-There are two other approaches commonly used in phylogenetic model selection. Where $L_i$ is the likelihood under model $i$, $k_i$ is the degrees of freedom for the model, and $n$ is sample size (*e.g.*, number of sites in the alignment), these are the Akaike Information Criterion (AIC):
+There are two other approaches commonly used in phylogenetic model selection. Where $L_i$ is the likelihood under model $i$, $k_i$ is the degrees of freedom for the model, and $n$ is sample size (*e.g.*, number of sites in the alignment), these are the Akaike Information Criterion (AIC) [@akaike1974]:
 
 \begin{equation} 
   AIC_i = 2k_i - 2ln(L_i)
   (\#eq:aic)
 \end{equation}
 
-And the Bayesian Information Criterion (BIC):
+And the Bayesian Information Criterion (BIC) [@schwarz1978]:
 
 \begin{equation} 
   BIC_i = k_iln(n) - 2ln(L_i)
@@ -1381,7 +1383,7 @@ And the Bayesian Information Criterion (BIC):
 
 To apply either of these criteria, they are calculated for each model and the model with the *lowest* value is selected. Adding parameters increases the value, penalizing any increase in likelihood they provide. These criteria have multiple advantages over LRT, including that they can be used to compare non-nested models [@Burnham2002].
 
-To decide whether to use LRT, AIC, or BIC model selection criteria, you need to run a model selection criterion selection analysis. Just kidding. To decide which to use, you should apply your knowledge of phylogenetic methods critically. In many cases, these different approaches will lead to very similar decisions about model selection. As an example of a fairly typical approach, the program iqtree runs AIC and BIC analyses, but proceeds under the model selected by BIC unless you explicitly step in to apply a different model. If, on inspection of the analysis results, you find that AIC selects a very different model, it would be prudent to run your analyses under that model as well to see if it leads to differences that are relevant to the questions that motivate your project.
+To decide whether to use LRT, AIC, or BIC model selection criteria, you need to run a model selection criterion selection analysis. Just kidding. To decide which to use, you should apply your knowledge of phylogenetic methods critically. In many cases, these different approaches will lead to very similar decisions about model selection. As an example of a fairly typical approach, the program iqtree runs AIC and BIC analyses through ModelFinder [@kalyaanamoorthy2017], but proceeds under the model selected by BIC unless you explicitly step in to apply a different model. If, on inspection of the analysis results, you find that AIC selects a very different model, it would be prudent to run your analyses under that model as well to see if it leads to differences that are relevant to the questions that motivate your project.
 
 ### Adding complexity to DNA evolution models
 
@@ -1421,7 +1423,7 @@ Bootstrapping is used to generate many new matrices (typically at least a hundre
 
 Note that I am not using the term "significance" when referring to bootstrap support. This is because bootstraps don't have a clear statistical interpretation. It is a scale that varies from $0$ to $1$, but is not itself a significance. It just indicates how frequently a branch is recovered when the data columns are resampled. This gives a sense of how broad support is for the branch across characters, but is quite complicated in reality. For example, some variation across bootstrap replicates is due to resampling, but sometimes it is just due to the stochastic nature of heuristic maximum likelihood searches.
 
-Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process.
+Many phylogenetic inference programs do not run full independent maximum likelihood searches on each bootstrap replicate. Instead, they borrow information across replicates, such as optimal starting trees, to speed up the process. One widely used example is the ultrafast bootstrap approximation [@hoang2018].
 
 ## Topology tests
 
@@ -1443,7 +1445,7 @@ ML and bootstraps are widely used and are a critical foundation for many phyloge
 
 All analyses include a variety of tradeoffs, and the issues listed above are often mitigated by the multiple upsides of an ML bootstrap analysis framework. It also greatly helps that there are decades of experience with ML analyses that help contextualize and interpret ML bootstrap results. This work has produced ML methods and software packages that are highly optimized for computational efficiency, enabling the routine application of these approaches to very large datasets.
 
-Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above [@holder2003, @huelsenbeck2001mrbayes, @larget1999markov, @chen2014bayesian]. Rather than focus on a single "best" topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters. 
+Another analysis framework, Bayesian statistics, directly addresses all of the issues listed above [@yangrannala1997; @holder2003; @huelsenbeck2001mrbayes; @larget1999markov; @chen2014bayesian]. Rather than focus on a single "best" topology, it provides a set of hypotheses consistent with the data. The frequencies of these hypotheses in the sample are the expected probabilities of the hypotheses given the data. These frequencies have a clear probabilistic interpretation, unlike the bootstrap support values. Bayesian statistics and likelihood have deep mathematical connections, so we will be able to build directly on the foundation established in previous chapters. 
 
 ## Bayesian statistics
 
@@ -1470,7 +1472,7 @@ To calculate the posterior probability of a phylogenetic hypothesis, we need to 
 
 What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won't.
 
-Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling [@metropolis1953]. MCMC is a widely used method to approximate probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypotheses that are either rejected or accepted based on a specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
+Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling [@metropolis1953; @hastings1970]. MCMC is a widely used method to approximate probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypotheses that are either rejected or accepted based on a specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
 
 Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate our test statistic as the ratio of the posterior probability of $H^*$ to the posterior probability of $H$:
 
@@ -1493,7 +1495,7 @@ MCMC produces a sample of model parameters and topologies with branch lengths. T
 
 ## Bayesian phylogenetic inference in practice
 
-There are a variety of practical considerations to implementing a Bayesian phylogenetic analysis with MCMC. These include:
+There are a variety of practical considerations to implementing a Bayesian phylogenetic analysis with MCMC. These analyses are carried out with widely used software packages such as MrBayes [@huelsenbeck2001mrbayes; @ronquist2012] and BEAST [@drummond2007]. The practical considerations include:
 
 - Selecting the appropriate model. Many of the same considerations we reviewed in the context of likelihood apply here. 
 - Selecting appropriate priors on topology, branch length, and model parameters.
@@ -1572,7 +1574,7 @@ Since there are 4 possible DNA nucleotides and codons are 3 nucleotides long, th
 
 #### Morphology
 
-Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs [@harmon2018phylogenetic, chapter 7].
+Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs [@harmon2018phylogenetic, chapter 7]. The most widely used of these is the Mk model [@lewis2001], a $k$-state generalization of the Jukes-Cantor model in which all changes among $k$ states occur at equal rates.
 
 ### Ordinal scale types
 
@@ -1607,7 +1609,7 @@ Measurement theory distinguishes several different scale types (for example, int
 
 ### Brownian motion
 
-The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM). In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.
+The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM) [@felsenstein1973continuous; @felsenstein1985phylogenies]. In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.
 
 Under BM, the expected change in the trait value is zero. This is not because there is no change under Brownian motion. It is because increases are just as common as decreases. If you run the same BM simulation many times and average the results, the average change across all of them will be zero. Each one, however, can be quite different from the original value and from each other. This is because the variance of the trait value increases linearly with time. The longer two lineages evolve independently, or the faster the change, the more different their trait values are expected to become. 
 
@@ -1637,7 +1639,7 @@ The BM model is primarily used because it provides a mathematically tractable ap
 
 ### Ornstein–Uhlenbeck models
 
-Brownian motion assumes that there is no preferred trait value or directional trend in evolution. In reality, traits are often subject to constraints, such as stabilizing selection or metabolic constraints, that lead values to stay near a particular optimum. The Ornstein–Uhlenbeck (OU) model is a common variation of Brownian motion that can accommodate these constraints. 
+Brownian motion assumes that there is no preferred trait value or directional trend in evolution. In reality, traits are often subject to constraints, such as stabilizing selection or metabolic constraints, that lead values to stay near a particular optimum. The Ornstein–Uhlenbeck (OU) model is a common variation of Brownian motion that can accommodate these constraints [@hansen1997; @butler2004].
 
 In the OU process, trait evolution is still driven by random fluctuations, but there is also a deterministic tendency for the trait value to move toward an optimum. The model can be written as
 
@@ -1699,7 +1701,7 @@ By definition, in a chronogram branch lengths are in units of time. The age of e
 
 The process of creating a chronogram is referred to as time calibration. In essence, external information about the ages of some nodes is used to constrain the ages of other nodes.
 
-If the rate of evolution were uniform and did not vary in different lineages, then the branch lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing branch lengths by the rate of change. For example, if the branch lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions per million years, then dividing each branch length by 2 would give a chronogram where the units of branch length are millions of years. This is called clock-like evolution -- changes in characters are like regular ticks on a clock. No real data evolve in a perfectly clock-like way, so time calibration of phylogenies instead relies on relaxed clock models that allow local variations in evolutionary rate.
+If the rate of evolution were uniform and did not vary in different lineages, then the branch lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing branch lengths by the rate of change. For example, if the branch lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions per million years, then dividing each branch length by 2 would give a chronogram where the units of branch length are millions of years. This is called clock-like evolution -- changes in characters are like regular ticks on a clock [@zuckerkandl1965]. No real data evolve in a perfectly clock-like way, so time calibration of phylogenies instead relies on relaxed clock models that allow local variations in evolutionary rate [@sanderson1997; @drummond2006].
 
 If all the tip nodes of a phylogeny are the same distance from the root, the tree is referred to as being ultrametric. If all the tips on a chronogram are sampled at the same time, then the chronogram is expected to be ultrametric because the same amount of time has elapsed from the root to each tip. An ultrametric tree is not necessarily a chronogram, though. Some of the internal nodes may have ages that violate branch lengths proportional to time, or a phylogram could be constrained to be ultrametric without calibrating any of the branch lengths according to time.
 
@@ -1719,7 +1721,7 @@ Consider this same task in terms of branch lengths, rather than node ages. From 
 
 The use of character data and time calibrations to infer time-calibrated phylogenies falls into two broad categories. The first is to use information from fossils (or other historical data) to constrain the ages of internal nodes. A Bayesian approach provides a natural framework for this -- node ages can be specified as priors on the tree. For example, if a given fossil is known to fall within a particular clade, then the most recent common ancestor of that clade can be constrained to be at least as old as the fossil and possibly older. 
 
-While this can work well in some situations, there are several drawbacks to this method. In practice, it is also necessary to place maximum ages on some of the nodes to keep the time calibration from pushing everything way back in time. Given the incompleteness of the fossil record, this is not as straightforward as constraining the minimum age of a node. If we have a fossil we can assert that the clade that contains it can be no younger than that specimen, though it may be much older. But it is harder to assert a maximum age, given that we just might not have fossils for older organisms that existed in the clade. Applying maximum ages often relies on expertise and additional information, such as knowledge that a given land mass where the organisms are exclusively found did not exist before a particular time.
+While this can work well in some situations, there are several drawbacks to this method. In practice, it is also necessary to place maximum ages on some of the nodes to keep the time calibration from pushing everything way back in time. Given the incompleteness of the fossil record, this is not as straightforward as constraining the minimum age of a node. If we have a fossil we can assert that the clade that contains it can be no younger than that specimen, though it may be much older. But it is harder to assert a maximum age, given that we just might not have fossils for older organisms that existed in the clade. Applying maximum ages often relies on expertise and additional information, such as knowledge that a given land mass where the organisms are exclusively found did not exist before a particular time. Careful justification of fossil calibrations is essential, and best practices have been formalized to make them explicit and reproducible [@parham2012].
 
 The model known as the "fossilized birth–death" (FBD) process doesn't use fossils as external constraints on internal nodes; instead it includes fossils right in the tree as their own tips [@heath2014calibration]. Unlike extant tips, which all have the same age (*i.e.*, today), the ages of these fossil tips are then constrained with geological data. This approach provides the ability to also include parameters for fossil preservation and sampling. FBD methods require that the character matrix includes data that can be scored in the fossils. The FBD process has since grown into a broad family of models with applications spanning paleobiology, macroevolution, and epidemiology; @wright2022integrating provide an accessible overview.
 
@@ -1737,7 +1739,7 @@ There are many applications of ancestral character state reconstruction, and lea
 
 We already have all of the machinery we need to reconstruct discrete ancestral states under a model of evolution. In the chapters on simulation and inference we described the evolution of a discrete character with a rate matrix $\mathbf{Q}$, and we saw that the probability of moving from one state to another along a branch of length $t$ is given by the matrix exponential $\mathbf{P}(t) = e^{\mathbf{Q}t}$ (Equation \@ref(eq:jc69-prob)). The same model that let us simulate data and compute the likelihood of a tree also lets us compute the probability of each state at each internal node.
 
-The simplest Markovian model for a discrete character with $k$ states is the Mk model, a direct generalization of the Jukes-Cantor model to $k$ states in which all changes occur at the same rate. Just as with DNA models, we can relax this assumption to allow different rates for different transitions.
+The simplest Markovian model for a discrete character with $k$ states is the Mk model [@lewis2001], a direct generalization of the Jukes-Cantor model to $k$ states in which all changes occur at the same rate. Just as with DNA models, we can relax this assumption to allow different rates for different transitions.
 
 There are two distinct questions we might ask about the ancestral states, and it is important to keep them separate. The first is the *marginal* reconstruction -- for a single node, what is the probability of each possible state, averaging over all possible states at every other internal node? The second is the *joint* reconstruction -- what is the single most probable assignment of states to *all* internal nodes considered together? The marginal reconstruction is the more commonly reported, because it gives us a probability for each state at each node, and therefore an explicit measure of uncertainty. It is the one we focus on here.
 
@@ -1776,7 +1778,7 @@ Just as with discrete characters, we can quantify the uncertainty in these estim
 
 ## Cautions and limitations
 
-Reconstructions are only as good as the model. Every reconstructed state is conditional on the model of evolution we assumed, the tree we clamped, and the branch lengths we used. Change the model and the reconstruction can change, and reconstructions can be strikingly sensitive to this -- a badly misspecified model can yield confident but wrong ancestral states [@revell2025ancestral]. A reconstruction is best understood as a statement of the form "if the character evolved like this, on this tree, then the ancestor probably looked like this."
+Reconstructions are only as good as the model [@cunningham1998]. Every reconstructed state is conditional on the model of evolution we assumed, the tree we clamped, and the branch lengths we used. Change the model and the reconstruction can change, and reconstructions can be strikingly sensitive to this -- a badly misspecified model can yield confident but wrong ancestral states [@revell2025ancestral]. A reconstruction is best understood as a statement of the form "if the character evolved like this, on this tree, then the ancestor probably looked like this."
 
 Uncertainty grows with depth. Both the discrete pies and the continuous confidence intervals tend to become less informative as we move away from the tips and toward the root. Deep ancestral states, which are often the ones we most want to know, are frequently the ones we can say the least about.
 
@@ -1877,7 +1879,7 @@ The diagonal, running from top left to bottom right, holds the variances, all eq
 
 ## Phylogenetic generalized least squares
 
-Independent contrasts turn out to be one instance of a more general and flexible framework. That framework is phylogenetic generalized least squares, abbreviated PGLS [@grafen1989phylogenetic; @symonds2014primer].
+Independent contrasts turn out to be one instance of a more general and flexible framework. That framework is phylogenetic generalized least squares, abbreviated PGLS [@grafen1989phylogenetic; @freckleton2002; @symonds2014primer].
 
 Ordinary least squares regression assumes that the residuals, the deviations of the data from the fitted line, are independent and identically distributed. Generalized least squares relaxes this assumption by allowing the residuals to have a specified covariance structure. And we have just built exactly such a structure: the phylogenetic variance-covariance matrix $\boldsymbol{\Sigma}$ of Equation \@ref(eq:comp-vcv). In PGLS we fit a regression in which the residuals are assumed to covary according to $\boldsymbol{\Sigma}$. The method effectively down-weights the contribution of species that share a great deal of history, so that a cluster of closely related species counts for less than the same number of independent lineages.
 
@@ -1889,13 +1891,13 @@ Ordinary least squares regression assumes that the residuals, the deviations of 
 
 Independent contrasts are the special case of PGLS in which the covariance structure $\boldsymbol{\Sigma}$ is the one implied by Brownian motion. For that model the two methods are mathematically equivalent: the slope from the PGLS regression is identical to the slope from regressing the contrasts through the origin. Felsenstein's node-by-node pruning and the matrix-based regression are two routes to the same estimate.
 
-Because PGLS is more general, it has become the more widely used of the two. Expressed as a regression with a specified covariance structure, it accommodates things that are awkward under the contrasts formulation. We can include multiple predictors, categorical variables, and continuous covariates in the same model. More importantly, we can change the assumed covariance structure to reflect a different model of evolution. If we think the trait evolves under an Ornstein-Uhlenbeck process (Section \@ref(continuous-data)) rather than pure Brownian motion, we substitute the covariance structure implied by that model. The tree still supplies the non-independence, but we now have a whole family of models describing how that non-independence accumulates.
+Because PGLS is more general, it has become the more widely used of the two. Expressed as a regression with a specified covariance structure, it accommodates things that are awkward under the contrasts formulation. We can include multiple predictors, categorical variables, and continuous covariates in the same model. More importantly, we can change the assumed covariance structure to reflect a different model of evolution. If we think the trait evolves under an Ornstein-Uhlenbeck process (Section \@ref(continuous-data)) [@hansen1997; @butler2004] rather than pure Brownian motion, we substitute the covariance structure implied by that model. The tree still supplies the non-independence, but we now have a whole family of models describing how that non-independence accumulates.
 
-It is worth being precise about what these methods do, because they are easily misdescribed [@uyeda2018rethinking]. It is common to say that they "remove the phylogenetic signal" or "correct for the fact that species are not independent," but neither phrasing is quite right. Ordinary regression does not assume that the observations themselves are independent; it assumes that the *residuals* -- the part of one trait left unexplained by the other -- are independent. What independent contrasts and PGLS do is account for the covariance of those residuals, and they discard no biological signal in doing so; the contrasts are themselves the evolutionary changes. A subtler and more important caution is that correctly accounting for shared history does not, by itself, show that two traits are causally related. A single unreplicated event -- one ancient branch on which both traits happened to shift -- can produce a strongly significant contrast or PGLS slope even when nothing connects the traits, and neither method guards against this. Shared history is not just a statistical nuisance to be swept away.
+It is worth being precise about what these methods do, because they are easily misdescribed [@uyeda2018rethinking]. It is common to say that they "remove the phylogenetic signal" [@blomberg2003] or "correct for the fact that species are not independent," but neither phrasing is quite right. Ordinary regression does not assume that the observations themselves are independent; it assumes that the *residuals* -- the part of one trait left unexplained by the other -- are independent. What independent contrasts and PGLS do is account for the covariance of those residuals, and they discard no biological signal in doing so; the contrasts are themselves the evolutionary changes. A subtler and more important caution is that correctly accounting for shared history does not, by itself, show that two traits are causally related. A single unreplicated event -- one ancient branch on which both traits happened to shift -- can produce a strongly significant contrast or PGLS slope even when nothing connects the traits, and neither method guards against this. Shared history is not just a statistical nuisance to be swept away.
 
 ## Beyond correlated evolution
 
-Testing for correlated evolution between two traits is the most common comparative analysis, and it is where the core ideas are clearest, but it is far from the only question comparative methods can address [@harmon2018phylogenetic]. The same framework of an explicit evolutionary model on a fixed tree supports a much broader set of investigations.
+Testing for correlated evolution between two traits is the most common comparative analysis, and it is where the core ideas are clearest, but it is far from the only question comparative methods can address [@harmon2018phylogenetic; @revell2022]. The same framework of an explicit evolutionary model on a fixed tree supports a much broader set of investigations.
 
 We can ask whether the rate of evolution itself varies across the tree, for example whether a particular clade diversified in a trait much faster than its relatives. We can ask whether a trait is subject to stabilizing selection toward an optimum, using the Ornstein-Uhlenbeck model, and whether different parts of the tree are drawn toward different optima. We can fit and compare these competing models using the model evaluation tools developed earlier in the book, asking which model of trait evolution the data support. In every case the logic is the one we have built up here: specify a model of how the trait evolves, use the tree to describe the resulting non-independence among species, and then estimate parameters or compare models in that light.
 
@@ -1950,6 +1952,8 @@ linear algebra:
 
 - The *Essence of linear algebra* video series by Grant Sanderson (3Blue1Brown) - https://www.3blue1brown.com/topics/linear-algebra.
 
+- *Introduction to Linear Algebra* by Gilbert Strang [@strang2016] is a widely used and comprehensive textbook, paired with his well-known MIT lecture series.
+
 - Linear Algebra: Theory, Intuition, Code, by Mike X Cohen. This book is 
 accessible to scientists with little past math experience, and is very 
 reasonably priced. https://www.amazon.com/Linear-Algebra-Theory-Intuition-Code/dp/9083136604.
@@ -1962,7 +1966,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 12, 2026 at 06:10:53 PM with the following R package versions.
+This book was rendered from the source code on Jul 12, 2026 at 07:31:04 PM with the following R package versions.
 
 
 ```
