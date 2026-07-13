@@ -1,5 +1,5 @@
 ---
-title: "Exercise 08"
+title: "Exercise 07"
 output:
   pdf_document: default
   html_document: default
@@ -21,37 +21,156 @@ library(magrittr)
 
 ## Introduction
 
-The goals of this exercise are to perform a basic morphological analyses.
 
-You will use a dataset on fossil bears, featured in [this other tutorial](https://revbayes.github.io/tutorials/morph_tree/) and derived from a [previous study](https://doi.org/10.3989/egeol.40714.182).
+The goals of this exercise are to:
+- Introduce you to bayesian analysis using revbayes
 
-
-
-
-## Problems and tasks
+This file will not knit until all the results from RevBayes are in a folder with it. You can click Run > Run All to run the code up to what you have completed as you step through the exercise.
 
 
+[RevBayes](https://revbayes.github.io) is a very flexible tool for phylogenetic analyses. You have extensive control over which features of your model are constant, deterministic, or stochastic. This allows RevBayes to do a standard Bayesian phylogenetic inference, but it can also do much more including time calibration, ancestral character state reconstruction, and phylogenetic comparative analyses. 
+
+This flexibility comes with greater complexity than many other tools. For example, the models are explicitly specified rather than just called by name (eg GTR). The configurations are placed in RevBayes script files that typically end with the file extension `.Rev`. These files contain a series of commands written in RevBayes' own language, which has a  [syntax](https://revbayes.github.io/tutorials/intro/rev.html) similar to R. For an introduction to how to specify models and implement analyses see the documentation on  [Getting Started with RevBayes tutorial](https://revbayes.github.io/tutorials/intro/getting_started.html). For an overview of all the commands see the [documentation](https://revbayes.github.io/documentation/).
 
 
-> **_Problem 1:_** (1 point) 
+A typical RevBayes script has commands that load the data, set up the model, define the analysis, run the analysis, and control what is in the output and where it goes. For routine analyses you can modify the basics of existing files, changing the input and output files for example. For more more specialized analyses you can extensively revise and expand these files, or write them from scrap.
 
-1. Examine the data matrix bears.nex, which is in nexus format. Answer the following questions:
-
-- How many species and characters are there?
-
-- Describe the structure of the data (continuous, discrete, number of states, etc...)
+There is a series of detailed [tutorials](https://revbayes.github.io/tutorials/) that serve as a great starting point for using RevBayes. This exercise is based off of the [Nucleotide substitution models](https://revbayes.github.io/tutorials/ctmc/) tutorial.
 
 
+## Software
 
-Next, run a phylogenetic analysis with iqtree:
+[RevBayes](https://revbayes.github.io/) can be difficult to install because it requires an external library, boost. I suggest using it on a remote cluster.
 
-   iqtree2 -s bears.nex -bb 1000 -nt AUTO 
+We will also use two desktop tools to view the results. Both require [java](https://www.oracle.com/java/technologies/javase-jre8-downloads.html), which you will need to install if you don't have it already.
+
+Install these desktop tools on your computer:
+
+- [FigTree](https://github.com/rambaut/figtree/releases), a phylogeny viewer.
+- [Tracer](http://beast.community/tracer), a trace viewer.
 
 
+## Exercise files
+
+This exercise folder contains:
+
+- A `data` directory with the multiple sequence alignment we will consider, in nexus format.
+- A series of `.Rev` revbayes scripts. Each contains all the RevBays commands for one analysis.
+- Example job scripts. These are used to launch the RevBayes analyses, including point the RevBays program, called `rb`, to the `.Rev` script that contains the commands for your analysis.
 
 
-> **_Problem 2:_** (2 points) Examine the `bears.nex.iqtree` log file. Indicate which which model and parameters were selected. Describe this model here.
+## Following the tutorial
+
+This exercise is a bit different than the others in that you are fallowing another existing tutorial -- [Nucleotide substitution models](https://revbayes.github.io/tutorials/ctmc/). The problems listed here related to that tutorial and the steps you take there. 
+
+That tutorial is written as if you are running the commands on your own computer. We will run it on the cluster. This requires some deviations from the instructions in the tutorial. Rather than launch the scripts by opening RevBayes and running a `source()` command, you will use the `job*.sh` slurm scripts to launch revbayes and run the `.Rev` scripts. To run the JC analysis, for example, lanunch the job on the cluster with:
+
+    sbatch job_jc.sh
+
+In the interest of time, we will skip the HKY model. Feel free to go through it if you like.
 
 
-> **_Problem 3:_** (1 point) Insert a code block below to plot the tree with bootstrap support. Then summarize the result (for example, how well supported is the tree?)
+## Summarizing MCMC Samples
+
+To understand the MCMC sampling, plot some key variables recorded in the log file through generations. Download the output file from the cluster and place it on your computer in the same folder as this file.
+
+You can view the log files with [Tracer](http://beast.community/tracer), or with the code below.
+
+We will plot the summary MCMC stats right here in R. Each replicate is shown as a different color.
+
+```{r}
+
+trace_jc_run_1 <- read_tsv("output/primates_cytb_JC_run_1.log") %>%
+  mutate(Replicate_ID = as.factor(1))
+
+trace_jc_run_2 <- read_tsv("output/primates_cytb_JC_run_2.log") %>%
+  mutate(Replicate_ID = as.factor(2))
+
+trace_jc_run_3 <- read_tsv("output/primates_cytb_JC_run_3.log") %>%
+  mutate(Replicate_ID = as.factor(3))
+
+trace_jc_run_4 <- read_tsv("output/primates_cytb_JC_run_4.log") %>%
+  mutate(Replicate_ID = as.factor(4))
+
+# Combine the data frames into one
+trace_jc <- bind_rows(trace_jc_run_1, trace_jc_run_2, trace_jc_run_3, trace_jc_run_4)
+
+# Rescale iterations so they are per replicate, not total across samples
+trace_jc %<>% mutate(Iteration = Iteration %/% length(levels(trace_jc$Replicate_ID)))
+
+
+trace_jc %<>%                           # Read the data
+  mutate(Replicate_ID = as.factor(Replicate_ID))                       # Convert the replicate id to a factor
+ trace_jc %<>% mutate(Iteration = Iteration %/% length(levels(trace_jc$Replicate_ID)))  # The iterations are sequenctial across all replicates. Rescale them so that they are in number of generations per replicate, rather than total number of samples
+
+```
+Now let's plot Tree length, TL, as in the tutorial:
+
+```{r}
+trace_jc %>%
+  ggplot(aes(x=Iteration, y=TL, col=Replicate_ID), alpha=0.2) + geom_line()
+```
+
+```{r}
+trace_jc %>%
+  ggplot(aes(x=Iteration, y=Likelihood, col=Replicate_ID), alpha=0.2) + geom_line()
+```
+
+These plots show all iteration, ie generations. These include the first MCMC iterations before the run has burned in. By default, the [`readTreeTrace`](https://revbayes.github.io/documentation/readTreeTrace.html) that is used in our scripts to import trees to summarize them discards the phylogenies from the first 25% of iterations as a burn in. Here we will do the same, and replot:
+
+
+```{r}
+trace_jc %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(x=Iteration, y=TL, col=Replicate_ID), alpha=0.2) + geom_line()
+```
+
+
+```{r}
+trace_jc %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(x=Iteration, y=Likelihood, col=Replicate_ID), alpha=0.2) + geom_line()
+```
+
+
+Now we will also look at the post-burning distribution of TL and Likelihood
+
+```{r}
+trace_jc %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(TL, fill = Replicate_ID, colour = Replicate_ID)) +
+    geom_density(alpha = 0.1)
+```
+
+```{r}
+trace_jc %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(Likelihood, fill = Replicate_ID, colour = Replicate_ID)) +
+    geom_density(alpha = 0.1)
+```
+
+> **_Problem 1:_** (2 points) Answer the following questions about the MCMC summaries for the JC model above.
+
+- Was the burnin sufficient?
+- Does mixing look good?
+- When considering the whole run, why do you think tree length (TL) starts high and then gets lower, while Likelihood starts low and gets higher?
+- Did the replicates converge on similar parameter distributions?
+
+Open the tree `output_jc/primates_cytb_JC_MAP.tree` on your local computer with FigTree to inspect the topology, edge length, and posterior probabilities. You will need to check the `Node Labels` box and then in `Display:` select `posterior`.
+
+> **_Problem 2:_** (1.5 points) Answer the following questions for the GTR analyses. Copy and paste the codeblocks from above and modify them to import these results and plot them, or use Tracer to view the results. Pick at least one other model paraemter to examine in addition to TL and Likelihood. Note that this analysis has just a single replicate. 
+
+- Was the burnin sufficient?
+- Does mixing look good?
+- Did the replicates converge on similar parameter distributions?
+
+> **_Problem 3:_** (1.5 points) Answer the following questions for the GTR+IG analyses. Copy and paste the codeblocks from above and modify them to import these results and plot them, or use Tracer to view the results. Examine alpha in addition to TL and likelihood. Note that this analysis has just a single replicate. 
+
+- Was the burnin sufficient?
+- Does mixing look good?
+- Did the replicates converge on similar parameter distributions?
+
+## Submit
+
+Make sure you have all files in this folder and have knit the document. Compress the folder with zip, and submit it on canvas.
 
