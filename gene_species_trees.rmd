@@ -66,24 +66,31 @@ gst_draw_tube <- function(main, ab_y, gene="concordant") {
        main=main, cex.main=1.0)
   tubecol <- "grey85"; lwdt <- 26
   seg <- function(p,q) segments(p[1],p[2],q[1],q[2],col=tubecol,lwd=lwdt,lend=1)
+  jdisc <- function(p) points(p[1],p[2],pch=19,col=tubecol,cex=3.4)  # fill crotch notch
   seg(tipA,abN); seg(tipB,abN); seg(abN,rootN); seg(tipC,rootN); seg(rootN,topN)
+  jdisc(abN); jdisc(rootN)
   text(c(1,2.2,3.7), rep(-0.05,3), c("A","B","C"), font=3, cex=1.1, pos=3, offset=0.15)
-  gl <- function(v, dx=0) {
-    x <- sapply(v, `[`, 1) + dx; y <- sapply(v, `[`, 2)
-    lines(x, y, lwd=2.2, col="black")
-  }
+  gl <- function(...) { pts <- list(...); x <- sapply(pts,`[`,1); y <- sapply(pts,`[`,2)
+                        lines(x, y, lwd=2.2, col="black") }
   dot <- function(p) points(p[1], p[2], pch=19, cex=0.8)
+  off <- function(p, dx) c(p[1]+dx, p[2])  # small horizontal slot, inside tube half-width
+  oL <- -0.09; oR <- 0.09
+  # tips anchored on the tube centerline (flush); slot offsets only where lineages share a tube
   if (gene=="concordant") {
-    cAB  <- lin(abN, rootN, 0.5); cABC <- lin(rootN, topN, 0.55)
-    gl(list(tipA, abN, cAB), dx=-0.05); gl(list(tipB, abN, cAB), dx=0.05); dot(cAB)
-    gl(list(cAB, rootN, cABC)); gl(list(tipC, rootN, cABC)); dot(cABC)
-    gl(list(cABC, topN))
+    cAB  <- lin(abN, rootN, 0.5)    # A,B coalesce on the internal branch
+    cABC <- lin(rootN, topN, 0.55)  # then with C
+    gl(tipA, off(abN,oL), cAB)
+    gl(tipB, off(abN,oR), cAB); dot(cAB)
+    gl(cAB, off(rootN,oL), cABC)
+    gl(tipC, off(rootN,oR), cABC); dot(cABC)
+    gl(cABC, topN)
   } else {
-    cBC <- lin(rootN, topN, 0.32); cABC <- lin(rootN, topN, 0.72)
-    gl(list(tipA, abN, rootN, cABC), dx=-0.09)
-    gl(list(tipB, abN, rootN, cBC),  dx=0.09)
-    gl(list(tipC, rootN, cBC),       dx=0.02)
-    dot(cBC); gl(list(cBC, cABC)); dot(cABC); gl(list(cABC, topN))
+    cBC  <- lin(rootN, topN, 0.34)  # B,C coalesce first, in the ancestral tube
+    cABC <- lin(rootN, topN, 0.72)  # then A joins
+    gl(tipA, off(abN,oL), off(rootN,oL), cABC)  # A passes through uncoalesced
+    gl(tipB, off(abN,oR), off(rootN,oR), cBC)   # B passes through uncoalesced
+    gl(tipC, off(rootN,0.12), cBC); dot(cBC)
+    gl(cBC, cABC); dot(cABC); gl(cABC, topN)
   }
 }
 par(mfrow=c(1,2), mar=c(1.5,1,2.5,1))
@@ -105,23 +112,28 @@ The coalescent assumes that every species carries exactly one copy of each regio
 
 This is where the familiar vocabulary of **orthology** and **paralogy** comes in. Two gene copies are orthologs if their most recent common ancestor is a speciation event, and paralogs if it is a duplication event. The distinction matters because our whole strategy of using genes as proxies for species assumes we are comparing orthologs: copies whose divergence tracks the divergence of species. Compare paralogs by mistake and the gene tree can depart drastically from the species tree, not because of any subtle coalescent effect but because the copies diverged at a duplication that long predates the speciation events we are trying to reconstruct.
 
-```{r gst-reconciliation, echo=FALSE, fig.width=7, fig.height=3.4, fig.cap="A gene family tree (right) reconciled against a species tree (left). A duplication (D) early in the history produced two copies; within each copy, divergences track speciation. A1 and B1 are orthologs (their common ancestor is a speciation), while A1 and A2 are paralogs (their common ancestor is the duplication). One copy was subsequently lost in species C. Comparing paralogs by mistake -- say A1 with B2 -- would badly misrepresent how the species are related."}
+```{r gst-reconciliation, echo=FALSE, fig.width=7, fig.height=3.4, fig.cap="A gene family tree (right) reconciled against a species tree (left). A duplication (D) early in the history produced two copies, and within each copy divergences track speciation, so each copy recapitulates the species tree ((A,B),C). A1 and B1 are orthologs (their common ancestor is a speciation), while A1 and A2 are paralogs (their common ancestor is the duplication). The second copy in species C (C2) was subsequently lost: its lineage terminates before the present (marked with an X). Comparing paralogs by mistake -- say A1 with B2 -- would badly misrepresent how the species are related."}
 par(mfrow=c(1,2), mar=c(1,1,2.5,1))
 gst_draw_clado(c("A","B","C"), main="Species tree",
   nodes=list(
     list(x=c(1,2),   ybase=c(0,0),   ytop=1.6),
     list(x=c(1.5,3), ybase=c(1.6,0), ytop=3.0)))
 # ylim reversed so the root (larger y) is at the bottom and tips at the top
-plot(NA, xlim=c(0.4,5.6), ylim=c(4.3,-0.6), axes=FALSE, xlab="", ylab="",
+plot(NA, xlim=c(0.4,6.6), ylim=c(4.3,-0.6), axes=FALSE, xlab="", ylab="",
      main="Gene family tree", cex.main=1.1)
-text(1:5, rep(-0.35,5), c("A1","B1","C1","A2","B2"), font=3, cex=1.0)
+text(c(1,2,3,4,5), rep(-0.35,5), c("A1","B1","C1","A2","B2"), font=3, cex=1.0)
+# copy 1: ((A1,B1),C1)
 segments(1,0,1,1.6); segments(2,0,2,1.6); segments(1,1.6,2,1.6)
 segments(1.5,1.6,1.5,2.6); segments(3,0,3,2.6); segments(1.5,2.6,3,2.6)
+# copy 2: ((A2,B2),C2), with C2 lost -- its branch stops before the present
 segments(4,0,4,1.6); segments(5,0,5,1.6); segments(4,1.6,5,1.6)
-segments(4.5,1.6,4.5,3.4)
-segments(2.25,2.6,2.25,3.4); segments(2.25,3.4,4.5,3.4)
-points(3.375,3.4,pch=22,bg="grey40",cex=1.7); text(3.375,3.4,"D",col="white",cex=0.7)
-text(4.5,3.05,"loss of C2", pos=4, cex=0.85, col="grey30")
+segments(4.5,1.6,4.5,2.6); segments(6,1.0,6,2.6); segments(4.5,2.6,6,2.6)
+points(6,1.0,pch=4,cex=1.2,lwd=2,col="grey30")
+text(6,0.9,"C2\nlost",pos=3,cex=0.72,col="grey30",offset=0.35)
+# duplication D joining the two copies
+segments(2.25,2.6,2.25,3.4); segments(5.25,2.6,5.25,3.4); segments(2.25,3.4,5.25,3.4)
+segments(3.75,3.4,3.75,4.0)
+points(3.75,3.4,pch=22,bg="grey40",cex=1.7); text(3.75,3.4,"D",col="white",cex=0.7)
 ```
 
 It is tempting to respond to all this by restricting analyses to single-copy orthologs: regions that are present in exactly one copy in every species, with a clean one-to-one correspondence and no duplication or loss to worry about. Much of phylogenomics attempts to do this. But strict, universal single-copy orthologs are rare, and in an important sense they are the odd-balls rather than the normal case [@dunn2016]. Duplication and loss are pervasive features of genome evolution; a gene that has remained single copy across a whole clade for hundreds of millions of years is unusual may be unusual in ways (strong constraint, dosage sensitivity) that make it a biased sample of the genome.
@@ -150,7 +162,7 @@ plot(t, pconc, type="l", lwd=3, ylim=c(0,1),
 axis(1); axis(2, at=seq(0,1,0.25))
 abline(h=1/3, lty=3, col="grey50")
 polygon(c(0,0.4,0.4,0), c(0,0,1,1), col=rgb(0,0,0,0.06), border=NA)
-text(0.2, 0.94, "high\ndiscordance", cex=0.9, col="grey30")
+text(0.08, 0.96, "high\ndiscordance", cex=0.9, col="grey30", adj=c(0,1))
 text(3.1, 0.60, "gene trees ~ species tree", cex=0.95, col="grey30")
 ```
 
