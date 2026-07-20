@@ -7,7 +7,7 @@ isbn_paperback: "979-8-9934524-0-1"
 isbn_hardcover: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
-date: "2026-07-12"
+date: "2026-07-20"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1427,13 +1427,13 @@ Rather than assess the support of a particular focal topology, sometimes you wan
 
 So far we have gone to great lengths to understand the evolution single genome regions. Implicitly, we have treated the phylogenies of genes as though they were the phylogenies of the species that carry them. This is a common and often useful simplification, but it is not always correct. In this chapter we will examine the distinction between **gene trees** and **species trees**, and the biological processes that can make gene trees disagree with each other and with the species tree.
 
-Gene trees can disagree due to estimation error. Any tree we infer from a finite stretch of sequence is uncertain, and two genes can appear to disagree simply because we have estimated each of them imperfectly. This in part motivated the evaluation methods we already discussed (Chapter \@ref(evaluation)). But gene trees can also disagree because the histories of different genome regions are genuinely different [@maddison1997gene]. This discordance is the expected outcome of ordinary biological processes acting on real populations and real genomes. A gene tree that disagrees with the species tree can be exactly right about its own history, and quite distinct from the history of the species that carry it. While estimation error shrinks as we collect more data per gene, true discordance does not. It is a property of the history itself.
+Gene trees can disagree due to estimation error. Any tree we infer from a finite stretch of sequence is uncertain, and two genes can appear to disagree simply because we have estimated each of them imperfectly. This in part motivated the evaluation methods we already discussed (Chapter \@ref(evaluation)). But gene trees can also disagree because the histories of different genome regions are genuinely different [@maddison1997gene]. This discordance is the expected outcome of ordinary biological processes acting on real populations and real genomes. A gene tree that disagrees with the species tree can be right about its own history, and quite distinct from the history of the species that carry it. While estimation error shrinks as we collect more data per gene, true discordance does not. It is a property of the history itself.
 
 ## Gene trees, species trees, and real discordance
 
-@maddison1997gene provided a seminal framing gene tree dscordance that serves as the foundation for this chapter. Picture the species tree not as a set of lines but as a set of tubes, each tube a population extended through time, branching as species split. The gene trees exist inside these tubes. The species tree is the container; the history of any particular genome region is a tree that threads its way through that container. Sometimes the gene tree hugs the shape of the container and matches the species tree exactly. Sometimes it does not.
+@maddison1997gene provided the framing of gene tree discordance that serves as the foundation for this chapter. Picture the species tree not as a set of thin lines but as a set of tubes, each tube a population extended through time that branches as species split. The history of any particular genome region is then a gene tree that runs inside these tubes. Sometimes a gene tree follows the shape of its tubes and matches the species tree exactly; sometimes it does not.
 
-![(\#fig:gst-discordance)Three genome regions sampled from the same four species can support three different, and genuinely correct, gene trees. None of these disagreements is an error; each reflects the real history of that region.](phylogenetic_biology_files/figure-latex/gst-discordance-1.pdf) 
+![(\#fig:gst-discordance)Three genome regions sampled from the same four species can support three different, and genuinely correct, gene trees.](phylogenetic_biology_files/figure-latex/gst-discordance-1.pdf) 
 
 Several distinct biological processes can lead gene trees to be discordant with eachother and the species tree (Figure \@ref(fig:gst-discordance)):
 
@@ -1443,17 +1443,39 @@ Several distinct biological processes can lead gene trees to be discordant with 
 
 - **Introgression, hybridization, and horizontal transfer**, in which genetic material moves between lineages that have already diverged, so that a region's history is genuinely reticulate rather than tree-like.
 
-The first two are the focus of this chapter. They are variations on the same theme: a gene tree contained within, but not identical to, a species tree.
-
 ## The multispecies coalescent
 
-The process behind incomplete lineage sorting is most naturally described backward in time, in the same spirit as the simulation-first view of models we developed earlier (Chapter \@ref(simulation)). Follow two gene copies sampled in different species back into their shared ancestral population. Looking backward, lineages **coalesce** when they find a common ancestor. Whether two lineages coalesce within a given ancestral branch, rather than passing through it still distinct, depends on how long that branch is in coalescent units.
-
-When an internal branch is long, lineages entering it coalesce before reaching the next speciation node, and they do so in the order the species split; the gene tree matches the species tree. When an internal branch is short, lineages can pass through it without coalescing — a **deep coalescence** — and then coalesce more anciently, in a deeper ancestral population, where they may pair up in an order that does not match the species tree (Figure \@ref(fig:gst-coalescent)). The persistence of ancestral polymorphism across speciation events is the source of the discordance, and the multispecies coalescent is the model that describes its probabilities.
+The process behind incomplete lineage sorting is most naturally described backward in time, in the same spirit as the simulation-first view of models we developed earlier (Chapter \@ref(simulation)). Follow two copies of the same gene sampled in different species back into their shared ancestral population. Looking backward, lineages **coalesce** when they find a common ancestor. This coalescence will always occur before the species split, they question is how long before. If the coalescence occurs along the branch subtending the speciation, the gene tree will match the species tree; if it occurs deeper in the ancestral population, the gene tree may be discordant (Figure \@ref(fig:gst-coalescent)).
 
 ![(\#fig:gst-coalescent)Gene lineages (black) evolving within a species tree (grey tubes) for species A, B, and C. Left: a long internal branch lets the A and B lineages coalesce before the deeper split, so the gene tree matches the species tree, ((A,B),C). Right: a short internal branch lets both lineages pass through without coalescing (deep coalescence); in the ancestral population the B lineage happens to coalesce with C first, producing the discordant gene tree ((B,C),A).](phylogenetic_biology_files/figure-latex/gst-coalescent-1.pdf) 
 
-Because discordance from the coalescent is expected, we can build methods that embrace it rather than fight it. Two broad families of coalescent-aware methods are in wide use:
+How often deep coalescence occurs is set by the effective population size $N_e$. Looking backward in time, any two gene lineages in a population of $N_e$ diploid individuals coalesce with probability $1/(2N_e)$ in each generation, so the expected time back to their common ancestor is $2N_e$ generations. Coalescence is therefore fast in small populations and slow in large ones.
+
+This is why it is convenient to measure the length of a branch not in generations but in **coalescent units**, dividing a branch of $t$ generations by the coalescence timescale $2N_e$:
+
+\begin{equation}
+  \tau = \frac{t}{2N_e}
+  (\#eq:coalescent-units)
+\end{equation}
+
+A branch that is long in coalescent units — $\tau$ large, from many generations, a small population, or both — gives two lineages ample time to coalesce along the internal branch; a short branch does not. The probability that two lineages entering an internal branch of length $\tau$ fail to coalesce along it, and so pass into the deeper ancestral population where deep coalescence can occur, is $e^{-\tau}$.
+
+For three species, whenever two lineages fail to coalesce on the internal branch, all three rooted gene-tree topologies become equally likely in the ancestral population, and only one of them matches the species tree. Combining the two possibilities — coalescence on the branch, which always yields the matching tree, and failure, which yields it only one time in three — the probability that the gene tree matches the species tree is
+
+\begin{equation}
+  P(\text{match}) = 1 - \frac{2}{3}\,e^{-\tau}.
+  (\#eq:gene-tree-match)
+\end{equation}
+
+Equation \@ref(eq:gene-tree-match) is the curve in Figure \@ref(fig:gst-anomaly). When the internal branch is very short ($\tau \to 0$) the match probability falls to $1/3$ — no better than choosing one of the three topologies at random — and as the branch lengthens it climbs toward one, where gene trees become reliable proxies for the species tree.
+
+![(\#fig:gst-anomaly)The probability that a gene tree matches the species tree rises as the internal branch of the species tree lengthens (in coalescent units). Short internal branches, as in rapid radiations, leave a wide zone of frequent discordance; long branches leave gene trees essentially concordant.](phylogenetic_biology_files/figure-latex/gst-anomaly-1.pdf) 
+
+In practical terms, incomplete lineage sorting is a serious concern for rapid radiations, recent and closely spaced speciation events, and species with large effective population sizes — and much less of one for deep divergences separated by long branches. The hardest problems in phylogenetics, the short internal branches at the base of an old, rapid radiation, are exactly where these effects are strongest.
+
+The sharpest version of the problem is the **anomaly zone** [@degnan2009]. When internal branches are short enough, the single most probable gene tree is not the species tree but a different topology altogether. In this regime, simply taking the most common gene tree — or concatenating everything and inferring one tree — can converge on the wrong answer with more and more data. Discordance here is not just noise around the right answer; it can be actively misleading, and methods that model it explicitly become necessary rather than optional.
+
+Two broad families of coalescent-aware phylogenetic methods, which model and accommodate the multispecies coalescent, are in wide use:
 
 - **Summary, or two-step, methods.** Estimate a gene tree for each region, then estimate the species tree from the distribution of gene trees under the multispecies coalescent. **ASTRAL** is the most widely used method of this kind [@zhang2018]; it is statistically consistent under the coalescent and scales to genome-wide data sets.
 
@@ -1467,7 +1489,7 @@ The coalescent assumes that every species carries exactly one copy of each regio
 
 This is where the familiar vocabulary of **orthology** and **paralogy** comes in. Two gene copies are orthologs if their most recent common ancestor is a speciation event, and paralogs if it is a duplication event. The distinction matters because our whole strategy of using genes as proxies for species assumes we are comparing orthologs: copies whose divergence tracks the divergence of species. Compare paralogs by mistake and the gene tree can depart drastically from the species tree, not because of any subtle coalescent effect but because the copies diverged at a duplication that long predates the speciation events we are trying to reconstruct.
 
-![(\#fig:gst-reconciliation)A gene family tree (right) reconciled against a species tree (left). A duplication (D) early in the history produced two copies; within each copy, divergences track speciation. A1 and B1 are orthologs (their common ancestor is a speciation), while A1 and A2 are paralogs (their common ancestor is the duplication). One copy was subsequently lost in species C. Comparing paralogs by mistake -- say A1 with B2 -- would badly misrepresent how the species are related.](phylogenetic_biology_files/figure-latex/gst-reconciliation-1.pdf) 
+![(\#fig:gst-reconciliation)How duplication and loss can make single-copy genes mislead. Left: the species tree, ((A,B),C). Middle: a gene family tree in which an early duplication (D) produced two copies; within each copy divergences track speciation, so each copy on its own recapitulates the species tree. Reciprocal loss (dashed grey lineages, marked X) then removes B and C from the first copy and A from the second, leaving exactly one surviving copy in each species: A1, B2, and C2. Right: these survivors look like ordinary single-copy genes, but A1 is a paralog of B2 and C2, so the tree they support is (A,(B,C)) -- B groups with C, conflicting with the species tree. This hidden paralogy is invisible unless the full gene family history is reconstructed.](phylogenetic_biology_files/figure-latex/gst-reconciliation-1.pdf) 
 
 It is tempting to respond to all this by restricting analyses to single-copy orthologs: regions that are present in exactly one copy in every species, with a clean one-to-one correspondence and no duplication or loss to worry about. Much of phylogenomics attempts to do this. But strict, universal single-copy orthologs are rare, and in an important sense they are the odd-balls rather than the normal case [@dunn2016]. Duplication and loss are pervasive features of genome evolution; a gene that has remained single copy across a whole clade for hundreds of millions of years is unusual may be unusual in ways (strong constraint, dosage sensitivity) that make it a biased sample of the genome.
 
@@ -1481,17 +1503,9 @@ The coalescent and duplication-loss both assume that the species tree itself is 
 
 ## When does discordance matter?
 
-We have now seen the biological processes that make gene trees depart from the species tree, and the methods that model them. But this machinery is not always needed. Discordance is not equally severe in all groups, and a great deal of phylogenetics proceeds perfectly well while ignoring it. Whether it matters comes down to a comparison between two quantities: the length of the internal branches of the species tree and the size of the populations along them.
+We have now seen the biological processes that make gene trees depart from the species tree, and the methods that model them. But this machinery is not always needed, and a great deal of phylogenetics proceeds perfectly well while ignoring discordance. Whether that is safe depends on the cause. Incomplete lineage sorting is a serious problem only when internal branches are short and populations large, as we saw above; gene duplication and loss matters most when gene families are large and dynamic, so that even single-copy genes may carry hidden paralogy; and reticulation matters when hybridization or horizontal transfer is common in the group at hand.
 
-The natural currency here is the coalescent unit, a branch length measured not in years or in substitutions but in expected numbers of generations to coalescence, which scales with the effective population size $N_e$. A branch that is long in coalescent units — because it represents many generations, or a small population, or both — gives ancestral lineages ample time to coalesce in the order the species split, and gene trees come out matching the species tree. A branch that is short in coalescent units — few generations, large population, or both — does not, and gene trees frequently disagree with the species tree and with each other.
-
-![(\#fig:gst-anomaly)The probability that a gene tree matches the species tree rises as the internal branch of the species tree lengthens (in coalescent units). Short internal branches, as in rapid radiations, leave a wide zone of frequent discordance; long branches leave gene trees essentially concordant.](phylogenetic_biology_files/figure-latex/gst-anomaly-1.pdf) 
-
-This gives a simple rule of thumb. Discordance due to incomplete lineage sorting is a major concern when internal branches are short and populations are large: rapid radiations, recent and closely spaced speciation events, and species with large effective population sizes. It is less of a concern when internal branches are long and populations are small: deep divergences separated by long branches, and species that have passed through bottlenecks or otherwise maintain small $N_e$. The most difficult cases in phylogenetics — the short, deep internal branches at the base of an old, rapid radiation — are exactly the cases where these effects are strongest.
-
-This rule of thumb also tells us when we can get away with the simpler default. That default is concatenation: joining all the alignments end to end into one supermatrix and inferring a single tree, as introduced in Chapter \@ref(molecular-inference-in-practice). Concatenation is not a coalescent method — it ignores the gene-tree/species-tree distinction entirely, treating every region as though it shared one history — but it is fast, general, and remains the workhorse of phylogenetics. When discordance is mild it is accurate too, and there is little to gain from anything more elaborate. When discordance is severe, treating all regions as one history becomes exactly the wrong assumption, and the coalescent-aware methods above earn their extra cost.
-
-The sharpest version of the problem is the anomaly zone [@degnan2009]. When internal branches are short enough, the single most probable gene tree is not the species tree but a different topology altogether. In this regime, simply taking the most common gene tree — or concatenating everything and inferring one tree — can converge on the wrong answer with more and more data. Discordance here is not just noise around the right answer; it can be actively misleading, and methods that model it explicitly become necessary rather than optional.
+When discordance is expected to be mild, we can get away with the simpler default: concatenation, joining all the alignments end to end into one supermatrix and inferring a single tree, as introduced in Chapter \@ref(molecular-inference-in-practice). Concatenation is not a coalescent method — it ignores the gene-tree/species-tree distinction entirely, treating every region as though it shared one history — but it is fast, general, and remains the workhorse of phylogenetics. When discordance is severe, treating all regions as one history becomes exactly the wrong assumption, and the coalescent-aware methods above earn their extra cost.
 
 ## Concluding thoughts
 
@@ -2034,7 +2048,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 12, 2026 at 11:08:53 PM with the following R package versions.
+This book was rendered from the source code on Jul 20, 2026 at 01:07:50 AM with the following R package versions.
 
 
 ```
