@@ -8,38 +8,7 @@ Gene trees can disagree due to estimation error. Any tree we infer from a finite
 
 @maddison1997gene provided the framing of gene tree discordance that serves as the foundation for this chapter. Picture the species tree not as a set of thin lines but as a set of tubes, each tube a population extended through time that branches as species split. The history of any particular gene is a gene tree that runs inside these tubes. Sometimes a gene tree follows the shape of its tubes and matches the species tree exactly; sometimes it does not.
 
-```{r gst-discordance, echo=FALSE, fig.cap="Three genome regions sampled from the same four species can support three different, and genuinely correct, gene trees."}
-gst_draw_clado <- function(tip_lab, nodes, main="") {
-  n <- length(tip_lab)
-  # ylim reversed so the root (larger y) is at the bottom and tips at the top
-  plot(NA, xlim=c(0.5, n+0.5), ylim=c(4.3, -0.6),
-       axes=FALSE, xlab="", ylab="", main=main, cex.main=1.1)
-  text(seq_len(n), rep(-0.35, n), tip_lab, font=3, cex=1.15)
-  for (nd in nodes) {
-    segments(nd$x[1], nd$ybase[1], nd$x[1], nd$ytop)
-    segments(nd$x[2], nd$ybase[2], nd$x[2], nd$ytop)
-    segments(nd$x[1], nd$ytop,     nd$x[2], nd$ytop)
-  }
-}
-par(mfrow=c(1,3), mar=c(1,1,2.5,1))
-gst_draw_clado(c("A","B","C","D"), main="Gene tree 1",
-  nodes=list(
-    list(x=c(1,2),    ybase=c(0,0),    ytop=1.6),
-    list(x=c(3,4),    ybase=c(0,0),    ytop=1.6),
-    list(x=c(1.5,3.5),ybase=c(1.6,1.6),ytop=3.2)))
-gst_draw_clado(c("A","C","B","D"), main="Gene tree 2",
-  nodes=list(
-    list(x=c(1,2),    ybase=c(0,0),    ytop=1.6),
-    list(x=c(3,4),    ybase=c(0,0),    ytop=1.6),
-    list(x=c(1.5,3.5),ybase=c(1.6,1.6),ytop=3.2)))
-gst_draw_clado(c("A","B","C","D"), main="Gene tree 3",
-  nodes=list(
-    list(x=c(3,4),    ybase=c(0,0),    ytop=1.1),
-    list(x=c(2,3.5),  ybase=c(0,1.1),  ytop=2.2),
-    list(x=c(1,2.75), ybase=c(0,2.2),  ytop=3.2)))
-```
-
-Several distinct biological processes can lead gene trees to be discordant with each other and the species tree (Figure \@ref(fig:gst-discordance)):
+Several distinct biological processes can lead gene trees to be discordant with each other and the species tree:
 
 - **Incomplete lineage sorting**, in which ancestral variation persists across successive speciation events and sorts among descendants in a way that does not track the order of speciation. This is the domain of the multispecies coalescent.
 
@@ -49,31 +18,44 @@ Several distinct biological processes can lead gene trees to be discordant with 
 
 ## Incomplete lineage sorting
 
-The process behind incomplete lineage sorting is most naturally described backward in time, in the same spirit as the simulation-first view of models we developed earlier (Chapter \@ref(simulation)). Follow the same gene sampled in three different species back through their ancestral populations (Figure \@ref(fig:gst-coalescent)). Looking backward, gene lineages **coalesce** when they find a common ancestor. This coalescence will always occur before the species split; the question is how long before. If the coalescence occurs along the branch subtending the speciation, the gene tree will match the species tree (Figure \@ref(fig:gst-coalescent), left). This is complete lineage sorting. If coalescence occurs deeper in the ancestral population, the gene tree may be discordant (Figure \@ref(fig:gst-coalescent), right). This is incomplete lineage sorting.
+The process behind incomplete lineage sorting is most naturally described backward in time. Let us consider the process on an example gene tree and species tree (Figure \@ref(fig:gst-coalescent)), knowing that what we learn in this context generalizes. Here we follow a gene sampled in three different species, A, B and C, back through their ancestral populations. Looking backward, gene lineages **coalesce** when they find a common ancestor. Coalescence between genes sampled from different species will always occur before the species split; the question is how long before. The two lineages first have the chance to coalesce along the branch subtending the speciation, which we will call the **focal branch**. But they could coalesce deeper in the tree.
 
-There are three kinds of outcome whose probabilities we would like to calculate:
+There are three possible outcomes to consider (Figure \@ref(fig:gst-coalescent)):
 
-1. The A and B lineages coalesce along the internal branch (complete lineage sorting). **The gene tree is concordant with the species tree.**
-2. They fail to coalesce along the branch (incomplete lineage sorting), but in the ancestral population A and B are still the first pair to coalesce. **The gene tree is concordant with the species tree.**
-3. They fail to coalesce along the branch (incomplete lineage sorting), and instead A or B coalesces first with C. **The gene tree is discordant with the species tree.**
+1. The A and B lineages coalesce along the focal branch (complete lineage sorting). **The gene tree is concordant with the species tree.**
+2. The A and B lineages fail to coalesce along the focal branch (incomplete lineage sorting), but in the ancestral population A and B are still the first pair to coalesce. **The gene tree is concordant with the species tree.**
+3. The A and B lineages fail to coalesce along the focal branch (incomplete lineage sorting), and instead A or B coalesces first with C. **The gene tree is discordant with the species tree.**
 
-The first two outcomes give a gene tree that matches the species tree; only the third produces discordance. We can calculate these probabilities with several simplifying assumptions (such as neutral evolution) and the multispecies coalescent model.
+The first two outcomes give a gene tree that matches the species tree; only the third produces discordance. We can calculate the probabilities of these outcomes with the multispecies coalescent model.
 
-```{r gst-coalescent, echo=FALSE, fig.width=7, fig.height=3.6, fig.cap="Gene lineages (black) evolving within a species tree (grey tubes) for species A, B, and C. Left: a long internal branch lets the A and B lineages coalesce before the deeper split, so the gene tree matches the species tree, ((A,B),C). Right: a short internal branch lets both lineages pass through without coalescing (deep coalescence); in the ancestral population the B lineage happens to coalesce with C first, producing the discordant gene tree ((B,C),A)."}
+```{r gst-coalescent, echo=FALSE, fig.width=9, fig.height=3.6, fig.cap="The three possible outcomes for a single gene sampled in species A, B, and C, whose species tree is ((A,B),C). Gene lineages (black) evolve within the species tree (grey tubes); the focal branch is the branch ancestral to the A--B speciation, where the A and B lineages first have the chance to coalesce. Outcome 1: the A and B lineages coalesce along the focal branch (complete lineage sorting), giving the concordant gene tree ((A,B),C). Outcome 2: the lineages pass through the focal branch without coalescing (deep coalescence), but A and B are still the first pair to coalesce in the ancestral population, again giving the concordant ((A,B),C). Outcome 3: after the same deep coalescence, B instead coalesces with C first, giving the discordant gene tree ((B,C),A)."}
 gst_draw_tube <- function(main, ab_y, gene="concordant") {
   root_x <- 2.7; root_y <- 5.4; top <- 7.1
   tipA <- c(1,0); tipB <- c(2.2,0); tipC <- c(3.7,0)
   abN <- c(1.6, ab_y); rootN <- c(root_x, root_y); topN <- c(root_x, top)
   lin <- function(p,q,f) p + (q-p)*f
   # ylim reversed so the root (larger y) is at the bottom and tips at the top
-  plot(NA, xlim=c(0,4.4), ylim=c(7.3,-0.2), axes=FALSE, xlab="", ylab="",
-       main=main, cex.main=1.0)
+  plot(NA, xlim=c(0,4.4), ylim=c(7.3,-1.2), axes=FALSE, xlab="", ylab="",
+       main=main, cex.main=0.9)
   tubecol <- "grey85"; lwdt <- 26
-  seg <- function(p,q) segments(p[1],p[2],q[1],q[2],col=tubecol,lwd=lwdt,lend=1)
-  jdisc <- function(p) points(p[1],p[2],pch=19,col=tubecol,cex=3.4)  # fill crotch notch
-  seg(tipA,abN); seg(tipB,abN); seg(abN,rootN); seg(tipC,rootN); seg(rootN,topN)
-  jdisc(abN); jdisc(rootN)
-  text(c(1,2.2,3.7), rep(-0.05,3), c("A","B","C"), font=3, cex=1.1, pos=3, offset=0.15)
+  # draw each tube as one continuous polyline (tip -> abN -> root -> top) with round
+  # joins, so branches merge cleanly at the nodes with no crotch notch
+  gtube <- function(...) { pts <- list(...); lines(sapply(pts,`[`,1), sapply(pts,`[`,2),
+                           col=tubecol, lwd=lwdt, lend="round", ljoin="round") }
+  gtube(tipA, abN, rootN, topN)
+  gtube(tipB, abN, rootN, topN)
+  gtube(tipC, rootN, topN)
+  text(c(1,2.2,3.7), rep(-0.85,3), c("A","B","C"), font=3, cex=1.5)
+  # label the focal branch: text set parallel to and just beside the branch
+  usr <- par("usr"); pin <- par("pin")
+  ipx <- pin[1]/(usr[2]-usr[1]); ipy <- pin[2]/(usr[4]-usr[3])   # inches per user unit
+  ang <- atan2((rootN[2]-abN[2])*ipy, (rootN[1]-abN[1])*ipx) * 180/pi
+  fbmid <- lin(abN, rootN, 0.5)
+  nx <- -(rootN[2]-abN[2])*ipy; ny <- (rootN[1]-abN[1])*ipx      # screen-space perpendicular
+  nl <- sqrt(nx^2+ny^2); nx <- nx/nl; ny <- ny/nl
+  if (nx > 0) { nx <- -nx; ny <- -ny }                           # point to the open (left) side
+  text(fbmid[1] + nx*0.24/ipx, fbmid[2] + ny*0.24/ipy,
+       "focal branch", srt=ang, cex=1.05, col="grey30")
   gl <- function(...) { pts <- list(...); x <- sapply(pts,`[`,1); y <- sapply(pts,`[`,2)
                         lines(x, y, lwd=2.2, col="black") }
   dot <- function(p) points(p[1], p[2], pch=19, cex=0.8)
@@ -81,7 +63,8 @@ gst_draw_tube <- function(main, ab_y, gene="concordant") {
   oL <- -0.09; oR <- 0.09
   # tips anchored on the tube centerline (flush); slot offsets only where lineages share a tube
   if (gene=="concordant") {
-    cAB  <- lin(abN, rootN, 0.5)    # A,B coalesce on the internal branch
+    # Outcome 1: A and B coalesce on the (long) focal branch
+    cAB  <- lin(abN, rootN, 0.5)
     cABC <- lin(rootN, topN, 0.55)  # then with C
     gl(tipA, off(abN,oL), cAB)
     gl(tipB, off(abN,oR), cAB); dot(cAB)
@@ -89,19 +72,33 @@ gst_draw_tube <- function(main, ab_y, gene="concordant") {
     gl(tipC, off(rootN,oR), cABC); dot(cABC)
     gl(cABC, topN)
   } else {
-    # three lineages descend the ancestral tube in parallel tracks (A left, B middle, C right)
+    # Outcomes 2 and 3: A and B pass through the (short) focal branch without
+    # coalescing (deep coalescence), in parallel tracks (A left, B middle, C right),
+    # and resolve in the ancestral population.
     rA <- c(2.60,5.4); rB <- c(2.70,5.4); rC <- c(2.82,5.4)
-    cBC  <- c(2.76, 5.66)  # B,C coalesce first, shallow -- adjacent tracks, so no crossing
-    cABC <- c(2.67, 6.50)  # then A joins, deeper
-    gl(tipA, off(abN,oL), rA, cABC)  # A passes through uncoalesced
-    gl(tipB, off(abN,oR), rB, cBC)   # B passes through uncoalesced
-    gl(tipC, rC, cBC); dot(cBC)
-    gl(cBC, cABC); dot(cABC); gl(cABC, topN)
+    if (gene=="deep_concordant") {
+      # Outcome 2: A and B are still the first pair to coalesce -> concordant
+      cAB  <- c(2.65, 5.66)  # A,B coalesce first, shallow -- adjacent tracks
+      cABC <- c(2.74, 6.50)  # then C joins, deeper
+      gl(tipA, off(abN,oL), rA, cAB)
+      gl(tipB, off(abN,oR), rB, cAB); dot(cAB)
+      gl(tipC, rC, cABC)
+      gl(cAB, cABC); dot(cABC); gl(cABC, topN)
+    } else {
+      # Outcome 3: B coalesces with C first -> discordant
+      cBC  <- c(2.76, 5.66)  # B,C coalesce first, shallow -- adjacent tracks
+      cABC <- c(2.67, 6.50)  # then A joins, deeper
+      gl(tipA, off(abN,oL), rA, cABC)  # A passes through uncoalesced
+      gl(tipB, off(abN,oR), rB, cBC)   # B passes through uncoalesced
+      gl(tipC, rC, cBC); dot(cBC)
+      gl(cBC, cABC); dot(cABC); gl(cABC, topN)
+    }
   }
 }
-par(mfrow=c(1,2), mar=c(1.5,1,2.5,1))
-gst_draw_tube("Long internal branch: gene tree matches", ab_y=1.9, gene="concordant")
-gst_draw_tube("Short internal branch: deep coalescence", ab_y=4.4, gene="discordant")
+par(mfrow=c(1,3), mar=c(1.5,1,3.6,1))
+gst_draw_tube("Outcome 1: concordant\n((A,B),C)", ab_y=1.9, gene="concordant")
+gst_draw_tube("Outcome 2: concordant\n((A,B),C)", ab_y=4.4, gene="deep_concordant")
+gst_draw_tube("Outcome 3: discordant\n((B,C),A)", ab_y=4.4, gene="discordant")
 ```
 
 The effective population size $N_e$ is the number of diploid individuals in an idealized population. Since diploid individuals each carry two copies of each gene, the total number of gene copies in a population of $N_e$ diploids is $2N_e$. Given a particular gene sampled from the population, the probability that it coalesces with another particular gene in the previous generation is $1/(2N_e)$. From this, we can derive that the expected time back to the most recent common ancestor of any two copies of a gene sampled from the population is $2N_e$ generations. The larger the effective population size, the longer we expect it to take for lineages to coalesce.
@@ -113,7 +110,7 @@ Since generation times and $N_e$ can vary widely across species, branch lengths 
   (\#eq:coalescent-units)
 \end{equation}
 
-A branch length of $\tau=1$ coalescent unit is the expected time for two lineages to coalesce.
+A branch length of $\tau=1$ coalescent unit is the expected time for two lineages to coalesce within a population.
 
 As in our analyses of sequence evolution, we would like to have probabilities, not just expectations. The probability that two copies of a gene sampled from a population fail to coalesce along a branch of length $\tau$ is:
 
@@ -124,7 +121,7 @@ As in our analyses of sequence evolution, we would like to have probabilities, n
 
 Note that the exponent contains a negative sign, so the probability of failure to coalesce decreases as the branch length increases. Equivalently, the probability of coalescence increases as the branch length increases. This makes sense. The more time two lineages spend together in a population, the more likely they are to coalesce.
 
-Equation \@ref(eq:no-coalescent-prob) gives the probability of outcomes 2 and 3 together, in which A and B fail to coalesce along the branch. To split that probability between concordance and discordance we need a short combinatorial assessment. When A and B fail to coalesce, all three lineages enter the ancestral population together, and the first coalescence there is equally likely to join any of the three pairs: A with B, A with C, or B with C. Only one of these, A with B, matches the species tree. So, given that A and B failed to coalesce along the branch, the gene tree is concordant with probability $1/3$ and discordant with probability $2/3$.
+Equation \@ref(eq:no-coalescent-prob) gives the probability of outcomes 2 or outcome 3 happening. To split that probability between these two outcomeswe need a short combinatorial assessment. When A and B fail to coalesce, all three lineages enter the ancestral population together, and the first coalescence there is equally likely to join any of the three pairs: A with B, A with C, or B with C. Only one of these, A with B, matches the species tree. So, given that A and B failed to coalesce along the focal branch, the gene tree is concordant with probability $1/3$ and discordant with probability $2/3$.
 
 Multiplying the probability of failing to coalesce by the probability of a discordant resolution gives the overall probability of a discordant gene tree (event 3),
 
@@ -133,21 +130,21 @@ Multiplying the probability of failing to coalesce by the probability of a disco
   (\#eq:discordant-prob)
 \end{equation}
 
-and the probability that the gene tree matches the species tree (events 1 and 2) is one minus this,
+Since the probabilities sum to 1, the probability that the gene tree matches the species tree (outcomes 1 or 2) is one minus this,
 
 \begin{equation}
-  P(\text{match}) = 1 - \frac{2}{3}\,e^{-\tau}.
+  P(\text{concordant}) = 1 - \frac{2}{3}\,e^{-\tau}.
   (\#eq:concordant-prob)
 \end{equation}
 
-Equation \@ref(eq:concordant-prob) is the curve in Figure \@ref(fig:gst-anomaly). When the internal branch is very short ($\tau \to 0$) the match probability falls to $1/3$ — no better than choosing one of the three topologies at random — and as the branch lengthens it climbs toward one, where gene trees become reliable proxies for the species tree.
+Equation \@ref(eq:concordant-prob) is the curve in Figure \@ref(fig:gst-anomaly). When the focal branch is very short ($\tau \to 0$) the match probability falls to $1/3$ — no better than choosing one of the three topologies at random — and as the branch lengthens it climbs toward one, where gene trees become reliable proxies for the species tree.
 
-```{r gst-anomaly, echo=FALSE, fig.width=5, fig.height=3.6, fig.cap="The probability that a gene tree matches the species tree rises as the internal branch of the species tree lengthens (in coalescent units). Short internal branches, as in rapid radiations, leave a wide zone of frequent discordance; long branches leave gene trees essentially concordant."}
+```{r gst-anomaly, echo=FALSE, fig.width=5, fig.height=3.6, fig.cap="The probability that the gene tree matches the species tree rises as the focal branch lengthens (in coalescent units). A short focal branch, as at the base of a rapid radiation, leaves a wide zone of frequent discordance; a long one leaves gene trees essentially concordant."}
 par(mar=c(4.5,4.5,1,1))
 t <- seq(0, 4, length.out=200)
 pconc <- 1 - (2/3)*exp(-t)
 plot(t, pconc, type="l", lwd=3, ylim=c(0,1),
-     xlab="Internal branch length (coalescent units)",
+     xlab="Focal branch length (coalescent units)",
      ylab="P(gene tree matches species tree)", axes=FALSE)
 axis(1); axis(2, at=seq(0,1,0.25))
 abline(h=1/3, lty=3, col="grey50")
@@ -155,6 +152,8 @@ polygon(c(0,0.4,0.4,0), c(0,0,1,1), col=rgb(0,0,0,0.06), border=NA)
 text(0.08, 0.96, "high\ndiscordance", cex=0.9, col="grey30", adj=c(0,1))
 text(3.1, 0.60, "gene trees ~ species tree", cex=0.95, col="grey30")
 ```
+
+We worked this out for a single focal branch in a three-species tree, but the same reasoning applies to every internal branch of any species tree: each is the focal branch for the lineages that pass through it, and the shorter it is in coalescent units, the more often gene trees disagree there.
 
 In practical terms, incomplete lineage sorting is a serious concern for rapid radiations, recent and closely spaced speciation events, and species with large effective population sizes. The **anomaly zone** is an extreme example of this problem [@degnan2009]. When internal branches are short enough, the single most probable gene tree is not the species tree but a different topology altogether. In this regime, simply taking the most common gene tree — or concatenating everything and inferring one tree — can converge on the wrong answer with more and more data.
 
@@ -174,6 +173,19 @@ This is where the familiar vocabulary of **orthology** and **paralogy** comes in
 
 ```{r gst-reconciliation, echo=FALSE, fig.width=8, fig.height=3.2, fig.cap="How duplication and loss can make single-copy genes mislead. Left: the species tree, ((A,B),C). Middle: a gene family tree in which an early duplication (D) produced two copies; within each copy divergences track speciation, so each copy on its own recapitulates the species tree. Reciprocal loss (dashed grey lineages, marked X) then removes B and C from the first copy and A from the second, leaving exactly one surviving copy in each species: A1, B2, and C2. Right: these survivors look like ordinary single-copy genes, but A1 is a paralog of B2 and C2, so the tree they support is (A,(B,C)) -- B groups with C, conflicting with the species tree. This hidden paralogy is invisible unless the full gene family history is reconstructed."}
 par(mfrow=c(1,3), mar=c(1,1,2.5,1))
+
+# helper: draw a simple cladogram (root at bottom, tips at top)
+gst_draw_clado <- function(tip_lab, nodes, main="") {
+  n <- length(tip_lab)
+  plot(NA, xlim=c(0.5, n+0.5), ylim=c(4.3, -0.6),
+       axes=FALSE, xlab="", ylab="", main=main, cex.main=1.1)
+  text(seq_len(n), rep(-0.35, n), tip_lab, font=3, cex=1.15)
+  for (nd in nodes) {
+    segments(nd$x[1], nd$ybase[1], nd$x[1], nd$ytop)
+    segments(nd$x[2], nd$ybase[2], nd$x[2], nd$ytop)
+    segments(nd$x[1], nd$ytop,     nd$x[2], nd$ytop)
+  }
+}
 
 # Panel 1: species tree ((A,B),C)
 gst_draw_clado(c("A","B","C"), main="Species tree",

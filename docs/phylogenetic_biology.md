@@ -7,7 +7,7 @@ isbn_paperback: "979-8-9934524-0-1"
 isbn_hardcover: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
-date: "2026-07-20"
+date: "2026-07-21"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -1425,55 +1425,79 @@ Rather than assess the support of a particular focal topology, sometimes you wan
 
 # Gene trees and species trees {#gene-species-trees}
 
-So far we have gone to great lengths to understand the evolution single genome regions. Implicitly, we have treated the phylogenies of genes as though they were the phylogenies of the species that carry them. This is a common and often useful simplification, but it is not always correct. In this chapter we will examine the distinction between **gene trees** and **species trees**, and the biological processes that can make gene trees disagree with each other and with the species tree.
+So far we have gone to great lengths to understand the evolution of single genome regions. Implicitly, we have treated the phylogenies of genes as though they were the phylogenies of the species that carry them. This is a common and often useful simplification, but it is often not correct. In this chapter we will examine the distinction between **gene trees** and **species trees**, and the biological processes that can make gene trees disagree with each other and with the species tree.
 
 Gene trees can disagree due to estimation error. Any tree we infer from a finite stretch of sequence is uncertain, and two genes can appear to disagree simply because we have estimated each of them imperfectly. This in part motivated the evaluation methods we already discussed (Chapter \@ref(evaluation)). But gene trees can also disagree because the histories of different genome regions are genuinely different [@maddison1997gene]. This discordance is the expected outcome of ordinary biological processes acting on real populations and real genomes. A gene tree that disagrees with the species tree can be right about its own history, and quite distinct from the history of the species that carry it. While estimation error shrinks as we collect more data per gene, true discordance does not. It is a property of the history itself.
 
 ## Gene trees, species trees, and real discordance
 
-@maddison1997gene provided the framing of gene tree discordance that serves as the foundation for this chapter. Picture the species tree not as a set of thin lines but as a set of tubes, each tube a population extended through time that branches as species split. The history of any particular genome region is then a gene tree that runs inside these tubes. Sometimes a gene tree follows the shape of its tubes and matches the species tree exactly; sometimes it does not.
+@maddison1997gene provided the framing of gene tree discordance that serves as the foundation for this chapter. Picture the species tree not as a set of thin lines but as a set of tubes, each tube a population extended through time that branches as species split. The history of any particular gene is a gene tree that runs inside these tubes. Sometimes a gene tree follows the shape of its tubes and matches the species tree exactly; sometimes it does not.
 
-![(\#fig:gst-discordance)Three genome regions sampled from the same four species can support three different, and genuinely correct, gene trees.](phylogenetic_biology_files/figure-latex/gst-discordance-1.pdf) 
-
-Several distinct biological processes can lead gene trees to be discordant with eachother and the species tree (Figure \@ref(fig:gst-discordance)):
+Several distinct biological processes can lead gene trees to be discordant with each other and the species tree:
 
 - **Incomplete lineage sorting**, in which ancestral variation persists across successive speciation events and sorts among descendants in a way that does not track the order of speciation. This is the domain of the multispecies coalescent.
 
-- **Gene duplication and loss**, in which a genome region is copied or deleted, so that the history of the region includes events that the species tree does not.
+- **Gene duplication and loss**, in which a genome region is copied within a genome or deleted, so that the history of the region includes events that the species tree does not.
 
 - **Introgression, hybridization, and horizontal transfer**, in which genetic material moves between lineages that have already diverged, so that a region's history is genuinely reticulate rather than tree-like.
 
-## The multispecies coalescent
+## Incomplete lineage sorting
 
-The process behind incomplete lineage sorting is most naturally described backward in time, in the same spirit as the simulation-first view of models we developed earlier (Chapter \@ref(simulation)). Follow two copies of the same gene sampled in different species back into their shared ancestral population. Looking backward, lineages **coalesce** when they find a common ancestor. This coalescence will always occur before the species split, they question is how long before. If the coalescence occurs along the branch subtending the speciation, the gene tree will match the species tree; if it occurs deeper in the ancestral population, the gene tree may be discordant (Figure \@ref(fig:gst-coalescent)).
+The process behind incomplete lineage sorting is most naturally described backward in time. Let us consider the process on an example gene tree and species tree (Figure \@ref(fig:gst-coalescent)), knowing that what we learn in this context generalizes. Here we follow a gene sampled in three different species, A, B and C, back through their ancestral populations. Looking backward, gene lineages **coalesce** when they find a common ancestor. Coalescence between genes sampled from different species will always occur before the species split; the question is how long before. The two lineages first have the chance to coalesce along the branch subtending the speciation, which we will call the **focal branch**. But they could coalesce deeper in the tree.
 
-![(\#fig:gst-coalescent)Gene lineages (black) evolving within a species tree (grey tubes) for species A, B, and C. Left: a long internal branch lets the A and B lineages coalesce before the deeper split, so the gene tree matches the species tree, ((A,B),C). Right: a short internal branch lets both lineages pass through without coalescing (deep coalescence); in the ancestral population the B lineage happens to coalesce with C first, producing the discordant gene tree ((B,C),A).](phylogenetic_biology_files/figure-latex/gst-coalescent-1.pdf) 
+There are three possible outcomes to consider (Figure \@ref(fig:gst-coalescent)):
 
-How often deep coalescence occurs is set by the effective population size $N_e$. Looking backward in time, any two gene lineages in a population of $N_e$ diploid individuals coalesce with probability $1/(2N_e)$ in each generation, so the expected time back to their common ancestor is $2N_e$ generations. Coalescence is therefore fast in small populations and slow in large ones.
+1. The A and B lineages coalesce along the focal branch (complete lineage sorting). **The gene tree is concordant with the species tree.**
+2. The A and B lineages fail to coalesce along the focal branch (incomplete lineage sorting), but in the ancestral population A and B are still the first pair to coalesce. **The gene tree is concordant with the species tree.**
+3. The A and B lineages fail to coalesce along the focal branch (incomplete lineage sorting), and instead A or B coalesces first with C. **The gene tree is discordant with the species tree.**
 
-This is why it is convenient to measure the length of a branch not in generations but in **coalescent units**, dividing a branch of $t$ generations by the coalescence timescale $2N_e$:
+The first two outcomes give a gene tree that matches the species tree; only the third produces discordance. We can calculate the probabilities of these outcomes with the multispecies coalescent model.
+
+![(\#fig:gst-coalescent)The three possible outcomes for a single gene sampled in species A, B, and C, whose species tree is ((A,B),C). Gene lineages (black) evolve within the species tree (grey tubes); the focal branch is the branch ancestral to the A--B speciation, where the A and B lineages first have the chance to coalesce. Outcome 1: the A and B lineages coalesce along the focal branch (complete lineage sorting), giving the concordant gene tree ((A,B),C). Outcome 2: the lineages pass through the focal branch without coalescing (deep coalescence), but A and B are still the first pair to coalesce in the ancestral population, again giving the concordant ((A,B),C). Outcome 3: after the same deep coalescence, B instead coalesces with C first, giving the discordant gene tree ((B,C),A).](phylogenetic_biology_files/figure-latex/gst-coalescent-1.pdf) 
+
+The effective population size $N_e$ is the number of diploid individuals in an idealized population. Since diploid individuals each carry two copies of each gene, the total number of gene copies in a population of $N_e$ diploids is $2N_e$. Given a particular gene sampled from the population, the probability that it coalesces with another particular gene in the previous generation is $1/(2N_e)$. From this, we can derive that the expected time back to the most recent common ancestor of any two copies of a gene sampled from the population is $2N_e$ generations. The larger the effective population size, the longer we expect it to take for lineages to coalesce.
+
+Since generation times and $N_e$ can vary widely across species, branch lengths are often normalized to **coalescent units**. 
 
 \begin{equation}
   \tau = \frac{t}{2N_e}
   (\#eq:coalescent-units)
 \end{equation}
 
-A branch that is long in coalescent units — $\tau$ large, from many generations, a small population, or both — gives two lineages ample time to coalesce along the internal branch; a short branch does not. The probability that two lineages entering an internal branch of length $\tau$ fail to coalesce along it, and so pass into the deeper ancestral population where deep coalescence can occur, is $e^{-\tau}$.
+A branch length of $\tau=1$ coalescent unit is the expected time for two lineages to coalesce.
 
-For three species, whenever two lineages fail to coalesce on the internal branch, all three rooted gene-tree topologies become equally likely in the ancestral population, and only one of them matches the species tree. Combining the two possibilities — coalescence on the branch, which always yields the matching tree, and failure, which yields it only one time in three — the probability that the gene tree matches the species tree is
+As in our analyses of sequence evolution, we would like to have probabilities, not just expectations. The probability that two copies of a gene sampled from a population fail to coalesce along a branch of length $\tau$ is:
+
+\begin{equation}
+  P(\text{fail to coalesce}) = e^{-\tau}
+  (\#eq:no-coalescent-prob)
+\end{equation}
+
+Note that the exponent contains a negative sign, so the probability of failure to coalesce decreases as the branch length increases. Equivalently, the probability of coalescence increases as the branch length increases. This makes sense. The more time two lineages spend together in a population, the more likely they are to coalesce.
+
+Equation \@ref(eq:no-coalescent-prob) gives the probability of outcomes 2 and 3 together, in which A and B fail to coalesce along the focal branch. To split that probability between concordance and discordance we need a short combinatorial assessment. When A and B fail to coalesce, all three lineages enter the ancestral population together, and the first coalescence there is equally likely to join any of the three pairs: A with B, A with C, or B with C. Only one of these, A with B, matches the species tree. So, given that A and B failed to coalesce along the focal branch, the gene tree is concordant with probability $1/3$ and discordant with probability $2/3$.
+
+Multiplying the probability of failing to coalesce by the probability of a discordant resolution gives the overall probability of a discordant gene tree (event 3),
+
+\begin{equation}
+  P(\text{discordant}) = \frac{2}{3}\,e^{-\tau}
+  (\#eq:discordant-prob)
+\end{equation}
+
+and the probability that the gene tree matches the species tree (events 1 and 2) is one minus this,
 
 \begin{equation}
   P(\text{match}) = 1 - \frac{2}{3}\,e^{-\tau}.
-  (\#eq:gene-tree-match)
+  (\#eq:concordant-prob)
 \end{equation}
 
-Equation \@ref(eq:gene-tree-match) is the curve in Figure \@ref(fig:gst-anomaly). When the internal branch is very short ($\tau \to 0$) the match probability falls to $1/3$ — no better than choosing one of the three topologies at random — and as the branch lengthens it climbs toward one, where gene trees become reliable proxies for the species tree.
+Equation \@ref(eq:concordant-prob) is the curve in Figure \@ref(fig:gst-anomaly). When the focal branch is very short ($\tau \to 0$) the match probability falls to $1/3$ — no better than choosing one of the three topologies at random — and as the branch lengthens it climbs toward one, where gene trees become reliable proxies for the species tree.
 
-![(\#fig:gst-anomaly)The probability that a gene tree matches the species tree rises as the internal branch of the species tree lengthens (in coalescent units). Short internal branches, as in rapid radiations, leave a wide zone of frequent discordance; long branches leave gene trees essentially concordant.](phylogenetic_biology_files/figure-latex/gst-anomaly-1.pdf) 
+![(\#fig:gst-anomaly)The probability that the gene tree matches the species tree rises as the focal branch lengthens (in coalescent units). A short focal branch, as at the base of a rapid radiation, leaves a wide zone of frequent discordance; a long one leaves gene trees essentially concordant.](phylogenetic_biology_files/figure-latex/gst-anomaly-1.pdf) 
 
-In practical terms, incomplete lineage sorting is a serious concern for rapid radiations, recent and closely spaced speciation events, and species with large effective population sizes — and much less of one for deep divergences separated by long branches. The hardest problems in phylogenetics, the short internal branches at the base of an old, rapid radiation, are exactly where these effects are strongest.
+We worked this out for a single focal branch in a three-species tree, but the same reasoning applies to every internal branch of any species tree: each is the focal branch for the lineages that pass through it, and the shorter it is in coalescent units, the more often gene trees disagree there.
 
-The sharpest version of the problem is the **anomaly zone** [@degnan2009]. When internal branches are short enough, the single most probable gene tree is not the species tree but a different topology altogether. In this regime, simply taking the most common gene tree — or concatenating everything and inferring one tree — can converge on the wrong answer with more and more data. Discordance here is not just noise around the right answer; it can be actively misleading, and methods that model it explicitly become necessary rather than optional.
+In practical terms, incomplete lineage sorting is a serious concern for rapid radiations, recent and closely spaced speciation events, and species with large effective population sizes. The **anomaly zone** is an extreme example of this problem [@degnan2009]. When internal branches are short enough, the single most probable gene tree is not the species tree but a different topology altogether. In this regime, simply taking the most common gene tree — or concatenating everything and inferring one tree — can converge on the wrong answer with more and more data.
 
 Two broad families of coalescent-aware phylogenetic methods, which model and accommodate the multispecies coalescent, are in wide use:
 
@@ -1485,31 +1509,39 @@ Two broad families of coalescent-aware phylogenetic methods, which model and acc
 
 ## Gene duplication and loss
 
-The coalescent assumes that every species carries exactly one copy of each region, so that the only question is how single copies sort. Real genomes do not oblige. Genome regions are duplicated and lost throughout evolution, and as a result most genes are members of **gene families**: sets of related copies within and across genomes that trace back to a history of duplication and differentiation.
+Genome regions are duplicated and lost throughout evolution, and as a result most genes are members of **gene families**: sets of related copies within and across genomes that trace back to a history of duplication and differentiation.
 
-This is where the familiar vocabulary of **orthology** and **paralogy** comes in. Two gene copies are orthologs if their most recent common ancestor is a speciation event, and paralogs if it is a duplication event. The distinction matters because our whole strategy of using genes as proxies for species assumes we are comparing orthologs: copies whose divergence tracks the divergence of species. Compare paralogs by mistake and the gene tree can depart drastically from the species tree, not because of any subtle coalescent effect but because the copies diverged at a duplication that long predates the speciation events we are trying to reconstruct.
+This is where the familiar vocabulary of **orthology** and **paralogy** comes in. Two gene copies are orthologs if their most recent common ancestor immediately precedes a speciation event, and paralogs if it precedes a duplication event. The distinction matters because our whole strategy of using genes as proxies for species assumes we are comparing orthologs: copies whose divergence tracks the divergence of species. Compare paralogs by mistake and the gene tree can depart drastically from the species tree.
 
 ![(\#fig:gst-reconciliation)How duplication and loss can make single-copy genes mislead. Left: the species tree, ((A,B),C). Middle: a gene family tree in which an early duplication (D) produced two copies; within each copy divergences track speciation, so each copy on its own recapitulates the species tree. Reciprocal loss (dashed grey lineages, marked X) then removes B and C from the first copy and A from the second, leaving exactly one surviving copy in each species: A1, B2, and C2. Right: these survivors look like ordinary single-copy genes, but A1 is a paralog of B2 and C2, so the tree they support is (A,(B,C)) -- B groups with C, conflicting with the species tree. This hidden paralogy is invisible unless the full gene family history is reconstructed.](phylogenetic_biology_files/figure-latex/gst-reconciliation-1.pdf) 
 
-It is tempting to respond to all this by restricting analyses to single-copy orthologs: regions that are present in exactly one copy in every species, with a clean one-to-one correspondence and no duplication or loss to worry about. Much of phylogenomics attempts to do this. But strict, universal single-copy orthologs are rare, and in an important sense they are the odd-balls rather than the normal case [@dunn2016]. Duplication and loss are pervasive features of genome evolution; a gene that has remained single copy across a whole clade for hundreds of millions of years is unusual may be unusual in ways (strong constraint, dosage sensitivity) that make it a biased sample of the genome.
+It is tempting to respond to all this by restricting analyses to single-copy orthologs: regions that are present in exactly one copy in every species, with a clean one-to-one correspondence and no duplication or loss to worry about. Much of phylogenomics attempts to do this. But strict, universal single-copy orthologs are rare, and in an important sense they are the odd-balls rather than the normal case [@dunn2016]. Duplication and loss are pervasive features of genome evolution; a gene that has remained single copy across a whole clade for hundreds of millions of years may be unusual in ways (strong constraint, dosage sensitivity) that make it a biased sample of the genome.
 
-A more general response is to treat the labels *ortholog* and *paralog* as summaries of something richer: an explicit, reconstructed history of duplication and loss [@dunn2016]. Rather than sorting pairs of genes into two bins (strict orthologs and others), we can infer the full gene family tree and map it onto the species tree, a procedure called reconciliation [@szollosi2014]. Reconciliation places each duplication and loss event on the species tree and, in doing so, tells us which copies are orthologs, which are paralogs, and exactly why (Figure \@ref(fig:gst-reconciliation)). Orthology and paralogy fall out as consequences of the history rather than serving as the primitive concepts. Notice that this is the same move as the coalescent: a gene tree contained within a species tree, differing from it through a well-defined process, which we model rather than ignore.
+A more general response is to treat the labels *ortholog* and *paralog* as summaries of something richer: an explicit, reconstructed history of duplication and loss [@dunn2016]. Rather than sorting pairs of genes into two bins (strict orthologs and others), we can infer the full gene family tree and map it onto the species tree, a procedure called reconciliation [@szollosi2014; @chen2000]. Reconciliation places each duplication and loss event on the species tree and, in doing so, tells us which copies are orthologs, which are paralogs, and exactly why (Figure \@ref(fig:gst-reconciliation)). Orthology and paralogy fall out as consequences of the history rather than serving as the primitive concepts.
 
-This perspective also lets us discard fewer data. Tools that identify gene families and infer their histories, such as OrthoFinder [@emms2019], make the full complement of gene families available for analysis, and methods such as ASTRAL-Pro estimate the species tree directly from multi-copy gene family trees, accounting for paralogy instead of requiring it to be filtered away first [@zhang2020].
+Methods that consider gene duplication and loss can reduce inference problems and also let us discard fewer data (since we can relax our gene selection criteria to include genes with more complex histories). Tools that identify gene families and infer their histories, such as OrthoFinder [@emms2019], make the full complement of gene families available for analysis, and methods such as ASTRAL-Pro estimate the species tree directly from multi-copy gene family trees, accounting for paralogy instead of requiring it to be filtered away first [@zhang2020].
 
 ## Reticulation: introgression, hybridization, and horizontal transfer
 
-The coalescent and duplication-loss both assume that the species tree itself is a tree — that lineages, once split, stay split. Sometimes they do not. In **introgression** and **hybridization**, lineages that have already diverged exchange genes, so that some regions of the genome have a history that runs across branches of the species tree rather than along them. In **horizontal gene transfer**, especially common among prokaryotes, a genome region moves between distantly related lineages outright. In these cases the history of the organisms is not fully captured by any single tree; it is a network, with branches that merge as well as split. Phylogenetic networks generalize trees to represent such reticulate histories [@solislemus2017], and are an active area of method development. For much of eukaryotic phylogenetics a tree remains an excellent approximation, but it is worth remembering that it is an approximation.
+The coalescent and gene duplication and loss both take the branching of the species tree for granted: lineages, once split, are assumed to stay split, and discordance arises only from how genes sort or duplicate within that fixed history. Reticulation breaks that assumption. Lineages that have already diverged come back into genetic contact and exchange material, so the history of the organisms is no longer a tree but a **network**, with branches that merge as well as split.
 
-## When does discordance matter?
+**Hybridization** and **introgression** are two outcomes of the same underlying event, interbreeding between diverged but still cross-fertile lineages, that differ in scale and consequence. Hybridization is the cross itself, and in its most dramatic form it founds a new lineage whose genome is a balanced mosaic of both parents (a homoploid hybrid) or a doubled complement of both parental genomes (an allopolyploid, a common route to new species in plants). Such a hybrid lineage descends from two branches of the species tree, a merger of two lineages. Introgression is the subtler and more common result: when hybrids backcross repeatedly into one of the parental populations, a minority of one lineage's genome leaks into the other while both species persist largely intact. The recipient remains recognizably itself but carries some regions inherited from the donor. Introgression therefore touches only part of the genome, so it is usually detected from genome-wide asymmetries in shared variation rather than from any single locus.
 
-We have now seen the biological processes that make gene trees depart from the species tree, and the methods that model them. But this machinery is not always needed, and a great deal of phylogenetics proceeds perfectly well while ignoring discordance. Whether that is safe depends on the cause. Incomplete lineage sorting is a serious problem only when internal branches are short and populations large, as we saw above; gene duplication and loss matters most when gene families are large and dynamic, so that even single-copy genes may carry hidden paralogy; and reticulation matters when hybridization or horizontal transfer is common in the group at hand.
+**Horizontal**, or lateral, **gene transfer** moves genetic material between lineages outside of reproduction altogether. Rather than passing from parent to offspring, a gene is taken up directly, carried by a plasmid, a virus, or environmental DNA, and inserted into another genome. Because this requires neither interbreeding nor close relationship, horizontal transfer can move a gene between very distantly related organisms, and it is pervasive among prokaryotes. A transferred gene has a history that leaps across the tree, resembling neither the recipient's close relatives nor a pattern of incomplete lineage sorting.
 
-When discordance is expected to be mild, we can get away with the simpler default: concatenation, joining all the alignments end to end into one supermatrix and inferring a single tree, as introduced in Chapter \@ref(molecular-inference-in-practice). Concatenation is not a coalescent method — it ignores the gene-tree/species-tree distinction entirely, treating every region as though it shared one history — but it is fast, general, and remains the workhorse of phylogenetics. When discordance is severe, treating all regions as one history becomes exactly the wrong assumption, and the coalescent-aware methods above earn their extra cost.
+All three produce reticulate histories that no single tree can fully capture, and phylogenetic networks generalize trees to represent them [@solislemus2017].
 
-## Concluding thoughts
+## Conclusion
 
-Discordance is expected in real data, and should never be a surprise. The question is if and how to address it. Real discordance can have multiple causes and methods have been developed to explicitly model and address each. In reality, the specific processes that cause any particular discordance may be non-identifiable, and the best we can do is to use methods that are robust to multiple causes. The coalescent is a good example: it models one cause of discordance, but it may be able to essentially soak up other causes such as gene duplication and loss.
+We have examined biological processes that can lead gene trees to depart from the species tree, methods that model these processes, and approaches to addressing discordance. This is one of the most active areas of phylogenetic research, and there is considerable ongoing development and consideration of the best approaches for particular problems.
+
+Many analyses do not attempt to model discordance at all, and treat all regions as though they share one history. One of the most common such approaches is to concatenate all the gene alignments end to end into one supermatrix and infer a single tree. There are a few reasons this is still a common approach. In practical terms, it often gives the same answer as methods that explicitly accommodate discordance, and it is computationally simpler. In some cases, the biology of the problem may make discordance unlikely. Another concern is that methods that accommodate discordance have many more parameters, and data may be too limited to support the more complex models. In practice, it is common for studies to take multiple approaches and compare the results. Understanding where the methods agree and where they disagree can be informative about the biology of the group and the structure of the problem, and can help identify additional approaches that may be needed to understand the problem. 
+
+Real discordance can have multiple causes. Methods have been developed to explicitly model and address each. In reality, the specific processes that cause any particular discordance may be non-identifiable, and the best we can do is to use methods that are robust to multiple causes. The coalescent is a good example: it models one cause of discordance, but it may be able to essentially soak up other causes such as gene duplication and loss. Just because a method detects discordance doesn't mean the discordance is due to the process it models. 
+
+We should expect that different processes tend to dominate in different parts of the tree of life, and that the biology of the group and structure of the phylogenetic problem should inform the choice of method. As we have seen, incomplete lineage sorting is most likely when the absolute length of branches is short. Given that shorter branches tend to be sampled in recent divergences, this is a particular concern at shallower depths in the tree. Incongruence due to gene duplication and loss is most likely when longer times have elapsed along the branches of the species tree. This is a particular concern for deeper phylogenetic problems, such as those regarding relationships from hundreds of millions of years ago. 
+
+Gene tree/ species tree discordance is one of those phylogenetic patterns that is often treated as a technical nuisance to be overcome in the quest to resolve species relationships, but it is also a rich area of biology that is clearly relevant, and often central, to the larger evolutionary questions that are leading us to infer phylogenies in the first place. Incomplete lineage sorting tells us how population-level processes give rise to macroevolutionary patterns. Gene duplication and loss is central to the evolution of genome novelty and complexity. Introgression and hybridization are central to understanding the evolution of many groups, including humans. As the field develops these processes will be treated less as nuisances to be overcome, and more as important biological phenomena to be sought out and understood.
 
 <!--chapter:end:gene_species_trees.rmd-->
 
@@ -2048,7 +2080,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 20, 2026 at 01:07:50 AM with the following R package versions.
+This book was rendered from the source code on Jul 21, 2026 at 01:19:07 AM with the following R package versions.
 
 
 ```
