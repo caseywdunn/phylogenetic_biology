@@ -204,7 +204,7 @@ Collecting these values gives the phylogenetic variance-covariance matrix. We wi
 (\#eq:comp-vcv)
 \end{equation}
 
-The diagonal, running from top left to bottom right, holds the variances, all equal here because the tree is ultrametric. Every other entry is a covariance, and the pattern of large and small values mirrors the tree: closely related tips such as A and B share a great deal of history and have a large covariance, while the distantly attached D shares none and has covariances of zero. Reading down the row for D, or across its column, gives all zeros. This matrix is a complete description of the non-independence induced by the tree, and it is exactly what the next method takes as its input.
+The diagonal, running from top left to bottom right, holds the variances, all equal here because the tree is ultrametric. Every other entry is a covariance, and the pattern of large and small values mirrors the tree: closely related tips such as A and B share a great deal of history and have a large covariance, while the distantly attached D shares none and has covariances of zero. Reading across the row for D, or down its column, gives all zeros. This matrix is a complete description of the non-independence induced by the tree, and it is exactly what the next method takes as its input.
 
 ## Phylogenetic generalized least squares\index{phylogenetic generalized least squares (PGLS)}
 

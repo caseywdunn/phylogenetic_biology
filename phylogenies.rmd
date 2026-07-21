@@ -68,7 +68,7 @@ Here we will work with some mammal phylogenies, mostly because their silhouette 
 
 You will rarely see a phylogeny depicted as in Figure \@ref(fig:trees-graph-tree), with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the branches (Figure \@ref(fig:trees-mammal)), with the nodes implied at the ends of branches.
 
-```{r trees-mammal, echo=FALSE, fig.cap="Phylogeny of some mammals. Topology and branch lengths from http://vertlife.org.  The organism silhouettes are from http://phylopic.org/. Note that node circles are not drawn, instead nodes are implied at ends of branches."}
+```{r trees-mammal, echo=FALSE, fig.cap="Phylogeny of some mammals. Topology and branch lengths from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. Note that node circles are not drawn; instead, nodes are implied at ends of branches."}
 
 # The native phylopic tool in ggtree has some issues - api times out, some images can be missing because originals are small, and hard to control scaling when they have variable width. So load them from local copies of the images
 
@@ -140,7 +140,7 @@ In a fully bifurcating phylogeny with $n$ tip nodes, the following will be the c
 
 - The root node, which is a special internal node that is older than all other nodes, has no parent branch, so it has only two branches. These connect it to its immediate descendant nodes (its children).
 
-- All internal nodes in the tree other than the root have three branches - one connected to a parent node, and two connected to child nodes.
+- All internal nodes in the tree other than the root have three branches -- one connected to a parent node, and two connected to child nodes.
 
 - Since every branch in the tree has a single child node, and each node in the tree except for the root has a parent branch, the total number of branches in the tree is $2n-2$.
 
@@ -335,7 +335,7 @@ Even when we don't know where the root of a phylogeny is, we often want to talk 
 
 There are some basic things we can't take for granted in an unrooted phylogeny. We don't, for example, know which way time goes along the branches. We don't know which internal nodes are child nodes and which are parent nodes. We don't know which of the branches attached to an internal node connect to older nodes and which to younger nodes.
 
-```{r trees-rooted-abstract, echo=FALSE, fig.cap="These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray branch (D). Each of these elements are in the exact same topological positions in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three branches attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray branch, a new unrooted node is added along the branch. This new node is bifurcating."}
+```{r trees-rooted-abstract, echo=FALSE, fig.cap="These four cladograms have the same tips and same topology; only the layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray branch (D). Each of these elements is in the exact same topological position in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three branches attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray branch, a new unrooted node is added along the branch. This new node is bifurcating."}
 
 # Generated a random tree, but then specify it to use the same one for each render
 # rtree(10, rooted=FALSE) %>% write.tree()
@@ -536,7 +536,7 @@ p_min = tree_star %>%
   ggtree( branch.length="none" ) %<+% d_ingroup +
   #geom_tiplab(aes(image=paste0("figures/phylopic/", uid, '.512.png')), geom="image", offset=offset, size=phylopic_size_small ) +
   xlim(0, 2) +
-  ggtitle("(A) Unlabeled 11 tips comb cladogram")
+  ggtitle("(A) Unlabeled 11-tip comb cladogram")
 
 p_images = tree_star %>%
   ggtree( branch.length="none" ) %<+% d_ingroup +

@@ -1,6 +1,6 @@
 # Inferring phylogenies from data
 
-In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$ (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given the starting state and the branch length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the branches of a phylogeny.
+In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$ (Equation \@ref(eq:matrix-exp)) that gives the probability of a particular end state given the starting state and the branch length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the branches of a phylogeny.
 
 We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data [@Felsenstein:1981vk].
 
@@ -103,7 +103,7 @@ ggtree(phy) +
 
 ```
 
-We will start by calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). This isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
+We will start by calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). This isn't a history we have any particular reason to believe; it is just one possible history of states randomly chosen from all the possible histories.
 
 ```{r inference-internal-states, fig.cap="The same toy tree as above, now with arbitrary states added at the internal nodes, so every node has a state (in boxes)."}
 
@@ -123,7 +123,7 @@ Our goal now is to calculate the probability of each observed change. Recall tha
   (\#eq:prob)
 \end{equation}
 
-Where $\mathbf{Q}$ is the rate matrix. Let's plug some numbers in using the model we specified in the previous chapter. We don't have any specific reason to use this model on this tree, we are just sticking with it since we already built it.
+Where $\mathbf{Q}$ is the rate matrix. Let's plug some numbers in using the model we specified in the previous chapter. We don't have any specific reason to use this model on this tree; we are just sticking with it since we already built it.
 
 Here is the relative rate matrix $\mathbf{R}$:
 
@@ -189,7 +189,7 @@ example_prob = prod(p)
 
 ```
 
-The joint probability of all these states can now be calculated as the product of each state. This comes out to $`r example_prob`$. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of $`r round(example_prob*1e6,1)`$ times out of a million simulations.
+The joint probability of all these states can now be calculated as the product of each state. This comes out to $`r example_prob`$. There are multiple ways to think about this probability. One is from a frequency perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of $`r round(example_prob*1e6,1)`$ times out of a million simulations.
 
 Here we use much of the same machinery as in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see, their mathematical implementation shares many features.
 
@@ -254,7 +254,7 @@ At this point we can calculate the log likelihood for specified phylogenies, mod
 
 The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. By reference to Equation \@ref(eq:ntrees), we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. This excellent [interactive visualization](http://phylo.bio.ku.edu/mephytis/brlen-opt.html) allows you to manually optimize branch lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
 
-Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.
+Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics -- to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it; if it is worse, you discard it.
 
 This might sound simple, but it isn't. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima. Widely used maximum likelihood inference programs include RAxML [@stamatakis2014] and IQ-TREE [@nguyen2015].
 

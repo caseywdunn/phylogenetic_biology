@@ -142,7 +142,7 @@ segments %>%
     ylab("n (replacements)")
 ```
 
-Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often confounded in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for branch lengths is given as the number of expected evolutionary changes rather than absolute time (years, months, *etc.*). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)) [@zapata2015]. The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
+Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often conflated in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for branch lengths is given as the number of expected evolutionary changes rather than absolute time (years, months, *etc.*). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)) [@zapata2015]. The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
 
 ```{r sim-tree-cnid, fig.cap="A published phylogeny (Zapata, 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time."}
 
@@ -151,7 +151,7 @@ knitr::include_graphics("figures/Fig_cnidaria.png")
 
 ### Expected end state
 
-The machinery above shows how a model can clarify the way we think about the expected amount of change along a branch. Often, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor this question is to think about the extremes - what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
+The machinery above shows how a model can clarify the way we think about the expected amount of change along a branch. Often, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor this question is to think about the extremes -- what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
 
 The situation is most clear after a small amount of change (when $\mu t$ is small) - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.
 
@@ -193,7 +193,7 @@ In all the examples above, I simulated replacement events by randomly generating
 The process of change that our simple model describes is similar to compound interest. 
 We have something in hand, apply a process to it, then take the output and apply that same process again. Over and over. 
 In the case of compound interest, that something is money and the process is growth. In the case of our model, the 
-something is a DNA site and the process is mutation. In both cases, we take as inputs a starting state, a rate of change, and an amount of time, and as an output get the expected end state. To get the expected end state as a function of time elapsed, given a rate of change, we can use exponential functions. For example, here is the exponential function for calculating a balance at time $B(t)$ given the initial balance $B_0$ and an interest rate $r$:
+something is a DNA site and the process is mutation. In both cases, we take as inputs a starting state, a rate of change, and an amount of time, and as an output get the expected end state. To get the expected end state as a function of time elapsed, given a rate of change, we can use exponential functions. For example, here is the exponential function for calculating a balance at time $t$, written $B(t)$, given the initial balance $B_0$ and an interest rate $r$:
 
 \begin{equation}
   B\left(t\right) = B_0 e^{r t} 
@@ -214,13 +214,13 @@ For our sequence evolution model, we need two exponential functions [@swofford19
 
 Equation \@ref(eq:sim-stay) shows the probability of the final state being the same as 
 the beginning state. So if you start with an A, this would give you the probability 
-of remaining an A after time $t$ given a specific value of $\mu$. Equation \@ref(eq:sim-change) is the probability of each of the three end states that are different from the starting state. If you start as an A, this is the probability of changing to a G, for example. It is also the probability of C to T, G to A, *etc*...
+of remaining an A after time $t$ given a specific value of $\mu$. Equation \@ref(eq:sim-change) is the probability of each of the three end states that are different from the starting state. If you start as an A, this is the probability of changing to a G, for example. It is also the probability of C to T, G to A, *etc.*
 
 Consider what happens to these equations in the extremes we considered above when examining Figure \@ref(fig:sim-saturation). If $\mu$ or $t$ are zero, we expect no change (Figure \@ref(fig:sim-analytical), left side). In that case we get $e^0$, which is 1. Equation \@ref(eq:sim-stay) becomes $1/4 + 3/4$, which is 1. So there is a probability of 1 that, after no change, the end state is the same as the beginning state. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 1/4$, which is 0. So after no change the end states that differ from the beginning state each have probability 0.
 
 Now consider the case after infinite change (or just a large amount of change, as in the right side of Figure \@ref(fig:sim-analytical)). If $\mu$ or $t$ are infinity, then $e^{-\mu t}$ becomes $e^{-\infty}$, which is 0. In that case, Equation \@ref(eq:sim-stay) becomes $1/4 + 0$, which is simply $1/4$. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 0$, which is also $1/4$. So all the nucleotides (the one that you started with, and the three other states that substitution can lead to) all have the same equal frequency of $1/4$. This reflects the fact that the frequency of drawing each of these from the bag was $1/4$.
 
-```{r sim-analytical, fig.cap="The probability of observing a particular end state at time $t$, given the start state A and $\\mu=0.05$. The solid line is the probability of observing the original start state (as described by Equation \\@ref(eq:sim-stay)), the dashed line is the probability of observing each of the three other states (as described by Equation \\@ref(eq:sim-change))." }
+```{r sim-analytical, fig.cap="The probability of observing a particular end state at time $t$, given the start state A and $\\mu=0.05$. The solid line is the probability of observing the original start state (as described by Equation \\@ref(eq:sim-stay)); the dashed line is the probability of observing each of the three other states (as described by Equation \\@ref(eq:sim-change))." }
 
 mu=0.05
 p = ggplot(data = data.frame(x = 0), mapping = aes(x = x))
@@ -317,7 +317,7 @@ $\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amo
 
 \begin{equation}
 \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
-(\#eq:jc69-prob)
+(\#eq:matrix-exp)
 \end{equation}
 
 Raising $e$ to the power of a matrix is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$, known as the substitution probability matrix, is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$, $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row and column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over a branch of length $t$. Given the single rate parameter and uniform equilibrium frequencies, the diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
@@ -439,7 +439,7 @@ notation to computational representations, since we are doing more calculations.
 Q
 ```
 
-Now we need to exponentiate $\mathbf{Q}$ to get $\mathbf{P}(t)$, according to Equation \@ref(eq:jc69-prob). If we do that numerically, we need to specify $t$ before we do the exponentiation. So, for example, $\mathbf{P}(1)$ is:
+Now we need to exponentiate $\mathbf{Q}$ to get $\mathbf{P}(t)$, according to Equation \@ref(eq:matrix-exp). If we do that numerically, we need to specify $t$ before we do the exponentiation. So, for example, $\mathbf{P}(1)$ is:
 
 ```{r}
 t = 1
