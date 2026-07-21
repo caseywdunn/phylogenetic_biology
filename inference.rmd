@@ -4,7 +4,7 @@ In the previous chapter we built modeling machinery that allowed us to specify a
 
 We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data [@Felsenstein:1981vk].
 
-This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the likelihood. Searching for the most likely hypothesis is referred to as maximum likelihood (ML). A comprehensive reference on the whole endeavor of phylogenetic inference is @felsenstein2004.
+This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the likelihood\index{likelihood}. Searching for the most likely hypothesis is referred to as maximum likelihood (ML). A comprehensive reference on the whole endeavor of phylogenetic inference is @felsenstein2004.
 
 ## Probability of a single history
 
@@ -248,7 +248,7 @@ The machinery above gives us everything we need to calculate the log likelihood 
 
 This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.
 
-## Maximum likelihood
+## Maximum likelihood\index{maximum likelihood}
 
 At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. How do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).
 
@@ -262,6 +262,6 @@ Optimization of calculations becomes very important. For example, it isn't neces
 
 ## Optimality criteria
 
-Here we used likelihood as an optimality criterion to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony. In parsimony, the minimum number of changes along branches needed to explain the data at the tips is used as the criterion to evaluate each topology [@fitch1971]. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
+Here we used likelihood as an optimality criteri\index{optimality criterion}on to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony\index{parsimony}. In parsimony, the minimum number of changes along branches needed to explain the data at the tips is used as the criterion to evaluate each topology [@fitch1971]. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
 
 Under some conditions parsimony and likelihood will recover similar topologies, but often they do not. This is because they are doing different things that under many conditions lead to different results [@steel2000parsimony]. For example, we do not always expect the simplest possible explanation for a given pattern to be the best explanation. If a character has a high rate of evolutionary change, then we expect many changes on a tree rather than the fewest possible. This is accommodated in a likelihood framework.

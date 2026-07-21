@@ -2,6 +2,37 @@
 \usepackage{float}
 \usepackage{afterpage}
 
+% Back-of-book index. \index{...} markers are placed inline in the chapter
+% source (dropped silently in the HTML build, typeset by makeindex in the PDF).
+% The index itself is emitted by \printindex in after_body.tex.
+\usepackage{makeidx}
+\makeindex
+
+% The book class typesets the index with \twocolumn, whose output routine fills
+% the first column to the full text height and leaves the final page unbalanced;
+% combined with this book's strong widow/club penalties (set below), the first
+% column can run past the bottom margin. Retypeset the index with multicol, which
+% balances the two columns, keeps them inside the text block, and breaks to a new
+% page cleanly. The penalties are also reset locally so entries break freely.
+\usepackage{multicol}
+\makeatletter
+\renewenvironment{theindex}{%
+  \columnseprule \z@
+  \columnsep 35\p@
+  \chapter*{\indexname}%
+  \markboth{\indexname}{\indexname}%
+  \thispagestyle{plain}%
+  \parindent\z@
+  \parskip\z@ \@plus .3\p@\relax
+  \let\item\@idxitem
+  \raggedright
+  \widowpenalty\z@ \clubpenalty\z@ \clubpenalties 1 \z@ \interlinepenalty\z@
+  \begin{multicols}{2}%
+}{%
+  \end{multicols}%
+}
+\makeatother
+
 % Suppress the default pandoc/LaTeX title page. pandoc emits \maketitle from the
 % YAML title/author/date, which produces a redundant title page (stamped with the
 % build date) in front of our own front matter. The real title, copyright, and

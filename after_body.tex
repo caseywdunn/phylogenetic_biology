@@ -1,4 +1,13 @@
 
+% Back-of-book index, printed after the bibliography. \phantomsection +
+% \addcontentsline give it a Table of Contents entry (the theindex environment
+% in the book class uses \chapter*, which is not numbered and not listed on its
+% own).
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+
 \clearpage
 \ifodd\value{page}
   \thispagestyle{empty}

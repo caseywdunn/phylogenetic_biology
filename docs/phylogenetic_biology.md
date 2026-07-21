@@ -34,19 +34,19 @@ always_allow_html: true
 
 
 
-## Approach
+## Approach {-}
 
 Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative - they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
 
 This book is not a comprehensive treatment of phylogenetic biology, it is focused on teaching some of the key concepts and methods. This will provide a foundation for the many other rich areas of the field, from its interfaces with population genetics to comparative genomics to comparative methods at a macroevolutionary scale. It is in no way an overview of all of phylogenetic biology, which has grown into a very large field. Omissions of topics do not imply that they are unimportant.
 
-## Using this book
+## Using this book {-}
 
 This book is intended both for the self-directed learner and for use in a course. 
 
 I wrote it as a text for my course, Phylogenetic Biology (Yale EEB354). We read one chapter a week. We review and discuss the reading on Tuesdays, and then on Thursdays do hands-on work, read papers from the literature, or share student projects.
 
-## Distribution
+## Distribution {-}
 
 There are several ways you can get this book:
 
@@ -68,7 +68,7 @@ You are currently reading the First Edition (Version 1.0.0) of the book. Please 
 
 This book follows [semantic versioning](https://semver.org/) (major.minor.patch). The major version is the edition: a new edition marks a substantial revision and carries a new ISBN, minor versions add or revise content while keeping earlier citations valid, and patch versions make editorial corrections. The online edition at <https://dunnlab.org/phylogenetic_biology/> is updated continuously as new versions are released, while each released version is permanently archived on Zenodo through the DOI above.
 
-## Other resources
+## Other resources {-}
 
 The following sites have a wide variety of material that is relevant to the 
 theory and practice of phylogenetic biology.
@@ -110,7 +110,7 @@ The following books provide general computational background for the topics cove
 
 - Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. <http://practicalcomputing.org>
 
-## Acknowledgements
+## Acknowledgements {-}
 
 Thanks in particular to the students of Yale EEB354 in 2020, 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation and feedback. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Other lab members provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Nate Grubaugh invited me to share a couple chapters in his course each year. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access. I am also very grateful to the students and faculty of the Workshop on Molecular Evolution at Woods Hole. Finally, I thank James Prosek for generously allowing me to use his work *Moth Cluster IV* for the cover.
 
@@ -154,7 +154,7 @@ There are a few concepts that are fundamental to understanding phylogenetic anal
 
 - Model parameter values. These are the specific values for terms in the model. In a model that indicates covariance between characters, the specific values in the covariance matrix are model parameter values. If you have a set of functions that describe the probability of changing between particular states for a character, the model parameters include the rates in those functions.
 
-In order to make informative comparisons across species, both for inferring phylogenies and for phylogenetic comparative analyses, we need a unified ontological framework to refer to the same characters and character states in different organisms. This correspondence is provided by the concept of homology. Homology is a hypothesis that the same attribute is present in different entities because that attribute was present in their shared ancestor. Human arms and bird wings are homologous, for example. Homology is a deceptively simple concept that can sometimes be devilishly difficult to define, test, and apply [@wagner2014]. 
+In order to make informative comparisons across species, both for inferring phylogenies and for phylogenetic comparative analyses, we need a unified ontological framework to refer to the same characters and character states in different organisms. This correspondence is provided by the concept of homology\index{homology}. Homology is a hypothesis that the same attribute is present in different entities because that attribute was present in their shared ancestor. Human arms and bird wings are homologous, for example. Homology is a deceptively simple concept that can sometimes be devilishly difficult to define, test, and apply [@wagner2014]. 
 
 \begin{figure}
 \includegraphics[width=4.5in]{figures/phylogenetic_analyses} \caption{(A) The primary components of a phylogenetic analysis. This mammal phylogeny and branch lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.}(\#fig:intro-concepts)
@@ -260,7 +260,7 @@ gene transfer or hybridization.
 directionality. Specifically, they denote time. The node on one end of the branch 
 is older than the node on the other end of the branch. We therefore can refer to the nodes connected to a particular branch as the parent node and child node.
 
-A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The branches indicate evolutionary relationships between those entities. You could imagine, as an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each branch would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes, and retain nodes immediately preceding divergence events as the internal nodes. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single branch, parent-child node relationships in the tree don't mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.
+A phylogenetic graph is an abstraction, and for it to be useful it is important to keep in mind what features of biology we are attempting to represent. The nodes are entities that can evolve, like organisms or genes. The branches indicate evolutionary relationships between those entities. You could imagine, as an extreme case, a graph that showed every single individual that ever existed in your group of interest, say mammals. Each branch would connect literal parents and offspring. That would be a big phylogeny, and you would never have enough information to know it all, but it does exist even if unknowable and unwieldy given our current tools. A phylogeny is a subset of that graph, where we often retain a single individual per species as the tip nodes\index{node!tip}, and retain nodes immediately preceding divergence events as the internal nodes\index{node!internal}. In this respect, a phylogeny is a subgraph of the entire history of life on Earth. Because many generations are collapsed along a single branch, parent-child node relationships in the tree don't mean actual parent-child relationships. Parent-child nodes are often separated by millions of generations.
 
 ## Drawing phylogenies
 
@@ -311,7 +311,7 @@ One of the most important things to keep in mind when interpreting a phylogeny i
 
 ## The meaning of branch lengths {#trees-branch-lengths}
 
-The meaning of branch lengths can vary from tree to tree (Figure \@ref(fig:trees-types)). A phylogeny where branch lengths are scaled to time is known as a chronogram. Chronograms of organisms all sampled at the same time will be ultrametric, *i.e.*, the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
+The meaning of branch lengths can vary\index{branch length} from tree to tree (Figure \@ref(fig:trees-types)). A phylogeny where branch lengths are scaled to time is known as a chronogram\index{chronogram}. Chronograms of organisms all sampled at the same time will be ultrametric\index{ultrametric tree}, *i.e.*, the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
 
 In many cases we don't have the information needed to scale branches to time, which requires fossil calibrations. Most published phylogenies therefore scale the branches according to the expected amount of evolutionary change in the characters under consideration. The longer the branch, the greater the expected change. The rate of evolution usually varies a bit across branches, so phylograms are not usually ultrametric. 
 
@@ -325,15 +325,15 @@ It is always good practice whenever you show a phylogeny to indicate whether it 
 
 One of the most useful applications of phylogenies is to concisely refer to groups of organisms in light of their evolutionary history.
 
-A convenient way to designate groups of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade -- a group of tips that includes their MRCA and all of its descendants. A group is said to be monophyletic (Figure \@ref(fig:trees-groups)A) if it satisfies these criteria (you don't need to use the double descriptor "monophyletic clade", since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping the branch just below the MRCA.
+A convenient way to designate groups of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade\index{clade} -- a group of tips that includes their MRCA and all of its descendants. A group is said to be monophyletic\index{monophyletic group} (Figure \@ref(fig:trees-groups)A) if it satisfies these criteria (you don't need to use the double descriptor "monophyletic clade", since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping the branch just below the MRCA.
 
 ![(\#fig:trees-groups)(A) A monophyletic group, *i.e.*, a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the rabbit.](phylogenetic_biology_files/figure-latex/trees-groups-1.pdf) 
 
 Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and platypus. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@dequeiroz2007; @deQueiroz2020].
 
-Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
+Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of rabbits is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic\index{polyphyletic group} (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic\index{paraphyletic group} (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
 
-## Polytomies
+## Polytomies\index{polytomy}
 
 Some phylogenies are not strictly bifurcating. An internal node with more than two branches connecting it to descendants is called a polytomy (Figure \@ref(fig:trees-polytomies)B-D). This can be due to uncertainty about branching order (a soft polytomy) or multiple divergence events in very quick succession, giving rise at effectively the same time to more than two lineages (a hard polytomy).
 
@@ -343,7 +343,7 @@ A phylogeny that consists entirely of a single polytomy is said to be entirely u
 
 ## Rooting
 
-All the phylogenies we have seen so far are rooted -- we know what the oldest point is in the tree, and call it the root node. This special internal node has no branch connecting it to a parent node, and all other nodes in the phylogeny are its descendants. One consequence of having a rooted tree is that we know the direction of time along each branch -- time proceeds from the root to the tips. This provides a clear parent-child relationship between nodes at the ends of each branch.
+All the phylogenies we have seen so far are rooted\index{rooting} -- we know what the oldest point is in the tree, and call it the root node\index{root}. This special internal node has no branch connecting it to a parent node, and all other nodes in the phylogeny are its descendants. One consequence of having a rooted tree is that we know the direction of time along each branch -- time proceeds from the root to the tips. This provides a clear parent-child relationship between nodes at the ends of each branch.
 
 Not all phylogenies are rooted. Sometimes we just don't care where the root is -- some questions and methods don't depend on the root, so we don't have to bother placing it. Sometimes we just don't know -- placing the root in a phylogeny takes information that sometimes we don't have. There are many phylogenetic studies focused on identifying the location of the root in various groups of organisms; this is often an interesting and important question. 
 
@@ -357,9 +357,9 @@ The root could fall at any point in an unrooted phylogeny, either along a branch
 
 Things are a bit different if you root at an existing internal node (Figure \@ref(fig:trees-rooted-abstract)B-C). Because the existing node becomes the root, the number of nodes in the tree remains unchanged. So far so good. But since internal nodes in a bifurcating tree all have three branches connected to them, when an internal node becomes the root the root is a polytomy. This seems like a pain, so why not always root along a branch? There are a few reasons. One is that rooting along a branch requires that we pick a specific point along the branch where the root goes, for example in the middle or somewhere else. That decision can take information that we don't have. Another reason is that the creation and destruction of nodes associated with rooting along branches gets cumbersome and problematic, especially when there are specific data associated with internal nodes.
 
-What information can we use to root a phylogeny? There are a couple of approaches. One is to pick the midpoint -- the point farthest from any tips -- as the root. If evolution proceeded at a perfectly uniform rate this could work well, but in practice rates of evolution are too variable across lineages for this to give a reliable result.
+What information can we use to root a phylogeny? There are a couple of approaches. One is to pick the midpoint\index{rooting!midpoint} -- the point farthest from any tips -- as the root. If evolution proceeded at a perfectly uniform rate this could work well, but in practice rates of evolution are too variable across lineages for this to give a reliable result.
 
-The more common approach to rooting a phylogeny is to use an outgroup (Figure \@ref(fig:trees-rooting)). If the ingroup is the group of organisms you are interested in (*e.g.*, mammals), the outgroup is a set of organisms that you strongly believe do not fall within the ingroup. If you place the root anywhere in the outgroup, then the most recent common ancestor of the ingroup will be the root of the ingroup. Rooting this way works better when a larger number of outgroup species are considered, and the outgroup species include the organisms most closely related to the ingroup. Including too few outgroups is one of the most common mistakes in published phylogenies.
+The more common approach to rooting a phylogeny is to use an outgroup\index{rooting!outgroup} (Figure \@ref(fig:trees-rooting)). If the ingroup is the group of organisms\index{ingroup} you are interested in (*e.g.*, mammals), the outgroup is a set of organisms that you strongly believe do not fall within the ingroup. If you place the root anywhere in the outgroup, then the most recent common ancestor of the ingroup will be the root of the ingroup. Rooting this way works better when a larger number of outgroup species are considered, and the outgroup species include the organisms most closely related to the ingroup. Including too few outgroups is one of the most common mistakes in published phylogenies.
 
 ![(\#fig:trees-rooting)The root of the mammal tree is shown in black. (A) Unrooted layout. (B) Rooted layout. (C) Rooted layout, including outgroup. The root for the whole tree, shown in gray, is placed in the outgroup. The node where the ingroup is attached to the rest of the tree is the ingroup root. In this case, that is the black mammal root.](phylogenetic_biology_files/figure-latex/trees-rooting-1.pdf) 
 
@@ -369,7 +369,7 @@ Always be careful interpreting root position when looking at a published phyloge
 
 Thinking about phylogenies as graphs gives us very explicit ways to think about what information can be contained in a phylogeny. In the fundamental graphical sense, a phylogeny is a pair of sets -- a set of nodes and a set of branches -- and annotations of those entities.
 
-The topology of the phylogeny is the way in which nodes are connected by branches. If there are different connections in two phylogenies, then they have different topologies. If the annotations differ but the connections are the same, then the topologies are the same. Sometimes we know more and sometimes less about the topology. A fully resolved bifurcating phylogeny, where every internal node has two children, contains maximal information about the topology. A completely unresolved star phylogeny contains no information about topology.
+The topology of the phylogeny is the way in which nodes are connected\index{topology} by branches. If there are different connections in two phylogenies, then they have different topologies. If the annotations differ but the connections are the same, then the topologies are the same. Sometimes we know more and sometimes less about the topology. A fully resolved bifurcating phylogeny, where every internal node has two children, contains maximal information about the topology. A completely unresolved star phylogeny contains no information about topology.
 
 Node annotations can include:
 
@@ -403,7 +403,7 @@ The amount of information in a phylogeny varies greatly depending on a variety o
 
 So far we have focused on phylogenies in the abstract sense as mathematical graphs and their associated annotations, and in the concrete sense as tree-like drawings that represent these relationships. To work with trees of any significant size, we need to also represent them computationally. How can you store and manipulate a whole tree and all its associated annotations?
 
-One way is to store a text representation of the tree. This is convenient because text files are easy to work with, and can be viewed and edited with a variety of existing text editors. Newick, a phylogenetic data format ironed out over dinner at [Newick's Lobster House](https://www.yelp.com/biz/newicks-lobster-house-dover), does exactly this. The Newick format is widely used for storing phylogenies in text files, and is supported as a way to read and write trees by almost every phylogenetic software tool. The basic idea is to designate each clade within a pair of parentheses.
+One way is to store a text representation of the tree. This is convenient because text files are easy to work with, and can be viewed and edited with a variety of existing text editors. Newick\index{Newick format}, a phylogenetic data format ironed out over dinner at [Newick's Lobster House](https://www.yelp.com/biz/newicks-lobster-house-dover), does exactly this. The Newick format is widely used for storing phylogenies in text files, and is supported as a way to read and write trees by almost every phylogenetic software tool. The basic idea is to designate each clade within a pair of parentheses.
 
 
 ``` r
@@ -432,7 +432,7 @@ In the R code above, for Figure \@ref(fig:trees-newick), you can see how to defi
 a different type of representation, and then draw that. Most of the figures in this text were 
 made using similar code.
 
-Considering just the Newick specification of the tree, `"(((A,B),(C,D)),E);"`, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, `(A,B)` and `(C,D)`. The next set of parentheses out indicates that these two clades together form a larger clade, `((A,B),(C,D))`. Finally, the outermost parentheses indicate that the clade `((A,B),(C,D))` is sister to `E`. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting [description and history](https://evolution.genetics.washington.edu/phylip/newicktree.html) of the Newick format, which includes details on how to store other types of information in the file format.
+Considering just the Newick specification of the tree, `"(((A,B),(C,D)),E);"`, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, `(A,B)` and `(C,D)`. The next set of parentheses out indicates that these two clades together form a larger clade, `((A,B),(C,D))`. Finally, the outermost parentheses indicate that the clade `((A,B),(C,D))` is sister\index{sister group} to `E`. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting [description and history](https://evolution.genetics.washington.edu/phylip/newicktree.html) of the Newick format, which includes details on how to store other types of information in the file format.
 
 As versatile and simple as Newick is for storing trees in files, it isn't great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, branches, and their annotations. This allows us to directly encode the information noted in the section [The information contained in phylogenies], and to readily extend the data objects as needed.
 
@@ -728,7 +728,7 @@ This was a lot of work to write a really simple model in a much more complicated
 
 ## Expanding the models
 
-The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one branch in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution, named JC69 after the folks who described it in 1969 [@jc1969]. It has only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that we deliberately omit. 
+The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one branch in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution\index{substitution model}, named JC69\index{substitution model!Jukes-Cantor (JC69)} after the folks who described it in 1969 [@jc1969]. It has only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that we deliberately omit. 
 
 The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, including that:
 
@@ -757,7 +757,7 @@ To accommodate each of these deviations from JC69, we need to add parameters to 
 
 (To keep things compact, I have followed the convention of placing $-$ in the diagonal elements, which is short for "whatever it takes to make the rows of $\mathbf{Q}$ sum to 0".)
 
-This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model of DNA sequence evolution [@tavare1986]. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along a branch to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
+This model (Equation \@ref(eq:sim-gtr)) is called the General Time Reversible (GTR) model\index{substitution model!General Time Reversible (GTR)} of DNA sequence evolution [@tavare1986]. It is General because it has parameters that allow many things to vary independently. The $\pi_A ... \pi_T$ parameters allow the equilibrium frequencies to differ for each nucleotide. The $a ... f$ parameters adjust $\mu$ so that rates can differ. For example, the instantaneous rate of change from A to C can be different from that of A to G by setting $a$ and $b$ to different values. It is Time Reversible because we don't have different rate parameters for every single off-diagonal element, but instead mirror them. This means, for example, that the rates of change from A to C and from C to A are both the same, $\mu a$. There are a few motivations for this. It keeps the total number of parameters down. It also reflects what is observed biologically. And it means that we don't need to know the direction of time along a branch to calculate $\mathbf{P}(t)$. This last point is very important since we often don't know where the root of a tree is when we want to calculate these probabilities. It also turns out to be convenient and efficient for phylogenetic inference software tools to reroot phylogenies without changing these probabilities as they make calculations on phylogenies.
 
 If we let all the parameters in the GTR model (Equation \@ref(eq:sim-gtr)) be free, it is quite complex. We would have to estimate them all from data. The alternative is to clamp some of them. In fact, by comparison of Equations \@ref(eq:jc69-expanded) and \@ref(eq:sim-gtr), we can see that JC69 is a clamped version of GTR where $\pi_A=\pi_C=\pi_G=\pi_T=0.25$ and $a=b=c=d=e=f=1$. Only $\mu$ is left free in JC69.
 
@@ -932,7 +932,7 @@ In the previous chapter we built modeling machinery that allowed us to specify a
 
 We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data [@Felsenstein:1981vk].
 
-This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the likelihood. Searching for the most likely hypothesis is referred to as maximum likelihood (ML). A comprehensive reference on the whole endeavor of phylogenetic inference is @felsenstein2004.
+This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the likelihood\index{likelihood}. Searching for the most likely hypothesis is referred to as maximum likelihood (ML). A comprehensive reference on the whole endeavor of phylogenetic inference is @felsenstein2004.
 
 ## Probability of a single history
 
@@ -1118,7 +1118,7 @@ The machinery above gives us everything we need to calculate the log likelihood 
 
 This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.
 
-## Maximum likelihood
+## Maximum likelihood\index{maximum likelihood}
 
 At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. How do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).
 
@@ -1132,7 +1132,7 @@ Optimization of calculations becomes very important. For example, it isn't neces
 
 ## Optimality criteria
 
-Here we used likelihood as an optimality criterion to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony. In parsimony, the minimum number of changes along branches needed to explain the data at the tips is used as the criterion to evaluate each topology [@fitch1971]. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
+Here we used likelihood as an optimality criteri\index{optimality criterion}on to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony\index{parsimony}. In parsimony, the minimum number of changes along branches needed to explain the data at the tips is used as the criterion to evaluate each topology [@fitch1971]. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
 
 Under some conditions parsimony and likelihood will recover similar topologies, but often they do not. This is because they are doing different things that under many conditions lead to different results [@steel2000parsimony]. For example, we do not always expect the simplest possible explanation for a given pattern to be the best explanation. If a character has a high rate of evolutionary change, then we expect many changes on a tree rather than the fewest possible. This is accommodated in a likelihood framework.
 
@@ -1148,7 +1148,7 @@ The first step to an analysis is to clearly define your question. There will be 
 
 ## Taxon sampling
 
-The tips in a phylogeny, be they genes, species, individuals, or some other evolving entity, are referred to as taxa. One of the first things you will want to consider is the breadth and depth of taxon sampling.
+The tips in a phylogeny, be they genes, species, individuals, or some other evolving entity, are referred to as taxa. One of the first things you will want to consider is the breadth and depth of taxon sampling\index{taxon sampling}.
 
 One of the most common mistakes in phylogenetic analyses is to include too few taxa. There are many ways that adding taxa helps:
 
@@ -1200,7 +1200,7 @@ Multiple strategies above are often used in the same study; they are not exclusi
 
 ### Transcriptomes
 
-A transcriptome is the collection of RNA in a cell or collection of cells. Because RNA is transcribed from the genome, sequencing the RNA gives a snapshot of an enriched subset of the genome. Whereas the other enrichment approaches described are implemented by the investigator at the bench, transcriptome sequencing largely relies on a natural process in the living cell (transcription) to enrich for particular genome regions.
+A transcriptome is the collection of RNA\index{transcriptome} in a cell or collection of cells. Because RNA is transcribed from the genome, sequencing the RNA gives a snapshot of an enriched subset of the genome. Whereas the other enrichment approaches described are implemented by the investigator at the bench, transcriptome sequencing largely relies on a natural process in the living cell (transcription) to enrich for particular genome regions.
 
 In a typical phylogenetic study based on transcriptome data, messenger RNA (mRNA), which encodes the protein coding genes, is isolated. mRNA is then copied to complementary DNA (cDNA) and sequenced. Because many of the same genes are highly expressed across species and tissues, there is considerable overlap between the genes in transcriptome datasets from different samples. Many investigators are interested in protein coding genes for other purposes as well, adding value to the transcriptome data.
 
@@ -1208,13 +1208,13 @@ There are a couple of challenges to working with transcriptomes. For one, RNA is
 
 ### Targeted enrichment
 
-In targeted enrichment, an investigator designs short bait sequences that are similar to conserved genome regions. They then isolate DNA from their taxa of interest, fragment it, and use the baits to fish out the conserved regions along with their neighboring sequences. This allows the investigator to create pools of DNA that are enriched for specific pre-selected regions. This is a highly cost-effective way to isolate homologous sequences across species, and works well when samples have fragmented DNA (in museum specimens, for example). 
+In targeted enrichment\index{targeted enrichment}, an investigator designs short bait sequences that are similar to conserved genome regions. They then isolate DNA from their taxa of interest, fragment it, and use the baits to fish out the conserved regions along with their neighboring sequences. This allows the investigator to create pools of DNA that are enriched for specific pre-selected regions. This is a highly cost-effective way to isolate homologous sequences across species, and works well when samples have fragmented DNA (in museum specimens, for example). 
 
 The baits are typically designed based on one or more genomes that are already available in the clade of interest. There are a few challenges to using targeted enrichment. One is that data are difficult to combine across different studies that used different baits. In addition, the design and synthesis of baits require a large up-front investment that makes this approach best suited to larger projects.
 
 ### RAD-seq
 
-Like targeted enrichment, RAD-seq enriches for sequence data from specific regions scattered across the genome. It differs, though, in that it uses intrinsic properties of the genome for enrichment, rather than user-designed baits. Genomic DNA is digested with one or two restriction enzymes that cut the genome at specific small sequences, and leave the DNA with particular overhangs at the cut end. These cut fragments are then size-selected. If cutting with two restriction enzymes, the fragments that have different overhangs (because they were cut once with each enzyme) are then further enriched. The fragments are then sequenced.
+Like targeted enrichment, RAD-seq enriches\index{RAD-seq} for sequence data from specific regions scattered across the genome. It differs, though, in that it uses intrinsic properties of the genome for enrichment, rather than user-designed baits. Genomic DNA is digested with one or two restriction enzymes that cut the genome at specific small sequences, and leave the DNA with particular overhangs at the cut end. These cut fragments are then size-selected. If cutting with two restriction enzymes, the fragments that have different overhangs (because they were cut once with each enzyme) are then further enriched. The fragments are then sequenced.
 
 The result is that sequences are enriched for regions with similar distances between restriction enzyme sites across taxa. This is a powerful way to get a consistent subset of the genome across many different samples. It doesn't require a big investment in baits at the outset, but there are a few important limitations. First, it only works well on closely related taxa, since differences in restriction site placement evolve relatively quickly and enrichment overlap falls quickly with evolutionary distance. RAD-seq therefore is most often used when looking at evolutionary relationships within species or among very closely related species. Second, there is very little control over which specific genome regions are sequenced. For example, if you want to build a phylogeny and look at the evolution of a particular gene, you can't readily engineer the sample enrichment to target that specific gene.
 
@@ -1268,7 +1268,7 @@ Based on this overview, you can assess which types of data (*i.e.*, which data p
 
 ## Homologous sites
 
-Once you have collected homologous sequences for one or more genome regions across your taxa of interest, you next need to identify homologous nucleotide sites within these regions. This process is referred to as multiple sequence alignment (MSA). Rather than rely on explicit models of molecular evolution, multiple sequence alignment usually relies on similarities between sequences. The general idea is to slide the sequences along each other and insert gaps as needed so that similarity at each site is optimized while reducing the number of gaps introduced. Widely used multiple sequence alignment programs include MAFFT [@katoh2013] and MUSCLE [@edgar2004].
+Once you have collected homologous sequences for one or more genome regions across your taxa of interest, you next need to identify homologous nucleotide sites within these regions. This process is referred to as multiple sequence alignment\index{sequence alignment} (MSA). Rather than rely on explicit models of molecular evolution, multiple sequence alignment usually relies on similarities between sequences. The general idea is to slide the sequences along each other and insert gaps as needed so that similarity at each site is optimized while reducing the number of gaps introduced. Widely used multiple sequence alignment programs include MAFFT [@katoh2013] and MUSCLE [@edgar2004].
 
 The output of multiple sequence alignment is a matrix. Each row is a taxon that will correspond to a tip in the phylogeny. Each column is a single nucleotide site that is hypothesized to be homologous across taxa. There are multiple file formats that are used to store aligned sequences, including fasta, nexus [@maddison1997nexus], and phylip.
 
@@ -1326,7 +1326,7 @@ Though nested models always have different degrees of freedom, there is no guara
 
 In our previous examinations of inference, we used likelihood as an optimality criterion when looking for the phylogeny that best explains our data. Similarly, we can search for the model that best explains the data. We can pick a reasonable phylogeny and evaluate the likelihood of the data under each of the models we would like to consider. In each case we also optimize the model parameter values for each model to make sure we are comparing the models in the best possible light.
 
-We can then make a series of pairwise comparisons between models, where we consider the ratio of their likelihoods. This is the gist of a likelihood ratio test (LRT). Instead of considering the ratio of likelihoods, we can consider the difference in their log likelihoods since:
+We can then make a series of pairwise comparisons between models, where we consider the ratio of their likelihoods. This is the gist of a likelihood ratio test\index{likelihood ratio test} (LRT). Instead of considering the ratio of likelihoods, we can consider the difference in their log likelihoods since:
 
 \begin{equation} 
   \Delta = ln(\frac{a}{b}) = ln(a) - ln(b)
@@ -1344,7 +1344,7 @@ Let's say we are comparing GTR to HKY85, and we denote the likelihood under GTR 
 
 One way to proceed would then be to select GTR if $\Delta>0$, and HKY85 if $\Delta<0$. This wouldn't be a good way to go, though, since it would pick GTR every single time. The reason is that HKY85 is nested within GTR. That means that the best possible likelihood under HKY85 is also available under GTR. Because it has more degrees of freedom, GTR has many other possible values, and chances are very good that one of those will be more likely than the parameter values that were most likely under HKY85. If comparing two nested models, the model with more degrees of freedom will never have a likelihood lower than the simpler model.
 
-This would seem to imply that more complex models are always better, but they are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch lengths based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
+This would seem to imply that more complex models are always better, but they are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit\index{overfitting}. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch lengths based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
 
 When comparing nested models, the question therefore isn't whether one model has higher likelihood than the other, but whether the increase in likelihood one gets from adding parameters is worth the cost of adding the parameters. There are a few different ways to make this cost/benefit analysis.
 
@@ -1359,14 +1359,14 @@ We can compare this test statistic $\delta$ to the appropriate $\chi^2$ distribu
 
 There are a few challenges to applying the LRT to model selection in phylogenetics [@posada2001; @posada2004model]. One issue is that the test presumes that one of the models is correct [@zhang1999performance], but in phylogenetics models are always simplifications of the evolutionary process at hand. The impact of violating this assumption varies across datasets and analyses, but can lead to undesirable behavior in real-world applications.
 
-There are two other approaches commonly used in phylogenetic model selection. Where $L_i$ is the likelihood under model $i$, $k_i$ is the degrees of freedom for the model, and $n$ is sample size (*e.g.*, number of sites in the alignment), these are the Akaike Information Criterion (AIC) [@akaike1974]:
+There are two other approaches commonly used in phylogenetic model selection. Where $L_i$ is the likelihood under model $i$, $k_i$ is the degrees of freedom for the model, and $n$ is sample size (*e.g.*, number of sites in the alignment), these are the Akaike Information Criterion (AIC)\index{Akaike information criterion (AIC)} [@akaike1974]:
 
 \begin{equation} 
   AIC_i = 2k_i - 2ln(L_i)
   (\#eq:aic)
 \end{equation}
 
-And the Bayesian Information Criterion (BIC) [@schwarz1978]:
+And the Bayesian Information Criterion (BIC)\index{Bayesian information criterion (BIC)} [@schwarz1978]:
 
 \begin{equation} 
   BIC_i = k_iln(n) - 2ln(L_i)
@@ -1409,7 +1409,7 @@ It should be noted that these support values are often referred to as "nodal sup
 
 ### Bootstrapping
 
-The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap [@felsenstein1985confidence]. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with $n$ columns, bootstrapping generates a new matrix, also with $n$ columns, by resampling from the original matrix with replacement. Some columns from the original matrix won't be sampled at all, some will be sampled once, and some will be sampled multiple times.
+The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap\index{bootstrap} [@felsenstein1985confidence]. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with $n$ columns, bootstrapping generates a new matrix, also with $n$ columns, by resampling from the original matrix with replacement. Some columns from the original matrix won't be sampled at all, some will be sampled once, and some will be sampled multiple times.
 
 Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated from the original data matrix) in the sample of bootstrap phylogenies. A branch frequency of 100% indicates that a branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
 
@@ -1419,15 +1419,15 @@ Many phylogenetic inference programs do not run full independent maximum likelih
 
 ## Topology tests
 
-Rather than assess the support of a particular focal topology, sometimes you want to assess how significant the difference in support is for specific phylogenies. There are several different topology tests that address these questions. They include the SOWH test [@swofford1996molecular], the KH test [@kishino1989], the SH test [@Shimodaira1999], and the AU test [@Shimodaira2002]. Some of these are implemented in popular maximum likelihood software tools including iqtree [@Minh2020]. Their performance differs across conditions and their assumptions differ, so care should be taken in selecting and evaluating these tests [@Goldman2000;@Markowski2023].
+Rather than assess the support of a particular focal topology, sometimes you want to assess how significant the difference in support is for specific phylogenies. There are several different topology test\index{topology test}s that address these questions. They include the SOWH test [@swofford1996molecular], the KH test [@kishino1989], the SH test [@Shimodaira1999], and the AU test [@Shimodaira2002]. Some of these are implemented in popular maximum likelihood software tools including iqtree [@Minh2020]. Their performance differs across conditions and their assumptions differ, so care should be taken in selecting and evaluating these tests [@Goldman2000;@Markowski2023].
 
 <!--chapter:end:evaluation.rmd-->
 
 # Gene trees and species trees {#gene-species-trees}
 
-So far we have gone to great lengths to understand the evolution of single genome regions. Implicitly, we have treated the phylogenies of genes as though they were the phylogenies of the species that carry them. This is a common and often useful simplification, but it is often not correct. In this chapter we will examine the distinction between **gene trees** and **species trees**, and the biological processes that can make gene trees disagree with each other and with the species tree.
+So far we have gone to great lengths to understand the evolution of single genome regions. Implicitly, we have treated the phylogenies of genes as though they were the phylogenies of the species that carry them. This is a common and often useful simplification, but it is often not correct. In this chapter we will examine the distinction between **gene trees**\index{gene tree} and **species trees**\index{species tree}, and the biological processes that can make gene trees disagree with each other and with the species tree.
 
-Gene trees can disagree due to estimation error. Any tree we infer from a finite stretch of sequence is uncertain, and two genes can appear to disagree simply because we have estimated each of them imperfectly. This in part motivated the evaluation methods we already discussed (Chapter \@ref(evaluation)). But gene trees can also disagree because the histories of different genome regions are genuinely different [@maddison1997gene]. This discordance is the expected outcome of ordinary biological processes acting on real populations and real genomes. A gene tree that disagrees with the species tree can be right about its own history, and quite distinct from the history of the species that carry it. While estimation error shrinks as we collect more data per gene, true discordance does not. It is a property of the history itself.
+Gene trees can disagree due to estimation error. Any tree we infer from a finite stretch of sequence is uncertain, and two genes can appear to disagree simply because we have estimated each of them imperfectly. This in part motivated the evaluation methods we already discussed (Chapter \@ref(evaluation)). But gene trees can also disagree because the histories of different genome regions are genuinely different [@maddison1997gene]. This discordance\index{discordance} is the expected outcome of ordinary biological processes acting on real populations and real genomes. A gene tree that disagrees with the species tree can be right about its own history, and quite distinct from the history of the species that carry it. While estimation error shrinks as we collect more data per gene, true discordance does not. It is a property of the history itself.
 
 ## Gene trees, species trees, and real discordance
 
@@ -1435,7 +1435,7 @@ Gene trees can disagree due to estimation error. Any tree we infer from a finite
 
 Several distinct biological processes can lead gene trees to be discordant with each other and the species tree:
 
-- **Incomplete lineage sorting**, in which ancestral variation persists across successive speciation events and sorts among descendants in a way that does not track the order of speciation. This is the domain of the multispecies coalescent.
+- **Incomplete lineage sorting**\index{incomplete lineage sorting}, in which ancestral variation persists across successive speciation events and sorts among descendants in a way that does not track the order of speciation. This is the domain of the multispecies coalescent.
 
 - **Gene duplication and loss**, in which a genome region is copied within a genome or deleted, so that the history of the region includes events that the species tree does not.
 
@@ -1443,7 +1443,7 @@ Several distinct biological processes can lead gene trees to be discordant with 
 
 ## Incomplete lineage sorting
 
-The process behind incomplete lineage sorting is most naturally described backward in time. Let us consider the process on an example gene tree and species tree (Figure \@ref(fig:gst-coalescent)), knowing that what we learn in this context generalizes. Here we follow a gene sampled in three different species, A, B and C, back through their ancestral populations. Looking backward, gene lineages **coalesce** when they find a common ancestor. Coalescence between genes sampled from different species will always occur before the species split; the question is how long before. The two lineages first have the chance to coalesce along the branch subtending the speciation, which we will call the **focal branch**. But they could coalesce deeper in the tree.
+The process behind incomplete lineage sorting is most naturally described backward in time. Let us consider the process on an example gene tree and species tree (Figure \@ref(fig:gst-coalescent)), knowing that what we learn in this context generalizes. Here we follow a gene sampled in three different species, A, B, and C, back through their ancestral populations. Looking backward, gene lineages **coalesce**\index{coalescence} when they find a common ancestor. Coalescence between genes sampled from different species will always occur before the species split; the question is how long before. The two lineages first have the chance to coalesce along the branch subtending the speciation, which we will call the **focal branch**. But they could coalesce deeper in the tree.
 
 There are three possible outcomes to consider (Figure \@ref(fig:gst-coalescent)):
 
@@ -1451,11 +1451,11 @@ There are three possible outcomes to consider (Figure \@ref(fig:gst-coalescent))
 2. The A and B lineages fail to coalesce along the focal branch (incomplete lineage sorting), but in the ancestral population A and B are still the first pair to coalesce. **The gene tree is concordant with the species tree.**
 3. The A and B lineages fail to coalesce along the focal branch (incomplete lineage sorting), and instead A or B coalesces first with C. **The gene tree is discordant with the species tree.**
 
-The first two outcomes give a gene tree that matches the species tree; only the third produces discordance. We can calculate the probabilities of these outcomes with the multispecies coalescent model.
+The first two outcomes give a gene tree that matches the species tree; only the third produces discordance. We can calculate the probabilities of these outcomes with the multispecies coalescent model\index{multispecies coalescent}.
 
 ![(\#fig:gst-coalescent)The three possible outcomes for a single gene sampled in species A, B, and C, whose species tree is ((A,B),C). Gene lineages (black) evolve within the species tree (grey tubes); the focal branch is the branch ancestral to the A--B speciation, where the A and B lineages first have the chance to coalesce. Outcome 1: the A and B lineages coalesce along the focal branch (complete lineage sorting), giving the concordant gene tree ((A,B),C). Outcome 2: the lineages pass through the focal branch without coalescing (deep coalescence), but A and B are still the first pair to coalesce in the ancestral population, again giving the concordant ((A,B),C). Outcome 3: after the same deep coalescence, B instead coalesces with C first, giving the discordant gene tree ((B,C),A).](phylogenetic_biology_files/figure-latex/gst-coalescent-1.pdf) 
 
-The effective population size $N_e$ is the number of diploid individuals in an idealized population. Since diploid individuals each carry two copies of each gene, the total number of gene copies in a population of $N_e$ diploids is $2N_e$. Given a particular gene sampled from the population, the probability that it coalesces with another particular gene in the previous generation is $1/(2N_e)$. From this, we can derive that the expected time back to the most recent common ancestor of any two copies of a gene sampled from the population is $2N_e$ generations. The larger the effective population size, the longer we expect it to take for lineages to coalesce.
+The effective population size\index{effective population size} $N_e$ is the number of diploid individuals in an idealized population. Since diploid individuals each carry two copies of each gene, the total number of gene copies in a population of $N_e$ diploids is $2N_e$. Given a particular gene sampled from the population, the probability that it coalesces with another particular gene in the previous generation is $1/(2N_e)$. From this, we can derive that the expected time back to the most recent common ancestor of any two copies of a gene sampled from the population is $2N_e$ generations. The larger the effective population size, the longer we expect it to take for lineages to coalesce.
 
 Since generation times and $N_e$ can vary widely across species, branch lengths are often normalized to **coalescent units**. 
 
@@ -1464,7 +1464,7 @@ Since generation times and $N_e$ can vary widely across species, branch lengths 
   (\#eq:coalescent-units)
 \end{equation}
 
-A branch length of $\tau=1$ coalescent unit is the expected time for two lineages to coalesce.
+A branch length of $\tau=1$ coalescent unit is the expected time for two lineages to coalesce within a population.
 
 As in our analyses of sequence evolution, we would like to have probabilities, not just expectations. The probability that two copies of a gene sampled from a population fail to coalesce along a branch of length $\tau$ is:
 
@@ -1475,29 +1475,27 @@ As in our analyses of sequence evolution, we would like to have probabilities, n
 
 Note that the exponent contains a negative sign, so the probability of failure to coalesce decreases as the branch length increases. Equivalently, the probability of coalescence increases as the branch length increases. This makes sense. The more time two lineages spend together in a population, the more likely they are to coalesce.
 
-Equation \@ref(eq:no-coalescent-prob) gives the probability of outcomes 2 and 3 together, in which A and B fail to coalesce along the focal branch. To split that probability between concordance and discordance we need a short combinatorial assessment. When A and B fail to coalesce, all three lineages enter the ancestral population together, and the first coalescence there is equally likely to join any of the three pairs: A with B, A with C, or B with C. Only one of these, A with B, matches the species tree. So, given that A and B failed to coalesce along the focal branch, the gene tree is concordant with probability $1/3$ and discordant with probability $2/3$.
+Equation \@ref(eq:no-coalescent-prob) gives the probability that outcome 2 or outcome 3 occurs. To split that probability between these two outcomes, we need a short combinatorial assessment. When A and B fail to coalesce, all three lineages enter the ancestral population together, and the first coalescence there is equally likely to join any of the three pairs: A with B, A with C, or B with C. Only one of these, A with B, matches the species tree. So, given that A and B failed to coalesce along the focal branch, the gene tree is concordant with probability $1/3$ and discordant with probability $2/3$.
 
-Multiplying the probability of failing to coalesce by the probability of a discordant resolution gives the overall probability of a discordant gene tree (event 3),
+Multiplying the probability of failing to coalesce by the probability of a discordant resolution gives the overall probability of a discordant gene tree (outcome 3),
 
 \begin{equation}
   P(\text{discordant}) = \frac{2}{3}\,e^{-\tau}
   (\#eq:discordant-prob)
 \end{equation}
 
-and the probability that the gene tree matches the species tree (events 1 and 2) is one minus this,
+Since the probabilities sum to 1, the probability that the gene tree matches the species tree (outcomes 1 or 2) is one minus this,
 
 \begin{equation}
-  P(\text{match}) = 1 - \frac{2}{3}\,e^{-\tau}.
+  P(\text{concordant}) = 1 - \frac{2}{3}\,e^{-\tau}.
   (\#eq:concordant-prob)
 \end{equation}
 
-Equation \@ref(eq:concordant-prob) is the curve in Figure \@ref(fig:gst-anomaly). When the focal branch is very short ($\tau \to 0$) the match probability falls to $1/3$ — no better than choosing one of the three topologies at random — and as the branch lengthens it climbs toward one, where gene trees become reliable proxies for the species tree.
+Equation \@ref(eq:concordant-prob) is plotted in Figure \@ref(fig:gst-concordance): the match probability is $1/3$ when the focal branch is vanishingly short ($\tau \to 0$), no better than choosing a topology at random, and rises toward one as the branch lengthens.
 
-![(\#fig:gst-anomaly)The probability that the gene tree matches the species tree rises as the focal branch lengthens (in coalescent units). A short focal branch, as at the base of a rapid radiation, leaves a wide zone of frequent discordance; a long one leaves gene trees essentially concordant.](phylogenetic_biology_files/figure-latex/gst-anomaly-1.pdf) 
+![(\#fig:gst-concordance)The probability that the gene tree matches the species tree rises as the focal branch lengthens (in coalescent units). A short focal branch, as at the base of a rapid radiation, leaves a wide zone of frequent discordance; a long one leaves gene trees essentially concordant.](phylogenetic_biology_files/figure-latex/gst-concordance-1.pdf) 
 
-We worked this out for a single focal branch in a three-species tree, but the same reasoning applies to every internal branch of any species tree: each is the focal branch for the lineages that pass through it, and the shorter it is in coalescent units, the more often gene trees disagree there.
-
-In practical terms, incomplete lineage sorting is a serious concern for rapid radiations, recent and closely spaced speciation events, and species with large effective population sizes. The **anomaly zone** is an extreme example of this problem [@degnan2009]. When internal branches are short enough, the single most probable gene tree is not the species tree but a different topology altogether. In this regime, simply taking the most common gene tree — or concatenating everything and inferring one tree — can converge on the wrong answer with more and more data.
+Although we worked this out for a single focal branch in a three-species tree, the same logic applies to every internal branch of any species tree: the shorter a branch is in coalescent units, the more its gene trees disagree with the species tree. Incomplete lineage sorting is therefore a serious concern wherever internal branches are short — rapid radiations, recent and closely spaced speciation events, and species with large effective population sizes — and negligible where internal branches are long.
 
 Two broad families of coalescent-aware phylogenetic methods, which model and accommodate the multispecies coalescent, are in wide use:
 
@@ -1509,39 +1507,39 @@ Two broad families of coalescent-aware phylogenetic methods, which model and acc
 
 ## Gene duplication and loss
 
-Genome regions are duplicated and lost throughout evolution, and as a result most genes are members of **gene families**: sets of related copies within and across genomes that trace back to a history of duplication and differentiation.
+Genome regions are duplicated and lost throughout evolution, and as a result most genes are members of **gene families**\index{gene family}: sets of homologous genes within and across genomes that trace back to a history of duplication and differentiation.
 
-This is where the familiar vocabulary of **orthology** and **paralogy** comes in. Two gene copies are orthologs if their most recent common ancestor immediately precedes a speciation event, and paralogs if it precedes a duplication event. The distinction matters because our whole strategy of using genes as proxies for species assumes we are comparing orthologs: copies whose divergence tracks the divergence of species. Compare paralogs by mistake and the gene tree can depart drastically from the species tree.
+This is where the familiar vocabulary of **orthology**\index{orthology} and **paralogy**\index{paralogy} comes in. Two gene copies are orthologs if their most recent common ancestor immediately precedes a speciation event, and paralogs if it precedes a duplication event. The distinction matters in part because our strategy of using genes as proxies for species assumes we are comparing orthologs: copies whose divergence tracks the divergence of species. Compare paralogs by mistake and the gene tree can depart drastically from the species tree.
 
 ![(\#fig:gst-reconciliation)How duplication and loss can make single-copy genes mislead. Left: the species tree, ((A,B),C). Middle: a gene family tree in which an early duplication (D) produced two copies; within each copy divergences track speciation, so each copy on its own recapitulates the species tree. Reciprocal loss (dashed grey lineages, marked X) then removes B and C from the first copy and A from the second, leaving exactly one surviving copy in each species: A1, B2, and C2. Right: these survivors look like ordinary single-copy genes, but A1 is a paralog of B2 and C2, so the tree they support is (A,(B,C)) -- B groups with C, conflicting with the species tree. This hidden paralogy is invisible unless the full gene family history is reconstructed.](phylogenetic_biology_files/figure-latex/gst-reconciliation-1.pdf) 
 
-It is tempting to respond to all this by restricting analyses to single-copy orthologs: regions that are present in exactly one copy in every species, with a clean one-to-one correspondence and no duplication or loss to worry about. Much of phylogenomics attempts to do this. But strict, universal single-copy orthologs are rare, and in an important sense they are the odd-balls rather than the normal case [@dunn2016]. Duplication and loss are pervasive features of genome evolution; a gene that has remained single copy across a whole clade for hundreds of millions of years may be unusual in ways (strong constraint, dosage sensitivity) that make it a biased sample of the genome.
+It is tempting to restrict phylogenetic analyses of species to single-copy orthologs: regions that are present in exactly one copy in every species, with a clean one-to-one correspondence and no duplication or loss to worry about. Though many analyses attempt to approximate this, single-copy orthologs are exceedingly rare in practice. When sampling thousands of genes from even a moderately sized phylogeny of a few dozen species, there may only be a handful of genes that occur as no more than one copy in any species. The biological motivation for excluding genes with any duplication or loss is also less compelling than it may seem at first glance. Duplication and loss are pervasive features of genome evolution; a gene that has remained single copy across a whole clade for hundreds of millions of years may be unusual in ways (strong constraint, dosage sensitivity) that make it a biased sample of the genome.
 
-A more general response is to treat the labels *ortholog* and *paralog* as summaries of something richer: an explicit, reconstructed history of duplication and loss [@dunn2016]. Rather than sorting pairs of genes into two bins (strict orthologs and others), we can infer the full gene family tree and map it onto the species tree, a procedure called reconciliation [@szollosi2014; @chen2000]. Reconciliation places each duplication and loss event on the species tree and, in doing so, tells us which copies are orthologs, which are paralogs, and exactly why (Figure \@ref(fig:gst-reconciliation)). Orthology and paralogy fall out as consequences of the history rather than serving as the primitive concepts.
+A more general response is to treat the labels *ortholog* and *paralog* as summaries of something richer: an explicit, reconstructed history of duplication and loss [@dunn2016]. Rather than sorting pairs of genes into two bins (strict orthologs and others), we can infer the full gene family tree and map it onto the species tree, a procedure called reconciliation\index{reconciliation} [@szollosi2014; @chen2000]. Reconciliation places each duplication and loss event on the species tree and, in doing so, tells us which copies are orthologs, which are paralogs, and exactly why (Figure \@ref(fig:gst-reconciliation)). Orthology and paralogy fall out as consequences of the history rather than serving as the primitive concepts.
 
-Methods that consider gene duplication and loss can reduce inference problems and also let us discard fewer data (since we can relax our gene selection criteria to include genes with more complex histories). Tools that identify gene families and infer their histories, such as OrthoFinder [@emms2019], make the full complement of gene families available for analysis, and methods such as ASTRAL-Pro estimate the species tree directly from multi-copy gene family trees, accounting for paralogy instead of requiring it to be filtered away first [@zhang2020].
+Methods that consider gene duplication and loss can reduce inference problems and also let us discard fewer data (since we can relax our gene selection criteria to include genes with more complex histories). Tools that identify gene families and infer their histories, such as OrthoFinder [@emms2019], make the full complement of gene families available for analysis, and methods such as ASTRAL-Pro estimate the species tree directly from multi-copy gene family trees, accounting for paralogy instead of requiring it to be filtered away first [@zhang2020]. Many studies include genes with more than one copy per species without full reconciliation, using simpler approaches such as pruning some copies from gene trees before species tree inference, based on gene tree structure or branch lengths.
 
 ## Reticulation: introgression, hybridization, and horizontal transfer
 
-The coalescent and gene duplication and loss both take the branching of the species tree for granted: lineages, once split, are assumed to stay split, and discordance arises only from how genes sort or duplicate within that fixed history. Reticulation breaks that assumption. Lineages that have already diverged come back into genetic contact and exchange material, so the history of the organisms is no longer a tree but a **network**, with branches that merge as well as split.
+The coalescent and gene duplication and loss both take the branching of the species tree for granted: lineages, once split, are assumed to stay split, and discordance arises only from how genes sort or duplicate within that fixed history. Reticulation breaks that assumption. Lineages that have already diverged come back into genetic contact and exchange material, so the history of the organisms is no longer a tree but a **network**\index{phylogenetic network}, with branches that merge as well as split.
 
-**Hybridization** and **introgression** are two outcomes of the same underlying event, interbreeding between diverged but still cross-fertile lineages, that differ in scale and consequence. Hybridization is the cross itself, and in its most dramatic form it founds a new lineage whose genome is a balanced mosaic of both parents (a homoploid hybrid) or a doubled complement of both parental genomes (an allopolyploid, a common route to new species in plants). Such a hybrid lineage descends from two branches of the species tree, a merger of two lineages. Introgression is the subtler and more common result: when hybrids backcross repeatedly into one of the parental populations, a minority of one lineage's genome leaks into the other while both species persist largely intact. The recipient remains recognizably itself but carries some regions inherited from the donor. Introgression therefore touches only part of the genome, so it is usually detected from genome-wide asymmetries in shared variation rather than from any single locus.
+**Hybridization**\index{hybridization} and **introgression**\index{introgression} are two outcomes of the same underlying event — interbreeding between diverged but still cross-fertile lineages — that differ in scale and consequence. Hybridization is the cross itself, and in its most dramatic form it founds a new lineage whose genome is a balanced mosaic of both parents (a homoploid hybrid) or a doubled complement of both parental genomes (an allopolyploid, a common route to new species in plants). Such a hybrid lineage descends from two branches of the species tree, a merger of two lineages. Introgression is the subtler and more common result: when hybrids backcross repeatedly into one of the parental populations, a minority of one lineage's genome leaks into the other while both species persist largely intact. The recipient remains recognizably itself but carries some regions inherited from the donor. Introgression therefore touches only part of the genome, so it is usually detected from genome-wide asymmetries in shared variation rather than from any single locus.
 
-**Horizontal**, or lateral, **gene transfer** moves genetic material between lineages outside of reproduction altogether. Rather than passing from parent to offspring, a gene is taken up directly, carried by a plasmid, a virus, or environmental DNA, and inserted into another genome. Because this requires neither interbreeding nor close relationship, horizontal transfer can move a gene between very distantly related organisms, and it is pervasive among prokaryotes. A transferred gene has a history that leaps across the tree, resembling neither the recipient's close relatives nor a pattern of incomplete lineage sorting.
+**Horizontal**, or lateral, **gene transfer**\index{horizontal gene transfer} moves genetic material between lineages outside of reproductive processes. Rather than passing from parent to offspring, a gene is taken up directly, carried by a plasmid, a virus, or environmental DNA, and inserted into another genome. Because this requires neither interbreeding nor close relationship, horizontal transfer can move a gene between very distantly related organisms, and it is pervasive among prokaryotes. A transferred gene has a history that leaps across the tree, resembling neither the recipient's close relatives nor a pattern of incomplete lineage sorting.
 
-All three produce reticulate histories that no single tree can fully capture, and phylogenetic networks generalize trees to represent them [@solislemus2017].
+All three processes produce reticulate histories that no single tree can fully capture, and phylogenetic networks generalize trees to represent them [@solislemus2017].
 
 ## Conclusion
 
-We have examined biological processes that can lead gene trees to depart from the species tree, methods that model these processes, and approaches to addressing discordance. This is one of the most active areas of phylogenetic research, and there is considerable ongoing development and consideration of the best approaches for particular problems.
+We have examined biological processes that can lead gene trees to depart from each other and from the species tree, methods that model these processes, and approaches to addressing discordance. This is one of the most active areas of phylogenetic research, and there is considerable ongoing development and consideration of the best approaches for particular problems.
 
 Many analyses do not attempt to model discordance at all, and treat all regions as though they share one history. One of the most common such approaches is to concatenate all the gene alignments end to end into one supermatrix and infer a single tree. There are a few reasons this is still a common approach. In practical terms, it often gives the same answer as methods that explicitly accommodate discordance, and it is computationally simpler. In some cases, the biology of the problem may make discordance unlikely. Another concern is that methods that accommodate discordance have many more parameters, and data may be too limited to support the more complex models. In practice, it is common for studies to take multiple approaches and compare the results. Understanding where the methods agree and where they disagree can be informative about the biology of the group and the structure of the problem, and can help identify additional approaches that may be needed to understand the problem. 
 
 Real discordance can have multiple causes. Methods have been developed to explicitly model and address each. In reality, the specific processes that cause any particular discordance may be non-identifiable, and the best we can do is to use methods that are robust to multiple causes. The coalescent is a good example: it models one cause of discordance, but it may be able to essentially soak up other causes such as gene duplication and loss. Just because a method detects discordance doesn't mean the discordance is due to the process it models. 
 
-We should expect that different processes tend to dominate in different parts of the tree of life, and that the biology of the group and structure of the phylogenetic problem should inform the choice of method. As we have seen, incomplete lineage sorting is most likely when the absolute length of branches is short. Given that shorter branches tend to be sampled in recent divergences, this is a particular concern at shallower depths in the tree. Incongruence due to gene duplication and loss is most likely when longer times have elapsed along the branches of the species tree. This is a particular concern for deeper phylogenetic problems, such as those regarding relationships from hundreds of millions of years ago. 
+We should expect that different processes tend to dominate in different parts of the tree of life, and that the biology of the group and structure of the phylogenetic problem should inform the choice of method. As we have seen, incomplete lineage sorting is more likely on shorter branches and in larger populations. Given that shorter branches tend to be sampled in recent divergences, this is a particular concern at shallower depths in the tree. Incongruence due to gene duplication and loss is most likely when longer times have elapsed along the branches of the species tree. This is a particular concern for deeper phylogenetic problems, such as those regarding relationships from hundreds of millions of years ago. 
 
-Gene tree/ species tree discordance is one of those phylogenetic patterns that is often treated as a technical nuisance to be overcome in the quest to resolve species relationships, but it is also a rich area of biology that is clearly relevant, and often central, to the larger evolutionary questions that are leading us to infer phylogenies in the first place. Incomplete lineage sorting tells us how population-level processes give rise to macroevolutionary patterns. Gene duplication and loss is central to the evolution of genome novelty and complexity. Introgression and hybridization are central to understanding the evolution of many groups, including humans. As the field develops these processes will be treated less as nuisances to be overcome, and more as important biological phenomena to be sought out and understood.
+Gene tree/species tree discordance is one of those phylogenetic patterns that is often treated as a technical nuisance to be overcome in the quest to resolve species relationships. But it is also a rich area of biology that is clearly relevant, and often central, to the larger evolutionary questions that are leading us to infer phylogenies in the first place. Incomplete lineage sorting tells us how population-level processes give rise to macroevolutionary patterns. Gene duplication and loss is central to the evolution of genome novelty and complexity. Introgression and hybridization are central to understanding the evolution of many groups, including humans. As the field develops these processes will be treated less as nuisances to be overcome, and more as important biological phenomena to be sought out and understood.
 
 <!--chapter:end:gene_species_trees.rmd-->
 
@@ -1565,7 +1563,7 @@ Another analysis framework, Bayesian statistics, directly addresses all of the i
 
 Bayesian statistics is much older than many other domains of statistics, but has recently seen a surge in use as computational and methodological advances allow them to be applied more effectively to a wider number of problems. The basic intuition is that our understanding of the world is not drawn from the data alone. Instead, the data are used to update our prior understanding of the world. This updated understanding is referred to as the posterior. There are many excellent introductions to Bayesian statistics, so I will not provide a full derivation here. If you would like more of a background, please consult Appendix \@ref(stats-bayes).
 
-Bayes' theorem establishes the following relationships:
+Bayes' theorem establishes\index{Bayes' theorem} the following relationships:
 
 \begin{equation} 
   P(H|D) = \frac{P(D|H)P(H)}{P(D)} 
@@ -1574,7 +1572,7 @@ Bayes' theorem establishes the following relationships:
 
 $P(H|D)$, read as "the probability of the hypothesis given the data", is the posterior probability of a given hypothesis. It takes into account prior expectations and new insight from the data. This posterior probability is what we are trying to estimate. We have already seen $P(D|H)$, read as "the probability of the data given the hypothesis". This is the likelihood, and from previous chapters we know how to calculate it. $P(H)$ and $P(D)$ are our prior probabilities, our world view before we collected data. $P(H)$ is the prior probability of the hypothesis, without considering the data. $P(D)$ is the prior probability of the data, without considering the hypothesis.
 
-Let's plug in a few numbers to get some intuition for the behavior of Bayes' theorem. First, consider the case where $P(H)=0$, *i.e.*, you assign a prior probability of $0$ to the hypothesis. The posterior probability, $P(H|D)$, will then also be $0$. This shows that if you believe ahead of collecting data that the hypothesis is absolutely impossible, no amount of data can change your mind and your updated hypothesis, the posterior, will also be $0$. 
+Let's plug in a few numbers to get some intuition for the behavior of Bayes' theorem. First, consider the case where $P(H)=0$, *i.e.*, you assign a prior probability\index{prior probability} of $0$ to the hypothesis. The posterior probability\index{posterior probability}, $P(H|D)$, will then also be $0$. This shows that if you believe ahead of collecting data that the hypothesis is absolutely impossible, no amount of data can change your mind and your updated hypothesis, the posterior, will also be $0$. 
 
 Second, let's consider the case where the data are just as likely under the hypothesis as they are under other hypotheses. This would be like having a medical test for a specific condition where the test was so bad that the data (test result) didn't depend in any way on the hypothesis (the presence of the condition). For example, the test returns a positive 10% of the time regardless of whether you have the condition or not. In that situation, $P(D|H)=P(D)$. Since $P(D|H)$ is in the numerator and $P(D)$ is in the denominator, they cancel out. That leaves $P(H|D)=P(H)$ -- the posterior probability of the hypothesis is the same as the prior on the hypothesis. The data didn't change our understanding of the hypothesis at all. This is the behavior we want when the data have no information relevant to the hypothesis.
 
@@ -1586,7 +1584,7 @@ To calculate the posterior probability of a phylogenetic hypothesis, we need to 
 
 What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won't.
 
-Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC) sampling [@metropolis1953; @hastings1970]. MCMC is a widely used method to approximate probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypotheses that are either rejected or accepted based on a specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
+Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC)\index{Markov chain Monte Carlo (MCMC)} sampling [@metropolis1953; @hastings1970]. MCMC is a widely used method to approximate probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypotheses that are either rejected or accepted based on a specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
 
 Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate our test statistic as the ratio of the posterior probability of $H^*$ to the posterior probability of $H$:
 
@@ -1615,7 +1613,7 @@ There are a variety of practical considerations to implementing a Bayesian phylo
 - Selecting appropriate priors on topology, branch length, and model parameters.
 - Devising an appropriate hypothesis proposal mechanism. If the new hypothesis $H^*$ is too different from $H$, it will tend to be rejected as $H$ becomes optimized. This will lead to an approximated posterior distribution that is too narrow, leading to overconfidence in a small set of hypotheses. If the steps are too small, then MCMC will tend to get trapped in local optima because they cannot find more distant better optima. There are several approaches to these challenges, including searches with multiple MCMC chains that take different step sizes.
 - The very early samples in the chain are not a good estimate of the posterior distribution, because the initial $H$ is 
-not necessarily close to a peak in the posterior. The initial samples before MCMC settles into a stable distribution are therefore discarded as part of a "burn-in" phase.
+not necessarily close to a peak in the posterior. The initial samples before MCMC settles into a stable distribution are therefore discarded as part of a "burn-in\index{burn-in}" phase.
 - Knowing when enough generations have been sampled to adequately approximate the posterior distribution. This is often evaluated by running multiple independent MCMC analyses and stopping them if and when they have converged on similar distributions.
 
 The ability to specify a prior can be a great advantage of Bayesian analyses. A prior is an explicit, principled way to incorporate prior knowledge into a new analysis. For example, if you are very confident that a particular clade exists based on external evidence, you could design a topology prior that favors topologies that include that clade over topologies that don't. If you have external information about model parameters, you could set a prior that constrains these parameters. These are cases of what are called informative priors -- they are nonuniform, and intentionally constrain results based on external information. In many cases, though, investigators use relatively uninformative priors that give equal probabilities to all hypotheses. This allows the posterior to be dominated by the data, and is appropriate when the investigator doesn't have external information to include in the prior or wants to focus on signal in a particular dataset. If you are ever concerned about the impact of your priors on your posteriors, you can run your analysis without any data -- the posterior will then be determined entirely by the prior. This gives you a good understanding of the impact of your prior on the posterior, and by comparing this empty analysis to an analysis with data you can get a good sense of the impact of your data on the posterior.
@@ -1678,7 +1676,7 @@ Measurements of DNA sequences have 4 possible states, corresponding to each of t
 
 #### Amino acids
 
-Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more parameters in models of protein evolution than in models of DNA evolution.
+Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids\index{amino acid data} rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more parameters in models of protein evolution than in models of DNA evolution.
 
 There are a few reasons why protein sequences are often considered in phylogenetic analyses rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another is that synonymous changes in protein coding DNA sequences quickly saturate for more distant evolutionary comparisons. This means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.
 
@@ -1688,7 +1686,7 @@ Since there are 4 possible DNA nucleotides and codons are 3 nucleotides long, th
 
 #### Morphology
 
-Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs [@harmon2018phylogenetic, chapter 7]. The most widely used of these is the Mk model [@lewis2001], a $k$-state generalization of the Jukes-Cantor model in which all changes among $k$ states occur at equal rates.
+Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs [@harmon2018phylogenetic, chapter 7]. The most widely used of these is the Mk model\index{Mk model} [@lewis2001], a $k$-state generalization of the Jukes-Cantor model in which all changes among $k$ states occur at equal rates.
 
 ### Ordinal scale types
 
@@ -1723,7 +1721,7 @@ Measurement theory distinguishes several different scale types (for example, int
 
 ### Brownian motion
 
-The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM) [@felsenstein1973continuous; @felsenstein1985phylogenies]. In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.
+The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM)\index{Brownian motion} [@felsenstein1973continuous; @felsenstein1985phylogenies]. In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.
 
 Under BM, the expected change in the trait value is zero. This is not because there is no change under Brownian motion. It is because increases are just as common as decreases. If you run the same BM simulation many times and average the results, the average change across all of them will be zero. Each one, however, can be quite different from the original value and from each other. This is because the variance of the trait value increases linearly with time. The longer two lineages evolve independently, or the faster the change, the more different their trait values are expected to become. 
 
@@ -1751,7 +1749,7 @@ The BM model is primarily used because it provides a mathematically tractable ap
 
 
 
-### Ornstein–Uhlenbeck models
+### Ornstein–Uhlenbeck\index{Ornstein-Uhlenbeck model} models
 
 Brownian motion assumes that there is no preferred trait value or directional trend in evolution. In reality, traits are often subject to constraints, such as stabilizing selection or metabolic constraints, that lead values to stay near a particular optimum. The Ornstein–Uhlenbeck (OU) model is a common variation of Brownian motion that can accommodate these constraints [@hansen1997; @butler2004].
 
@@ -1780,7 +1778,7 @@ Each edge (branch) connects two nodes. In a rooted tree, we refer to the node cl
 
 ## Measurements of time on trees
 
-As discussed in Section \@ref(trees-branch-lengths), branch length can mean different things. It is up to the investigator to specify a branch length and clearly communicate what it means in the tree at hand. The three usual approaches are a cladogram (a tree in which branch lengths have no meaning), a phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and a chronogram (branch lengths are in units of time). These tree types differ in what we can say about time.
+As discussed in Section \@ref(trees-branch-lengths), branch length can mean different things. It is up to the investigator to specify a branch length and clearly communicate what it means in the tree at hand. The three usual approaches are a cladogram\index{cladogram} (a tree in which branch lengths have no meaning), a phylogram (branch lengths\index{phylogram} are the expected amount of evolutionary change in the traits used to infer the phylogeny), and a chronogram (branch lengths are in units of time). These tree types differ in what we can say about time.
 
 ### Cladograms
 
@@ -1813,13 +1811,13 @@ By definition, in a chronogram branch lengths are in units of time. The age of e
 
 ## Time calibration
 
-The process of creating a chronogram is referred to as time calibration. In essence, external information about the ages of some nodes is used to constrain the ages of other nodes.
+The process of creating a chronogram is referred to as time calibration\index{time calibration}. In essence, external information about the ages of some nodes is used to constrain the ages of other nodes.
 
-If the rate of evolution were uniform and did not vary in different lineages, then the branch lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing branch lengths by the rate of change. For example, if the branch lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions per million years, then dividing each branch length by 2 would give a chronogram where the units of branch length are millions of years. This is called clock-like evolution -- changes in characters are like regular ticks on a clock [@zuckerkandl1965]. No real data evolve in a perfectly clock-like way, so time calibration of phylogenies instead relies on relaxed clock models that allow local variations in evolutionary rate [@sanderson1997; @drummond2006].
+If the rate of evolution were uniform and did not vary in different lineages, then the branch lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing branch lengths by the rate of change. For example, if the branch lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions per million years, then dividing each branch length by 2 would give a chronogram where the units of branch length are millions of years. This is called clock-like evolution\index{molecular clock} -- changes in characters are like regular ticks on a clock [@zuckerkandl1965]. No real data evolve in a perfectly clock-like way, so time calibration of phylogenies instead relies on relaxed clock models\index{molecular clock!relaxed} that allow local variations in evolutionary rate [@sanderson1997; @drummond2006].
 
 If all the tip nodes of a phylogeny are the same distance from the root, the tree is referred to as being ultrametric. If all the tips on a chronogram are sampled at the same time, then the chronogram is expected to be ultrametric because the same amount of time has elapsed from the root to each tip. An ultrametric tree is not necessarily a chronogram, though. Some of the internal nodes may have ages that violate branch lengths proportional to time, or a phylogram could be constrained to be ultrametric without calibrating any of the branch lengths according to time.
 
-In the early days of the field, phylogenetic inference was done separately from time calibration. A phylogram would first be inferred. The phylogram would then be modified into a chronogram. This would involve stretching and shrinking branches to make the tree ultrametric and to constrain some internal nodes to fit fossil calibration dates. This modification of branch lengths was not made with consideration of the underlying trait data. 
+In the early days of the field, phylogenetic inference was done separately from time calibration. A phylogram would first be inferred. The phylogram would then be modified into a chronogram. This would involve stretching and shrinking branches to make the tree ultrametric and to constrain some internal nodes to fit fossil calibration dates\index{fossil calibration}. This modification of branch lengths was not made with consideration of the underlying trait data. 
 
 Subsequent approaches instead unify phylogenetic inference and time calibration. Using external information, such as fossils and the sampling times of tips, branch lengths are inferred in units of time under relaxed clock models that allow rates of evolution to vary across the tree to accommodate these constraints. Because the external calibrations allow rates and time to be inferred independently (unlike an unconstrained phylogram, where they are conflated), this time-calibrated inference produces a chronogram.
 
@@ -1843,7 +1841,7 @@ The model known as the "fossilized birth–death" (FBD) process doesn't use foss
 
 # Ancestral character state reconstruction
 
- We learned about models of evolution and how to run these models forward in time, from the root to the tips, to simulate the evolution of characters. In the chapters on inference, we used the same machinery to estimate the tree and model parameters that best explain the states we see at the tips. Here we turn to a different product of the same tools -- learning about the states of the characters at the internal nodes of the tree. Estimating these states is called ancestral character state reconstruction [@joy2016ancestral; @revell2025ancestral].
+ We learned about models of evolution and how to run these models forward in time, from the root to the tips, to simulate the evolution of characters. In the chapters on inference, we used the same machinery to estimate the tree and model parameters that best explain the states we see at the tips. Here we turn to a different product of the same tools -- learning about the states of the characters at the internal nodes of the tree. Estimating these states is called ancestral character state reconstruction\index{ancestral state reconstruction} [@joy2016ancestral; @revell2025ancestral].
 
 Recall the framing from Chapter \@ref(intro). A phylogenetic analysis has several components -- the tree, the branch lengths, the model, the model parameters, the character states at the tips, and the character states at the ancestors. Different studies clamp some of these, estimate others, and then keep or discard the estimates depending on the question. Ancestral character state reconstruction is the case where the character states at the internal nodes are what we want to estimate and keep. To get them, we usually clamp the tree, the branch lengths, and the observed states at the tips, and then estimate the states at the ancestors.
 
@@ -1910,7 +1908,7 @@ A recurring theme of phylogenetic comparative biology is that we cannot treat th
 
 Suppose we measure two traits across a set of species, say body mass and metabolic rate, and we want to know whether they tend to evolve together. The naive approach is to treat each species as an independent data point, plot one trait against the other, and fit an ordinary regression. This is exactly what we would do with independent samples in an introductory statistics course.
 
-The problem is that species are not independent samples. Two species that diverged from a common ancestor a short time ago have had very little time to evolve apart, and so they tend to resemble each other on essentially every trait, simply because they inherited most of their features from that recent common ancestor. Two species whose lineages separated hundreds of millions of years ago have had far more opportunity to diverge. The tree tells us how much shared history each pair of species has, and therefore how much we should expect them to resemble one another before we invoke any relationship between the traits themselves.
+The problem is that species are not independent samples\index{phylogenetic non-independence}. Two species that diverged from a common ancestor a short time ago have had very little time to evolve apart, and so they tend to resemble each other on essentially every trait, simply because they inherited most of their features from that recent common ancestor. Two species whose lineages separated hundreds of millions of years ago have had far more opportunity to diverge. The tree tells us how much shared history each pair of species has, and therefore how much we should expect them to resemble one another before we invoke any relationship between the traits themselves.
 
 This was the central insight of a landmark paper by Joe Felsenstein [@felsenstein1985phylogenies]. If we ignore the tree, we are effectively counting closely related species as if they were independent replicates, when in reality they are close to being a single replicate observed several times. Our sample size is inflated, our confidence intervals are too narrow, and we will routinely find "significant" relationships that are nothing more than the shadow of shared ancestry.
 
@@ -1955,7 +1953,7 @@ Figure \@ref(fig:comp-pic) shows contrasts for two traits that were simulated wi
 
 ## The expected covariance structure
 
-Independent contrasts handle shared history by transforming the correlated tip values into a set of contrasts that are independent under Brownian motion. There is another, complementary perspective. Instead of transforming the data to independence, it describes the shared history explicitly, as a covariance matrix among the tips.
+Independent contrasts handle shared history\index{independent contrasts} by transforming the correlated tip values into a set of contrasts that are independent under Brownian motion. There is another, complementary perspective. Instead of transforming the data to independence, it describes the shared history explicitly, as a covariance matrix among the tips.
 
 Under Brownian motion, the trait values at the tips of a tree follow a multivariate normal distribution. The mean of that distribution is the root state, and the covariance between any two tips is proportional to the amount of evolutionary time they share, *i.e.*, the distance from the root to their most recent common ancestor. This is intuitive: two tips accumulate the same random changes along every branch they share, and independent changes only after they diverge, so the more history they share, the more their trait values covary. A tip shares its entire root-to-tip path with itself, so its variance (its covariance with itself) is proportional to its total distance from the root.
 
@@ -1991,7 +1989,7 @@ Collecting these values gives the phylogenetic variance-covariance matrix. We wi
 
 The diagonal, running from top left to bottom right, holds the variances, all equal here because the tree is ultrametric. Every other entry is a covariance, and the pattern of large and small values mirrors the tree: closely related tips such as A and B share a great deal of history and have a large covariance, while the distantly attached D shares none and has covariances of zero. Reading down the row for D, or across its column, gives all zeros. This matrix is a complete description of the non-independence induced by the tree, and it is exactly what the next method takes as its input.
 
-## Phylogenetic generalized least squares
+## Phylogenetic generalized least squares\index{phylogenetic generalized least squares (PGLS)}
 
 Independent contrasts turn out to be one instance of a more general and flexible framework. That framework is phylogenetic generalized least squares, abbreviated PGLS [@grafen1989phylogenetic; @freckleton2002; @symonds2014primer].
 
@@ -2007,7 +2005,7 @@ Independent contrasts are the special case of PGLS in which the covariance struc
 
 Because PGLS is more general, it has become the more widely used of the two. Expressed as a regression with a specified covariance structure, it accommodates things that are awkward under the contrasts formulation. We can include multiple predictors, categorical variables, and continuous covariates in the same model. More importantly, we can change the assumed covariance structure to reflect a different model of evolution. If we think the trait evolves under an Ornstein-Uhlenbeck process (Section \@ref(continuous-data)) [@hansen1997; @butler2004] rather than pure Brownian motion, we substitute the covariance structure implied by that model. The tree still supplies the non-independence, but we now have a whole family of models describing how that non-independence accumulates.
 
-It is worth being precise about what these methods do, because they are easily misdescribed [@uyeda2018rethinking]. It is common to say that they "remove the phylogenetic signal" [@blomberg2003] or "correct for the fact that species are not independent," but neither phrasing is quite right. Ordinary regression does not assume that the observations themselves are independent; it assumes that the *residuals* -- the part of one trait left unexplained by the other -- are independent. What independent contrasts and PGLS do is account for the covariance of those residuals, and they discard no biological signal in doing so; the contrasts are themselves the evolutionary changes. A subtler and more important caution is that correctly accounting for shared history does not, by itself, show that two traits are causally related. A single unreplicated event -- one ancient branch on which both traits happened to shift -- can produce a strongly significant contrast or PGLS slope even when nothing connects the traits, and neither method guards against this. Shared history is not just a statistical nuisance to be swept away.
+It is worth being precise about what these methods do, because they are easily misdescribed [@uyeda2018rethinking]. It is common to say that they "remove the phylogenetic signal\index{phylogenetic signal}" [@blomberg2003] or "correct for the fact that species are not independent," but neither phrasing is quite right. Ordinary regression does not assume that the observations themselves are independent; it assumes that the *residuals* -- the part of one trait left unexplained by the other -- are independent. What independent contrasts and PGLS do is account for the covariance of those residuals, and they discard no biological signal in doing so; the contrasts are themselves the evolutionary changes. A subtler and more important caution is that correctly accounting for shared history does not, by itself, show that two traits are causally related. A single unreplicated event -- one ancient branch on which both traits happened to shift -- can produce a strongly significant contrast or PGLS slope even when nothing connects the traits, and neither method guards against this. Shared history is not just a statistical nuisance to be swept away.
 
 ## Beyond correlated evolution
 
@@ -2080,7 +2078,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 21, 2026 at 01:19:07 AM with the following R package versions.
+This book was rendered from the source code on Jul 21, 2026 at 08:27:15 PM with the following R package versions.
 
 
 ```

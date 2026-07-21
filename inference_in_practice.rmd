@@ -8,7 +8,7 @@ The first step to an analysis is to clearly define your question. There will be 
 
 ## Taxon sampling
 
-The tips in a phylogeny, be they genes, species, individuals, or some other evolving entity, are referred to as taxa. One of the first things you will want to consider is the breadth and depth of taxon sampling.
+The tips in a phylogeny, be they genes, species, individuals, or some other evolving entity, are referred to as taxa. One of the first things you will want to consider is the breadth and depth of taxon sampling\index{taxon sampling}.
 
 One of the most common mistakes in phylogenetic analyses is to include too few taxa. There are many ways that adding taxa helps:
 
@@ -60,7 +60,7 @@ Multiple strategies above are often used in the same study; they are not exclusi
 
 ### Transcriptomes
 
-A transcriptome is the collection of RNA in a cell or collection of cells. Because RNA is transcribed from the genome, sequencing the RNA gives a snapshot of an enriched subset of the genome. Whereas the other enrichment approaches described are implemented by the investigator at the bench, transcriptome sequencing largely relies on a natural process in the living cell (transcription) to enrich for particular genome regions.
+A transcriptome is the collection of RNA\index{transcriptome} in a cell or collection of cells. Because RNA is transcribed from the genome, sequencing the RNA gives a snapshot of an enriched subset of the genome. Whereas the other enrichment approaches described are implemented by the investigator at the bench, transcriptome sequencing largely relies on a natural process in the living cell (transcription) to enrich for particular genome regions.
 
 In a typical phylogenetic study based on transcriptome data, messenger RNA (mRNA), which encodes the protein coding genes, is isolated. mRNA is then copied to complementary DNA (cDNA) and sequenced. Because many of the same genes are highly expressed across species and tissues, there is considerable overlap between the genes in transcriptome datasets from different samples. Many investigators are interested in protein coding genes for other purposes as well, adding value to the transcriptome data.
 
@@ -68,13 +68,13 @@ There are a couple of challenges to working with transcriptomes. For one, RNA is
 
 ### Targeted enrichment
 
-In targeted enrichment, an investigator designs short bait sequences that are similar to conserved genome regions. They then isolate DNA from their taxa of interest, fragment it, and use the baits to fish out the conserved regions along with their neighboring sequences. This allows the investigator to create pools of DNA that are enriched for specific pre-selected regions. This is a highly cost-effective way to isolate homologous sequences across species, and works well when samples have fragmented DNA (in museum specimens, for example). 
+In targeted enrichment\index{targeted enrichment}, an investigator designs short bait sequences that are similar to conserved genome regions. They then isolate DNA from their taxa of interest, fragment it, and use the baits to fish out the conserved regions along with their neighboring sequences. This allows the investigator to create pools of DNA that are enriched for specific pre-selected regions. This is a highly cost-effective way to isolate homologous sequences across species, and works well when samples have fragmented DNA (in museum specimens, for example). 
 
 The baits are typically designed based on one or more genomes that are already available in the clade of interest. There are a few challenges to using targeted enrichment. One is that data are difficult to combine across different studies that used different baits. In addition, the design and synthesis of baits require a large up-front investment that makes this approach best suited to larger projects.
 
 ### RAD-seq
 
-Like targeted enrichment, RAD-seq enriches for sequence data from specific regions scattered across the genome. It differs, though, in that it uses intrinsic properties of the genome for enrichment, rather than user-designed baits. Genomic DNA is digested with one or two restriction enzymes that cut the genome at specific small sequences, and leave the DNA with particular overhangs at the cut end. These cut fragments are then size-selected. If cutting with two restriction enzymes, the fragments that have different overhangs (because they were cut once with each enzyme) are then further enriched. The fragments are then sequenced.
+Like targeted enrichment, RAD-seq enriches\index{RAD-seq} for sequence data from specific regions scattered across the genome. It differs, though, in that it uses intrinsic properties of the genome for enrichment, rather than user-designed baits. Genomic DNA is digested with one or two restriction enzymes that cut the genome at specific small sequences, and leave the DNA with particular overhangs at the cut end. These cut fragments are then size-selected. If cutting with two restriction enzymes, the fragments that have different overhangs (because they were cut once with each enzyme) are then further enriched. The fragments are then sequenced.
 
 The result is that sequences are enriched for regions with similar distances between restriction enzyme sites across taxa. This is a powerful way to get a consistent subset of the genome across many different samples. It doesn't require a big investment in baits at the outset, but there are a few important limitations. First, it only works well on closely related taxa, since differences in restriction site placement evolve relatively quickly and enrichment overlap falls quickly with evolutionary distance. RAD-seq therefore is most often used when looking at evolutionary relationships within species or among very closely related species. Second, there is very little control over which specific genome regions are sequenced. For example, if you want to build a phylogeny and look at the evolution of a particular gene, you can't readily engineer the sample enrichment to target that specific gene.
 
@@ -129,7 +129,7 @@ Based on this overview, you can assess which types of data (*i.e.*, which data p
 
 ## Homologous sites
 
-Once you have collected homologous sequences for one or more genome regions across your taxa of interest, you next need to identify homologous nucleotide sites within these regions. This process is referred to as multiple sequence alignment (MSA). Rather than rely on explicit models of molecular evolution, multiple sequence alignment usually relies on similarities between sequences. The general idea is to slide the sequences along each other and insert gaps as needed so that similarity at each site is optimized while reducing the number of gaps introduced. Widely used multiple sequence alignment programs include MAFFT [@katoh2013] and MUSCLE [@edgar2004].
+Once you have collected homologous sequences for one or more genome regions across your taxa of interest, you next need to identify homologous nucleotide sites within these regions. This process is referred to as multiple sequence alignment\index{sequence alignment} (MSA). Rather than rely on explicit models of molecular evolution, multiple sequence alignment usually relies on similarities between sequences. The general idea is to slide the sequences along each other and insert gaps as needed so that similarity at each site is optimized while reducing the number of gaps introduced. Widely used multiple sequence alignment programs include MAFFT [@katoh2013] and MUSCLE [@edgar2004].
 
 The output of multiple sequence alignment is a matrix. Each row is a taxon that will correspond to a tip in the phylogeny. Each column is a single nucleotide site that is hypothesized to be homologous across taxa. There are multiple file formats that are used to store aligned sequences, including fasta, nexus [@maddison1997nexus], and phylip.
 

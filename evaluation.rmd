@@ -45,7 +45,7 @@ Though nested models always have different degrees of freedom, there is no guara
 
 In our previous examinations of inference, we used likelihood as an optimality criterion when looking for the phylogeny that best explains our data. Similarly, we can search for the model that best explains the data. We can pick a reasonable phylogeny and evaluate the likelihood of the data under each of the models we would like to consider. In each case we also optimize the model parameter values for each model to make sure we are comparing the models in the best possible light.
 
-We can then make a series of pairwise comparisons between models, where we consider the ratio of their likelihoods. This is the gist of a likelihood ratio test (LRT). Instead of considering the ratio of likelihoods, we can consider the difference in their log likelihoods since:
+We can then make a series of pairwise comparisons between models, where we consider the ratio of their likelihoods. This is the gist of a likelihood ratio test\index{likelihood ratio test} (LRT). Instead of considering the ratio of likelihoods, we can consider the difference in their log likelihoods since:
 
 \begin{equation} 
   \Delta = ln(\frac{a}{b}) = ln(a) - ln(b)
@@ -63,7 +63,7 @@ Let's say we are comparing GTR to HKY85, and we denote the likelihood under GTR 
 
 One way to proceed would then be to select GTR if $\Delta>0$, and HKY85 if $\Delta<0$. This wouldn't be a good way to go, though, since it would pick GTR every single time. The reason is that HKY85 is nested within GTR. That means that the best possible likelihood under HKY85 is also available under GTR. Because it has more degrees of freedom, GTR has many other possible values, and chances are very good that one of those will be more likely than the parameter values that were most likely under HKY85. If comparing two nested models, the model with more degrees of freedom will never have a likelihood lower than the simpler model.
 
-This would seem to imply that more complex models are always better, but they are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch lengths based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
+This would seem to imply that more complex models are always better, but they are not. As we add degrees of freedom, we are adding stochastic parameters that must be estimated from the data. In a very extreme case, we clearly couldn't estimate an infinite number of parameters from a finite dataset -- there wouldn't be enough information to independently assess each parameter. But there are challenges even with a relatively small number of parameters. If we add too many model parameters, we can over-fit\index{overfitting}. Essentially, if there are too many model parameters we can make any phylogeny look good by adjusting the model parameters. This makes it more difficult to optimize the topology and branch lengths based on their impact on the likelihood. The data have finite information, and the more information we use to estimate model parameters the less we have to estimate the phylogeny.
 
 When comparing nested models, the question therefore isn't whether one model has higher likelihood than the other, but whether the increase in likelihood one gets from adding parameters is worth the cost of adding the parameters. There are a few different ways to make this cost/benefit analysis.
 
@@ -78,14 +78,14 @@ We can compare this test statistic $\delta$ to the appropriate $\chi^2$ distribu
 
 There are a few challenges to applying the LRT to model selection in phylogenetics [@posada2001; @posada2004model]. One issue is that the test presumes that one of the models is correct [@zhang1999performance], but in phylogenetics models are always simplifications of the evolutionary process at hand. The impact of violating this assumption varies across datasets and analyses, but can lead to undesirable behavior in real-world applications.
 
-There are two other approaches commonly used in phylogenetic model selection. Where $L_i$ is the likelihood under model $i$, $k_i$ is the degrees of freedom for the model, and $n$ is sample size (*e.g.*, number of sites in the alignment), these are the Akaike Information Criterion (AIC) [@akaike1974]:
+There are two other approaches commonly used in phylogenetic model selection. Where $L_i$ is the likelihood under model $i$, $k_i$ is the degrees of freedom for the model, and $n$ is sample size (*e.g.*, number of sites in the alignment), these are the Akaike Information Criterion (AIC)\index{Akaike information criterion (AIC)} [@akaike1974]:
 
 \begin{equation} 
   AIC_i = 2k_i - 2ln(L_i)
   (\#eq:aic)
 \end{equation}
 
-And the Bayesian Information Criterion (BIC) [@schwarz1978]:
+And the Bayesian Information Criterion (BIC)\index{Bayesian information criterion (BIC)} [@schwarz1978]:
 
 \begin{equation} 
   BIC_i = k_iln(n) - 2ln(L_i)
@@ -151,7 +151,7 @@ It should be noted that these support values are often referred to as "nodal sup
 
 ### Bootstrapping
 
-The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap [@felsenstein1985confidence]. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with $n$ columns, bootstrapping generates a new matrix, also with $n$ columns, by resampling from the original matrix with replacement. Some columns from the original matrix won't be sampled at all, some will be sampled once, and some will be sampled multiple times.
+The most widely used approach to assessing confidence in maximum likelihood phylogenetic inference is the bootstrap\index{bootstrap} [@felsenstein1985confidence]. Given a data matrix where rows are taxa and columns are characters (nucleotide sites in the case of DNA) with $n$ columns, bootstrapping generates a new matrix, also with $n$ columns, by resampling from the original matrix with replacement. Some columns from the original matrix won't be sampled at all, some will be sampled once, and some will be sampled multiple times.
 
 Bootstrapping is used to generate many new matrices (typically at least a hundred, but ideally 1000 or more), and maximum likelihood searches are then run on each matrix. This generates a sample of phylogenies. These can be examined in a variety of ways, but the most common is to evaluate the frequency of each branch of the maximum likelihood tree (generated from the original data matrix) in the sample of bootstrap phylogenies. A branch frequency of 100% indicates that a branch is always in the bootstrap replicates and is taken to be strong support. Support below 90% is generally considered weak.
 
@@ -161,4 +161,4 @@ Many phylogenetic inference programs do not run full independent maximum likelih
 
 ## Topology tests
 
-Rather than assess the support of a particular focal topology, sometimes you want to assess how significant the difference in support is for specific phylogenies. There are several different topology tests that address these questions. They include the SOWH test [@swofford1996molecular], the KH test [@kishino1989], the SH test [@Shimodaira1999], and the AU test [@Shimodaira2002]. Some of these are implemented in popular maximum likelihood software tools including iqtree [@Minh2020]. Their performance differs across conditions and their assumptions differ, so care should be taken in selecting and evaluating these tests [@Goldman2000;@Markowski2023].
+Rather than assess the support of a particular focal topology, sometimes you want to assess how significant the difference in support is for specific phylogenies. There are several different topology test\index{topology test}s that address these questions. They include the SOWH test [@swofford1996molecular], the KH test [@kishino1989], the SH test [@Shimodaira1999], and the AU test [@Shimodaira2002]. Some of these are implemented in popular maximum likelihood software tools including iqtree [@Minh2020]. Their performance differs across conditions and their assumptions differ, so care should be taken in selecting and evaluating these tests [@Goldman2000;@Markowski2023].

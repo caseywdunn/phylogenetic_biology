@@ -51,7 +51,7 @@ Measurements of DNA sequences have 4 possible states, corresponding to each of t
 
 #### Amino acids
 
-Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more parameters in models of protein evolution than in models of DNA evolution.
+Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids\index{amino acid data} rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more parameters in models of protein evolution than in models of DNA evolution.
 
 There are a few reasons why protein sequences are often considered in phylogenetic analyses rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another is that synonymous changes in protein coding DNA sequences quickly saturate for more distant evolutionary comparisons. This means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.
 
@@ -61,7 +61,7 @@ Since there are 4 possible DNA nucleotides and codons are 3 nucleotides long, th
 
 #### Morphology
 
-Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs [@harmon2018phylogenetic, chapter 7]. The most widely used of these is the Mk model [@lewis2001], a $k$-state generalization of the Jukes-Cantor model in which all changes among $k$ states occur at equal rates.
+Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs [@harmon2018phylogenetic, chapter 7]. The most widely used of these is the Mk model\index{Mk model} [@lewis2001], a $k$-state generalization of the Jukes-Cantor model in which all changes among $k$ states occur at equal rates.
 
 ### Ordinal scale types
 
@@ -96,7 +96,7 @@ Measurement theory distinguishes several different scale types (for example, int
 
 ### Brownian motion
 
-The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM) [@felsenstein1973continuous; @felsenstein1985phylogenies]. In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.
+The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM)\index{Brownian motion} [@felsenstein1973continuous; @felsenstein1985phylogenies]. In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.
 
 Under BM, the expected change in the trait value is zero. This is not because there is no change under Brownian motion. It is because increases are just as common as decreases. If you run the same BM simulation many times and average the results, the average change across all of them will be zero. Each one, however, can be quite different from the original value and from each other. This is because the variance of the trait value increases linearly with time. The longer two lineages evolve independently, or the faster the change, the more different their trait values are expected to become. 
 
@@ -148,7 +148,7 @@ p_brownian
 
 
 
-### Ornstein–Uhlenbeck models
+### Ornstein–Uhlenbeck\index{Ornstein-Uhlenbeck model} models
 
 Brownian motion assumes that there is no preferred trait value or directional trend in evolution. In reality, traits are often subject to constraints, such as stabilizing selection or metabolic constraints, that lead values to stay near a particular optimum. The Ornstein–Uhlenbeck (OU) model is a common variation of Brownian motion that can accommodate these constraints [@hansen1997; @butler2004].
 
