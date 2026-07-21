@@ -49,7 +49,7 @@ Let's examine one of the most common models, the linear model:
 \end{equation}
 
 Here, $y$ and $x$ are variables. The model posits a linear relationship between $x$ and $y$. If you plot their correspondence in a plane 
-you will get a line. $m$ and $b$ are model parameters. $m$ is the slope of the line. It captures how much change there is in $y$ for each unit of change in $x$. $b$ is the intercept. It is the value of $y$ when $x=0$.
+you will get a line (Figure \@ref(fig:sim-linear)). $m$ and $b$ are model parameters. $m$ is the slope of the line. It captures how much change there is in $y$ for each unit of change in $x$. $b$ is the intercept. It is the value of $y$ when $x=0$.
 
 ```{r sim-linear, fig.cap="A linear model with $m=0.5$ and $b=1$."}
 m = 0.5
@@ -236,7 +236,7 @@ p +
   ylab( "P" )
 ```
 
-We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) instead of from simulations of changes along branches. 
+We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) instead of from simulations of changes along branches (Figure \@ref(fig:sim-sat-analytical)).
 
 ```{r sim-sat-analytical, cache=TRUE, fig.cap="Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \\@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \\@ref(eq:sim-change). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." }
 

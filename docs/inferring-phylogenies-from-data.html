@@ -361,9 +361,9 @@ Figure 4.1: The toy phylogeny we will use to examine inference. Node numbers are
 </div>
 <p>We will start by calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure <a href="inferring-phylogenies-from-data.html#fig:inference-internal-states">4.2</a>. This isn’t a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.</p>
 <div class="figure"><span style="display:block;" id="fig:inference-internal-states"></span>
-<img src="phylogenetic_biology_files/figure-html/inference-internal-states-1.png" alt="The same toy tree as above, but with arbitrary internal node states (in boxes)." width="2100" />
+<img src="phylogenetic_biology_files/figure-html/inference-internal-states-1.png" alt="The same toy tree as above, now with arbitrary states added at the internal nodes, so every node has a state (in boxes)." width="2100" />
 <p class="caption">
-Figure 4.2: The same toy tree as above, but with arbitrary internal node states (in boxes).
+Figure 4.2: The same toy tree as above, now with arbitrary states added at the internal nodes, so every node has a state (in boxes).
 </p>
 </div>
 <p>Our goal now is to calculate the probability of each observed change. Recall that the matrix that contains these probabilities, given a starting state (rows), ending state (columns), and branch length <span class="math inline">\(t\)</span>, is given by:</p>

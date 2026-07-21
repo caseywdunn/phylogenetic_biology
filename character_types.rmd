@@ -98,7 +98,7 @@ Measurement theory distinguishes several different scale types (for example, int
 
 The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM)\index{Brownian motion} [@felsenstein1973continuous; @felsenstein1985phylogenies]. In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.
 
-Under BM, the expected change in the trait value is zero. This is not because there is no change under Brownian motion. It is because increases are just as common as decreases. If you run the same BM simulation many times and average the results, the average change across all of them will be zero. Each one, however, can be quite different from the original value and from each other. This is because the variance of the trait value increases linearly with time. The longer two lineages evolve independently, or the faster the change, the more different their trait values are expected to become. 
+Under BM, the expected change in the trait value is zero. This is not because there is no change under Brownian motion. It is because increases are just as common as decreases. If you run the same BM simulation many times and average the results, the average change across all of them will be zero. Each one, however, can be quite different from the original value and from each other (Figure \@ref(fig:char-brownian)). This is because the variance of the trait value increases linearly with time. The longer two lineages evolve independently, or the faster the change, the more different their trait values are expected to become. 
 
 Mathematically, Brownian motion can be written as
 
@@ -121,6 +121,8 @@ One reason BM is widely used is that it leads to a convenient statistical formul
 The BM model is primarily used because it provides a mathematically tractable approximation to trait evolution. However, many biological traits do not actually evolve according to the assumptions of BM and violate the fundamental nature of the measurements being analyzed. For example, BM allows trait values to take any real number, including negative values. Many biological measurements, such as body mass or metabolic rate, are strictly positive. Sometimes these violations have little impact on inference, especially when the observed trait variation is far from biologically impossible values. In other cases, however, they can lead to misleading conclusions if the model poorly reflects the underlying evolutionary processes.
 
 ```{r char-brownian, fig.cap="Multiple Brownian motion trajectories."}
+set.seed(23456)
+
 # Number of trajectories and steps
 n_trajectories = 50
 n_steps = 100

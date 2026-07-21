@@ -105,7 +105,7 @@ ggtree(phy) +
 
 We will start by calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). This isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
 
-```{r inference-internal-states, fig.cap="The same toy tree as above, but with arbitrary internal node states (in boxes)."}
+```{r inference-internal-states, fig.cap="The same toy tree as above, now with arbitrary states added at the internal nodes, so every node has a state (in boxes)."}
 
 ggtree(phy) +
   geom_tiplab(offset=0.2) +
