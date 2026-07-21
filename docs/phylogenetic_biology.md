@@ -198,7 +198,7 @@ With this framework in mind, let's take a look at a sampling of recent phylogene
 
 - [Nextstrain](https://nextstrain.org/sars-cov-2/) provides a frequently updated phylogeny of SARS-CoV-2, with associated data on geography, sampling time, and other factors [@hadfield2018nextstrain]. This has been critical to understanding and monitoring the SARS-CoV-2 pandemic, and intervening to disrupt transmission. They are using observed character data at the tips (virus genome sequences) to estimate topology, branch lengths, and model parameters.
 
-- Myxozoa are enigmatic parasites that live in fish. They have very few morphological traits that show clear homology with other animals. So Sally Chang, Paulyn Cartwright, and colleagues used phylogenetic inference to examine their relationships to other animals, and found strong support for their placement within Cnidaria [@chang2015genomic].
+- Myxozoa are enigmatic parasites that infect fish and invertebrate hosts. They have very few morphological traits that show clear homology with other animals. So Sally Chang, Paulyn Cartwright, and colleagues used phylogenetic inference to examine their relationships to other animals, and found strong support for their placement within Cnidaria [@chang2015genomic].
 
 - My own lab wanted to see if the evolution of gene expression is more rapid after gene duplication than after speciation [@dunn2018pairwise]. We found no evidence for such a difference. We used the results of previous studies to clamp gene phylogenies and gene expression character states at the tips, and estimated ancestral expression states to examine shifts in expression along particular branches.
 
@@ -218,7 +218,7 @@ This is a very exciting time in phylogenetic biology. For many years most studie
 
 Phylogenies represent evolutionary relationships. The only figure in Darwin's *Origin of Species* [@darwin1859] was a phylogeny (Figure \@ref(fig:trees-darwin)), though he didn't call it that.
 
-Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haeckel's tree in the manuscript [@haeckel1897] where he coined the term phylogeny (Figure \@ref(fig:trees-haeckel)).
+Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haeckel's tree (Figure \@ref(fig:trees-haeckel)) [@haeckel1897]. Haeckel had coined the term *phylogeny* decades earlier, in his 1866 *Generelle Morphologie der Organismen* [@haeckel1866].
 
 ![(\#fig:trees-haeckel)Haeckel's hypothesis of the animal phylogeny (Haeckel, 1897), drawn as an actual tree.](figures/haeckel.jpg) 
 
@@ -313,7 +313,7 @@ One of the most important things to keep in mind when interpreting a phylogeny i
 
 The meaning of branch lengths can vary\index{branch length} from tree to tree (Figure \@ref(fig:trees-types)). A phylogeny where branch lengths are scaled to time is known as a chronogram\index{chronogram}. Chronograms of organisms all sampled at the same time will be ultrametric\index{ultrametric tree}, *i.e.*, the tip nodes will be flush. If tips are sampled at different times, for example when including fossils or sampling a rapidly evolving virus at different time points, they will not be ultrametric.
 
-In many cases we don't have the information needed to scale branches to time, which requires fossil calibrations. Most published phylogenies therefore scale the branches according to the expected amount of evolutionary change in the characters under consideration. The longer the branch, the greater the expected change. The rate of evolution usually varies a bit across branches, so phylograms are not usually ultrametric. 
+In many cases we don't have the information needed to scale branches to time, which requires calibration information such as fossils or the sampling dates of tips collected at different time points. Most published phylogenies therefore scale the branches according to the expected amount of evolutionary change in the characters under consideration. The longer the branch, the greater the expected change. The rate of evolution usually varies a bit across branches, so phylograms are not usually ultrametric. 
 
 Sometimes we are only interested in, or only have information about, the topology of the phylogeny. In this case we can draw the branches whatever length we want, and we call the phylogeny a cladogram. Cladograms can also be useful for showing annotations on branches in phylogenies with a wide variation in branch lengths, since there might not be enough room to write labels on very short branches. 
 
@@ -357,7 +357,7 @@ The root could fall at any point in an unrooted phylogeny, either along a branch
 
 Things are a bit different if you root at an existing internal node (Figure \@ref(fig:trees-rooted-abstract)B-C). Because the existing node becomes the root, the number of nodes in the tree remains unchanged. So far so good. But since internal nodes in a bifurcating tree all have three branches connected to them, when an internal node becomes the root the root is a polytomy. This seems like a pain, so why not always root along a branch? There are a few reasons. One is that rooting along a branch requires that we pick a specific point along the branch where the root goes, for example in the middle or somewhere else. That decision can take information that we don't have. Another reason is that the creation and destruction of nodes associated with rooting along branches gets cumbersome and problematic, especially when there are specific data associated with internal nodes.
 
-What information can we use to root a phylogeny? There are a couple of approaches. One is to pick the midpoint\index{rooting!midpoint} -- the point farthest from any tips -- as the root. If evolution proceeded at a perfectly uniform rate this could work well, but in practice rates of evolution are too variable across lineages for this to give a reliable result.
+What information can we use to root a phylogeny? There are a couple of approaches. One is to pick the midpoint\index{rooting!midpoint} -- the middle of the longest path between two tips -- as the root. If evolution proceeded at a perfectly uniform rate this could work well, but in practice rates of evolution are too variable across lineages for this to give a reliable result.
 
 The more common approach to rooting a phylogeny is to use an outgroup\index{rooting!outgroup} (Figure \@ref(fig:trees-rooting)). If the ingroup is the group of organisms\index{ingroup} you are interested in (*e.g.*, mammals), the outgroup is a set of organisms that you strongly believe do not fall within the ingroup. If you place the root anywhere in the outgroup, then the most recent common ancestor of the ingroup will be the root of the ingroup. Rooting this way works better when a larger number of outgroup species are considered, and the outgroup species include the organisms most closely related to the ingroup. Including too few outgroups is one of the most common mistakes in published phylogenies.
 
@@ -838,7 +838,7 @@ Now we need to exponentiate $\mathbf{Q}$ to get $\mathbf{P}(t)$, according to Eq
 ## T 0.1160735 0.21187182 0.08066121 0.5913935
 ```
 
-The sum of each row of $\mathbf{P}(t)$ is 1 for any value of $t$, since our model doesn't create or destroy nucleotides. No matter which of the four nucleotides you start with, you have to end with one of the four nucleotides. This better demonstrates why we had to select diagonal values of the *rate* matrix $\mathbf{Q}$ so that each row in that matrix is 0 -- if we hadn't, then the row sums of $\mathbf{P}(t)$ would not be 1. 
+The sum of each row of $\mathbf{P}(t)$ is 1 for any value of $t$, since our model doesn't create or destroy nucleotides. No matter which of the four nucleotides you start with, you have to end with one of the four nucleotides. This better demonstrates why we had to select diagonal values of the *rate* matrix $\mathbf{Q}$ so that each row in that matrix sums to 0 -- if we hadn't, then the row sums of $\mathbf{P}(t)$ would not be 1. 
 
 Now that we can derive $\mathbf{P}(t)$, let's explore some of its properties. Let's first think about what happens when $t=0$. In this case, there is no time for evolution to occur and the resulting nucleotide should be the same as the starting nucleotide. Indeed, we see this is the case:
 
@@ -1103,7 +1103,7 @@ The sum of the probabilities for each of these different histories for n5-n7 tha
 
 ## Log likelihood
 
-The likelihood of these data on this phylogeny, $0.0058252$, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers have trouble storing them efficiently. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, $ln(p)$. The log likelihood for this phylogeny is $-5.1455597$. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:
+The likelihood of these data on this phylogeny, $0.0058252$, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers cannot represent them accurately, underflowing toward zero. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, $ln(p)$. The log likelihood for this phylogeny is $-5.1455597$. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:
 
 \begin{equation} 
   ln(a)+ln(b) = ln(ab)
@@ -1116,7 +1116,7 @@ We can calculate joint log probabilities as sums of log probabilities for each e
 
 The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We now need to expand this model from a single site to multiple sites within a gene or even across whole genomes.
 
-This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.
+This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the log of the joint probability of observing the data at all sites. This joint probability for all sites will be much smaller than the probability for each individual site.
 
 ## Maximum likelihood\index{maximum likelihood}
 
@@ -1202,7 +1202,7 @@ Multiple strategies above are often used in the same study; they are not exclusi
 
 A transcriptome is the collection of RNA\index{transcriptome} in a cell or collection of cells. Because RNA is transcribed from the genome, sequencing the RNA gives a snapshot of an enriched subset of the genome. Whereas the other enrichment approaches described are implemented by the investigator at the bench, transcriptome sequencing largely relies on a natural process in the living cell (transcription) to enrich for particular genome regions.
 
-In a typical phylogenetic study based on transcriptome data, messenger RNA (mRNA), which encodes the protein coding genes, is isolated. mRNA is then copied to complementary DNA (cDNA) and sequenced. Because many of the same genes are highly expressed across species and tissues, there is considerable overlap between the genes in transcriptome datasets from different samples. Many investigators are interested in protein coding genes for other purposes as well, adding value to the transcriptome data.
+In a typical phylogenetic study based on transcriptome data, messenger RNA (mRNA), which is transcribed from protein-coding genes, is isolated. mRNA is then copied to complementary DNA (cDNA) and sequenced. Because many of the same genes are highly expressed across species and tissues, there is considerable overlap between the genes in transcriptome datasets from different samples. Many investigators are interested in protein coding genes for other purposes as well, adding value to the transcriptome data.
 
 There are a couple of challenges to working with transcriptomes. For one, RNA is much less stable than DNA. It is therefore critical to take considerable care when collecting, storing, and processing tissue for transcriptome studies. Transcriptome sequencing only captures genes that are being expressed, leading to missing data for some genes in some samples. As sequencing costs have fallen, genome sequencing has become a better option than transcriptome sequencing for most phylogenetic projects.
 
@@ -1373,7 +1373,7 @@ And the Bayesian Information Criterion (BIC)\index{Bayesian information criterio
   (\#eq:bic)
 \end{equation}
 
-To apply either of these criteria, they are calculated for each model and the model with the *lowest* value is selected. Adding parameters increases the value, penalizing any increase in likelihood they provide. These criteria have multiple advantages over LRT, including that they can be used to compare non-nested models [@Burnham2002].
+To apply either of these criteria, they are calculated for each model and the model with the *lowest* value is selected. Adding parameters increases the penalty term, offsetting any increase in likelihood they provide. These criteria have multiple advantages over LRT, including that they can be used to compare non-nested models [@Burnham2002].
 
 To decide whether to use LRT, AIC, or BIC model selection criteria, you need to run a model selection criterion selection analysis. Just kidding. To decide which to use, you should apply your knowledge of phylogenetic methods critically. In many cases, these different approaches will lead to very similar decisions about model selection. As an example of a fairly typical approach, the program iqtree runs AIC and BIC analyses through ModelFinder [@kalyaanamoorthy2017], but proceeds under the model selected by BIC unless you explicitly step in to apply a different model. If, on inspection of the analysis results, you find that AIC selects a very different model, it would be prudent to run your analyses under that model as well to see if it leads to differences that are relevant to the questions that motivate your project.
 
@@ -1570,7 +1570,7 @@ Bayes' theorem establishes\index{Bayes' theorem} the following relationships:
   (\#eq:bayes-theorem)
 \end{equation}
 
-$P(H|D)$, read as "the probability of the hypothesis given the data", is the posterior probability of a given hypothesis. It takes into account prior expectations and new insight from the data. This posterior probability is what we are trying to estimate. We have already seen $P(D|H)$, read as "the probability of the data given the hypothesis". This is the likelihood, and from previous chapters we know how to calculate it. $P(H)$ and $P(D)$ are our prior probabilities, our world view before we collected data. $P(H)$ is the prior probability of the hypothesis, without considering the data. $P(D)$ is the prior probability of the data, without considering the hypothesis.
+$P(H|D)$, read as "the probability of the hypothesis given the data", is the posterior probability of a given hypothesis. It takes into account prior expectations and new insight from the data. This posterior probability is what we are trying to estimate. We have already seen $P(D|H)$, read as "the probability of the data given the hypothesis". This is the likelihood, and from previous chapters we know how to calculate it. $P(H)$ and $P(D)$ are our prior probabilities, our world view before we collected data. $P(H)$ is the prior probability of the hypothesis, without considering the data. $P(D)$ is the prior probability of the data, averaged over all hypotheses.
 
 Let's plug in a few numbers to get some intuition for the behavior of Bayes' theorem. First, consider the case where $P(H)=0$, *i.e.*, you assign a prior probability\index{prior probability} of $0$ to the hypothesis. The posterior probability\index{posterior probability}, $P(H|D)$, will then also be $0$. This shows that if you believe ahead of collecting data that the hypothesis is absolutely impossible, no amount of data can change your mind and your updated hypothesis, the posterior, will also be $0$. 
 
@@ -1584,9 +1584,9 @@ To calculate the posterior probability of a phylogenetic hypothesis, we need to 
 
 What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won't.
 
-Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC)\index{Markov chain Monte Carlo (MCMC)} sampling [@metropolis1953; @hastings1970]. MCMC is a widely used method to approximate probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypotheses that are either rejected or accepted based on a specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
+Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC)\index{Markov chain Monte Carlo (MCMC)} sampling [@metropolis1953; @hastings1970]. MCMC is a widely used method to approximate probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypotheses that are either rejected or accepted based on a specially formulated acceptance ratio $R$ and criteria for evaluating it, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
 
-Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate our test statistic as the ratio of the posterior probability of $H^*$ to the posterior probability of $H$:
+Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate this acceptance ratio as the ratio of the posterior probability of $H^*$ to the posterior probability of $H$:
 
 \begin{equation} 
   R = \frac{P(D|H^*)P(H^*)}{P(D)} \frac{P(D)}{P(D|H)P(H)} = \frac{P(D|H^*)P(H^*)}{P(D|H)P(H)}
@@ -1595,12 +1595,14 @@ Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^
 
 Because $P(D)$ doesn't depend on the hypothesis under consideration, it is the same in both posteriors. Because we are considering a ratio of posteriors, it cancels out. We don't need to calculate it to derive $R$.
 
+This form assumes the proposal mechanism is symmetric -- that proposing $H^*$ from $H$ is as probable as the reverse. When it is not, an additional proposal ratio corrects for the asymmetry; we omit it here for simplicity.
+
 The "Markov Chain" in MCMC alludes to the fact that MCMC is a series of repeated events that depend only on the previous step. Each repeated cycle of events, also known as a generation, proceeds as follows:
 
 1. We have hypothesis $H$.
 2. We propose a new hypothesis $H^*$ by modifying $H$.
 3. We calculate $R$ according to Equation \@ref(eq:bayes-mcmc).
-4. If $R>1$, we accept $H^*$. If $R<1$, we accept $H^*$ with probability $R$. Otherwise, we retain $H$.
+4. If $R \geq 1$, we accept $H^*$. Otherwise, we accept $H^*$ with probability $R$, and retain $H$ if it is not accepted.
 5. The result of the step above is added to the posterior sample, and becomes $H$ for the next iteration of the cycle.
 
 MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, with branch frequencies. Unlike bootstraps, though, the frequency of a branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, *i.e.*, the probability of the branch given the data and our priors. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.
@@ -1692,11 +1694,11 @@ Direct analogs of the DNA sequence evolution models are often applied to discret
 
 Ordinal scale types include any kind of ranking, such as position in a social hierarchy [@houle2011measurement, Table 1]. They have an ordering, *i.e.*, some values are larger than others. But there is no statement about the distance between the values. In a pecking order for chickens, $1$ is dominant over $2$ and $2$ over $3$, but that doesn't indicate that there is a similar difference between $1$ and $2$ as there is between $2$ and $3$.
 
-### Interval scale types
+### Discrete ordered characters
 
-Interval scale types include measurements such as the number of digits on a forelimb. They differ from ordinal scale types in that there are uniform distances between the values [@houle2011measurement, Table 1]. Character measurements on an interval scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendage or the number of digits on a vertebrate forelimb.
+Discrete ordered characters are countable traits, such as the number of digits on a forelimb or the number of bristles on an arthropod appendage. Like ordinal characters they have an order, but unlike them the spacing between adjacent values is uniform and meaningful -- the difference between 3 and 4 digits is the same as between 4 and 5. This uniform spacing is the defining feature of an interval scale [@houle2011measurement, Table 1]; because counts also have a true zero, however, they are strictly a ratio (or absolute) scale rather than a true interval scale. For modeling their evolution, what matters is that they are discrete and ordered with uniform steps between adjacent states.
 
-Models for the evolution of interval data can be described with the same language we used for nominal scale types. The rates for changes between non-adjacent values are just set to zero. $5$, for example, will have a nonzero rate of change to $6$ and $4$ and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of $4$ digits.
+Models for the evolution of discrete ordered characters can be described with the same language we used for nominal scale types. The rates for changes between non-adjacent values are just set to zero. $5$, for example, will have a nonzero rate of change to $6$ and $4$ and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of $4$ digits.
 
 Such a rate matrix describing the changes between 0-6 digits would have this form, if the rates were the same between all states:
 
@@ -1871,7 +1873,7 @@ The reconstruction depends on the model. If we had allowed the rate of gains to 
 
 For continuous characters we reconstruct ancestral states under a continuous model of evolution, most often the Brownian motion model introduced in Section \@ref(continuous-data). Recall that under Brownian motion the expected change along a branch is zero, and the variance of the change grows in proportion to the branch length. The observed trait values at the tips of the tree follow a multivariate normal distribution whose covariance structure is set by the shared branch lengths of the tree.
 
-Under Brownian motion the maximum likelihood estimate of the trait value at an internal node has a satisfying intuition. It is a weighted average of the values in the two subtrees descending from the node, where the weights are inversely proportional to the branch lengths (including the variance accumulated deeper in each subtree). A descendant reached by a short branch is a more reliable guide to the ancestor than one reached by a long branch, and so it counts for more in the average. The reconstructed value at the root is a weighted average of the entire tree.
+Under Brownian motion the estimate of the trait value at an internal node has a satisfying intuition. It is a weighted average of the values in the two subtrees descending from the node, where the weights are inversely proportional to the branch lengths (including the variance accumulated deeper in each subtree). A descendant reached by a short branch is a more reliable guide to the ancestor than one reached by a long branch, and so it counts for more in the average. The reconstructed value at the root is a weighted average of the entire tree.
 
 Concretely, the estimate is built up from the tips toward the root by the same kind of pruning we used for the discrete case. Summarize each tip by its observed value and a variance equal to its branch length (in units of the rate $\sigma^2$). At an internal node joining two descendants that carry estimates $\hat{x}_i$ and $\hat{x}_j$ with variances $v_i$ and $v_j$, combine them by inverse-variance weighting,
 
@@ -1959,14 +1961,14 @@ Under Brownian motion, the trait values at the tips of a tree follow a multivari
 
 We can read this expected covariance structure directly off the tree. Consider the small four-tip tree in Figure \@ref(fig:comp-vcv-tree), drawn with its branch lengths.
 
-![(\#fig:comp-vcv-tree)A four-tip tree drawn with its branch lengths; the horizontal axis is distance from the root. The covariance between two tips is the distance from the root to their most recent common ancestor -- the depth of the internal node (gray) at which their lineages join. Sisters A and B join at the deeper node (distance 2), A and C (and B and C) join at the older node (distance 1), and D joins the others only at the root (distance 0). The variance of each tip is its total distance from the root, here 3 for every tip because the tree is ultrametric. These depths are exactly the entries of the covariance matrix in Equation \@ref(eq:comp-vcv).](phylogenetic_biology_files/figure-latex/comp-vcv-tree-1.pdf) 
+![(\#fig:comp-vcv-tree)A four-tip tree drawn with its branch lengths; the horizontal axis is distance from the root. The covariance between two tips is the distance from the root to their most recent common ancestor -- the internal node (gray) at which their lineages join. Sisters A and B join at the more recent node (distance 2), A and C (and B and C) join at the older node (distance 1), and D joins the others only at the root (distance 0). The variance of each tip is its total distance from the root, here 3 for every tip because the tree is ultrametric. These depths are exactly the entries of the covariance matrix in Equation \@ref(eq:comp-vcv).](phylogenetic_biology_files/figure-latex/comp-vcv-tree-1.pdf) 
 
 To turn this tree into a matrix, we take the tips two at a time and measure how much evolutionary history each pair shares. There are two kinds of entry. A *diagonal* entry is the variance of a single tip, and equals its total distance from the root -- the full length of the path from the root out to that tip. An *off-diagonal* entry is the covariance between two different tips, and equals the length of the path they share: the distance from the root to their most recent common ancestor, the node at which their two lineages join.
 
 Working through the tips of Figure \@ref(fig:comp-vcv-tree):
 
 - Every tip sits at distance 3 from the root, so every diagonal entry, the variance, is 3.
-- A and B are sisters. Their lineages join at the deeper internal node, at distance 2 from the root, so the path they share -- and therefore their covariance -- is 2.
+- A and B are sisters. Their lineages join at the more recent internal node, at distance 2 from the root, so the path they share -- and therefore their covariance -- is 2.
 - A and C join further back, at the older internal node at distance 1 from the root, so their covariance is 1. The same holds for B and C.
 - D branches off at the root itself, so it shares no path with A, B, or C, and all of its covariances are 0.
 
@@ -2078,7 +2080,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 21, 2026 at 08:27:15 PM with the following R package versions.
+This book was rendered from the source code on Jul 21, 2026 at 09:05:43 PM with the following R package versions.
 
 
 ```

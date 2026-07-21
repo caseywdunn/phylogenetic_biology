@@ -277,7 +277,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>9.1.1</b> Nominal scale types</a></li>
 <li class="chapter" data-level="9.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>9.1.2</b> Ordinal scale types</a></li>
-<li class="chapter" data-level="9.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#interval-scale-types"><i class="fa fa-check"></i><b>9.1.3</b> Interval scale types</a></li>
+<li class="chapter" data-level="9.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-ordered-characters"><i class="fa fa-check"></i><b>9.1.3</b> Discrete ordered characters</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>9.2</b> Continuous data</a>
 <ul>
@@ -1145,7 +1145,7 @@ We can think of the probabilities of specific changes along each branch as the p
 </div>
 <div id="log-likelihood" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Log likelihood<a href="inferring-phylogenies-from-data.html#log-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The likelihood of these data on this phylogeny, <span class="math inline">\(0.0058252\)</span>, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers have trouble storing them efficiently. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, <span class="math inline">\(ln(p)\)</span>. The log likelihood for this phylogeny is <span class="math inline">\(-5.1455597\)</span>. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:</p>
+<p>The likelihood of these data on this phylogeny, <span class="math inline">\(0.0058252\)</span>, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers cannot represent them accurately, underflowing toward zero. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, <span class="math inline">\(ln(p)\)</span>. The log likelihood for this phylogeny is <span class="math inline">\(-5.1455597\)</span>. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:</p>
 <p><span class="math display" id="eq:logs">\[\begin{equation}
   ln(a)+ln(b) = ln(ab)
   \tag{4.2}
@@ -1155,7 +1155,7 @@ We can think of the probabilities of specific changes along each branch as the p
 <div id="likelihood-for-multiple-sites" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Likelihood for multiple sites<a href="inferring-phylogenies-from-data.html#likelihood-for-multiple-sites" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We now need to expand this model from a single site to multiple sites within a gene or even across whole genomes.</p>
-<p>This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.</p>
+<p>This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the log of the joint probability of observing the data at all sites. This joint probability for all sites will be much smaller than the probability for each individual site.</p>
 </div>
 <div id="maximum-likelihood" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Maximum likelihood<a href="inferring-phylogenies-from-data.html#maximum-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>

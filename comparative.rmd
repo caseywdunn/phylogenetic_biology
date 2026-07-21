@@ -169,7 +169,7 @@ Under Brownian motion, the trait values at the tips of a tree follow a multivari
 
 We can read this expected covariance structure directly off the tree. Consider the small four-tip tree in Figure \@ref(fig:comp-vcv-tree), drawn with its branch lengths.
 
-```{r comp-vcv-tree, echo=FALSE, fig.cap="A four-tip tree drawn with its branch lengths; the horizontal axis is distance from the root. The covariance between two tips is the distance from the root to their most recent common ancestor -- the depth of the internal node (gray) at which their lineages join. Sisters A and B join at the deeper node (distance 2), A and C (and B and C) join at the older node (distance 1), and D joins the others only at the root (distance 0). The variance of each tip is its total distance from the root, here 3 for every tip because the tree is ultrametric. These depths are exactly the entries of the covariance matrix in Equation \\@ref(eq:comp-vcv)."}
+```{r comp-vcv-tree, echo=FALSE, fig.cap="A four-tip tree drawn with its branch lengths; the horizontal axis is distance from the root. The covariance between two tips is the distance from the root to their most recent common ancestor -- the internal node (gray) at which their lineages join. Sisters A and B join at the more recent node (distance 2), A and C (and B and C) join at the older node (distance 1), and D joins the others only at the root (distance 0). The variance of each tip is its total distance from the root, here 3 for every tip because the tree is ultrametric. These depths are exactly the entries of the covariance matrix in Equation \\@ref(eq:comp-vcv)."}
 small = read.tree(text = "(((A:1,B:1):1,C:2):1,D:3);")
 ggtree(small) +
   geom_tiplab(fontface = "italic", offset = 0.08) +
@@ -183,7 +183,7 @@ To turn this tree into a matrix, we take the tips two at a time and measure how 
 Working through the tips of Figure \@ref(fig:comp-vcv-tree):
 
 - Every tip sits at distance 3 from the root, so every diagonal entry, the variance, is 3.
-- A and B are sisters. Their lineages join at the deeper internal node, at distance 2 from the root, so the path they share -- and therefore their covariance -- is 2.
+- A and B are sisters. Their lineages join at the more recent internal node, at distance 2 from the root, so the path they share -- and therefore their covariance -- is 2.
 - A and C join further back, at the older internal node at distance 1 from the root, so their covariance is 1. The same holds for B and C.
 - D branches off at the root itself, so it shares no path with A, B, or C, and all of its covariances are 0.
 

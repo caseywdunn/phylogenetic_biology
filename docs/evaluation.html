@@ -277,7 +277,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>9.1.1</b> Nominal scale types</a></li>
 <li class="chapter" data-level="9.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>9.1.2</b> Ordinal scale types</a></li>
-<li class="chapter" data-level="9.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#interval-scale-types"><i class="fa fa-check"></i><b>9.1.3</b> Interval scale types</a></li>
+<li class="chapter" data-level="9.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-ordered-characters"><i class="fa fa-check"></i><b>9.1.3</b> Discrete ordered characters</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>9.2</b> Continuous data</a>
 <ul>
@@ -412,7 +412,7 @@ Figure 6.1: A hierarchical view of DNA substitution models. The number of degree
   BIC_i = k_iln(n) - 2ln(L_i)
   \tag{6.5}
 \end{equation}\]</span></p>
-<p>To apply either of these criteria, they are calculated for each model and the model with the <em>lowest</em> value is selected. Adding parameters increases the value, penalizing any increase in likelihood they provide. These criteria have multiple advantages over LRT, including that they can be used to compare non-nested models <span class="citation">(<a href="#ref-Burnham2002">Burnham and Anderson 2002</a>)</span>.</p>
+<p>To apply either of these criteria, they are calculated for each model and the model with the <em>lowest</em> value is selected. Adding parameters increases the penalty term, offsetting any increase in likelihood they provide. These criteria have multiple advantages over LRT, including that they can be used to compare non-nested models <span class="citation">(<a href="#ref-Burnham2002">Burnham and Anderson 2002</a>)</span>.</p>
 <p>To decide whether to use LRT, AIC, or BIC model selection criteria, you need to run a model selection criterion selection analysis. Just kidding. To decide which to use, you should apply your knowledge of phylogenetic methods critically. In many cases, these different approaches will lead to very similar decisions about model selection. As an example of a fairly typical approach, the program iqtree runs AIC and BIC analyses through ModelFinder <span class="citation">(<a href="#ref-kalyaanamoorthy2017">Kalyaanamoorthy et al. 2017</a>)</span>, but proceeds under the model selected by BIC unless you explicitly step in to apply a different model. If, on inspection of the analysis results, you find that AIC selects a very different model, it would be prudent to run your analyses under that model as well to see if it leads to differences that are relevant to the questions that motivate your project.</p>
 </div>
 <div id="adding-complexity-to-dna-evolution-models" class="section level3 hasAnchor" number="6.1.3">

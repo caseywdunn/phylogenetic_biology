@@ -25,7 +25,7 @@ Bayes' theorem establishes\index{Bayes' theorem} the following relationships:
   (\#eq:bayes-theorem)
 \end{equation}
 
-$P(H|D)$, read as "the probability of the hypothesis given the data", is the posterior probability of a given hypothesis. It takes into account prior expectations and new insight from the data. This posterior probability is what we are trying to estimate. We have already seen $P(D|H)$, read as "the probability of the data given the hypothesis". This is the likelihood, and from previous chapters we know how to calculate it. $P(H)$ and $P(D)$ are our prior probabilities, our world view before we collected data. $P(H)$ is the prior probability of the hypothesis, without considering the data. $P(D)$ is the prior probability of the data, without considering the hypothesis.
+$P(H|D)$, read as "the probability of the hypothesis given the data", is the posterior probability of a given hypothesis. It takes into account prior expectations and new insight from the data. This posterior probability is what we are trying to estimate. We have already seen $P(D|H)$, read as "the probability of the data given the hypothesis". This is the likelihood, and from previous chapters we know how to calculate it. $P(H)$ and $P(D)$ are our prior probabilities, our world view before we collected data. $P(H)$ is the prior probability of the hypothesis, without considering the data. $P(D)$ is the prior probability of the data, averaged over all hypotheses.
 
 Let's plug in a few numbers to get some intuition for the behavior of Bayes' theorem. First, consider the case where $P(H)=0$, *i.e.*, you assign a prior probability\index{prior probability} of $0$ to the hypothesis. The posterior probability\index{posterior probability}, $P(H|D)$, will then also be $0$. This shows that if you believe ahead of collecting data that the hypothesis is absolutely impossible, no amount of data can change your mind and your updated hypothesis, the posterior, will also be $0$. 
 
@@ -39,9 +39,9 @@ To calculate the posterior probability of a phylogenetic hypothesis, we need to 
 
 What then, about $P(D)$? This is our prior on the data itself. Calculating it requires integrating the probability of generating these particular character data (*e.g.*, nucleotide sequences observed at the tips) across all possible topologies and branch lengths. That would be prohibitively computationally expensive to actually do. So we won't.
 
-Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC)\index{Markov chain Monte Carlo (MCMC)} sampling [@metropolis1953; @hastings1970]. MCMC is a widely used method to approximate probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypotheses that are either rejected or accepted based on a specially formulated test statistic $R$ and criteria for evaluating this statistic, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
+Instead, we will forego calculating $P(D)$ by approximating the posterior with Markov Chain Monte Carlo (MCMC)\index{Markov chain Monte Carlo (MCMC)} sampling [@metropolis1953; @hastings1970]. MCMC is a widely used method to approximate probability distributions that are too complex to calculate analytically. MCMC is implemented by proposing a series of hypotheses that are either rejected or accepted based on a specially formulated acceptance ratio $R$ and criteria for evaluating it, such that the accepted hypotheses form a sample that is drawn from the distribution of interest. In our case, that distribution of interest is the posterior distribution.
 
-Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate our test statistic as the ratio of the posterior probability of $H^*$ to the posterior probability of $H$:
+Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^*$. We calculate this acceptance ratio as the ratio of the posterior probability of $H^*$ to the posterior probability of $H$:
 
 \begin{equation} 
   R = \frac{P(D|H^*)P(H^*)}{P(D)} \frac{P(D)}{P(D|H)P(H)} = \frac{P(D|H^*)P(H^*)}{P(D|H)P(H)}
@@ -50,12 +50,14 @@ Consider the current hypothesis to be $H$, and the newly proposed hypothesis $H^
 
 Because $P(D)$ doesn't depend on the hypothesis under consideration, it is the same in both posteriors. Because we are considering a ratio of posteriors, it cancels out. We don't need to calculate it to derive $R$.
 
+This form assumes the proposal mechanism is symmetric -- that proposing $H^*$ from $H$ is as probable as the reverse. When it is not, an additional proposal ratio corrects for the asymmetry; we omit it here for simplicity.
+
 The "Markov Chain" in MCMC alludes to the fact that MCMC is a series of repeated events that depend only on the previous step. Each repeated cycle of events, also known as a generation, proceeds as follows:
 
 1. We have hypothesis $H$.
 2. We propose a new hypothesis $H^*$ by modifying $H$.
 3. We calculate $R$ according to Equation \@ref(eq:bayes-mcmc).
-4. If $R>1$, we accept $H^*$. If $R<1$, we accept $H^*$ with probability $R$. Otherwise, we retain $H$.
+4. If $R \geq 1$, we accept $H^*$. Otherwise, we accept $H^*$ with probability $R$, and retain $H$ if it is not accepted.
 5. The result of the step above is added to the posterior sample, and becomes $H$ for the next iteration of the cycle.
 
 MCMC produces a sample of model parameters and topologies with branch lengths. This sample is an approximation of the posterior distribution of these entities. We can summarize the topologies in this posterior sample in the same way we did for bootstraps, with branch frequencies. Unlike bootstraps, though, the frequency of a branch in this distribution has a clear statistical interpretation. It is an approximation of the posterior probability of that branch, *i.e.*, the probability of the branch given the data and our priors. The branch lengths and model parameters form continuous probability distributions. We can summarize these in a variety of ways, for example by taking the mean for each.

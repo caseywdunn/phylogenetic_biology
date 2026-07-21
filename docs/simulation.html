@@ -277,7 +277,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="9.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>9.1.1</b> Nominal scale types</a></li>
 <li class="chapter" data-level="9.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>9.1.2</b> Ordinal scale types</a></li>
-<li class="chapter" data-level="9.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#interval-scale-types"><i class="fa fa-check"></i><b>9.1.3</b> Interval scale types</a></li>
+<li class="chapter" data-level="9.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-ordered-characters"><i class="fa fa-check"></i><b>9.1.3</b> Discrete ordered characters</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>9.2</b> Continuous data</a>
 <ul>
@@ -636,7 +636,7 @@ notation to computational representations, since we are doing more calculations.
 ## C 0.1160735 0.49837662 0.08066121 0.3048887
 ## G 0.3048887 0.08066121 0.49837662 0.1160735
 ## T 0.1160735 0.21187182 0.08066121 0.5913935</code></pre>
-<p>The sum of each row of <span class="math inline">\(\mathbf{P}(t)\)</span> is 1 for any value of <span class="math inline">\(t\)</span>, since our model doesn’t create or destroy nucleotides. No matter which of the four nucleotides you start with, you have to end with one of the four nucleotides. This better demonstrates why we had to select diagonal values of the <em>rate</em> matrix <span class="math inline">\(\mathbf{Q}\)</span> so that each row in that matrix is 0 – if we hadn’t, then the row sums of <span class="math inline">\(\mathbf{P}(t)\)</span> would not be 1.</p>
+<p>The sum of each row of <span class="math inline">\(\mathbf{P}(t)\)</span> is 1 for any value of <span class="math inline">\(t\)</span>, since our model doesn’t create or destroy nucleotides. No matter which of the four nucleotides you start with, you have to end with one of the four nucleotides. This better demonstrates why we had to select diagonal values of the <em>rate</em> matrix <span class="math inline">\(\mathbf{Q}\)</span> so that each row in that matrix sums to 0 – if we hadn’t, then the row sums of <span class="math inline">\(\mathbf{P}(t)\)</span> would not be 1.</p>
 <p>Now that we can derive <span class="math inline">\(\mathbf{P}(t)\)</span>, let’s explore some of its properties. Let’s first think about what happens when <span class="math inline">\(t=0\)</span>. In this case, there is no time for evolution to occur and the resulting nucleotide should be the same as the starting nucleotide. Indeed, we see this is the case:</p>
 <pre><code>##   A C G T
 ## A 1 0 0 0
