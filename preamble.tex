@@ -2,6 +2,13 @@
 \usepackage{float}
 \usepackage{afterpage}
 
+% The bibliography style (plainnat, set via biblio-style) prints DOIs with a
+% \doi{...} command. The doi package defines it to typeset the DOI as a clickable
+% link and, crucially, reads its argument with URL catcodes so special characters
+% in DOIs (e.g. the underscore in 10.1007/978-3-662-43550-2_5) do not break the
+% build the way an ordinary macro argument would.
+\usepackage{doi}
+
 % Back-of-book index. \index{...} markers are placed inline in the chapter
 % source (dropped silently in the HTML build, typeset by makeindex in the PDF).
 % The index itself is emitted by \printindex in after_body.tex.

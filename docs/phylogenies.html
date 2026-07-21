@@ -404,9 +404,9 @@ is older than the node on the other end of the branch. We therefore can refer to
 <p>Here we will work with some mammal phylogenies, mostly because their silhouette icons are so recognizable and because there are extensive phylogenies available for this group <span class="citation">(<a href="#ref-upham2019">Upham et al. 2019</a>)</span>.</p>
 <p>You will rarely see a phylogeny depicted as in Figure <a href="phylogenies.html#fig:trees-graph-tree">2.4</a>, with a circle for every node. It gets too cluttered. Instead, it is simpler to draw just the branches (Figure <a href="phylogenies.html#fig:trees-mammal">2.5</a>), with the nodes implied at the ends of branches.</p>
 <div class="figure"><span style="display:block;" id="fig:trees-mammal"></span>
-<img src="phylogenetic_biology_files/figure-html/trees-mammal-1.png" alt="Phylogeny of some mammals. Topology and branch lengths from http://vertlife.org.  The organism silhouettes are from http://phylopic.org/. Note that node circles are not drawn, instead nodes are implied at ends of branches." width="2100" />
+<img src="phylogenetic_biology_files/figure-html/trees-mammal-1.png" alt="Phylogeny of some mammals. Topology and branch lengths from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. Note that node circles are not drawn; instead, nodes are implied at ends of branches." width="2100" />
 <p class="caption">
-Figure 2.5: Phylogeny of some mammals. Topology and branch lengths from <a href="http://vertlife.org" class="uri">http://vertlife.org</a>. The organism silhouettes are from <a href="http://phylopic.org/" class="uri">http://phylopic.org/</a>. Note that node circles are not drawn, instead nodes are implied at ends of branches.
+Figure 2.5: Phylogeny of some mammals. Topology and branch lengths from <a href="http://vertlife.org" class="uri">http://vertlife.org</a>. The organism silhouettes are from <a href="http://phylopic.org/" class="uri">http://phylopic.org/</a>. Note that node circles are not drawn; instead, nodes are implied at ends of branches.
 </p>
 </div>
 <p>There is considerable variation in how the same phylogeny can be drawn (Figure <a href="phylogenies.html#fig:trees-layouts">2.6</a>). This gives some flexibility in deciding what presentation is best for your particular goals, but can also create confusion because two images that look very different may in fact be of the exact same phylogeny.</p>
@@ -427,7 +427,7 @@ Figure 2.6: The same tree as above, laid out in several different ways.
 <li><p>There are <span class="math inline">\(n-1\)</span> internal nodes. For example, Figure <a href="phylogenies.html#fig:trees-graph-tree">2.4</a> shows a phylogeny with 4 tip nodes (labeled 1-4) and 3 internal nodes (labeled 5-7). The total number of nodes (tip nodes and internal nodes) is therefore <span class="math inline">\(2n-1\)</span>.</p></li>
 <li><p>Each tip node has a single branch, which connects it to its parent node.</p></li>
 <li><p>The root node, which is a special internal node that is older than all other nodes, has no parent branch, so it has only two branches. These connect it to its immediate descendant nodes (its children).</p></li>
-<li><p>All internal nodes in the tree other than the root have three branches - one connected to a parent node, and two connected to child nodes.</p></li>
+<li><p>All internal nodes in the tree other than the root have three branches – one connected to a parent node, and two connected to child nodes.</p></li>
 <li><p>Since every branch in the tree has a single child node, and each node in the tree except for the root has a parent branch, the total number of branches in the tree is <span class="math inline">\(2n-2\)</span>.</p></li>
 </ul>
 <p>The function for the number of possible rooted phylogenies for <span class="math inline">\(n\)</span> tips is:</p>
@@ -491,9 +491,9 @@ Figure 2.10: (A) The fully resolved mammal tree used in other figures. (B-C) Dif
 <p>Even when we don’t know where the root of a phylogeny is, we often want to talk about other aspects of the tree, such as the topology and branch lengths. This means we need to consider how to work with unrooted phylogenies.</p>
 <p>There are some basic things we can’t take for granted in an unrooted phylogeny. We don’t, for example, know which way time goes along the branches. We don’t know which internal nodes are child nodes and which are parent nodes. We don’t know which of the branches attached to an internal node connect to older nodes and which to younger nodes.</p>
 <div class="figure"><span style="display:block;" id="fig:trees-rooted-abstract"></span>
-<img src="phylogenetic_biology_files/figure-html/trees-rooted-abstract-1.png" alt="These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray branch (D). Each of these elements are in the exact same topological positions in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three branches attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray branch, a new unrooted node is added along the branch. This new node is bifurcating." width="2100" />
+<img src="phylogenetic_biology_files/figure-html/trees-rooted-abstract-1.png" alt="These four cladograms have the same tips and same topology; only the layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray branch (D). Each of these elements is in the exact same topological position in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three branches attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray branch, a new unrooted node is added along the branch. This new node is bifurcating." width="2100" />
 <p class="caption">
-Figure 2.11: These four cladograms have the same tips and same topology, only their layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray branch (D). Each of these elements are in the exact same topological positions in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three branches attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray branch, a new unrooted node is added along the branch. This new node is bifurcating.
+Figure 2.11: These four cladograms have the same tips and same topology; only the layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray branch (D). Each of these elements is in the exact same topological position in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three branches attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray branch, a new unrooted node is added along the branch. This new node is bifurcating.
 </p>
 </div>
 <p>The root could fall at any point in an unrooted phylogeny, either along a branch or right at a node. You can think of rooting a phylogeny as grabbing the point that you think is the root and dragging it until all the branches point away from it (Figure <a href="phylogenies.html#fig:trees-rooted-abstract">2.11</a>B-D). If you grab at some point along a branch (Figure <a href="phylogenies.html#fig:trees-rooted-abstract">2.11</a>D), this creates a new node that is the root. This new root node has two branches connecting it to descendants (these two branches arise by splitting the single branch along which the root was placed). Since it has no branch connecting it to a parent, it differs from other internal nodes in having only two branches connected to it (instead of three, or more in the case of polytomies). The end result of rooting along a branch is that you add a node to the phylogeny and the root is resolved (not a polytomy).</p>
@@ -600,7 +600,7 @@ made using similar code.</p>
 <h2><span class="header-section-number">2.11</span> Additional reading<a href="phylogenies.html#additional-reading" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>I used <code>ggtree</code> <span class="citation">(<a href="#ref-R-ggtree">Yu et al. 2026</a>)</span> to draw the trees in this chapter. If you are interested in learning more about these tools, see:</p>
 <ul>
-<li><p>The ggtree book <span class="citation">(<a href="#ref-yu2023">Yu 2023</a>)</span></p></li>
+<li><p>The ggtree book <span class="citation">(<a href="#ref-yu2023">Yu 2022</a>)</span></p></li>
 <li><p>ggtree vignettes - <a href="https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html" class="uri">https://bioconductor.statistik.tu-dortmund.de/packages/3.1/bioc/vignettes/ggtree/inst/doc/ggtree.html</a></p></li>
 </ul>
 
@@ -615,7 +615,7 @@ Baum, David A., and Stacey D. Smith. 2012. <em>Tree Thinking: An Introduction to
 Darwin, Charles. 1859. <em>The Origin of Species by Means of Natural Selection: Or, the Preservation of Favored Races in the Struggle for Life</em>.
 </div>
 <div id="ref-deQueiroz2020" class="csl-entry">
-<span class="nocase">deQueiroz, Kevin, and Philip D Cantino</span>. 2020. <em>International Code of Phylogenetic Nomenclature (PhyloCode): A Phylogenetic Code of Biological Nomenclature</em>. CRC Press.
+<span class="nocase">deQueiroz, Kevin, and Philip D Cantino</span>. 2020. <em>International Code of Phylogenetic Nomenclature (PhyloCode): A Phylogenetic Code of Biological Nomenclature</em>. CRC Press. <a href="https://doi.org/10.1201/9780429446320">https://doi.org/10.1201/9780429446320</a>.
 </div>
 <div id="ref-haeckel1866" class="csl-entry">
 Haeckel, Ernst. 1866. <em>Generelle Morphologie Der Organismen</em>. Georg Reimer.
@@ -639,7 +639,7 @@ Upham, Nathan S, Jacob A Esselstyn, and Walter Jetz. 2019. <span>“Inferring th
 West, Douglas B. 2001. <em>Introduction to Graph Theory</em>. 2nd ed. Prentice Hall.
 </div>
 <div id="ref-yu2023" class="csl-entry">
-Yu, Guangchuang. 2023. <em>Data Integration, Manipulation and Visualization of Phylogenetic Trees</em>. Chapman; Hall/CRC.
+Yu, Guangchuang. 2022. <em>Data Integration, Manipulation and Visualization of Phylogenetic Trees</em>. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9781003279242">https://doi.org/10.1201/9781003279242</a>.
 </div>
 <div id="ref-R-ggtree" class="csl-entry">
 Yu, Guangchuang, Tommy Tsan-Yuk Lam, and Shuangbin Xu. 2026. <em>Ggtree: An r Package for Visualization of Tree and Annotation Data</em>. <a href="https://doi.org/10.18129/B9.bioc.ggtree">https://doi.org/10.18129/B9.bioc.ggtree</a>.
