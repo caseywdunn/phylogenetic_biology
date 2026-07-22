@@ -81,6 +81,21 @@
   \renewcommand{\headrulewidth}{0pt}%
 }
 
+% Truly-blank versos. The book class is openright, so every \chapter -- and
+% \tableofcontents -- issues \cleardoublepage, which inserts a blank verso
+% whenever the preceding matter ends on a recto. The default \cleardoublepage
+% leaves that inserted page in the active (fancy) page style, so it keeps a
+% running head and folio. Redefine it to stamp the skipped verso empty: no
+% header, no page number (the page is still counted, just not printed). This
+% governs both the front-matter versos and every chapter-ending verso.
+\makeatletter
+\renewcommand{\cleardoublepage}{%
+  \clearpage
+  \ifodd\c@page\else
+    \null\thispagestyle{empty}\newpage
+  \fi}
+\makeatother
+
 % Widow and orphan control.
 % A "widow" is the last line of a paragraph stranded at the top of a page; an
 % "orphan" (club line) is the first line of a paragraph stranded at the bottom.

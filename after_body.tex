@@ -8,11 +8,13 @@
 \addcontentsline{toc}{chapter}{Index}
 \printindex
 
+% Parity only -- no forced trailing blanks. End the book cleanly on the last
+% index page, then add a single empty-styled blank ONLY if that page is a recto,
+% so the interior always has an even page count. Delivering an even count means
+% Ingram has no parity gap of its own to fill, which avoids stacking a
+% distributor blank on top of ours. Confirm the exact requirement (even count,
+% barcode placement) against Ingram's current file specs before upload.
 \clearpage
-\ifodd\value{page}
-  \thispagestyle{empty}
-  \mbox{}
-  \clearpage
+\ifodd\value{page}\else
+  \null\thispagestyle{empty}\clearpage
 \fi
-\thispagestyle{empty}
-\mbox{}

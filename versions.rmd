@@ -1,8 +1,43 @@
 # Software versions
 
-This book was rendered from the source code on `r format(Sys.time(), "%b %d, %Y at %X")` with the following R package versions.
+```{r book_provenance, echo=FALSE}
+# Book version (from the YAML metadata) and the last git commit of the source
+# tree the PDF was built from. The git lookup falls back to "unknown" if the
+# build happens outside a git repository (e.g. from a release source tarball).
+book_version <- rmarkdown::metadata$version
+git_field <- function(fmt) {
+  out <- tryCatch(
+    suppressWarnings(system2("git", c("log", "-1", "--date=short", paste0("--format=", fmt)),
+                             stdout = TRUE, stderr = FALSE)),
+    error = function(e) character(0))
+  if (length(out) == 0 || !nzchar(out[1])) NA_character_ else out[1]
+}
+git_hash <- git_field("%h")
+git_date <- git_field("%cd")
+git_commit <- if (is.na(git_hash)) {
+  "unknown"
+} else if (is.na(git_date)) {
+  git_hash
+} else {
+  paste0(git_hash, " (", git_date, ")")
+}
+```
+
+This book, version `r book_version`, was rendered from the source code on `r format(Sys.time(), "%b %d, %Y at %X")`, at git commit `r git_commit`, with the following R package versions.
 
 ```{r session_summary, echo=FALSE, comment=NA}
-  options(width = 60)
-	sessionInfo()
+  # sessionInfo() prints the BLAS/LAPACK library paths with cat(), so those
+  # lines ignore options(width) and can run past the right trim edge in the
+  # PDF (the LAPACK path is a single unbreakable token, so word wrapping will
+  # not split it). Hard-wrap every output line to the code-column width so no
+  # line is clipped, whatever the build machine's library paths happen to be.
+  code_width <- 60
+  options(width = code_width)
+  info <- capture.output(sessionInfo())
+  wrapped <- unlist(lapply(info, function(line) {
+    if (nchar(line) <= code_width) return(line)
+    starts <- seq(1, nchar(line), by = code_width)
+    substring(line, starts, pmin(starts + code_width - 1, nchar(line)))
+  }))
+  cat(wrapped, sep = "\n")
 ```

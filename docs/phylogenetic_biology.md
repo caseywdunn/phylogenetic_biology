@@ -32,6 +32,8 @@ always_allow_html: true
 
 # Preface {-}
 
+\markboth{Preface}{Preface}
+
 
 
 ## Approach {-}
@@ -2080,7 +2082,9 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 22, 2026 at 02:15:21 PM with the following R package versions.
+
+
+This book, version 1.0.0, was rendered from the source code on Jul 22, 2026 at 03:03:29 PM, at git commit 28bd874 (2026-07-22), with the following R package versions.
 
 
 ```
@@ -2089,8 +2093,10 @@ Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 24.04.3 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.s
+o.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenbl
+asp-r0.3.26.so;  LAPACK version 3.12.0
 
 locale:
  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
