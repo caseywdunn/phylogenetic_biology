@@ -141,7 +141,7 @@ df_brownian = data.frame(time = rep(time_points, n_trajectories),
 
 # Plot all trajectories with alpha = 0.3
 p_brownian = ggplot(data = df_brownian, aes(x = time, y = position, group = trajectory)) +
-  geom_line(color = "gray", alpha = 0.3) +
+  geom_line(color = "gray30", alpha = 0.5) +
   ylab("Trait value") + 
   theme_classic()
 

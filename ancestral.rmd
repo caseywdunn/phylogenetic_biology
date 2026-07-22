@@ -69,10 +69,15 @@ x = fastBM(phy_c, sig2 = 1)
 obj = contMap(phy_c, x, plot = FALSE)
 
 # Recolor the map as a grayscale ramp (light = low, dark = high) so the
-# figure reads correctly in black-and-white print.
-obj = setMap(obj, colors = c("gray90", "gray10"))
+# figure reads correctly in black-and-white print. The light end is kept
+# dark enough (gray75, not gray90) that pale branches survive final trim.
+obj = setMap(obj, colors = c("gray75", "gray10"))
 
-plot(obj, lwd = 3, fsize = 0.7, outline = FALSE, legend = FALSE)
+# Extend the horizontal limit so the larger tip labels have room to the
+# right of the tips, and add an offset so labels do not touch the tips.
+h = max(nodeHeights(obj$tree))
+plot(obj, lwd = 3, fsize = 0.9, offset = 0.5, outline = FALSE,
+     legend = FALSE, xlim = c(0, h * 1.35))
 ```
 
 Figure \@ref(fig:ancestral-continuous) shows a continuous reconstruction, with the estimated trait value mapped as a grayscale gradient along the branches of the tree. Because the reconstruction at each node is an average of its descendants, the reconstructed values are smoother and less extreme than the tip values. Deep nodes in particular are pulled toward the middle of the observed range. This is a direct consequence of the model. Brownian motion has no memory of direction and no tendency toward any particular value, so in the absence of information the best guess for an ancestor is the average of its descendants.

@@ -351,7 +351,7 @@ Even when we don't know where the root of a phylogeny is, we often want to talk 
 
 There are some basic things we can't take for granted in an unrooted phylogeny. We don't, for example, know which way time goes along the branches. We don't know which internal nodes are child nodes and which are parent nodes. We don't know which of the branches attached to an internal node connect to older nodes and which to younger nodes.
 
-![(\#fig:trees-rooted-abstract)These four cladograms have the same tips and same topology; only the layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray branch (D). Each of these elements is in the exact same topological position in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three branches attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray branch, a new unrooted node is added along the branch. This new node is bifurcating.](phylogenetic_biology_files/figure-latex/trees-rooted-abstract-1.pdf) 
+![(\#fig:trees-rooted-abstract)These four cladograms have the same tips and same topology; only the layout differs. (A) The first layout is unrooted. The other layouts are rooted on the black node (B), gray node (C), and gray branch (D). Each of these elements is in the exact same topological position in all trees. When the tree is rooted on the black or gray nodes, the base of the tree is a polytomy since these nodes have three branches attached to them. No nodes are added or removed when rooting on a node. When rooting on the gray branch, a new node is added along the branch. This new node is bifurcating.](phylogenetic_biology_files/figure-latex/trees-rooted-abstract-1.pdf) 
 
 The root could fall at any point in an unrooted phylogeny, either along a branch or right at a node. You can think of rooting a phylogeny as grabbing the point that you think is the root and dragging it until all the branches point away from it (Figure \@ref(fig:trees-rooted-abstract)B-D). If you grab at some point along a branch (Figure \@ref(fig:trees-rooted-abstract)D), this creates a new node that is the root. This new root node has two branches connecting it to descendants (these two branches arise by splitting the single branch along which the root was placed). Since it has no branch connecting it to a parent, it differs from other internal nodes in having only two branches connected to it (instead of three, or more in the case of polytomies). The end result of rooting along a branch is that you add a node to the phylogeny and the root is resolved (not a polytomy).
 
@@ -1272,7 +1272,7 @@ Once you have collected homologous sequences for one or more genome regions acro
 
 The output of multiple sequence alignment is a matrix. Each row is a taxon that will correspond to a tip in the phylogeny. Each column is a single nucleotide site that is hypothesized to be homologous across taxa. There are multiple file formats that are used to store aligned sequences, including FASTA, NEXUS [@maddison1997nexus], and PHYLIP.
 
-## Combining information across multiple genome regions
+## Combining information across genes
 
 Sometimes when we build phylogenies from genomic data, we are interested in the specific evolutionary history of the genome regions themselves. This is the case, for example, when looking at gene family evolution. Often, though, we are using the evolutionary history of the genome regions as a proxy for the evolutionary history of the organisms, such as when we are asking questions with DNA data about how species are related to each other. There are a variety of conditions, though, under which different genome regions can have genuinely different evolutionary histories from each other, and some of these histories deviate from the evolutionary history of the taxa as a whole [@maddison1997gene]. These differences are not errors; they are the expected result of real biological processes, including incomplete lineage sorting, gene duplication and loss, and horizontal transfer. These processes, and the methods that address them, are the subject of Chapter \@ref(gene-species-trees).
 
@@ -2080,7 +2080,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 # Software versions
 
-This book was rendered from the source code on Jul 22, 2026 at 01:49:27 PM with the following R package versions.
+This book was rendered from the source code on Jul 22, 2026 at 02:15:21 PM with the following R package versions.
 
 
 ```

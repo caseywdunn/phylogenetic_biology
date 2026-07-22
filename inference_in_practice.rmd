@@ -133,7 +133,7 @@ Once you have collected homologous sequences for one or more genome regions acro
 
 The output of multiple sequence alignment is a matrix. Each row is a taxon that will correspond to a tip in the phylogeny. Each column is a single nucleotide site that is hypothesized to be homologous across taxa. There are multiple file formats that are used to store aligned sequences, including FASTA, NEXUS [@maddison1997nexus], and PHYLIP.
 
-## Combining information across multiple genome regions
+## Combining information across genes
 
 Sometimes when we build phylogenies from genomic data, we are interested in the specific evolutionary history of the genome regions themselves. This is the case, for example, when looking at gene family evolution. Often, though, we are using the evolutionary history of the genome regions as a proxy for the evolutionary history of the organisms, such as when we are asking questions with DNA data about how species are related to each other. There are a variety of conditions, though, under which different genome regions can have genuinely different evolutionary histories from each other, and some of these histories deviate from the evolutionary history of the taxa as a whole [@maddison1997gene]. These differences are not errors; they are the expected result of real biological processes, including incomplete lineage sorting, gene duplication and loss, and horizontal transfer. These processes, and the methods that address them, are the subject of Chapter \@ref(gene-species-trees).
 
