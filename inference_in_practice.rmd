@@ -4,7 +4,7 @@ In the last chapter we examined the mathematical and statistical underpinnings o
 
 ## Your question
 
-The first step to an analysis is to clearly define your question. There will be many decisions to make along the way, and a clear question will provide an explicit benchmark for working through these decisions -- which decision is best for the question at hand? If you have a vague question it will be much harder to decide which steps are best, and many decisions about trade-offs will essentially be arbitrary.
+The first step to an analysis is to clearly define your question. There will be many decisions to make along the way, and a clear question will provide an explicit benchmark for working through these decisions---which decision is best for the question at hand? If you have a vague question it will be much harder to decide which steps are best, and many decisions about trade-offs will essentially be arbitrary.
 
 ## Taxon sampling
 

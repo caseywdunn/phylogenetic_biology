@@ -1,6 +1,6 @@
 # Additional character types
 
-So far we have considered a single type of character data -- DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies. These include morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.
+So far we have considered a single type of character data---DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies. These include morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.
 
 We can group character types based on shared features. Some data, such as the nucleotides of DNA, are discrete unordered values from a finite set $\{A, C, G, T\}$ where the elements have no inherent ordering (*e.g.*, $C$ is not greater than $A$, or less than $T$). Others have continuous values, such as mass or length, that fall in a particular order on the real number line ($2.5$ is less than $3.2$). Still others, such as the number of bristles on a leg segment, have countable values represented with integers. These values are both discrete (there are no integers between $3$ and $4$) and ordered ($3$ is less than $4$). If we consider these different character types, it is clear not only that we measure and record them differently, but that the measurements themselves have different properties requiring different analysis methods. We could not, for example, construct a matrix like Equation \@ref(eq:jc69) with rows and columns for every possible length in millimeters for flower petals.
 
@@ -47,7 +47,7 @@ There are many types of organism measurements, and therefore state spaces and ch
 
 #### DNA nucleotides
 
-Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides -- $\{A, C, G, T\}$. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states. They are unordered because changes don't have to occur in a specific order; any state can change to any other state directly. In measurement theory terms, discrete unordered character types correspond to a nominal scale type.
+Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides---$\{A, C, G, T\}$. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states. They are unordered because changes don't have to occur in a specific order; any state can change to any other state directly. In measurement theory terms, discrete unordered character types correspond to a nominal scale type.
 
 #### Amino acids
 
@@ -69,7 +69,7 @@ Ordinal scale types include any kind of ranking, such as position in a social hi
 
 ### Discrete ordered characters
 
-Discrete ordered characters are countable traits, such as the number of digits on a forelimb or the number of bristles on an arthropod appendage. Like ordinal characters they have an order, but unlike them the spacing between adjacent values is uniform and meaningful -- the difference between 3 and 4 digits is the same as between 4 and 5. This uniform spacing is the defining feature of an interval scale [@houle2011measurement, Table 1]; because counts also have a true zero, however, they are strictly a ratio (or absolute) scale rather than a true interval scale. For modeling their evolution, what matters is that they are discrete and ordered with uniform steps between adjacent states.
+Discrete ordered characters are countable traits, such as the number of digits on a forelimb or the number of bristles on an arthropod appendage. Like ordinal characters they have an order, but unlike them the spacing between adjacent values is uniform and meaningful---the difference between 3 and 4 digits is the same as between 4 and 5. This uniform spacing is the defining feature of an interval scale [@houle2011measurement, Table 1]; because counts also have a true zero, however, they are strictly a ratio (or absolute) scale rather than a true interval scale. For modeling their evolution, what matters is that they are discrete and ordered with uniform steps between adjacent states.
 
 Models for the evolution of discrete ordered characters can be described with the same language we used for nominal scale types. The rates for changes between non-adjacent values are just set to zero. $5$, for example, will have a nonzero rate of change to $6$ and $4$ and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of $4$ digits.
 

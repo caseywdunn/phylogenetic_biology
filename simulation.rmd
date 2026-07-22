@@ -28,7 +28,7 @@ are useful", a common aphorism expanded from a quote by @box1976science.
 The goal of a model isn't to be "right" in the sense of being a perfect explanation of 
 data. Real data are far too complex for any model to do this. Instead, the most useful models strike a trade-off between simplicity and adequacy. They are 
 as simple as possible, while adequately describing the phenomenon of interest. Adequacy is often 
-in the eye of the beholder -- one scientist will be perfectly happy with a model that makes reasonable 
+in the eye of the beholder---one scientist will be perfectly happy with a model that makes reasonable 
 rough approximations of a system, while another scientist may be interested in second- and third-order effects
 for which more complexity is needed for adequate explanation.
 
@@ -97,7 +97,7 @@ When DNA is replicated, the appropriate nucleotide is usually incorporated. Some
 
 Not all replacement events will result in an apparent change. Sometimes the appropriate nucleotide is selected by chance, even though it was picked at random. If, for example, the appropriate nucleotide was an A, under this model $1/4$ of the time that a replacement event occurs, an A is selected by chance and there is no apparent change. In such a case, there has not been a substitution, just a replacement in kind. If the A is replaced with any of the other three nucleotides we say there has been a substitution. Because three of the four possible outcomes of a replacement event result in a substitution, the substitution rate is $(3/4) \mu$. Because some events result in no apparent change, substitutions are only a subset of events and the substitution rate is *lower* than the replacement rate.
 
-It might seem a bit odd to consider replacement events that don't result in substitutions, but this follows naturally from a central feature we specified for the model -- the new nucleotide doesn't depend in any way on what nucleotide was there before. If we had a process where replacements always resulted in substitutions, then excluding the replacement-in-kind events would require knowing which nucleotide should be placed so that we *don't* select it.
+It might seem a bit odd to consider replacement events that don't result in substitutions, but this follows naturally from a central feature we specified for the model---the new nucleotide doesn't depend in any way on what nucleotide was there before. If we had a process where replacements always resulted in substitutions, then excluding the replacement-in-kind events would require knowing which nucleotide should be placed so that we *don't* select it.
 
 ### Expected amount of change
 
@@ -151,9 +151,9 @@ knitr::include_graphics("figures/Fig_cnidaria.png")
 
 ### Expected end state
 
-The machinery above shows how a model can clarify the way we think about the expected amount of change along a branch. Often, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor this question is to think about the extremes -- what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
+The machinery above shows how a model can clarify the way we think about the expected amount of change along a branch. Often, though, we want to know what the probability of a given end state is given a starting state, a model, and the amount of time elapsed. One way to anchor this question is to think about the extremes---what do we expect after a very small amount of change (either a short time or a slow rate of change, or both), and what do we expect after a large amount of change?
 
-The situation is most clear after a small amount of change (when $\mu t$ is small) - we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.
+The situation is most clear after a small amount of change (when $\mu t$ is small)—we expect the end state to be the same as the starting state. If we start with an A, for example, if there is very little change we expect to end with an A (Figure \@ref(fig:sim-saturation), left side). In this situation, the starting state tells us a lot about the end state. Not much else matters.
 
 What should we expect, though, if there has been a large amount of change (when $\mu t$ is large)? Can we know anything at all? It turns out that we can. If there have been many replacements, one after the other, then the initial starting state doesn't matter because whatever was there initially will probably have been replaced multiple times. It is as if it had been erased and written over. If the starting state doesn't contain information about the end state, what does? 
 
@@ -313,7 +313,7 @@ There is a lot going on in $\mathbf{Q}$. To make sense of it all, it helps to fa
 
 (See Section \@ref(linear-algebra) for resources on linear algebra if you are unfamiliar with the intuition and mechanics of matrix multiplication.) 
 
-$\mathbf{Q}$ is the instantaneous rate matrix -- it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used exponential equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
+$\mathbf{Q}$ is the instantaneous rate matrix---it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used exponential equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
 
 \begin{equation}
 \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
@@ -326,11 +326,11 @@ This was a lot of work to write a really simple model in a much more complicated
 
 ## Expanding the models
 
-The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one branch in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution\index{substitution model}, named JC69\index{substitution model!Jukes-Cantor (JC69)} after the folks who described it in 1969 [@jc1969]. It has only one free parameter -- the rate of evolution $\mu$. It is highly idealized -- there are many important facts about DNA and DNA evolution that we deliberately omit. 
+The mathematical, statistical, and computational machinery above describes the evolution of one DNA site along one branch in a phylogeny (Figure \@ref(fig:sim-application)) according to a simple model. In fact, this is the simplest possible model of DNA evolution\index{substitution model}, named JC69\index{substitution model!Jukes-Cantor (JC69)} after the folks who described it in 1969 [@jc1969]. It has only one free parameter---the rate of evolution $\mu$. It is highly idealized---there are many important facts about DNA and DNA evolution that we deliberately omit. 
 
 The simplicity of JC69 makes it a useful starting place to understand how models of DNA evolution work, but it is too simple to be very useful in practice. There are many other biological aspects of sequence evolution we might want to consider, including that:
 
-- The nucleotides C, G, T, and A are often not found at an equal frequency of 0.25 each. The GTR model lets all four equilibrium frequencies differ, subject only to the constraint that they sum to 100%. It is tempting to think that double-stranded DNA forces C and G to occur at the same frequency, and likewise T and A, so that the four could always be summarized by a single number. That equality is exact only when you count both strands of the duplex together, because every C on one strand is paired with a G on the other (this is Chargaff's first parity rule). But sequence data, and the $\pi$ parameters of our model, describe a *single* strand. Within one strand the two frequencies are only approximately equal (Chargaff's second parity rule), and real genomes show measurable GC and AT skews, which is why GTR estimates all four frequencies rather than one. As a convenient approximation we can nonetheless summarize a strand by its GC content -- the percent of sites that are G or C -- by assuming C=G and T=A. For example, the human genome has a GC content of 41%, which under this approximation gives nucleotide frequencies of 0.205 G, 0.205 C, 0.295 T and 0.295 A. This is quite different than the equal frequencies of 0.25 for all nucleotides expected by the JC69 model.
+- The nucleotides C, G, T, and A are often not found at an equal frequency of 0.25 each. The GTR model lets all four equilibrium frequencies differ, subject only to the constraint that they sum to 100%. It is tempting to think that double-stranded DNA forces C and G to occur at the same frequency, and likewise T and A, so that the four could always be summarized by a single number. That equality is exact only when you count both strands of the duplex together, because every C on one strand is paired with a G on the other (this is Chargaff's first parity rule). But sequence data, and the $\pi$ parameters of our model, describe a *single* strand. Within one strand the two frequencies are only approximately equal (Chargaff's second parity rule), and real genomes show measurable GC and AT skews, which is why GTR estimates all four frequencies rather than one. As a convenient approximation we can nonetheless summarize a strand by its GC content---the percent of sites that are G or C---by assuming C=G and T=A. For example, the human genome has a GC content of 41%, which under this approximation gives nucleotide frequencies of 0.205 G, 0.205 C, 0.295 T and 0.295 A. This is quite different than the equal frequencies of 0.25 for all nucleotides expected by the JC69 model.
 
 - The rates of mutation between different nucleotides are not the same. This is in part because some nucleotides are shaped more like others, and are more likely to be substituted for each other by mistake. In particular, A and G tend to be substituted for each other because they have two rings, and C and T tend to be substituted for each other because they have one ring. These changes between A/G and C/T are referred to as transitions. All other substitutions are called transversions, and are each less likely.
 
@@ -447,7 +447,7 @@ P = exponentiate_matrix(Q*t)
 print(P)
 ```
 
-The sum of each row of $\mathbf{P}(t)$ is 1 for any value of $t$, since our model doesn't create or destroy nucleotides. No matter which of the four nucleotides you start with, you have to end with one of the four nucleotides. This better demonstrates why we had to select diagonal values of the *rate* matrix $\mathbf{Q}$ so that each row in that matrix sums to 0 -- if we hadn't, then the row sums of $\mathbf{P}(t)$ would not be 1. 
+The sum of each row of $\mathbf{P}(t)$ is 1 for any value of $t$, since our model doesn't create or destroy nucleotides. No matter which of the four nucleotides you start with, you have to end with one of the four nucleotides. This better demonstrates why we had to select diagonal values of the *rate* matrix $\mathbf{Q}$ so that each row in that matrix sums to 0---if we hadn't, then the row sums of $\mathbf{P}(t)$ would not be 1. 
 
 Now that we can derive $\mathbf{P}(t)$, let's explore some of its properties. Let's first think about what happens when $t=0$. In this case, there is no time for evolution to occur and the resulting nucleotide should be the same as the starting nucleotide. Indeed, we see this is the case:
 
@@ -467,7 +467,7 @@ P = exponentiate_matrix(Q*t)
 print(P)
 ```
 
-In this case, each row has the exact same values. If you look closely, they should be familiar -- they are the equilibrium frequencies from $\boldsymbol{\Pi}$. This matches what happened in Figures \@ref(fig:sim-saturation) and \@ref(fig:sim-analytical). As branch length increases, the expected frequencies of each nucleotide deviate further and further from the original state and approach the equilibrium frequencies specified by $\boldsymbol{\Pi}$.
+In this case, each row has the exact same values. If you look closely, they should be familiar---they are the equilibrium frequencies from $\boldsymbol{\Pi}$. This matches what happened in Figures \@ref(fig:sim-saturation) and \@ref(fig:sim-analytical). As branch length increases, the expected frequencies of each nucleotide deviate further and further from the original state and approach the equilibrium frequencies specified by $\boldsymbol{\Pi}$.
 
 ## Simulation along a single branch
 
@@ -539,7 +539,7 @@ ggtree(phy) +
   xlim(0,5)
 ```
 
-This isn't a big step from what we have already -- once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along all the branches in a whole tree.
+This isn't a big step from what we have already---once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along all the branches in a whole tree.
 
 Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\boldsymbol{\Pi}$. That gives us the $`r state[5]`$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so they also share a parent state.
 
@@ -549,7 +549,7 @@ Data can be simulated on a tree of arbitrary size in this way. Just sample from 
 
 ## Scaling from a single site to multiple sites
 
-So far we have considered evolution at a single DNA site across a whole phylogeny. Genomes have from thousands to billions of sites, though. We can trivially expand our simulations from a single nucleotide at a time to arbitrarily long DNA sequences. How? With one simplifying assumption -- that the evolution of each site is independent of the evolution at other sites. We just simulate one site at a time, and then stick all the results together into a sequence. 
+So far we have considered evolution at a single DNA site across a whole phylogeny. Genomes have from thousands to billions of sites, though. We can trivially expand our simulations from a single nucleotide at a time to arbitrarily long DNA sequences. How? With one simplifying assumption---that the evolution of each site is independent of the evolution at other sites. We just simulate one site at a time, and then stick all the results together into a sequence. 
 
 ## Concluding thoughts
 

@@ -263,9 +263,9 @@ knitr::include_graphics("figures/cover.png")
 
 ## Approach {-}
 
-Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative - they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
+Models are at the core of modern phylogenetic biology. Models are usually taught in the context of phylogenetic inference, where they are used to look backward in time. This seems to me a bit like teaching students to master driving in reverse before you show them how to drive forward down a road. Phylogenetic models are generative—they explain how data are created under specific evolutionary processes. They are therefore more intuitive to understand in the context of generating data, proceeding in time from ancestral states forward to future states. I therefore focus first on building an intuitive understanding of models in the context of simulation, and only after that apply models to inference and other tasks that look back in time.
 
-This book is not a comprehensive treatment of phylogenetic biology, it is focused on teaching some of the key concepts and methods. This will provide a foundation for the many other rich areas of the field, from its interfaces with population genetics to comparative genomics to comparative methods at a macroevolutionary scale. It is in no way an overview of all of phylogenetic biology, which has grown into a very large field. Omissions of topics do not imply that they are unimportant.
+This book is not a comprehensive treatment of phylogenetic biology; it is focused on teaching some of the key concepts and methods. This will provide a foundation for the many other rich areas of the field, from its interfaces with population genetics to comparative genomics to comparative methods at a macroevolutionary scale. It is in no way an overview of all of phylogenetic biology, which has grown into a very large field. Omissions of topics do not imply that they are unimportant.
 
 ## Using this book {-}
 
@@ -301,43 +301,38 @@ The following sites have a wide variety of material that is relevant to the
 theory and practice of phylogenetic biology.
 
 - An extensive list of tools, tutorials, and examples of phylogenetic tools in
-the programming language R maintained by Brian O'Meara. <https://cran.r-project.org/web/views/Phylogenetics.html>
+the programming language R maintained by Brian O'Meara. <https://cran.r-project.org/web/views/Phylogenetics.html>.
 
-- Liam Revell has an excellent blog on phylogenetic methods. <https://blog.phytools.org/>
+- Liam Revell has an excellent blog on phylogenetic methods. <https://blog.phytools.org/>.
 
 - The Workshop on Molecular Evolution at Woods Hole. This is an intensive summer
-course on phylogenetics, with an emphasis on building phylogenetic trees. <https://molevolworkshop.github.io>
+course on phylogenetics, with an emphasis on building phylogenetic trees. <https://molevolworkshop.github.io>.
 
 - The Applied Phylogenetics Workshop in Bodega Bay. This is another summer course
 on phylogenetics, but with a bit more emphasis on using phylogenies to test
-evolutionary questions. <http://treethinkers.org/tutorials/>
+evolutionary questions. <http://treethinkers.org/tutorials/>.
 
 The following are some of the many great books for learning more about phylogenetic methods:
 
-- Baum, D. and Smith, S. (2012). Tree Thinking. An Introduction to Phylogenetic 
-Biology. [Roberts Publishers](http://www.roberts-publishers.com/tree-thinking-an-introduction-to-phylogenetic-biology.html).
+- Baum, D. and Smith, S. (2012). Tree Thinking: An Introduction to Phylogenetic Biology. [Roberts Publishers](http://www.roberts-publishers.com/tree-thinking-an-introduction-to-phylogenetic-biology.html).
 
-- Felsenstein, J. (2004) Inferring phylogenies. 
-[Sinauer Associates](http://www.sinauer.com/detail.php?id=1775).
+- Felsenstein, J. (2004). Inferring Phylogenies. [Sinauer Associates](http://www.sinauer.com/detail.php?id=1775).
 
-- Garamszegi, LZ. (2014) Modern Phylogenetic Comparative Methods and Their Application in Evolutionary Biology. [Springer](https://link.springer.com/book/10.1007/978-3-662-43550-2)
+- Garamszegi, L. Z. (2014). Modern Phylogenetic Comparative Methods and Their Application in Evolutionary Biology. [Springer](https://link.springer.com/book/10.1007/978-3-662-43550-2).
 
-- Paradis, E. (2011) Analysis of Phylogenetics and Evolution with R. 
-[Springer](http://www.springer.com/life+sciences/evolutionary+%26+developmental+biology/book/978-0-387-32914-7)
+- Paradis, E. (2011). Analysis of Phylogenetics and Evolution with R. [Springer](http://www.springer.com/life+sciences/evolutionary+%26+developmental+biology/book/978-0-387-32914-7).
 
-- Revell, LJ, Harmon, LJ (2022) Phylogenetic Comparative Methods in R. [Princeton](https://press.princeton.edu/books/paperback/9780691219035/phylogenetic-comparative-methods-in-r)
+- Revell, L. J. and Harmon, L. J. (2022). Phylogenetic Comparative Methods in R. [Princeton](https://press.princeton.edu/books/paperback/9780691219035/phylogenetic-comparative-methods-in-r).
 
-- Swofford, D. L., Olsen, G. J., Waddell, P. J., & Hillis, D. M. (1996). 
-Phylogenetic inference. In: Molecular Systematics, Second Edition. eds: D. M. 
-Hillis, C Moritz, & B. K. Mable. [Sinauer Associates](http://www.sinauer.com/detail.php?id=1775)
+- Swofford, D. L., Olsen, G. J., Waddell, P. J., and Hillis, D. M. (1996). Phylogenetic inference. In: Molecular Systematics, Second Edition. Eds: D. M. Hillis, C. Moritz, and B. K. Mable. [Sinauer Associates](http://www.sinauer.com/detail.php?id=1775).
 
 The following books provide general computational background for the topics covered here:
 
-- Wickham, H., Grolemund, G (2017) R for Data Science. <https://r4ds.had.co.nz>
+- Wickham, H. and Grolemund, G. (2017). R for Data Science. <https://r4ds.had.co.nz>.
 
-- Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. <http://practicalcomputing.org>
+- Haddock, S. H. D. and Dunn, C. W. (2010). Practical Computing for Biologists. <http://practicalcomputing.org>.
 
-## Acknowledgements {-}
+## Acknowledgments {-}
 
 Thanks in particular to the students of Yale EEB354 in 2020, 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation and feedback. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Other lab members provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Nate Grubaugh invited me to share a couple chapters in his course each year. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self publishing to facilitate student access. I am also very grateful to the students and faculty of the Workshop on Molecular Evolution at Woods Hole. Finally, I thank James Prosek for generously allowing me to use his work *Moth Cluster IV* for the cover.
 
