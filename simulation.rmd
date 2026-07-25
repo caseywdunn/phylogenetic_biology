@@ -435,7 +435,7 @@ diag(Q) = - rowSums(Q)
 Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\boldsymbol{\Pi}$ and adjusting the diagonal so that the rows each sum to 0:
 
 \begin{equation}
-\mathbf{Q} = \mathbf{R\Pi} =
+\mathbf{Q} = \mathbf{R}\boldsymbol{\Pi} =
 \left(\begin{array}{cccc} 
 -0.6600 & 0.1025 & 0.4100 & 0.1475 \\
 0.1475 & -0.8400 & 0.1025 & 0.5900 \\

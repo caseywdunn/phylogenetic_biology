@@ -813,7 +813,7 @@ Now we need $\boldsymbol{\Pi}$. We noted earlier that humans have a GC content o
 Now we can calculate $\mathbf{Q}$ by multiplying $\mathbf{R}$ and $\boldsymbol{\Pi}$ and adjusting the diagonal so that the rows each sum to 0:
 
 \begin{equation}
-\mathbf{Q} = \mathbf{R\Pi} =
+\mathbf{Q} = \mathbf{R}\boldsymbol{\Pi} =
 \left(\begin{array}{cccc} 
 -0.6600 & 0.1025 & 0.4100 & 0.1475 \\
 0.1475 & -0.8400 & 0.1025 & 0.5900 \\
@@ -971,7 +971,7 @@ Here is the relative rate matrix $\mathbf{R}$:
 ## T 0.5 2.0 0.5 0.0
 ```
 
-The equilibrium frequencies $\mathbf{\Pi}$:
+The equilibrium frequencies $\boldsymbol{\Pi}$:
 
 
 ```
@@ -1011,7 +1011,7 @@ We can think of the probabilities of specific changes along each branch as the p
     6     0.0195083
     7     0.0652538
 
-Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in, our full set of probabilities is:
+Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\boldsymbol{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in, our full set of probabilities is:
 
 
  node   probability
@@ -2095,7 +2095,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 
 
-This book, version 1.0.0, was rendered from the source code on Jul 25, 2026 at 12:56:58 PM, at git commit 74c63b6 (2026-07-25), with the following R package versions.
+This book, version 1.0.0, was rendered from the source code on Jul 25, 2026 at 01:46:30 PM, at git commit c3345ab (2026-07-25), with the following R package versions.
 
 
 ```

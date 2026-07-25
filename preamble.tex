@@ -2,6 +2,29 @@
 \usepackage{float}
 \usepackage{afterpage}
 
+% Bold uppercase Greek in math (the matrices \Pi and \Sigma).
+%
+% For xelatex, pandoc's template loads unicode-math and then loads lmodern
+% AFTER it. lmodern is a legacy NFSS font package, and loading it second
+% clobbers unicode-math's math alphabets: \mathbf reverts to a text alphabet
+% that contains Latin letters but no Greek. The consequences are silent and
+% differ by command:
+%   \mathbf{\Pi}      -> nothing at all (no glyph, no warning)
+%   \boldsymbol{\Pi}  -> an ordinary, NON-bold Pi
+%   \symbf{\Pi}       -> correct bold Pi (U+1D6B7)
+% \mathbf{R} keeps working throughout, which is why the breakage shows up only
+% on the Greek matrices and reads as an authoring mistake rather than a font
+% clash. Note that \setmathfont does NOT repair \mathbf here; only \symbf works.
+%
+% \symbf is unicode-math's command and MathJax does not understand it, so the
+% chapter sources keep \boldsymbol (which MathJax does support) and the PDF
+% build redirects it here. That keeps one spelling in the .rmd files and leaves
+% the HTML build untouched. The guard keeps this a no-op if the document is
+% ever built with a pdftex engine, where unicode-math is not loaded.
+\ifdefined\symbf
+  \renewcommand{\boldsymbol}[1]{\symbf{#1}}
+\fi
+
 % The bibliography style (plainnat, set via biblio-style) prints DOIs with a
 % \doi{...} command. The doi package defines it to typeset the DOI as a clickable
 % link and, crucially, reads its argument with URL catcodes so special characters
@@ -34,6 +57,24 @@
 \usepackage{etoolbox}
 \apptocmd{\thebibliography}{\raggedright}{}{}
 \Urlmuskip=0mu plus 1mu\relax
+
+% Table of Contents entry for the bibliography. natbib's thebibliography opens
+% with \chapter*, which is unnumbered and therefore not listed, so without this
+% the ToC jumped straight from Appendix B to the Index. (references.rmd only
+% emits a heading for the HTML build, and after_body.tex does the equivalent
+% \addcontentsline for the Index alone.) The \cleardoublepage must come first:
+% it lands us on the page the bibliography will actually start on, so
+% \addcontentsline records that number rather than the last page of Appendix B.
+% \chapter* then issues its own \cleardoublepage, which is a no-op from here.
+% The failure branch warns rather than failing silently: if a future natbib or
+% pandoc template makes \thebibliography unpatchable, the ToC entry would just
+% quietly vanish again, which is exactly the bug this is fixing.
+\pretocmd{\thebibliography}{%
+  \cleardoublepage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\bibname}%
+}{}{\PackageWarningNoLine{preamble}{Could not patch \string\thebibliography;
+  the Bibliography will be missing from the Table of Contents}}
 
 % Back-of-book index. \index{...} markers are placed inline in the chapter
 % source (dropped silently in the HTML build, typeset by makeindex in the PDF).

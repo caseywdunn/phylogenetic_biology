@@ -131,7 +131,7 @@ Here is the relative rate matrix $\mathbf{R}$:
 R
 ```
 
-The equilibrium frequencies $\mathbf{\Pi}$:
+The equilibrium frequencies $\boldsymbol{\Pi}$:
 
 ```{r}
 Pi
@@ -173,7 +173,7 @@ root_prob = pi_v[ example_states[root_node] ]
 
 ```
 
-Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in, our full set of probabilities is:
+Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\boldsymbol{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in, our full set of probabilities is:
 
 ```{r}
 
