@@ -16,7 +16,7 @@ Many questions in biology require knowing evolutionary relationships, even if th
 
 Though phylogeny initially sprang from the field of comparative morphology, and much of the initial focus was on building and analyzing trees with morphological data and using them to study the evolution of morphology, the field has rapidly expanded to encompass many other categories of data. Even so, morphology continues to be vital to building phylogenies in many contexts, including when fossils are available. While most phylogenetic inference is now based on molecular data, phylogenetic comparative methods are routinely applied to all sorts of data and questions. Phylogenetic comparative methods now play important roles in the study of physiology, ecology, genomics, medicine, and most other parts of biology. 
 
-Phylogenetics is no longer a strictly macroevolutionary field. Some of the most exciting work in recent years has been at the interface of population genetics and phylogenetic biology, helping to unify our perspectives on micro- and macroevolution. Phylogenies are now also routinely used to study the evolution of genes and other molecular characters, and also to dive into extremely recent and fast evolutionary processes within species, such as virus pandemics.
+Phylogenetics is no longer a strictly macroevolutionary field. Some of the most exciting work in recent years has been at the interface of population genetics and phylogenetic biology, helping to unify our perspectives on micro- and macroevolution. Phylogenies are now also routinely used to study the evolution of genes and other molecular characters, and also to dive into extremely recent and fast evolutionary processes within species, such as viral pandemics.
 
 ## Core concepts
 
@@ -80,7 +80,7 @@ Some studies differ only in which estimates are kept and which are thrown away. 
 
 With this framework in mind, let's take a look at a sampling of recent phylogenetic studies. 
 
-- [Nextstrain](https://nextstrain.org/sars-cov-2/) provides a frequently updated phylogeny of SARS-CoV-2, with associated data on geography, sampling time, and other factors [@hadfield2018nextstrain]. This has been critical to understanding and monitoring the SARS-CoV-2 pandemic, and intervening to disrupt transmission. They are using observed character data at the tips (virus genome sequences) to estimate topology, branch lengths, and model parameters.
+- [Nextstrain](https://nextstrain.org/sars-cov-2/) provides a frequently updated phylogeny of SARS-CoV-2, with associated data on geography, sampling time, and other factors [@hadfield2018nextstrain]. This supported genomic epidemiology, surveillance, and public-health decisions during the SARS-CoV-2 pandemic. They are using observed character data at the tips (virus genome sequences) to estimate topology, branch lengths, and model parameters.
 
 - Myxozoa are enigmatic parasites that infect fish and invertebrate hosts. They have very few morphological traits that show clear homology with other animals. So Sally Chang, Paulyn Cartwright, and colleagues used phylogenetic inference to examine their relationships to other animals, and found strong support for their placement within Cnidaria [@chang2015genomic].
 

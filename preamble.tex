@@ -23,6 +23,18 @@
 % before it includes this file; \bibpunct assigns globally, so it wins.
 \bibpunct{(}{)}{;}{a}{,}{,}
 
+% Bibliography line breaking. natbib's thebibliography is justified, so a long
+% unbreakable DOI/URL (e.g. the Shimodaira-Hasegawa reference) that cannot find a
+% break point is stretched across the full measure, letter-spacing the string.
+% Two fixes, together: (1) set the bibliography ragged right so justification no
+% longer stretches inter-letter glue, and (2) give \url (used by the doi package
+% to typeset DOIs) stretchable break glue so long DOIs break within the string
+% instead of overflowing the margin. \Urlmuskip is provided by the url package,
+% which the doi package loads above.
+\usepackage{etoolbox}
+\apptocmd{\thebibliography}{\raggedright}{}{}
+\Urlmuskip=0mu plus 1mu\relax
+
 % Back-of-book index. \index{...} markers are placed inline in the chapter
 % source (dropped silently in the HTML build, typeset by makeindex in the PDF).
 % The index itself is emitted by \printindex in after_body.tex.

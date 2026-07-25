@@ -92,7 +92,7 @@ Let's start with a simple model of DNA evolution. At first we will consider only
 - State at the start of the branch (the nucleotide at the parent node)
 - State at the end of the branch (the nucleotide at the child node)
 
-```{r sim-application, echo=FALSE, fig.cap="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a change from A to C.", out.width="100%"}
+```{r sim-application, echo=FALSE, fig.cap="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is shown in bold, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), i.e., a change from A to C.", out.width="100%"}
 # out.width pins the figure to the text block; without it knitr sizes an
 # included raster from its own pixels and dpi, which can overflow the margin.
 
@@ -109,9 +109,9 @@ It might seem a bit odd to consider replacement events that don't result in subs
 
 For the simple process described here, there are two things to consider if we want to know the amount of evolutionary change. The first is the rate $\mu$, and the second is the time over which the evolutionary process acts. In our example here, that time is the length of the branch under consideration in the phylogeny.
 
-In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over the same time interval (0-100 time units). Each black line on the bar is a replacement event randomly introduced by the computer according to our model. We use a different value of $\mu$ for each simulation (as indicated on the vertical axis). In the bottom bar, where $\mu=0$, there are no replacements (black bars) and therefore no substitutions (the whole bar is the same color). There are more replacement events as $\mu$ increases along the vertical axis.
+In Figure \@ref(fig:sim-jc-mu-sweep) each horizontal bar is a simulation over the same time interval (0-100 time units). Each black line on the bar is a replacement event randomly introduced by the computer according to our model. We use a different value of $\mu$ for each simulation (as indicated on the vertical axis). In the bottom bar, where $\mu=0$, there are no replacements (black lines) and therefore no substitutions (the whole bar stays a single shade, corresponding to the starting nucleotide A). There are more replacement events as $\mu$ increases along the vertical axis.
 
-```{r sim-jc-mu-sweep, fig.cap="Each horizontal bar is a simulation of evolution of a single nucleotide position through time, $t$, for a specified value of $\\mu$. Each simulation starts out as an A. Black vertical lines correspond to replacement events, which don't all lead to substitutions (a new color). "}
+```{r sim-jc-mu-sweep, fig.cap="Each horizontal bar is a simulation of evolution of a single nucleotide position through time, $t$, for a specified value of $\\mu$. Each simulation starts out as an A. Black vertical lines correspond to replacement events, which don't all lead to substitutions (a shift to a different shade, marking a new nucleotide state). "}
 
   t = 100 # total time to consider
   mu_step = 0.01

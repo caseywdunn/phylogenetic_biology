@@ -27,7 +27,7 @@ used for things that have no evolutionary component, like similarity of response
 to a drug.
 
 It is helpful, then, to be more precise about the components of a phylogeny, and 
-what each of those parts represent.
+what each of those parts represents.
 
 ## Phylogenies are graphs
 
@@ -43,9 +43,9 @@ knitr::include_graphics("figures/graph.png")
 A phylogeny is a specific instance of a mathematical object known as a [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) [@west2001].
 A graph consists of nodes (also called vertices), often represented as circles, connected by edges, often
 represented by lines (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
-For example, nodes could be people, and edges family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.
+For example, nodes could be people, and edges could represent family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.
 
-```{r trees-graph-tree, echo=FALSE, fig.cap="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (*i.e.*, there are no paths that go in circles). The graph is bifurcating---the root node has two branches that connect it to its children; the other internal nodes each have three branches (one that connects to the parent, two to children); and the tips each have one branch (that connects to its parent)."}
+```{r trees-graph-tree, echo=FALSE, fig.cap="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (i.e., there are no paths that go in circles). The graph is bifurcating---the root node has two branches that connect it to its children; the other internal nodes each have three branches (one that connects to the parent, two to children); and the tips each have one branch (that connects to its parent)."}
 
 knitr::include_graphics("figures/graph_tree.png")
 
@@ -230,7 +230,7 @@ One of the most useful applications of phylogenies is to concisely refer to grou
 
 A convenient way to designate groups of organisms is by their most recent common ancestor (MRCA). One of the core concepts in phylogenetic biology is the clade\index{clade}---a group of tips that includes their MRCA and all of its descendants. A group is said to be monophyletic\index{monophyletic group} (Figure \@ref(fig:trees-groups)A) if it satisfies these criteria (you don't need to use the double descriptor "monophyletic clade", since a clade is by definition monophyletic). Since internal nodes are included in this definition, you can think of a monophyletic group as a subtree that is formed by clipping the branch just below the MRCA.
 
-```{r trees-groups, echo=FALSE, fig.cap="(A) A monophyletic group, *i.e.*, a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the hare."}
+```{r trees-groups, echo=FALSE, fig.cap="(A) A monophyletic group, i.e., a clade. (B) A polyphyletic group. (C) A paraphyletic group that does not include the hare."}
 
 
 p_mono = ggtree(tree) %<+% d_ingroup +
