@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2026-07-21" />
+<meta name="date" content="2026-07-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -169,7 +169,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i>Using this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i>Distribution</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i>Other resources</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
 <li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.1</b> License</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
@@ -239,7 +239,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#working-with-publicly-available-data"><i class="fa fa-check"></i><b>5.5</b> Working with publicly available data</a></li>
 <li class="chapter" data-level="5.6" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#homologous-sites"><i class="fa fa-check"></i><b>5.6</b> Homologous sites</a></li>
-<li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
+<li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-genes"><i class="fa fa-check"></i><b>5.7</b> Combining information across genes</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a>
 <ul>
@@ -348,7 +348,7 @@ div.csl-indent {
 <div id="inferring-phylogenies-from-data" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Inferring phylogenies from data<a href="inferring-phylogenies-from-data.html#inferring-phylogenies-from-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In the previous chapter we built modeling machinery that allowed us to specify a rate matrix <span class="math inline">\(\mathbf{Q}\)</span> (Equation <a href="simulation.html#eq:sim-gtr">(3.8)</a>), and from that derive the matrix <span class="math inline">\(\mathbf{P}(t)\)</span> (Equation <a href="simulation.html#eq:matrix-exp">(3.7)</a>) that gives the probability of a particular end state given the starting state and the branch length <span class="math inline">\(t\)</span>. We used <span class="math inline">\(\mathbf{P}(t)\)</span> in a generative context, to simulate the evolution of a DNA sequence along the branches of a phylogeny.</p>
-<p>We will now turn to using the same statistical framework for what may initially seem to be a very different task – phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data <span class="citation">(<a href="#ref-Felsenstein:1981vk">Felsenstein 1981</a>)</span>.</p>
+<p>We will now turn to using the same statistical framework for what may initially seem to be a very different task—phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data <span class="citation">(<a href="#ref-Felsenstein:1981vk">Felsenstein 1981</a>)</span>.</p>
 <p>This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the likelihood. Searching for the most likely hypothesis is referred to as maximum likelihood (ML). A comprehensive reference on the whole endeavor of phylogenetic inference is <span class="citation">Felsenstein (<a href="#ref-felsenstein2004">2004</a>)</span>.</p>
 <div id="probability-of-a-single-history" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Probability of a single history<a href="inferring-phylogenies-from-data.html#probability-of-a-single-history" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -378,7 +378,7 @@ Figure 4.2: The same toy tree as above, now with arbitrary states added at the i
 ## C 0.5 0.0 0.5 2.0
 ## G 2.0 0.5 0.0 0.5
 ## T 0.5 2.0 0.5 0.0</code></pre>
-<p>The equilibrium frequencies <span class="math inline">\(\mathbf{\Pi}\)</span>:</p>
+<p>The equilibrium frequencies <span class="math inline">\(\boldsymbol{\Pi}\)</span>:</p>
 <pre><code>##       A     C     G     T
 ## A 0.295 0.000 0.000 0.000
 ## C 0.000 0.205 0.000 0.000
@@ -437,7 +437,7 @@ We can think of the probabilities of specific changes along each branch as the p
 </tr>
 </tbody>
 </table>
-<p>Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to <span class="math inline">\(\mathbf{\Pi}\)</span>, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in, our full set of probabilities is:</p>
+<p>Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to <span class="math inline">\(\boldsymbol{\Pi}\)</span>, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in, our full set of probabilities is:</p>
 <table>
 <thead>
 <tr class="header">
@@ -1161,7 +1161,7 @@ We can think of the probabilities of specific changes along each branch as the p
 <h2><span class="header-section-number">4.5</span> Maximum likelihood<a href="inferring-phylogenies-from-data.html#maximum-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. How do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).</p>
 <p>The small toy phylogeny considered here (Figure <a href="inferring-phylogenies-from-data.html#fig:inference-toy">4.1</a>) has four tip nodes. By reference to Equation <a href="phylogenies.html#eq:ntrees">(2.1)</a>, we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. This excellent <a href="http://phylo.bio.ku.edu/mephytis/brlen-opt.html">interactive visualization</a> allows you to manually optimize branch lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.</p>
-<p>Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics – to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it; if it is worse, you discard it.</p>
+<p>Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics—to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it; if it is worse, you discard it.</p>
 <p>This might sound simple, but it isn’t. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima. Widely used maximum likelihood inference programs include RAxML <span class="citation">(<a href="#ref-stamatakis2014">Stamatakis 2014</a>)</span> and IQ-TREE <span class="citation">(<a href="#ref-nguyen2015">Nguyen et al. 2015</a>)</span>.</p>
 <p>Optimization of calculations becomes very important. For example, it isn’t necessary to recalculate all values on each new topology, since some of the calculations from previous topologies remain relevant <span class="citation">(<a href="#ref-Felsenstein:1981vk">Felsenstein 1981</a>)</span>.</p>
 </div>

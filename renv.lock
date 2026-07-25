@@ -2323,7 +2323,7 @@
     },
     "ggtree": {
       "Package": "ggtree",
-      "Version": "4.0.4",
+      "Version": "4.0.5",
       "Source": "Bioconductor",
       "Type": "Package",
       "Title": "an R package for visualization of tree and annotation data",

@@ -218,6 +218,34 @@ knitr::opts_chunk$set(
   dpi = 300,
   cache = FALSE
   )
+
+# Build the PDF with the real latexmk rather than tinytex's R reimplementation,
+# so that the back-of-book index is correct.
+#
+# The index is a fixed point: its page numbers depend on the pagination of a
+# document the index is itself part of. Getting it right requires treating the
+# .idx file as a build dependency -- run the engine, and if .idx changed, re-run
+# makeindex and the engine again, until nothing moves. tinytex's emulated
+# latexmk (its default) does not converge on that: makeindex runs early, against
+# a pagination that is still shifting as cross-references resolve, and is not
+# re-run afterwards. The failure is silent, because LaTeX treats .ind as an
+# ordinary input file and never asks for a rerun -- the build reports success
+# with stale page numbers baked in. That is what left every index entry about
+# two pages low, identically on every rebuild.
+#
+# The real latexmk does track .idx and re-runs makeindex until it converges. It
+# is not part of texlive-latex-extra on Debian, so docker/Dockerfile installs
+# the separate `latexmk` package. Warn rather than fail if it is absent: an
+# index that is quietly wrong is the exact failure mode being fixed here.
+if (nzchar(Sys.which("latexmk"))) {
+  options(tinytex.latexmk.emulation = FALSE)
+} else if (knitr::is_latex_output()) {
+  warning(
+    "latexmk not found; falling back to tinytex's emulation. ",
+    "Index page numbers in the PDF are likely to be stale. ",
+    "See docker/Dockerfile and development.md."
+  )
+}
 ```
 
 ```{r include=FALSE}

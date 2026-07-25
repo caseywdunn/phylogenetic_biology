@@ -1,6 +1,7 @@
 FROM rocker/verse:4.5.1
 
 RUN apt-get update && apt-get install -y \
+    latexmk \
     texlive-latex-extra \
     texlive-fonts-extra \
     texlive-science \

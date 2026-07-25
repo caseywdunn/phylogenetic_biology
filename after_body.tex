@@ -14,7 +14,24 @@
 % Ingram has no parity gap of its own to fill, which avoids stacking a
 % distributor blank on top of ours. Confirm the exact requirement (even count,
 % barcode placement) against Ingram's current file specs before upload.
-\clearpage
-\ifodd\value{page}\else
-  \null\thispagestyle{empty}\clearpage
-\fi
+% Deferred to \AtEndDocument: the index's \end{multicols} can leave a page
+% that is only shipped out at \end{document}, i.e. AFTER any parity test placed
+% inline here. Measuring parity inline therefore reads the count before that
+% last page exists, and the interior comes out odd (163 pp.) with a stray
+% headered blank at the end. \AtEndDocument runs late enough that everything
+% has been flushed, so \value{page} is the real final count.
+%
+% This assumes the roman front matter has an even page count, which it does by
+% construction (\clearrecto and the \cleardoublepage redefinition in
+% preamble.tex keep the half-title/title/dedication on rectos). Even front
+% matter + even arabic body = even interior. Verify after every build:
+%   pdfinfo docs/phylogenetic_biology.pdf | grep Pages
+\AtEndDocument{%
+  \clearpage
+  \typeout{^^J*** PARITY: after clearpage, value(page)=\the\value{page} ***^^J}%
+  \ifodd\value{page}%
+    \typeout{^^J*** PARITY: odd -> no blank added ***^^J}%
+  \else
+    \null\thispagestyle{empty}\clearpage
+    \typeout{^^J*** PARITY: even -> blank added, now \the\value{page} ***^^J}%
+  \fi}

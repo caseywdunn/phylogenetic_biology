@@ -10,6 +10,30 @@ In `phylogenetic_biology`, execute:
 
     bookdown::render_book("index.rmd", "bookdown::gitbook")
 
+### The back-of-book index requires latexmk
+
+The PDF build needs the real `latexmk` (installed by `docker/Dockerfile`), not
+tinytex's R reimplementation of it. The `setup` chunk in `index.rmd` sets
+`options(tinytex.latexmk.emulation = FALSE)` when `latexmk` is on the path, and
+warns when it is not.
+
+This matters because the index is a fixed point: its page numbers depend on the
+pagination of a document the index is part of. Producing it correctly means
+treating `.idx` as a build dependency -- run the engine, and if `.idx` changed,
+re-run `makeindex` and the engine again, until nothing moves. tinytex's
+emulation does not converge on that; it runs `makeindex` once, early, against a
+pagination that is still shifting as cross-references resolve. The failure is
+silent, since LaTeX treats `.ind` as an ordinary input file and never requests a
+rerun, so the build reports success with stale page numbers. Symptom: every
+index entry is off by a constant amount, identically on every rebuild.
+
+After a PDF build, spot-check a few entries against the pages they point to:
+
+``` bash
+pdftotext -layout docs/phylogenetic_biology.pdf - | tail -45 \
+  | grep -E "bootstrap|ultrametric|Brownian"
+```
+
 ## Running tests
 
 To run tests of the code, launch an R console from the `manuscript/` directory of this
