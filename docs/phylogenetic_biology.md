@@ -2095,7 +2095,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 
 
-This book, version 1.0.0, was rendered from the source code on Jul 25, 2026 at 09:33:41 PM, at git commit cc90695 (2026-07-25), with the following R package versions.
+This book, version 1.0.0, was rendered from the source code on Jul 25, 2026 at 09:51:22 PM, at git commit d772743 (2026-07-25), with the following R package versions.
 
 
 ```

@@ -8,30 +8,35 @@
 \addcontentsline{toc}{chapter}{Index}
 \printindex
 
-% Parity only -- no forced trailing blanks. End the book cleanly on the last
-% index page, then add a single empty-styled blank ONLY if that page is a recto,
-% so the interior always has an even page count. Delivering an even count means
-% Ingram has no parity gap of its own to fill, which avoids stacking a
-% distributor blank on top of ours. Confirm the exact requirement (even count,
-% barcode placement) against Ingram's current file specs before upload.
-% Deferred to \AtEndDocument: the index's \end{multicols} can leave a page
-% that is only shipped out at \end{document}, i.e. AFTER any parity test placed
-% inline here. Measuring parity inline therefore reads the count before that
-% last page exists, and the interior comes out odd (163 pp.) with a stray
-% headered blank at the end. \AtEndDocument runs late enough that everything
-% has been flushed, so \value{page} is the real final count.
+% Page parity. Ingram wants an even interior page count, so add a single
+% empty-styled blank when the book would otherwise end on an odd page.
 %
-% This assumes the roman front matter has an even page count, which it does by
-% construction (\clearrecto and the \cleardoublepage redefinition in
+% Note the sense of the test, which is easy to get wrong. Inside this hook,
+% after \clearpage, \value{page} is the number of the LAST page that will
+% ship -- not the number of the next, unstarted page. (Measured: a build whose
+% index ended on 148 reported value(page)=149 and produced a 149-page body.)
+% So an ODD \value{page} means the interior would end odd and needs the blank.
+% The more familiar idiom, which tests for even, is correct only when no page
+% is in progress at that moment; it is wrong here and silently produced an
+% odd 163-page interior on every build.
+%
+% \AtEndDocument rather than inline: the last index page is not yet shipped at
+% the point after_body's content is read, so an inline test measures too early.
+%
+% This also assumes the roman front matter has an even page count, which it
+% does by construction (\clearrecto and the \cleardoublepage redefinition in
 % preamble.tex keep the half-title/title/dedication on rectos). Even front
-% matter + even arabic body = even interior. Verify after every build:
+% matter + even body = even interior. The counter arithmetic is subtle enough
+% that the output is the only real guarantee -- verify after every build:
 %   pdfinfo docs/phylogenetic_biology.pdf | grep Pages
 \AtEndDocument{%
   \clearpage
-  \typeout{^^J*** PARITY: after clearpage, value(page)=\the\value{page} ***^^J}%
-  \ifodd\value{page}%
-    \typeout{^^J*** PARITY: odd -> no blank added ***^^J}%
-  \else
+  % Any page shipped from here on is a trailing blank, so strip running
+  % heads and folios from all of them. This catches both the parity blank
+  % below and the stray page the index leaves after it, which otherwise
+  % prints "150 Index" on an empty final sheet.
+  \pagestyle{empty}%
+  \ifodd\value{page}
     \null\thispagestyle{empty}\clearpage
-    \typeout{^^J*** PARITY: even -> blank added, now \the\value{page} ***^^J}%
-  \fi}
+  \fi
+  \typeout{^^J*** PARITY: interior ends on page \the\value{page} ***^^J}}
