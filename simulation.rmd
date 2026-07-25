@@ -36,7 +36,11 @@ Cartography is an interesting analogy for the way we will use statistical models
 be a copy of the whole world, which wouldn't be that much more useful than the world itself already is for many 
 of the things you would like to do with a map. So all maps are simplifications (Figure \@ref(fig:sim-maps)). The simplification is often what makes the map useful. 
 
-```{r sim-maps, echo=FALSE, fig.cap="Four maps of the Yale campus, varying in complexity and focus. (A) Aerial image of New Haven, including much of Yale campus, from 1934. This image has a very large amount of information. (B) A street map of the same region (OpenStreetMap). It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points."}
+```{r sim-maps, echo=FALSE, fig.cap="Four maps of the Yale campus, varying in complexity and focus. (A) Aerial image of New Haven, including much of Yale campus, from 1934. This image has a very large amount of information. (B) A street map of the same region (OpenStreetMap). It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.", out.width="100%"}
+# out.width pins the figure to the text block. Without it, knitr sizes an
+# included raster from its own pixel dimensions and dpi (maps.png is 1782px
+# wide, which at 300dpi is 5.94in), and anything over the 4.75in text width
+# silently overflows into the margin rather than raising an error.
 
 knitr::include_graphics("figures/maps.png")
 ```
@@ -88,7 +92,9 @@ Let's start with a simple model of DNA evolution. At first we will consider only
 - State at the start of the branch (the nucleotide at the parent node)
 - State at the end of the branch (the nucleotide at the child node)
 
-```{r sim-application, echo=FALSE, fig.cap="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a change from A to C."}
+```{r sim-application, echo=FALSE, fig.cap="Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a change from A to C.", out.width="100%"}
+# out.width pins the figure to the text block; without it knitr sizes an
+# included raster from its own pixels and dpi, which can overflow the margin.
 
 knitr::include_graphics("figures/applications.png")
 ```
@@ -148,7 +154,9 @@ Because rate ($\mu$) and time ($t$) are so often conflated in phylogenetic quest
 
 The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
 
-```{r sim-tree-cnid, fig.cap="A published phylogeny (Zapata, 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time."}
+```{r sim-tree-cnid, fig.cap="A published phylogeny (Zapata, 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.", out.width="100%"}
+# out.width pins the figure to the text block; without it knitr sizes an
+# included raster from its own pixels and dpi, which can overflow the margin.
 
 knitr::include_graphics("figures/Fig_cnidaria.png")
 ```
@@ -375,7 +383,7 @@ We now have a more complex model of DNA evolution that we can simplify by settin
 
 Now that we have a framework for specifying a model with unequal equilibrium frequencies and different rates of change between different nucleotide pairs, let's build a specific case of a model and use it to simulate some data. That means we need to pick some actual model parameters, plug them into $\mathbf{R}$ and $\boldsymbol{\Pi}$ to get $\mathbf{Q}$, and then exponentiate that to get $\mathbf{P}(t)$. We can then use that to simulate changes in a single nucleotide along a branch. This will be a mathematically grounded version of the schematic in Figure \@ref(fig:sim-application)B.
 
-We are using a mammal tree, so let's pick some parameter values that roughly approximate what we see in mammals. Rather than set all the parameters independently, let's set up an HKY85 model, which accommodates non-uniform base frequencies and different transition/transversion ratios. First, we can clamp $\mu=1$. This basically just means the branch lengths will be in units of expected evolutionary change. Transitions (captured by parameters $b$ and $e$) are on the order of 4 times more frequent than transversions (captured by parameters $a$, $c$, $d$, and $f$) in mammals [@rosenberg2003]. So we will clamp $b=e=2$ and $a=c=d=f=0.5$. I picked these particular values (rather than others, such as 4 and 1) because they keep the mean of the off-diagonal entries in $\mathbf{R}$ to 1. 
+We are using a mammal tree, so let's pick some parameter values that roughly approximate what we see in mammals. Rather than set all the parameters independently, let's set up an HKY85 model, which accommodates non-uniform base frequencies and different transition/transversion ratios. First, we can clamp $\mu=1$. Transitions (captured by parameters $b$ and $e$) are on the order of 4 times more frequent than transversions (captured by parameters $a$, $c$, $d$, and $f$) in mammals [@rosenberg2003]. So we will clamp $b=e=2$ and $a=c=d=f=0.5$. I picked these particular values (rather than others, such as 4 and 1) because they keep the mean of the off-diagonal entries in $\mathbf{R}$ to 1. 
 
 Now we have the following values for $\mathbf{R}$:
 
@@ -549,7 +557,7 @@ Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As i
 
 There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the `Species_A` terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from $\boldsymbol{\Pi}$, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is $`r state[6]`$. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length $t$ of the branch, and $\mathbf{P}(t)$. We then do the same for each of the other branches.
 
-Data can be simulated on a tree of arbitrary size in this way. Just sample from $\mathbf{P}(t)$ for the root state. Then traverse the tree from the root to each of the tips, simulating the state at each of the other internal nodes and finally the terminal nodes according to the states of their parents, branch length $t$, and $\mathbf{P}(t)$.
+Data can be simulated on a tree of arbitrary size in this way. Just sample the root state from the equilibrium frequencies. Then traverse the tree from the root to each of the tips, simulating the state at each of the other internal nodes and finally the terminal nodes according to the states of their parents, branch length $t$, and $\mathbf{P}(t)$.
 
 ## Scaling from a single site to multiple sites
 

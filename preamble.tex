@@ -9,6 +9,20 @@
 % build the way an ordinary macro argument would.
 \usepackage{doi}
 
+% plainnat is used for the DOIs above, but natbib also derives citation
+% punctuation from the style *name*: \bibstyle@plainnat (natbib.sty) presets
+% square brackets and a comma between multiple citations, which is why the PDF
+% read [Chang et al., 2015] while the HTML build (pandoc citeproc, which ignores
+% biblio-style) read (Chang et al. 2015). Restore the parenthetical punctuation
+% explicitly. The six arguments are: opening bracket, closing bracket, separator
+% between multiple citations, style letter (a = author-year), separator between
+% author and year, and separator before extra text after the year. These values
+% are natbib's own defaults, i.e. what apalike used before the switch.
+%
+% This must come after \bibliographystyle{plainnat}, which pandoc emits just
+% before it includes this file; \bibpunct assigns globally, so it wins.
+\bibpunct{(}{)}{;}{a}{,}{,}
+
 % Back-of-book index. \index{...} markers are placed inline in the chapter
 % source (dropped silently in the HTML build, typeset by makeindex in the PDF).
 % The index itself is emitted by \printindex in after_body.tex.

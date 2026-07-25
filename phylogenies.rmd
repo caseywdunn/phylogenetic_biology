@@ -4,7 +4,9 @@
 phylopic_size_small = 0.1
 ```
 
-```{r trees-darwin, echo=FALSE, fig.cap="Darwin's depiction of the evolutionary relationships among organisms (Darwin, 1859)."}
+```{r trees-darwin, echo=FALSE, fig.cap="Darwin's depiction of the evolutionary relationships among organisms (Darwin, 1859).", out.width="100%"}
+# out.width pins the figure to the text block; without it knitr sizes an
+# included raster from its own pixels and dpi, which can overflow the margin.
 
 knitr::include_graphics("figures/darwin.png")
 ```
@@ -270,7 +272,13 @@ grid.arrange(
 
 Any internal node in a rooted phylogeny can be uniquely described as the MRCA of two or more tips. You can therefore use sets of tips to designate a particular internal node, and then use that node to define a clade. For example, we could clearly designate mammals as all the descendants of the MRCA of humans and platypus. This is a very compact and unambiguous way to name groups of organisms. In fact, an entire biological nomenclature has been built with phylogenetically defined names like these [@dequeiroz2007; @deQueiroz2020].
 
-Not all groups are monophyletic. For example, the group consisting of people and mice to the exclusion of hares is not monophyletic. Their MRCA is easy enough to find, and once found it is clear that not all descendants of this node are included in the group. Slightly different terminology is used for such groups depending on how we think about internal nodes and branches. If we think of this set of non-monophyletic tips as isolated tips, to the exclusion of the MRCA, then we say the group is polyphyletic\index{polyphyletic group} (Figure \@ref(fig:trees-groups)B). If we think of it as including the MRCA but excluding all the other tips descended from that MRCA that are not in the group, then we call it paraphyletic\index{paraphyletic group} (Figure \@ref(fig:trees-groups)C). In extreme cases the distinction is clearer. For example, if you have a large group of 100 species that is monophyletic except for the exclusion of a couple species nested well within the group, then it would usually be referred to as paraphyletic. If you were referring to a small group of tips scattered across a very large phylogeny with hundreds of tips, then it would usually be referred to as polyphyletic.
+Not all groups are monophyletic, and a group can fail to be monophyletic in two distinct ways. The difference between them is structural, and it turns on whether the group includes the most recent common ancestor (MRCA) of its members.
+
+A group is paraphyletic\index{paraphyletic group} if it includes the MRCA of its members but excludes some of that ancestor's descendants (Figure \@ref(fig:trees-groups)C). It is a clade with one or more subgroups removed. The group consisting of people and mice, together with the ancestral lineage they share, but excluding the hare that also descends from that ancestor, is paraphyletic: the common ancestor is included, but not all of its descendants are.
+
+A group is polyphyletic\index{polyphyletic group} if it excludes the MRCA of its members, combining two or more separate lineages (Figure \@ref(fig:trees-groups)B). Picking out people and mice as isolated lineages, without the shared ancestor and the branches that connect them, gives a polyphyletic group. Such groups often arise when organisms are grouped by a convergently evolved similarity rather than by common ancestry.
+
+Note that this is not a matter of how one chooses to think about the same set of tips: the two cases are different groups, one that contains the ancestral lineage and one that does not. In practice the scale of the tree tends to determine which term is used. A large clade of 100 species that is intact except for a couple of species nested well within it that are left out is usually called paraphyletic, since it still contains the group's ancestor and merely drops a few descendants. A handful of tips scattered across a phylogeny of hundreds of species, whose deep common ancestor and the intervening lineages are excluded, is usually called polyphyletic.
 
 ## Polytomies\index{polytomy}
 

@@ -120,7 +120,9 @@ Most phylogenetic studies deposit their raw data in these public archives, but t
 
 When I am interested in building a phylogeny for a particular group of organisms, one of my first steps is to take a look at the [NCBI taxonomy browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi). There you can enter a taxonomic group name, and select which data you would like to see (Figure \@ref(fig:practice-cnidaria)). You can adjust the number of taxonomic levels to control whether you want to view just summaries for larger groups or get all the way down to the species level.
 
-```{r practice-cnidaria, echo=FALSE, fig.cap="A view of the sequence data available for Cnidaria. Here I have selected to view available Nucleotide, Protein, SRA, Genome, and Assembly data."}
+```{r practice-cnidaria, echo=FALSE, fig.cap="A view of the sequence data available for Cnidaria. Here I have selected to view available Nucleotide, Protein, SRA, Genome, and Assembly data.", out.width="100%"}
+# out.width pins the figure to the text block; without it knitr sizes an
+# included raster from its own pixels and dpi, which can overflow the margin.
 
 knitr::include_graphics("figures/cnidaria_taxonomy_browser.png")
 ```

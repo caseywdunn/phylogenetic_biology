@@ -7,7 +7,7 @@ isbn_paperback: "979-8-9934524-0-1"
 isbn_hardcover: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
-date: "2026-07-22"
+date: "2026-07-25"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -154,7 +154,7 @@ There are a few concepts that are fundamental to understanding phylogenetic anal
 In order to make informative comparisons across species, both for inferring phylogenies and for phylogenetic comparative analyses, we need a unified ontological framework to refer to the same characters and character states in different organisms. This correspondence is provided by the concept of homology\index{homology}. Homology is a hypothesis that the same attribute is present in different entities because that attribute was present in their shared ancestor. Human arms and bird wings are homologous, for example. Homology is a deceptively simple concept that can sometimes be devilishly difficult to define, test, and apply [@wagner2014]. 
 
 \begin{figure}
-\includegraphics[width=4.5in]{figures/phylogenetic_analyses} \caption{(A) The primary components of a phylogenetic analysis. This mammal phylogeny and branch lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.}(\#fig:intro-concepts)
+\includegraphics[width=1\linewidth]{figures/phylogenetic_analyses} \caption{(A) The primary components of a phylogenetic analysis. This mammal phylogeny and branch lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.}(\#fig:intro-concepts)
 \end{figure}
 
 ## A unified perspective on phylogenetic studies
@@ -210,7 +210,7 @@ This is a very exciting time in phylogenetic biology. For many years most studie
 
 
 \begin{figure}
-\includegraphics[width=5in]{figures/darwin} \caption{Darwin's depiction of the evolutionary relationships among organisms (Darwin, 1859).}(\#fig:trees-darwin)
+\includegraphics[width=1\linewidth]{figures/darwin} \caption{Darwin's depiction of the evolutionary relationships among organisms (Darwin, 1859).}(\#fig:trees-darwin)
 \end{figure}
 
 Phylogenies represent evolutionary relationships. The only figure in Darwin's *Origin of Species* [@darwin1859] was a phylogeny (Figure \@ref(fig:trees-darwin)), though he didn't call it that.
@@ -538,7 +538,7 @@ be a copy of the whole world, which wouldn't be that much more useful than the w
 of the things you would like to do with a map. So all maps are simplifications (Figure \@ref(fig:sim-maps)). The simplification is often what makes the map useful. 
 
 \begin{figure}
-\includegraphics[width=5in]{figures/maps} \caption{Four maps of the Yale campus, varying in complexity and focus. (A) A satellite image of New Haven, including much of Yale campus, from Google Maps. This image has a very large amount of information. (B) A street map of the same region, also from Google Maps. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.}(\#fig:sim-maps)
+\includegraphics[width=1\linewidth]{figures/maps} \caption{Four maps of the Yale campus, varying in complexity and focus. (A) Aerial image of New Haven, including much of Yale campus, from 1934. This image has a very large amount of information. (B) A street map of the same region (OpenStreetMap). It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.}(\#fig:sim-maps)
 \end{figure}
 
 Let's examine one of the most common models, the linear model:
@@ -578,7 +578,7 @@ Let's start with a simple model of DNA evolution. At first we will consider only
 - State at the end of the branch (the nucleotide at the child node)
 
 \begin{figure}
-\includegraphics[width=4.72in]{figures/applications} \caption{Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a change from A to C.}(\#fig:sim-application)
+\includegraphics[width=1\linewidth]{figures/applications} \caption{Our current goal is to model the evolution of a single site in a DNA sequence along a single branch in a phylogeny. (A) An example phylogeny, with DNA sequence fragments shown at the tips and one internal node. The site under examination is in color, and the branch under examination (at the top) is thicker than the rest. (B) A closeup of the focal branch, and the state of the focal site at its ends (the parent and child nodes). (C) Multiple mutational histories that are consistent with the starting and end states shown in (B), *i.e.*, a change from A to C.}(\#fig:sim-application)
 \end{figure}
 
 When DNA is replicated, the appropriate nucleotide is usually incorporated. Some fraction of the time, at rate $\mu$, an event occurs where the appropriate nucleotide is replaced with a random nucleotide instead. In our model, the probability of selecting any of the nucleotides during one of these random replacement events is uniform (picking a C is just as probable as picking a G, for example), and the new nucleotide doesn't depend in any way on what nucleotide was there before. It is as if you had a bag containing a large number of C, G, T, and A nucleotides at equal frequencies. As you built the new DNA strand, every so often you would replace the nucleotide you should be adding with one you instead select by reaching into the bag and picking at random.
@@ -599,10 +599,14 @@ As $\mu$ increases (going up on the vertical axis), the number of replacement ev
 
 ![(\#fig:sim-jc-mu-n)The number of replacement events increases linearly with the replacement rate $\mu$. This plot is from the same simulation as that shown in Figure \@ref(fig:sim-jc-mu-sweep). The line is a linear model fit to the data. Since $n=\mu t$, and in this case $t=100$, the slope of $n$ on $\mu$ is estimated to be near 100.](phylogenetic_biology_files/figure-latex/sim-jc-mu-n-1.pdf) 
 
-Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. Because rate ($\mu$) and time ($t$) are so often conflated in phylogenetic questions, often the rate is essentially fixed at one and the unit of time for branch lengths is given as the number of expected evolutionary changes rather than absolute time (years, months, *etc.*). You will often see this length as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)) [@zapata2015]. The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
+Because of the linear relationship between the number of replacements and the product $\mu t$, rate ($\mu$) and time ($t$) are conflated. In many scenarios you can't estimate them independently. If there are a small number of replacements, for example, you can't tell if there is a low rate over a long time interval, or a high rate over a short interval. Both would give the same resulting number of changes $n$. 
+
+Because rate ($\mu$) and time ($t$) are so often conflated in phylogenetic questions, branch lengths are usually rescaled and given in units of the expected number of substitutions per site rather than absolute time (years, months, *etc.*). The factor relating $\mu t$ to the expected number of substitutions depends on the model, because not every replacement is a substitution. Under the simple model considered here, the substitution rate is $(3/4)\mu$, so a branch of duration $t$ carries $(3/4)\mu t$ expected substitutions per site. You will often see the resulting branch lengths as the scale bar of published phylogenies (Figure \@ref(fig:sim-tree-cnid)) [@zapata2015].
+
+The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
 
 \begin{figure}
-\includegraphics[width=4.9in]{figures/Fig_cnidaria} \caption{A published phylogeny (Zapata, 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.}(\#fig:sim-tree-cnid)
+\includegraphics[width=1\linewidth]{figures/Fig_cnidaria} \caption{A published phylogeny (Zapata, 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.}(\#fig:sim-tree-cnid)
 \end{figure}
 
 ### Expected end state
@@ -689,7 +693,7 @@ The model we built above only has one parameter that can vary, $\mu$, so we can 
 
 Recall that $\mu$ is the rate of *any* replacement event happening. That replacement event could be an A, C, G, or T. Only three of these replacements lead to a substitution, since replacing with the original nucleotides does not lead to a change. To find the rate of *specific* replacements happening, as we need to do for the elements of this matrix, we need to apportion the total replacement rate $\mu$ to specific nucleotides. We can do that with a new term $\pi$, which is the name we will give to the equilibrium frequency of each state. This corresponds to the frequency of each nucleotide in the bag we randomly sampled from. In our simple model, $\pi=0.25$ for all nucleotides. Because $\pi$ was clamped and wasn't free to vary, it was essentially invisible in the way we previously described the model.
 
-The off-diagonal elements of $\mathbf{Q}$ give the rates of substitutions, and are all $\mu \pi$. But what's up with the diagonal elements? We pick these diagonal elements to be whatever value leads the rows to sum to 0. The basic intuition of this is that we aren't creating or destroying nucleotides, just replacing them. So the net change needs to be 0. Since there are three substitutions in each row, and each substitution has rate $\mu \pi$, these diagonal elements are set to $-3 \mu \pi$. The negative rates for the diagonal elements can be thought of as a rate of leaving the current state, while the positive off diagonal rates correspond to entering new states.
+The off-diagonal elements of $\mathbf{Q}$ give the rates of substitutions, and are all $\mu \pi$. But what's up with the diagonal elements? We pick these diagonal elements to be whatever value leads the rows to sum to 0. The basic intuition of this is that we aren't creating or destroying nucleotides, just replacing them. So the net change needs to be 0. Since there are three possible substitutions in each row, and each substitution has rate $\mu \pi$, these diagonal elements are set to $-3 \mu \pi$. The negative rates for the diagonal elements can be thought of as a rate of leaving the current state, while the positive off diagonal rates correspond to entering new states.
 
 There is a lot going on in $\mathbf{Q}$. To make sense of it all, it helps to factor it out into two parts [@swofford1996molecular]. The first is a $4\times4$ matrix $\mathbf{R}$, which has all the rates, and the second is a $4\times4$ matrix $\boldsymbol{\Pi}$ that has the equilibrium frequencies on its diagonal and 0 everywhere else (Equation \@ref(eq:jc69-expanded)).
 
@@ -1258,7 +1262,7 @@ Most phylogenetic studies deposit their raw data in these public archives, but t
 When I am interested in building a phylogeny for a particular group of organisms, one of my first steps is to take a look at the [NCBI taxonomy browser](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi). There you can enter a taxonomic group name, and select which data you would like to see (Figure \@ref(fig:practice-cnidaria)). You can adjust the number of taxonomic levels to control whether you want to view just summaries for larger groups or get all the way down to the species level.
 
 \begin{figure}
-\includegraphics[width=5in]{figures/cnidaria_taxonomy_browser} \caption{A view of the sequence data available for Cnidaria. Here I have selected to view available Nucleotide, Protein, SRA, Genome, and Assembly data.}(\#fig:practice-cnidaria)
+\includegraphics[width=1\linewidth]{figures/cnidaria_taxonomy_browser} \caption{A view of the sequence data available for Cnidaria. Here I have selected to view available Nucleotide, Protein, SRA, Genome, and Assembly data.}(\#fig:practice-cnidaria)
 \end{figure}
 
 Based on this overview, you can assess which types of data (*i.e.*, which data produced by which enrichment strategy) are best for advancing your question with publicly available data. All the PCR data and most of the raw sequence data will usually be available here, but many assemblies and processed data for whole genomes, transcriptomes, and other high-throughput datasets may not be. The best practice when working with these data is to take a deep dive into the recent literature and see if these intermediate products were deposited in another public archive, or contact authors for more details.
@@ -2079,7 +2083,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 
 
-This book, version 1.0.0, was rendered from the source code on Jul 22, 2026 at 03:43:31 PM, at git commit 4c4b738 (2026-07-22), with the following R package versions.
+This book, version 1.0.0, was rendered from the source code on Jul 25, 2026 at 02:39:05 AM, at git commit facf979 (2026-07-24), with the following R package versions.
 
 
 ```

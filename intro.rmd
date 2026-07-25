@@ -36,7 +36,9 @@ There are a few concepts that are fundamental to understanding phylogenetic anal
 
 In order to make informative comparisons across species, both for inferring phylogenies and for phylogenetic comparative analyses, we need a unified ontological framework to refer to the same characters and character states in different organisms. This correspondence is provided by the concept of homology\index{homology}. Homology is a hypothesis that the same attribute is present in different entities because that attribute was present in their shared ancestor. Human arms and bird wings are homologous, for example. Homology is a deceptively simple concept that can sometimes be devilishly difficult to define, test, and apply [@wagner2014]. 
 
-```{r intro-concepts, echo=FALSE, fig.cap="(A) The primary components of a phylogenetic analysis. This mammal phylogeny and branch lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components."}
+```{r intro-concepts, echo=FALSE, fig.cap="(A) The primary components of a phylogenetic analysis. This mammal phylogeny and branch lengths are from http://vertlife.org. The organism silhouettes are from http://phylopic.org/. (B) Different analyses tend to take different approaches to these components.", out.width="100%"}
+# out.width pins the figure to the text block; without it knitr sizes an
+# included raster from its own pixels and dpi, which can overflow the margin.
 
 knitr::include_graphics("figures/phylogenetic_analyses.png")
 
