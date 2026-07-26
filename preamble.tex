@@ -2,5 +2,226 @@
 \usepackage{float}
 \usepackage{afterpage}
 
+% \FloatBarrier, for the few places where a float must not drift past a boundary.
+% Loaded without the [section] option deliberately: that would put an implicit
+% barrier at every section in the book and reshuffle float placement throughout.
+% Barriers are placed by hand instead, one at a time, where they are needed.
+\usepackage{placeins}
+
+% Bold uppercase Greek in math (the matrices \Pi and \Sigma).
+%
+% For xelatex, pandoc's template loads unicode-math and then loads lmodern
+% AFTER it. lmodern is a legacy NFSS font package, and loading it second
+% clobbers unicode-math's math alphabets: \mathbf reverts to a text alphabet
+% that contains Latin letters but no Greek. The consequences are silent and
+% differ by command:
+%   \mathbf{\Pi}      -> nothing at all (no glyph, no warning)
+%   \boldsymbol{\Pi}  -> an ordinary, NON-bold Pi
+%   \symbf{\Pi}       -> correct bold Pi (U+1D6B7)
+% \mathbf{R} keeps working throughout, which is why the breakage shows up only
+% on the Greek matrices and reads as an authoring mistake rather than a font
+% clash. Note that \setmathfont does NOT repair \mathbf here; only \symbf works.
+%
+% \symbf is unicode-math's command and MathJax does not understand it, so the
+% chapter sources keep \boldsymbol (which MathJax does support) and the PDF
+% build redirects it here. That keeps one spelling in the .rmd files and leaves
+% the HTML build untouched. The guard keeps this a no-op if the document is
+% ever built with a pdftex engine, where unicode-math is not loaded.
+\ifdefined\symbf
+  \renewcommand{\boldsymbol}[1]{\symbf{#1}}
+\fi
+
+% The bibliography style (plainnat, set via biblio-style) prints DOIs with a
+% \doi{...} command. The doi package defines it to typeset the DOI as a clickable
+% link and, crucially, reads its argument with URL catcodes so special characters
+% in DOIs (e.g. the underscore in 10.1007/978-3-662-43550-2_5) do not break the
+% build the way an ordinary macro argument would.
+\usepackage{doi}
+
+% plainnat is used for the DOIs above, but natbib also derives citation
+% punctuation from the style *name*: \bibstyle@plainnat (natbib.sty) presets
+% square brackets and a comma between multiple citations, which is why the PDF
+% read [Chang et al., 2015] while the HTML build (pandoc citeproc, which ignores
+% biblio-style) read (Chang et al. 2015). Restore the parenthetical punctuation
+% explicitly. The six arguments are: opening bracket, closing bracket, separator
+% between multiple citations, style letter (a = author-year), separator between
+% author and year, and separator before extra text after the year. These values
+% are natbib's own defaults, i.e. what apalike used before the switch.
+%
+% This must come after \bibliographystyle{plainnat}, which pandoc emits just
+% before it includes this file; \bibpunct assigns globally, so it wins.
+\bibpunct{(}{)}{;}{a}{,}{,}
+
+% Bibliography line breaking. natbib's thebibliography is justified, so a long
+% unbreakable DOI/URL (e.g. the Shimodaira-Hasegawa reference) that cannot find a
+% break point is stretched across the full measure, letter-spacing the string.
+% Two fixes, together: (1) set the bibliography ragged right so justification no
+% longer stretches inter-letter glue, and (2) give \url (used by the doi package
+% to typeset DOIs) stretchable break glue so long DOIs break within the string
+% instead of overflowing the margin. \Urlmuskip is provided by the url package,
+% which the doi package loads above.
+\usepackage{etoolbox}
+\apptocmd{\thebibliography}{\raggedright}{}{}
+\Urlmuskip=0mu plus 1mu\relax
+
+% Table of Contents entry for the bibliography. natbib's thebibliography opens
+% with \chapter*, which is unnumbered and therefore not listed, so without this
+% the ToC jumped straight from Appendix B to the Index. (references.rmd only
+% emits a heading for the HTML build, and after_body.tex does the equivalent
+% \addcontentsline for the Index alone.) The \cleardoublepage must come first:
+% it lands us on the page the bibliography will actually start on, so
+% \addcontentsline records that number rather than the last page of Appendix B.
+% \chapter* then issues its own \cleardoublepage, which is a no-op from here.
+% The failure branch warns rather than failing silently: if a future natbib or
+% pandoc template makes \thebibliography unpatchable, the ToC entry would just
+% quietly vanish again, which is exactly the bug this is fixing.
+\pretocmd{\thebibliography}{%
+  \cleardoublepage
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\bibname}%
+}{}{\PackageWarningNoLine{preamble}{Could not patch \string\thebibliography;
+  the Bibliography will be missing from the Table of Contents}}
+
+% Back-of-book index. \index{...} markers are placed inline in the chapter
+% source (dropped silently in the HTML build, typeset by makeindex in the PDF).
+% The index itself is emitted by \printindex in after_body.tex.
+\usepackage{makeidx}
+\makeindex
+
+% The book class typesets the index with \twocolumn, whose output routine fills
+% the first column to the full text height and leaves the final page unbalanced;
+% combined with this book's strong widow/club penalties (set below), the first
+% column can run past the bottom margin. Retypeset the index with multicol, which
+% balances the two columns, keeps them inside the text block, and breaks to a new
+% page cleanly. The penalties are also reset locally so entries break freely.
+\usepackage{multicol}
+\makeatletter
+\renewenvironment{theindex}{%
+  \columnseprule \z@
+  \columnsep 35\p@
+  \chapter*{\indexname}%
+  \markboth{\indexname}{\indexname}%
+  \thispagestyle{plain}%
+  \parindent\z@
+  \parskip\z@ \@plus .3\p@\relax
+  \let\item\@idxitem
+  \raggedright
+  \widowpenalty\z@ \clubpenalty\z@ \clubpenalties 1 \z@ \interlinepenalty\z@
+  \begin{multicols}{2}%
+}{%
+  \end{multicols}%
+}
+\makeatother
+
+% Suppress the default pandoc/LaTeX title page. pandoc emits \maketitle from the
+% YAML title/author/date, which produces a redundant title page (stamped with the
+% build date) in front of our own front matter. The real title, copyright, and
+% dedication pages are supplied by frontpage.tex (generated from index.rmd and
+% included via before_body), so make \maketitle a no-op here.
+\renewcommand{\maketitle}{}
+
+% Advance to the next recto (odd) page, leaving any skipped verso completely
+% blank -- no header, no page number. Used in the generated front matter
+% (frontpage.tex) to put the title page and dedication on rectos, with the
+% copyright page on the verso of the title page.
+\newcommand{\clearrecto}{\clearpage\ifodd\value{page}\else\thispagestyle{empty}\null\clearpage\fi}
+
 % Define book size
-\usepackage[paperwidth=7in, paperheight=10in, margin=1in]{geometry}
+% margin sets the base 1in margin on all sides; bindingoffset adds a 0.25in
+% gutter to the inner (spine) edge, mirrored on recto/verso, so the inside
+% margin is 1.25in and the outside 1in -- the conventional allowance for
+% perfect binding.
+\usepackage[paperwidth=7in, paperheight=10in, margin=1in, bindingoffset=0.25in]{geometry}
+
+% Running headers.
+% The default book class typesets running heads in ALL CAPS at full size. On
+% this narrow (~5in) text block, long section titles then run into the page
+% number (e.g. "...DISCRETE CHARACTERS101"). Use smaller, mixed-case running
+% heads so long titles fit, with the page number on the outer edge and the
+% running title on the inner edge (further from the page number).
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\small\thepage}
+\fancyhead[RE]{\small\nouppercase{\leftmark}}
+\fancyhead[LO]{\small\nouppercase{\rightmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+% Chapter-opening pages use the "plain" style; put their page number in the foot.
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\small\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+% Truly-blank versos. The book class is openright, so every \chapter -- and
+% \tableofcontents -- issues \cleardoublepage, which inserts a blank verso
+% whenever the preceding matter ends on a recto. The default \cleardoublepage
+% leaves that inserted page in the active (fancy) page style, so it keeps a
+% running head and folio. Redefine it to stamp the skipped verso empty: no
+% header, no page number (the page is still counted, just not printed). This
+% governs both the front-matter versos and every chapter-ending verso.
+\makeatletter
+\renewcommand{\cleardoublepage}{%
+  \clearpage
+  \ifodd\c@page\else
+    \null\thispagestyle{empty}\newpage
+  \fi}
+\makeatother
+
+% Ragged-right section headings.
+% The book class typesets headings justified, so a title too long for one line
+% gets hyphenated and can strand a fragment on the second line:
+%
+%   1.3  A unified perspective on phylogenetic stud-
+%        ies
+%   7.1  Gene trees, species trees, and real discor-
+%        dance
+%
+% Ragged right removes the need to hyphenate, so those break at word boundaries
+% instead ("...phylogenetic / studies"). This matches how the bibliography and
+% the index are already set above.
+%
+% These are the book class definitions verbatim, with \raggedright appended to
+% the style argument. Fonts and the space above and below each heading are
+% unchanged, and a heading that already fits on one line renders identically --
+% a single line is flush left either way. The wrapped headings still occupy two
+% lines, so pagination should not move.
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\Large\bfseries\raggedright}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\large\bfseries\raggedright}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries\raggedright}}
+\makeatother
+
+% Widow and orphan control.
+% A "widow" is the last line of a paragraph stranded at the top of a page; an
+% "orphan" (club line) is the first line of a paragraph stranded at the bottom.
+% 10000 is TeX's "infinite" penalty, telling it to avoid such breaks wherever it
+% can. We also guard the lines around displayed equations, of which this book has
+% many.
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\postdisplaypenalty=10000
+
+% Keep section headings from being stranded near the foot of a page with only a
+% line or two of their text following. \clubpenalties makes the penalty apply to
+% the first *two* lines after a break (i.e. after a heading), not just the first,
+% so a heading pulls at least a couple of lines with it to the next page.
+\clubpenalties 3 10000 10000 0
+
+% The book class uses \flushbottom (every page flush to the bottom margin), which
+% leaves TeX no vertical slack to honour the penalties above -- it will still
+% break rather than under-fill a page. \raggedbottom lets pages end a line or two
+% short so the penalties can actually take effect. The trade-off is that facing
+% pages may not always end at exactly the same height.
+\raggedbottom

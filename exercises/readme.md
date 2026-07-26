@@ -72,7 +72,7 @@ Markdown files are used in many contexts. If you would like to convert any markd
     pandoc test.md -o test.html
     pandoc test.md -o test.docx
 
-This creates pdf, html, and docx versions of `test.md`. The input file is specified right after the `pandoc` command, and the output file is specified right after `-o`. It figures out the input and output formats from the file extensions.
+This creates pdf, HTML, and docx versions of `test.md`. The input file is specified right after the `pandoc` command, and the output file is specified right after `-o`. It figures out the input and output formats from the file extensions.
 
 #### git
 

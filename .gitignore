@@ -5,11 +5,29 @@ phylogenetic_biology.knit.md
 phylogenetic_biology.utf8.md
 
 *.tex
+!preamble.tex
+!after_body.tex
 *.log
 *.aux
 *.out
 *.toc
 *.pdf
+
+# Further LaTeX intermediates. The PDF build uses the real latexmk (see the
+# setup chunk in index.rmd), which leaves more behind than tinytex's emulation
+# did: .fls and .fdb_latexmk are its file-recorder output and dependency
+# database. The index and bibliography intermediates are listed here too, since
+# a build interrupted before cleanup leaves them in the repo root.
+*.fls
+*.fdb_latexmk
+*.idx
+*.ind
+*.ilg
+*.bbl
+*.blg
+*.lof
+*.lot
+*.synctex.gz
 
 explorations/
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Appendix A Statistical and mathematical fundamentals | Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
-  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Appendix A Statistical and mathematical fundamentals | Phylogenetic Biology" />
   <meta property="og:type" content="book" />
@@ -23,14 +23,14 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2025-10-07" />
+<meta name="date" content="2026-07-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="phylogenies-and-time.html"/>
+<link rel="prev" href="comparative-methods.html"/>
 <link rel="next" href="software-versions.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -52,8 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -167,12 +165,12 @@ div.csl-indent {
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i><b>0.1</b> Approach</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i><b>0.2</b> Using this book</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i><b>0.3</b> Distribution</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>0.4</b> Other resources</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6</b> License</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i>Approach</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i>Using this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i>Distribution</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i>Other resources</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.1</b> License</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -241,7 +239,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#working-with-publicly-available-data"><i class="fa fa-check"></i><b>5.5</b> Working with publicly available data</a></li>
 <li class="chapter" data-level="5.6" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#homologous-sites"><i class="fa fa-check"></i><b>5.6</b> Homologous sites</a></li>
-<li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
+<li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-genes"><i class="fa fa-check"></i><b>5.7</b> Combining information across genes</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a>
 <ul>
@@ -258,45 +256,71 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="evaluation.html"><a href="evaluation.html#topology-tests"><i class="fa fa-check"></i><b>6.3</b> Topology tests</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylogenetics</a>
+<li class="chapter" data-level="7" data-path="gene-species-trees.html"><a href="gene-species-trees.html"><i class="fa fa-check"></i><b>7</b> Gene trees and species trees</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>7.1</b> Bayesian statistics</a></li>
-<li class="chapter" data-level="7.2" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>7.2</b> Bayesian phylogenetic inference</a></li>
-<li class="chapter" data-level="7.3" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference-in-practice"><i class="fa fa-check"></i><b>7.3</b> Bayesian phylogenetic inference in practice</a></li>
-<li class="chapter" data-level="7.4" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#resources"><i class="fa fa-check"></i><b>7.4</b> Resources</a></li>
+<li class="chapter" data-level="7.1" data-path="gene-species-trees.html"><a href="gene-species-trees.html#gene-trees-species-trees-and-real-discordance"><i class="fa fa-check"></i><b>7.1</b> Gene trees, species trees, and real discordance</a></li>
+<li class="chapter" data-level="7.2" data-path="gene-species-trees.html"><a href="gene-species-trees.html#incomplete-lineage-sorting"><i class="fa fa-check"></i><b>7.2</b> Incomplete lineage sorting</a></li>
+<li class="chapter" data-level="7.3" data-path="gene-species-trees.html"><a href="gene-species-trees.html#gene-duplication-and-loss"><i class="fa fa-check"></i><b>7.3</b> Gene duplication and loss</a></li>
+<li class="chapter" data-level="7.4" data-path="gene-species-trees.html"><a href="gene-species-trees.html#reticulation-introgression-hybridization-and-horizontal-transfer"><i class="fa fa-check"></i><b>7.4</b> Reticulation: introgression, hybridization, and horizontal transfer</a></li>
+<li class="chapter" data-level="7.5" data-path="gene-species-trees.html"><a href="gene-species-trees.html#conclusion"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a>
+<li class="chapter" data-level="8" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html"><i class="fa fa-check"></i><b>8</b> Bayesian phylogenetics</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-character-types"><i class="fa fa-check"></i><b>8.1</b> Discrete character types</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1.1</b> Nominal scale types</a></li>
-<li class="chapter" data-level="8.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>8.1.2</b> Ordinal scale types</a></li>
+<li class="chapter" data-level="8.1" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>8.1</b> Bayesian statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>8.2</b> Bayesian phylogenetic inference</a></li>
+<li class="chapter" data-level="8.3" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference-in-practice"><i class="fa fa-check"></i><b>8.3</b> Bayesian phylogenetic inference in practice</a></li>
+<li class="chapter" data-level="8.4" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#resources"><i class="fa fa-check"></i><b>8.4</b> Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.2</b> Continuous data</a>
+<li class="chapter" data-level="9" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>9</b> Additional character types</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="additional-character-types.html"><a href="additional-character-types.html#difference-scale-type"><i class="fa fa-check"></i><b>8.2.1</b> Difference scale type</a></li>
-<li class="chapter" data-level="8.2.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ratio-scale-type"><i class="fa fa-check"></i><b>8.2.2</b> Ratio scale type</a></li>
+<li class="chapter" data-level="9.1" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-character-types"><i class="fa fa-check"></i><b>9.1</b> Discrete character types</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>9.1.1</b> Nominal scale types</a></li>
+<li class="chapter" data-level="9.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>9.1.2</b> Ordinal scale types</a></li>
+<li class="chapter" data-level="9.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-ordered-characters"><i class="fa fa-check"></i><b>9.1.3</b> Discrete ordered characters</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>9.2</b> Continuous data</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="additional-character-types.html"><a href="additional-character-types.html#brownian-motion"><i class="fa fa-check"></i><b>9.2.1</b> Brownian motion</a></li>
+<li class="chapter" data-level="9.2.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ornsteinuhlenbeck-models"><i class="fa fa-check"></i><b>9.2.2</b> Ornstein–Uhlenbeck models</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a>
+<li class="chapter" data-level="10" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>10</b> Phylogenies and time</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a>
+<li class="chapter" data-level="10.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>10.1</b> Measurements of time on trees</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>9.1.1</b> Cladograms</a></li>
-<li class="chapter" data-level="9.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>9.1.2</b> Phylograms</a></li>
-<li class="chapter" data-level="9.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>9.1.3</b> Chronograms</a></li>
+<li class="chapter" data-level="10.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>10.1.1</b> Cladograms</a></li>
+<li class="chapter" data-level="10.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>10.1.2</b> Phylograms</a></li>
+<li class="chapter" data-level="10.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>10.1.3</b> Chronograms</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.2</b> Time calibration</a></li>
-<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#the-implications-of-constraining-node-ages"><i class="fa fa-check"></i><b>9.3</b> The implications of constraining node ages</a>
+<li class="chapter" data-level="10.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>10.2</b> Time calibration</a></li>
+<li class="chapter" data-level="10.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#the-implications-of-constraining-node-ages"><i class="fa fa-check"></i><b>10.3</b> The implications of constraining node ages</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration-in-practice"><i class="fa fa-check"></i><b>9.3.1</b> Time calibration in practice</a></li>
+<li class="chapter" data-level="10.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration-in-practice"><i class="fa fa-check"></i><b>10.3.1</b> Time calibration in practice</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>11</b> Ancestral character state reconstruction</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#reconstructing-discrete-characters"><i class="fa fa-check"></i><b>11.1</b> Reconstructing discrete characters</a></li>
+<li class="chapter" data-level="11.2" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#reconstructing-continuous-characters"><i class="fa fa-check"></i><b>11.2</b> Reconstructing continuous characters</a></li>
+<li class="chapter" data-level="11.3" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#cautions-and-limitations"><i class="fa fa-check"></i><b>11.3</b> Cautions and limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>12</b> Comparative methods</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="comparative-methods.html"><a href="comparative-methods.html#species-are-not-independent-observations"><i class="fa fa-check"></i><b>12.1</b> Species are not independent observations</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="comparative-methods.html"><a href="comparative-methods.html#a-simulation-of-the-problem"><i class="fa fa-check"></i><b>12.1.1</b> A simulation of the problem</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>12.2</b> Phylogenetic independent contrasts</a></li>
+<li class="chapter" data-level="12.3" data-path="comparative-methods.html"><a href="comparative-methods.html#the-expected-covariance-structure"><i class="fa fa-check"></i><b>12.3</b> The expected covariance structure</a></li>
+<li class="chapter" data-level="12.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-generalized-least-squares"><i class="fa fa-check"></i><b>12.4</b> Phylogenetic generalized least squares</a></li>
+<li class="chapter" data-level="12.5" data-path="comparative-methods.html"><a href="comparative-methods.html#beyond-correlated-evolution"><i class="fa fa-check"></i><b>12.5</b> Beyond correlated evolution</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> Probability theory and General statistics</a></li>
-<li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.2</b> Bayes theorem</a></li>
+<li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> Probability theory and general statistics</a></li>
+<li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.2</b> Bayes’ theorem</a></li>
 <li class="chapter" data-level="A.3" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#linear-algebra"><i class="fa fa-check"></i><b>A.3</b> Linear algebra</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="software-versions.html"><a href="software-versions.html"><i class="fa fa-check"></i><b>B</b> Software versions</a></li>
@@ -321,32 +345,32 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="statistical-and-mathematical-fundamentals" class="section level1 hasAnchor" number="10">
+<div id="statistical-and-mathematical-fundamentals" class="section level1 hasAnchor" number="13">
 <h1><span class="header-section-number">Appendix A</span> Statistical and mathematical fundamentals<a href="statistical-and-mathematical-fundamentals.html#statistical-and-mathematical-fundamentals" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Phylogenetic biology draws on a variety of themes in statistics and mathematics. Given the diverse backgrounds of people coming to phylogenetic biology, one of the challenges of introducing people to this field is ensuring a foundation in these fundamentals. Many people have a solid working grasp of many of these topics, others need a refresher, and some have never seen them.</p>
+<p>Phylogenetic biology draws on a variety of themes in statistics and mathematics. Given the diverse backgrounds of people coming to phylogenetic biology, one of the challenges of introducing people to this field is ensuring a foundation in these fundamentals. Many people have a solid working grasp of these topics, others need a refresher, and some have never seen them.</p>
 <p>Throughout the text I have covered some of these fundamentals, but here I provide additional resources.</p>
-<div id="stats-general" class="section level2 hasAnchor" number="10.1">
-<h2><span class="header-section-number">A.1</span> Probability theory and General statistics<a href="statistical-and-mathematical-fundamentals.html#stats-general" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>I put together this short summary of statistical concepts commonly encountered in biology - <a href="https://bitbucket.org/caseywdunn/statistics/raw/master/statistics_in_biology.pdf" class="uri">https://bitbucket.org/caseywdunn/statistics/raw/master/statistics_in_biology.pdf</a>. It is short and technical, with a focus on the relationship between concepts, such as the exponential family of distributions.</p>
+<div id="stats-general" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">A.1</span> Probability theory and general statistics<a href="statistical-and-mathematical-fundamentals.html#stats-general" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I put together this short summary of statistical concepts commonly encountered in biology—<a href="https://raw.githubusercontent.com/caseywdunn/statistics/master/statistics_in_biology.pdf" class="uri">https://raw.githubusercontent.com/caseywdunn/statistics/master/statistics_in_biology.pdf</a>. It is short and technical, with a focus on the relationship between concepts, such as the exponential family of distributions.</p>
 </div>
-<div id="stats-bayes" class="section level2 hasAnchor" number="10.2">
-<h2><span class="header-section-number">A.2</span> Bayes theorem<a href="statistical-and-mathematical-fundamentals.html#stats-bayes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Grant Sanderson of 3Blue1Brown provides an excellent introduction to Bayes Theorem and conditional probability in this video - <a href="https://youtu.be/HZGCoVF3YvM" class="uri">https://youtu.be/HZGCoVF3YvM</a>. Note that he uses <span class="math inline">\(E\)</span> for Evidence rather than <span class="math inline">\(D\)</span> for Data as is common practice in phylogenetic applications.</p>
-<p>This video provides additional perspective, including its application to medical testing - <a href="https://youtu.be/R13BD8qKeTg" class="uri">https://youtu.be/R13BD8qKeTg</a>.</p>
-<p>The MCMC robot by Paul Lewis is an excellent interactive introduction to MCMC sampling - <a href="https://phylogeny.uconn.edu/mcmc-robot/" class="uri">https://phylogeny.uconn.edu/mcmc-robot/</a>.</p>
+<div id="stats-bayes" class="section level2 hasAnchor" number="13.2">
+<h2><span class="header-section-number">A.2</span> Bayes’ theorem<a href="statistical-and-mathematical-fundamentals.html#stats-bayes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Grant Sanderson of 3Blue1Brown provides an excellent introduction to Bayes’ theorem and conditional probability in this video—<a href="https://youtu.be/HZGCoVF3YvM" class="uri">https://youtu.be/HZGCoVF3YvM</a>. Note that he uses <span class="math inline">\(E\)</span> for Evidence rather than <span class="math inline">\(D\)</span> for Data as is common practice in phylogenetic applications.</p>
+<p>This video provides additional perspective, including its application to medical testing—<a href="https://youtu.be/R13BD8qKeTg" class="uri">https://youtu.be/R13BD8qKeTg</a>.</p>
+<p>The MCMC robot by Paul Lewis is an excellent interactive introduction to MCMC sampling—<a href="https://phylogeny.uconn.edu/mcmc-robot/" class="uri">https://phylogeny.uconn.edu/mcmc-robot/</a>.</p>
 </div>
-<div id="linear-algebra" class="section level2 hasAnchor" number="10.3">
+<div id="linear-algebra" class="section level2 hasAnchor" number="13.3">
 <h2><span class="header-section-number">A.3</span> Linear algebra<a href="statistical-and-mathematical-fundamentals.html#linear-algebra" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Linear algebra is a rich field of math that springs from a surprisingly simple
-starting point - linear combinations of
+starting point—linear combinations of
 vectors, often represented as rows and columns of matrices. From basic
 operations such as vector addition and scalar multiplication, one can build
 matrix operations and many sophisticated data analyses. Many familiar data
 analysis methods, such as regression, solving systems of equations,
-Principal Component Analyses (PCA), and common clustering methods, are built from linear
+Principal Component Analysis (PCA), and common clustering methods, are built from linear
 algebra under the hood. So are many aspects of phylogenetic analysis, including
 the models of evolution themselves and the representation of the phylogenetic
-trees in matrix forms that computers can easily manupulate.</p>
+trees in matrix forms that computers can easily manipulate.</p>
 <p>Though linear algebra is fundamental to many topics at the intersection of
 science, mathematics, and computation, most science students have far less
 exposure to this critical field than to statistics, calculus, and other
@@ -356,15 +380,22 @@ and allow us to better apply, implement, and extend them.</p>
 <p>The following resources are a good place to start in your own studies of
 linear algebra:</p>
 <ul>
-<li><p>The Essence of Linear Algebra video series by Grant Sanderson (3Blue1Brown) - <a href="https://www.3blue1brown.com/topics/linear-algebra" class="uri">https://www.3blue1brown.com/topics/linear-algebra</a>.</p></li>
+<li><p>The <em>Essence of linear algebra</em> video series by Grant Sanderson (3Blue1Brown)—<a href="https://www.3blue1brown.com/topics/linear-algebra" class="uri">https://www.3blue1brown.com/topics/linear-algebra</a>.</p></li>
+<li><p><em>Introduction to Linear Algebra</em> by Gilbert Strang <span class="citation">(<a href="#ref-strang2023">Strang 2023</a>)</span> is a widely used and comprehensive textbook, paired with his well-known MIT lecture series.</p></li>
 <li><p>Linear Algebra: Theory, Intuition, Code, by Mike X Cohen. This book is
 accessible to scientists with little past math experience, and is very
 reasonably priced. <a href="https://www.amazon.com/Linear-Algebra-Theory-Intuition-Code/dp/9083136604" class="uri">https://www.amazon.com/Linear-Algebra-Theory-Intuition-Code/dp/9083136604</a>.</p></li>
-<li><p>Data Driven Science and Engineering, by Steve Brunton and Nathan Kutz - <a href="http://www.databookuw.com/" class="uri">http://www.databookuw.com/</a> .
+<li><p>Data Driven Science and Engineering, by Steve Brunton and Nathan Kutz—<a href="http://www.databookuw.com/" class="uri">http://www.databookuw.com/</a>.
 This book shows how linear algebra is applied to many powerful scientific data analyses.
-The authors have excellent companion videos organized into playlists at <a href="https://www.youtube.com/c/Eigensteve/playlists" class="uri">https://www.youtube.com/c/Eigensteve/playlists</a>, including singular value decomposition for Chapter 1, Fourier analyses for chapter 2.</p></li>
+The authors have excellent companion videos organized into playlists at <a href="https://www.youtube.com/c/Eigensteve/playlists" class="uri">https://www.youtube.com/c/Eigensteve/playlists</a>, including singular value decomposition for Chapter 1, and Fourier analyses for Chapter 2.</p></li>
 </ul>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-strang2023" class="csl-entry">
+Strang, Gilbert. 2023. <em>Introduction to Linear Algebra</em>. 6th ed. Wellesley-Cambridge Press.
 </div>
 </div>
             </section>
@@ -372,7 +403,7 @@ The authors have excellent companion videos organized into playlists at <a href=
           </div>
         </div>
       </div>
-<a href="phylogenies-and-time.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="comparative-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="software-versions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -415,7 +446,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["phylogenetic_biology.pdf", "phylogenetic_biology.epub"],
+  "download": null,
   "search": {
     "engine": "fuse",
     "options": null

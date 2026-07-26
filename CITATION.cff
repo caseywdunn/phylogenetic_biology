@@ -18,8 +18,8 @@ preferred-citation:
       given-names: Casey W.
       affiliation: Yale University
       orcid: https://orcid.org/0000-0003-0628-5150
-  year: 2025
-  edition: 0.9.0
+  year: 2026
+  edition: "First Edition"
   doi: 10.5281/zenodo.17267993
   publisher:
     name: "Casey W. Dunn"
@@ -27,5 +27,5 @@ preferred-citation:
   isbn: "979-8-9934524-0-1"
   license: CC-BY-NC-ND-4.0
   repository-code: https://github.com/caseywdunn/phylogenetic_biology
-  url: http://dunnlab.org/phylogenetic_biology/
+  url: https://dunnlab.org/phylogenetic_biology/
 

@@ -135,5 +135,5 @@ Site heterogeneity in rates is incorporated into the final model using `-i` (fra
 
 ## Submit
 
-Confirm that this document knits without error. Compress the exercise folder, with this file, the knitted html file, and all analysis results, and submit.
+Confirm that this document knits without error. Compress the exercise folder, with this file, the knitted HTML file, and all analysis results, and submit.
 

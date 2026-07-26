@@ -1,0 +1,42 @@
+
+% Back-of-book index, printed after the bibliography. \phantomsection +
+% \addcontentsline give it a Table of Contents entry (the theindex environment
+% in the book class uses \chapter*, which is not numbered and not listed on its
+% own).
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+
+% Page parity. Ingram wants an even interior page count, so add a single
+% empty-styled blank when the book would otherwise end on an odd page.
+%
+% Note the sense of the test, which is easy to get wrong. Inside this hook,
+% after \clearpage, \value{page} is the number of the LAST page that will
+% ship -- not the number of the next, unstarted page. (Measured: a build whose
+% index ended on 148 reported value(page)=149 and produced a 149-page body.)
+% So an ODD \value{page} means the interior would end odd and needs the blank.
+% The more familiar idiom, which tests for even, is correct only when no page
+% is in progress at that moment; it is wrong here and silently produced an
+% odd 163-page interior on every build.
+%
+% \AtEndDocument rather than inline: the last index page is not yet shipped at
+% the point after_body's content is read, so an inline test measures too early.
+%
+% This also assumes the roman front matter has an even page count, which it
+% does by construction (\clearrecto and the \cleardoublepage redefinition in
+% preamble.tex keep the half-title/title/dedication on rectos). Even front
+% matter + even body = even interior. The counter arithmetic is subtle enough
+% that the output is the only real guarantee -- verify after every build:
+%   pdfinfo docs/phylogenetic_biology.pdf | grep Pages
+\AtEndDocument{%
+  \clearpage
+  % Any page shipped from here on is a trailing blank, so strip running
+  % heads and folios from all of them. This catches both the parity blank
+  % below and the stray page the index leaves after it, which otherwise
+  % prints "150 Index" on an empty final sheet.
+  \pagestyle{empty}%
+  \ifodd\value{page}
+    \null\thispagestyle{empty}\clearpage
+  \fi
+  \typeout{^^J*** PARITY: interior ends on page \the\value{page} ***^^J}}

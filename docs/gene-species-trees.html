@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Gene trees and species trees | Phylogenetic Biology</title>
+  <meta name="description" content="An introduction to Phylogenetic Biology." />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Gene trees and species trees | Phylogenetic Biology" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="An introduction to Phylogenetic Biology." />
+  <meta name="github-repo" content="caseywdunn/phylogenetic_biology" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Gene trees and species trees | Phylogenetic Biology" />
+  
+  <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
+  
+
+<meta name="author" content="Casey W. Dunn" />
+
+
+<meta name="date" content="2026-07-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="evaluation.html"/>
+<link rel="next" href="bayesian-phylogenetics.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Phylogenetic Biology</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i>Approach</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i>Using this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i>Distribution</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i>Other resources</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.1</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#history-of-the-field"><i class="fa fa-check"></i><b>1.1</b> History of the field</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#core-concepts"><i class="fa fa-check"></i><b>1.2</b> Core concepts</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#a-unified-perspective-on-phylogenetic-studies"><i class="fa fa-check"></i><b>1.3</b> A unified perspective on phylogenetic studies</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#applications"><i class="fa fa-check"></i><b>1.4</b> Applications</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="phylogenies.html"><a href="phylogenies.html"><i class="fa fa-check"></i><b>2</b> Phylogenies</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="phylogenies.html"><a href="phylogenies.html#phylogenies-are-graphs"><i class="fa fa-check"></i><b>2.1</b> Phylogenies are graphs</a></li>
+<li class="chapter" data-level="2.2" data-path="phylogenies.html"><a href="phylogenies.html#drawing-phylogenies"><i class="fa fa-check"></i><b>2.2</b> Drawing phylogenies</a></li>
+<li class="chapter" data-level="2.3" data-path="phylogenies.html"><a href="phylogenies.html#tree-properties"><i class="fa fa-check"></i><b>2.3</b> Some properties of phylogenies</a></li>
+<li class="chapter" data-level="2.4" data-path="phylogenies.html"><a href="phylogenies.html#rotating-nodes"><i class="fa fa-check"></i><b>2.4</b> Rotating nodes</a></li>
+<li class="chapter" data-level="2.5" data-path="phylogenies.html"><a href="phylogenies.html#trees-branch-lengths"><i class="fa fa-check"></i><b>2.5</b> The meaning of branch lengths</a></li>
+<li class="chapter" data-level="2.6" data-path="phylogenies.html"><a href="phylogenies.html#naming-nodes-and-groups"><i class="fa fa-check"></i><b>2.6</b> Naming nodes and groups</a></li>
+<li class="chapter" data-level="2.7" data-path="phylogenies.html"><a href="phylogenies.html#polytomies"><i class="fa fa-check"></i><b>2.7</b> Polytomies</a></li>
+<li class="chapter" data-level="2.8" data-path="phylogenies.html"><a href="phylogenies.html#rooting"><i class="fa fa-check"></i><b>2.8</b> Rooting</a></li>
+<li class="chapter" data-level="2.9" data-path="phylogenies.html"><a href="phylogenies.html#the-information-contained-in-phylogenies"><i class="fa fa-check"></i><b>2.9</b> The information contained in phylogenies</a></li>
+<li class="chapter" data-level="2.10" data-path="phylogenies.html"><a href="phylogenies.html#representation"><i class="fa fa-check"></i><b>2.10</b> Representation</a></li>
+<li class="chapter" data-level="2.11" data-path="phylogenies.html"><a href="phylogenies.html#additional-reading"><i class="fa fa-check"></i><b>2.11</b> Additional reading</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>3</b> Simulation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="simulation.html"><a href="simulation.html#models"><i class="fa fa-check"></i><b>3.1</b> Models</a></li>
+<li class="chapter" data-level="3.2" data-path="simulation.html"><a href="simulation.html#a-simple-model-of-evolution"><i class="fa fa-check"></i><b>3.2</b> A simple model of evolution</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="simulation.html"><a href="simulation.html#expected-amount-of-change"><i class="fa fa-check"></i><b>3.2.1</b> Expected amount of change</a></li>
+<li class="chapter" data-level="3.2.2" data-path="simulation.html"><a href="simulation.html#expected-end-state"><i class="fa fa-check"></i><b>3.2.2</b> Expected end state</a></li>
+<li class="chapter" data-level="3.2.3" data-path="simulation.html"><a href="simulation.html#analytical-approach"><i class="fa fa-check"></i><b>3.2.3</b> Analytical approach</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="simulation.html"><a href="simulation.html#generalizing-the-simple-model"><i class="fa fa-check"></i><b>3.3</b> Generalizing the simple model</a></li>
+<li class="chapter" data-level="3.4" data-path="simulation.html"><a href="simulation.html#expanding-the-models"><i class="fa fa-check"></i><b>3.4</b> Expanding the models</a></li>
+<li class="chapter" data-level="3.5" data-path="simulation.html"><a href="simulation.html#plugging-some-numbers-into-the-expanded-model"><i class="fa fa-check"></i><b>3.5</b> Plugging some numbers into the expanded model</a></li>
+<li class="chapter" data-level="3.6" data-path="simulation.html"><a href="simulation.html#simulation-along-a-single-branch"><i class="fa fa-check"></i><b>3.6</b> Simulation along a single branch</a></li>
+<li class="chapter" data-level="3.7" data-path="simulation.html"><a href="simulation.html#scaling-from-a-single-branch-to-a-whole-tree"><i class="fa fa-check"></i><b>3.7</b> Scaling from a single branch to a whole tree</a></li>
+<li class="chapter" data-level="3.8" data-path="simulation.html"><a href="simulation.html#scaling-from-a-single-site-to-multiple-sites"><i class="fa fa-check"></i><b>3.8</b> Scaling from a single site to multiple sites</a></li>
+<li class="chapter" data-level="3.9" data-path="simulation.html"><a href="simulation.html#concluding-thoughts"><i class="fa fa-check"></i><b>3.9</b> Concluding thoughts</a></li>
+<li class="chapter" data-level="3.10" data-path="simulation.html"><a href="simulation.html#additional-resources"><i class="fa fa-check"></i><b>3.10</b> Additional resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html"><i class="fa fa-check"></i><b>4</b> Inferring phylogenies from data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-a-single-history"><i class="fa fa-check"></i><b>4.1</b> Probability of a single history</a></li>
+<li class="chapter" data-level="4.2" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#probability-of-multiple-histories"><i class="fa fa-check"></i><b>4.2</b> Probability of multiple histories</a></li>
+<li class="chapter" data-level="4.3" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#log-likelihood"><i class="fa fa-check"></i><b>4.3</b> Log likelihood</a></li>
+<li class="chapter" data-level="4.4" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#likelihood-for-multiple-sites"><i class="fa fa-check"></i><b>4.4</b> Likelihood for multiple sites</a></li>
+<li class="chapter" data-level="4.5" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#maximum-likelihood"><i class="fa fa-check"></i><b>4.5</b> Maximum likelihood</a></li>
+<li class="chapter" data-level="4.6" data-path="inferring-phylogenies-from-data.html"><a href="inferring-phylogenies-from-data.html#optimality-criteria"><i class="fa fa-check"></i><b>4.6</b> Optimality criteria</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html"><i class="fa fa-check"></i><b>5</b> Molecular inference in practice</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#your-question"><i class="fa fa-check"></i><b>5.1</b> Your question</a></li>
+<li class="chapter" data-level="5.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#taxon-sampling"><i class="fa fa-check"></i><b>5.2</b> Taxon sampling</a></li>
+<li class="chapter" data-level="5.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#collecting-sequence-data"><i class="fa fa-check"></i><b>5.3</b> Collecting sequence data</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#whole-genomes"><i class="fa fa-check"></i><b>5.3.1</b> Whole genomes</a></li>
+<li class="chapter" data-level="5.3.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#transcriptomes"><i class="fa fa-check"></i><b>5.3.2</b> Transcriptomes</a></li>
+<li class="chapter" data-level="5.3.3" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#targeted-enrichment"><i class="fa fa-check"></i><b>5.3.3</b> Targeted enrichment</a></li>
+<li class="chapter" data-level="5.3.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#rad-seq"><i class="fa fa-check"></i><b>5.3.4</b> RAD-seq</a></li>
+<li class="chapter" data-level="5.3.5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#pcr"><i class="fa fa-check"></i><b>5.3.5</b> PCR</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#data-processing-upstream-of-phylogenetic-analyses"><i class="fa fa-check"></i><b>5.4</b> Data processing upstream of phylogenetic analyses</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#estimation-of-original-sequences"><i class="fa fa-check"></i><b>5.4.1</b> Estimation of original sequences</a></li>
+<li class="chapter" data-level="5.4.2" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#identification-of-homologous-genome-regions"><i class="fa fa-check"></i><b>5.4.2</b> Identification of homologous genome regions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#working-with-publicly-available-data"><i class="fa fa-check"></i><b>5.5</b> Working with publicly available data</a></li>
+<li class="chapter" data-level="5.6" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#homologous-sites"><i class="fa fa-check"></i><b>5.6</b> Homologous sites</a></li>
+<li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-genes"><i class="fa fa-check"></i><b>5.7</b> Combining information across genes</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="evaluation.html"><a href="evaluation.html#model-evaluation"><i class="fa fa-check"></i><b>6.1</b> Model evaluation</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="evaluation.html"><a href="evaluation.html#model-structure"><i class="fa fa-check"></i><b>6.1.1</b> Model structure</a></li>
+<li class="chapter" data-level="6.1.2" data-path="evaluation.html"><a href="evaluation.html#evaluating-models"><i class="fa fa-check"></i><b>6.1.2</b> Evaluating models</a></li>
+<li class="chapter" data-level="6.1.3" data-path="evaluation.html"><a href="evaluation.html#adding-complexity-to-dna-evolution-models"><i class="fa fa-check"></i><b>6.1.3</b> Adding complexity to DNA evolution models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="evaluation.html"><a href="evaluation.html#topological-evaluation"><i class="fa fa-check"></i><b>6.2</b> Topological evaluation</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="evaluation.html"><a href="evaluation.html#summarizing-topological-support"><i class="fa fa-check"></i><b>6.2.1</b> Summarizing topological support</a></li>
+<li class="chapter" data-level="6.2.2" data-path="evaluation.html"><a href="evaluation.html#bootstrapping"><i class="fa fa-check"></i><b>6.2.2</b> Bootstrapping</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="evaluation.html"><a href="evaluation.html#topology-tests"><i class="fa fa-check"></i><b>6.3</b> Topology tests</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="gene-species-trees.html"><a href="gene-species-trees.html"><i class="fa fa-check"></i><b>7</b> Gene trees and species trees</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="gene-species-trees.html"><a href="gene-species-trees.html#gene-trees-species-trees-and-real-discordance"><i class="fa fa-check"></i><b>7.1</b> Gene trees, species trees, and real discordance</a></li>
+<li class="chapter" data-level="7.2" data-path="gene-species-trees.html"><a href="gene-species-trees.html#incomplete-lineage-sorting"><i class="fa fa-check"></i><b>7.2</b> Incomplete lineage sorting</a></li>
+<li class="chapter" data-level="7.3" data-path="gene-species-trees.html"><a href="gene-species-trees.html#gene-duplication-and-loss"><i class="fa fa-check"></i><b>7.3</b> Gene duplication and loss</a></li>
+<li class="chapter" data-level="7.4" data-path="gene-species-trees.html"><a href="gene-species-trees.html#reticulation-introgression-hybridization-and-horizontal-transfer"><i class="fa fa-check"></i><b>7.4</b> Reticulation: introgression, hybridization, and horizontal transfer</a></li>
+<li class="chapter" data-level="7.5" data-path="gene-species-trees.html"><a href="gene-species-trees.html#conclusion"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html"><i class="fa fa-check"></i><b>8</b> Bayesian phylogenetics</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>8.1</b> Bayesian statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>8.2</b> Bayesian phylogenetic inference</a></li>
+<li class="chapter" data-level="8.3" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference-in-practice"><i class="fa fa-check"></i><b>8.3</b> Bayesian phylogenetic inference in practice</a></li>
+<li class="chapter" data-level="8.4" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#resources"><i class="fa fa-check"></i><b>8.4</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>9</b> Additional character types</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-character-types"><i class="fa fa-check"></i><b>9.1</b> Discrete character types</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>9.1.1</b> Nominal scale types</a></li>
+<li class="chapter" data-level="9.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>9.1.2</b> Ordinal scale types</a></li>
+<li class="chapter" data-level="9.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-ordered-characters"><i class="fa fa-check"></i><b>9.1.3</b> Discrete ordered characters</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>9.2</b> Continuous data</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="additional-character-types.html"><a href="additional-character-types.html#brownian-motion"><i class="fa fa-check"></i><b>9.2.1</b> Brownian motion</a></li>
+<li class="chapter" data-level="9.2.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ornsteinuhlenbeck-models"><i class="fa fa-check"></i><b>9.2.2</b> Ornstein–Uhlenbeck models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>10</b> Phylogenies and time</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>10.1</b> Measurements of time on trees</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>10.1.1</b> Cladograms</a></li>
+<li class="chapter" data-level="10.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>10.1.2</b> Phylograms</a></li>
+<li class="chapter" data-level="10.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>10.1.3</b> Chronograms</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>10.2</b> Time calibration</a></li>
+<li class="chapter" data-level="10.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#the-implications-of-constraining-node-ages"><i class="fa fa-check"></i><b>10.3</b> The implications of constraining node ages</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration-in-practice"><i class="fa fa-check"></i><b>10.3.1</b> Time calibration in practice</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>11</b> Ancestral character state reconstruction</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#reconstructing-discrete-characters"><i class="fa fa-check"></i><b>11.1</b> Reconstructing discrete characters</a></li>
+<li class="chapter" data-level="11.2" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#reconstructing-continuous-characters"><i class="fa fa-check"></i><b>11.2</b> Reconstructing continuous characters</a></li>
+<li class="chapter" data-level="11.3" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#cautions-and-limitations"><i class="fa fa-check"></i><b>11.3</b> Cautions and limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>12</b> Comparative methods</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="comparative-methods.html"><a href="comparative-methods.html#species-are-not-independent-observations"><i class="fa fa-check"></i><b>12.1</b> Species are not independent observations</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="comparative-methods.html"><a href="comparative-methods.html#a-simulation-of-the-problem"><i class="fa fa-check"></i><b>12.1.1</b> A simulation of the problem</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>12.2</b> Phylogenetic independent contrasts</a></li>
+<li class="chapter" data-level="12.3" data-path="comparative-methods.html"><a href="comparative-methods.html#the-expected-covariance-structure"><i class="fa fa-check"></i><b>12.3</b> The expected covariance structure</a></li>
+<li class="chapter" data-level="12.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-generalized-least-squares"><i class="fa fa-check"></i><b>12.4</b> Phylogenetic generalized least squares</a></li>
+<li class="chapter" data-level="12.5" data-path="comparative-methods.html"><a href="comparative-methods.html#beyond-correlated-evolution"><i class="fa fa-check"></i><b>12.5</b> Beyond correlated evolution</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> Probability theory and general statistics</a></li>
+<li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.2</b> Bayes’ theorem</a></li>
+<li class="chapter" data-level="A.3" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#linear-algebra"><i class="fa fa-check"></i><b>A.3</b> Linear algebra</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="software-versions.html"><a href="software-versions.html"><i class="fa fa-check"></i><b>B</b> Software versions</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Phylogenetic Biology</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="gene-species-trees" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Gene trees and species trees<a href="gene-species-trees.html#gene-species-trees" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>So far we have gone to great lengths to understand the evolution of single genome regions. Implicitly, we have treated the phylogenies of genes as though they were the phylogenies of the species that carry them. This is a common and often useful simplification, but it is often not correct. In this chapter we will examine the distinction between <strong>gene trees</strong> and <strong>species trees</strong>, and the biological processes that can make gene trees disagree with each other and with the species tree.</p>
+<p>Gene trees can disagree due to estimation error. Any tree we infer from a finite stretch of sequence is uncertain, and two genes can appear to disagree simply because we have estimated each of them imperfectly. This in part motivated the evaluation methods we already discussed (Chapter <a href="evaluation.html#evaluation">6</a>). But gene trees can also disagree because the histories of different genome regions are genuinely different <span class="citation">(<a href="#ref-maddison1997gene">Maddison 1997</a>)</span>. This discordance is the expected outcome of ordinary biological processes acting on real populations and real genomes. A gene tree that disagrees with the species tree can be right about its own history, and quite distinct from the history of the species that carry it. While estimation error shrinks as we collect more data per gene, true discordance does not. It is a property of the history itself.</p>
+<div id="gene-trees-species-trees-and-real-discordance" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Gene trees, species trees, and real discordance<a href="gene-species-trees.html#gene-trees-species-trees-and-real-discordance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="citation">Maddison (<a href="#ref-maddison1997gene">1997</a>)</span> provided the framing of gene tree discordance that serves as the foundation for this chapter. Picture the species tree not as a set of thin lines but as a set of tubes, each tube a population extended through time that branches as species split. The history of any particular gene is a gene tree that runs inside these tubes. Sometimes a gene tree follows the shape of its tubes and matches the species tree exactly; sometimes it does not.</p>
+<p>Several distinct biological processes can lead gene trees to be discordant with each other and the species tree:</p>
+<ul>
+<li><p><strong>Incomplete lineage sorting</strong>, in which ancestral variation persists across successive speciation events and sorts among descendants in a way that does not track the order of speciation. This is the domain of the multispecies coalescent.</p></li>
+<li><p><strong>Gene duplication and loss</strong>, in which a genome region is copied within a genome or deleted, so that the history of the region includes events that the species tree does not.</p></li>
+<li><p><strong>Introgression, hybridization, and horizontal transfer</strong>, in which genetic material moves between lineages that have already diverged, so that a region’s history is genuinely reticulate rather than tree-like.</p></li>
+</ul>
+</div>
+<div id="incomplete-lineage-sorting" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Incomplete lineage sorting<a href="gene-species-trees.html#incomplete-lineage-sorting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The process behind incomplete lineage sorting is most naturally described backward in time. Let us consider the process on an example gene tree and species tree (Figure <a href="gene-species-trees.html#fig:gst-coalescent">7.1</a>), knowing that what we learn in this context generalizes. Here we follow a gene sampled in three different species, A, B, and C, back through their ancestral populations. Looking backward, gene lineages <strong>coalesce</strong> when they find a common ancestor. Coalescence between genes sampled from different species will always occur before the species split; the question is how long before. The two lineages first have the chance to coalesce along the branch subtending the speciation, which we will call the <strong>focal branch</strong>. But they could coalesce deeper in the tree.</p>
+<p>There are three possible outcomes to consider (Figure <a href="gene-species-trees.html#fig:gst-coalescent">7.1</a>):</p>
+<ol style="list-style-type: decimal">
+<li>The A and B lineages coalesce along the focal branch (complete lineage sorting). <strong>The gene tree is concordant with the species tree.</strong></li>
+<li>The A and B lineages fail to coalesce along the focal branch (incomplete lineage sorting), but in the ancestral population A and B are still the first pair to coalesce. <strong>The gene tree is concordant with the species tree.</strong></li>
+<li>The A and B lineages fail to coalesce along the focal branch (incomplete lineage sorting), and instead A or B coalesces first with C. <strong>The gene tree is discordant with the species tree.</strong></li>
+</ol>
+<p>The first two outcomes give a gene tree that matches the species tree; only the third produces discordance. We can calculate the probabilities of these outcomes with the multispecies coalescent model.</p>
+<div class="figure"><span style="display:block;" id="fig:gst-coalescent"></span>
+<img src="phylogenetic_biology_files/figure-html/gst-coalescent-1.png" alt="The three possible outcomes for a single gene sampled in species A, B, and C, whose species tree is ((A,B),C). Gene lineages (black) evolve within the species tree (gray tubes); the focal branch is the branch ancestral to the A--B speciation, where the A and B lineages first have the chance to coalesce. Outcome 1: the A and B lineages coalesce along the focal branch (complete lineage sorting), giving the concordant gene tree ((A,B),C). Outcome 2: the lineages pass through the focal branch without coalescing (deep coalescence), but A and B are still the first pair to coalesce in the ancestral population, again giving the concordant ((A,B),C). Outcome 3: after the same deep coalescence, B instead coalesces with C first, giving the discordant gene tree ((B,C),A)." width="2700" />
+<p class="caption">
+Figure 7.1: The three possible outcomes for a single gene sampled in species A, B, and C, whose species tree is ((A,B),C). Gene lineages (black) evolve within the species tree (gray tubes); the focal branch is the branch ancestral to the A–B speciation, where the A and B lineages first have the chance to coalesce. Outcome 1: the A and B lineages coalesce along the focal branch (complete lineage sorting), giving the concordant gene tree ((A,B),C). Outcome 2: the lineages pass through the focal branch without coalescing (deep coalescence), but A and B are still the first pair to coalesce in the ancestral population, again giving the concordant ((A,B),C). Outcome 3: after the same deep coalescence, B instead coalesces with C first, giving the discordant gene tree ((B,C),A).
+</p>
+</div>
+<p>The effective population size <span class="math inline">\(N_e\)</span> is the number of diploid individuals in an idealized population. Since diploid individuals each carry two copies of each gene, the total number of gene copies in a population of <span class="math inline">\(N_e\)</span> diploids is <span class="math inline">\(2N_e\)</span>. Given a particular gene sampled from the population, the probability that it coalesces with another particular gene in the previous generation is <span class="math inline">\(1/(2N_e)\)</span>. From this, we can derive that the expected time back to the most recent common ancestor of any two copies of a gene sampled from the population is <span class="math inline">\(2N_e\)</span> generations. The larger the effective population size, the longer we expect it to take for lineages to coalesce.</p>
+<p>Since generation times and <span class="math inline">\(N_e\)</span> can vary widely across species, branch lengths are often normalized to <strong>coalescent units</strong>.</p>
+<p><span class="math display" id="eq:coalescent-units">\[\begin{equation}
+  \tau = \frac{t}{2N_e}
+  \tag{7.1}
+\end{equation}\]</span></p>
+<p>A branch length of <span class="math inline">\(\tau=1\)</span> coalescent unit is the expected time for two lineages to coalesce within a population.</p>
+<p>As in our analyses of sequence evolution, we would like to have probabilities, not just expectations. The probability that two copies of a gene sampled from a population fail to coalesce along a branch of length <span class="math inline">\(\tau\)</span> is:</p>
+<p><span class="math display" id="eq:no-coalescent-prob">\[\begin{equation}
+  P(\text{fail to coalesce}) = e^{-\tau}
+  \tag{7.2}
+\end{equation}\]</span></p>
+<p>Note that the exponent contains a negative sign, so the probability of failure to coalesce decreases as the branch length increases. Equivalently, the probability of coalescence increases as the branch length increases. This makes sense. The more time two lineages spend together in a population, the more likely they are to coalesce.</p>
+<p>Equation <a href="gene-species-trees.html#eq:no-coalescent-prob">(7.2)</a> gives the probability that outcome 2 or outcome 3 occurs. To split that probability between these two outcomes, we need a short combinatorial assessment. When A and B fail to coalesce, all three lineages enter the ancestral population together, and the first coalescence there is equally likely to join any of the three pairs: A with B, A with C, or B with C. Only one of these, A with B, matches the species tree. So, given that A and B failed to coalesce along the focal branch, the gene tree is concordant with probability <span class="math inline">\(1/3\)</span> and discordant with probability <span class="math inline">\(2/3\)</span>.</p>
+<p>Multiplying the probability of failing to coalesce by the probability of a discordant resolution gives the overall probability of a discordant gene tree (outcome 3),</p>
+<p><span class="math display" id="eq:discordant-prob">\[\begin{equation}
+  P(\text{discordant}) = \frac{2}{3}\,e^{-\tau}
+  \tag{7.3}
+\end{equation}\]</span></p>
+<p>Since the probabilities sum to 1, the probability that the gene tree matches the species tree (outcomes 1 or 2) is one minus this,</p>
+<p><span class="math display" id="eq:concordant-prob">\[\begin{equation}
+  P(\text{concordant}) = 1 - \frac{2}{3}\,e^{-\tau}.
+  \tag{7.4}
+\end{equation}\]</span></p>
+<p>Equation <a href="gene-species-trees.html#eq:concordant-prob">(7.4)</a> is plotted in Figure <a href="gene-species-trees.html#fig:gst-concordance">7.2</a>: the match probability is <span class="math inline">\(1/3\)</span> when the focal branch is vanishingly short (<span class="math inline">\(\tau \to 0\)</span>), no better than choosing a topology at random, and rises toward one as the branch lengthens.</p>
+<div class="figure"><span style="display:block;" id="fig:gst-concordance"></span>
+<img src="phylogenetic_biology_files/figure-html/gst-concordance-1.png" alt="The probability that the gene tree matches the species tree rises as the focal branch lengthens (in coalescent units). A short focal branch, as at the base of a rapid radiation, leaves a wide zone of frequent discordance; a long one leaves gene trees essentially concordant." width="1500" />
+<p class="caption">
+Figure 7.2: The probability that the gene tree matches the species tree rises as the focal branch lengthens (in coalescent units). A short focal branch, as at the base of a rapid radiation, leaves a wide zone of frequent discordance; a long one leaves gene trees essentially concordant.
+</p>
+</div>
+<p>Although we worked this out for a single focal branch in a three-species tree, the same logic applies to every internal branch of any species tree: the shorter a branch is in coalescent units, the more its gene trees disagree with the species tree. Incomplete lineage sorting is therefore a serious concern wherever internal branches are short—rapid radiations, recent and closely spaced speciation events, and species with large effective population sizes—and negligible where internal branches are long.</p>
+<p>Two broad families of coalescent-aware phylogenetic methods, which model and accommodate the multispecies coalescent, are in wide use:</p>
+<ul>
+<li><p><strong>Summary, or two-step, methods.</strong> Estimate a gene tree for each region, then estimate the species tree from the distribution of gene trees under the multispecies coalescent. <strong>ASTRAL</strong> is the most widely used method of this kind <span class="citation">(<a href="#ref-zhang2018">Zhang et al. 2018</a>)</span>; it is statistically consistent under the coalescent and scales to genome-wide datasets.</p></li>
+<li><p><strong>Co-estimation and site-based methods.</strong> Full-likelihood approaches such as *BEAST co-estimate gene trees and the species tree together in a single Bayesian analysis <span class="citation">(<a href="#ref-heled2010">Heled and Drummond 2010</a>)</span>, which is powerful but computationally demanding. Site-based methods such as SVDquartets work directly from the sequence patterns under the coalescent without first estimating gene trees <span class="citation">(<a href="#ref-chifman2014">Chifman and Kubatko 2014</a>)</span>.</p></li>
+</ul>
+<p><span class="citation">Edwards (<a href="#ref-edwards2009">2009</a>)</span> is a good general treatment of species-tree inference under the coalescent.</p>
+</div>
+<div id="gene-duplication-and-loss" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Gene duplication and loss<a href="gene-species-trees.html#gene-duplication-and-loss" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Genome regions are duplicated and lost throughout evolution, and as a result most genes are members of <strong>gene families</strong>: sets of homologous genes within and across genomes that trace back to a history of duplication and differentiation.</p>
+<p>This is where the familiar vocabulary of <strong>orthology</strong> and <strong>paralogy</strong> comes in. Two gene copies are orthologs if their most recent common ancestor immediately precedes a speciation event, and paralogs if it precedes a duplication event. The distinction matters in part because our strategy of using genes as proxies for species assumes we are comparing orthologs: copies whose divergence tracks the divergence of species. Compare paralogs by mistake and the gene tree can depart drastically from the species tree.</p>
+<div class="figure"><span style="display:block;" id="fig:gst-reconciliation"></span>
+<img src="phylogenetic_biology_files/figure-html/gst-reconciliation-1.png" alt="How duplication and loss can make single-copy genes mislead. Left: the species tree, ((A,B),C). Middle: a gene family tree in which an early duplication (D) produced two copies; within each copy divergences track speciation, so each copy on its own recapitulates the species tree. Reciprocal loss (dashed gray lineages, marked X) then removes B and C from the first copy and A from the second, leaving exactly one surviving copy in each species: A1, B2, and C2. Right: these survivors look like ordinary single-copy genes, but A1 is a paralog of B2 and C2, so the tree they support is (A,(B,C))---B groups with C, conflicting with the species tree. This hidden paralogy is invisible unless the full gene family history is reconstructed." width="2400" />
+<p class="caption">
+Figure 7.3: How duplication and loss can make single-copy genes mislead. Left: the species tree, ((A,B),C). Middle: a gene family tree in which an early duplication (D) produced two copies; within each copy divergences track speciation, so each copy on its own recapitulates the species tree. Reciprocal loss (dashed gray lineages, marked X) then removes B and C from the first copy and A from the second, leaving exactly one surviving copy in each species: A1, B2, and C2. Right: these survivors look like ordinary single-copy genes, but A1 is a paralog of B2 and C2, so the tree they support is (A,(B,C))—B groups with C, conflicting with the species tree. This hidden paralogy is invisible unless the full gene family history is reconstructed.
+</p>
+</div>
+<p>It is tempting to restrict phylogenetic analyses of species to single-copy orthologs: regions that are present in exactly one copy in every species, with a clean one-to-one correspondence and no duplication or loss to worry about. Though many analyses attempt to approximate this, single-copy orthologs are exceedingly rare in practice. When sampling thousands of genes from even a moderately sized phylogeny of a few dozen species, there may only be a handful of genes that occur as no more than one copy in any species. The biological motivation for excluding genes with any duplication or loss is also less compelling than it may seem at first glance. Duplication and loss are pervasive features of genome evolution; a gene that has remained single copy across a whole clade for hundreds of millions of years may be unusual in ways (strong constraint, dosage sensitivity) that make it a biased sample of the genome.</p>
+<p>A more general response is to treat the labels <em>ortholog</em> and <em>paralog</em> as summaries of something richer: an explicit, reconstructed history of duplication and loss <span class="citation">(<a href="#ref-dunn2016">Dunn and Munro 2016</a>)</span>. Rather than sorting pairs of genes into two bins (strict orthologs and others), we can infer the full gene family tree and map it onto the species tree, a procedure called reconciliation <span class="citation">(<a href="#ref-szollosi2014">Szöllősi et al. 2015</a>; <a href="#ref-chen2000">Chen et al. 2000</a>)</span>. Reconciliation places each duplication and loss event on the species tree and, in doing so, tells us which copies are orthologs, which are paralogs, and exactly why (Figure <a href="gene-species-trees.html#fig:gst-reconciliation">7.3</a>). Orthology and paralogy fall out as consequences of the history rather than serving as the primitive concepts.</p>
+<p>Methods that consider gene duplication and loss can reduce inference problems and also let us discard fewer data (since we can relax our gene selection criteria to include genes with more complex histories). Tools that identify gene families and infer their histories, such as OrthoFinder <span class="citation">(<a href="#ref-emms2019">Emms and Kelly 2019</a>)</span>, make the full complement of gene families available for analysis, and methods such as ASTRAL-Pro estimate the species tree directly from multi-copy gene family trees, accounting for paralogy instead of requiring it to be filtered away first <span class="citation">(<a href="#ref-zhang2020">Zhang et al. 2020</a>)</span>. Many studies include genes with more than one copy per species without full reconciliation, using simpler approaches such as pruning some copies from gene trees before species tree inference, based on gene tree structure or branch lengths.</p>
+</div>
+<div id="reticulation-introgression-hybridization-and-horizontal-transfer" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Reticulation: introgression, hybridization, and horizontal transfer<a href="gene-species-trees.html#reticulation-introgression-hybridization-and-horizontal-transfer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The coalescent and gene duplication and loss both take the branching of the species tree for granted: lineages, once split, are assumed to stay split, and discordance arises only from how genes sort or duplicate within that fixed history. Reticulation breaks that assumption. Lineages that have already diverged come back into genetic contact and exchange material, so the history of the organisms is no longer a tree but a <strong>network</strong>, with branches that merge as well as split.</p>
+<p><strong>Hybridization</strong> and <strong>introgression</strong> are two outcomes of the same underlying event—interbreeding between diverged but still cross-fertile lineages—that differ in scale and consequence. Hybridization is the cross itself, and in its most dramatic form it founds a new lineage whose genome is a balanced mosaic of both parents (a homoploid hybrid) or a doubled complement of both parental genomes (an allopolyploid, a common route to new species in plants). Such a hybrid lineage descends from two branches of the species tree, a merger of two lineages. Introgression is the subtler and more common result: when hybrids backcross repeatedly into one of the parental populations, a minority of one lineage’s genome leaks into the other while both species persist largely intact. The recipient remains recognizably itself but carries some regions inherited from the donor. Introgression therefore touches only part of the genome, so it is usually detected from genome-wide asymmetries in shared variation rather than from any single locus.</p>
+<p><strong>Horizontal</strong>, or lateral, <strong>gene transfer</strong> moves genetic material between lineages outside of reproductive processes. Rather than passing from parent to offspring, a gene is taken up directly, carried by a plasmid, a virus, or environmental DNA, and inserted into another genome. Because this requires neither interbreeding nor close relationship, horizontal transfer can move a gene between very distantly related organisms, and it is pervasive among prokaryotes. A transferred gene has a history that leaps across the tree, resembling neither the recipient’s close relatives nor a pattern of incomplete lineage sorting.</p>
+<p>All three processes produce reticulate histories that no single tree can fully capture, and phylogenetic networks generalize trees to represent them <span class="citation">(<a href="#ref-solislemus2017">Solís-Lemus et al. 2017</a>)</span>.</p>
+</div>
+<div id="conclusion" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Conclusion<a href="gene-species-trees.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We have examined biological processes that can lead gene trees to depart from each other and from the species tree, methods that model these processes, and approaches to addressing discordance. This is one of the most active areas of phylogenetic research, and there is considerable ongoing development and consideration of the best approaches for particular problems.</p>
+<p>Many analyses do not attempt to model discordance at all, and treat all regions as though they share one history. One of the most common such approaches is to concatenate all the gene alignments end to end into one supermatrix and infer a single tree. There are a few reasons this is still a common approach. In practical terms, it often gives the same answer as methods that explicitly accommodate discordance, and it is computationally simpler. In some cases, the biology of the problem may make discordance unlikely. Another concern is that methods that accommodate discordance have many more parameters, and data may be too limited to support the more complex models. In practice, it is common for studies to take multiple approaches and compare the results. Understanding where the methods agree and where they disagree can be informative about the biology of the group and the structure of the problem, and can help identify additional approaches that may be needed to understand the problem.</p>
+<p>Real discordance can have multiple causes. Methods have been developed to explicitly model and address each. In reality, the specific processes that cause any particular discordance may be non-identifiable, and the best we can do is to use methods that are robust to multiple causes. The coalescent is a good example: it models one cause of discordance, but it may be able to essentially soak up other causes such as gene duplication and loss. Just because a method detects discordance doesn’t mean the discordance is due to the process it models.</p>
+<p>We should expect that different processes tend to dominate in different parts of the tree of life, and that the biology of the group and structure of the phylogenetic problem should inform the choice of method. As we have seen, incomplete lineage sorting is more likely on shorter branches and in larger populations. Given that shorter branches tend to be sampled in recent divergences, this is a particular concern at shallower depths in the tree. Incongruence due to gene duplication and loss is most likely when longer times have elapsed along the branches of the species tree. This is a particular concern for deeper phylogenetic problems, such as those regarding relationships from hundreds of millions of years ago.</p>
+<p>Gene tree/species tree discordance is one of those phylogenetic patterns that is often treated as a technical nuisance to be overcome in the quest to resolve species relationships. But it is also a rich area of biology that is clearly relevant, and often central, to the larger evolutionary questions that are leading us to infer phylogenies in the first place. Incomplete lineage sorting tells us how population-level processes give rise to macroevolutionary patterns. Gene duplication and loss is central to the evolution of genome novelty and complexity. Introgression and hybridization are central to understanding the evolution of many groups, including humans. As the field develops these processes will be treated less as nuisances to be overcome, and more as important biological phenomena to be sought out and understood.</p>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-chen2000" class="csl-entry">
+Chen, Kevin, Dannie Durand, and Martin Farach-Colton. 2000. <span>“<span>Notung</span>: Dating Gene Duplications Using Gene Family Trees.”</span> <em>Proceedings of the Fourth Annual International Conference on Computational Molecular Biology (RECOMB ’00)</em> (New York, NY, USA), RECOMB ’00, 96–106. <a href="https://doi.org/10.1145/332306.332351">https://doi.org/10.1145/332306.332351</a>.
+</div>
+<div id="ref-chifman2014" class="csl-entry">
+Chifman, Julia, and Laura Kubatko. 2014. <span>“Quartet Inference from <span>SNP</span> Data Under the Coalescent Model.”</span> <em>Bioinformatics</em> 30 (23): 3317–24. <a href="https://doi.org/10.1093/bioinformatics/btu530">https://doi.org/10.1093/bioinformatics/btu530</a>.
+</div>
+<div id="ref-dunn2016" class="csl-entry">
+Dunn, Casey W., and Catriona Munro. 2016. <span>“Comparative Genomics and the Diversity of Life.”</span> <em>Zoologica Scripta</em> 45 (S1): 5–13. <a href="https://doi.org/10.1111/zsc.12211">https://doi.org/10.1111/zsc.12211</a>.
+</div>
+<div id="ref-edwards2009" class="csl-entry">
+Edwards, Scott V. 2009. <span>“Is a New and General Theory of Molecular Systematics Emerging?”</span> <em>Evolution</em> 63 (1): 1–19. <a href="https://doi.org/10.1111/j.1558-5646.2008.00549.x">https://doi.org/10.1111/j.1558-5646.2008.00549.x</a>.
+</div>
+<div id="ref-emms2019" class="csl-entry">
+Emms, David M., and Steven Kelly. 2019. <span>“<span>OrthoFinder</span>: Phylogenetic Orthology Inference for Comparative Genomics.”</span> <em>Genome Biology</em> 20 (1): 238. <a href="https://doi.org/10.1186/s13059-019-1832-y">https://doi.org/10.1186/s13059-019-1832-y</a>.
+</div>
+<div id="ref-heled2010" class="csl-entry">
+Heled, Joseph, and Alexei J. Drummond. 2010. <span>“Bayesian Inference of Species Trees from Multilocus Data.”</span> <em>Molecular Biology and Evolution</em> 27 (3): 570–80. <a href="https://doi.org/10.1093/molbev/msp274">https://doi.org/10.1093/molbev/msp274</a>.
+</div>
+<div id="ref-maddison1997gene" class="csl-entry">
+Maddison, Wayne P. 1997. <span>“Gene Trees in Species Trees.”</span> <em>Systematic Biology</em> 46 (3): 523–36. <a href="https://doi.org/10.1093/sysbio/46.3.523">https://doi.org/10.1093/sysbio/46.3.523</a>.
+</div>
+<div id="ref-solislemus2017" class="csl-entry">
+Solís-Lemus, Claudia, Paul Bastide, and Cécile Ané. 2017. <span>“<span>PhyloNetworks</span>: A Package for Phylogenetic Networks.”</span> <em>Molecular Biology and Evolution</em> 34 (12): 3292–98. <a href="https://doi.org/10.1093/molbev/msx235">https://doi.org/10.1093/molbev/msx235</a>.
+</div>
+<div id="ref-szollosi2014" class="csl-entry">
+Szöllősi, Gergely J., Eric Tannier, Vincent Daubin, and Bastien Boussau. 2015. <span>“The Inference of Gene Trees with Species Trees.”</span> <em>Systematic Biology</em> 64 (1): e42–62. <a href="https://doi.org/10.1093/sysbio/syu048">https://doi.org/10.1093/sysbio/syu048</a>.
+</div>
+<div id="ref-zhang2018" class="csl-entry">
+Zhang, Chao, Maryam Rabiee, Erfan Sayyari, and Siavash Mirarab. 2018. <span>“<span>ASTRAL-III</span>: Polynomial Time Species Tree Reconstruction from Partially Resolved Gene Trees.”</span> <em>BMC Bioinformatics</em> 19 (S6): 153. <a href="https://doi.org/10.1186/s12859-018-2129-y">https://doi.org/10.1186/s12859-018-2129-y</a>.
+</div>
+<div id="ref-zhang2020" class="csl-entry">
+Zhang, Chao, Celine Scornavacca, Erin K. Molloy, and Siavash Mirarab. 2020. <span>“<span>ASTRAL-Pro</span>: Quartet-Based Species-Tree Inference Despite Paralogy.”</span> <em>Molecular Biology and Evolution</em> 37 (11): 3292–307. <a href="https://doi.org/10.1093/molbev/msaa139">https://doi.org/10.1093/molbev/msaa139</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="evaluation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bayesian-phylogenetics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

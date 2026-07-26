@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Phylogenies and time | Phylogenetic Biology</title>
+  <title>Chapter 10 Phylogenies and time | Phylogenetic Biology</title>
   <meta name="description" content="An introduction to Phylogenetic Biology." />
-  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Phylogenies and time | Phylogenetic Biology" />
+  <meta property="og:title" content="Chapter 10 Phylogenies and time | Phylogenetic Biology" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="An introduction to Phylogenetic Biology." />
   <meta name="github-repo" content="caseywdunn/phylogenetic_biology" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Phylogenies and time | Phylogenetic Biology" />
+  <meta name="twitter:title" content="Chapter 10 Phylogenies and time | Phylogenetic Biology" />
   
   <meta name="twitter:description" content="An introduction to Phylogenetic Biology." />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2025-10-07" />
+<meta name="date" content="2026-07-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="additional-character-types.html"/>
-<link rel="next" href="statistical-and-mathematical-fundamentals.html"/>
+<link rel="next" href="ancestral-character-state-reconstruction.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,8 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -167,12 +165,12 @@ div.csl-indent {
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i><b>0.1</b> Approach</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i><b>0.2</b> Using this book</a></li>
-<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i><b>0.3</b> Distribution</a></li>
-<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i><b>0.4</b> Other resources</a></li>
-<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>0.5</b> Acknowledgements</a></li>
-<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.6</b> License</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#approach"><i class="fa fa-check"></i>Approach</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#using-this-book"><i class="fa fa-check"></i>Using this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#distribution"><i class="fa fa-check"></i>Distribution</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#other-resources"><i class="fa fa-check"></i>Other resources</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgments"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i><b>0.1</b> License</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
@@ -241,7 +239,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#working-with-publicly-available-data"><i class="fa fa-check"></i><b>5.5</b> Working with publicly available data</a></li>
 <li class="chapter" data-level="5.6" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#homologous-sites"><i class="fa fa-check"></i><b>5.6</b> Homologous sites</a></li>
-<li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-multiple-genome-regions"><i class="fa fa-check"></i><b>5.7</b> Combining information across multiple genome regions</a></li>
+<li class="chapter" data-level="5.7" data-path="molecular-inference-in-practice.html"><a href="molecular-inference-in-practice.html#combining-information-across-genes"><i class="fa fa-check"></i><b>5.7</b> Combining information across genes</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>6</b> Evaluation</a>
 <ul>
@@ -258,45 +256,71 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="evaluation.html"><a href="evaluation.html#topology-tests"><i class="fa fa-check"></i><b>6.3</b> Topology tests</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html"><i class="fa fa-check"></i><b>7</b> Bayesian phylogenetics</a>
+<li class="chapter" data-level="7" data-path="gene-species-trees.html"><a href="gene-species-trees.html"><i class="fa fa-check"></i><b>7</b> Gene trees and species trees</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>7.1</b> Bayesian statistics</a></li>
-<li class="chapter" data-level="7.2" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>7.2</b> Bayesian phylogenetic inference</a></li>
-<li class="chapter" data-level="7.3" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference-in-practice"><i class="fa fa-check"></i><b>7.3</b> Bayesian phylogenetic inference in practice</a></li>
-<li class="chapter" data-level="7.4" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#resources"><i class="fa fa-check"></i><b>7.4</b> Resources</a></li>
+<li class="chapter" data-level="7.1" data-path="gene-species-trees.html"><a href="gene-species-trees.html#gene-trees-species-trees-and-real-discordance"><i class="fa fa-check"></i><b>7.1</b> Gene trees, species trees, and real discordance</a></li>
+<li class="chapter" data-level="7.2" data-path="gene-species-trees.html"><a href="gene-species-trees.html#incomplete-lineage-sorting"><i class="fa fa-check"></i><b>7.2</b> Incomplete lineage sorting</a></li>
+<li class="chapter" data-level="7.3" data-path="gene-species-trees.html"><a href="gene-species-trees.html#gene-duplication-and-loss"><i class="fa fa-check"></i><b>7.3</b> Gene duplication and loss</a></li>
+<li class="chapter" data-level="7.4" data-path="gene-species-trees.html"><a href="gene-species-trees.html#reticulation-introgression-hybridization-and-horizontal-transfer"><i class="fa fa-check"></i><b>7.4</b> Reticulation: introgression, hybridization, and horizontal transfer</a></li>
+<li class="chapter" data-level="7.5" data-path="gene-species-trees.html"><a href="gene-species-trees.html#conclusion"><i class="fa fa-check"></i><b>7.5</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>8</b> Additional character types</a>
+<li class="chapter" data-level="8" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html"><i class="fa fa-check"></i><b>8</b> Bayesian phylogenetics</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-character-types"><i class="fa fa-check"></i><b>8.1</b> Discrete character types</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>8.1.1</b> Nominal scale types</a></li>
-<li class="chapter" data-level="8.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>8.1.2</b> Ordinal scale types</a></li>
+<li class="chapter" data-level="8.1" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-statistics"><i class="fa fa-check"></i><b>8.1</b> Bayesian statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference"><i class="fa fa-check"></i><b>8.2</b> Bayesian phylogenetic inference</a></li>
+<li class="chapter" data-level="8.3" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#bayesian-phylogenetic-inference-in-practice"><i class="fa fa-check"></i><b>8.3</b> Bayesian phylogenetic inference in practice</a></li>
+<li class="chapter" data-level="8.4" data-path="bayesian-phylogenetics.html"><a href="bayesian-phylogenetics.html#resources"><i class="fa fa-check"></i><b>8.4</b> Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>8.2</b> Continuous data</a>
+<li class="chapter" data-level="9" data-path="additional-character-types.html"><a href="additional-character-types.html"><i class="fa fa-check"></i><b>9</b> Additional character types</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="additional-character-types.html"><a href="additional-character-types.html#difference-scale-type"><i class="fa fa-check"></i><b>8.2.1</b> Difference scale type</a></li>
-<li class="chapter" data-level="8.2.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ratio-scale-type"><i class="fa fa-check"></i><b>8.2.2</b> Ratio scale type</a></li>
+<li class="chapter" data-level="9.1" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-character-types"><i class="fa fa-check"></i><b>9.1</b> Discrete character types</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="additional-character-types.html"><a href="additional-character-types.html#nominal-scale-types"><i class="fa fa-check"></i><b>9.1.1</b> Nominal scale types</a></li>
+<li class="chapter" data-level="9.1.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ordinal-scale-types"><i class="fa fa-check"></i><b>9.1.2</b> Ordinal scale types</a></li>
+<li class="chapter" data-level="9.1.3" data-path="additional-character-types.html"><a href="additional-character-types.html#discrete-ordered-characters"><i class="fa fa-check"></i><b>9.1.3</b> Discrete ordered characters</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="additional-character-types.html"><a href="additional-character-types.html#continuous-data"><i class="fa fa-check"></i><b>9.2</b> Continuous data</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="additional-character-types.html"><a href="additional-character-types.html#brownian-motion"><i class="fa fa-check"></i><b>9.2.1</b> Brownian motion</a></li>
+<li class="chapter" data-level="9.2.2" data-path="additional-character-types.html"><a href="additional-character-types.html#ornsteinuhlenbeck-models"><i class="fa fa-check"></i><b>9.2.2</b> Ornstein–Uhlenbeck models</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>9</b> Phylogenies and time</a>
+<li class="chapter" data-level="10" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html"><i class="fa fa-check"></i><b>10</b> Phylogenies and time</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>9.1</b> Measurements of time on trees</a>
+<li class="chapter" data-level="10.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#measurements-of-time-on-trees"><i class="fa fa-check"></i><b>10.1</b> Measurements of time on trees</a>
 <ul>
-<li class="chapter" data-level="9.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>9.1.1</b> Cladograms</a></li>
-<li class="chapter" data-level="9.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>9.1.2</b> Phylograms</a></li>
-<li class="chapter" data-level="9.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>9.1.3</b> Chronograms</a></li>
+<li class="chapter" data-level="10.1.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#cladograms"><i class="fa fa-check"></i><b>10.1.1</b> Cladograms</a></li>
+<li class="chapter" data-level="10.1.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#phylograms"><i class="fa fa-check"></i><b>10.1.2</b> Phylograms</a></li>
+<li class="chapter" data-level="10.1.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#chronograms"><i class="fa fa-check"></i><b>10.1.3</b> Chronograms</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>9.2</b> Time calibration</a></li>
-<li class="chapter" data-level="9.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#the-implications-of-constraining-node-ages"><i class="fa fa-check"></i><b>9.3</b> The implications of constraining node ages</a>
+<li class="chapter" data-level="10.2" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration"><i class="fa fa-check"></i><b>10.2</b> Time calibration</a></li>
+<li class="chapter" data-level="10.3" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#the-implications-of-constraining-node-ages"><i class="fa fa-check"></i><b>10.3</b> The implications of constraining node ages</a>
 <ul>
-<li class="chapter" data-level="9.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration-in-practice"><i class="fa fa-check"></i><b>9.3.1</b> Time calibration in practice</a></li>
+<li class="chapter" data-level="10.3.1" data-path="phylogenies-and-time.html"><a href="phylogenies-and-time.html#time-calibration-in-practice"><i class="fa fa-check"></i><b>10.3.1</b> Time calibration in practice</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html"><i class="fa fa-check"></i><b>11</b> Ancestral character state reconstruction</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#reconstructing-discrete-characters"><i class="fa fa-check"></i><b>11.1</b> Reconstructing discrete characters</a></li>
+<li class="chapter" data-level="11.2" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#reconstructing-continuous-characters"><i class="fa fa-check"></i><b>11.2</b> Reconstructing continuous characters</a></li>
+<li class="chapter" data-level="11.3" data-path="ancestral-character-state-reconstruction.html"><a href="ancestral-character-state-reconstruction.html#cautions-and-limitations"><i class="fa fa-check"></i><b>11.3</b> Cautions and limitations</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="comparative-methods.html"><a href="comparative-methods.html"><i class="fa fa-check"></i><b>12</b> Comparative methods</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="comparative-methods.html"><a href="comparative-methods.html#species-are-not-independent-observations"><i class="fa fa-check"></i><b>12.1</b> Species are not independent observations</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="comparative-methods.html"><a href="comparative-methods.html#a-simulation-of-the-problem"><i class="fa fa-check"></i><b>12.1.1</b> A simulation of the problem</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-independent-contrasts"><i class="fa fa-check"></i><b>12.2</b> Phylogenetic independent contrasts</a></li>
+<li class="chapter" data-level="12.3" data-path="comparative-methods.html"><a href="comparative-methods.html#the-expected-covariance-structure"><i class="fa fa-check"></i><b>12.3</b> The expected covariance structure</a></li>
+<li class="chapter" data-level="12.4" data-path="comparative-methods.html"><a href="comparative-methods.html#phylogenetic-generalized-least-squares"><i class="fa fa-check"></i><b>12.4</b> Phylogenetic generalized least squares</a></li>
+<li class="chapter" data-level="12.5" data-path="comparative-methods.html"><a href="comparative-methods.html#beyond-correlated-evolution"><i class="fa fa-check"></i><b>12.5</b> Beyond correlated evolution</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html"><i class="fa fa-check"></i><b>A</b> Statistical and mathematical fundamentals</a>
 <ul>
-<li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> Probability theory and General statistics</a></li>
-<li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.2</b> Bayes theorem</a></li>
+<li class="chapter" data-level="A.1" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-general"><i class="fa fa-check"></i><b>A.1</b> Probability theory and general statistics</a></li>
+<li class="chapter" data-level="A.2" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#stats-bayes"><i class="fa fa-check"></i><b>A.2</b> Bayes’ theorem</a></li>
 <li class="chapter" data-level="A.3" data-path="statistical-and-mathematical-fundamentals.html"><a href="statistical-and-mathematical-fundamentals.html#linear-algebra"><i class="fa fa-check"></i><b>A.3</b> Linear algebra</a></li>
 </ul></li>
 <li class="chapter" data-level="B" data-path="software-versions.html"><a href="software-versions.html"><i class="fa fa-check"></i><b>B</b> Software versions</a></li>
@@ -321,69 +345,80 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="phylogenies-and-time" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">Chapter 9</span> Phylogenies and time<a href="phylogenies-and-time.html#phylogenies-and-time" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="phylogenies-and-time" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">Chapter 10</span> Phylogenies and time<a href="phylogenies-and-time.html#phylogenies-and-time" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Phylogenies consider the history, pattern, and process of evolution through time, so time is often a critical feature of phylogenetic analyses. The specific considerations of time vary across analyses and studies, depending on the data available and the questions asked.</p>
-<p>It is helpful to step back and think about how the elements of a phylogeny correspond to time. We will here consider rooted trees, where the direction of time is specified and runs from the root to the tips. Each node occurs at a specific point in time, even if the specific time is unknown. We will call this point in time the node age. There is often confusion about the description of relative time on phylogenies. I will describe the magnitude of age here as time before the present. A node minimum age is closer to the present (further forward in time and closer to the tips) and a node with maximum age as further from the present (further back in time). A node is treated as a singular divergence event, and has no duration. This of course is an approximation of the actual biology of divergence, which can take place over a period of time as populations become increasingly isolated.</p>
+<p>It is helpful to step back and think about how the elements of a phylogeny correspond to time. We will here consider rooted trees, where the direction of time is specified and runs from the root to the tips. Each node occurs at a specific point in time, even if the specific time is unknown. We will call this point in time the node age. There is often confusion about the description of relative time on phylogenies. I will describe the magnitude of age here as time before the present. A node with minimum age is closer to the present (further forward in time and closer to the tips), and a node with maximum age is further from the present (further back in time). A node is treated as a singular divergence event, and has no duration. This of course is an approximation of the actual biology of divergence, which can take place over a period of time as populations become increasingly isolated.</p>
 <p>Each edge (branch) connects two nodes. In a rooted tree, we refer to the node closer to the root (or that is the root) as the parent node, and the node closer to the tips (or that is a tip) as the child node. The starting and ending times of the edge are set by the ages of the parent and child nodes. The duration of the edge is the difference in the ages of these nodes.</p>
-<div id="measurements-of-time-on-trees" class="section level2 hasAnchor" number="9.1">
-<h2><span class="header-section-number">9.1</span> Measurements of time on trees<a href="phylogenies-and-time.html#measurements-of-time-on-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As discussed in Section <a href="phylogenies.html#trees-branch-lengths">2.5</a>, branch length can mean different things. It is up to the investigator to specify a branch length and clearly communicate what it means in the tree at hand. The three usual approaches are a cladogram (a tree in which branch lengths have no meaning), phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and chronogram, where branch lengths are in units of time. These trees types differ in what we can say about time.</p>
-<div id="cladograms" class="section level3 hasAnchor" number="9.1.1">
-<h3><span class="header-section-number">9.1.1</span> Cladograms<a href="phylogenies-and-time.html#cladograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Because branch lengths in a cladogram have no meaning, we cannot make absolute statements about time in a cladogram. This doesn’t mean, though, that we can’t say anything about time – we can still make some ordinal statements about the relative ages of nodes.</p>
+<div id="measurements-of-time-on-trees" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Measurements of time on trees<a href="phylogenies-and-time.html#measurements-of-time-on-trees" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As discussed in Section <a href="phylogenies.html#trees-branch-lengths">2.5</a>, branch length can mean different things. It is up to the investigator to specify a branch length and clearly communicate what it means in the tree at hand. The three usual approaches are a cladogram (a tree in which branch lengths have no meaning), a phylogram (branch lengths are the expected amount of evolutionary change in the traits used to infer the phylogeny), and a chronogram (branch lengths are in units of time). These tree types differ in what we can say about time.</p>
+<div id="cladograms" class="section level3 hasAnchor" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Cladograms<a href="phylogenies-and-time.html#cladograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Because branch lengths in a cladogram have no meaning, we cannot make absolute statements about time in a cladogram. This doesn’t mean, though, that we can’t say anything about time—we can still make some ordinal statements about the relative ages of nodes.</p>
 <div class="figure"><span style="display:block;" id="fig:time-cladogram"></span>
 <img src="phylogenetic_biology_files/figure-html/time-cladogram-1.png" alt="A cladogram. Nodes and node numbers are gray, and branches are black." width="2100" />
 <p class="caption">
-Figure 9.1: A cladogram. Nodes and node numbers are gray, and branches are black.
+Figure 10.1: A cladogram. Nodes and node numbers are gray, and branches are black.
 </p>
 </div>
-<p>Take a look at the cladogram in Figure <a href="phylogenies-and-time.html#fig:time-cladogram">9.1</a>. Consider the gray node numbers. The terminal nodes are numbered 1-5, and 6-9 are internal nodes. Of those, the root is node 6. Because the tree is rooted, we know that time proceeds from the root to the tips. If you consider two nodes, where one is descended from the other, then the node closer to the root is older. There are a variety of statements we could make based on this simple relationship, including:</p>
+<p>Take a look at the cladogram in Figure <a href="phylogenies-and-time.html#fig:time-cladogram">10.1</a>. Consider the gray node numbers. The terminal nodes are numbered 1-5, and 6-9 are internal nodes. Of those, the root is node 6. Because the tree is rooted, we know that time proceeds from the root to the tips. If you consider two nodes, where one is descended from the other, then the node closer to the root is older. There are a variety of statements we could make based on this simple relationship, including:</p>
 <ul>
 <li>Node 6 is older than all other nodes in the phylogeny. This is tautological, since the root is by definition the oldest node.</li>
-<li>Node 7 is older than node 9. This is because 9 is descended form 7, and 7 is closer to the root.</li>
+<li>Node 7 is older than node 9. This is because 9 is descended from 7, and 7 is closer to the root.</li>
 </ul>
 <p>We can’t make any relative assertions, though, about the ages of nodes that aren’t descended from each other. For example, we have no idea if node 8 or node 9 is older.</p>
 <p>In practice, these relative statements of age are often quite useful. For example, if Clade A is nested within Clade B, then we know that Clade A is younger than Clade B even if we don’t know the ages of any nodes. This may seem trivial, but it is important information that is implicit in many discussions of phylogenies.</p>
 </div>
-<div id="phylograms" class="section level3 hasAnchor" number="9.1.2">
-<h3><span class="header-section-number">9.1.2</span> Phylograms<a href="phylogenies-and-time.html#phylograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="phylograms" class="section level3 hasAnchor" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> Phylograms<a href="phylogenies-and-time.html#phylograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Strictly speaking, the only assertions we can make about time on phylograms are those that we can also make on cladograms. This is because we can’t be certain of the relationships between time and branch length in the phylogram. If the rate of evolution changes in different regions of the tree, then branches of the same length would not represent time intervals of the same length. Phylograms therefore have the same information about time as cladograms do.</p>
 </div>
-<div id="chronograms" class="section level3 hasAnchor" number="9.1.3">
-<h3><span class="header-section-number">9.1.3</span> Chronograms<a href="phylogenies-and-time.html#chronograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>By definition, in a chronogram branch lengths are in units of time. The age of each node is specified. This has a couple implications for what we can say about time. We can make ordinal statements, as we did for cladograms and phylograms. But we can also make absolute statements about the interval of time that has elapsed between two nodes. We can also make statements about the relative ages of nodes that are not descended from each other.</p>
+<div id="chronograms" class="section level3 hasAnchor" number="10.1.3">
+<h3><span class="header-section-number">10.1.3</span> Chronograms<a href="phylogenies-and-time.html#chronograms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>By definition, in a chronogram branch lengths are in units of time. The age of each node is specified. This has a couple of implications for what we can say about time. We can make ordinal statements, as we did for cladograms and phylograms. But we can also make absolute statements about the interval of time that has elapsed between two nodes. We can also make statements about the relative ages of nodes that are not descended from each other.</p>
 </div>
 </div>
-<div id="time-calibration" class="section level2 hasAnchor" number="9.2">
-<h2><span class="header-section-number">9.2</span> Time calibration<a href="phylogenies-and-time.html#time-calibration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The process of creating a chronogram is referred to as time calibration. In essence, external information about the ages of some nodes are used to constrain the ages of other nodes.</p>
-<p>If the rate of evolution were uniform and did not vary in different lineages, then the branch lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing branch lengths by the rate of change. For example, if the branch lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions were million years, then dividing each branch length by 2 would give a chronogram where the units of branch length are millions of years. This is called clock-like evolution – changes in characters are like regular tics on a clock. No real data evolve in a perfectly clock-like way, so time calibration of phylogenies instead relies on relaxed clock models that allow local variations in evolutionary rate.</p>
-<p>If all the tip nodes of a phylogeny are the same distance from the root, the tree is referred to as being ultrametric. If all the tips on a chronogram are sampled at the same time, then the chronogram is expected to be ultrametric because the same amount of time has elapsed from the root to each tip. An ultrametric tree is not necessarily a chronogram, though. Some of the internal nodes may have ages that violate branch lengths proportional to time, or a phylogram could be constrained to be ultrametric without calibrating any of the branch lengths according to time.</p>
+<div id="time-calibration" class="section level2 hasAnchor" number="10.2">
+<h2><span class="header-section-number">10.2</span> Time calibration<a href="phylogenies-and-time.html#time-calibration" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The process of creating a chronogram is referred to as time calibration. In essence, external information about the ages of some nodes is used to constrain the ages of other nodes.</p>
+<p>If the rate of evolution were uniform and did not vary in different lineages, then the branch lengths on the phylogram would be proportional to the elapsed time. We could convert from the phylogram to the chronogram just by dividing branch lengths by the rate of change. For example, if the branch lengths are in number of expected DNA substitutions, and the rate of evolutionary change is always 2 substitutions per million years, then dividing each branch length by 2 would give a chronogram where the units of branch length are millions of years. This is called clock-like evolution—changes in characters are like regular ticks on a clock <span class="citation">(<a href="#ref-zuckerkandl1965">Zuckerkandl and Pauling 1965</a>)</span>. No real data evolve in a perfectly clock-like way, so time calibration of phylogenies instead relies on relaxed clock models that allow local variations in evolutionary rate <span class="citation">(<a href="#ref-sanderson1997">Sanderson 1997</a>; <a href="#ref-drummond2006">Drummond et al. 2006</a>)</span>.</p>
+<p>If all the tip nodes of a phylogeny are the same distance from the root, the tree is referred to as being ultrametric. If all the tips on a chronogram are sampled at the same time, then the chronogram is expected to be ultrametric because the same amount of time has elapsed from the root to each tip. An ultrametric tree is not necessarily a chronogram, though. Some of the internal nodes may have ages that violate the expectation that branch lengths are proportional to time, or a phylogram could be constrained to be ultrametric without calibrating any of the branch lengths according to time.</p>
 <p>In the early days of the field, phylogenetic inference was done separately from time calibration. A phylogram would first be inferred. The phylogram would then be modified into a chronogram. This would involve stretching and shrinking branches to make the tree ultrametric and to constrain some internal nodes to fit fossil calibration dates. This modification of branch lengths was not made with consideration of the underlying trait data.</p>
-<p>Subsequent approaches instead unify phylogenetic inference and time calibration. Using external information, such as fossils and the sampling times of tips, branch lengths are inferred in units of time under relaxed clock models that allow rates of evolution to vary across the tree to accommodate these constraints. Because the external calibrations allow rates and time to be inferred independently (unlike an unconstrained phylogram, where they are conflated), this time calibrated inference produces a chronogram.</p>
+<p>Subsequent approaches instead unify phylogenetic inference and time calibration. Using external information, such as fossils and the sampling times of tips, branch lengths are inferred in units of time under relaxed clock models that allow rates of evolution to vary across the tree to accommodate these constraints. Because the external calibrations allow rates and time to be inferred independently (unlike an unconstrained phylogram, where they are conflated), this time-calibrated inference produces a chronogram.</p>
 </div>
-<div id="the-implications-of-constraining-node-ages" class="section level2 hasAnchor" number="9.3">
-<h2><span class="header-section-number">9.3</span> The implications of constraining node ages<a href="phylogenies-and-time.html#the-implications-of-constraining-node-ages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-implications-of-constraining-node-ages" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> The implications of constraining node ages<a href="phylogenies-and-time.html#the-implications-of-constraining-node-ages" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Clamping the ages of nodes reduces the number of free parameters in our tree. The way to think about this is that the more information we have, the more constrained and specific our view of the world is. Consider first constraining tip ages to make a tree ultrametric. Before we clamp the tip ages, any tip can be any age and all the branches are free to have any length. The ultrametric tree is nested within this set of unconstrained possibilities. The tip ages, and therefore branch lengths, in this unconstrained tree can be selected so that they are ultrametric, but the vast majority of values will lead to trees that are not ultrametric. By clamping some values with added information that some nodes (tips, in this case) are the same age, we now are allowing only a constrained subset of trees and these require fewer parameters to describe.</p>
-<p>Consider this same task in terms of branch lengths, rather than node ages. From Section <a href="phylogenies.html#tree-properties">2.3</a>, we know that the number of branches in a tree is <span class="math inline">\(2n-2\)</span>, where <span class="math inline">\(n\)</span> is the number of tips. This is because each of the <span class="math inline">\(n\)</span> tip nodes has an branch leading to it, and each of the <span class="math inline">\(n-1\)</span> internal nodes, with the exception of the root node, has an branch leading to it. So there are <span class="math inline">\(n-2\)</span> branches that give rise to internal nodes. This is how we arrive at our <span class="math inline">\(n+n-2=2n-2\)</span> branches in the phylogeny, each with their own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the branches leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than <span class="math inline">\(n\)</span> branch lengths for the tips, we only have <span class="math inline">\(1\)</span> tip branch length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with <span class="math inline">\(1+n-2=n-1\)</span> branch lengths that we need to estimate independently in our ultrametric tree.</p>
-<div id="time-calibration-in-practice" class="section level3 hasAnchor" number="9.3.1">
-<h3><span class="header-section-number">9.3.1</span> Time calibration in practice<a href="phylogenies-and-time.html#time-calibration-in-practice" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The use of character data and time calibrations to infer time calibrated phylogenies fall into two broad categories. The first is to use information from fossils (or other historical data) to constrain the ages of internal nodes. A Bayesian framework provides a natural framework for this – node ages can by specified as priors on the tree. For example, if a given fossil is known to fall within a particular clade, then the most recent common ancestor of that clade can be constrained to be at least as old as the fossil and possibly older.</p>
-<p>While this can work well in some situations, there are several drawbacks to this method. In practice, it is also necessary to place maximum ages on some of the nodes to keep the time calibration from pushing everything way back in time. Given the incompleteness of the fossil record, this is not as straight forward as constraining the minimum age of a node. If we have a fossil we can assert that the clade that contains it can be no younger than that specimen, though it may be much older. But it is harder to assert a maximum age, given that we just might not have fossils for older organisms that existed in the clade. Applying maximum ages often relies on expertise and additional information, such as knowledge that a given land mass where the organisms are exclusively found did not exist before a particular time.</p>
-<p>Models known as the “fossilized birth–death” (FBD) process don’t use fossils as external constraints on internal nodes, they instead include fossils right in the tree as their own tips <span class="citation">(<a href="#ref-heath2014calibration">Heath et al. 2014</a>)</span>. Unlike extant tips, which all have the same age (<em>i.e.</em>, today), the ages of these fossil tips are then constrained with geological data. This approach provides the ability to also include parameters for fossil preservation and sampling. FBD methods require that the character matrix includes data that can be scored in the fossils.</p>
+<p>Consider this same task in terms of branch lengths, rather than node ages. From Section <a href="phylogenies.html#tree-properties">2.3</a>, we know that the number of branches in a tree is <span class="math inline">\(2n-2\)</span>, where <span class="math inline">\(n\)</span> is the number of tips. This is because each of the <span class="math inline">\(n\)</span> tip nodes has a branch leading to it, and each of the <span class="math inline">\(n-1\)</span> internal nodes, with the exception of the root node, has a branch leading to it. So there are <span class="math inline">\(n-2\)</span> branches that give rise to internal nodes. This is how we arrive at our <span class="math inline">\(n+n-2=2n-2\)</span> branches in the phylogeny, each with its own length. In an ultrametric tree, by definition all the tips have the same age. That means that if you know the length of one of the branches leading to a tip node, you can calculate all the others. They have a deterministic relationship and are not free to vary independently. Rather than <span class="math inline">\(n\)</span> branch lengths for the tips, we only have <span class="math inline">\(1\)</span> tip branch length that is free to vary and we can calculate all the others so that the tip nodes have the same ages. This leaves us with <span class="math inline">\(1+n-2=n-1\)</span> branch lengths that we need to estimate independently in our ultrametric tree.</p>
+<div id="time-calibration-in-practice" class="section level3 hasAnchor" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> Time calibration in practice<a href="phylogenies-and-time.html#time-calibration-in-practice" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The use of character data and time calibrations to infer time-calibrated phylogenies falls into two broad categories. The first is to use information from fossils (or other historical data) to constrain the ages of internal nodes. A Bayesian approach provides a natural framework for this—node ages can be specified as priors on the tree. For example, if a given fossil is known to fall within a particular clade, then the most recent common ancestor of that clade can be constrained to be at least as old as the fossil and possibly older.</p>
+<p>While this can work well in some situations, there are several drawbacks to this method. In practice, it is also necessary to place maximum ages on some of the nodes to keep the time calibration from pushing everything way back in time. Given the incompleteness of the fossil record, this is not as straightforward as constraining the minimum age of a node. If we have a fossil we can assert that the clade that contains it can be no younger than that specimen, though it may be much older. But it is harder to assert a maximum age, given that we just might not have fossils for older organisms that existed in the clade. Applying maximum ages often relies on expertise and additional information, such as knowledge that a given land mass where the organisms are exclusively found did not exist before a particular time. Careful justification of fossil calibrations is essential, and best practices have been formalized to make them explicit and reproducible <span class="citation">(<a href="#ref-parham2012">Parham et al. 2012</a>)</span>.</p>
+<p>The model known as the “fossilized birth–death” (FBD) process doesn’t use fossils as external constraints on internal nodes; instead it includes fossils right in the tree as their own tips <span class="citation">(<a href="#ref-heath2014calibration">Heath et al. 2014</a>)</span>. Unlike extant tips, which all have the same age (<em>i.e.</em>, today), the ages of these fossil tips are then constrained with geological data. This approach provides the ability to also include parameters for fossil preservation and sampling. FBD methods require that the character matrix includes data that can be scored in the fossils. The FBD process has since grown into a broad family of models with applications spanning paleobiology, macroevolution, and epidemiology; <span class="citation">Wright et al. (<a href="#ref-wright2022integrating">2022</a>)</span> provide an accessible overview.</p>
 
 </div>
 </div>
-</div>
-
-
-
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-drummond2006" class="csl-entry">
+Drummond, Alexei J., Simon Y. W. Ho, Matthew J. Phillips, and Andrew Rambaut. 2006. <span>“Relaxed Phylogenetics and Dating with Confidence.”</span> <em>PLoS Biology</em> 4 (5): e88. <a href="https://doi.org/10.1371/journal.pbio.0040088">https://doi.org/10.1371/journal.pbio.0040088</a>.
+</div>
 <div id="ref-heath2014calibration" class="csl-entry">
 Heath, Tracy A, John P Huelsenbeck, and Tanja Stadler. 2014. <span>“The Fossilized Birth–Death Process for Coherent Calibration of Divergence-Time Estimates.”</span> <em>PNAS</em> 111 (29): E2957–66. <a href="https://doi.org/10.1073/pnas.1319091111">https://doi.org/10.1073/pnas.1319091111</a>.
+</div>
+<div id="ref-parham2012" class="csl-entry">
+Parham, James F., Philip C. J. Donoghue, Christopher J. Bell, et al. 2012. <span>“Best Practices for Justifying Fossil Calibrations.”</span> <em>Systematic Biology</em> 61 (2): 346–59. <a href="https://doi.org/10.1093/sysbio/syr107">https://doi.org/10.1093/sysbio/syr107</a>.
+</div>
+<div id="ref-sanderson1997" class="csl-entry">
+Sanderson, Michael J. 1997. <span>“A Nonparametric Approach to Estimating Divergence Times in the Absence of Rate Constancy.”</span> <em>Molecular Biology and Evolution</em> 14 (12): 1218–31. <a href="https://doi.org/10.1093/oxfordjournals.molbev.a025731">https://doi.org/10.1093/oxfordjournals.molbev.a025731</a>.
+</div>
+<div id="ref-wright2022integrating" class="csl-entry">
+Wright, April M., David W. Bapst, Joëlle Barido-Sottani, and Rachel C. M. Warnock. 2022. <span>“Integrating Fossil Observations into Phylogenetics Using the Fossilized Birth–Death Model.”</span> <em>Annual Review of Ecology, Evolution, and Systematics</em> 53 (1): 251–73. <a href="https://doi.org/10.1146/annurev-ecolsys-102220-030855">https://doi.org/10.1146/annurev-ecolsys-102220-030855</a>.
+</div>
+<div id="ref-zuckerkandl1965" class="csl-entry">
+Zuckerkandl, Emile, and Linus Pauling. 1965. <span>“Molecules as Documents of Evolutionary History.”</span> <em>Journal of Theoretical Biology</em> 8 (2): 357–66. <a href="https://doi.org/10.1016/0022-5193(65)90083-4">https://doi.org/10.1016/0022-5193(65)90083-4</a>.
 </div>
 </div>
             </section>
@@ -392,7 +427,7 @@ Heath, Tracy A, John P Huelsenbeck, and Tanja Stadler. 2014. <span>“The Fossil
         </div>
       </div>
 <a href="additional-character-types.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="statistical-and-mathematical-fundamentals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ancestral-character-state-reconstruction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -434,7 +469,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["phylogenetic_biology.pdf", "phylogenetic_biology.epub"],
+  "download": null,
   "search": {
     "engine": "fuse",
     "options": null

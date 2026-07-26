@@ -7,7 +7,7 @@ sim_jc = function( mu = 1, t = 100, n = 1000, first =  NULL ){
   
   beta = mu / 4
   i = t/n  # time interval per step
-  p = beta * i # expected change over the interval
+  p = beta * i # probability of replacement by one specific nucleotide over the interval
   y = sample( c('C', 'G', 'T', 'A', NA), size=n, replace = TRUE, prob=c( p, p, p, p, (1 - 4 * p)  ) )
   y[1] = first # initialize ancestral state
   

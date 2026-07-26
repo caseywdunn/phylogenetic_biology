@@ -1,10 +1,10 @@
 # Additional character types
 
-So far we have considered a single type of character data -- DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies. These include morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.
+So far we have considered a single type of character data---DNA sequences. But there are many other types of characters that we would like to measure and analyze on phylogenies. These include morphology, protein sequences, protein structure, gene expression, physiological traits, and environmental tolerances. Different types of character data need to be handled in different ways. In particular, we need to be able to articulate explicit models for how each type of data evolves.
 
-We can group character types based on shared features. Some data, such as the nucleotides of DNA, are discrete unordered values from a finite set $\{A, C, G, T\}$ where the elements have no inherent ordering (e.g., $C$ is not greater than $A$, or less than $T$).  Others have continuous values, such as mass or length, that fall in a particular order on the real number line ($2.5$ is less than $3.2$). Still others, such as the number of bristles on a leg segment, have countable values represented with integers. These values are both discrete (there are no integers between $3$ and $4$) and ordered ($3$ is less than $4$). If we consider these different character types, it is clear that we not only measure and record them differently, but that the measurements themselves have different properties requiring different analysis methods. We could not, for example, construct a matrix like Equation \@ref(eq:jc69) with rows and columns for every possible length in millimeters for flower petals.
+We can group character types based on shared features. Some data, such as the nucleotides of DNA, are discrete unordered values from a finite set $\{A, C, G, T\}$ where the elements have no inherent ordering (*e.g.*, $C$ is not greater than $A$, or less than $T$). Others have continuous values, such as mass or length, that fall in a particular order on the real number line ($2.5$ is less than $3.2$). Still others, such as the number of bristles on a leg segment, have countable values represented with integers. These values are both discrete (there are no integers between $3$ and $4$) and ordered ($3$ is less than $4$). If we consider these different character types, it is clear not only that we measure and record them differently, but that the measurements themselves have different properties requiring different analysis methods. We could not, for example, construct a matrix like Equation \@ref(eq:jc69) with rows and columns for every possible length in millimeters for flower petals.
 
-Rather than approach each new character type in an *ad hoc* way, it is better to examine their general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The character type your data correspond to is an intrinsic property that must be correctly identified. The criteria for making this evaluation and understandings its implications are part of measurement theory [@houle2011measurement]. This field sits at the intersection of math, statistics, and philosophy. It considers the relationships between measurements and the reality they represent, and clarifies what information the measurements contain. It examines which mathematical operations we can perform with them while preserving their meaning, and reveals what actual transforms those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually a fascinating and grounding framework for understanding many of the central aspects of what we do in science.
+Rather than approach each new character type in an *ad hoc* way, it is better to examine their general properties and explicitly consider how each character should be encoded and modeled. Specifying the character types is a critical aspect of how we articulate our ontological perspective (*i.e.*, what organismal attributes exist, which are worth considering for the question at hand, and what the relation between them is). The character type your data correspond to is an intrinsic property that must be correctly identified. The criteria for making this evaluation and understanding its implications are part of measurement theory [@houle2011measurement]. This field sits at the intersection of math, statistics, and philosophy. It considers the relationships between measurements and the reality they represent, and clarifies what information the measurements contain. It examines which mathematical operations we can perform with them while preserving their meaning, and reveals what actual transformations those operations correspond to. With a name like "measurement theory", you might assume that it is a dusty and boring annoyance that someone else needs to worry about, but it is actually a fascinating and grounding framework for understanding many of the central aspects of what we do in science.
 
 ```{r char-scale-types, echo=FALSE}
 df <- data.frame(
@@ -18,17 +18,26 @@ df <- data.frame(
   check.names = FALSE
 )
 
-knitr::kable(df,
+tbl <- knitr::kable(df,
   col.names = c("Scale type", "Domain", "Measurement type", "Meaningful comparisons", "Biological examples"),
   caption = "Scale types, modified from Houle (2011).",
   escape = FALSE,
   booktabs = TRUE
-) %>%
-  kableExtra::kable_styling(latex_options = c("scale_down")) %>%
-  kableExtra::column_spec(5, width = "3cm")
+)
+
+# scale_down and the column width are LaTeX-only formatting. Applying
+# kable_styling in HTML output pulls in the kableExtra "kePrint" dependency,
+# which bookdown's gitbook build fails to copy into libs/. Guard it to PDF.
+if (knitr::is_latex_output()) {
+  tbl <- tbl %>%
+    kableExtra::kable_styling(latex_options = c("scale_down")) %>%
+    kableExtra::column_spec(5, width = "3cm")
+}
+
+tbl
 ```
 
-Because biological measurement developed pragmatically rather than from measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Measurement type column. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Our comparisons should be constrained to respect the physical realities that our measurements represent, and measurement theory gives us formal tools to evaluate this. We should not, for example, compute the numerical difference between ordinal states, like social dominance ranks, because the actual physical or evolutionary distances between those ranks are unknown and unequal.  
+Because biological measurement developed pragmatically rather than from measurement theory, there are some differences in the nomenclature. What phylogenetic biologists call "character type" is referred to in measurement theory, and many other fields of science, as "scale type" (Table \@ref(tab:char-scale-types)). Scale types vary in several ways. The Domain indicates the possible values. Phylogenetic methods differ most based on whether this domain is discrete or continuous, reflected here in the Measurement type column. Meaningful comparisons indicates comparisons that can be made between measurements of each scale type. Our comparisons should be constrained to respect the physical realities that our measurements represent, and measurement theory gives us formal tools to evaluate this. We should not, for example, compute the numerical difference between ordinal states, like social dominance ranks, because the actual physical or evolutionary distances between those ranks are unknown and unequal.
 
 There are many types of organism measurements, and therefore state spaces and character types, that are addressed in a phylogenetic context. Here we consider some of the more frequently applied character types, *i.e.*, scale types. Different scale types require different models of evolution.
 
@@ -38,31 +47,31 @@ There are many types of organism measurements, and therefore state spaces and ch
 
 #### DNA nucleotides
 
-Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides -- $\{A, C, G, T\}$. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states. They are unordered because changes don't have to occur in a specific order, any state can change to any other state directly. In measurement theory terms, discrete unordered character types correspond to a nominal scale type.
+Measurements of DNA sequences have 4 possible states, corresponding to each of the 4 nucleotides---$\{A, C, G, T\}$. DNA data are discrete and unordered. Nucleotides are discrete because they have a set of distinct and separate states. They are unordered because changes don't have to occur in a specific order; any state can change to any other state directly. In measurement theory terms, discrete unordered character types correspond to a nominal scale type.
 
 #### Amino acids
 
-Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the primary difference is that the state space is larger. This means there are many more parameters in models of protein evolution than in models of DNA evolution.
+Protein sequences are handled very similarly to DNA sequences, the character states just correspond to amino acids\index{amino acid data} rather than to DNA nucleotides. They are discrete and unordered, and therefore on a nominal scale type. There are 20 possible states instead of 4, so the state space is larger. In principle this implies many more parameters, because the size of the rate matrix grows with the square of the number of states: a fully parameterized model of amino acid evolution has far more exchangeability parameters than a nucleotide model. In practice, however, these are rarely all estimated from the data at hand. Most protein analyses instead use empirical exchangeability matrices, such as JTT, WAG, or LG\index{amino acid substitution model}, whose values were estimated once from large databases of protein alignments and are then held fixed. As a result, the number of parameters actually estimated in a typical protein analysis can be comparable to, or even fewer than, in a nucleotide model, even though the underlying model describes a much larger state space.
 
-There are a few reasons why protein sequences are often considered in phylogenetic analyses rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another is that synonymous changes in protein coding DNA sequences quickly saturate for more distant evolutionary comparisons. This means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.
+There are a few reasons why protein sequences are often considered in phylogenetic analyses rather than the DNA sequences that encode them. One is that questions about protein evolution are best addressed with models that directly describe protein evolution. Another is that synonymous changes in protein-coding DNA sequences quickly saturate for more distant evolutionary comparisons. This means that much of the variation in DNA sequence has little information about phylogenetic relationships. Protein data can be more tractable to work with in this situation.
 
 #### Codons
 
-Since there are 4 possible DNA nucleotides and codons are 3 nucleotides long, there are $4^3=64$ possible codons. Each one of these codons corresponds to a specific amino acid or stop codon. In some cases, it is most interesting to consider each of the 64 codons as a discrete character state. The models then have matrices that have dimensions of 64 (as opposed to 4 for nucleotides and 20 for amino acids).
+Since there are 4 possible DNA nucleotides and codons are 3 nucleotides long, there are $4^3=64$ possible codons. Each one of these codons corresponds to a specific amino acid or stop codon. In some cases, it is most interesting to consider each of the 64 codons as a discrete character state. The models then have matrices with dimensions of $64 \times 64$ (as opposed to 4 for nucleotides and 20 for amino acids).
 
 #### Morphology
 
-Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs [@harmon2018phylogenetic, chapter 7].
+Direct analogs of the DNA sequence evolution models are often applied to discrete unordered morphological traits, such as the presence or absence of limbs [@harmon2018phylogenetic, chapter 7]. The most widely used of these is the Mk model\index{Mk model} [@lewis2001], a $k$-state generalization of the Jukes-Cantor model in which all changes among $k$ states occur at equal rates.
 
 ### Ordinal scale types
 
 Ordinal scale types include any kind of ranking, such as position in a social hierarchy [@houle2011measurement, Table 1]. They have an ordering, *i.e.*, some values are larger than others. But there is no statement about the distance between the values. In a pecking order for chickens, $1$ is dominant over $2$ and $2$ over $3$, but that doesn't indicate that there is a similar difference between $1$ and $2$ as there is between $2$ and $3$.
 
-### Interval scale types
+### Discrete ordered characters
 
-Interval scale types include measurements such as the number of digits on a forelimb. They differ from nominal scale types in that there is an ordering, *i.e.*, some values are larger than others and there are uniform distances between the values [@houle2011measurement, Table 1]. Character measurements on an interval scale type are often referred to in phylogenetics as discrete ordered character types. An example would be any countable character, such as the number of bristles on an arthropod appendage or the number of digits on a vertebrate forelimb.
+Discrete ordered characters are countable traits, such as the number of digits on a forelimb or the number of bristles on an arthropod appendage. Like ordinal characters they have an order, but unlike them the spacing between adjacent values is uniform and meaningful---the difference between 3 and 4 digits is the same as between 4 and 5. This uniform spacing is the defining feature of an interval scale [@houle2011measurement, Table 1]; because counts also have a true zero, however, they are strictly a ratio (or absolute) scale rather than a true interval scale. For modeling their evolution, what matters is that they are discrete and ordered with uniform steps between adjacent states.
 
-Models for the evolution of interval data can be described with the same language we used for nominal scale types. The rates for changes between non-adjacent values are just set to zero. $5$, for example, will have a nonzero rate of change to $6$ and $4$ and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of $4$ digits.
+Models for the evolution of discrete ordered characters can be described with the same language we used for nominal scale types. The rates for changes between non-adjacent values are just set to zero. $5$, for example, will have a nonzero rate of change to $6$ and $4$ and a rate of zero to all other values. In this way, the rate matrix disallows instantaneous changes that skip intermediate values. For example, to evolve from a forelimb with 5 digits to one with 3 digits, the model requires that the character pass through an intermediate state of $4$ digits.
 
 Such a rate matrix describing the changes between 0-6 digits would have this form, if the rates were the same between all states:
 
@@ -79,17 +88,17 @@ Such a rate matrix describing the changes between 0-6 digits would have this for
 \end{array}\right)
 \end{equation}
 
-## Continuous data
+## Continuous data {#continuous-data}
 
 Many characters, such as body mass, limb length, protein abundance, maximum swimming speed, and metabolic rate, can take values across a continuous range of real numbers. In phylogenetics, these traits are typically grouped under the umbrella of continuous character data, since values can vary smoothly and intermediate values are possible between any two observations.
 
 Measurement theory distinguishes several different scale types (for example, interval and ratio scales) that may all have continuous values. In phylogenetic comparative analyses, these distinctions are usually ignored, and the traits are analyzed using a common set of evolutionary models. Sometimes, ignoring these distinctions has little practical impact, but sometimes it has major consequences.
 
-### Brownian Motion
+### Brownian motion
 
-The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM). In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.
+The most widely used model for continuous trait evolution on phylogenies is Brownian motion (BM)\index{Brownian motion} [@felsenstein1973continuous; @felsenstein1985phylogenies]. In this model, trait evolution is treated as a stochastic diffusion process along the branches of the phylogenetic tree. Trait values change through time by accumulating small random fluctuations. This can be conceptualized as infinitesimally small random steps along the number line, sometimes increasing the value and sometimes decreasing it.
 
-Under BM, the expected change in the trait value is zero. This is not because there is no change under Brownian motion. It is because increases are just as common as decreases. If you run the same BM simulation many times and average the results, the average change across all of them will be zero. Each one, however, can be quite different from the original value and from each other. This is because the variance of the trait value increases linearly with time. The longer two lineages evolve independently, or the faster the change, the more different their trait values are expected to become. 
+Under BM, the expected change in the trait value is zero. This is not because there is no change under Brownian motion. It is because increases are just as common as decreases. If you run the same BM simulation many times and average the results, the average change across all of them will be zero. Each one, however, can be quite different from the original value and from each other (Figure \@ref(fig:char-brownian)). This is because the variance of the trait value increases linearly with time. The longer two lineages evolve independently, or the faster the change, the more different their trait values are expected to become. 
 
 Mathematically, Brownian motion can be written as
 
@@ -112,6 +121,8 @@ One reason BM is widely used is that it leads to a convenient statistical formul
 The BM model is primarily used because it provides a mathematically tractable approximation to trait evolution. However, many biological traits do not actually evolve according to the assumptions of BM and violate the fundamental nature of the measurements being analyzed. For example, BM allows trait values to take any real number, including negative values. Many biological measurements, such as body mass or metabolic rate, are strictly positive. Sometimes these violations have little impact on inference, especially when the observed trait variation is far from biologically impossible values. In other cases, however, they can lead to misleading conclusions if the model poorly reflects the underlying evolutionary processes.
 
 ```{r char-brownian, fig.cap="Multiple Brownian motion trajectories."}
+set.seed(23456)
+
 # Number of trajectories and steps
 n_trajectories = 50
 n_steps = 100
@@ -130,7 +141,7 @@ df_brownian = data.frame(time = rep(time_points, n_trajectories),
 
 # Plot all trajectories with alpha = 0.3
 p_brownian = ggplot(data = df_brownian, aes(x = time, y = position, group = trajectory)) +
-  geom_line(color = "gray", alpha = 0.3) +
+  geom_line(color = "gray30", alpha = 0.5) +
   ylab("Trait value") + 
   theme_classic()
 
@@ -139,9 +150,9 @@ p_brownian
 
 
 
-### Ornstein–Uhlenbeck Models
+### Ornstein–Uhlenbeck\index{Ornstein-Uhlenbeck model} models
 
-Brownian motion assumes that there is no preferred trait value or directional trend in evolution. In reality, traits are often subject to constraints, such as stabilizing selection or metabolic constraints, that lead values to stay near a particular optimum. The Ornstein–Uhlenbeck (OU) model is a common variation of Brownian motion that can accommodate these constraints. 
+Brownian motion assumes that there is no preferred trait value or directional trend in evolution. In reality, traits are often subject to constraints, such as stabilizing selection or metabolic constraints, that lead values to stay near a particular optimum. The Ornstein–Uhlenbeck (OU) model is a common variation of Brownian motion that can accommodate these constraints [@hansen1997; @butler2004].
 
 In the OU process, trait evolution is still driven by random fluctuations, but there is also a deterministic tendency for the trait value to move toward an optimum. The model can be written as
 
@@ -149,8 +160,10 @@ In the OU process, trait evolution is still driven by random fluctuations, but t
 dX(t) = \alpha(\theta - X(t))dt + \sigma dW(t)
 \]
 
-where $X(t)$ is the trait value at time $t$, $\theta$ is the optimal trait value, $\alpha$ describes the strength of attraction toward that optimum, and $\sigma$ controls the magnitude of random fluctuations.
+where $X(t)$ is the trait value at time $t$, $\theta$ is the value toward which the trait is drawn (often interpreted as an optimal trait value), $\alpha$ describes the strength of attraction toward that value, and $\sigma$ controls the magnitude of random fluctuations.
 
 The OU model therefore includes both stochastic variation and a restoring force that pulls the trait toward an optimal value. When $\alpha$ is large, trait values tend to remain close to the optimum. When $\alpha$ is small, the restoring force is weak and trait values can wander more widely.
 
-The Brownian motion model can be understood as a special case of the OU model. If the strength of attraction toward the optimum approaches zero ($\alpha = 0$), the restoring force disappears and the process reduces to pure Brownian motion. In this sense, OU models generalize Brownian motion by allowing evolutionary processes that include stabilizing selection or adaptive optima.
+The Brownian motion model can be understood as a special case of the OU model. If the strength of attraction toward the optimum approaches zero ($\alpha = 0$), the restoring force disappears and the process reduces to pure Brownian motion. In this sense, OU models generalize Brownian motion by allowing processes in which trait values are pulled toward a central value rather than wandering freely.
+
+It is important to be careful about the biological interpretation of these parameters. The OU model describes a statistical tendency for a trait to revert toward a central value; it does not, on its own, reveal why. Identifying $\theta$ with an adaptive optimum, and a nonzero $\alpha$ with stabilizing selection, is a biological interpretation that depends on the assumptions of the model [@hansen1997; @butler2004]. A trait can appear to evolve under an OU process for reasons unrelated to adaptation, including bounds on the range of possible values, measurement error, or model misspecification. A good fit to an OU model is therefore consistent with stabilizing selection toward an optimum, but does not by itself demonstrate it, and inferring the underlying evolutionary process from the fit of a phylogenetic model alone is notoriously difficult [@uyeda2018rethinking]. Distinguishing genuine adaptation from these alternatives generally requires additional evidence, such as *a priori* hypotheses about which lineages are expected to share an optimum.

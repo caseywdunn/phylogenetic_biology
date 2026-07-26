@@ -1,10 +1,10 @@
 # Inferring phylogenies from data
 
-In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$  (Equation \@ref(eq:jc69-prob)) that gives the probability of a particular end state given the starting state and the branch length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the branches of a phylogeny.
+In the previous chapter we built modeling machinery that allowed us to specify a rate matrix $\mathbf{Q}$ (Equation \@ref(eq:sim-gtr)), and from that derive the matrix $\mathbf{P}(t)$ (Equation \@ref(eq:matrix-exp)) that gives the probability of a particular end state given the starting state and the branch length $t$. We used $\mathbf{P}(t)$ in a generative context, to simulate the evolution of a DNA sequence along the branches of a phylogeny.
 
-We will now turn to using the same statistical framework for what may initially seem to be a very different task -- phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data [@Felsenstein:1981vk].
+We will now turn to using the same statistical framework for what may initially seem to be a very different task---phylogenetic inference, where we infer the topology and branch lengths of a phylogeny from character data (DNA sequences, in this case). But these tasks are similar conceptually. The basic intuition is that you can infer a phylogeny by looking for the topology and branch lengths that are most likely to generate the observed data [@Felsenstein:1981vk].
 
-This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the Likelihood. Searching for the most likely hypothesis is referred to as Maximum Likelihood (ML).
+This relationship between simulation and inference is widely used in a variety of fields. The probability of the observed data given a hypothesis is referred to as the likelihood\index{likelihood}. Searching for the most likely hypothesis is referred to as maximum likelihood (ML). A comprehensive reference on the whole endeavor of phylogenetic inference is @felsenstein2004.
 
 ## Probability of a single history
 
@@ -103,9 +103,9 @@ ggtree(phy) +
 
 ```
 
-We will start be calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). This isn't a history we have any particular reason to believe, it is just one possible history of states randomly chosen from all the possible histories.
+We will start by calculating the probability of a single history of evolution for a single site on a single phylogeny with specified topology and branch lengths. This history is a full set of states at all nodes. These are added to the toy phylogeny in Figure \@ref(fig:inference-internal-states). This isn't a history we have any particular reason to believe; it is just one possible history of states randomly chosen from all the possible histories.
 
-```{r inference-internal-states, fig.cap="The same toy tree as above, but with arbitrary internal node states (in boxes)."}
+```{r inference-internal-states, fig.cap="The same toy tree as above, now with arbitrary states added at the internal nodes, so every node has a state (in boxes)."}
 
 ggtree(phy) +
   geom_tiplab(offset=0.2) +
@@ -123,7 +123,7 @@ Our goal now is to calculate the probability of each observed change. Recall tha
   (\#eq:prob)
 \end{equation}
 
-Where $\mathbf{Q}$ is the rate matrix. Let's plug some numbers in using the model we specified in the previous chapter. We don't have any specific reason to use this model on this tree, we are just sticking with it since we already built it.
+Where $\mathbf{Q}$ is the rate matrix. Let's plug some numbers in using the model we specified in the previous chapter. We don't have any specific reason to use this model on this tree; we are just sticking with it since we already built it.
 
 Here is the relative rate matrix $\mathbf{R}$:
 
@@ -131,7 +131,7 @@ Here is the relative rate matrix $\mathbf{R}$:
 R
 ```
 
-The equilibrium frequencies $\mathbf{\Pi}$:
+The equilibrium frequencies $\boldsymbol{\Pi}$:
 
 ```{r}
 Pi
@@ -173,7 +173,7 @@ root_prob = pi_v[ example_states[root_node] ]
 
 ```
 
-Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\mathbf{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in our full set of probabilities is:
+Note, though, that the probability for node 5, the root node, is missing. This makes sense since the root is not the child of any branch, and we calculated the probabilities based on changes along branches. We will therefore assess the probability of the root node state according to $\boldsymbol{\Pi}$, the equilibrium frequencies. This is the same approach we took when simulating data on a tree. When we fill that in, our full set of probabilities is:
 
 ```{r}
 
@@ -189,9 +189,9 @@ example_prob = prod(p)
 
 ```
 
-The joint probability of all these states can now be calculated as the product of each state. This comes out to $`r example_prob`$. There are multiple ways to think about this probability. One is from a frequentist perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of $`r round(example_prob*1e6,1)`$ times out of a million simulations.
+The joint probability of all these states can now be calculated as the product of each state. This comes out to $`r example_prob`$. There are multiple ways to think about this probability. One is from a frequency perspective. If we were to simulate character states on this tree, we would expect this full set of character states to occur at a frequency of $`r round(example_prob*1e6,1)`$ times out of a million simulations.
 
-Here we use much of the same machinery as in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see their mathematical implementation shares many features.
+Here we use much of the same machinery as in the previous chapter, but toward a slightly different end. Rather than use the probability distributions to generate nucleotides in a simulation, we instead calculated the probability of a particular set of nucleotides. These may have seemed like very different tasks at first blush, but as you can now see, their mathematical implementation shares many features.
 
 ## Probability of multiple histories
 
@@ -209,9 +209,9 @@ node_states_list = lapply(seq_len(ncol(node_states)), function(i) node_states[,i
 
 
 
-history_probs = 
-  node_states_list %>% 
-  map( get_tree_prob, phy, R, Pi ) %>%
+history_probs =
+  node_states_list %>%
+  purrr::map( get_tree_prob, phy, R, Pi ) %>%
   unlist()
 
 history_D = as.data.frame(t(node_states))
@@ -233,10 +233,10 @@ The sum of the probabilities for each of these different histories for n5-n7 tha
 
 ## Log likelihood
 
-The likelihood of these data on this phylogeny, $`r sum(history_probs)`$, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers have trouble storing them efficiently. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, $ln(p)$. The log likelihood for this phylogeny is $`r sum(history_probs) %>% log()`$. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:
+The likelihood of these data on this phylogeny, $`r sum(history_probs)`$, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers cannot represent them accurately, underflowing toward zero. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, $\ln(p)$. The log likelihood for this phylogeny is $`r sum(history_probs) %>% log()`$. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:
 
 \begin{equation} 
-  ln(a)+ln(b) = ln(ab)
+  \ln(a)+\ln(b) = \ln(ab)
   (\#eq:logs)
 \end{equation}
 
@@ -246,22 +246,22 @@ We can calculate joint log probabilities as sums of log probabilities for each e
 
 The machinery above gives us everything we need to calculate the log likelihood of a specific pattern of nucleotides across tips for a single site in a DNA sequence. We now need to expand this model from a single site to multiple sites within a gene or even across whole genomes.
 
-This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the joint probability of observing the data seen across tips for each site in the DNA sequence. This joint probability for all sites will be much smaller than the probability for each individual site.
+This comes down to more of the same. We do everything we did above for each site, and then sum the log likelihoods across sites. This gives us the log of the joint probability of observing the data at all sites. This joint probability for all sites will be much smaller than the probability for each individual site.
 
-## Maximum likelihood
+## Maximum likelihood\index{maximum likelihood}
 
 At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. How do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).
 
-The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. By reference to Equation \@ref(eq:ntrees), we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. This excellent [interactive visualization](http://phylo.bio.ku.edu/mephytis/brlen-opt.html) allows you to manually optimize branch lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
+The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. By reference to Equation \@ref(eq:ntrees), we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. An excellent interactive visualization allows you to manually optimize branch lengths on a small phylogeny—<http://phylo.bio.ku.edu/mephytis/brlen-opt.html>. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
 
-Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics - to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it, if it is worse, you discard it.
+Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics---to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it; if it is worse, you discard it.
 
-This might sound simple, but it isn't. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima.
+This might sound simple, but it isn't. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima. Widely used maximum likelihood inference programs include RAxML [@stamatakis2014] and IQ-TREE [@nguyen2015].
 
 Optimization of calculations becomes very important. For example, it isn't necessary to recalculate all values on each new topology, since some of the calculations from previous topologies remain relevant [@Felsenstein:1981vk].
 
 ## Optimality criteria
 
-Here we used likelihood as an optimality criterion to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony. In parsimony, the minimum number of changes along branches needed to explain the data at the tips is used as the criterion to evaluate each topology. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
+Here we used likelihood as an optimality criteri\index{optimality criterion}on to search over treespace, the set of all possible phylogenies, to find the phylogeny that maximizes the criterion. There are other optimality criteria that are used in phylogenetic inference. These include parsimony\index{parsimony}. In parsimony, the minimum number of changes along branches needed to explain the data at the tips is used as the criterion to evaluate each topology [@fitch1971]. Optimization proceeds by attempting to identify the topology that requires the fewest changes. This requires far less computational power than likelihood, so searches are faster.
 
 Under some conditions parsimony and likelihood will recover similar topologies, but often they do not. This is because they are doing different things that under many conditions lead to different results [@steel2000parsimony]. For example, we do not always expect the simplest possible explanation for a given pattern to be the best explanation. If a character has a high rate of evolutionary change, then we expect many changes on a tree rather than the fewest possible. This is accommodated in a likelihood framework.
