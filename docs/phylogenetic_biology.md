@@ -7,7 +7,7 @@ isbn_paperback: "979-8-9934524-0-1"
 isbn_hardcover: "979-8-9934524-1-8"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
-date: "2026-07-25"
+date: "2026-07-26"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -54,13 +54,13 @@ There are several ways you can get this book:
 
 - You can read an HTML version for free at <https://dunnlab.org/phylogenetic_biology/>
 
-- The book is rendered from source code available at <https://github.com/caseywdunn/phylogenetic_biology>, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
-
-- Snapshots of source code for each release are also available on Zenodo via the book's DOI at <https://doi.org/10.5281/zenodo.17267993>.
-
 - You can purchase a paperback from your favorite book retailer. Search for ISBN 979-8-9934524-0-1.
 
 - You can purchase a hardcover from your favorite book retailer. Search for ISBN 979-8-9934524-1-8.
+
+- The book is rendered from source code available at <https://github.com/caseywdunn/phylogenetic_biology>, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
+
+- Snapshots of source code for each release are also available on Zenodo via the book's DOI at <https://doi.org/10.5281/zenodo.17267993>.
 
 Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at <https://github.com/caseywdunn/phylogenetic_biology/issues>.
 
@@ -394,13 +394,22 @@ Branch annotations can include:
 
 - Branch frequencies. This is how topology support values, such as bootstraps and posterior probabilities (which we'll discuss later), are stored.
 
+![(\#fig:trees-information)Adding information to a phylogeny makes it more specific.](phylogenetic_biology_files/figure-latex/trees-information-1.pdf) 
+
 Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and branches that indicate the topology of the phylogeny (Figure \@ref(fig:trees-information)C). Once you have topology, you could display branch attributes. For example, you could scale the branch lengths by time (Figure \@ref(fig:trees-information)D).
 
 At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure \@ref(fig:trees-information)A is compatible with any phylogeny with any branch lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure \@ref(fig:trees-information)B, it is compatible with any phylogeny with any branch lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure \@ref(fig:trees-information)D, for example by labeling internal nodes or showing character states.
 
 The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate branch lengths, for example, while another couldn't care less about branch lengths and is only interested in topology.
 
-![(\#fig:trees-information)Adding information to a phylogeny makes it more specific.](phylogenetic_biology_files/figure-latex/trees-information-1.pdf) 
+
+<!-- Figure 2.13 is tall enough that LaTeX defers it to a float page. Left to
+     drift, it lands inside the Newick listing in the next section, splitting
+     that code across two pages with a full page of figure in between. The
+     barrier makes LaTeX resolve the float before Representation begins, so the
+     listing starts on a clean page and stays together. PDF only; the HTML build
+     has no floats. -->
+\FloatBarrier
 
 ## Representation
 
@@ -435,7 +444,7 @@ In the R code above, for Figure \@ref(fig:trees-newick), you can see how to defi
 a different type of representation, and then draw that. Most of the figures in this text were 
 made using similar code.
 
-Considering just the Newick specification of the tree, `"(((A,B),(C,D)),E);"`, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, `(A,B)` and `(C,D)`. The next set of parentheses out indicates that these two clades together form a larger clade, `((A,B),(C,D))`. Finally, the outermost parentheses indicate that the clade `((A,B),(C,D))` is sister\index{sister group} to `E`. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting [description and history](https://evolution.genetics.washington.edu/phylip/newicktree.html) of the Newick format, which includes details on how to store other types of information in the file format.
+Considering just the Newick specification of the tree, `"(((A,B),(C,D)),E);"`, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, `(A,B)` and `(C,D)`. The next set of parentheses out indicates that these two clades together form a larger clade, `((A,B),(C,D))`. Finally, the outermost parentheses indicate that the clade `((A,B),(C,D))` is sister\index{sister group} to `E`. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting description and history of the Newick format, which includes details on how to store other types of information in the file format—<https://evolution.genetics.washington.edu/phylip/newicktree.html>.
 
 As versatile and simple as Newick is for storing trees in files, it isn't great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, branches, and their annotations. This allows us to directly encode the information noted in the section [The information contained in phylogenies], and to readily extend the data objects as needed.
 
@@ -544,7 +553,7 @@ be a copy of the whole world, which wouldn't be that much more useful than the w
 of the things you would like to do with a map. So all maps are simplifications (Figure \@ref(fig:sim-maps)). The simplification is often what makes the map useful. 
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{figures/maps} \caption{Four maps of the Yale campus, varying in complexity and focus. (A) Aerial image of New Haven, including much of Yale campus, from 1934. This image has a very large amount of information. (B) A street map of the same region (OpenStreetMap). It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.}(\#fig:sim-maps)
+\includegraphics[width=1\linewidth]{figures/maps} \caption{Four maps of the Yale campus, varying in complexity and focus. (A) Aerial image of New Haven, including much of Yale campus, from 1934. This image has a very large amount of information. (B) A street map of the same region; map data © OpenStreetMap contributors, available under the Open Database License. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.}(\#fig:sim-maps)
 \end{figure}
 
 Let's examine one of the most common models, the linear model:
@@ -612,7 +621,7 @@ Because rate ($\mu$) and time ($t$) are so often conflated in phylogenetic quest
 The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{figures/Fig_cnidaria} \caption{A published phylogeny (Zapata, 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.}(\#fig:sim-tree-cnid)
+\includegraphics[width=1\linewidth]{figures/Fig_cnidaria} \caption{A published phylogeny (Zapata et al., 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.}(\#fig:sim-tree-cnid)
 \end{figure}
 
 ### Expected end state
@@ -646,31 +655,31 @@ something is a DNA site and the process is mutation. In both cases, we take as i
 For our sequence evolution model, we need two exponential functions [@swofford1996molecular]:
 
 \begin{equation}
-  P\left(t\right) = \frac{1}{4} + \frac{3}{4} e^{-\mu t} 
+  P_{\text{same}}\left(t\right) = \frac{1}{4} + \frac{3}{4} e^{-\mu t}
   (\#eq:sim-stay)
 \end{equation}
 
 \begin{equation}
-  P\left(t\right) = \frac{1}{4} - \frac{1}{4} e^{-\mu t} 
+  P_{\text{different}}\left(t\right) = \frac{1}{4} - \frac{1}{4} e^{-\mu t}
   (\#eq:sim-change)
 \end{equation}
 
-Equation \@ref(eq:sim-stay) shows the probability of the final state being the same as 
-the beginning state. So if you start with an A, this would give you the probability 
-of remaining an A after time $t$ given a specific value of $\mu$. Equation \@ref(eq:sim-change) is the probability of each of the three end states that are different from the starting state. If you start as an A, this is the probability of changing to a G, for example. It is also the probability of C to T, G to A, *etc.*
+Equation \@ref(eq:sim-stay), which we write as $P_{\text{same}}(t)$, shows the probability of the final state being the same as
+the beginning state. So if you start with an A, this would give you the probability
+of remaining an A after time $t$ given a specific value of $\mu$. Equation \@ref(eq:sim-change), which we write as $P_{\text{different}}(t)$, is the probability of each of the three end states that are different from the starting state. If you start as an A, this is the probability of changing to a G, for example. It is also the probability of C to T, G to A, *etc.* Note that these are the probabilities of *each* of the four possible end states, so they sum to one across the four states as $P_{\text{same}}(t) + 3 P_{\text{different}}(t) = 1$ for any $t$.
 
-Consider what happens to these equations in the extremes we considered above when examining Figure \@ref(fig:sim-saturation). If $\mu$ or $t$ are zero, we expect no change (Figure \@ref(fig:sim-analytical), left side). In that case we get $e^0$, which is 1. Equation \@ref(eq:sim-stay) becomes $1/4 + 3/4$, which is 1. So there is a probability of 1 that, after no change, the end state is the same as the beginning state. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 1/4$, which is 0. So after no change the end states that differ from the beginning state each have probability 0.
+Consider what happens to these equations in the extremes we considered above when examining Figure \@ref(fig:sim-saturation). If $\mu$ or $t$ are zero, we expect no change (Figure \@ref(fig:sim-analytical), left side). In that case we get $e^0$, which is 1. $P_{\text{same}}(t)$ (Equation \@ref(eq:sim-stay)) becomes $1/4 + 3/4$, which is 1. So there is a probability of 1 that, after no change, the end state is the same as the beginning state. Likewise, $P_{\text{different}}(t)$ (Equation \@ref(eq:sim-change)) becomes $1/4 - 1/4$, which is 0. So after no change the end states that differ from the beginning state each have probability 0.
 
-Now consider the case after infinite change (or just a large amount of change, as in the right side of Figure \@ref(fig:sim-analytical)). If $\mu$ or $t$ are infinity, then $e^{-\mu t}$ becomes $e^{-\infty}$, which is 0. In that case, Equation \@ref(eq:sim-stay) becomes $1/4 + 0$, which is simply $1/4$. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 0$, which is also $1/4$. So all the nucleotides (the one that you started with, and the three other states that substitution can lead to) all have the same equal frequency of $1/4$. This reflects the fact that the frequency of drawing each of these from the bag was $1/4$.
+Now consider the case after infinite change (or just a large amount of change, as in the right side of Figure \@ref(fig:sim-analytical)). If $\mu$ or $t$ are infinity, then $e^{-\mu t}$ becomes $e^{-\infty}$, which is 0. In that case, $P_{\text{same}}(t)$ becomes $1/4 + 0$, which is simply $1/4$. Likewise, $P_{\text{different}}(t)$ becomes $1/4 - 0$, which is also $1/4$. So all the nucleotides (the one that you started with, and the three other states that substitution can lead to) all have the same equal frequency of $1/4$. This reflects the fact that the frequency of drawing each of these from the bag was $1/4$.
 
-![(\#fig:sim-analytical)The probability of observing a particular end state at time $t$, given the start state A and $\mu=0.05$. The solid line is the probability of observing the original start state (as described by Equation \@ref(eq:sim-stay)); the dashed line is the probability of observing each of the three other states (as described by Equation \@ref(eq:sim-change)).](phylogenetic_biology_files/figure-latex/sim-analytical-1.pdf) 
+![(\#fig:sim-analytical)The probability of observing a particular end state at time $t$, given the start state A and $\mu=0.05$. The solid line, labeled same, is $P_{\text{same}}(t)$, the probability of observing the original start state (Equation \@ref(eq:sim-stay)). The dashed line, labeled different, is $P_{\text{different}}(t)$, the probability of observing each of the three other states (Equation \@ref(eq:sim-change)).](phylogenetic_biology_files/figure-latex/sim-analytical-1.pdf) 
 
 We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) instead of from simulations of changes along branches (Figure \@ref(fig:sim-sat-analytical)).
 
-![(\#fig:sim-sat-analytical)Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \@ref(eq:sim-change). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each.](phylogenetic_biology_files/figure-latex/sim-sat-analytical-1.pdf) 
+![(\#fig:sim-sat-analytical)Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\mu=0.050$. The starting state is set at A, so the probability of observing an A is $P_{\text{same}}(t)$ (Equation \@ref(eq:sim-stay)). The other three nucleotides, C, G, and T, are each described by $P_{\text{different}}(t)$ (Equation \@ref(eq:sim-change)). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each.](phylogenetic_biology_files/figure-latex/sim-sat-analytical-1.pdf) 
 
-Let's put this back into a biological context. Our simple model allows us to 
-calculate the probability $P(t)$ of a given nucleotide state at the end (child node) of a branch given:
+Let's put this back into a biological context. Our simple model allows us to
+calculate the probability of a given nucleotide state at the end (child node) of a branch, either $P_{\text{same}}(t)$ or $P_{\text{different}}(t)$ depending on whether that state matches the start state, given:
 
 - The nucleotide state at the beginning (parent node) of the branch
 - Replacement rate $\mu$
@@ -722,14 +731,14 @@ There is a lot going on in $\mathbf{Q}$. To make sense of it all, it helps to fa
 
 (See Section \@ref(linear-algebra) for resources on linear algebra if you are unfamiliar with the intuition and mechanics of matrix multiplication.) 
 
-$\mathbf{Q}$ is the instantaneous rate matrix---it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used exponential equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
+$\mathbf{Q}$ is the instantaneous rate matrix---it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used the exponential functions $P_{\text{same}}(t)$ and $P_{\text{different}}(t)$ (Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change)) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
 
 \begin{equation}
 \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
 (\#eq:matrix-exp)
 \end{equation}
 
-Raising $e$ to the power of a matrix is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$, known as the substitution probability matrix, is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$, $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row and column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over a branch of length $t$. Given the single rate parameter and uniform equilibrium frequencies, the diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
+Raising $e$ to the power of a matrix is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$, known as the substitution probability matrix, is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$, $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row and column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over a branch of length $t$. Given the single rate parameter and uniform equilibrium frequencies, the diagonal elements are each $P_{\text{same}}(t)$ (Equation \@ref(eq:sim-stay)), and the off diagonal elements are each $P_{\text{different}}(t)$ (Equation \@ref(eq:sim-change)).
 
 This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.
 
@@ -1110,10 +1119,10 @@ The sum of the probabilities for each of these different histories for n5-n7 tha
 
 ## Log likelihood
 
-The likelihood of these data on this phylogeny, $0.0058252$, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers cannot represent them accurately, underflowing toward zero. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, $ln(p)$. The log likelihood for this phylogeny is $-5.1455597$. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:
+The likelihood of these data on this phylogeny, $0.0058252$, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers cannot represent them accurately, underflowing toward zero. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, $\ln(p)$. The log likelihood for this phylogeny is $-5.1455597$. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:
 
 \begin{equation} 
-  ln(a)+ln(b) = ln(ab)
+  \ln(a)+\ln(b) = \ln(ab)
   (\#eq:logs)
 \end{equation}
 
@@ -1129,7 +1138,7 @@ This comes down to more of the same. We do everything we did above for each site
 
 At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. How do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).
 
-The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. By reference to Equation \@ref(eq:ntrees), we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. This excellent [interactive visualization](http://phylo.bio.ku.edu/mephytis/brlen-opt.html) allows you to manually optimize branch lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
+The small toy phylogeny considered here (Figure \@ref(fig:inference-toy)) has four tip nodes. By reference to Equation \@ref(eq:ntrees), we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. An excellent interactive visualization allows you to manually optimize branch lengths on a small phylogeny—<http://phylo.bio.ku.edu/mephytis/brlen-opt.html>. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.
 
 Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics---to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it; if it is worse, you discard it.
 
@@ -1303,7 +1312,7 @@ Each model parameter can be treated in one of three ways [@Hohna2014]:
 
 - Deterministic. The parameter value depends on the values of other parameters according to specified mathematical relationships. Its value can vary, but is determined by the values of other parameters and cannot be set independently from them.
 
-The most widely used DNA sequence evolution models include the General Time Reversible model and its derivatives (Section \@ref(expanding-the-models)). The GTR model has 11 parameters (Figure \@ref(fig:evaluation-models-nested)). These include the global rate $\mu$ used to tune the overall rate of evolution. Next come the relative rate parameters $a,b,c,d,e,f$ that modify the rates of change between particular nucleotide states, so that they can differ from each other. For example, if `a=0.5` and `b=2`, then changes between A and G occur at a rate four times higher than changes between C and A. Finally we have the equilibrium frequencies $\pi_A,\pi_C,\pi_G,\pi_T$.
+The most widely used DNA sequence evolution models include the General Time Reversible model and its derivatives (Section \@ref(expanding-the-models)). The GTR model has 11 parameters (Figure \@ref(fig:evaluation-models-nested)). These include the global rate $\mu$ used to tune the overall rate of evolution. Next come the relative rate parameters $a,b,c,d,e,f$ that modify the rates of change between particular nucleotide states, so that they can differ from each other. Finally we have the equilibrium frequencies $\pi_A,\pi_C,\pi_G,\pi_T$.
 
 These parameters are treated as follows in the GTR model (Figure \@ref(fig:evaluation-models-nested)):
 
@@ -1319,7 +1328,7 @@ These parameters are treated as follows in the GTR model (Figure \@ref(fig:evalu
 
 The number of stochastic parameters in a model is referred to as the degrees of freedom, $df$. You can think of it as the number of knobs that can be turned freely during the analysis. Models that have higher degrees of freedom are often referred to as more complex than models with fewer degrees of freedom.
 
-The GTR model has $df=8$. There are $5$ stochastic relative rate parameters and $3$ stochastic equilibrium frequencies (Figure \@ref(fig:evaluation-models-nested)). The other models we have seen are nested within this. By nested I mean that they can take on a smaller subset of the parameter values than the more complex model can. Models that are nested within other models have a smaller degree of freedom. See the [IQ-TREE DNA model documentation](http://www.iqtree.org/doc/Substitution-Models#dna-models) for a longer list of models.
+The GTR model has $df=8$. There are $5$ stochastic relative rate parameters and $3$ stochastic equilibrium frequencies (Figure \@ref(fig:evaluation-models-nested)). The other models we have seen are nested within this. By nested I mean that they can take on a smaller subset of the parameter values than the more complex model can. Models that are nested within other models have a smaller degree of freedom. See the IQ-TREE DNA model documentation for a longer list of models—<http://www.iqtree.org/doc/Substitution-Models#dna-models>.
 
 The HKY85 model has $df=4$ (Figure \@ref(fig:evaluation-models-nested)). There is $1$ stochastic relative rate parameter, which determines the transition to transversion ratio. There are the same $3$ stochastic equilibrium frequency parameters as in the GTR model. There are many values that a GTR model can take that an HKY85 model cannot, for example $b$ can differ from $e$ in GTR but not in HKY85. Every value that HKY85 can take can also be taken by GTR. For example, in HKY85 $b=e$, and in GTR $b$ and $e$ are independent stochastic variables that can be different or that can take on the same value. Because every possible value of HKY85 is also possible in GTR, and GTR has more degrees of freedom than HKY85, HKY85 is nested within GTR.
 
@@ -1336,7 +1345,7 @@ In our previous examinations of inference, we used likelihood as an optimality c
 We can then make a series of pairwise comparisons between models, where we consider the ratio of their likelihoods. This is the gist of a likelihood ratio test\index{likelihood ratio test} (LRT). Instead of considering the ratio of likelihoods, we can consider the difference in their log likelihoods since:
 
 \begin{equation} 
-  \Delta = ln(\frac{a}{b}) = ln(a) - ln(b)
+  \Delta = \ln\left(\frac{a}{b}\right) = \ln(a) - \ln(b)
   (\#eq:logs-diff)
 \end{equation}
 
@@ -1345,7 +1354,7 @@ If this difference $\Delta$ is positive, then the model corresponding to $a$ is 
 Let's say we are comparing GTR to HKY85, and we denote the likelihood under GTR as $L_{GTR}$ and the likelihood under HKY85 as $L_{HKY85}$. We'll put the model with more parameters, GTR in this case, in the numerator, *i.e.*, set $a$ above to $L_{GTR}$ and $b$ to $L_{HKY85}$. 
 
 \begin{equation} 
-  \Delta = ln(\frac{L_{GTR}}{L_{HKY85}}) = ln(L_{GTR}) - ln(L_{HKY85})
+  \Delta = \ln\left(\frac{L_{GTR}}{L_{HKY85}}\right) = \ln(L_{GTR}) - \ln(L_{HKY85})
   (\#eq:logs-gtr-hky)
 \end{equation}
 
@@ -1358,7 +1367,7 @@ When comparing nested models, the question therefore isn't whether one model has
 The simplest is to slightly modify the way we compare the log likelihoods, so that their difference is distributed according to a $\chi^2$ distribution with degrees of freedom equal to the difference in degrees of freedom of the models:
 
 \begin{equation} 
-  \delta = 2(ln(L_{1}) - ln(L_{0}))
+  \delta = 2\left(\ln(L_{1}) - \ln(L_{0})\right)
   (\#eq:lrt)
 \end{equation}
 
@@ -1369,14 +1378,14 @@ There are a few challenges to applying the LRT to model selection in phylogeneti
 There are two other approaches commonly used in phylogenetic model selection. Where $L_i$ is the likelihood under model $i$, $k_i$ is the degrees of freedom for the model, and $n$ is sample size (*e.g.*, number of sites in the alignment), these are the Akaike Information Criterion (AIC)\index{Akaike information criterion (AIC)} [@akaike1974]:
 
 \begin{equation} 
-  AIC_i = 2k_i - 2ln(L_i)
+  AIC_i = 2k_i - 2\ln(L_i)
   (\#eq:aic)
 \end{equation}
 
 And the Bayesian Information Criterion (BIC)\index{Bayesian information criterion (BIC)} [@schwarz1978]:
 
 \begin{equation} 
-  BIC_i = k_iln(n) - 2ln(L_i)
+  BIC_i = k_i\ln(n) - 2\ln(L_i)
   (\#eq:bic)
 \end{equation}
 
@@ -2095,7 +2104,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 
 
-This book, version 1.0.0, was rendered from the source code on Jul 25, 2026 at 09:51:22 PM, at git commit d772743 (2026-07-25), with the following R package versions.
+This book, version 1.0.0, was rendered from the source code on Jul 26, 2026 at 03:05:27 AM, at git commit 3e618ff (2026-07-25), with the following R package versions.
 
 
 ```
@@ -2145,7 +2154,7 @@ loaded via a namespace (and not attached):
 [13] magick_2.9.1            labeling_0.4.3         
 [15] subplex_1.9             deSolve_1.40           
 [17] rmarkdown_2.30          tzdb_0.5.0             
-[19] tinytex_0.57            bit_4.6.0              
+[19] bit_4.6.0               tinytex_0.57           
 [21] xfun_0.53               cachem_1.1.0           
 [23] aplot_0.2.9             clusterGeneration_1.3.8
 [25] jsonlite_2.0.0          parallel_4.5.1         
@@ -2180,7 +2189,7 @@ loaded via a namespace (and not attached):
 [83] fontquiver_0.2.1        ggplotify_0.1.3        
 [85] htmlwidgets_1.6.4       farver_2.1.2           
 [87] htmltools_0.5.8.1       lifecycle_1.0.4        
-[89] bit64_4.6.0-1           fontLiberation_0.1.0   
+[89] fontLiberation_0.1.0    bit64_4.6.0-1          
 [91] MASS_7.3-65            
 ```
 

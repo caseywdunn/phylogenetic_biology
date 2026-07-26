@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2026-07-25" />
+<meta name="date" content="2026-07-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -356,7 +356,7 @@ Figure 2.1: Darwin’s depiction of the evolutionary relationships among organis
 <p>Phylogenies represent evolutionary relationships. The only figure in Darwin’s <em>Origin of Species</em> <span class="citation">(<a href="#ref-darwin1859">Darwin 1859</a>)</span> was a phylogeny (Figure <a href="phylogenies.html#fig:trees-darwin">2.1</a>), though he didn’t call it that.</p>
 <p>Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haeckel’s tree (Figure <a href="phylogenies.html#fig:trees-haeckel">2.2</a>) <span class="citation">(<a href="#ref-haeckel1897">Haeckel 1897</a>)</span>. Haeckel had coined the term <em>phylogeny</em> decades earlier, in his 1866 <em>Generelle Morphologie der Organismen</em> <span class="citation">(<a href="#ref-haeckel1866">Haeckel 1866</a>)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:trees-haeckel"></span>
-<img src="figures/haeckel.jpg" alt="Haeckel's hypothesis of the animal phylogeny (Haeckel, 1897), drawn as an actual tree."  />
+<img src="figures/haeckel.jpg" alt="Haeckel's hypothesis of the animal phylogeny (Haeckel, 1897), drawn as an actual tree." width="100%" />
 <p class="caption">
 Figure 2.2: Haeckel’s hypothesis of the animal phylogeny (Haeckel, 1897), drawn as an actual tree.
 </p>
@@ -373,7 +373,7 @@ what each of those parts represents.</p>
 <p>In order to establish a strong foundation for thinking about phylogenies, it is
 helpful to turn to math.</p>
 <div class="figure"><span style="display:block;" id="fig:trees-graph"></span>
-<img src="figures/graph.png" alt="Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating." width="120" />
+<img src="figures/graph.png" alt="Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating." width="60%" />
 <p class="caption">
 Figure 2.3: Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating.
 </p>
@@ -383,7 +383,7 @@ A graph consists of nodes (also called vertices), often represented as circles, 
 represented by lines (Figure <a href="phylogenies.html#fig:trees-graph">2.3</a>). Graphs are useful representations of a variety of systems.
 For example, nodes could be people, and edges could represent family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.</p>
 <div class="figure"><span style="display:block;" id="fig:trees-graph-tree"></span>
-<img src="figures/graph_tree.png" alt="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (i.e., there are no paths that go in circles). The graph is bifurcating---the root node has two branches that connect it to its children; the other internal nodes each have three branches (one that connects to the parent, two to children); and the tips each have one branch (that connects to its parent)." width="139" />
+<img src="figures/graph_tree.png" alt="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (i.e., there are no paths that go in circles). The graph is bifurcating---the root node has two branches that connect it to its children; the other internal nodes each have three branches (one that connects to the parent, two to children); and the tips each have one branch (that connects to its parent)." width="60%" />
 <p class="caption">
 Figure 2.4: Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (i.e., there are no paths that go in circles). The graph is bifurcating—the root node has two branches that connect it to its children; the other internal nodes each have three branches (one that connects to the parent, two to children); and the tips each have one branch (that connects to its parent).
 </p>
@@ -529,15 +529,21 @@ Figure 2.12: The root of the mammal tree is shown in black. (A) Unrooted layout.
 <li><p>Events. These could include a character change (such as the gain of a placenta) or a geographical change (such as an intercontinental dispersal event). Nodes at each end of a branch need not be different in the relevant trait to have change events along the branch. For example, at a particular gene site a parent and a child node could both have an A. There could be two or more events along the branch that are compatible with this pattern, for example a change from A to C and then a change from C back to A.</p></li>
 <li><p>Branch frequencies. This is how topology support values, such as bootstraps and posterior probabilities (which we’ll discuss later), are stored.</p></li>
 </ul>
-<p>Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could draw an unresolved, unlabeled cladogram (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and branches that indicate the topology of the phylogeny (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>C). Once you have topology, you could display branch attributes. For example, you could scale the branch lengths by time (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>D).</p>
-<p>At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure <a href="phylogenies.html#fig:trees-information">2.13</a>A is compatible with any phylogeny with any branch lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure <a href="phylogenies.html#fig:trees-information">2.13</a>B, it is compatible with any phylogeny with any branch lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure <a href="phylogenies.html#fig:trees-information">2.13</a>D, for example by labeling internal nodes or showing character states.</p>
-<p>The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate branch lengths, for example, while another couldn’t care less about branch lengths and is only interested in topology.</p>
 <div class="figure"><span style="display:block;" id="fig:trees-information"></span>
 <img src="phylogenetic_biology_files/figure-html/trees-information-1.png" alt="Adding information to a phylogeny makes it more specific." width="2100" />
 <p class="caption">
 Figure 2.13: Adding information to a phylogeny makes it more specific.
 </p>
 </div>
+<p>Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could draw an unresolved, unlabeled cladogram (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and branches that indicate the topology of the phylogeny (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>C). Once you have topology, you could display branch attributes. For example, you could scale the branch lengths by time (Figure <a href="phylogenies.html#fig:trees-information">2.13</a>D).</p>
+<p>At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure <a href="phylogenies.html#fig:trees-information">2.13</a>A is compatible with any phylogeny with any branch lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure <a href="phylogenies.html#fig:trees-information">2.13</a>B, it is compatible with any phylogeny with any branch lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure <a href="phylogenies.html#fig:trees-information">2.13</a>D, for example by labeling internal nodes or showing character states.</p>
+<p>The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate branch lengths, for example, while another couldn’t care less about branch lengths and is only interested in topology.</p>
+<!-- Figure 2.13 is tall enough that LaTeX defers it to a float page. Left to
+     drift, it lands inside the Newick listing in the next section, splitting
+     that code across two pages with a full page of figure in between. The
+     barrier makes LaTeX resolve the float before Representation begins, so the
+     listing starts on a clean page and stays together. PDF only; the HTML build
+     has no floats. -->
 </div>
 <div id="representation" class="section level2 hasAnchor" number="2.10">
 <h2><span class="header-section-number">2.10</span> Representation<a href="phylogenies.html#representation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -569,7 +575,7 @@ Figure 2.14: Defining and drawing a Newick tree. Tip labels (letters) are black,
 <p>In the R code above, for Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>, you can see how to define a Newick tree, convert it to
 a different type of representation, and then draw that. Most of the figures in this text were
 made using similar code.</p>
-<p>Considering just the Newick specification of the tree, <code>"(((A,B),(C,D)),E);"</code>, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, <code>(A,B)</code> and <code>(C,D)</code>. The next set of parentheses out indicates that these two clades together form a larger clade, <code>((A,B),(C,D))</code>. Finally, the outermost parentheses indicate that the clade <code>((A,B),(C,D))</code> is sister to <code>E</code>. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting <a href="https://evolution.genetics.washington.edu/phylip/newicktree.html">description and history</a> of the Newick format, which includes details on how to store other types of information in the file format.</p>
+<p>Considering just the Newick specification of the tree, <code>"(((A,B),(C,D)),E);"</code>, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, <code>(A,B)</code> and <code>(C,D)</code>. The next set of parentheses out indicates that these two clades together form a larger clade, <code>((A,B),(C,D))</code>. Finally, the outermost parentheses indicate that the clade <code>((A,B),(C,D))</code> is sister to <code>E</code>. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting description and history of the Newick format, which includes details on how to store other types of information in the file format—<a href="https://evolution.genetics.washington.edu/phylip/newicktree.html" class="uri">https://evolution.genetics.washington.edu/phylip/newicktree.html</a>.</p>
 <p>As versatile and simple as Newick is for storing trees in files, it isn’t great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, branches, and their annotations. This allows us to directly encode the information noted in the section <a href="phylogenies.html#the-information-contained-in-phylogenies">The information contained in phylogenies</a>, and to readily extend the data objects as needed.</p>
 <p>The most widely used format for storing phylogenies in the R programming language is as a <code>phylo</code> object from the excellent <code>ape</code> library <span class="citation">(<a href="#ref-R-ape"><span class="nocase">Paradis et al.</span> 2024</a>)</span>. The <code>read.tree()</code> function in the code block above creates a <code>phylo</code> object called <code>phylo_tree</code> based on the phylogeny we specified as text and named <code>newick_text</code>. In a <code>phylo</code> object, each node of a phylogeny has a unique number. The first consecutive node numbers, from 1 to <span class="math inline">\(n\)</span> where <span class="math inline">\(n\)</span> is the number of tip nodes, are allocated to the tip nodes. The internal nodes are numbered consecutively from there, which in a bifurcating tree will be nodes <span class="math inline">\(n+1\)</span> to <span class="math inline">\(2n-1\)</span>. The assignment of the node numbers within these ranges is arbitrary, and there is no guarantee that the same nodes will have the same numbers each time the tree is read. The numbers of the nodes that were given when we created the <code>phylo</code> object from the Newick text are shown in gray in Figure <a href="phylogenies.html#fig:trees-newick">2.14</a>.</p>
 <p>Below we take a quick peek inside the <code>phylo</code> object we created above. The intent isn’t to learn how to manipulate trees in R quite yet, but to just show you how trees can be stored in computer memory. First, let’s take a look at the structure of the <code>phylo</code> object to see what variables it contains within it:</p>
@@ -618,7 +624,7 @@ Baum, David A., and Stacey D. Smith. 2012. <em>Tree Thinking: An Introduction to
 Darwin, Charles. 1859. <em>The Origin of Species by Means of Natural Selection: Or, the Preservation of Favored Races in the Struggle for Life</em>. John Murray.
 </div>
 <div id="ref-haeckel1866" class="csl-entry">
-Haeckel, Ernst. 1866. <em>Generelle Morphologie Der Organismen</em>. Georg Reimer.
+Haeckel, Ernst. 1866. <em>Generelle Morphologie <span class="nocase">der</span> Organismen</em>. Georg Reimer.
 </div>
 <div id="ref-haeckel1897" class="csl-entry">
 Haeckel, Ernst. 1897. <em>The Evolution of Man</em>. Vol. 1. D. Appleton.
@@ -696,7 +702,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["phylogenetic_biology.pdf", "phylogenetic_biology.epub"],
+  "download": null,
   "search": {
     "engine": "fuse",
     "options": null

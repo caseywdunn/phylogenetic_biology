@@ -12,3 +12,32 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+/* Comparative methods (the last numbered chapter) is followed immediately by the
+   bare "# (APPENDIX) Appendix {-}" marker in appendix.rmd. In the merged document
+   that level-1 heading closes the chapter's <div class="section level1">, but
+   bookdown still appends that chapter's per-page reference list afterwards. The
+   split page therefore carries one unmatched </div>, and the HTML parser closes
+   <section class="normal"> early -- the References heading and entries end up as
+   children of div.page-wrapper instead. Outside that section they lose its
+   font-size (1.6rem) and its 15px side padding, so they render smaller and shifted
+   left than on every other chapter page.
+
+   Restore what they would have inherited. These selectors only match when the
+   block has escaped the section, so they become inert if bookdown ever emits it
+   inside. Verified against a chapter whose references nest correctly: heading
+   24px at x=315, entries 16px at x=339. */
+.book .book-body .page-wrapper > h3,
+.book .book-body .page-wrapper > #refs {
+  font-size: 1.6rem;
+  margin-right: 15px;
+}
+.book .book-body .page-wrapper > h3 {
+  font-size: 2.4rem;
+  margin-left: 15px;
+  margin-top: 1.275em;
+  margin-bottom: .85em;
+}
+.book .book-body .page-wrapper > #refs {
+  margin-left: calc(1.5em + 15px);
+}

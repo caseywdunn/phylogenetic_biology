@@ -36,7 +36,7 @@ Cartography is an interesting analogy for the way we will use statistical models
 be a copy of the whole world, which wouldn't be that much more useful than the world itself already is for many 
 of the things you would like to do with a map. So all maps are simplifications (Figure \@ref(fig:sim-maps)). The simplification is often what makes the map useful. 
 
-```{r sim-maps, echo=FALSE, fig.cap="Four maps of the Yale campus, varying in complexity and focus. (A) Aerial image of New Haven, including much of Yale campus, from 1934. This image has a very large amount of information. (B) A street map of the same region (OpenStreetMap). It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.", out.width="100%"}
+```{r sim-maps, echo=FALSE, fig.cap="Four maps of the Yale campus, varying in complexity and focus. (A) Aerial image of New Haven, including much of Yale campus, from 1934. This image has a very large amount of information. (B) A street map of the same region; map data © OpenStreetMap contributors, available under the Open Database License. It has less information, but is more useful for some tasks such as navigation. (C) An even more simplified map, focused on showing the Yale Shuttle routes. (D) The New Haven property map of the region around Osborn Memorial Laboratory, showing property lines and plot numbers. Like (C) it is simple, but reflects different decisions about which information to discard or retain. This figure is inspired by the London maps that David Swofford uses in his own talks to make the same points.", out.width="100%"}
 # out.width pins the figure to the text block. Without it, knitr sizes an
 # included raster from its own pixel dimensions and dpi (maps.png is 1782px
 # wide, which at 300dpi is 5.94in), and anything over the 4.75in text width
@@ -154,7 +154,7 @@ Because rate ($\mu$) and time ($t$) are so often conflated in phylogenetic quest
 
 The exception is when you have external information, such as dated fossils, that allow you to independently estimate rates and branch lengths in terms of actual time. Sometimes deconfounding $\mu t$ isn't important to the primary question of the investigator, sometimes it would be nice to know but can't be done, and other times (such as in papers that date trees) it *is* the central question.
 
-```{r sim-tree-cnid, fig.cap="A published phylogeny (Zapata, 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.", out.width="100%"}
+```{r sim-tree-cnid, fig.cap="A published phylogeny (Zapata et al., 2015) with a scale bar indicating branch length in terms of the expected amount of evolutionary change, rather than absolute time.", out.width="100%"}
 # out.width pins the figure to the text block; without it knitr sizes an
 # included raster from its own pixels and dpi, which can overflow the margin.
 
@@ -215,42 +215,47 @@ something is a DNA site and the process is mutation. In both cases, we take as i
 For our sequence evolution model, we need two exponential functions [@swofford1996molecular]:
 
 \begin{equation}
-  P\left(t\right) = \frac{1}{4} + \frac{3}{4} e^{-\mu t} 
+  P_{\text{same}}\left(t\right) = \frac{1}{4} + \frac{3}{4} e^{-\mu t}
   (\#eq:sim-stay)
 \end{equation}
 
 \begin{equation}
-  P\left(t\right) = \frac{1}{4} - \frac{1}{4} e^{-\mu t} 
+  P_{\text{different}}\left(t\right) = \frac{1}{4} - \frac{1}{4} e^{-\mu t}
   (\#eq:sim-change)
 \end{equation}
 
-Equation \@ref(eq:sim-stay) shows the probability of the final state being the same as 
-the beginning state. So if you start with an A, this would give you the probability 
-of remaining an A after time $t$ given a specific value of $\mu$. Equation \@ref(eq:sim-change) is the probability of each of the three end states that are different from the starting state. If you start as an A, this is the probability of changing to a G, for example. It is also the probability of C to T, G to A, *etc.*
+Equation \@ref(eq:sim-stay), which we write as $P_{\text{same}}(t)$, shows the probability of the final state being the same as
+the beginning state. So if you start with an A, this would give you the probability
+of remaining an A after time $t$ given a specific value of $\mu$. Equation \@ref(eq:sim-change), which we write as $P_{\text{different}}(t)$, is the probability of each of the three end states that are different from the starting state. If you start as an A, this is the probability of changing to a G, for example. It is also the probability of C to T, G to A, *etc.* Note that these are the probabilities of *each* of the four possible end states, so they sum to one across the four states as $P_{\text{same}}(t) + 3 P_{\text{different}}(t) = 1$ for any $t$.
 
-Consider what happens to these equations in the extremes we considered above when examining Figure \@ref(fig:sim-saturation). If $\mu$ or $t$ are zero, we expect no change (Figure \@ref(fig:sim-analytical), left side). In that case we get $e^0$, which is 1. Equation \@ref(eq:sim-stay) becomes $1/4 + 3/4$, which is 1. So there is a probability of 1 that, after no change, the end state is the same as the beginning state. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 1/4$, which is 0. So after no change the end states that differ from the beginning state each have probability 0.
+Consider what happens to these equations in the extremes we considered above when examining Figure \@ref(fig:sim-saturation). If $\mu$ or $t$ are zero, we expect no change (Figure \@ref(fig:sim-analytical), left side). In that case we get $e^0$, which is 1. $P_{\text{same}}(t)$ (Equation \@ref(eq:sim-stay)) becomes $1/4 + 3/4$, which is 1. So there is a probability of 1 that, after no change, the end state is the same as the beginning state. Likewise, $P_{\text{different}}(t)$ (Equation \@ref(eq:sim-change)) becomes $1/4 - 1/4$, which is 0. So after no change the end states that differ from the beginning state each have probability 0.
 
-Now consider the case after infinite change (or just a large amount of change, as in the right side of Figure \@ref(fig:sim-analytical)). If $\mu$ or $t$ are infinity, then $e^{-\mu t}$ becomes $e^{-\infty}$, which is 0. In that case, Equation \@ref(eq:sim-stay) becomes $1/4 + 0$, which is simply $1/4$. Likewise, Equation \@ref(eq:sim-change) becomes $1/4 - 0$, which is also $1/4$. So all the nucleotides (the one that you started with, and the three other states that substitution can lead to) all have the same equal frequency of $1/4$. This reflects the fact that the frequency of drawing each of these from the bag was $1/4$.
+Now consider the case after infinite change (or just a large amount of change, as in the right side of Figure \@ref(fig:sim-analytical)). If $\mu$ or $t$ are infinity, then $e^{-\mu t}$ becomes $e^{-\infty}$, which is 0. In that case, $P_{\text{same}}(t)$ becomes $1/4 + 0$, which is simply $1/4$. Likewise, $P_{\text{different}}(t)$ becomes $1/4 - 0$, which is also $1/4$. So all the nucleotides (the one that you started with, and the three other states that substitution can lead to) all have the same equal frequency of $1/4$. This reflects the fact that the frequency of drawing each of these from the bag was $1/4$.
 
-```{r sim-analytical, fig.cap="The probability of observing a particular end state at time $t$, given the start state A and $\\mu=0.05$. The solid line is the probability of observing the original start state (as described by Equation \\@ref(eq:sim-stay)); the dashed line is the probability of observing each of the three other states (as described by Equation \\@ref(eq:sim-change))." }
+```{r sim-analytical, fig.cap="The probability of observing a particular end state at time $t$, given the start state A and $\\mu=0.05$. The solid line, labeled same, is $P_{\\text{same}}(t)$, the probability of observing the original start state (Equation \\@ref(eq:sim-stay)). The dashed line, labeled different, is $P_{\\text{different}}(t)$, the probability of observing each of the three other states (Equation \\@ref(eq:sim-change))." }
 
 mu=0.05
 p = ggplot(data = data.frame(x = 0), mapping = aes(x = x))
 fun.1 = function(x) {1/4 + 3/4*(exp(- mu * x))}
 fun.2 = function(x) {1/4 - 1/4*(exp(- mu * x))}
 
-p + 
-  stat_function(fun = fun.1, linetype = "solid") + 
-  stat_function(fun = fun.2, linetype = "dashed") + 
-  xlim(0,100) + 
+p +
+  stat_function(fun = fun.1, aes(linetype = "same")) +
+  stat_function(fun = fun.2, aes(linetype = "different")) +
+  scale_linetype_manual(
+    values = c(same = "solid", different = "dashed"),
+    breaks = c("same", "different"),
+    name = "end state"
+  ) +
+  xlim(0,100) +
   ylim(0,1) +
-  xlab( "t" ) + 
+  xlab( "t" ) +
   ylab( "P" )
 ```
 
 We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot like that of Figure \@ref(fig:sim-saturation), but derived from Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) instead of from simulations of changes along branches (Figure \@ref(fig:sim-sat-analytical)).
 
-```{r sim-sat-analytical, cache=TRUE, fig.cap="Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=0.050$. The starting state is set at A, so the probability of observing an A is described by Equation \\@ref(eq:sim-stay). The other three nucleotides, C, G, and T, are described by Equation \\@ref(eq:sim-change). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." }
+```{r sim-sat-analytical, cache=TRUE, fig.cap="Stacked bar plots indicating the frequency of each nucleotide after evolution for a specified amount of time. The rate of evolution is $\\mu=0.050$. The starting state is set at A, so the probability of observing an A is $P_{\\text{same}}(t)$ (Equation \\@ref(eq:sim-stay)). The other three nucleotides, C, G, and T, are each described by $P_{\\text{different}}(t)$ (Equation \\@ref(eq:sim-change)). At time $t=0$ (no evolution), the probability that the state is the same as at the start is 1.0. As the length of time increases, the four nucleotides converge on equal probability of 0.25 each." }
 
   t_values = seq( 0, 100, 10 )
   
@@ -272,8 +277,8 @@ We can reorganize things a bit (Figure \@ref(fig:sim-analytical)) to get a plot 
       scale_fill_grey()
 ```
 
-Let's put this back into a biological context. Our simple model allows us to 
-calculate the probability $P(t)$ of a given nucleotide state at the end (child node) of a branch given:
+Let's put this back into a biological context. Our simple model allows us to
+calculate the probability of a given nucleotide state at the end (child node) of a branch, either $P_{\text{same}}(t)$ or $P_{\text{different}}(t)$ depending on whether that state matches the start state, given:
 
 - The nucleotide state at the beginning (parent node) of the branch
 - Replacement rate $\mu$
@@ -325,14 +330,14 @@ There is a lot going on in $\mathbf{Q}$. To make sense of it all, it helps to fa
 
 (See Section \@ref(linear-algebra) for resources on linear algebra if you are unfamiliar with the intuition and mechanics of matrix multiplication.) 
 
-$\mathbf{Q}$ is the instantaneous rate matrix---it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used exponential equations \@ref(eq:sim-stay) and \@ref(eq:sim-change) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
+$\mathbf{Q}$ is the instantaneous rate matrix---it specifies the particular amount of change we expect over a short period of evolutionary time. But as we discussed before, we often want to know the probability of ending with a particular state if you start with a particular state and let it evolve along a branch of a given length. Before, when we were keeping things as simple as possible, we used the exponential functions $P_{\text{same}}(t)$ and $P_{\text{different}}(t)$ (Equations \@ref(eq:sim-stay) and \@ref(eq:sim-change)) for this. They took as input the overall replacement rate $\mu$ and the length of the branch $t$. Now we want a similar equation, but we want to provide the rate matrix $Q$ rather than the single parameter $\mu$. Again we can just use an exponential function, and it actually has a much simpler form.
 
 \begin{equation}
 \mathbf{P}\left(t\right) = e^{\mathbf{Q} t} 
 (\#eq:matrix-exp)
 \end{equation}
 
-Raising $e$ to the power of a matrix is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$, known as the substitution probability matrix, is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$, $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row and column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over a branch of length $t$. Given the single rate parameter and uniform equilibrium frequencies, the diagonal elements are each Equation \@ref(eq:sim-stay), and the off diagonal elements are each Equation \@ref(eq:sim-change).
+Raising $e$ to the power of a matrix is known as matrix exponentiation, and it returns a matrix with the same dimensions as the matrix in the exponent. This new matrix $\mathbf{P}(t)$, known as the substitution probability matrix, is therefore also a $4 \times 4$ matrix. As for $\mathbf{Q}$, $\boldsymbol{\Pi}$, and $\mathbf{R}$, each row and column corresponds to one of the four possible nucleotides (A, C, G, T). Each of the elements in the matrix is the probability of going from the nucleotide of the corresponding row to the nucleotide of the corresponding column over a branch of length $t$. Given the single rate parameter and uniform equilibrium frequencies, the diagonal elements are each $P_{\text{same}}(t)$ (Equation \@ref(eq:sim-stay)), and the off diagonal elements are each $P_{\text{different}}(t)$ (Equation \@ref(eq:sim-change)).
 
 This was a lot of work to write a really simple model in a much more complicated way. Now we can start to reap the rewards of describing this simple model in this form.
 

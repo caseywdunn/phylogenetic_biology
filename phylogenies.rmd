@@ -15,7 +15,10 @@ Phylogenies represent evolutionary relationships. The only figure in Darwin's *O
 
 Phylogenies are often referred to as trees. It is an apt analogy. From the anchoring of the tree at a root, to the depiction of lineages as branches, to the presentation of tips as leaves, there is a direct correspondence. Many of the first speculative phylogenies were illustrated as actual trees, including Haeckel's tree (Figure \@ref(fig:trees-haeckel)) [@haeckel1897]. Haeckel had coined the term *phylogeny* decades earlier, in his 1866 *Generelle Morphologie der Organismen* [@haeckel1866].
 
-```{r trees-haeckel, echo=FALSE, fig.cap="Haeckel's hypothesis of the animal phylogeny (Haeckel, 1897), drawn as an actual tree."}
+```{r trees-haeckel, echo=FALSE, fig.cap="Haeckel's hypothesis of the animal phylogeny (Haeckel, 1897), drawn as an actual tree.", out.width = if (knitr::is_html_output()) "100%"}
+# HTML-only out.width; see the note on the trees-graph chunk below. Without it
+# this chunk emitted no width attribute at all, so the plate rendered at its
+# intrinsic size.
 
 knitr::include_graphics("figures/haeckel.jpg")
 ```
@@ -34,7 +37,14 @@ what each of those parts represents.
 In order to establish a strong foundation for thinking about phylogenies, it is 
 helpful to turn to math.
 
-```{r trees-graph, echo=FALSE, fig.cap="Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating."}
+```{r trees-graph, echo=FALSE, fig.cap="Simple graph. Nodes are represented by circles, and edges by lines. Note that this graph has a cycle (you could walk in a circle between nodes 1, 2, and 4). It is also not bifurcating.", out.width = if (knitr::is_html_output()) "60%"}
+# out.width is set for HTML only. knitr sizes an included raster from its pixel
+# dimensions and dpi: at dpi=300 this 749px image is 2.5in, which is right for
+# the 4.75in print text block, but the HTML path applies a much smaller factor
+# and emits width="120" -- a fraction of the ~770px content column, while the
+# R-generated figures fill it. Setting it here fixes HTML and leaves the PDF
+# (and therefore its pagination) untouched. 60% rather than 100%: this is a
+# six-node schematic, and at full column width it dwarfs the surrounding text.
 
 knitr::include_graphics("figures/graph.png")
 
@@ -45,7 +55,9 @@ A graph consists of nodes (also called vertices), often represented as circles, 
 represented by lines (Figure \@ref(fig:trees-graph)). Graphs are useful representations of a variety of systems.
 For example, nodes could be people, and edges could represent family relationships, connections in a social network, or financial transactions. We often refer to the edges in phylogenies as branches.
 
-```{r trees-graph-tree, echo=FALSE, fig.cap="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (i.e., there are no paths that go in circles). The graph is bifurcating---the root node has two branches that connect it to its children; the other internal nodes each have three branches (one that connects to the parent, two to children); and the tips each have one branch (that connects to its parent)."}
+```{r trees-graph-tree, echo=FALSE, fig.cap="Graph representing a phylogeny. The tip nodes typically represent sampled entities, like living organisms, sequenced genes, or fossils. The internal nodes are ancestors that immediately precede divergence events. The root is a special internal node that has no parent. It is acyclic (i.e., there are no paths that go in circles). The graph is bifurcating---the root node has two branches that connect it to its children; the other internal nodes each have three branches (one that connects to the parent, two to children); and the tips each have one branch (that connects to its parent).", out.width = if (knitr::is_html_output()) "60%"}
+# HTML-only out.width; see the note on the trees-graph chunk above. 60% to match
+# Figure 2.3, the companion schematic.
 
 knitr::include_graphics("figures/graph_tree.png")
 
@@ -528,12 +540,6 @@ Branch annotations can include:
 
 - Branch frequencies. This is how topology support values, such as bootstraps and posterior probabilities (which we'll discuss later), are stored.
 
-Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and branches that indicate the topology of the phylogeny (Figure \@ref(fig:trees-information)C). Once you have topology, you could display branch attributes. For example, you could scale the branch lengths by time (Figure \@ref(fig:trees-information)D).
-
-At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure \@ref(fig:trees-information)A is compatible with any phylogeny with any branch lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure \@ref(fig:trees-information)B, it is compatible with any phylogeny with any branch lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure \@ref(fig:trees-information)D, for example by labeling internal nodes or showing character states.
-
-The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate branch lengths, for example, while another couldn't care less about branch lengths and is only interested in topology.
-
 ```{r trees-information, echo=FALSE, fig.cap="Adding information to a phylogeny makes it more specific."}
 
 offset = 0.5
@@ -574,6 +580,21 @@ grid.arrange(
 
 ```
 
+Not all phylogenies have all this information. The minimum possible information a phylogeny could contain is just the number of tips. With this, you could draw an unresolved, unlabeled cladogram (Figure \@ref(fig:trees-information)A). You could then start layering information onto that phylogeny. For example, you could next add images denoting the species at the tips (Figure \@ref(fig:trees-information)B). That tells you what species are in the phylogeny, but nothing about how they are related. Next you could add internal nodes and branches that indicate the topology of the phylogeny (Figure \@ref(fig:trees-information)C). Once you have topology, you could display branch attributes. For example, you could scale the branch lengths by time (Figure \@ref(fig:trees-information)D).
+
+At each step in this process of layering on information, the phylogeny is compatible with a very large set of possible phylogenies. At one extreme, Figure \@ref(fig:trees-information)A is compatible with any phylogeny with any branch lengths for any 11 species or organisms or genes. Each added piece of information narrows that subset. When we label the tips as in Figure \@ref(fig:trees-information)B, it is compatible with any phylogeny with any branch lengths for those specific species. And so on. More information provides more specificity. We could go well beyond Figure \@ref(fig:trees-information)D, for example by labeling internal nodes or showing character states.
+
+The amount of information in a phylogeny varies greatly depending on a variety of factors, including what information is available, what the question at hand is, and what makes the most sense for the focused description of the biology at hand. One investigator may go to great lengths to calibrate branch lengths, for example, while another couldn't care less about branch lengths and is only interested in topology.
+
+
+<!-- Figure 2.13 is tall enough that LaTeX defers it to a float page. Left to
+     drift, it lands inside the Newick listing in the next section, splitting
+     that code across two pages with a full page of figure in between. The
+     barrier makes LaTeX resolve the float before Representation begins, so the
+     listing starts on a clean page and stays together. PDF only; the HTML build
+     has no floats. -->
+`r if (knitr::is_latex_output()) '\\FloatBarrier'`
+
 ## Representation
 
 So far we have focused on phylogenies in the abstract sense as mathematical graphs and their associated annotations, and in the concrete sense as tree-like drawings that represent these relationships. To work with trees of any significant size, we need to also represent them computationally. How can you store and manipulate a whole tree and all its associated annotations?
@@ -606,7 +627,7 @@ In the R code above, for Figure \@ref(fig:trees-newick), you can see how to defi
 a different type of representation, and then draw that. Most of the figures in this text were 
 made using similar code.
 
-Considering just the Newick specification of the tree, `"(((A,B),(C,D)),E);"`, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, `(A,B)` and `(C,D)`. The next set of parentheses out indicates that these two clades together form a larger clade, `((A,B),(C,D))`. Finally, the outermost parentheses indicate that the clade `((A,B),(C,D))` is sister\index{sister group} to `E`. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting [description and history](https://evolution.genetics.washington.edu/phylip/newicktree.html) of the Newick format, which includes details on how to store other types of information in the file format.
+Considering just the Newick specification of the tree, `"(((A,B),(C,D)),E);"`, you can see it built up as a series of clades. The inner-most sets of parentheses define two clades, `(A,B)` and `(C,D)`. The next set of parentheses out indicates that these two clades together form a larger clade, `((A,B),(C,D))`. Finally, the outermost parentheses indicate that the clade `((A,B),(C,D))` is sister\index{sister group} to `E`. Commas separate sisters within clades, and the whole thing is finished off with a semicolon. The format also allows for labels of internal nodes, and the specification of branch lengths. Joe Felsenstein wrote an interesting description and history of the Newick format, which includes details on how to store other types of information in the file format—<https://evolution.genetics.washington.edu/phylip/newicktree.html>.
 
 As versatile and simple as Newick is for storing trees in files, it isn't great for storing trees in computer memory where you want to do things with them. To build and analyze trees it is better to have a format that has a more direct representation of nodes, branches, and their annotations. This allows us to directly encode the information noted in the section [The information contained in phylogenies], and to readily extend the data objects as needed.
 

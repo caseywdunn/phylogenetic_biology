@@ -219,41 +219,64 @@ at <https://dunnlab.org/phylogenetic_biology/> (served from the `docs/` folder o
 
 ### Release ritual
 
-Do all of steps 1-4 on `dev`, then release from `master`:
+Do all of steps 1-6 on `dev`, then release from `master`:
 
 1. Land every change intended for the release on `dev`.
 2. Bump the version: edit `version:` in `index.rmd` (and `major_edition_year:`
    if the year has changed). This is the only place the number is edited.
-3. Rebuild the HTML so the generated files pick up the new version:
+3. Rebuild the HTML so the generated source files pick up the new version:
 
         bookdown::render_book("index.rmd", "bookdown::gitbook")
 
    This regenerates `frontpage.tex`, `CITATION.cff`, and the HTML in `docs/`.
+   Its purpose here is to propagate the version into the generated files that
+   go into the release commit; the HTML it produces is provisional and is
+   re-rendered in step 5 (its `Software versions` page would otherwise record
+   the pre-bump commit).
 4. Commit the result on `dev`:
 
         git add -A
         git commit -m "Version X.Y.Z"
 
-5. Merge into `master` (production):
+   This is the commit that the PDF will record, so it must be a sensible, final
+   release commit -- not an intermediate "wip" commit. The
+   `Software versions` chapter stamps the most recent git commit (`git log -1`
+   in `versions.rmd`) into the built book, so the next step must run on top of a
+   clean `HEAD`.
+
+5. Regenerate the final published docs -- HTML and PDF -- on top of the
+   `Version X.Y.Z` commit. Each records the most recent git commit in its
+   `Software versions` chapter (`git log -1` in `versions.rmd`), so building
+   them now, after step 4 rather than before, is what makes that recorded commit
+   the clean release commit in both formats. Re-render the HTML with the
+   `bookdown::gitbook` command from step 3; the PDF build command is
+   intentionally kept out of these public docs (run it from your private notes).
+
+6. Commit the regenerated docs on `dev`:
+
+        git add -A
+        git commit -m "Build docs for X.Y.Z"
+
+7. Merge into `master` (production):
 
         git checkout master
         git merge --no-ff dev
 
-6. Tag the release, reading the number straight from `index.rmd` so the tag
+8. Tag the release, reading the number straight from `index.rmd` so the tag
    cannot drift from the printed version:
 
-        VERSION=$(grep -E '^edition:' index.rmd | sed -E 's/edition:[[:space:]]*"?//; s/"?[[:space:]]*$//')
+        VERSION=$(grep -E '^version:' index.rmd | sed -E 's/version:[[:space:]]*"?//; s/"?[[:space:]]*$//')
         git tag -a "v$VERSION" -m "Version $VERSION"
 
-7. Push everything:
+9. Push everything:
 
         git push origin master dev --tags
 
-8. For **major or minor** versions only, create a
+10. For **major or minor** versions only, create a
    [GitHub release](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
    on the new tag, with release notes. The release notes are the book's version
    history, and publishing the release triggers Zenodo to mint the version DOI.
-9. Return to `dev` for the next cycle, keeping it current with production:
+11. Return to `dev` for the next cycle, keeping it current with production:
 
         git checkout dev
         git merge master

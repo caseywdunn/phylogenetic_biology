@@ -141,7 +141,16 @@ I am so grateful for her adventurous spirit, quick mind, and love of life.}
 \\end{center}
 \\vspace*{\\fill}
 
+%% End the front matter. \\thispagestyle{empty} is load-bearing: pandoc emits an
+%% empty paragraph between this file and \\tableofcontents, which starts the
+%% following page (the dedication verso). That page is therefore shipped by the
+%% \\cleardoublepage inside \\chapter*{Contents} as a real page, not skipped by
+%% it, so the \\thispagestyle{empty} in the \\cleardoublepage redefinition never
+%% applies to it and it carries a folio and header rule. Setting the style here
+%% catches it. Do not use \\clearrecto instead: that adds its own \\null page,
+%% which just moves the stray page to the next recto and grows the book by two.
 \\clearpage
+\\thispagestyle{empty}
 ', edition_version_tex, major_edition_year_value, isbn_paperback_value, isbn_hardcover_value, doi_value)
 
 writeLines(frontpage_content, "frontpage.tex")
@@ -307,13 +316,13 @@ There are several ways you can get this book:
 
 - You can read an HTML version for free at <https://dunnlab.org/phylogenetic_biology/>
 
-- The book is rendered from source code available at <https://github.com/caseywdunn/phylogenetic_biology>, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
-
-- Snapshots of source code for each release are also available on Zenodo via the book's DOI at <https://doi.org/`r doi_value`>.
-
 - You can purchase a paperback from your favorite book retailer. Search for ISBN `r isbn_paperback_value`.
 
 - You can purchase a hardcover from your favorite book retailer. Search for ISBN `r isbn_hardcover_value`.
+
+- The book is rendered from source code available at <https://github.com/caseywdunn/phylogenetic_biology>, with `bookdown` [@bookdown2016]. If you are curious about how any of the figures or analyses were done you can examine the source code there and rerun it yourself.
+
+- Snapshots of source code for each release are also available on Zenodo via the book's DOI at <https://doi.org/`r doi_value`>.
 
 Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at <https://github.com/caseywdunn/phylogenetic_biology/issues>.
 

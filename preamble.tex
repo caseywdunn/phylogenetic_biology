@@ -2,6 +2,12 @@
 \usepackage{float}
 \usepackage{afterpage}
 
+% \FloatBarrier, for the few places where a float must not drift past a boundary.
+% Loaded without the [section] option deliberately: that would put an implicit
+% barrier at every section in the book and reshuffle float placement throughout.
+% Barriers are placed by hand instead, one at a time, where they are needed.
+\usepackage{placeins}
+
 % Bold uppercase Greek in math (the matrices \Pi and \Sigma).
 %
 % For xelatex, pandoc's template loads unicode-math and then loads lmodern
@@ -161,6 +167,39 @@
   \ifodd\c@page\else
     \null\thispagestyle{empty}\newpage
   \fi}
+\makeatother
+
+% Ragged-right section headings.
+% The book class typesets headings justified, so a title too long for one line
+% gets hyphenated and can strand a fragment on the second line:
+%
+%   1.3  A unified perspective on phylogenetic stud-
+%        ies
+%   7.1  Gene trees, species trees, and real discor-
+%        dance
+%
+% Ragged right removes the need to hyphenate, so those break at word boundaries
+% instead ("...phylogenetic / studies"). This matches how the bibliography and
+% the index are already set above.
+%
+% These are the book class definitions verbatim, with \raggedright appended to
+% the style argument. Fonts and the space above and below each heading are
+% unchanged, and a heading that already fits on one line renders identically --
+% a single line is flush left either way. The wrapped headings still occupy two
+% lines, so pagination should not move.
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {2.3ex \@plus.2ex}%
+                                   {\normalfont\Large\bfseries\raggedright}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\large\bfseries\raggedright}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries\raggedright}}
 \makeatother
 
 % Widow and orphan control.

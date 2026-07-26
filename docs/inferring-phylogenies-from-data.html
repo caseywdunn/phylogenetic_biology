@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2026-07-25" />
+<meta name="date" content="2026-07-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1145,9 +1145,9 @@ We can think of the probabilities of specific changes along each branch as the p
 </div>
 <div id="log-likelihood" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Log likelihood<a href="inferring-phylogenies-from-data.html#log-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The likelihood of these data on this phylogeny, <span class="math inline">\(0.0058252\)</span>, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers cannot represent them accurately, underflowing toward zero. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, <span class="math inline">\(ln(p)\)</span>. The log likelihood for this phylogeny is <span class="math inline">\(-5.1455597\)</span>. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:</p>
+<p>The likelihood of these data on this phylogeny, <span class="math inline">\(0.0058252\)</span>, is not a big number. And this is a very small tree. As trees get larger there are many more probabilities we need to multiply, so the products get even smaller. The joint probabilities, in fact, get so small that computers cannot represent them accurately, underflowing toward zero. Rather than store and manipulate the small probabilities directly, most tools take the natural logs of the probabilities, <span class="math inline">\(\ln(p)\)</span>. The log likelihood for this phylogeny is <span class="math inline">\(-5.1455597\)</span>. Taking the log transforms probabilities to a numerical representation that is easier to work with. It also has the added value of making calculations of joint probability simpler. Given the relationship between the log of products of variables and the sum of logs of each value:</p>
 <p><span class="math display" id="eq:logs">\[\begin{equation}
-  ln(a)+ln(b) = ln(ab)
+  \ln(a)+\ln(b) = \ln(ab)
   \tag{4.2}
 \end{equation}\]</span></p>
 <p>We can calculate joint log probabilities as sums of log probabilities for each event, rather than as the log of products of the probabilities. You will almost always see log likelihoods, rather than just likelihoods, published in the literature. Note that because likelihoods are probabilities and therefore range from 0–1, the log likelihoods will range from <span class="math inline">\(-\infty\)</span> (for probabilities very close to 0) to <span class="math inline">\(0\)</span> (for probabilities close to 1). Since likelihoods tend to be small, they end up as log likelihoods that are negative numbers with large absolute values.</p>
@@ -1160,7 +1160,7 @@ We can think of the probabilities of specific changes along each branch as the p
 <div id="maximum-likelihood" class="section level2 hasAnchor" number="4.5">
 <h2><span class="header-section-number">4.5</span> Maximum likelihood<a href="inferring-phylogenies-from-data.html#maximum-likelihood" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>At this point we can calculate the log likelihood for specified phylogenies, models, and DNA sequences. But we set out to do phylogenetic inference, where we estimate phylogenies from sequences at tips. How do we get there from here? Once we can calculate the likelihood of a given phylogeny, we can calculate the likelihood of any phylogeny. We can then search for the phylogeny with the maximum likelihood (and, of course, maximum log likelihood).</p>
-<p>The small toy phylogeny considered here (Figure <a href="inferring-phylogenies-from-data.html#fig:inference-toy">4.1</a>) has four tip nodes. By reference to Equation <a href="phylogenies.html#eq:ntrees">(2.1)</a>, we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. This excellent <a href="http://phylo.bio.ku.edu/mephytis/brlen-opt.html">interactive visualization</a> allows you to manually optimize branch lengths on a small phylogeny. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.</p>
+<p>The small toy phylogeny considered here (Figure <a href="inferring-phylogenies-from-data.html#fig:inference-toy">4.1</a>) has four tip nodes. By reference to Equation <a href="phylogenies.html#eq:ntrees">(2.1)</a>, we can see that there are 15 possible topologies. For each, we can optimize the branch lengths to find the maximum likelihood for the topology. This is an iterative process, where each branch length is progressively refined until no change increases the likelihood. An excellent interactive visualization allows you to manually optimize branch lengths on a small phylogeny—<a href="http://phylo.bio.ku.edu/mephytis/brlen-opt.html" class="uri">http://phylo.bio.ku.edu/mephytis/brlen-opt.html</a>. Then we pick the topology with the maximum likelihood. This requires a very large number of calculations, but is doable for every possible topology.</p>
 <p>Things change very quickly, though, as trees grow in size. Beyond about 15 tips there are so many possible topologies that it is impossible to calculate the likelihood for every topology using existing computer hardware and software. That means it is necessary to use heuristics—to modify the tree you have until you can do no better. This is like hill climbing. You calculate the likelihood of a tree and then modify it. If the likelihood is higher, you keep it; if it is worse, you discard it.</p>
 <p>This might sound simple, but it isn’t. One challenge is that you can get trapped on a local maximum and mistake it for the best phylogeny, when in fact there are other phylogenies with very different topologies that are much better but not locally accessible. There is extraordinary craft that goes into building tools that are able to efficiently climb these likelihood surfaces without getting trapped in local maxima. Widely used maximum likelihood inference programs include RAxML <span class="citation">(<a href="#ref-stamatakis2014">Stamatakis 2014</a>)</span> and IQ-TREE <span class="citation">(<a href="#ref-nguyen2015">Nguyen et al. 2015</a>)</span>.</p>
 <p>Optimization of calculations becomes very important. For example, it isn’t necessary to recalculate all values on each new topology, since some of the calculations from previous topologies remain relevant <span class="citation">(<a href="#ref-Felsenstein:1981vk">Felsenstein 1981</a>)</span>.</p>
@@ -1241,7 +1241,7 @@ gitbook.start({
     "link": null,
     "text": null
   },
-  "download": ["phylogenetic_biology.pdf", "phylogenetic_biology.epub"],
+  "download": null,
   "search": {
     "engine": "fuse",
     "options": null
