@@ -34,6 +34,24 @@ pdftotext -layout docs/phylogenetic_biology.pdf - | tail -45 \
   | grep -E "bootstrap|ultrametric|Brownian"
 ```
 
+## Web analytics
+
+The gitbook build injects `analytics.html` into the `<head>` of every chapter
+page, via `includes: in_header` under `bookdown::gitbook` in `_output.yml`. It
+loads [GoatCounter](https://www.goatcounter.com/), which sets no cookies and
+stores no personal data, so the book needs no consent banner. The PDF and epub
+builds do not include it.
+
+The site code is `caseywdunn`, the same one the lab website uses, which it sets
+in `goatcounter:` in `_config.yml` of the `caseywdunn.github.io` repository.
+Both sites are served under dunnlab.org, so one code gives a single dashboard in
+which the URL path separates them, with the book under `/phylogenetic_biology/`,
+one row per chapter. Keep the two repositories in sync if the code ever changes.
+
+Because the script is baked into the HTML at render time, changing it requires a
+gitbook rebuild and a fresh commit of `docs/`. Local previews are not counted:
+`count.js` ignores localhost, private address ranges, and `file://` URLs.
+
 ## Running tests
 
 To run tests of the code, launch an R console from the `manuscript/` directory of this

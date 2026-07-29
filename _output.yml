@@ -1,5 +1,8 @@
 bookdown::gitbook:
   css: style.css
+  # Web analytics, HTML build only. See the comments in analytics.html.
+  includes:
+    in_header: analytics.html
   config:
     toc:
       before: |
