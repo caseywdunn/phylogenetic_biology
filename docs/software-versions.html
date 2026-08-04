@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2026-07-26" />
+<meta name="date" content="2026-08-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,29 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<!--
+Web analytics for the gitbook (HTML) build only, injected into the <head> of
+every chapter page via `includes: in_header` under `bookdown::gitbook` in
+_output.yml. The PDF and epub builds do not include this file.
+
+GoatCounter is used rather than Google Analytics because it sets no cookies and
+stores no personal data, so the book needs no consent banner for readers in the
+EU. See https://www.goatcounter.com/help/privacy for what is and is not
+collected.
+
+The site code below, `caseywdunn`, is deliberately the same one the lab website
+uses, which it sets in `goatcounter:` in _config.yml of the caseywdunn.github.io
+repository. Both sites are served under dunnlab.org, so one code puts them in a
+single dashboard where the URL path separates them: the book is everything under
+/phylogenetic_biology/, one row per chapter. Keep the two in sync. The code is
+not a secret; it is visible in the page source of every site that uses it.
+
+Local previews are not counted: count.js ignores hits from localhost, private
+address ranges, and file:// URLs unless allow_local is set. No separate
+development/production gate is needed here.
+-->
+<script data-goatcounter="https://caseywdunn.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 
 
 <style type="text/css">
@@ -347,7 +370,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="software-versions" class="section level1 hasAnchor" number="14">
 <h1><span class="header-section-number">Appendix B</span> Software versions<a href="software-versions.html#software-versions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This book, version 1.0.0, was rendered from the source code on Jul 26, 2026 at 03:29:45 AM, at git commit 7702033 (2026-07-25), with the following R package versions.</p>
+<p>This book, version 1.0.0, was rendered from the source code on Aug 04, 2026 at 05:27:10 PM, at git commit 4e95936 (2026-07-28), with the following R package versions.</p>
 <pre><code>R version 4.5.1 (2025-06-13)
 Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 24.04.3 LTS
