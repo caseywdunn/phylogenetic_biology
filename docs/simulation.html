@@ -23,7 +23,7 @@
 <meta name="author" content="Casey W. Dunn" />
 
 
-<meta name="date" content="2026-08-04" />
+<meta name="date" content="2026-08-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -693,53 +693,53 @@ notation to computational representations, since we are doing more calculations.
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">A</td>
-<td align="right">0.0387691</td>
-<td align="left">A</td>
+<td align="left">G</td>
+<td align="right">1.3222432</td>
+<td align="left">G</td>
 </tr>
 <tr class="even">
 <td align="left">A</td>
-<td align="right">0.3444866</td>
-<td align="left">A</td>
-</tr>
-<tr class="odd">
-<td align="left">C</td>
-<td align="right">0.6561006</td>
-<td align="left">A</td>
-</tr>
-<tr class="even">
-<td align="left">C</td>
-<td align="right">0.6723020</td>
-<td align="left">C</td>
-</tr>
-<tr class="odd">
-<td align="left">A</td>
-<td align="right">0.5311025</td>
-<td align="left">A</td>
-</tr>
-<tr class="even">
-<td align="left">A</td>
-<td align="right">0.7477842</td>
+<td align="right">1.7567417</td>
 <td align="left">G</td>
 </tr>
 <tr class="odd">
 <td align="left">T</td>
-<td align="right">1.7042348</td>
-<td align="left">T</td>
+<td align="right">1.7811181</td>
+<td align="left">C</td>
 </tr>
 <tr class="even">
 <td align="left">A</td>
-<td align="right">0.6896113</td>
-<td align="left">G</td>
+<td align="right">1.1325609</td>
+<td align="left">A</td>
 </tr>
 <tr class="odd">
-<td align="left">G</td>
-<td align="right">0.7347406</td>
-<td align="left">G</td>
+<td align="left">C</td>
+<td align="right">1.1870947</td>
+<td align="left">C</td>
+</tr>
+<tr class="even">
+<td align="left">A</td>
+<td align="right">0.7290290</td>
+<td align="left">A</td>
+</tr>
+<tr class="odd">
+<td align="left">T</td>
+<td align="right">0.7148257</td>
+<td align="left">T</td>
 </tr>
 <tr class="even">
 <td align="left">G</td>
-<td align="right">1.3263353</td>
+<td align="right">1.1829141</td>
+<td align="left">A</td>
+</tr>
+<tr class="odd">
+<td align="left">C</td>
+<td align="right">1.7309029</td>
+<td align="left">C</td>
+</tr>
+<tr class="even">
+<td align="left">A</td>
+<td align="right">1.3610473</td>
 <td align="left">G</td>
 </tr>
 </tbody>
@@ -757,7 +757,7 @@ Figure 3.10: Simulation of states for a single DNA site on a simple tree accordi
 </div>
 <p>This isn’t a big step from what we have already—once we have all the machinery to simulate along a single branch, we can just iterate that to simulate evolution along all the branches in a whole tree.</p>
 <p>Let’s start with the root of the tree (Figure <a href="simulation.html#fig:sim-tree">3.10</a>, node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies <span class="math inline">\(\boldsymbol{\Pi}\)</span>. That gives us the <span class="math inline">\(A\)</span> at the root in Figure <a href="simulation.html#fig:sim-tree">3.10</a>. The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade <code>(Species_A, Species_B)</code>) and node 7 (the most recent common ancestor of the clade <code>(Species_C, Species_D)</code>). We simulate the states for these child nodes according to the state at the root (node 5), length <span class="math inline">\(t\)</span> of each branch, and <span class="math inline">\(\mathbf{P}(t)\)</span>. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so they also share a parent state.</p>
-<p>There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the <code>Species_A</code> terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from <span class="math inline">\(\boldsymbol{\Pi}\)</span>, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is <span class="math inline">\(A\)</span>. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length <span class="math inline">\(t\)</span> of the branch, and <span class="math inline">\(\mathbf{P}(t)\)</span>. We then do the same for each of the other branches.</p>
+<p>There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the <code>Species_A</code> terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from <span class="math inline">\(\boldsymbol{\Pi}\)</span>, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is <span class="math inline">\(C\)</span>. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length <span class="math inline">\(t\)</span> of the branch, and <span class="math inline">\(\mathbf{P}(t)\)</span>. We then do the same for each of the other branches.</p>
 <p>Data can be simulated on a tree of arbitrary size in this way. Just sample the root state from the equilibrium frequencies. Then traverse the tree from the root to each of the tips, simulating the state at each of the other internal nodes and finally the terminal nodes according to the states of their parents, branch length <span class="math inline">\(t\)</span>, and <span class="math inline">\(\mathbf{P}(t)\)</span>.</p>
 </div>
 <div id="scaling-from-a-single-site-to-multiple-sites" class="section level2 hasAnchor" number="3.8">

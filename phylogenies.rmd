@@ -172,6 +172,7 @@ This gets big really, really fast as $n$ increases. For a phylogeny of 5 tips th
 One of the most important things to keep in mind when interpreting a phylogeny is that the order of the tips doesn't convey any information [@baum2012]. You can rotate any internal node, changing the order of the tips, and you still have the exact same phylogeny, just drawn a different way (Figure \@ref(fig:trees-rotations)). The topology remains unchanged. It's the connections that tell us about the relationships. JD Laurence-Chasen, a former student in my invertebrate zoology course, made an excellent video about this---<https://vimeo.com/148794860>. The major implication of this is that you should never read a phylogeny across the tips to see, for example, which species are more closely related. You always need to look at the structure of the phylogeny itself.
 
 ```{r trees-rotations, echo=FALSE, fig.cap="The exact same phylogeny, drawn a few times with different node rotations."}
+set.seed(2)
 
 offset=15
 
@@ -208,7 +209,7 @@ Sometimes we are only interested in, or only have information about, the topolog
 It is always good practice whenever you show a phylogeny to indicate whether it is a chronogram, phylogram, or cladogram. Unfortunately, this is inconsistent in the literature, and not always clear from the figure legend or text. If you aren't sure what branch length means it is best to just ignore branch lengths and treat the phylogeny as if it were a cladogram.
 
 ```{r trees-types, echo=FALSE, fig.cap="Several types of trees. In a chronogram, branch lengths are scaled according to time. In a phylogram, branch lengths are scaled according to expected amount of evolutionary change, which can differ across characters and branches. In a cladogram, the branch lengths have no meaning. "}
-
+set.seed(3)
 
 tree_noised = tree
 
