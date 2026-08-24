@@ -1,13 +1,17 @@
 ---
 title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
-version: 1.0.0
+version: 1.1.0
 major_edition_year: 2026
 isbn_paperback: "979-8-9934524-0-1"
 isbn_hardcover: "979-8-9934524-1-8"
+# Printer storefront for the current printing of the paperback. This link can
+# only be generated after the book is sent to the publisher, so it is patched in
+# on master after each new printing. See "Release ritual" in development.md.
+paperback_url: "https://shop.lightningsource.com/b/085?params=PkwgWsxj7YZkqa0QOm0uQyYOhbhOH6ZesXrEh7whDxt"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
-date: "2026-07-26"
+date: "2026-08-24"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -33,6 +37,8 @@ always_allow_html: true
 # Preface {-}
 
 \markboth{Preface}{Preface}
+
+
 
 
 
@@ -64,7 +70,7 @@ There are several ways you can get this book:
 
 Please submit any errors you find, typos, or suggestions that you have for improving the manuscript to the issue tracker at <https://github.com/caseywdunn/phylogenetic_biology/issues>.
 
-You are currently reading the First Edition (Version 1.0.0) of the book. Please cite it as follows:
+You are currently reading the First Edition (Version 1.1.0) of the book. Please cite it as follows:
 
 > Dunn CW. Phylogenetic Biology. First Edition. New Haven, CT: Casey W. Dunn; 2026. ISBN 979-8-9934524-0-1. https://doi.org/10.5281/zenodo.17267993
 
@@ -110,6 +116,14 @@ The following books provide general computational background for the topics cove
 ## Acknowledgments {-}
 
 Thanks in particular to the students of Yale EEB354 in 2020, 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation and feedback. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Other lab members provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Nate Grubaugh invited me to share a couple chapters in his course each year. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self-publishing to facilitate student access. I am also very grateful to the students and faculty of the Workshop on Molecular Evolution at Woods Hole. Finally, I thank James Prosek for generously allowing me to use his work *Moth Cluster IV* for the cover.
+
+## Description of AI use {-}
+
+I started this book in 2020, and the bulk of the writing was finished by 2024, before capable large language models were available. The following chapters were drafted in full during that period, without any use of AI: Introduction, Phylogenies, Simulation, Inferring phylogenies from data, Molecular inference in practice, Evaluation, and Phylogenies and time.
+
+Large language models did assist with drafting the remaining chapters, to varying degrees. Any text produced with the assistance of AI was carefully reviewed and, in most cases, heavily revised by hand. In the final stages of production I also used AI to copy edit the full book, to address some technical issues with code, and to refine figures, for example their size and spacing. Claude Opus 4 variants were the primary models used.
+
+To describe this more precisely, the GAIDeT taxonomy [@suchikova2026gaidet] provides a standard vocabulary for declaring which tasks were delegated to generative AI. Under that taxonomy, and under full human supervision, I delegated *text generation* (for some chapters), *proofreading and editing*, and *reformatting* from the Writing and Editing category; *code generation* and *code optimization* from Software Development and Automation; and *visualization* from Data Management. Everything else—the conceptualization, the choice of topics and framing, the methodology, the analyses, and the final wording—is my own. Responsibility for the book lies entirely with me.
 
 
 
@@ -895,16 +909,16 @@ Table: (\#tab:sim-single-edges)Each row is simulated evolution along a single ed
 
 Parent       Length  Child 
 -------  ----------  ------
-A         0.0387691  A     
-A         0.3444866  A     
-C         0.6561006  A     
-C         0.6723020  C     
-A         0.5311025  A     
-A         0.7477842  G     
-T         1.7042348  T     
-A         0.6896113  G     
-G         0.7347406  G     
-G         1.3263353  G     
+G         1.3222432  G     
+A         1.7567417  G     
+T         1.7811181  C     
+A         1.1325609  A     
+C         1.1870947  C     
+A         0.7290290  A     
+T         0.7148257  T     
+G         1.1829141  A     
+C         1.7309029  C     
+A         1.3610473  G     
 
 In Table \@ref(tab:sim-single-edges) I selected the Parent nucleotide by sampling from $\boldsymbol{\Pi}$ as described above. I then created a random branch length $t$ by sampling from a uniform distribution that ranges from 0 to $2$, just to get a variety of branch lengths. I then simulated the Child state by sampling from $\mathbf{P}(t)$ given $t$ and the Parent state.
 
@@ -918,7 +932,7 @@ This isn't a big step from what we have already---once we have all the machinery
 
 Let's start with the root of the tree (Figure \@ref(fig:sim-tree), node 5). As in our simulations along single branches, we will pick the state from the equilibrium frequencies $\boldsymbol{\Pi}$. That gives us the $A$ at the root in Figure \@ref(fig:sim-tree). The root node is the parent of two branches that descend from it. These two branches connect to node 6 (the most recent common ancestor of the clade `(Species_A, Species_B)`) and node 7 (the most recent common ancestor of the clade `(Species_C, Species_D)`). We simulate the states for these child nodes according to the state at the root (node 5), length $t$ of each branch, and $\mathbf{P}(t)$. In each case, this is just as when we simulated evolution along a single branch at a time, it is just that the branches share a parent node so they also share a parent state.
 
-There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the `Species_A` terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from $\boldsymbol{\Pi}$, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is $A$. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length $t$ of the branch, and $\mathbf{P}(t)$. We then do the same for each of the other branches.
+There are four more branches in this tree, each connected to a terminal node. One branch has parent node 6 and child node 1 (which is the `Species_A` terminal node). Now that we are not at the root things are a little different. Rather than draw the state for the parent node from $\boldsymbol{\Pi}$, we just use the state that was simulated along the branch connecting node 5 to node 6. This state is $C$. Now we simulate evolution along the branch connecting node 6 to node 1, given the state at node 6, length $t$ of the branch, and $\mathbf{P}(t)$. We then do the same for each of the other branches.
 
 Data can be simulated on a tree of arbitrary size in this way. Just sample the root state from the equilibrium frequencies. Then traverse the tree from the root to each of the tips, simulating the state at each of the other internal nodes and finally the terminal nodes according to the states of their parents, branch length $t$, and $\mathbf{P}(t)$.
 
@@ -2104,7 +2118,7 @@ The authors have excellent companion videos organized into playlists at https://
 
 
 
-This book, version 1.0.0, was rendered from the source code on Jul 26, 2026 at 03:28:37 AM, at git commit 7702033 (2026-07-25), with the following R package versions.
+This book, version 1.1.0, was rendered from the source code on Aug 24, 2026 at 12:02:39 PM, at git commit f36b616 (2026-08-24), with the following R package versions.
 
 
 ```
@@ -2134,15 +2148,15 @@ attached base packages:
 [6] methods   base     
 
 other attached packages:
- [1] nlme_3.1-168     scales_1.4.0     ggrepel_0.9.6   
- [4] kableExtra_1.4.0 phangorn_2.12.1  Matrix_1.7-3    
- [7] lubridate_1.9.4  forcats_1.0.1    dplyr_1.1.4     
-[10] purrr_1.1.0      readr_2.1.5      tidyr_1.3.1     
-[13] tibble_3.3.0     ggplot2_4.0.0    tidyverse_2.0.0 
-[16] stringr_1.5.2    magrittr_2.0.4   gridExtra_2.3   
-[19] geiger_2.0.11    phytools_2.5-2   maps_3.4.3      
-[22] ape_5.8-1        ggtree_4.0.5     treeio_1.34.0   
-[25] renv_1.1.8       bookdown_0.45   
+ [1] nlme_3.1-168     bookdown_0.45    scales_1.4.0    
+ [4] ggrepel_0.9.6    kableExtra_1.4.0 phangorn_2.12.1 
+ [7] Matrix_1.7-3     lubridate_1.9.4  forcats_1.0.1   
+[10] dplyr_1.1.4      purrr_1.1.0      readr_2.1.5     
+[13] tidyr_1.3.1      tibble_3.3.0     ggplot2_4.0.0   
+[16] tidyverse_2.0.0  stringr_1.5.2    magrittr_2.0.4  
+[19] gridExtra_2.3    geiger_2.0.11    phytools_2.5-2  
+[22] maps_3.4.3       ape_5.8-1        ggtree_4.0.5    
+[25] treeio_1.34.0    renv_1.1.8      
 
 loaded via a namespace (and not attached):
  [1] mnormt_2.1.1            rlang_1.1.6            
@@ -2155,42 +2169,40 @@ loaded via a namespace (and not attached):
 [15] subplex_1.9             deSolve_1.40           
 [17] rmarkdown_2.30          tzdb_0.5.0             
 [19] bit_4.6.0               tinytex_0.57           
-[21] xfun_0.53               cachem_1.1.0           
-[23] aplot_0.2.9             clusterGeneration_1.3.8
-[25] jsonlite_2.0.0          parallel_4.5.1         
-[27] R6_2.6.1                bslib_0.9.0            
-[29] stringi_1.8.7           RColorBrewer_1.1-3     
-[31] jquerylib_0.1.4         numDeriv_2016.8-1.1    
-[33] Rcpp_1.1.0              iterators_1.0.14       
-[35] knitr_1.50              optimParallel_1.0-2    
-[37] splines_4.5.1           igraph_2.2.1           
-[39] timechange_0.3.0        tidyselect_1.2.1       
-[41] rstudioapi_0.17.1       yaml_2.3.10            
-[43] doParallel_1.0.17       codetools_0.2-20       
-[45] lattice_0.22-7          withr_3.0.2            
-[47] S7_0.2.0                coda_0.19-4.1          
-[49] evaluate_1.0.5          ggimage_0.3.5          
-[51] gridGraphics_0.5-1      xml2_1.4.1             
-[53] pillar_1.11.1           foreach_1.5.2          
-[55] ggfun_0.2.0             generics_0.1.4         
-[57] vroom_1.6.6             hms_1.1.4              
-[59] tidytree_0.4.6          glue_1.8.0             
-[61] gdtools_0.4.4           scatterplot3d_0.3-44   
-[63] lazyeval_0.2.2          tools_4.5.1            
-[65] ggiraph_0.9.2           fs_1.6.6               
-[67] mvtnorm_1.3-3           fastmatch_1.1-6        
-[69] grid_4.5.1              patchwork_1.3.2        
-[71] cli_3.6.5               rappdirs_0.3.3         
-[73] DEoptim_2.2-8           textshaping_1.0.4      
-[75] fontBitstreamVera_0.1.1 expm_1.0-0             
-[77] viridisLite_0.4.2       svglite_2.2.2          
-[79] gtable_0.3.6            yulab.utils_0.2.1      
-[81] sass_0.4.10             digest_0.6.37          
-[83] fontquiver_0.2.1        ggplotify_0.1.3        
-[85] htmlwidgets_1.6.4       farver_2.1.2           
-[87] htmltools_0.5.8.1       lifecycle_1.0.4        
-[89] fontLiberation_0.1.0    bit64_4.6.0-1          
-[91] MASS_7.3-65            
+[21] xfun_0.53               aplot_0.2.9            
+[23] clusterGeneration_1.3.8 jsonlite_2.0.0         
+[25] parallel_4.5.1          R6_2.6.1               
+[27] stringi_1.8.7           RColorBrewer_1.1-3     
+[29] numDeriv_2016.8-1.1     Rcpp_1.1.0             
+[31] iterators_1.0.14        knitr_1.50             
+[33] optimParallel_1.0-2     splines_4.5.1          
+[35] igraph_2.2.1            timechange_0.3.0       
+[37] tidyselect_1.2.1        rstudioapi_0.17.1      
+[39] yaml_2.3.10             doParallel_1.0.17      
+[41] codetools_0.2-20        lattice_0.22-7         
+[43] withr_3.0.2             S7_0.2.0               
+[45] coda_0.19-4.1           evaluate_1.0.5         
+[47] ggimage_0.3.5           gridGraphics_0.5-1     
+[49] xml2_1.4.1              pillar_1.11.1          
+[51] foreach_1.5.2           ggfun_0.2.0            
+[53] generics_0.1.4          vroom_1.6.6            
+[55] hms_1.1.4               tidytree_0.4.6         
+[57] glue_1.8.0              gdtools_0.4.4          
+[59] scatterplot3d_0.3-44    lazyeval_0.2.2         
+[61] tools_4.5.1             ggiraph_0.9.2          
+[63] fs_1.6.6                mvtnorm_1.3-3          
+[65] fastmatch_1.1-6         grid_4.5.1             
+[67] patchwork_1.3.2         cli_3.6.5              
+[69] rappdirs_0.3.3          DEoptim_2.2-8          
+[71] textshaping_1.0.4       fontBitstreamVera_0.1.1
+[73] expm_1.0-0              viridisLite_0.4.2      
+[75] svglite_2.2.2           gtable_0.3.6           
+[77] yulab.utils_0.2.1       digest_0.6.37          
+[79] fontquiver_0.2.1        ggplotify_0.1.3        
+[81] htmlwidgets_1.6.4       farver_2.1.2           
+[83] htmltools_0.5.8.1       lifecycle_1.0.4        
+[85] fontLiberation_0.1.0    bit64_4.6.0-1          
+[87] MASS_7.3-65            
 ```
 
 <!--chapter:end:versions.rmd-->
