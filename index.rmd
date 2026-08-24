@@ -1,7 +1,7 @@
 ---
 title: "Phylogenetic Biology"
 author: "Casey W. Dunn"
-version: 1.0.0
+version: 1.1.0
 major_edition_year: 2026
 isbn_paperback: "979-8-9934524-0-1"
 isbn_hardcover: "979-8-9934524-1-8"
@@ -391,6 +391,14 @@ The following books provide general computational background for the topics cove
 ## Acknowledgments {-}
 
 Thanks in particular to the students of Yale EEB354 in 2020, 2022, and 2024. This book started as a collection of lecture notes for this course. The students provided invaluable motivation and feedback. Thanks in particular to Lauren Mellenthin (graduate teaching fellow for the course in 2020), Namrata Ahuja (teaching fellow in 2022), and Dalila Destanovic (teaching fellow in 2024). Other lab members provided very helpful feedback when I posted new chapters. Steve Haddock and Felipe Zapata also provided close reads of most chapters, often within hours of completing first drafts. Nate Grubaugh invited me to share a couple chapters in his course each year. Thanks to Richard Hammack, author of [Book of Proof](https://richardhammack.github.io/BookOfProof/), for his helpful advice on self-publishing to facilitate student access. I am also very grateful to the students and faculty of the Workshop on Molecular Evolution at Woods Hole. Finally, I thank James Prosek for generously allowing me to use his work *Moth Cluster IV* for the cover.
+
+## Description of AI use {-}
+
+I started this book in 2020, and the bulk of the writing was finished by 2024, before capable large language models were available. The following chapters were drafted in full during that period, without any use of AI: Introduction, Phylogenies, Simulation, Inferring phylogenies from data, Molecular inference in practice, Evaluation, and Phylogenies and time.
+
+Large language models did assist with drafting the remaining chapters, to varying degrees. Any text produced with the assistance of AI was carefully reviewed and, in most cases, heavily revised by hand. In the final stages of production I also used AI to copy edit the full book, to address some technical issues with code, and to refine figures, for example their size and spacing. Claude Opus 4 variants were the primary models used.
+
+To describe this more precisely, the GAIDeT taxonomy [@suchikova2026gaidet] provides a standard vocabulary for declaring which tasks were delegated to generative AI. Under that taxonomy, and under full human supervision, I delegated *text generation* (for some chapters), *proofreading and editing*, and *reformatting* from the Writing and Editing category; *code generation* and *code optimization* from Software Development and Automation; and *visualization* from Data Management. Everything else—the conceptualization, the choice of topics and framing, the methodology, the analyses, and the final wording—is my own. Responsibility for the book lies entirely with me.
 
 ```{r license, echo=FALSE, results='asis'}
 # The license appears on the PDF copyright page, which is generated in the

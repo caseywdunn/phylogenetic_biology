@@ -34,6 +34,31 @@ pdftotext -layout docs/phylogenetic_biology.pdf - | tail -45 \
   | grep -E "bootstrap|ultrametric|Brownian"
 ```
 
+### Every stochastic chunk seeds itself
+
+Any chunk that consumes randomness calls `set.seed()` as its first line. This is
+a convention to maintain, not something the build enforces.
+
+The `preliminaries` chunk in `index.rmd` also seeds once, but that global seed is
+only a backstop. Relying on it alone makes a figure's appearance a function of
+how many random numbers every preceding chunk happened to draw, so adding,
+removing, or reordering a draw anywhere upstream silently redraws figures in
+chapters that were never edited. Per-chunk seeds make each figure independent of
+everything that ran before it.
+
+Note that a chunk can consume randomness without any `r*` or `sample()` call
+visible in it: `sim_jc()` and `sim_site()` in `functions.R` both call `sample()`
+internally, as do library functions such as `rcoal()`, `sim.char()`, and
+`fastBM()`. Grep the chunk's callees, not just its body.
+
+To check that the invariant still holds, change the global seed in `index.rmd`,
+rebuild into a scratch copy of the repository, and diff the figures against a
+build from an unmodified copy. Nothing under `figure-html/` should differ. Three
+files always differ between any two builds and are unrelated to this:
+`docs/software-versions.html` and `docs/phylogenetic_biology.md` carry a render
+timestamp and commit hash by design, and `docs/search_index.json` is derived from
+content.
+
 ## Web analytics
 
 The gitbook build injects `analytics.html` into the `<head>` of every chapter

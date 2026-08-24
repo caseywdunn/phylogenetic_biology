@@ -1,0 +1,54 @@
+# Deploy the built gitbook to GitHub Pages.
+#
+# This does NOT build the book. The book is built locally (see docker/) and the
+# rendered gitbook is committed to docs/. This workflow only publishes what is
+# already in docs/ on master, replacing the legacy branch-based Pages build that
+# silently stopped triggering after October 2025.
+#
+# Because the artifact is uploaded directly, Pages does not run Jekyll over it,
+# so no .nojekyll file is needed.
+
+name: Deploy gitbook to Pages
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
+  # Lets you redeploy the current master from the Actions tab without a push,
+  # which is what you want if a deploy is ever missed again.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race. Queue rather than cancel, so a deploy that is
+# already publishing is allowed to finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out master
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload docs/ as the Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
