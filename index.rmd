@@ -5,6 +5,10 @@ version: 1.0.0
 major_edition_year: 2026
 isbn_paperback: "979-8-9934524-0-1"
 isbn_hardcover: "979-8-9934524-1-8"
+# Printer storefront for the current printing of the paperback. This link can
+# only be generated after the book is sent to the publisher, so it is patched in
+# on master after each new printing. See "Release ritual" in development.md.
+paperback_url: "https://shop.lightningsource.com/b/085?params=PkwgWsxj7YZkqa0QOm0uQyYOhbhOH6ZesXrEh7whDxt"
 doi: "10.5281/zenodo.17267993"
 github-repo: caseywdunn/phylogenetic_biology
 date: "`r Sys.Date()`"
@@ -296,6 +300,21 @@ cat("\\markboth{Preface}{Preface}")
 # is_html_output() and file.exists() so the build does not fail before the
 # image is added at figures/cover.png.
 knitr::include_graphics("figures/cover.png")
+```
+
+```{r cover-paperback-html, echo=FALSE, results='asis', eval=knitr::is_html_output()}
+# Where to buy the paperback, shown under the cover in the HTML edition only.
+# It is deliberately absent from the PDF: that file is used for printing, and a
+# reader who has it already has the book. The link points at the printer's
+# storefront for the current printing and comes from paperback_url in the YAML
+# above, which is patched on master after each printing.
+paperback_url_value <- rmarkdown::metadata$paperback_url
+if (!is.null(paperback_url_value) && nzchar(paperback_url_value)) {
+  cat(sprintf(
+    "The [paperback](%s) is available directly from the printer, or from your favorite bookseller.",
+    paperback_url_value
+  ))
+}
 ```
 
 ## Approach {-}

@@ -324,6 +324,37 @@ Do all of steps 1-6 on `dev`, then release from `master`:
         git checkout dev
         git merge master
 
+### After a new printing: refresh the printer's storefront link
+
+The HTML edition shows a line under the cover pointing readers at the printer's
+storefront for the paperback (the `cover-paperback-html` chunk in `index.rmd`).
+The URL comes from the `paperback_url:` field in the `index.rmd` YAML, and it is
+the one piece of book content that cannot be set before release: the storefront
+link only exists once the interior has been sent to the publisher and the new
+printing is live.
+
+So after each new printing, patch it directly on `master`:
+
+1. Get the storefront URL for the new printing from the publisher.
+2. On `master`, update `paperback_url:` in `index.rmd`.
+3. Rebuild the HTML and commit the result:
+
+        bookdown::render_book("index.rmd", "bookdown::gitbook")
+        git add -A
+        git commit -m "Update paperback storefront link"
+
+4. Push `master`, then merge it back into `dev` so the branches do not diverge:
+
+        git push origin master
+        git checkout dev
+        git merge master
+
+This does not require a version bump: the link is not part of the printed book.
+Only the HTML needs rebuilding -- the line is suppressed in the PDF, which is
+used for printing, on the reasoning that anyone holding the PDF already has the
+book. If `paperback_url:` is empty or absent, the line is simply omitted, so the
+book still builds cleanly between printings.
+
 ## Other
 
 `CITATION.cff` can be validated with [this](https://citation-file-format.github.io/tutorials/).
