@@ -6,9 +6,25 @@ Details on compiling and releasing the book.
 
 The order of files in the book is specified in `_bookdown.yml`.
 
-In `phylogenetic_biology`, execute:
+From the repository root on the host, execute:
 
-    bookdown::render_book("index.rmd", "bookdown::gitbook")
+    ./build.sh html      # gitbook, into docs/
+    ./build.sh pdf       # PDF, into docs/ (gitignored)
+    ./build.sh all       # both
+
+`build.sh` drives the container from outside it, so nothing has to be installed
+on the host but docker, and no interactive session is needed. See "Running the
+Docker container" below if you would rather work inside RStudio.
+
+Two details in `build.sh` are easy to get wrong by hand and are worth knowing
+about. It maps the invoking user into the container, because otherwise the
+build leaves root-owned files in `docs/`. And it sets
+`RENV_CONFIG_AUTOLOADER_ENABLED=FALSE`: the image already has the lockfile
+restored into its site-library (the `Dockerfile` runs `renv::restore()` under
+`--vanilla`), and the bind mount then covers that with the repository's own
+`renv/`, whose project library exists on the host only as an empty shell.
+Without the bypass the autoloader aborts and every package appears to be
+missing. Inside the container, the image *is* the restored lockfile.
 
 ### The back-of-book index requires latexmk
 
@@ -262,64 +278,67 @@ at <https://dunnlab.org/phylogenetic_biology/> (served from the `docs/` folder o
 
 ### Release ritual
 
-Do all of steps 1-6 on `dev`, then release from `master`:
+Do steps 1-3 on `dev`, then release from `master`:
 
 1. Land every change intended for the release on `dev`.
-2. Bump the version: edit `version:` in `index.rmd` (and `major_edition_year:`
-   if the year has changed). This is the only place the number is edited.
-3. Rebuild the HTML so the generated source files pick up the new version:
+2. Cut the release build:
 
-        bookdown::render_book("index.rmd", "bookdown::gitbook")
+        ./build.sh release X.Y.Z
 
-   This regenerates `frontpage.tex`, `CITATION.cff`, and the HTML in `docs/`.
-   Its purpose here is to propagate the version into the generated files that
-   go into the release commit; the HTML it produces is provisional and is
-   re-rendered in step 5 (its `Software versions` page would otherwise record
-   the pre-bump commit).
-4. Commit the result on `dev`:
+   This bumps `version:` in `index.rmd` (the only place the number is ever
+   edited), renders, commits `Version X.Y.Z`, renders again, and commits
+   `Build docs for X.Y.Z`.
 
-        git add -A
-        git commit -m "Version X.Y.Z"
+   The double render is the reason this is a script rather than a checklist.
+   The `Software versions` chapter stamps the most recent git commit (`git log
+   -1` in `versions.rmd`) into the built book, so the docs that ship have to be
+   rendered *after* the release commit exists. Rendering once and committing
+   everything together silently stamps the previous commit, in both formats,
+   and nothing about the output looks wrong.
 
-   This is the commit that the PDF will record, so it must be a sensible, final
-   release commit -- not an intermediate "wip" commit. The
-   `Software versions` chapter stamps the most recent git commit (`git log -1`
-   in `versions.rmd`) into the built book, so the next step must run on top of a
-   clean `HEAD`.
+   The first render is provisional; its job is only to propagate the new
+   version into `frontpage.tex` and `CITATION.cff` so they are part of the
+   release commit. Note that `CITATION.cff` records the edition and year, both
+   derived from the major version, so a minor or patch bump leaves it unchanged.
 
-5. Regenerate the final published docs -- HTML and PDF -- on top of the
-   `Version X.Y.Z` commit. Each records the most recent git commit in its
-   `Software versions` chapter (`git log -1` in `versions.rmd`), so building
-   them now, after step 4 rather than before, is what makes that recorded commit
-   the clean release commit in both formats. Re-render the HTML with the
-   `bookdown::gitbook` command from step 3; the PDF build command is
-   intentionally kept out of these public docs (run it from your private notes).
+   Before touching anything the script checks that you are on `dev` with a
+   clean tree, and that `master` is an ancestor of `dev` -- if a previous cycle
+   skipped the final merge back into `dev` (step 8), releasing would silently
+   revert whatever master carries, so it stops and names those commits. It also lists any untracked files and asks,
+   since `git add -A` would otherwise sweep them into the release.
 
-6. Commit the regenerated docs on `dev`:
+   If the version is already X.Y.Z the bump is skipped, so the command is safe
+   to re-run after a failed build.
 
-        git add -A
-        git commit -m "Build docs for X.Y.Z"
+3. Spot-check the back-of-book index in the new PDF:
 
-7. Merge into `master` (production):
+        pdftotext -layout docs/phylogenetic_biology.pdf - | tail -45 \
+          | grep -E "bootstrap|ultrametric|Brownian"
+
+   Page numbers in the index are the *printed* ones, which differ from the
+   PDF's physical page numbers by the length of the front matter. Check an
+   entry by adding that offset, not by jumping straight to the physical page.
+
+4. Merge into `master` (production):
 
         git checkout master
         git merge --no-ff dev
 
-8. Tag the release, reading the number straight from `index.rmd` so the tag
+5. Tag the release, reading the number straight from `index.rmd` so the tag
    cannot drift from the printed version:
 
         VERSION=$(grep -E '^version:' index.rmd | sed -E 's/version:[[:space:]]*"?//; s/"?[[:space:]]*$//')
         git tag -a "v$VERSION" -m "Version $VERSION"
 
-9. Push everything:
+6. Push everything:
 
         git push origin master dev --tags
 
-10. For **major or minor** versions only, create a
+7. For **major or minor** versions only, create a
    [GitHub release](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
    on the new tag, with release notes. The release notes are the book's version
    history, and publishing the release triggers Zenodo to mint the version DOI.
-11. Return to `dev` for the next cycle, keeping it current with production:
+8. Return to `dev` for the next cycle, keeping it current with production:
 
         git checkout dev
         git merge master
@@ -339,7 +358,7 @@ So after each new printing, patch it directly on `master`:
 2. On `master`, update `paperback_url:` in `index.rmd`.
 3. Rebuild the HTML and commit the result:
 
-        bookdown::render_book("index.rmd", "bookdown::gitbook")
+        ./build.sh html
         git add -A
         git commit -m "Update paperback storefront link"
 
