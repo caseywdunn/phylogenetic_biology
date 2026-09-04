@@ -16,9 +16,40 @@ From the repository root on the host, execute:
 on the host but docker, and no interactive session is needed. See "Running the
 Docker container" below if you would rather work inside RStudio.
 
-Two details in `build.sh` are easy to get wrong by hand and are worth knowing
-about. It maps the invoking user into the container, because otherwise the
-build leaves root-owned files in `docs/`. And it sets
+**This host-driven route is the preferred one for agents**, and for any
+non-interactive use. It needs no RStudio session, no browser, and no state that
+outlives the command: the container is created and destroyed by each
+invocation, and the only thing that persists is what lands in the
+bind-mounted repository. A rebuild of the gitbook is therefore one command from
+the repository root:
+
+    ./build.sh html
+
+It requires only that the image exists; build it once per checkout, or after
+any change to `docker/Dockerfile` or `renv.lock`, with:
+
+    docker build -f docker/Dockerfile -t phylogenetic_biology:latest .
+
+Under the hood `./build.sh html` is the following, which is worth knowing if you
+ever need to run a different R expression against the repository:
+
+``` bash
+docker run --rm \
+  -u "$(id -u):$(id -g)" \
+  -e HOME=/tmp \
+  -e RENV_CONFIG_AUTOLOADER_ENABLED=FALSE \
+  -v "$(pwd):/phylogenetic_biology" \
+  -w /phylogenetic_biology \
+  phylogenetic_biology:latest \
+  Rscript -e 'bookdown::render_book("index.rmd", "bookdown::gitbook")'
+```
+
+Prefer `./build.sh html` over pasting that command, so the two flags below stay
+in one place rather than being retyped and quietly dropped.
+
+Those two flags are easy to get wrong by hand and are worth knowing about. `-u`
+maps the invoking user into the container, because otherwise the build leaves
+root-owned files in `docs/`. And
 `RENV_CONFIG_AUTOLOADER_ENABLED=FALSE`: the image already has the lockfile
 restored into its site-library (the `Dockerfile` runs `renv::restore()` under
 `--vanilla`), and the bind mount then covers that with the repository's own
@@ -69,11 +100,25 @@ internally, as do library functions such as `rcoal()`, `sim.char()`, and
 
 To check that the invariant still holds, change the global seed in `index.rmd`,
 rebuild into a scratch copy of the repository, and diff the figures against a
-build from an unmodified copy. Nothing under `figure-html/` should differ. Three
-files always differ between any two builds and are unrelated to this:
-`docs/software-versions.html` and `docs/phylogenetic_biology.md` carry a render
-timestamp and commit hash by design, and `docs/search_index.json` is derived from
-content.
+build from an unmodified copy. Nothing under `figure-html/` should differ.
+
+Expect the HTML itself to differ regardless, for reasons unrelated to this
+check, so compare the figures rather than reading `git status`:
+
+- Every page carries the render date, because `date:` in the `index.rmd` YAML is
+  `` `r Sys.Date()` ``. Two builds on different days differ in the
+  `<meta name="date">` of every page in `docs/`, and in the dateline on
+  `docs/index.html`; two builds on the same day do not.
+- `docs/software-versions.html` differs between *any* two builds. `versions.rmd`
+  stamps the render time to the second, along with the `git log -1` hash.
+- `docs/search_index.json` is derived from the rendered page text, so it picks up
+  the date along with everything else.
+- `docs/phylogenetic_biology.md` is the merged source, kept by
+  `delete_merged_file: false`, and carries both stamps as well. Only the PDF
+  build writes it, though: `keep_md: yes` is set under `bookdown::pdf_book` in
+  `_output.yml` and not under `bookdown::gitbook`. After a `./build.sh html` it
+  is therefore left over from the last PDF build, and being stale is expected
+  rather than a sign that something went wrong.
 
 ## Web analytics
 
@@ -187,6 +232,10 @@ And then build the book with:
 
     library(bookdown)
     bookdown::render_book("index.rmd", "bookdown::gitbook")
+
+This interactive route is for exploratory work in the R console. To just
+rebuild the book, use `./build.sh` from the host instead -- see "Building the
+book" above.
 
 ### Managing R packages with renv
 
